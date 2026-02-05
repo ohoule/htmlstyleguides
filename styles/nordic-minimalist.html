@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stillhet — Nordic Design System v1.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --snow: #FAFAFA;
+            --frost: #F5F5F5;
+            --mist: #E8E8E8;
+            --stone: #D4D4D4;
+            --slate: #A3A3A3;
+            --charcoal: #525252;
+            --ink: #262626;
+            --night: #171717;
+
+            --forest: #4A5D52;
+            --pine: #6B7D73;
+            --moss: #8A9A8F;
+            --sky: #7C9EB2;
+            --cloud: #B8C9D4;
+
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Karla', sans-serif;
+
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 24px;
+            --space-6: 32px;
+            --space-7: 48px;
+            --space-8: 64px;
+            --space-9: 96px;
+            --space-10: 128px;
+
+            --transition: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-weight: 400;
+            line-height: 1.7;
+            background: var(--snow);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background: var(--forest);
+            color: var(--snow);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: var(--space-6);
+            right: var(--space-6);
+            z-index: 100;
+        }
+
+        .nav-toggle {
+            width: 48px;
+            height: 48px;
+            background: var(--snow);
+            border: 1px solid var(--mist);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            transition: var(--transition);
+        }
+
+        .nav-toggle:hover {
+            border-color: var(--charcoal);
+        }
+
+        .nav-toggle span {
+            width: 18px;
+            height: 1px;
+            background: var(--ink);
+        }
+
+        .nav-menu {
+            position: absolute;
+            top: 56px;
+            right: 0;
+            background: var(--snow);
+            border: 1px solid var(--mist);
+            padding: var(--space-4);
+            display: none;
+            min-width: 160px;
+        }
+
+        .nav-menu.active {
+            display: block;
+        }
+
+        .nav-link {
+            display: block;
+            font-size: 13px;
+            color: var(--charcoal);
+            text-decoration: none;
+            padding: var(--space-2) 0;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--ink);
+        }
+
+        /* Sections */
+        section {
+            padding: var(--space-10) var(--space-6);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-number {
+            font-family: var(--font-serif);
+            font-size: 12px;
+            font-weight: 300;
+            color: var(--slate);
+            letter-spacing: 0.2em;
+            margin-bottom: var(--space-3);
+        }
+
+        /* Typography */
+        h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(48px, 10vw, 96px);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+        }
+
+        h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 300;
+            line-height: 1.2;
+            color: var(--ink);
+            margin-bottom: var(--space-5);
+        }
+
+        h3 {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: var(--space-3);
+        }
+
+        h4 {
+            font-family: var(--font-sans);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--slate);
+            margin-bottom: var(--space-4);
+        }
+
+        p {
+            max-width: 55ch;
+            color: var(--charcoal);
+        }
+
+        .lead {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--charcoal);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: var(--space-10) var(--space-6);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--slate);
+            margin-bottom: var(--space-4);
+        }
+
+        .hero h1 {
+            margin-bottom: var(--space-6);
+        }
+
+        .hero-tagline {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--charcoal);
+            max-width: 400px;
+        }
+
+        .hero-version {
+            font-size: 12px;
+            color: var(--slate);
+            margin-top: var(--space-8);
+        }
+
+        /* Divider */
+        .divider {
+            width: 48px;
+            height: 1px;
+            background: var(--stone);
+            margin: var(--space-9) 0;
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: var(--space-4);
+            margin-top: var(--space-6);
+        }
+
+        .color-card {
+            transition: var(--transition);
+        }
+
+        .color-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .color-swatch {
+            aspect-ratio: 1;
+            margin-bottom: var(--space-3);
+        }
+
+        .color-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: var(--space-1);
+        }
+
+        .color-hex {
+            font-size: 12px;
+            color: var(--slate);
+            font-family: var(--font-sans);
+        }
+
+        /* Typography Specimen */
+        .type-specimen {
+            margin-top: var(--space-6);
+            padding: var(--space-7);
+            background: var(--frost);
+        }
+
+        .type-serif {
+            font-family: var(--font-serif);
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 300;
+            line-height: 1.2;
+            color: var(--ink);
+            margin-bottom: var(--space-6);
+        }
+
+        .type-sans {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            color: var(--charcoal);
+            max-width: 50ch;
+            margin-bottom: var(--space-6);
+        }
+
+        .font-info {
+            display: flex;
+            gap: var(--space-8);
+            padding-top: var(--space-6);
+            border-top: 1px solid var(--mist);
+            flex-wrap: wrap;
+        }
+
+        .font-item {
+            min-width: 150px;
+        }
+
+        .font-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--slate);
+            margin-bottom: var(--space-2);
+        }
+
+        .font-name {
+            font-size: 14px;
+            color: var(--ink);
+        }
+
+        /* Spacing Scale */
+        .spacing-list {
+            margin-top: var(--space-6);
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-5);
+            padding: var(--space-3) 0;
+            border-bottom: 1px solid var(--mist);
+        }
+
+        .spacing-bar {
+            height: 24px;
+            background: var(--forest);
+            transition: var(--transition);
+        }
+
+        .spacing-item:hover .spacing-bar {
+            background: var(--ink);
+        }
+
+        .spacing-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--charcoal);
+            min-width: 60px;
+        }
+
+        .spacing-value {
+            font-size: 12px;
+            color: var(--slate);
+            min-width: 60px;
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-6);
+            margin-top: var(--space-6);
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .btn {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            padding: var(--space-3) var(--space-5);
+            border: 1px solid;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            min-width: 140px;
+        }
+
+        .btn-primary {
+            background: var(--ink);
+            color: var(--snow);
+            border-color: var(--ink);
+        }
+
+        .btn-primary:hover {
+            background: var(--charcoal);
+            border-color: var(--charcoal);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--ink);
+            border-color: var(--ink);
+        }
+
+        .btn-secondary:hover {
+            background: var(--ink);
+            color: var(--snow);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--charcoal);
+            border-color: var(--stone);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--ink);
+            color: var(--ink);
+        }
+
+        .btn-forest {
+            background: var(--forest);
+            color: var(--snow);
+            border-color: var(--forest);
+        }
+
+        .btn-forest:hover {
+            background: var(--pine);
+            border-color: var(--pine);
+        }
+
+        .btn-sm {
+            padding: var(--space-2) var(--space-4);
+            font-size: 12px;
+            min-width: 100px;
+        }
+
+        .btn-lg {
+            padding: var(--space-4) var(--space-6);
+            font-size: 14px;
+            min-width: 180px;
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-6);
+            margin-top: var(--space-6);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .form-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--charcoal);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            padding: var(--space-3) var(--space-4);
+            background: var(--snow);
+            border: 1px solid var(--stone);
+            color: var(--ink);
+            transition: var(--transition);
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--ink);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--slate);
+        }
+
+        .form-input.error {
+            border-color: #B45454;
+        }
+
+        .form-error {
+            font-size: 12px;
+            color: #B45454;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23525252' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-4) center;
+            padding-right: var(--space-7);
+            cursor: pointer;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--charcoal);
+        }
+
+        .checkbox-input {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1px solid var(--stone);
+            background: var(--snow);
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .checkbox-input:checked {
+            background: var(--ink);
+            border-color: var(--ink);
+        }
+
+        .checkbox-input:checked::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 6px;
+            width: 4px;
+            height: 8px;
+            border: solid var(--snow);
+            border-width: 0 1px 1px 0;
+            transform: rotate(45deg);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-5);
+            margin-top: var(--space-6);
+        }
+
+        .card {
+            background: var(--snow);
+            border: 1px solid var(--mist);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            border-color: var(--stone);
+            transform: translateY(-2px);
+        }
+
+        .card-image {
+            height: 180px;
+            background: var(--frost);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--forest) 0%, var(--pine) 100%);
+            opacity: 0.1;
+        }
+
+        .card-icon {
+            font-size: 32px;
+            color: var(--forest);
+        }
+
+        .card-body {
+            padding: var(--space-5);
+        }
+
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--ink);
+            margin-bottom: var(--space-2);
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: var(--charcoal);
+            margin-bottom: var(--space-4);
+        }
+
+        .card-footer {
+            padding: var(--space-4) var(--space-5);
+            border-top: 1px solid var(--mist);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-meta {
+            font-size: 12px;
+            color: var(--slate);
+        }
+
+        /* Data Table */
+        .table-container {
+            overflow-x: auto;
+            margin-top: var(--space-6);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .data-table thead {
+            border-bottom: 1px solid var(--ink);
+        }
+
+        .data-table th {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--charcoal);
+            padding: var(--space-3) var(--space-4);
+            text-align: left;
+        }
+
+        .data-table td {
+            padding: var(--space-4);
+            border-bottom: 1px solid var(--mist);
+            color: var(--charcoal);
+        }
+
+        .data-table tbody tr {
+            transition: var(--transition);
+        }
+
+        .data-table tbody tr:hover {
+            background: var(--frost);
+        }
+
+        /* Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+            margin-top: var(--space-4);
+        }
+
+        .badge {
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: var(--space-1) var(--space-3);
+            transition: var(--transition);
+        }
+
+        .badge-default {
+            background: var(--frost);
+            color: var(--charcoal);
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 1px solid var(--stone);
+            color: var(--charcoal);
+        }
+
+        .badge-dark {
+            background: var(--ink);
+            color: var(--snow);
+        }
+
+        .badge-forest {
+            background: var(--forest);
+            color: var(--snow);
+        }
+
+        .badge-sky {
+            background: var(--sky);
+            color: var(--snow);
+        }
+
+        .badge-warning {
+            background: #E6C17A;
+            color: var(--ink);
+        }
+
+        .badge-error {
+            background: #B45454;
+            color: var(--snow);
+        }
+
+        /* Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-6);
+            margin-top: var(--space-6);
+        }
+
+        .principle {
+            padding-left: var(--space-5);
+            border-left: 1px solid var(--stone);
+        }
+
+        .principle-number {
+            font-family: var(--font-serif);
+            font-size: 12px;
+            color: var(--slate);
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-title {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--ink);
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-text {
+            font-size: 14px;
+            color: var(--charcoal);
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-4);
+            margin-top: var(--space-6);
+        }
+
+        .animation-demo {
+            background: var(--frost);
+            padding: var(--space-6);
+            text-align: center;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-4);
+        }
+
+        .anim-box {
+            width: 40px;
+            height: 40px;
+            background: var(--forest);
+        }
+
+        .anim-fade .anim-box {
+            animation: fade 2s ease-in-out infinite;
+        }
+
+        @keyframes fade {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .anim-lift .anim-box {
+            transition: var(--transition);
+        }
+
+        .anim-lift:hover .anim-box {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .anim-grow .anim-box {
+            transition: transform 0.4s ease;
+        }
+
+        .anim-grow:hover .anim-box {
+            transform: scale(1.1);
+        }
+
+        .anim-rotate .anim-box {
+            animation: gentleRotate 8s linear infinite;
+        }
+
+        @keyframes gentleRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animation-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--slate);
+        }
+
+        /* Quote Block */
+        .quote-block {
+            margin-top: var(--space-6);
+            padding: var(--space-7);
+            background: var(--frost);
+            border-left: 2px solid var(--forest);
+        }
+
+        .quote-text {
+            font-family: var(--font-serif);
+            font-size: clamp(20px, 3vw, 28px);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--ink);
+            margin-bottom: var(--space-5);
+        }
+
+        .quote-author {
+            font-size: 13px;
+            color: var(--slate);
+        }
+
+        .quote-author strong {
+            color: var(--charcoal);
+            font-weight: 500;
+        }
+
+        /* Alerts */
+        .alert-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            margin-top: var(--space-6);
+        }
+
+        .alert {
+            padding: var(--space-4) var(--space-5);
+            border-left: 2px solid;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-4);
+            background: var(--frost);
+        }
+
+        .alert-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: var(--space-1);
+        }
+
+        .alert-text {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .alert-success {
+            border-color: var(--forest);
+            color: var(--forest);
+        }
+
+        .alert-info {
+            border-color: var(--sky);
+            color: var(--sky);
+        }
+
+        .alert-warning {
+            border-color: #C4A35A;
+            color: #8B7340;
+        }
+
+        .alert-error {
+            border-color: #B45454;
+            color: #B45454;
+        }
+
+        /* Footer */
+        footer {
+            padding: var(--space-9) var(--space-6);
+            text-align: center;
+            border-top: 1px solid var(--mist);
+            margin-top: var(--space-10);
+        }
+
+        .footer-brand {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--ink);
+            margin-bottom: var(--space-3);
+        }
+
+        .footer-tagline {
+            font-size: 14px;
+            color: var(--charcoal);
+            font-style: italic;
+            margin-bottom: var(--space-6);
+        }
+
+        .footer-copy {
+            font-size: 12px;
+            color: var(--slate);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: var(--space-8) var(--space-4);
+            }
+
+            .hero {
+                padding: var(--space-8) var(--space-4);
+            }
+
+            .nav {
+                top: var(--space-4);
+                right: var(--space-4);
+            }
+
+            .button-grid {
+                flex-direction: column;
+            }
+
+            .type-specimen {
+                padding: var(--space-5);
+            }
+
+            .quote-block {
+                padding: var(--space-5);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('active')">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="nav-menu">
+            <a href="#colors" class="nav-link">Colors</a>
+            <a href="#typography" class="nav-link">Typography</a>
+            <a href="#spacing" class="nav-link">Spacing</a>
+            <a href="#buttons" class="nav-link">Buttons</a>
+            <a href="#forms" class="nav-link">Forms</a>
+            <a href="#cards" class="nav-link">Cards</a>
+            <a href="#tables" class="nav-link">Tables</a>
+            <a href="#badges" class="nav-link">Badges</a>
+            <a href="#principles" class="nav-link">Principles</a>
+            <a href="#animations" class="nav-link">Animations</a>
+            <a href="#quote" class="nav-link">Quote</a>
+            <a href="#alerts" class="nav-link">Alerts</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <p class="hero-subtitle">Nordic Design System</p>
+        <h1>Stillhet</h1>
+        <p class="hero-tagline">The beauty of simplicity. Design that breathes.</p>
+        <p class="hero-version">Version 1.0</p>
+    </header>
+
+    <div class="divider" style="max-width: 1000px; margin-left: auto; margin-right: auto; padding: 0 var(--space-6);"></div>
+
+    <!-- Colors -->
+    <section id="colors">
+        <p class="section-number">01</p>
+        <h2>Color Palette</h2>
+        <p class="lead">Inspired by Scandinavian landscapes — snow-covered fields, deep forests, and quiet skies.</p>
+
+        <div class="color-grid">
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--snow); border: 1px solid var(--mist);"></div>
+                <p class="color-name">Snow</p>
+                <p class="color-hex">#FAFAFA</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--frost);"></div>
+                <p class="color-name">Frost</p>
+                <p class="color-hex">#F5F5F5</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--mist);"></div>
+                <p class="color-name">Mist</p>
+                <p class="color-hex">#E8E8E8</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--stone);"></div>
+                <p class="color-name">Stone</p>
+                <p class="color-hex">#D4D4D4</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--charcoal);"></div>
+                <p class="color-name">Charcoal</p>
+                <p class="color-hex">#525252</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--ink);"></div>
+                <p class="color-name">Ink</p>
+                <p class="color-hex">#262626</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--forest);"></div>
+                <p class="color-name">Forest</p>
+                <p class="color-hex">#4A5D52</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--sky);"></div>
+                <p class="color-name">Sky</p>
+                <p class="color-hex">#7C9EB2</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography -->
+    <section id="typography">
+        <p class="section-number">02</p>
+        <h2>Typography</h2>
+        <p class="lead">Two typefaces that complement each other — an elegant serif for headlines, a clean sans for body text.</p>
+
+        <div class="type-specimen">
+            <p class="type-serif">Less, but better.</p>
+            <p class="type-sans">Good design is as little design as possible. It concentrates on the essential aspects, and the products are not burdened with non-essentials. Back to purity, back to simplicity.</p>
+
+            <div class="font-info">
+                <div class="font-item">
+                    <p class="font-label">Serif</p>
+                    <p class="font-name" style="font-family: var(--font-serif);">Cormorant Garamond</p>
+                </div>
+                <div class="font-item">
+                    <p class="font-label">Sans-serif</p>
+                    <p class="font-name" style="font-family: var(--font-sans);">Karla</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spacing -->
+    <section id="spacing">
+        <p class="section-number">03</p>
+        <h2>Spacing Scale</h2>
+        <p class="lead">A consistent spacing system creates rhythm and harmony throughout the design.</p>
+
+        <div class="spacing-list">
+            <div class="spacing-item">
+                <span class="spacing-label">space-1</span>
+                <div class="spacing-bar" style="width: 4px;"></div>
+                <span class="spacing-value">4px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-2</span>
+                <div class="spacing-bar" style="width: 8px;"></div>
+                <span class="spacing-value">8px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-3</span>
+                <div class="spacing-bar" style="width: 12px;"></div>
+                <span class="spacing-value">12px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-4</span>
+                <div class="spacing-bar" style="width: 16px;"></div>
+                <span class="spacing-value">16px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-5</span>
+                <div class="spacing-bar" style="width: 24px;"></div>
+                <span class="spacing-value">24px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-6</span>
+                <div class="spacing-bar" style="width: 32px;"></div>
+                <span class="spacing-value">32px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-7</span>
+                <div class="spacing-bar" style="width: 48px;"></div>
+                <span class="spacing-value">48px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-8</span>
+                <div class="spacing-bar" style="width: 64px;"></div>
+                <span class="spacing-value">64px</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buttons -->
+    <section id="buttons">
+        <p class="section-number">04</p>
+        <h2>Buttons</h2>
+        <p class="lead">Understated interactions. Each button invites action without demanding attention.</p>
+
+        <div class="button-grid">
+            <div class="button-group">
+                <h4>Variants</h4>
+                <button class="btn btn-primary">Primary</button>
+                <button class="btn btn-secondary">Secondary</button>
+                <button class="btn btn-ghost">Ghost</button>
+                <button class="btn btn-forest">Forest</button>
+            </div>
+
+            <div class="button-group">
+                <h4>Sizes</h4>
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary">Default</button>
+                <button class="btn btn-primary btn-lg">Large</button>
+            </div>
+
+            <div class="button-group">
+                <h4>States</h4>
+                <button class="btn btn-primary">Default</button>
+                <button class="btn btn-primary" disabled>Disabled</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forms -->
+    <section id="forms">
+        <p class="section-number">05</p>
+        <h2>Forms</h2>
+        <p class="lead">Clean inputs that focus attention on the content, not the container.</p>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" placeholder="Enter your name">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" placeholder="you@example.com">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Error State</label>
+                <input type="text" class="form-input error" value="Invalid input">
+                <span class="form-error">Please enter a valid value</span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Select</label>
+                <select class="form-select">
+                    <option>Choose an option</option>
+                    <option>Stockholm</option>
+                    <option>Copenhagen</option>
+                    <option>Oslo</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Message</label>
+                <textarea class="form-textarea" placeholder="Write your message..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Preferences</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" checked>
+                        <span>Subscribe to newsletter</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input">
+                        <span>Accept terms</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards -->
+    <section id="cards">
+        <p class="section-number">06</p>
+        <h2>Cards</h2>
+        <p class="lead">Containers that organize content with quiet elegance.</p>
+
+        <div class="card-grid">
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-icon">◯</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Simplicity</h3>
+                    <p class="card-text">Reduce to the essential. Remove the unnecessary so the necessary may speak.</p>
+                    <button class="btn btn-secondary btn-sm">Learn more</button>
+                </div>
+                <div class="card-footer">
+                    <span class="card-meta">Design principle</span>
+                    <span class="badge badge-forest">Core</span>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-icon">△</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Balance</h3>
+                    <p class="card-text">Harmony between elements. Every component serves the whole composition.</p>
+                    <button class="btn btn-secondary btn-sm">Learn more</button>
+                </div>
+                <div class="card-footer">
+                    <span class="card-meta">Design principle</span>
+                    <span class="badge badge-outline">Essential</span>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-icon">□</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Function</h3>
+                    <p class="card-text">Form follows function. Beauty emerges from purposeful design.</p>
+                    <button class="btn btn-secondary btn-sm">Learn more</button>
+                </div>
+                <div class="card-footer">
+                    <span class="card-meta">Design principle</span>
+                    <span class="badge badge-default">Foundation</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Data Table -->
+    <section id="tables">
+        <p class="section-number">07</p>
+        <h2>Data Table</h2>
+        <p class="lead">Information presented with clarity. No decoration to distract from the data.</p>
+
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Material</th>
+                        <th>Origin</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Oak Chair</td>
+                        <td>Solid oak, linen</td>
+                        <td>Sweden</td>
+                        <td>€420</td>
+                        <td><span class="badge badge-forest">In stock</span></td>
+                    </tr>
+                    <tr>
+                        <td>Wool Blanket</td>
+                        <td>Merino wool</td>
+                        <td>Norway</td>
+                        <td>€180</td>
+                        <td><span class="badge badge-forest">In stock</span></td>
+                    </tr>
+                    <tr>
+                        <td>Ceramic Vase</td>
+                        <td>Stoneware</td>
+                        <td>Denmark</td>
+                        <td>€95</td>
+                        <td><span class="badge badge-warning">Low stock</span></td>
+                    </tr>
+                    <tr>
+                        <td>Linen Curtains</td>
+                        <td>100% linen</td>
+                        <td>Finland</td>
+                        <td>€240</td>
+                        <td><span class="badge badge-outline">Pre-order</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Badges -->
+    <section id="badges">
+        <p class="section-number">08</p>
+        <h2>Badges</h2>
+        <p class="lead">Small indicators that communicate status without overwhelming.</p>
+
+        <h4>Filled</h4>
+        <div class="badge-grid">
+            <span class="badge badge-default">Default</span>
+            <span class="badge badge-dark">Dark</span>
+            <span class="badge badge-forest">Forest</span>
+            <span class="badge badge-sky">Sky</span>
+        </div>
+
+        <h4 style="margin-top: var(--space-6);">Status</h4>
+        <div class="badge-grid">
+            <span class="badge badge-forest">Success</span>
+            <span class="badge badge-sky">Info</span>
+            <span class="badge badge-warning">Warning</span>
+            <span class="badge badge-error">Error</span>
+        </div>
+
+        <h4 style="margin-top: var(--space-6);">Outline</h4>
+        <div class="badge-grid">
+            <span class="badge badge-outline">Outline</span>
+            <span class="badge badge-outline">Tag</span>
+            <span class="badge badge-outline">Label</span>
+        </div>
+    </section>
+
+    <!-- Principles -->
+    <section id="principles">
+        <p class="section-number">09</p>
+        <h2>Design Principles</h2>
+        <p class="lead">The philosophy that guides every decision in Stillhet.</p>
+
+        <div class="principles-grid">
+            <div class="principle">
+                <p class="principle-number">I</p>
+                <h3 class="principle-title">Embrace Emptiness</h3>
+                <p class="principle-text">White space is not empty — it provides breathing room. Let elements have the space they need.</p>
+            </div>
+
+            <div class="principle">
+                <p class="principle-number">II</p>
+                <h3 class="principle-title">Quiet Confidence</h3>
+                <p class="principle-text">Good design doesn't shout. It speaks softly but clearly, inviting rather than demanding attention.</p>
+            </div>
+
+            <div class="principle">
+                <p class="principle-number">III</p>
+                <h3 class="principle-title">Natural Materials</h3>
+                <p class="principle-text">Draw from nature's palette. Colors that feel organic and textures that feel authentic.</p>
+            </div>
+
+            <div class="principle">
+                <p class="principle-number">IV</p>
+                <h3 class="principle-title">Intentional Restraint</h3>
+                <p class="principle-text">Add only what improves. If something doesn't serve a purpose, it doesn't belong.</p>
+            </div>
+
+            <div class="principle">
+                <p class="principle-number">V</p>
+                <h3 class="principle-title">Timeless Over Trendy</h3>
+                <p class="principle-text">Design for longevity. Avoid the fashionable in favor of the enduring.</p>
+            </div>
+
+            <div class="principle">
+                <p class="principle-number">VI</p>
+                <h3 class="principle-title">Subtle Craft</h3>
+                <p class="principle-text">Details matter, even when barely noticed. Quality reveals itself over time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Animations -->
+    <section id="animations">
+        <p class="section-number">10</p>
+        <h2>Animations</h2>
+        <p class="lead">Gentle motion that enhances without distracting. Movement with purpose.</p>
+
+        <div class="animation-grid">
+            <div class="animation-demo anim-fade">
+                <div class="anim-box"></div>
+                <span class="animation-label">Fade</span>
+            </div>
+
+            <div class="animation-demo anim-lift">
+                <div class="anim-box"></div>
+                <span class="animation-label">Lift (hover)</span>
+            </div>
+
+            <div class="animation-demo anim-grow">
+                <div class="anim-box"></div>
+                <span class="animation-label">Grow (hover)</span>
+            </div>
+
+            <div class="animation-demo anim-rotate">
+                <div class="anim-box"></div>
+                <span class="animation-label">Rotate</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Block -->
+    <section id="quote">
+        <p class="section-number">11</p>
+        <h2>Quote Block</h2>
+        <p class="lead">A special component for highlighting meaningful words.</p>
+
+        <div class="quote-block">
+            <p class="quote-text">"Have nothing in your houses that you do not know to be useful or believe to be beautiful."</p>
+            <p class="quote-author">— <strong>William Morris</strong>, Designer & Craftsman</p>
+        </div>
+    </section>
+
+    <!-- Alerts -->
+    <section id="alerts">
+        <p class="section-number">12</p>
+        <h2>Alerts</h2>
+        <p class="lead">Notifications that inform without alarming. Clear communication in calm tones.</p>
+
+        <div class="alert-grid">
+            <div class="alert alert-success">
+                <span class="alert-icon">✓</span>
+                <div class="alert-content">
+                    <p class="alert-title">Success</p>
+                    <p class="alert-text">Your changes have been saved successfully.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <span class="alert-icon">i</span>
+                <div class="alert-content">
+                    <p class="alert-title">Information</p>
+                    <p class="alert-text">A new version of the design system is available.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <span class="alert-icon">!</span>
+                <div class="alert-content">
+                    <p class="alert-title">Warning</p>
+                    <p class="alert-text">Your session will expire in 5 minutes.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-error">
+                <span class="alert-icon">×</span>
+                <div class="alert-content">
+                    <p class="alert-title">Error</p>
+                    <p class="alert-text">Unable to save changes. Please try again.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-brand">Stillhet</p>
+        <p class="footer-tagline">"Stillness" — A Nordic Design System</p>
+        <p class="footer-copy">Version 1.0 · Designed with intention</p>
+    </footer>
+</body>
+</html>

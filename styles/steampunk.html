@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cogsworth Industries — Mechanical Design System v1.8.8.9</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cutive+Mono&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brass: #B8860B;
+            --brass-light: #DAA520;
+            --brass-dark: #8B6914;
+            --copper: #B87333;
+            --copper-light: #CD7F32;
+            --bronze: #8C7853;
+            --iron: #3D3D3D;
+            --steel: #71797E;
+            --rust: #8B4513;
+            --mahogany: #4A2C2A;
+            --leather: #6B4423;
+            --cream: #F5F1E4;
+            --parchment: #EDE4D1;
+            --sepia: #704214;
+            --ink: #1C1410;
+            --steam: rgba(255, 255, 255, 0.6);
+
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Spectral', serif;
+            --font-mono: 'Cutive Mono', monospace;
+
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+            --space-4xl: 96px;
+
+            --border-thin: 1px;
+            --border-medium: 2px;
+            --border-thick: 3px;
+
+            --shadow-brass: 0 0 20px rgba(184, 134, 11, 0.3);
+            --shadow-deep: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.7;
+            background: var(--ink);
+            color: var(--cream);
+            background-image:
+                radial-gradient(ellipse at top, rgba(184, 134, 11, 0.05) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        ::selection {
+            background: var(--brass);
+            color: var(--ink);
+        }
+
+        /* Gear Background Animation */
+        .gear-bg {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .gear-bg::before {
+            content: '⚙';
+            font-size: 300px;
+            color: var(--brass);
+            animation: rotate 60s linear infinite;
+        }
+
+        .gear-bg.top-right {
+            top: -100px;
+            right: -100px;
+        }
+
+        .gear-bg.bottom-left {
+            bottom: -100px;
+            left: -100px;
+            animation-direction: reverse;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: var(--space-lg);
+            right: var(--space-lg);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .nav-link {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--brass);
+            text-decoration: none;
+            padding: var(--space-sm) var(--space-md);
+            background: rgba(28, 20, 16, 0.9);
+            border: var(--border-thin) solid var(--brass-dark);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-link:hover {
+            background: var(--brass);
+            color: var(--ink);
+            box-shadow: var(--shadow-brass);
+        }
+
+        @media (max-width: 768px) {
+            .nav { display: none; }
+        }
+
+        /* Sections */
+        section {
+            padding: var(--space-4xl) var(--space-xl);
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-number {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--brass);
+            padding: var(--space-xs) var(--space-sm);
+            border: var(--border-thin) solid var(--brass-dark);
+        }
+
+        /* Decorative Dividers */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            margin: var(--space-3xl) 0;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--brass-dark), transparent);
+        }
+
+        .divider-gear {
+            font-size: 24px;
+            color: var(--brass);
+            animation: rotate 20s linear infinite;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--brass-light);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: var(--brass);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--copper-light);
+            margin-bottom: var(--space-md);
+        }
+
+        h4 {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--steel);
+            margin-bottom: var(--space-md);
+        }
+
+        p {
+            max-width: 60ch;
+            color: var(--parchment);
+        }
+
+        .lead {
+            font-size: 20px;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--cream);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: var(--space-4xl);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(184, 134, 11, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--brass);
+            margin-bottom: var(--space-lg);
+            padding: var(--space-sm) var(--space-lg);
+            border: var(--border-thin) solid var(--brass-dark);
+            background: rgba(184, 134, 11, 0.1);
+        }
+
+        .hero h1 {
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-tagline {
+            font-family: var(--font-body);
+            font-size: 18px;
+            font-style: italic;
+            color: var(--parchment);
+            max-width: 500px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero-version {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--steel);
+        }
+
+        .hero-gears {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-2xl);
+            font-size: 32px;
+            color: var(--brass-dark);
+        }
+
+        .hero-gears span:nth-child(1) { animation: rotate 10s linear infinite; }
+        .hero-gears span:nth-child(2) { animation: rotate 8s linear infinite reverse; }
+        .hero-gears span:nth-child(3) { animation: rotate 12s linear infinite; }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        .color-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: var(--border-thin) solid var(--brass-dark);
+            transition: all 0.3s ease;
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-brass);
+            border-color: var(--brass);
+        }
+
+        .color-swatch {
+            height: 100px;
+            position: relative;
+        }
+
+        .color-swatch::after {
+            content: '⚙';
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            font-size: 20px;
+            opacity: 0.3;
+        }
+
+        .color-info {
+            padding: var(--space-md);
+            border-top: var(--border-thin) solid var(--brass-dark);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 14px;
+            color: var(--cream);
+            margin-bottom: var(--space-xs);
+        }
+
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--steel);
+        }
+
+        /* Typography Specimen */
+        .type-specimen {
+            background: linear-gradient(135deg, rgba(74, 44, 42, 0.3), rgba(28, 20, 16, 0.8));
+            border: var(--border-thin) solid var(--brass-dark);
+            padding: var(--space-2xl);
+            margin-top: var(--space-xl);
+            position: relative;
+        }
+
+        .type-specimen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--brass-dark), var(--brass), var(--brass-dark));
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 600;
+            color: var(--brass-light);
+            margin-bottom: var(--space-lg);
+        }
+
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 18px;
+            color: var(--parchment);
+            margin-bottom: var(--space-lg);
+            max-width: 55ch;
+        }
+
+        .type-mono {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--brass);
+            padding: var(--space-md);
+            background: rgba(0, 0, 0, 0.3);
+            border-left: var(--border-thick) solid var(--brass-dark);
+        }
+
+        .font-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: var(--border-thin) solid var(--brass-dark);
+        }
+
+        .font-item {
+            min-width: 180px;
+        }
+
+        .font-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--steel);
+            margin-bottom: var(--space-sm);
+        }
+
+        .font-name {
+            font-size: 16px;
+            color: var(--brass);
+        }
+
+        /* Spacing Scale */
+        .spacing-scale {
+            margin-top: var(--space-xl);
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            padding: var(--space-sm) 0;
+            border-bottom: var(--border-thin) solid rgba(184, 134, 11, 0.2);
+        }
+
+        .spacing-bar {
+            height: 28px;
+            background: linear-gradient(90deg, var(--brass-dark), var(--brass));
+            border: var(--border-thin) solid var(--brass);
+            position: relative;
+        }
+
+        .spacing-bar::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--copper);
+        }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--brass);
+            min-width: 70px;
+        }
+
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--steel);
+            min-width: 60px;
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .btn {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            padding: var(--space-md) var(--space-xl);
+            border: var(--border-medium) solid;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(180deg, var(--brass), var(--brass-dark));
+            color: var(--ink);
+            border-color: var(--brass);
+        }
+
+        .btn-primary:hover {
+            box-shadow: var(--shadow-brass);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--brass);
+            border-color: var(--brass);
+        }
+
+        .btn-secondary:hover {
+            background: var(--brass);
+            color: var(--ink);
+        }
+
+        .btn-copper {
+            background: linear-gradient(180deg, var(--copper), var(--rust));
+            color: var(--cream);
+            border-color: var(--copper);
+        }
+
+        .btn-copper:hover {
+            box-shadow: 0 0 20px rgba(184, 115, 51, 0.4);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--steel);
+            border-color: var(--steel);
+            border-style: dashed;
+        }
+
+        .btn-ghost:hover {
+            border-style: solid;
+            color: var(--brass);
+            border-color: var(--brass);
+        }
+
+        .btn-sm {
+            padding: var(--space-sm) var(--space-md);
+            font-size: 11px;
+        }
+
+        .btn-lg {
+            padding: var(--space-lg) var(--space-2xl);
+            font-size: 14px;
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .form-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--brass);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            font-family: var(--font-body);
+            font-size: 15px;
+            padding: var(--space-md);
+            background: rgba(0, 0, 0, 0.4);
+            border: var(--border-thin) solid var(--brass-dark);
+            color: var(--cream);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--brass);
+            box-shadow: 0 0 10px rgba(184, 134, 11, 0.2);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--steel);
+            font-style: italic;
+        }
+
+        .form-input.error {
+            border-color: var(--rust);
+        }
+
+        .form-error {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--rust);
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23B8860B' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-md) center;
+            padding-right: var(--space-2xl);
+            cursor: pointer;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .checkbox-input {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: var(--border-medium) solid var(--brass-dark);
+            background: rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-input:checked {
+            background: var(--brass);
+            border-color: var(--brass);
+        }
+
+        .checkbox-input:checked::after {
+            content: '⚙';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            color: var(--ink);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(74, 44, 42, 0.4), rgba(28, 20, 16, 0.9));
+            border: var(--border-thin) solid var(--brass-dark);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--brass-dark), var(--brass), var(--brass-dark));
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-deep), var(--shadow-brass);
+            border-color: var(--brass);
+        }
+
+        .card-image {
+            height: 160px;
+            background: linear-gradient(135deg, var(--mahogany), var(--ink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::before {
+            content: '⚙';
+            position: absolute;
+            font-size: 200px;
+            color: rgba(184, 134, 11, 0.05);
+            animation: rotate 30s linear infinite;
+        }
+
+        .card-icon {
+            font-size: 48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-body {
+            padding: var(--space-xl);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            color: var(--brass-light);
+            margin-bottom: var(--space-sm);
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: var(--parchment);
+            margin-bottom: var(--space-md);
+        }
+
+        .card-footer {
+            padding: var(--space-md) var(--space-xl);
+            border-top: var(--border-thin) solid var(--brass-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-meta {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--steel);
+            text-transform: uppercase;
+        }
+
+        /* Data Table */
+        .table-container {
+            overflow-x: auto;
+            margin-top: var(--space-xl);
+            border: var(--border-thin) solid var(--brass-dark);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .data-table thead {
+            background: linear-gradient(90deg, var(--brass-dark), var(--brass), var(--brass-dark));
+        }
+
+        .data-table th {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            color: var(--ink);
+            padding: var(--space-md) var(--space-lg);
+            text-align: left;
+        }
+
+        .data-table td {
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: var(--border-thin) solid rgba(184, 134, 11, 0.2);
+            color: var(--parchment);
+        }
+
+        .data-table tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(184, 134, 11, 0.1);
+        }
+
+        /* Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            margin-top: var(--space-md);
+        }
+
+        .badge {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: var(--space-xs) var(--space-md);
+            border: var(--border-thin) solid;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .badge-brass {
+            background: var(--brass);
+            color: var(--ink);
+            border-color: var(--brass);
+        }
+
+        .badge-copper {
+            background: var(--copper);
+            color: var(--cream);
+            border-color: var(--copper);
+        }
+
+        .badge-outline {
+            background: transparent;
+            color: var(--brass);
+            border-color: var(--brass);
+        }
+
+        .badge-success {
+            background: #2D5A2D;
+            color: var(--cream);
+            border-color: #2D5A2D;
+        }
+
+        .badge-warning {
+            background: var(--rust);
+            color: var(--cream);
+            border-color: var(--rust);
+        }
+
+        .badge-danger {
+            background: #8B0000;
+            color: var(--cream);
+            border-color: #8B0000;
+        }
+
+        /* Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .principle {
+            padding: var(--space-xl);
+            background: rgba(0, 0, 0, 0.3);
+            border: var(--border-thin) solid var(--brass-dark);
+            border-left: var(--border-thick) solid var(--brass);
+            position: relative;
+        }
+
+        .principle::before {
+            content: attr(data-number);
+            font-family: var(--font-display);
+            font-size: 48px;
+            color: var(--brass-dark);
+            position: absolute;
+            top: var(--space-sm);
+            right: var(--space-md);
+            opacity: 0.3;
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 16px;
+            color: var(--brass-light);
+            margin-bottom: var(--space-sm);
+        }
+
+        .principle-text {
+            font-size: 14px;
+            color: var(--parchment);
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        .animation-demo {
+            background: rgba(0, 0, 0, 0.4);
+            border: var(--border-thin) solid var(--brass-dark);
+            padding: var(--space-xl);
+            text-align: center;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+        }
+
+        .anim-gear {
+            font-size: 48px;
+            color: var(--brass);
+        }
+
+        .anim-spin .anim-gear {
+            animation: rotate 4s linear infinite;
+        }
+
+        .anim-pulse .anim-gear {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+        }
+
+        .anim-steam .anim-gear {
+            position: relative;
+        }
+
+        .anim-steam .anim-gear::after {
+            content: '💨';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            font-size: 20px;
+            animation: steam 2s ease-out infinite;
+        }
+
+        @keyframes steam {
+            0% { opacity: 0; transform: translateY(0) translateX(-50%); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-30px) translateX(-50%); }
+        }
+
+        .anim-swing .anim-gear {
+            animation: swing 2s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        .animation-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--steel);
+        }
+
+        /* Pressure Gauge */
+        .pressure-gauge {
+            margin-top: var(--space-xl);
+            max-width: 400px;
+            background: linear-gradient(135deg, var(--mahogany), var(--ink));
+            border: var(--border-thick) solid var(--brass);
+            border-radius: 50%;
+            padding: var(--space-2xl);
+            position: relative;
+            aspect-ratio: 1;
+            box-shadow: var(--shadow-deep), inset 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .gauge-inner {
+            width: 100%;
+            height: 100%;
+            border: var(--border-medium) solid var(--brass-dark);
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .gauge-needle {
+            position: absolute;
+            width: 4px;
+            height: 40%;
+            background: linear-gradient(180deg, var(--copper), var(--brass));
+            transform-origin: bottom center;
+            animation: needle 4s ease-in-out infinite;
+            bottom: 50%;
+            border-radius: 2px;
+        }
+
+        @keyframes needle {
+            0%, 100% { transform: rotate(-45deg); }
+            50% { transform: rotate(45deg); }
+        }
+
+        .gauge-center {
+            width: 20px;
+            height: 20px;
+            background: var(--brass);
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 10px rgba(184, 134, 11, 0.5);
+        }
+
+        .gauge-label {
+            font-family: var(--font-display);
+            font-size: 14px;
+            color: var(--brass);
+            position: absolute;
+            bottom: 25%;
+        }
+
+        .gauge-title {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--steel);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-top: var(--space-md);
+            text-align: center;
+        }
+
+        /* Alerts */
+        .alert-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        .alert {
+            padding: var(--space-lg);
+            border: var(--border-thin) solid;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            background: rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .alert::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+        }
+
+        .alert-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-display);
+            font-size: 14px;
+            margin-bottom: var(--space-xs);
+        }
+
+        .alert-text {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .alert-success {
+            border-color: #2D5A2D;
+            color: #7CB47C;
+        }
+
+        .alert-success::before { background: #2D5A2D; }
+
+        .alert-info {
+            border-color: var(--brass);
+            color: var(--brass-light);
+        }
+
+        .alert-info::before { background: var(--brass); }
+
+        .alert-warning {
+            border-color: var(--copper);
+            color: var(--copper-light);
+        }
+
+        .alert-warning::before { background: var(--copper); }
+
+        .alert-error {
+            border-color: #8B0000;
+            color: #CD5C5C;
+        }
+
+        .alert-error::before { background: #8B0000; }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(180deg, var(--ink), #0A0806);
+            padding: var(--space-4xl) var(--space-xl);
+            text-align: center;
+            border-top: var(--border-thin) solid var(--brass-dark);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--brass), transparent);
+        }
+
+        .footer-gears {
+            font-size: 48px;
+            color: var(--brass-dark);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-gears span:nth-child(1) { animation: rotate 15s linear infinite; }
+        .footer-gears span:nth-child(2) { animation: rotate 12s linear infinite reverse; }
+        .footer-gears span:nth-child(3) { animation: rotate 18s linear infinite; }
+
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 24px;
+            color: var(--brass-light);
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-tagline {
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-style: italic;
+            color: var(--parchment);
+            margin-bottom: var(--space-xl);
+        }
+
+        .footer-copy {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--steel);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: var(--space-3xl) var(--space-md);
+            }
+
+            .hero {
+                padding: var(--space-3xl) var(--space-md);
+            }
+
+            .button-grid {
+                flex-direction: column;
+            }
+
+            .pressure-gauge {
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gear-bg top-right"></div>
+    <div class="gear-bg bottom-left"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#colors" class="nav-link">Colors</a>
+        <a href="#typography" class="nav-link">Typography</a>
+        <a href="#spacing" class="nav-link">Spacing</a>
+        <a href="#buttons" class="nav-link">Buttons</a>
+        <a href="#forms" class="nav-link">Forms</a>
+        <a href="#cards" class="nav-link">Cards</a>
+        <a href="#tables" class="nav-link">Tables</a>
+        <a href="#badges" class="nav-link">Badges</a>
+        <a href="#principles" class="nav-link">Principles</a>
+        <a href="#animations" class="nav-link">Animations</a>
+        <a href="#gauge" class="nav-link">Gauge</a>
+        <a href="#alerts" class="nav-link">Alerts</a>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <span class="hero-badge">Est. 1889</span>
+        <h1>Cogsworth Industries</h1>
+        <p class="hero-tagline">"Precision Engineering for the Modern Age"</p>
+        <p class="hero-version">Mechanical Design System v1.8.8.9</p>
+        <div class="hero-gears">
+            <span>⚙</span>
+            <span>⚙</span>
+            <span>⚙</span>
+        </div>
+    </header>
+
+    <div class="divider">
+        <span class="divider-line"></span>
+        <span class="divider-gear">⚙</span>
+        <span class="divider-line"></span>
+    </div>
+
+    <!-- Colors -->
+    <section id="colors">
+        <div class="section-header">
+            <span class="section-number">01</span>
+            <h2>Color Palette</h2>
+        </div>
+        <p class="lead">Metals forged in the foundry — brass, copper, and iron form the backbone of our aesthetic.</p>
+
+        <div class="color-grid">
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--brass);"></div>
+                <div class="color-info">
+                    <p class="color-name">Brass</p>
+                    <p class="color-hex">#B8860B</p>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--copper);"></div>
+                <div class="color-info">
+                    <p class="color-name">Copper</p>
+                    <p class="color-hex">#B87333</p>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--bronze);"></div>
+                <div class="color-info">
+                    <p class="color-name">Bronze</p>
+                    <p class="color-hex">#8C7853</p>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--iron);"></div>
+                <div class="color-info">
+                    <p class="color-name">Iron</p>
+                    <p class="color-hex">#3D3D3D</p>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--steel);"></div>
+                <div class="color-info">
+                    <p class="color-name">Steel</p>
+                    <p class="color-hex">#71797E</p>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--mahogany);"></div>
+                <div class="color-info">
+                    <p class="color-name">Mahogany</p>
+                    <p class="color-hex">#4A2C2A</p>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--leather);"></div>
+                <div class="color-info">
+                    <p class="color-name">Leather</p>
+                    <p class="color-hex">#6B4423</p>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--parchment);"></div>
+                <div class="color-info">
+                    <p class="color-name">Parchment</p>
+                    <p class="color-hex">#EDE4D1</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography -->
+    <section id="typography">
+        <div class="section-header">
+            <span class="section-number">02</span>
+            <h2>Typography</h2>
+        </div>
+        <p class="lead">Typefaces befitting the Victorian era — elegant serifs and precise mechanicals.</p>
+
+        <div class="type-specimen">
+            <p class="type-display">Steam & Precision</p>
+            <p class="type-body">In the grand tradition of engineering excellence, every component must serve its purpose with unwavering reliability. The mechanisms of progress turn upon the gears of innovation.</p>
+            <p class="type-mono">SYSTEM.STATUS: OPERATIONAL // PRESSURE: NOMINAL // EFFICIENCY: 98.7%</p>
+
+            <div class="font-info">
+                <div class="font-item">
+                    <p class="font-label">Display</p>
+                    <p class="font-name" style="font-family: var(--font-display);">Cinzel</p>
+                </div>
+                <div class="font-item">
+                    <p class="font-label">Body</p>
+                    <p class="font-name" style="font-family: var(--font-body);">Spectral</p>
+                </div>
+                <div class="font-item">
+                    <p class="font-label">Mechanical</p>
+                    <p class="font-name" style="font-family: var(--font-mono);">Cutive Mono</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spacing -->
+    <section id="spacing">
+        <div class="section-header">
+            <span class="section-number">03</span>
+            <h2>Spacing Scale</h2>
+        </div>
+        <p class="lead">Measured with precision — every millimeter calculated for optimal composition.</p>
+
+        <div class="spacing-scale">
+            <div class="spacing-item">
+                <span class="spacing-label">XS</span>
+                <div class="spacing-bar" style="width: 4px;"></div>
+                <span class="spacing-value">4px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">SM</span>
+                <div class="spacing-bar" style="width: 8px;"></div>
+                <span class="spacing-value">8px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">MD</span>
+                <div class="spacing-bar" style="width: 16px;"></div>
+                <span class="spacing-value">16px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">LG</span>
+                <div class="spacing-bar" style="width: 24px;"></div>
+                <span class="spacing-value">24px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">XL</span>
+                <div class="spacing-bar" style="width: 32px;"></div>
+                <span class="spacing-value">32px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">2XL</span>
+                <div class="spacing-bar" style="width: 48px;"></div>
+                <span class="spacing-value">48px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">3XL</span>
+                <div class="spacing-bar" style="width: 64px;"></div>
+                <span class="spacing-value">64px</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buttons -->
+    <section id="buttons">
+        <div class="section-header">
+            <span class="section-number">04</span>
+            <h2>Buttons</h2>
+        </div>
+        <p class="lead">Levers and switches — each actuation triggers the machinery of interaction.</p>
+
+        <div class="button-grid">
+            <div class="button-group">
+                <h4>Variants</h4>
+                <button class="btn btn-primary">Engage</button>
+                <button class="btn btn-secondary">Configure</button>
+                <button class="btn btn-copper">Activate</button>
+                <button class="btn btn-ghost">Inspect</button>
+            </div>
+
+            <div class="button-group">
+                <h4>Sizes</h4>
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary">Default</button>
+                <button class="btn btn-primary btn-lg">Large</button>
+            </div>
+
+            <div class="button-group">
+                <h4>States</h4>
+                <button class="btn btn-primary">Operational</button>
+                <button class="btn btn-primary" disabled>Disabled</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forms -->
+    <section id="forms">
+        <div class="section-header">
+            <span class="section-number">05</span>
+            <h2>Forms</h2>
+        </div>
+        <p class="lead">Input mechanisms — gathering data with mechanical precision.</p>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="form-label">Operator Name</label>
+                <input type="text" class="form-input" placeholder="Enter designation...">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Telegraph Address</label>
+                <input type="email" class="form-input" placeholder="operator@cogsworth.ind">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Error State</label>
+                <input type="text" class="form-input error" value="MALFUNCTION">
+                <span class="form-error">⚠ Calibration required</span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Department</label>
+                <select class="form-select">
+                    <option>Select division...</option>
+                    <option>Boiler Room</option>
+                    <option>Gear Assembly</option>
+                    <option>Steam Generation</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Transmission</label>
+                <textarea class="form-textarea" placeholder="Compose your message..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Protocols</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" checked>
+                        <span>Safety protocols engaged</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input">
+                        <span>Maintenance mode</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards -->
+    <section id="cards">
+        <div class="section-header">
+            <span class="section-number">06</span>
+            <h2>Cards</h2>
+        </div>
+        <p class="lead">Compartments of information — organized with industrial efficiency.</p>
+
+        <div class="card-grid">
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-icon">⚙️</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">The Engine Room</h3>
+                    <p class="card-text">Where steam meets steel, and power is born. The heart of every mechanical endeavor.</p>
+                    <button class="btn btn-secondary btn-sm">Inspect</button>
+                </div>
+                <div class="card-footer">
+                    <span class="card-meta">Est. 1889</span>
+                    <span class="badge badge-brass">Operational</span>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-icon">🔧</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Workshop Bay</h3>
+                    <p class="card-text">Where craftsmen shape metal into marvels. Every gear hand-fitted with precision.</p>
+                    <button class="btn btn-secondary btn-sm">Enter</button>
+                </div>
+                <div class="card-footer">
+                    <span class="card-meta">Sector B-7</span>
+                    <span class="badge badge-outline">Active</span>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-icon">📜</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">The Archives</h3>
+                    <p class="card-text">Blueprints of genius preserved for posterity. The accumulated wisdom of engineers past.</p>
+                    <button class="btn btn-secondary btn-sm">Browse</button>
+                </div>
+                <div class="card-footer">
+                    <span class="card-meta">Restricted</span>
+                    <span class="badge badge-copper">Classified</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Data Table -->
+    <section id="tables">
+        <div class="section-header">
+            <span class="section-number">07</span>
+            <h2>Data Table</h2>
+        </div>
+        <p class="lead">Ledgers of operation — every reading logged and catalogued.</p>
+
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Serial No.</th>
+                        <th>Pressure</th>
+                        <th>Temperature</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Main Boiler</td>
+                        <td>MB-001-A</td>
+                        <td>150 PSI</td>
+                        <td>212°F</td>
+                        <td><span class="badge badge-success">Nominal</span></td>
+                    </tr>
+                    <tr>
+                        <td>Drive Shaft</td>
+                        <td>DS-042-C</td>
+                        <td>—</td>
+                        <td>98°F</td>
+                        <td><span class="badge badge-success">Nominal</span></td>
+                    </tr>
+                    <tr>
+                        <td>Pressure Valve</td>
+                        <td>PV-103-B</td>
+                        <td>175 PSI</td>
+                        <td>230°F</td>
+                        <td><span class="badge badge-warning">Caution</span></td>
+                    </tr>
+                    <tr>
+                        <td>Auxiliary Pump</td>
+                        <td>AP-007-D</td>
+                        <td>45 PSI</td>
+                        <td>85°F</td>
+                        <td><span class="badge badge-danger">Offline</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Badges -->
+    <section id="badges">
+        <div class="section-header">
+            <span class="section-number">08</span>
+            <h2>Badges</h2>
+        </div>
+        <p class="lead">Status indicators — communicating state at a glance.</p>
+
+        <h4>Metal Types</h4>
+        <div class="badge-grid">
+            <span class="badge badge-brass">Brass</span>
+            <span class="badge badge-copper">Copper</span>
+            <span class="badge badge-outline">Iron</span>
+        </div>
+
+        <h4 style="margin-top: var(--space-xl);">Operational States</h4>
+        <div class="badge-grid">
+            <span class="badge badge-success">Nominal</span>
+            <span class="badge badge-warning">Caution</span>
+            <span class="badge badge-danger">Critical</span>
+        </div>
+
+        <h4 style="margin-top: var(--space-xl);">Classifications</h4>
+        <div class="badge-grid">
+            <span class="badge badge-outline">Standard</span>
+            <span class="badge badge-outline">Priority</span>
+            <span class="badge badge-outline">Classified</span>
+        </div>
+    </section>
+
+    <!-- Principles -->
+    <section id="principles">
+        <div class="section-header">
+            <span class="section-number">09</span>
+            <h2>Design Principles</h2>
+        </div>
+        <p class="lead">The tenets of our craft — guiding every rivet and weld.</p>
+
+        <div class="principles-grid">
+            <div class="principle" data-number="I">
+                <h3 class="principle-title">Precision Engineering</h3>
+                <p class="principle-text">Every component must fit with exactitude. Tolerance is measured in thousandths.</p>
+            </div>
+
+            <div class="principle" data-number="II">
+                <h3 class="principle-title">Visible Mechanics</h3>
+                <p class="principle-text">Let the workings be seen. Beauty lies in the machinery itself.</p>
+            </div>
+
+            <div class="principle" data-number="III">
+                <h3 class="principle-title">Robust Construction</h3>
+                <p class="principle-text">Build to last generations. Quality materials, masterful craftsmanship.</p>
+            </div>
+
+            <div class="principle" data-number="IV">
+                <h3 class="principle-title">Analog Warmth</h3>
+                <p class="principle-text">The patina of brass, the grain of wood. Embrace natural imperfection.</p>
+            </div>
+
+            <div class="principle" data-number="V">
+                <h3 class="principle-title">Functional Ornament</h3>
+                <p class="principle-text">Decoration should serve purpose. Every flourish has function.</p>
+            </div>
+
+            <div class="principle" data-number="VI">
+                <h3 class="principle-title">Steam-Powered Soul</h3>
+                <p class="principle-text">Infuse life into metal. The hiss and hum of working machinery.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Animations -->
+    <section id="animations">
+        <div class="section-header">
+            <span class="section-number">10</span>
+            <h2>Animations</h2>
+        </div>
+        <p class="lead">Movement and motion — the life force of mechanical systems.</p>
+
+        <div class="animation-grid">
+            <div class="animation-demo anim-spin">
+                <span class="anim-gear">⚙</span>
+                <span class="animation-label">Rotation</span>
+            </div>
+
+            <div class="animation-demo anim-pulse">
+                <span class="anim-gear">⚙</span>
+                <span class="animation-label">Pulse</span>
+            </div>
+
+            <div class="animation-demo anim-steam">
+                <span class="anim-gear">⚙</span>
+                <span class="animation-label">Steam</span>
+            </div>
+
+            <div class="animation-demo anim-swing">
+                <span class="anim-gear">⚙</span>
+                <span class="animation-label">Pendulum</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pressure Gauge -->
+    <section id="gauge">
+        <div class="section-header">
+            <span class="section-number">11</span>
+            <h2>Pressure Gauge</h2>
+        </div>
+        <p class="lead">A signature component — monitoring system vitality.</p>
+
+        <div class="pressure-gauge">
+            <div class="gauge-inner">
+                <div class="gauge-needle"></div>
+                <div class="gauge-center"></div>
+                <span class="gauge-label">PSI</span>
+            </div>
+        </div>
+        <p class="gauge-title">Main Boiler Pressure Indicator</p>
+    </section>
+
+    <!-- Alerts -->
+    <section id="alerts">
+        <div class="section-header">
+            <span class="section-number">12</span>
+            <h2>Alerts</h2>
+        </div>
+        <p class="lead">System notifications — from nominal operation to critical warnings.</p>
+
+        <div class="alert-grid">
+            <div class="alert alert-success">
+                <span class="alert-icon">✓</span>
+                <div class="alert-content">
+                    <p class="alert-title">Systems Nominal</p>
+                    <p class="alert-text">All pressure readings within acceptable parameters. Operations may proceed.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <span class="alert-icon">ℹ</span>
+                <div class="alert-content">
+                    <p class="alert-title">Maintenance Notice</p>
+                    <p class="alert-text">Scheduled inspection of Drive Shaft DS-042-C at 1400 hours.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <span class="alert-icon">⚠</span>
+                <div class="alert-content">
+                    <p class="alert-title">Pressure Elevation</p>
+                    <p class="alert-text">Valve PV-103-B exceeding recommended pressure. Monitor closely.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-error">
+                <span class="alert-icon">⛔</span>
+                <div class="alert-content">
+                    <p class="alert-title">Critical Failure</p>
+                    <p class="alert-text">Auxiliary Pump AP-007-D offline. Immediate attention required.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-gears">
+            <span>⚙</span>
+            <span>⚙</span>
+            <span>⚙</span>
+        </div>
+        <p class="footer-brand">Cogsworth Industries</p>
+        <p class="footer-tagline">"Where Steam Meets Ingenuity"</p>
+        <p class="footer-copy">Mechanical Design System v1.8.8.9 · Established 1889</p>
+    </footer>
+</body>
+</html>

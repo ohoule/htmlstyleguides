@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ａｅｓｔｈｅｔｉｃ．ｓｙｓ — Digital Dreams v2.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-hot: #FF6AD5;
+            --pink-soft: #FF99E6;
+            --pink-deep: #C44BAD;
+            --cyan: #00FFFF;
+            --cyan-soft: #7FEFEF;
+            --cyan-deep: #00B4B4;
+            --purple: #9B59B6;
+            --purple-deep: #6C3483;
+            --purple-soft: #BB8FCE;
+            --orange-sunset: #FF8C42;
+            --yellow-sun: #FFE66D;
+            --blue-night: #1A1A2E;
+            --blue-dark: #16213E;
+            --blue-mid: #0F3460;
+            --black: #0D0D1A;
+            --white: #FFFFFF;
+
+            --gradient-sunset: linear-gradient(180deg, #FF6AD5 0%, #FF8C42 25%, #FFE66D 50%, #FF8C42 75%, #C44BAD 100%);
+            --gradient-cyber: linear-gradient(135deg, #FF6AD5 0%, #00FFFF 100%);
+            --gradient-night: linear-gradient(180deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
+            --gradient-neon: linear-gradient(90deg, #FF6AD5, #00FFFF, #FF6AD5);
+
+            --glow-pink: 0 0 10px #FF6AD5, 0 0 20px #FF6AD5, 0 0 40px #FF6AD5;
+            --glow-cyan: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 40px #00FFFF;
+            --glow-purple: 0 0 10px #9B59B6, 0 0 20px #9B59B6;
+
+            --font-pixel: 'Press Start 2P', cursive;
+            --font-terminal: 'VT323', monospace;
+            --font-display: 'Orbitron', sans-serif;
+
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+            --space-4xl: 96px;
+
+            --border-thin: 1px;
+            --border-medium: 2px;
+            --border-thick: 3px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-terminal);
+            font-size: 18px;
+            line-height: 1.6;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Scanlines overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.1) 2px,
+                rgba(0, 0, 0, 0.1) 4px
+            );
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* CRT flicker */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 106, 213, 0.02);
+            pointer-events: none;
+            z-index: 9998;
+            animation: flicker 0.1s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 0.02; }
+            50% { opacity: 0.04; }
+        }
+
+        ::selection {
+            background: var(--pink-hot);
+            color: var(--black);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: var(--space-lg);
+            right: var(--space-lg);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .nav-link {
+            font-family: var(--font-pixel);
+            font-size: 8px;
+            color: var(--cyan);
+            text-decoration: none;
+            padding: var(--space-sm) var(--space-md);
+            background: rgba(0, 0, 0, 0.8);
+            border: var(--border-thin) solid var(--cyan);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .nav-link:hover {
+            background: var(--cyan);
+            color: var(--black);
+            box-shadow: var(--glow-cyan);
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: var(--space-4xl) var(--space-xl);
+            position: relative;
+            border-bottom: var(--border-thin) solid var(--purple-deep);
+        }
+
+        section::before {
+            content: attr(data-section);
+            position: absolute;
+            top: var(--space-xl);
+            left: var(--space-xl);
+            font-family: var(--font-pixel);
+            font-size: 10px;
+            color: var(--pink-hot);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-shadow: var(--glow-pink);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 10vw, 80px);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: var(--gradient-cyber);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            filter: drop-shadow(0 0 20px rgba(255, 106, 213, 0.5));
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: clamp(24px, 5vw, 40px);
+            font-weight: 700;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-lg);
+            text-shadow: var(--glow-cyan);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--pink-hot);
+            margin-bottom: var(--space-md);
+        }
+
+        h4 {
+            font-family: var(--font-pixel);
+            font-size: 10px;
+            color: var(--purple-soft);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: var(--space-md);
+        }
+
+        p {
+            max-width: 60ch;
+            margin-bottom: var(--space-md);
+            color: var(--cyan-soft);
+        }
+
+        .lead {
+            font-size: 22px;
+            color: var(--pink-soft);
+        }
+
+        .japanese {
+            font-size: 0.8em;
+            color: var(--purple-soft);
+            margin-left: var(--space-sm);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--gradient-night);
+        }
+
+        /* Grid floor */
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -50%;
+            right: -50%;
+            height: 50%;
+            background:
+                linear-gradient(to bottom, transparent 0%, var(--purple-deep) 100%),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 60px,
+                    var(--pink-hot) 60px,
+                    var(--pink-hot) 61px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 60px,
+                    var(--pink-hot) 60px,
+                    var(--pink-hot) 61px
+                );
+            transform: perspective(500px) rotateX(60deg);
+            transform-origin: center top;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0, 0 0, 0 0; }
+            100% { background-position: 0 0, 0 60px, 60px 0; }
+        }
+
+        /* Sun */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: var(--gradient-sunset);
+            border-radius: 50%;
+            filter: blur(2px);
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+            box-shadow: 0 0 100px rgba(255, 106, 213, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-terminal);
+            font-size: 24px;
+            color: var(--cyan);
+            margin-bottom: var(--space-md);
+            animation: glitchText 3s infinite;
+        }
+
+        @keyframes glitchText {
+            0%, 90%, 100% { transform: translate(0); opacity: 1; }
+            91% { transform: translate(-2px, 1px); opacity: 0.8; }
+            92% { transform: translate(2px, -1px); opacity: 0.9; }
+            93% { transform: translate(-1px, 2px); opacity: 0.7; }
+        }
+
+        .hero-version {
+            font-family: var(--font-pixel);
+            font-size: 10px;
+            color: var(--pink-hot);
+            margin-top: var(--space-lg);
+            padding: var(--space-sm) var(--space-md);
+            border: var(--border-thin) solid var(--pink-hot);
+            display: inline-block;
+            text-shadow: var(--glow-pink);
+        }
+
+        .hero-japanese {
+            font-size: 48px;
+            color: var(--purple-soft);
+            margin-top: var(--space-xl);
+            opacity: 0.6;
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        .color-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: var(--border-thin) solid var(--purple);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--glow-purple);
+        }
+
+        .color-swatch {
+            height: 100px;
+            position: relative;
+        }
+
+        .color-swatch::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+        }
+
+        .color-info {
+            padding: var(--space-md);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 14px;
+            color: var(--white);
+            margin-bottom: var(--space-xs);
+        }
+
+        .color-hex {
+            font-family: var(--font-terminal);
+            font-size: 16px;
+            color: var(--cyan);
+        }
+
+        /* Typography Specimen */
+        .type-specimen {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.2), rgba(0, 255, 255, 0.1));
+            border: var(--border-thin) solid var(--purple);
+            padding: var(--space-2xl);
+            margin-top: var(--space-xl);
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 8vw, 64px);
+            font-weight: 900;
+            background: var(--gradient-cyber);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-lg);
+        }
+
+        .type-pixel {
+            font-family: var(--font-pixel);
+            font-size: 16px;
+            color: var(--pink-hot);
+            text-shadow: var(--glow-pink);
+            margin-bottom: var(--space-lg);
+            line-height: 2;
+        }
+
+        .type-terminal {
+            font-family: var(--font-terminal);
+            font-size: 24px;
+            color: var(--cyan);
+            margin-bottom: var(--space-lg);
+        }
+
+        .font-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: var(--border-thin) solid var(--purple-deep);
+        }
+
+        .font-item {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .font-label {
+            font-family: var(--font-pixel);
+            font-size: 8px;
+            color: var(--purple-soft);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .font-name {
+            font-size: 18px;
+            color: var(--pink-hot);
+        }
+
+        /* Spacing Scale */
+        .spacing-scale {
+            margin-top: var(--space-xl);
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-md);
+        }
+
+        .spacing-bar {
+            height: 32px;
+            background: var(--gradient-cyber);
+            position: relative;
+            box-shadow: var(--glow-pink);
+        }
+
+        .spacing-bar::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .spacing-label {
+            font-family: var(--font-pixel);
+            font-size: 10px;
+            color: var(--cyan);
+            min-width: 80px;
+        }
+
+        .spacing-value {
+            font-family: var(--font-terminal);
+            font-size: 18px;
+            color: var(--purple-soft);
+            min-width: 80px;
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .btn {
+            font-family: var(--font-pixel);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: var(--space-md) var(--space-xl);
+            border: var(--border-medium) solid;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: transparent;
+            color: var(--pink-hot);
+            border-color: var(--pink-hot);
+        }
+
+        .btn-primary:hover {
+            background: var(--pink-hot);
+            color: var(--black);
+            box-shadow: var(--glow-pink);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--cyan);
+            border-color: var(--cyan);
+        }
+
+        .btn-secondary:hover {
+            background: var(--cyan);
+            color: var(--black);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .btn-gradient {
+            background: var(--gradient-cyber);
+            color: var(--black);
+            border: none;
+            padding: calc(var(--space-md) + 2px) calc(var(--space-xl) + 2px);
+        }
+
+        .btn-gradient:hover {
+            box-shadow: var(--glow-pink), var(--glow-cyan);
+            transform: scale(1.05);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 106, 213, 0.1);
+            color: var(--purple-soft);
+            border-color: var(--purple);
+            border-style: dashed;
+        }
+
+        .btn-ghost:hover {
+            background: var(--purple);
+            color: var(--white);
+            border-style: solid;
+        }
+
+        .btn-sm {
+            padding: var(--space-sm) var(--space-md);
+            font-size: 8px;
+        }
+
+        .btn-lg {
+            padding: var(--space-lg) var(--space-2xl);
+            font-size: 12px;
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .form-label {
+            font-family: var(--font-pixel);
+            font-size: 10px;
+            color: var(--pink-hot);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            font-family: var(--font-terminal);
+            font-size: 18px;
+            padding: var(--space-md);
+            background: rgba(0, 0, 0, 0.7);
+            border: var(--border-medium) solid var(--purple);
+            color: var(--cyan);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--purple-soft);
+            opacity: 0.6;
+        }
+
+        .form-input.error {
+            border-color: var(--pink-hot);
+            box-shadow: var(--glow-pink);
+        }
+
+        .form-error {
+            font-family: var(--font-pixel);
+            font-size: 8px;
+            color: var(--pink-hot);
+            text-transform: uppercase;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300FFFF' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-md) center;
+            padding-right: var(--space-2xl);
+            cursor: pointer;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--cyan-soft);
+        }
+
+        .checkbox-input {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: var(--border-medium) solid var(--purple);
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-input:checked {
+            background: var(--pink-hot);
+            border-color: var(--pink-hot);
+            box-shadow: var(--glow-pink);
+        }
+
+        .checkbox-input:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--black);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.2), rgba(0, 0, 0, 0.8));
+            border: var(--border-thin) solid var(--purple);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-cyber);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 106, 213, 0.2), var(--glow-purple);
+        }
+
+        .card-image {
+            height: 160px;
+            background: var(--gradient-sunset);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 4px,
+                rgba(0, 0, 0, 0.1) 4px,
+                rgba(0, 0, 0, 0.1) 8px
+            );
+        }
+
+        .card-icon {
+            font-size: 48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-body {
+            padding: var(--space-xl);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            color: var(--pink-hot);
+            margin-bottom: var(--space-sm);
+        }
+
+        .card-text {
+            font-size: 16px;
+            color: var(--cyan-soft);
+            margin-bottom: var(--space-md);
+        }
+
+        .card-footer {
+            padding: var(--space-md) var(--space-xl);
+            border-top: var(--border-thin) solid var(--purple-deep);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-meta {
+            font-family: var(--font-pixel);
+            font-size: 8px;
+            color: var(--purple-soft);
+        }
+
+        /* Glitch Card */
+        .card-glitch {
+            animation: cardGlitch 5s infinite;
+        }
+
+        @keyframes cardGlitch {
+            0%, 95%, 100% { transform: translate(0); }
+            96% { transform: translate(-2px, 1px); }
+            97% { transform: translate(2px, -1px); }
+            98% { transform: translate(-1px, -1px); }
+        }
+
+        /* Data Table */
+        .table-container {
+            overflow-x: auto;
+            margin-top: var(--space-xl);
+            border: var(--border-thin) solid var(--purple);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-terminal);
+            font-size: 16px;
+        }
+
+        .data-table thead {
+            background: linear-gradient(90deg, var(--purple-deep), var(--pink-deep));
+        }
+
+        .data-table th {
+            font-family: var(--font-pixel);
+            font-size: 10px;
+            padding: var(--space-md) var(--space-lg);
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--white);
+        }
+
+        .data-table td {
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: var(--border-thin) solid var(--purple-deep);
+            color: var(--cyan);
+        }
+
+        .data-table tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(255, 106, 213, 0.1);
+        }
+
+        .data-table tbody tr:hover td {
+            color: var(--pink-hot);
+            text-shadow: var(--glow-pink);
+        }
+
+        /* Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            margin-top: var(--space-md);
+        }
+
+        .badge {
+            font-family: var(--font-pixel);
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: var(--space-sm) var(--space-md);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            transition: all 0.3s ease;
+        }
+
+        .badge-neon {
+            background: transparent;
+            color: var(--pink-hot);
+            border: var(--border-thin) solid var(--pink-hot);
+            text-shadow: var(--glow-pink);
+        }
+
+        .badge-neon:hover {
+            background: var(--pink-hot);
+            color: var(--black);
+            box-shadow: var(--glow-pink);
+        }
+
+        .badge-cyan {
+            background: transparent;
+            color: var(--cyan);
+            border: var(--border-thin) solid var(--cyan);
+            text-shadow: var(--glow-cyan);
+        }
+
+        .badge-filled {
+            background: var(--gradient-cyber);
+            color: var(--black);
+            border: none;
+        }
+
+        .badge-success {
+            color: #00FF88;
+            border-color: #00FF88;
+            text-shadow: 0 0 10px #00FF88;
+        }
+
+        .badge-warning {
+            color: var(--yellow-sun);
+            border-color: var(--yellow-sun);
+            text-shadow: 0 0 10px var(--yellow-sun);
+        }
+
+        .badge-danger {
+            color: #FF4444;
+            border-color: #FF4444;
+            text-shadow: 0 0 10px #FF4444;
+        }
+
+        /* Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .principle {
+            padding: var(--space-xl);
+            background: linear-gradient(135deg, rgba(255, 106, 213, 0.1), transparent);
+            border-left: var(--border-thick) solid var(--pink-hot);
+            position: relative;
+        }
+
+        .principle::before {
+            content: attr(data-number);
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-md);
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--purple-deep);
+            opacity: 0.3;
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 16px;
+            color: var(--cyan);
+            margin-bottom: var(--space-sm);
+        }
+
+        .principle-text {
+            font-size: 16px;
+            color: var(--purple-soft);
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .animation-demo {
+            background: rgba(0, 0, 0, 0.5);
+            border: var(--border-thin) solid var(--purple);
+            padding: var(--space-xl);
+            text-align: center;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+        }
+
+        .anim-box {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-cyber);
+        }
+
+        .anim-glow .anim-box {
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: var(--glow-pink); }
+            50% { box-shadow: var(--glow-cyan); }
+        }
+
+        .anim-glitch .anim-box {
+            animation: boxGlitch 0.5s steps(2) infinite;
+        }
+
+        @keyframes boxGlitch {
+            0%, 100% { transform: translate(0); background: var(--pink-hot); }
+            25% { transform: translate(-3px, 2px); background: var(--cyan); }
+            50% { transform: translate(3px, -2px); background: var(--purple); }
+            75% { transform: translate(-2px, -3px); background: var(--pink-hot); }
+        }
+
+        .anim-float .anim-box {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        .anim-scan .anim-box {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anim-scan .anim-box::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: scanline 2s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { top: -50%; }
+            100% { top: 150%; }
+        }
+
+        .animation-label {
+            font-family: var(--font-pixel);
+            font-size: 8px;
+            color: var(--purple-soft);
+            text-transform: uppercase;
+        }
+
+        /* Windows Dialog */
+        .windows-dialog {
+            max-width: 500px;
+            margin-top: var(--space-xl);
+            background: #C0C0C0;
+            border: 3px solid;
+            border-color: #FFFFFF #808080 #808080 #FFFFFF;
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
+            font-family: var(--font-pixel);
+        }
+
+        .windows-titlebar {
+            background: linear-gradient(90deg, #000080, #1084D0);
+            color: white;
+            padding: 4px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+        }
+
+        .windows-buttons {
+            display: flex;
+            gap: 2px;
+        }
+
+        .windows-btn {
+            width: 20px;
+            height: 20px;
+            background: #C0C0C0;
+            border: 2px solid;
+            border-color: #FFFFFF #808080 #808080 #FFFFFF;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .windows-btn:active {
+            border-color: #808080 #FFFFFF #FFFFFF #808080;
+        }
+
+        .windows-body {
+            padding: 16px;
+            color: #000000;
+        }
+
+        .windows-icon {
+            font-size: 32px;
+            margin-right: 16px;
+            float: left;
+        }
+
+        .windows-text {
+            font-size: 10px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .windows-footer {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding-top: 16px;
+            clear: both;
+        }
+
+        .windows-action {
+            font-family: var(--font-pixel);
+            font-size: 10px;
+            padding: 6px 24px;
+            background: #C0C0C0;
+            border: 2px solid;
+            border-color: #FFFFFF #808080 #808080 #FFFFFF;
+            cursor: pointer;
+        }
+
+        .windows-action:active {
+            border-color: #808080 #FFFFFF #FFFFFF #808080;
+        }
+
+        /* Alerts */
+        .alert-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .alert {
+            padding: var(--space-lg);
+            border: var(--border-medium) solid;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            position: relative;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .alert::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 4px;
+        }
+
+        .alert-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-pixel);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-xs);
+        }
+
+        .alert-text {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .alert-success {
+            border-color: #00FF88;
+            color: #00FF88;
+        }
+
+        .alert-success::before {
+            background: #00FF88;
+            box-shadow: 0 0 20px #00FF88;
+        }
+
+        .alert-info {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .alert-info::before {
+            background: var(--cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .alert-warning {
+            border-color: var(--yellow-sun);
+            color: var(--yellow-sun);
+        }
+
+        .alert-warning::before {
+            background: var(--yellow-sun);
+            box-shadow: 0 0 20px var(--yellow-sun);
+        }
+
+        .alert-error {
+            border-color: var(--pink-hot);
+            color: var(--pink-hot);
+        }
+
+        .alert-error::before {
+            background: var(--pink-hot);
+            box-shadow: var(--glow-pink);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gradient-night);
+            padding: var(--space-4xl) var(--space-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-neon);
+            background-size: 200% 100%;
+            animation: gradientMove 3s linear infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 24px;
+            background: var(--gradient-cyber);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-tagline {
+            font-family: var(--font-terminal);
+            font-size: 18px;
+            color: var(--purple-soft);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-japanese {
+            font-size: 32px;
+            color: var(--pink-hot);
+            opacity: 0.5;
+            margin-bottom: var(--space-xl);
+        }
+
+        .footer-copy {
+            font-family: var(--font-pixel);
+            font-size: 8px;
+            color: var(--purple-soft);
+            letter-spacing: 0.1em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: var(--space-3xl) var(--space-md);
+            }
+
+            section::before {
+                position: static;
+                display: block;
+                margin-bottom: var(--space-lg);
+            }
+
+            .hero::after {
+                width: 200px;
+                height: 200px;
+            }
+
+            .button-grid {
+                flex-direction: column;
+            }
+
+            .windows-dialog {
+                margin: var(--space-xl) var(--space-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#colors" class="nav-link">Colors</a>
+        <a href="#type" class="nav-link">Type</a>
+        <a href="#spacing" class="nav-link">Space</a>
+        <a href="#buttons" class="nav-link">Buttons</a>
+        <a href="#forms" class="nav-link">Forms</a>
+        <a href="#cards" class="nav-link">Cards</a>
+        <a href="#tables" class="nav-link">Tables</a>
+        <a href="#badges" class="nav-link">Badges</a>
+        <a href="#principles" class="nav-link">理念</a>
+        <a href="#animations" class="nav-link">Motion</a>
+        <a href="#dialog" class="nav-link">Dialog</a>
+        <a href="#alerts" class="nav-link">Alerts</a>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="container hero-content">
+            <p class="hero-subtitle">デジタルドリームス // Digital Dreams</p>
+            <h1>ａｅｓｔｈｅｔｉｃ</h1>
+            <span class="hero-version">System v2.0 // 1995-∞</span>
+            <p class="hero-japanese">永遠の夢</p>
+        </div>
+    </header>
+
+    <!-- Colors -->
+    <section id="colors" data-section="01 // Colors">
+        <div class="container">
+            <h2>Color Palette <span class="japanese">カラー</span></h2>
+            <p class="lead">Neon dreams and sunset memories. The colors of a digital paradise that never was.</p>
+
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--pink-hot);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Hot Pink</div>
+                        <div class="color-hex">#FF6AD5</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--cyan);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Cyber Cyan</div>
+                        <div class="color-hex">#00FFFF</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--purple);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Vapor Purple</div>
+                        <div class="color-hex">#9B59B6</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--orange-sunset);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Sunset Orange</div>
+                        <div class="color-hex">#FF8C42</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--yellow-sun);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Sun Yellow</div>
+                        <div class="color-hex">#FFE66D</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--blue-night);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Night Blue</div>
+                        <div class="color-hex">#1A1A2E</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--gradient-cyber);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Cyber Gradient</div>
+                        <div class="color-hex">Pink → Cyan</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--gradient-sunset);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Sunset Gradient</div>
+                        <div class="color-hex">Multi-stop</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography -->
+    <section id="type" data-section="02 // Typography">
+        <div class="container">
+            <h2>Typography <span class="japanese">タイポグラフィ</span></h2>
+            <p class="lead">Fonts from the future that never arrived. Digital nostalgia in every character.</p>
+
+            <div class="type-specimen">
+                <p class="type-display">DIGITAL PARADISE</p>
+                <p class="type-pixel">THE FUTURE IS NOW // 未来は今</p>
+                <p class="type-terminal">Welcome to the aesthetic dimension where dreams become reality and reality becomes dreams.</p>
+
+                <div class="font-info">
+                    <div class="font-item">
+                        <p class="font-label">Display</p>
+                        <p class="font-name" style="font-family: var(--font-display);">Orbitron</p>
+                    </div>
+                    <div class="font-item">
+                        <p class="font-label">Pixel</p>
+                        <p class="font-name" style="font-family: var(--font-pixel);">Press Start 2P</p>
+                    </div>
+                    <div class="font-item">
+                        <p class="font-label">Terminal</p>
+                        <p class="font-name" style="font-family: var(--font-terminal);">VT323</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spacing -->
+    <section id="spacing" data-section="03 // Spacing">
+        <div class="container">
+            <h2>Spacing Scale <span class="japanese">間隔</span></h2>
+            <p class="lead">Measured distances in the digital void. Every pixel counts.</p>
+
+            <div class="spacing-scale">
+                <div class="spacing-item">
+                    <span class="spacing-label">XS</span>
+                    <div class="spacing-bar" style="width: 4px;"></div>
+                    <span class="spacing-value">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">SM</span>
+                    <div class="spacing-bar" style="width: 8px;"></div>
+                    <span class="spacing-value">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">MD</span>
+                    <div class="spacing-bar" style="width: 16px;"></div>
+                    <span class="spacing-value">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">LG</span>
+                    <div class="spacing-bar" style="width: 24px;"></div>
+                    <span class="spacing-value">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">XL</span>
+                    <div class="spacing-bar" style="width: 32px;"></div>
+                    <span class="spacing-value">32px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">2XL</span>
+                    <div class="spacing-bar" style="width: 48px;"></div>
+                    <span class="spacing-value">48px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">3XL</span>
+                    <div class="spacing-bar" style="width: 64px;"></div>
+                    <span class="spacing-value">64px</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buttons -->
+    <section id="buttons" data-section="04 // Buttons">
+        <div class="container">
+            <h2>Buttons <span class="japanese">ボタン</span></h2>
+            <p class="lead">Click to enter the digital realm. Neon-lit pathways to interaction.</p>
+
+            <div class="button-grid">
+                <div class="button-group">
+                    <h4>Variants</h4>
+                    <button class="btn btn-primary">Primary</button>
+                    <button class="btn btn-secondary">Secondary</button>
+                    <button class="btn btn-gradient">Gradient</button>
+                    <button class="btn btn-ghost">Ghost</button>
+                </div>
+
+                <div class="button-group">
+                    <h4>Sizes</h4>
+                    <button class="btn btn-primary btn-sm">Small</button>
+                    <button class="btn btn-primary">Default</button>
+                    <button class="btn btn-primary btn-lg">Large</button>
+                </div>
+
+                <div class="button-group">
+                    <h4>States</h4>
+                    <button class="btn btn-primary">Default</button>
+                    <button class="btn btn-primary" disabled>Disabled</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forms -->
+    <section id="forms" data-section="05 // Forms">
+        <div class="container">
+            <h2>Forms <span class="japanese">フォーム</span></h2>
+            <p class="lead">Data entry portals to the virtual world. Type your dreams into existence.</p>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-input" placeholder="Enter handle...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="user@cyberspace.net">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Error State</label>
+                    <input type="text" class="form-input error" value="Invalid data">
+                    <span class="form-error">ERROR: CONNECTION_REFUSED</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Select Realm</label>
+                    <select class="form-select">
+                        <option>Choose dimension...</option>
+                        <option>デジタル // Digital</option>
+                        <option>夢 // Dream</option>
+                        <option>永遠 // Eternal</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-textarea" placeholder="Transmit your thoughts..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Options</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="checkbox-input" checked>
+                            <span>Remember me forever</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="checkbox-input">
+                            <span>Subscribe to dreams</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards -->
+    <section id="cards" data-section="06 // Cards">
+        <div class="container">
+            <h2>Cards <span class="japanese">カード</span></h2>
+            <p class="lead">Windows into parallel dimensions. Each one a portal to somewhere else.</p>
+
+            <div class="card-grid">
+                <article class="card">
+                    <div class="card-image">
+                        <span class="card-icon">🗿</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Classical Dreams</h3>
+                        <p class="card-text">Ancient aesthetics meet digital futures. The marble statues dream of electric sheep.</p>
+                        <button class="btn btn-secondary btn-sm">Explore</button>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-meta">∞ BC - ∞ AD</span>
+                        <span class="badge badge-neon">ETERNAL</span>
+                    </div>
+                </article>
+
+                <article class="card card-glitch">
+                    <div class="card-image" style="background: var(--gradient-cyber);">
+                        <span class="card-icon">🌴</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Palm Paradise</h3>
+                        <p class="card-text">Synthetic sunsets over digital beaches. The palm trees sway to lo-fi beats.</p>
+                        <button class="btn btn-secondary btn-sm">Visit</button>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-meta">1995 FOREVER</span>
+                        <span class="badge badge-cyan">GLITCH</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #1A1A2E, #0F3460);">
+                        <span class="card-icon">🌃</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Night City</h3>
+                        <p class="card-text">Neon lights reflect on rain-soaked streets. The city never sleeps, it only dreams.</p>
+                        <button class="btn btn-secondary btn-sm">Enter</button>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-meta">2AM ALWAYS</span>
+                        <span class="badge badge-filled">NEW</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Table -->
+    <section id="tables" data-section="07 // Tables">
+        <div class="container">
+            <h2>Data Table <span class="japanese">データ</span></h2>
+            <p class="lead">Digital records from the mainframe. Every row a memory stored forever.</p>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Memory</th>
+                            <th>Location</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0x001</td>
+                            <td>First Sunrise</td>
+                            <td>Digital Beach</td>
+                            <td>∞:00</td>
+                            <td><span class="badge badge-success">SAVED</span></td>
+                        </tr>
+                        <tr>
+                            <td>0x002</td>
+                            <td>Neon Lights</td>
+                            <td>Night City</td>
+                            <td>02:30</td>
+                            <td><span class="badge badge-neon">ACTIVE</span></td>
+                        </tr>
+                        <tr>
+                            <td>0x003</td>
+                            <td>Lost Signal</td>
+                            <td>The Void</td>
+                            <td>??:??</td>
+                            <td><span class="badge badge-warning">CORRUPT</span></td>
+                        </tr>
+                        <tr>
+                            <td>0x004</td>
+                            <td>Marble Dream</td>
+                            <td>Classical Realm</td>
+                            <td>-∞:00</td>
+                            <td><span class="badge badge-cyan">ETERNAL</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Badges -->
+    <section id="badges" data-section="08 // Badges">
+        <div class="container">
+            <h2>Badges <span class="japanese">バッジ</span></h2>
+            <p class="lead">Glowing indicators of status. Digital medals for the virtual soul.</p>
+
+            <h4>Neon Style</h4>
+            <div class="badge-grid">
+                <span class="badge badge-neon">AESTHETIC</span>
+                <span class="badge badge-cyan">DIGITAL</span>
+                <span class="badge badge-filled">GRADIENT</span>
+            </div>
+
+            <h4 style="margin-top: var(--space-xl);">Status</h4>
+            <div class="badge-grid">
+                <span class="badge badge-success">SUCCESS</span>
+                <span class="badge badge-warning">WARNING</span>
+                <span class="badge badge-danger">ERROR</span>
+            </div>
+
+            <h4 style="margin-top: var(--space-xl);">Japanese</h4>
+            <div class="badge-grid">
+                <span class="badge badge-neon">美的</span>
+                <span class="badge badge-cyan">夢</span>
+                <span class="badge badge-filled">永遠</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Principles -->
+    <section id="principles" data-section="09 // 理念">
+        <div class="container">
+            <h2>Design Principles <span class="japanese">理念</span></h2>
+            <p class="lead">The philosophy behind the aesthetic. Rules for dreaming in digital.</p>
+
+            <div class="principles-grid">
+                <div class="principle" data-number="01">
+                    <h3 class="principle-title">Nostalgic Future</h3>
+                    <p class="principle-text">Design for a tomorrow that feels like yesterday. The future was better when we imagined it.</p>
+                </div>
+
+                <div class="principle" data-number="02">
+                    <h3 class="principle-title">Neon Dreams</h3>
+                    <p class="principle-text">Let light be your guide. Glow effects create depth and dimension in the digital void.</p>
+                </div>
+
+                <div class="principle" data-number="03">
+                    <h3 class="principle-title">Glitch Embrace</h3>
+                    <p class="principle-text">Imperfection is beauty. Errors and artifacts are features, not bugs.</p>
+                </div>
+
+                <div class="principle" data-number="04">
+                    <h3 class="principle-title">Cultural Fusion</h3>
+                    <p class="principle-text">East meets West in the digital realm. 美学 and aesthetics are one.</p>
+                </div>
+
+                <div class="principle" data-number="05">
+                    <h3 class="principle-title">Infinite Loop</h3>
+                    <p class="principle-text">Time is circular. The 90s never ended, they just became eternal.</p>
+                </div>
+
+                <div class="principle" data-number="06">
+                    <h3 class="principle-title">Dreamy Reality</h3>
+                    <p class="principle-text">Blur the line between real and virtual. Everything is a dream within a dream.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Animations -->
+    <section id="animations" data-section="10 // Motion">
+        <div class="container">
+            <h2>Animations <span class="japanese">動き</span></h2>
+            <p class="lead">Movement in the digital realm. Every transition a journey through cyberspace.</p>
+
+            <div class="animation-grid">
+                <div class="animation-demo anim-glow">
+                    <div class="anim-box"></div>
+                    <span class="animation-label">Glow Pulse</span>
+                </div>
+
+                <div class="animation-demo anim-glitch">
+                    <div class="anim-box"></div>
+                    <span class="animation-label">Glitch</span>
+                </div>
+
+                <div class="animation-demo anim-float">
+                    <div class="anim-box"></div>
+                    <span class="animation-label">Float</span>
+                </div>
+
+                <div class="animation-demo anim-scan">
+                    <div class="anim-box"></div>
+                    <span class="animation-label">Scanline</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Windows Dialog -->
+    <section id="dialog" data-section="11 // Special">
+        <div class="container">
+            <h2>Windows Dialog <span class="japanese">ダイアログ</span></h2>
+            <p class="lead">A relic from the golden age. When interfaces had soul.</p>
+
+            <div class="windows-dialog">
+                <div class="windows-titlebar">
+                    <span>aesthetic.exe</span>
+                    <div class="windows-buttons">
+                        <button class="windows-btn">_</button>
+                        <button class="windows-btn">□</button>
+                        <button class="windows-btn">×</button>
+                    </div>
+                </div>
+                <div class="windows-body">
+                    <span class="windows-icon">💾</span>
+                    <p class="windows-text">
+                        Welcome to the AESTHETIC SYSTEM v2.0<br><br>
+                        You have entered a realm where digital dreams become reality and
+                        the boundaries of time dissolve into infinite loops of nostalgia.<br><br>
+                        Do you wish to continue into the void?
+                    </p>
+                    <div class="windows-footer">
+                        <button class="windows-action">YES 続ける</button>
+                        <button class="windows-action">NO 戻る</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alerts -->
+    <section id="alerts" data-section="12 // Alerts">
+        <div class="container">
+            <h2>Alerts <span class="japanese">警告</span></h2>
+            <p class="lead">System messages from the digital void. Notifications from another dimension.</p>
+
+            <div class="alert-grid">
+                <div class="alert alert-success">
+                    <span class="alert-icon">✓</span>
+                    <div class="alert-content">
+                        <div class="alert-title">CONNECTION ESTABLISHED</div>
+                        <p class="alert-text">You have successfully connected to the aesthetic dimension. Welcome home.</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <span class="alert-icon">ℹ</span>
+                    <div class="alert-content">
+                        <div class="alert-title">SYSTEM NOTICE // お知らせ</div>
+                        <p class="alert-text">The digital sunset will begin at 永遠:00. Please adjust your perception accordingly.</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <span class="alert-icon">⚠</span>
+                    <div class="alert-content">
+                        <div class="alert-title">NOSTALGIA OVERLOAD</div>
+                        <p class="alert-text">Warning: You may experience feelings of longing for a time that never existed.</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-error">
+                    <span class="alert-icon">✕</span>
+                    <div class="alert-content">
+                        <div class="alert-title">REALITY BREACH // 現実エラー</div>
+                        <p class="alert-text">Error: Unable to distinguish between dreams and reality. This is normal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">ａｅｓｔｈｅｔｉｃ．ｓｙｓ</div>
+        <p class="footer-tagline">Digital Dreams Never Die // デジタルドリームは永遠に</p>
+        <p class="footer-japanese">永遠の美学</p>
+        <p class="footer-copy">© 1995-∞ // ALL RIGHTS EXIST IN THE VOID // v2.0</p>
+    </footer>
+</body>
+</html>
