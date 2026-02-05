@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blueprint — Architecture Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Archivo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette - Architectural Concrete & Copper */
+            --color-charcoal: #2C2C2C;
+            --color-graphite: #4A4A4A;
+            --color-concrete: #8B8B8B;
+            --color-limestone: #D4CFC9;
+            --color-white: #FAFAFA;
+            --color-copper: #B87333;
+            --color-copper-light: #D4956A;
+            --color-copper-dark: #8B5A2B;
+            --color-blueprint: #1E3A5F;
+            --color-blueprint-light: #2E5A8F;
+
+            /* Semantic Colors */
+            --color-success: #4A7C59;
+            --color-warning: #C4A35A;
+            --color-error: #A65D57;
+            --color-info: #5A7C8A;
+
+            /* Typography */
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Archivo', sans-serif;
+
+            /* Spacing - 8px Grid */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.5rem;
+            --space-6: 2rem;
+            --space-7: 3rem;
+            --space-8: 4rem;
+            --space-9: 6rem;
+            --space-10: 8rem;
+
+            /* Layout */
+            --max-width: 1200px;
+            --border-radius: 2px;
+            --transition: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.7;
+            color: var(--color-charcoal);
+            background-color: var(--color-white);
+            font-size: 16px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-white);
+            border-bottom: 1px solid var(--color-limestone);
+            padding: var(--space-4) var(--space-6);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-charcoal);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-brand span {
+            color: var(--color-copper);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-5);
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.875rem;
+            color: var(--color-graphite);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-copper);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: var(--space-10) var(--space-6);
+            padding-top: calc(var(--space-10) + 80px);
+            background: var(--color-charcoal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .hero-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--color-copper);
+            margin-bottom: var(--space-4);
+            font-weight: 500;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 400;
+            color: var(--color-white);
+            line-height: 1.1;
+            margin-bottom: var(--space-5);
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            color: var(--color-copper);
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--color-concrete);
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        .hero-line {
+            width: 100px;
+            height: 1px;
+            background: var(--color-copper);
+            margin-top: var(--space-7);
+        }
+
+        /* Main Content */
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--space-9) var(--space-6);
+        }
+
+        section {
+            margin-bottom: var(--space-10);
+        }
+
+        .section-number {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            color: var(--color-copper);
+            margin-bottom: var(--space-2);
+            letter-spacing: 0.2em;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--color-charcoal);
+            margin-bottom: var(--space-6);
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--color-graphite);
+            margin-bottom: var(--space-4);
+        }
+
+        p {
+            margin-bottom: var(--space-4);
+            color: var(--color-graphite);
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .color-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-limestone);
+        }
+
+        .color-swatch {
+            height: 120px;
+            position: relative;
+        }
+
+        .color-swatch::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--color-copper);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .color-card:hover .color-swatch::after {
+            transform: scaleX(1);
+        }
+
+        .color-info {
+            padding: var(--space-4);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-charcoal);
+        }
+
+        .color-hex {
+            font-size: 0.75rem;
+            color: var(--color-concrete);
+            font-family: monospace;
+            text-transform: uppercase;
+        }
+
+        /* Typography */
+        .type-specimen {
+            margin-bottom: var(--space-7);
+            padding: var(--space-6);
+            background: var(--color-limestone);
+            background: linear-gradient(135deg, var(--color-limestone) 0%, var(--color-white) 100%);
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: var(--color-charcoal);
+            margin-bottom: var(--space-4);
+            line-height: 1.1;
+        }
+
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 1.5rem;
+            color: var(--color-graphite);
+            font-weight: 300;
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-5);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-5);
+            padding-bottom: var(--space-4);
+            border-bottom: 1px solid var(--color-limestone);
+        }
+
+        .type-label {
+            width: 100px;
+            font-size: 0.75rem;
+            color: var(--color-concrete);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            flex-shrink: 0;
+        }
+
+        /* Spacing */
+        .spacing-visual {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            align-items: flex-end;
+        }
+
+        .spacing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .spacing-box {
+            background: linear-gradient(135deg, var(--color-copper) 0%, var(--color-copper-dark) 100%);
+            transition: var(--transition);
+        }
+
+        .spacing-item:hover .spacing-box {
+            transform: translateY(-4px);
+        }
+
+        .spacing-label {
+            font-size: 0.75rem;
+            color: var(--color-concrete);
+            font-family: monospace;
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-4) var(--space-6);
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--color-charcoal);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-copper);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-charcoal);
+            border: 1px solid var(--color-charcoal);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-charcoal);
+            color: var(--color-white);
+        }
+
+        .btn-copper {
+            background: var(--color-copper);
+            color: var(--color-white);
+        }
+
+        .btn-copper:hover {
+            background: var(--color-copper-dark);
+        }
+
+        .btn-outline-copper {
+            background: transparent;
+            color: var(--color-copper);
+            border: 1px solid var(--color-copper);
+        }
+
+        .btn-outline-copper:hover {
+            background: var(--color-copper);
+            color: var(--color-white);
+        }
+
+        .btn-sm {
+            padding: var(--space-2) var(--space-4);
+            font-size: 0.75rem;
+        }
+
+        .btn-lg {
+            padding: var(--space-5) var(--space-8);
+            font-size: 1rem;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-5);
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-graphite);
+            margin-bottom: var(--space-2);
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-4);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            border: 1px solid var(--color-limestone);
+            background: var(--color-white);
+            color: var(--color-charcoal);
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-copper);
+        }
+
+        .form-input::placeholder {
+            color: var(--color-concrete);
+        }
+
+        textarea.form-input {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234A4A4A' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-4) center;
+            padding-right: var(--space-8);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-5);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .card {
+            background: var(--color-white);
+            border: 1px solid var(--color-limestone);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            border-color: var(--color-copper);
+        }
+
+        .card-image {
+            height: 220px;
+            background: linear-gradient(135deg, var(--color-limestone) 0%, var(--color-concrete) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .card-label {
+            position: absolute;
+            top: var(--space-4);
+            left: var(--space-4);
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--color-white);
+            background: var(--color-charcoal);
+            padding: var(--space-1) var(--space-3);
+        }
+
+        .card-body {
+            padding: var(--space-5);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--color-charcoal);
+            margin-bottom: var(--space-2);
+        }
+
+        .card-meta {
+            font-size: 0.75rem;
+            color: var(--color-concrete);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-3);
+        }
+
+        .card-text {
+            font-size: 0.9375rem;
+            color: var(--color-graphite);
+            line-height: 1.6;
+        }
+
+        .card-footer {
+            padding: var(--space-4) var(--space-5);
+            border-top: 1px solid var(--color-limestone);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-link {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-copper);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .card-link:hover {
+            color: var(--color-copper-dark);
+        }
+
+        /* Data Table */
+        .table-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--color-limestone);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--color-charcoal);
+            color: var(--color-white);
+            padding: var(--space-4);
+            text-align: left;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+        }
+
+        td {
+            padding: var(--space-4);
+            border-bottom: 1px solid var(--color-limestone);
+            color: var(--color-graphite);
+        }
+
+        tr:hover td {
+            background: rgba(184, 115, 51, 0.05);
+        }
+
+        .table-project {
+            font-family: var(--font-display);
+            font-weight: 500;
+            color: var(--color-charcoal);
+        }
+
+        .table-status {
+            display: inline-block;
+            padding: var(--space-1) var(--space-3);
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .status-active {
+            background: rgba(74, 124, 89, 0.1);
+            color: var(--color-success);
+        }
+
+        .status-pending {
+            background: rgba(196, 163, 90, 0.1);
+            color: var(--color-warning);
+        }
+
+        .status-completed {
+            background: rgba(184, 115, 51, 0.1);
+            color: var(--color-copper);
+        }
+
+        /* Badges */
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: var(--space-2) var(--space-4);
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+        }
+
+        .badge-charcoal {
+            background: var(--color-charcoal);
+            color: var(--color-white);
+        }
+
+        .badge-copper {
+            background: var(--color-copper);
+            color: var(--color-white);
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 1px solid var(--color-charcoal);
+            color: var(--color-charcoal);
+        }
+
+        .badge-blueprint {
+            background: var(--color-blueprint);
+            color: var(--color-white);
+        }
+
+        .badge-limestone {
+            background: var(--color-limestone);
+            color: var(--color-charcoal);
+        }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .principle-card {
+            padding: var(--space-6);
+            background: var(--color-white);
+            border: 1px solid var(--color-limestone);
+            position: relative;
+        }
+
+        .principle-number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--color-limestone);
+            line-height: 1;
+            margin-bottom: var(--space-4);
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--color-charcoal);
+            margin-bottom: var(--space-3);
+            font-weight: 500;
+        }
+
+        .principle-text {
+            font-size: 0.9375rem;
+            color: var(--color-graphite);
+            line-height: 1.6;
+        }
+
+        .principle-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: var(--color-copper);
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .animation-demo {
+            padding: var(--space-6);
+            background: var(--color-limestone);
+            text-align: center;
+        }
+
+        .animation-box {
+            width: 60px;
+            height: 60px;
+            background: var(--color-charcoal);
+            margin: 0 auto var(--space-4);
+        }
+
+        .demo-fade:hover .animation-box {
+            animation: fadeSlide 0.6s ease;
+        }
+
+        .demo-lift:hover .animation-box {
+            animation: lift 0.4s ease forwards;
+        }
+
+        .demo-reveal:hover .animation-box {
+            animation: reveal 0.5s ease;
+        }
+
+        .demo-rotate:hover .animation-box {
+            animation: rotate90 0.6s ease forwards;
+        }
+
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes lift {
+            to { transform: translateY(-8px); box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
+        }
+
+        @keyframes reveal {
+            0% { clip-path: inset(100% 0 0 0); }
+            100% { clip-path: inset(0 0 0 0); }
+        }
+
+        @keyframes rotate90 {
+            to { transform: rotate(90deg); }
+        }
+
+        .animation-name {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-graphite);
+        }
+
+        /* Special Component - Blueprint Panel */
+        .blueprint-panel {
+            background: var(--color-blueprint);
+            padding: var(--space-7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blueprint-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .blueprint-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .blueprint-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-6);
+            padding-bottom: var(--space-5);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .blueprint-title {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            color: var(--color-white);
+            margin-bottom: var(--space-2);
+        }
+
+        .blueprint-subtitle {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .blueprint-meta {
+            text-align: right;
+            color: var(--color-white);
+        }
+
+        .blueprint-number {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--color-copper-light);
+        }
+
+        .blueprint-date {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .blueprint-specs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-5);
+        }
+
+        .spec-item {
+            text-align: center;
+            padding: var(--space-4);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .spec-value {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--color-white);
+            margin-bottom: var(--space-1);
+        }
+
+        .spec-label {
+            font-size: 0.625rem;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-4) var(--space-5);
+            margin-bottom: var(--space-4);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-4);
+            border-left: 3px solid;
+        }
+
+        .alert-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: var(--space-1);
+        }
+
+        .alert-text {
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .alert-info {
+            background: rgba(90, 124, 138, 0.1);
+            border-color: var(--color-info);
+        }
+
+        .alert-info .alert-title { color: var(--color-info); }
+        .alert-info .alert-icon { fill: var(--color-info); }
+
+        .alert-success {
+            background: rgba(74, 124, 89, 0.1);
+            border-color: var(--color-success);
+        }
+
+        .alert-success .alert-title { color: var(--color-success); }
+        .alert-success .alert-icon { fill: var(--color-success); }
+
+        .alert-warning {
+            background: rgba(196, 163, 90, 0.1);
+            border-color: var(--color-warning);
+        }
+
+        .alert-warning .alert-title { color: var(--color-warning); }
+        .alert-warning .alert-icon { fill: var(--color-warning); }
+
+        .alert-error {
+            background: rgba(166, 93, 87, 0.1);
+            border-color: var(--color-error);
+        }
+
+        .alert-error .alert-title { color: var(--color-error); }
+        .alert-error .alert-icon { fill: var(--color-error); }
+
+        /* Footer */
+        footer {
+            background: var(--color-charcoal);
+            padding: var(--space-8) var(--space-6);
+            margin-top: var(--space-10);
+        }
+
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--color-white);
+        }
+
+        .footer-brand span {
+            color: var(--color-copper);
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            color: var(--color-concrete);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blueprint-specs {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: var(--space-4);
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="#" class="nav-brand">Blue<span>print</span></a>
+        <ul class="nav-links">
+            <li><a href="#colors">Colors</a></li>
+            <li><a href="#typography">Typography</a></li>
+            <li><a href="#components">Components</a></li>
+            <li><a href="#principles">Principles</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-label">Architecture Design System</div>
+            <h1>Blueprint<br><span>Design System</span></h1>
+            <p>A refined design language for architectural firms and design studios. Built on principles of precision, materiality, and spatial awareness.</p>
+            <div class="hero-line"></div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Color Palette -->
+        <section id="colors">
+            <div class="section-number">01</div>
+            <h2>Color Palette</h2>
+            <p>A material-inspired palette drawing from concrete, copper, and architectural drawings.</p>
+
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-charcoal);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Charcoal</div>
+                        <div class="color-hex">#2C2C2C</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-graphite);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Graphite</div>
+                        <div class="color-hex">#4A4A4A</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-copper);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Copper</div>
+                        <div class="color-hex">#B87333</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-blueprint);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Blueprint</div>
+                        <div class="color-hex">#1E3A5F</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-limestone);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Limestone</div>
+                        <div class="color-hex">#D4CFC9</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-concrete);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Concrete</div>
+                        <div class="color-hex">#8B8B8B</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Typography -->
+        <section id="typography">
+            <div class="section-number">02</div>
+            <h2>Typography</h2>
+
+            <div class="type-specimen">
+                <div class="type-display">Cormorant Garamond</div>
+                <div class="type-body">Archivo — The voice of structure</div>
+            </div>
+
+            <div class="type-scale">
+                <div class="type-row">
+                    <span class="type-label">Display</span>
+                    <span style="font-family: var(--font-display); font-size: 3rem; color: var(--color-charcoal);">Form Follows Function</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">H1</span>
+                    <span style="font-family: var(--font-display); font-size: 2.5rem; color: var(--color-charcoal);">Structural Integrity</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">H2</span>
+                    <span style="font-family: var(--font-display); font-size: 2rem; color: var(--color-charcoal);">Material Excellence</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">Body</span>
+                    <span style="font-family: var(--font-body); font-size: 1rem; color: var(--color-graphite);">Architecture is the learned game of forms assembled in light.</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">Caption</span>
+                    <span style="font-family: var(--font-body); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-concrete);">Project Specifications</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Spacing -->
+        <section>
+            <div class="section-number">03</div>
+            <h2>Spacing Scale</h2>
+            <p>An 8-pixel grid system ensuring precise alignment and visual rhythm.</p>
+
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 4px; height: 4px;"></div>
+                    <span class="spacing-label">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 8px; height: 8px;"></div>
+                    <span class="spacing-label">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 16px; height: 16px;"></div>
+                    <span class="spacing-label">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 24px; height: 24px;"></div>
+                    <span class="spacing-label">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 32px; height: 32px;"></div>
+                    <span class="spacing-label">32px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 48px; height: 48px;"></div>
+                    <span class="spacing-label">48px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 64px; height: 64px;"></div>
+                    <span class="spacing-label">64px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 96px; height: 96px;"></div>
+                    <span class="spacing-label">96px</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Buttons -->
+        <section>
+            <div class="section-number">04</div>
+            <h2>Buttons</h2>
+
+            <h3>Primary Actions</h3>
+            <div class="button-grid">
+                <button class="btn btn-primary">View Project</button>
+                <button class="btn btn-secondary">Learn More</button>
+                <button class="btn btn-copper">Contact Us</button>
+                <button class="btn btn-outline-copper">Download</button>
+            </div>
+
+            <h3>Sizes</h3>
+            <div class="button-grid">
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary">Default</button>
+                <button class="btn btn-primary btn-lg">Large</button>
+            </div>
+        </section>
+
+        <!-- 5. Forms -->
+        <section>
+            <div class="section-number">05</div>
+            <h2>Forms</h2>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Project Name</label>
+                    <input type="text" class="form-input" placeholder="Enter project name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Client</label>
+                    <input type="text" class="form-input" placeholder="Client name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Project Type</label>
+                    <select class="form-input form-select">
+                        <option>Residential</option>
+                        <option>Commercial</option>
+                        <option>Mixed Use</option>
+                        <option>Institutional</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Budget Range</label>
+                    <select class="form-input form-select">
+                        <option>$500K - $1M</option>
+                        <option>$1M - $5M</option>
+                        <option>$5M - $10M</option>
+                        <option>$10M+</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Project Brief</label>
+                <textarea class="form-input" placeholder="Describe your project vision..."></textarea>
+            </div>
+            <button class="btn btn-primary">Submit Inquiry</button>
+        </section>
+
+        <!-- 6. Cards -->
+        <section id="components">
+            <div class="section-number">06</div>
+            <h2>Cards</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-image">
+                        <span class="card-label">Residential</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">Los Angeles, CA</div>
+                        <h4 class="card-title">Coastal Retreat</h4>
+                        <p class="card-text">A 4,200 sq ft contemporary residence featuring cantilever design and floor-to-ceiling glazing.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="card-link">View Project →</a>
+                        <span class="badge badge-copper">Featured</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <span class="card-label">Commercial</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">New York, NY</div>
+                        <h4 class="card-title">Innovation Hub</h4>
+                        <p class="card-text">A LEED Platinum certified office complex with adaptive reuse of historic industrial structures.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="card-link">View Project →</a>
+                        <span class="badge badge-outline">Award Winner</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <span class="card-label">Cultural</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">Chicago, IL</div>
+                        <h4 class="card-title">Urban Gallery</h4>
+                        <p class="card-text">A 25,000 sq ft contemporary art museum with dynamic exhibition spaces and sculptural facade.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="card-link">View Project →</a>
+                        <span class="badge badge-blueprint">In Progress</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Data Table -->
+        <section>
+            <div class="section-number">07</div>
+            <h2>Data Table</h2>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Type</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Completion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-project">Waterfront Tower</td>
+                            <td>Mixed Use</td>
+                            <td>Miami, FL</td>
+                            <td><span class="table-status status-active">Active</span></td>
+                            <td>Q4 2025</td>
+                        </tr>
+                        <tr>
+                            <td class="table-project">Tech Campus</td>
+                            <td>Commercial</td>
+                            <td>Austin, TX</td>
+                            <td><span class="table-status status-pending">Pending</span></td>
+                            <td>Q2 2026</td>
+                        </tr>
+                        <tr>
+                            <td class="table-project">Heritage Restoration</td>
+                            <td>Institutional</td>
+                            <td>Boston, MA</td>
+                            <td><span class="table-status status-completed">Completed</span></td>
+                            <td>Q1 2024</td>
+                        </tr>
+                        <tr>
+                            <td class="table-project">Mountain Residence</td>
+                            <td>Residential</td>
+                            <td>Aspen, CO</td>
+                            <td><span class="table-status status-active">Active</span></td>
+                            <td>Q3 2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 8. Badges -->
+        <section>
+            <div class="section-number">08</div>
+            <h2>Badges & Tags</h2>
+
+            <div class="badge-group">
+                <span class="badge badge-charcoal">Residential</span>
+                <span class="badge badge-copper">Featured</span>
+                <span class="badge badge-blueprint">In Progress</span>
+                <span class="badge badge-outline">Award Winner</span>
+                <span class="badge badge-limestone">Archive</span>
+            </div>
+        </section>
+
+        <!-- 9. Design Principles -->
+        <section id="principles">
+            <div class="section-number">09</div>
+            <h2>Design Principles</h2>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-number">01</div>
+                    <h4 class="principle-title">Precision</h4>
+                    <p class="principle-text">Every element is placed with intention. Our grid system and spacing scale ensure pixel-perfect alignment.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">02</div>
+                    <h4 class="principle-title">Materiality</h4>
+                    <p class="principle-text">Colors and textures are drawn from architectural materials—concrete, copper, limestone, and blueprint paper.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">03</div>
+                    <h4 class="principle-title">Clarity</h4>
+                    <p class="principle-text">Information hierarchy is paramount. Clear typography and restrained decoration guide the eye naturally.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">04</div>
+                    <h4 class="principle-title">Timelessness</h4>
+                    <p class="principle-text">Classic proportions and refined aesthetics ensure the design remains relevant across changing trends.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Animation -->
+        <section>
+            <div class="section-number">10</div>
+            <h2>Animation Effects</h2>
+            <p>Subtle, purposeful motion that enhances understanding without distraction.</p>
+
+            <div class="animation-grid">
+                <div class="animation-demo demo-fade">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Fade & Slide</div>
+                </div>
+                <div class="animation-demo demo-lift">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Lift</div>
+                </div>
+                <div class="animation-demo demo-reveal">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Reveal</div>
+                </div>
+                <div class="animation-demo demo-rotate">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Rotate</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Special Component -->
+        <section>
+            <div class="section-number">11</div>
+            <h2>Blueprint Panel</h2>
+
+            <div class="blueprint-panel">
+                <div class="blueprint-content">
+                    <div class="blueprint-header">
+                        <div>
+                            <h3 class="blueprint-title">Coastal Retreat Residence</h3>
+                            <div class="blueprint-subtitle">Project Specifications</div>
+                        </div>
+                        <div class="blueprint-meta">
+                            <div class="blueprint-number">A-001</div>
+                            <div class="blueprint-date">Rev. 2024.03</div>
+                        </div>
+                    </div>
+                    <div class="blueprint-specs">
+                        <div class="spec-item">
+                            <div class="spec-value">4,200</div>
+                            <div class="spec-label">Total Sq Ft</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">3</div>
+                            <div class="spec-label">Floors</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">$2.8M</div>
+                            <div class="spec-label">Est. Budget</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">18</div>
+                            <div class="spec-label">Months</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Alerts -->
+        <section>
+            <div class="section-number">12</div>
+            <h2>Alert Messages</h2>
+
+            <div class="alert alert-info">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Project Update</div>
+                    <p class="alert-text">The schematic design phase has been approved. Moving to design development.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Permit Approved</div>
+                    <p class="alert-text">Building permit has been issued. Construction may begin as scheduled.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Material Lead Time</div>
+                    <p class="alert-text">Custom steel fabrication requires 12-week lead time. Order placement deadline approaching.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-error">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Site Issue Detected</div>
+                    <p class="alert-text">Soil report indicates additional foundation engineering required. Review meeting scheduled.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">Blue<span>print</span></div>
+            <div class="footer-text">Architecture Design System v1.0</div>
+        </div>
+    </footer>
+</body>
+</html>

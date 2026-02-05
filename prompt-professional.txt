@@ -1,0 +1,60 @@
+First, read the frontend-design skill at /mnt/skills/public/frontend-design/SKILL.md before starting.
+
+Create a complete, single-file HTML style guide/design system page with a PROFESSIONAL, ENTERPRISE-GRADE aesthetic.
+
+THEME GENERATION:
+Pick a professional industry or business context. The design should feel polished, trustworthy, and suitable for enterprise applications. Examples include (but don't limit yourself to): Corporate/Enterprise, Legal/Law Firm, Healthcare/Medical, Finance/Banking, Tech/SaaS, Consulting, Real Estate, Insurance, Government, Education/University, Non-Profit, Accounting, Architecture/Design Studio, Manufacturing, E-commerce, HR/People Ops, Logistics, Media/Publishing, Pharmaceutical, Engineering, etc.
+
+Invent a sophisticated, professional name for the design system that fits the industry (e.g., "Meridian", "Clarity", "Foundation", "Nexus", "Vertex").
+
+DESIGN PHILOSOPHY:
+- Clean, uncluttered layouts with generous whitespace
+- Restrained color palettes (1-2 primary colors, neutral bases)
+- Professional typography (readable, accessible, no novelty fonts)
+- Subtle, purposeful interactions (no flashy animations)
+- High contrast for accessibility
+- Consistent, predictable patterns
+- Focus on usability over decoration
+
+REQUIRED SECTIONS (numbered):
+1. **Color Palette** - Professional primary color, secondary accent, semantic colors (success, warning, error, info), and neutral grays with WCAG-compliant contrast ratios
+2. **Typography** - 2 professional Google Fonts (one sans-serif for UI, one optional serif for editorial). Show clear hierarchy: Display (32-48px), H1-H4 headings, Body (16px), Small/Caption, with appropriate line-heights
+3. **Spacing Scale** - 4px base unit system (4, 8, 12, 16, 24, 32, 48, 64, 96) with visual representation
+4. **Buttons** - Primary, Secondary, Tertiary/Ghost, Danger variants. Sizes: Small, Medium, Large. States: Default, Hover, Active, Disabled, Loading
+5. **Forms** - Text inputs, Select dropdowns, Textareas, Checkboxes, Radio buttons, Toggle switches. States: Default, Focus, Error, Disabled. Include proper labels and helper text
+6. **Cards** - Content card, Stats/Metric card, List item card - clean with subtle shadows
+7. **Data Table** - Sortable columns, row hover states, pagination indicators, zebra striping or clean borders
+8. **Badges/Status Indicators** - Filled and subtle variants for: Active/Success, Pending/Warning, Inactive/Error, Neutral/Info
+9. **Design Principles** - 4-6 principles focused on: Clarity, Consistency, Accessibility, Efficiency, Trust, Scalability
+10. **Micro-interactions** - Subtle hover states, focus rings, smooth transitions (200-300ms), loading states
+11. **Professional Component** - Choose ONE: Data visualization placeholder, Breadcrumb navigation, Tabs, Pagination, or Modal dialog preview
+12. **Notifications/Alerts** - Inline alerts and toast-style notifications for Success, Info, Warning, Error states with dismiss actions
+
+TECHNICAL REQUIREMENTS:
+- Single HTML file with embedded CSS (no external dependencies except Google Fonts)
+- Mobile-first responsive design with breakpoints at 640px, 768px, 1024px, 1280px
+- CSS custom properties for all design tokens (colors, spacing, typography, shadows, radii)
+- Smooth 200ms transitions on interactive elements
+- Clean header with system name and version
+- Professional footer with minimal decoration
+- Use CSS Grid and Flexbox for layouts
+- Include focus-visible states for keyboard navigation
+- Minimum touch target size of 44px for interactive elements
+
+STYLE RULES:
+- NO decorative illustrations or playful elements
+- NO gradients unless very subtle (use solid colors)
+- NO novelty fonts or display typography for UI elements
+- Shadows should be subtle (avoid harsh drop shadows)
+- Border radius: 4-8px maximum (no fully rounded corners except pills/avatars)
+- Maintain 4.5:1 contrast ratio for normal text, 3:1 for large text
+- All placeholder text should use realistic business/industry context
+- The design should feel like it could ship in a real enterprise product
+
+COLOR GUIDANCE:
+- Primary: Choose a professional, trustworthy color (blues, teals, deep greens, refined purples)
+- Avoid: Neon colors, overly saturated hues, trendy color schemes
+- Neutrals: Use a refined gray scale (cool or warm based on primary)
+- Semantic colors: Standard green for success, amber for warning, red for error, blue for info
+
+Output only the complete HTML code, no explanations.

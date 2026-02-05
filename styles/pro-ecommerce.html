@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storefront — E-Commerce Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette - Modern Retail */
+            --color-black: #0F0F0F;
+            --color-charcoal: #1A1A1A;
+            --color-gray-dark: #3D3D3D;
+            --color-gray: #6B6B6B;
+            --color-gray-light: #A3A3A3;
+            --color-cream: #F5F3EF;
+            --color-white: #FFFFFF;
+            --color-accent: #E85D04;
+            --color-accent-light: #FF7B2E;
+            --color-accent-dark: #C94E00;
+
+            /* Semantic Colors */
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-error: #EF4444;
+            --color-info: #3B82F6;
+
+            /* Typography */
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'DM Mono', monospace;
+
+            /* Spacing - 4px Grid */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.5rem;
+            --space-6: 2rem;
+            --space-7: 3rem;
+            --space-8: 4rem;
+            --space-9: 6rem;
+            --space-10: 8rem;
+
+            /* Layout */
+            --max-width: 1200px;
+            --border-radius-sm: 4px;
+            --border-radius: 8px;
+            --border-radius-lg: 16px;
+            --transition: 0.25s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--color-charcoal);
+            background-color: var(--color-white);
+            font-size: 16px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-white);
+            padding: var(--space-4) var(--space-6);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-black);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-brand span {
+            color: var(--color-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-5);
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.875rem;
+            color: var(--color-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-black);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: var(--space-10) var(--space-6);
+            padding-top: calc(var(--space-10) + 80px);
+            background: var(--color-cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-4);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 700;
+            color: var(--color-black);
+            line-height: 1.1;
+            margin-bottom: var(--space-5);
+            letter-spacing: -0.03em;
+        }
+
+        .hero h1 span {
+            color: var(--color-accent);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--color-gray);
+            max-width: 560px;
+            font-weight: 400;
+        }
+
+        /* Main Content */
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--space-9) var(--space-6);
+        }
+
+        section {
+            margin-bottom: var(--space-10);
+        }
+
+        .section-header {
+            margin-bottom: var(--space-6);
+        }
+
+        .section-number {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-accent);
+            margin-bottom: var(--space-2);
+            font-weight: 500;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-black);
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-charcoal);
+            margin-bottom: var(--space-4);
+        }
+
+        p {
+            margin-bottom: var(--space-4);
+            color: var(--color-gray);
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .color-card {
+            background: var(--color-white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: var(--transition);
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .color-swatch {
+            height: 100px;
+        }
+
+        .color-info {
+            padding: var(--space-4);
+        }
+
+        .color-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-charcoal);
+        }
+
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-gray);
+        }
+
+        /* Typography */
+        .type-specimen {
+            margin-bottom: var(--space-7);
+            padding: var(--space-7);
+            background: var(--color-cream);
+            border-radius: var(--border-radius-lg);
+        }
+
+        .type-display {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--color-black);
+            letter-spacing: -0.03em;
+            margin-bottom: var(--space-3);
+        }
+
+        .type-body {
+            font-family: var(--font-mono);
+            font-size: 1.125rem;
+            color: var(--color-gray);
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-5);
+            padding-bottom: var(--space-4);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .type-label {
+            width: 80px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-gray-light);
+            flex-shrink: 0;
+        }
+
+        /* Spacing */
+        .spacing-visual {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-5);
+            align-items: flex-end;
+        }
+
+        .spacing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .spacing-box {
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+            border-radius: var(--border-radius-sm);
+        }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-gray);
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-5);
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-charcoal);
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .btn-accent:hover {
+            background: var(--color-accent-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-black);
+            border: 2px solid var(--color-black);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-gray);
+        }
+
+        .btn-ghost:hover {
+            color: var(--color-black);
+            background: var(--color-cream);
+        }
+
+        .btn-sm {
+            padding: var(--space-2) var(--space-4);
+            font-size: 0.8125rem;
+        }
+
+        .btn-lg {
+            padding: var(--space-4) var(--space-7);
+            font-size: 1rem;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-5);
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--color-charcoal);
+            margin-bottom: var(--space-2);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-3) var(--space-4);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            border: 2px solid rgba(0,0,0,0.1);
+            border-radius: var(--border-radius);
+            background: var(--color-white);
+            color: var(--color-charcoal);
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .form-input::placeholder {
+            color: var(--color-gray-light);
+        }
+
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B6B6B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-4) center;
+            padding-right: var(--space-8);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-5);
+        }
+
+        /* Product Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .product-card {
+            background: var(--color-white);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            height: 280px;
+            background: var(--color-cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: var(--space-4);
+            left: var(--space-4);
+            padding: var(--space-1) var(--space-3);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .badge-new {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .badge-sale {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .product-actions {
+            position: absolute;
+            bottom: var(--space-4);
+            right: var(--space-4);
+            display: flex;
+            gap: var(--space-2);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-actions {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .action-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-white);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .action-btn:hover {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .product-body {
+            padding: var(--space-5);
+        }
+
+        .product-category {
+            font-size: 0.75rem;
+            color: var(--color-gray-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-1);
+        }
+
+        .product-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: var(--space-2);
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .price-current {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--color-black);
+        }
+
+        .price-original {
+            font-size: 0.9375rem;
+            color: var(--color-gray-light);
+            text-decoration: line-through;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+            margin-top: var(--space-3);
+            font-size: 0.8125rem;
+            color: var(--color-gray);
+        }
+
+        /* Data Table */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--color-cream);
+            padding: var(--space-4);
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: var(--space-4);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            color: var(--color-charcoal);
+        }
+
+        tr:hover td {
+            background: var(--color-cream);
+        }
+
+        .table-product {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .table-product-image {
+            width: 48px;
+            height: 48px;
+            background: var(--color-cream);
+            border-radius: var(--border-radius-sm);
+        }
+
+        .table-product-name {
+            font-weight: 600;
+            color: var(--color-black);
+        }
+
+        .table-product-sku {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-gray-light);
+        }
+
+        /* Badges */
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: var(--space-2) var(--space-3);
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+        }
+
+        .badge-black {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .badge-orange {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .badge-cream {
+            background: var(--color-cream);
+            color: var(--color-charcoal);
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 1px solid var(--color-gray-light);
+            color: var(--color-gray);
+        }
+
+        .badge-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--color-success);
+        }
+
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--color-warning);
+        }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .principle-card {
+            padding: var(--space-6);
+            background: var(--color-cream);
+            border-radius: var(--border-radius-lg);
+        }
+
+        .principle-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-black);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-4);
+            color: var(--color-white);
+        }
+
+        .principle-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-text {
+            font-size: 0.9375rem;
+            color: var(--color-gray);
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .animation-demo {
+            padding: var(--space-6);
+            background: var(--color-cream);
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+        }
+
+        .animation-box {
+            width: 50px;
+            height: 50px;
+            background: var(--color-black);
+            margin: 0 auto var(--space-4);
+            border-radius: var(--border-radius);
+        }
+
+        .demo-bounce:hover .animation-box {
+            animation: bounce 0.5s ease;
+        }
+
+        .demo-float:hover .animation-box {
+            animation: float 1s ease-in-out infinite;
+        }
+
+        .demo-pulse:hover .animation-box {
+            animation: pulse 0.6s ease;
+        }
+
+        .demo-shake:hover .animation-box {
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .animation-name {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--color-gray);
+        }
+
+        /* Special Component - Cart Summary */
+        .cart-summary {
+            background: var(--color-white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .cart-header {
+            padding: var(--space-5);
+            background: var(--color-cream);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-black);
+        }
+
+        .cart-count {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--color-gray);
+        }
+
+        .cart-body {
+            padding: var(--space-5);
+        }
+
+        .cart-item {
+            display: flex;
+            gap: var(--space-4);
+            padding: var(--space-4) 0;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 72px;
+            height: 72px;
+            background: var(--color-cream);
+            border-radius: var(--border-radius);
+            flex-shrink: 0;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: var(--space-1);
+        }
+
+        .cart-item-variant {
+            font-size: 0.8125rem;
+            color: var(--color-gray);
+        }
+
+        .cart-item-price {
+            font-weight: 600;
+            color: var(--color-black);
+            text-align: right;
+        }
+
+        .cart-item-qty {
+            font-size: 0.8125rem;
+            color: var(--color-gray);
+            text-align: right;
+        }
+
+        .cart-footer {
+            padding: var(--space-5);
+            background: var(--color-cream);
+        }
+
+        .cart-subtotal {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-2);
+            font-size: 0.9375rem;
+            color: var(--color-gray);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            padding-top: var(--space-3);
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .cart-total-label {
+            font-weight: 600;
+            color: var(--color-black);
+        }
+
+        .cart-total-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-black);
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-4) var(--space-5);
+            margin-bottom: var(--space-4);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+        }
+
+        .alert-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            margin-bottom: var(--space-1);
+        }
+
+        .alert-text {
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .alert-info {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .alert-info .alert-title { color: var(--color-info); }
+        .alert-info .alert-icon { fill: var(--color-info); }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .alert-success .alert-title { color: var(--color-success); }
+        .alert-success .alert-icon { fill: var(--color-success); }
+
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        .alert-warning .alert-title { color: var(--color-warning); }
+        .alert-warning .alert-icon { fill: var(--color-warning); }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .alert-error .alert-title { color: var(--color-error); }
+        .alert-error .alert-icon { fill: var(--color-error); }
+
+        /* Footer */
+        footer {
+            background: var(--color-black);
+            padding: var(--space-8) var(--space-6);
+            margin-top: var(--space-10);
+        }
+
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+
+        .footer-brand span {
+            color: var(--color-accent);
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            color: var(--color-gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: var(--space-4);
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="#" class="nav-brand">Store<span>front</span></a>
+        <ul class="nav-links">
+            <li><a href="#colors">Colors</a></li>
+            <li><a href="#typography">Typography</a></li>
+            <li><a href="#components">Components</a></li>
+            <li><a href="#principles">Principles</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-eyebrow">E-Commerce Design System</span>
+            <h1>Store<span>front</span></h1>
+            <p>A conversion-focused design system for modern e-commerce platforms. Built for seamless shopping experiences that delight customers and drive sales.</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Color Palette -->
+        <section id="colors">
+            <div class="section-header">
+                <div class="section-number">01</div>
+                <h2>Color Palette</h2>
+            </div>
+            <p>A bold, conversion-optimized palette that balances visual appeal with readability.</p>
+
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-black);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Black</div>
+                        <div class="color-hex">#0F0F0F</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-charcoal);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Charcoal</div>
+                        <div class="color-hex">#1A1A1A</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-accent);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Accent</div>
+                        <div class="color-hex">#E85D04</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-cream);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Cream</div>
+                        <div class="color-hex">#F5F3EF</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-gray);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Gray</div>
+                        <div class="color-hex">#6B6B6B</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-white);"></div>
+                    <div class="color-info">
+                        <div class="color-name">White</div>
+                        <div class="color-hex">#FFFFFF</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Typography -->
+        <section id="typography">
+            <div class="section-header">
+                <div class="section-number">02</div>
+                <h2>Typography</h2>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-display">Plus Jakarta Sans</div>
+                <div class="type-body">DM Mono — for prices and codes</div>
+            </div>
+
+            <div class="type-scale">
+                <div class="type-row">
+                    <span class="type-label">H1</span>
+                    <span style="font-size: 2.5rem; font-weight: 700; color: var(--color-black);">Summer Collection</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">H2</span>
+                    <span style="font-size: 2rem; font-weight: 700; color: var(--color-black);">Featured Products</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">H3</span>
+                    <span style="font-size: 1.25rem; font-weight: 600; color: var(--color-charcoal);">Product Details</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">Body</span>
+                    <span style="font-size: 1rem; color: var(--color-gray);">Free shipping on orders over $50. Easy returns within 30 days.</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">Price</span>
+                    <span style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; color: var(--color-black);">$149.00</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Spacing -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">03</div>
+                <h2>Spacing Scale</h2>
+            </div>
+            <p>Consistent spacing creates visual rhythm and improves scanability.</p>
+
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 4px; height: 4px;"></div>
+                    <span class="spacing-label">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 8px; height: 8px;"></div>
+                    <span class="spacing-label">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 16px; height: 16px;"></div>
+                    <span class="spacing-label">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 24px; height: 24px;"></div>
+                    <span class="spacing-label">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 32px; height: 32px;"></div>
+                    <span class="spacing-label">32px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 48px; height: 48px;"></div>
+                    <span class="spacing-label">48px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 64px; height: 64px;"></div>
+                    <span class="spacing-label">64px</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Buttons -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">04</div>
+                <h2>Buttons</h2>
+            </div>
+
+            <h3>Primary Actions</h3>
+            <div class="button-grid">
+                <button class="btn btn-primary">Add to Cart</button>
+                <button class="btn btn-accent">Buy Now</button>
+                <button class="btn btn-outline">Learn More</button>
+                <button class="btn btn-ghost">View Details</button>
+            </div>
+
+            <h3>Sizes</h3>
+            <div class="button-grid">
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary">Default</button>
+                <button class="btn btn-primary btn-lg">Large</button>
+            </div>
+        </section>
+
+        <!-- 5. Forms -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">05</div>
+                <h2>Forms</h2>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Promo Code</label>
+                    <input type="text" class="form-input" placeholder="Enter code">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Size</label>
+                    <select class="form-input form-select">
+                        <option>Select size</option>
+                        <option>Small</option>
+                        <option>Medium</option>
+                        <option>Large</option>
+                        <option>X-Large</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Quantity</label>
+                    <select class="form-input form-select">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5+</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-accent">Apply Code</button>
+        </section>
+
+        <!-- 6. Product Cards -->
+        <section id="components">
+            <div class="section-header">
+                <div class="section-number">06</div>
+                <h2>Product Cards</h2>
+            </div>
+
+            <div class="card-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-badge badge-new">New</span>
+                        <div class="product-actions">
+                            <button class="action-btn">♡</button>
+                            <button class="action-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="product-body">
+                        <div class="product-category">Accessories</div>
+                        <h4 class="product-title">Premium Leather Wallet</h4>
+                        <div class="product-price">
+                            <span class="price-current">$89.00</span>
+                        </div>
+                        <div class="product-rating">★★★★★ (128 reviews)</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-badge badge-sale">30% Off</span>
+                        <div class="product-actions">
+                            <button class="action-btn">♡</button>
+                            <button class="action-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="product-body">
+                        <div class="product-category">Footwear</div>
+                        <h4 class="product-title">Classic Canvas Sneakers</h4>
+                        <div class="product-price">
+                            <span class="price-current">$69.00</span>
+                            <span class="price-original">$99.00</span>
+                        </div>
+                        <div class="product-rating">★★★★☆ (89 reviews)</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <div class="product-actions">
+                            <button class="action-btn">♡</button>
+                            <button class="action-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="product-body">
+                        <div class="product-category">Apparel</div>
+                        <h4 class="product-title">Organic Cotton T-Shirt</h4>
+                        <div class="product-price">
+                            <span class="price-current">$45.00</span>
+                        </div>
+                        <div class="product-rating">★★★★★ (256 reviews)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Data Table -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">07</div>
+                <h2>Order Table</h2>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>SKU</th>
+                            <th>Stock</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="table-product">
+                                    <div class="table-product-image"></div>
+                                    <div>
+                                        <div class="table-product-name">Premium Leather Wallet</div>
+                                        <div class="table-product-sku">ACC-001-BLK</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span style="font-family: var(--font-mono);">SKU-28401</span></td>
+                            <td>156 units</td>
+                            <td style="font-family: var(--font-mono); font-weight: 600;">$89.00</td>
+                            <td><span class="badge badge-success">In Stock</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table-product">
+                                    <div class="table-product-image"></div>
+                                    <div>
+                                        <div class="table-product-name">Canvas Sneakers</div>
+                                        <div class="table-product-sku">FTW-042-WHT</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span style="font-family: var(--font-mono);">SKU-19283</span></td>
+                            <td>23 units</td>
+                            <td style="font-family: var(--font-mono); font-weight: 600;">$69.00</td>
+                            <td><span class="badge badge-warning">Low Stock</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table-product">
+                                    <div class="table-product-image"></div>
+                                    <div>
+                                        <div class="table-product-name">Organic Cotton T-Shirt</div>
+                                        <div class="table-product-sku">APP-018-GRY</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span style="font-family: var(--font-mono);">SKU-73629</span></td>
+                            <td>412 units</td>
+                            <td style="font-family: var(--font-mono); font-weight: 600;">$45.00</td>
+                            <td><span class="badge badge-success">In Stock</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 8. Badges -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">08</div>
+                <h2>Badges & Tags</h2>
+            </div>
+
+            <div class="badge-group">
+                <span class="badge badge-black">New</span>
+                <span class="badge badge-orange">Sale</span>
+                <span class="badge badge-cream">Featured</span>
+                <span class="badge badge-outline">Limited</span>
+                <span class="badge badge-success">In Stock</span>
+                <span class="badge badge-warning">Low Stock</span>
+            </div>
+        </section>
+
+        <!-- 9. Design Principles -->
+        <section id="principles">
+            <div class="section-header">
+                <div class="section-number">09</div>
+                <h2>Design Principles</h2>
+            </div>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-icon">🎯</div>
+                    <h4 class="principle-title">Conversion First</h4>
+                    <p class="principle-text">Every design decision optimizes for the customer journey, from discovery to checkout.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">⚡</div>
+                    <h4 class="principle-title">Speed Matters</h4>
+                    <p class="principle-text">Lightweight components and optimized assets ensure fast load times on all devices.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">✨</div>
+                    <h4 class="principle-title">Delight Users</h4>
+                    <p class="principle-text">Subtle animations and thoughtful interactions create memorable shopping experiences.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">📱</div>
+                    <h4 class="principle-title">Mobile Native</h4>
+                    <p class="principle-text">Designed mobile-first with touch-friendly targets and responsive layouts.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Animation -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">10</div>
+                <h2>Animation Effects</h2>
+            </div>
+            <p>Playful micro-interactions that enhance engagement without hindering performance.</p>
+
+            <div class="animation-grid">
+                <div class="animation-demo demo-bounce">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Bounce</div>
+                </div>
+                <div class="animation-demo demo-float">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Float</div>
+                </div>
+                <div class="animation-demo demo-pulse">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Pulse</div>
+                </div>
+                <div class="animation-demo demo-shake">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Shake</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Special Component -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">11</div>
+                <h2>Cart Summary</h2>
+            </div>
+
+            <div class="cart-summary" style="max-width: 400px;">
+                <div class="cart-header">
+                    <h3 class="cart-title">Your Cart</h3>
+                    <span class="cart-count">3 items</span>
+                </div>
+                <div class="cart-body">
+                    <div class="cart-item">
+                        <div class="cart-item-image"></div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">Premium Leather Wallet</div>
+                            <div class="cart-item-variant">Black / Standard</div>
+                        </div>
+                        <div>
+                            <div class="cart-item-price">$89.00</div>
+                            <div class="cart-item-qty">Qty: 1</div>
+                        </div>
+                    </div>
+                    <div class="cart-item">
+                        <div class="cart-item-image"></div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">Canvas Sneakers</div>
+                            <div class="cart-item-variant">White / Size 10</div>
+                        </div>
+                        <div>
+                            <div class="cart-item-price">$69.00</div>
+                            <div class="cart-item-qty">Qty: 1</div>
+                        </div>
+                    </div>
+                    <div class="cart-item">
+                        <div class="cart-item-image"></div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">Cotton T-Shirt</div>
+                            <div class="cart-item-variant">Gray / Medium</div>
+                        </div>
+                        <div>
+                            <div class="cart-item-price">$45.00</div>
+                            <div class="cart-item-qty">Qty: 1</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-footer">
+                    <div class="cart-subtotal">
+                        <span>Subtotal</span>
+                        <span>$203.00</span>
+                    </div>
+                    <div class="cart-subtotal">
+                        <span>Shipping</span>
+                        <span>Free</span>
+                    </div>
+                    <div class="cart-total">
+                        <span class="cart-total-label">Total</span>
+                        <span class="cart-total-value">$203.00</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Alerts -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">12</div>
+                <h2>Alert Messages</h2>
+            </div>
+
+            <div class="alert alert-info">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">New Arrivals</div>
+                    <p class="alert-text">Check out our latest spring collection. Fresh styles just landed!</p>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Order Confirmed</div>
+                    <p class="alert-text">Your order #12847 has been placed successfully. Check your email for details.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Low Stock Alert</div>
+                    <p class="alert-text">Only 3 items left in stock. Order soon to secure your purchase.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-error">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Payment Failed</div>
+                    <p class="alert-text">Your card was declined. Please update your payment method and try again.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">Store<span>front</span></div>
+            <div class="footer-text">E-Commerce Design System v1.0</div>
+        </div>
+    </footer>
+</body>
+</html>

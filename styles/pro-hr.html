@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thrive — HR Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette - Warm & Approachable */
+            --color-plum: #5B2C6F;
+            --color-plum-light: #7D3C98;
+            --color-plum-dark: #4A235A;
+            --color-coral: #E67E5A;
+            --color-coral-light: #F5A589;
+            --color-mint: #48C9B0;
+            --color-sky: #5DADE2;
+            --color-sand: #F7F4F0;
+            --color-warm-gray: #7B7D7D;
+            --color-charcoal: #2C3E50;
+            --color-white: #FFFFFF;
+
+            /* Semantic Colors */
+            --color-success: #27AE60;
+            --color-warning: #F39C12;
+            --color-error: #E74C3C;
+            --color-info: #3498DB;
+
+            /* Typography */
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Source Sans 3', sans-serif;
+
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.5rem;
+            --space-6: 2rem;
+            --space-7: 3rem;
+            --space-8: 4rem;
+            --space-9: 6rem;
+            --space-10: 8rem;
+
+            /* Layout */
+            --max-width: 1200px;
+            --border-radius: 12px;
+            --border-radius-sm: 6px;
+            --border-radius-lg: 20px;
+            --transition: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--color-charcoal);
+            background-color: var(--color-sand);
+            font-size: 16px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-white);
+            padding: var(--space-4) var(--space-6);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-brand {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-plum);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-5);
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            color: var(--color-warm-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-plum);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: var(--space-10) var(--space-6);
+            padding-top: calc(var(--space-10) + 80px);
+            background: linear-gradient(135deg, var(--color-plum) 0%, var(--color-plum-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: var(--color-coral);
+            border-radius: 50%;
+            opacity: 0.2;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 500px;
+            height: 500px;
+            background: var(--color-mint);
+            border-radius: 50%;
+            opacity: 0.15;
+        }
+
+        .hero-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: var(--color-white);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--border-radius);
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-5);
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 700;
+            color: var(--color-white);
+            line-height: 1.1;
+            margin-bottom: var(--space-5);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.85);
+            max-width: 560px;
+        }
+
+        /* Main Content */
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--space-9) var(--space-6);
+        }
+
+        section {
+            margin-bottom: var(--space-10);
+        }
+
+        .section-header {
+            margin-bottom: var(--space-6);
+        }
+
+        .section-number {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            color: var(--color-coral);
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-charcoal);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-charcoal);
+            margin-bottom: var(--space-4);
+        }
+
+        p {
+            margin-bottom: var(--space-4);
+            color: var(--color-warm-gray);
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .color-card {
+            background: var(--color-white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            transition: var(--transition);
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .color-swatch {
+            height: 100px;
+        }
+
+        .color-info {
+            padding: var(--space-4);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-charcoal);
+        }
+
+        .color-hex {
+            font-size: 0.75rem;
+            color: var(--color-warm-gray);
+        }
+
+        /* Typography */
+        .type-specimen {
+            margin-bottom: var(--space-7);
+            padding: var(--space-7);
+            background: var(--color-white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--color-plum);
+            margin-bottom: var(--space-3);
+        }
+
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            color: var(--color-warm-gray);
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-5);
+            padding: var(--space-4);
+            background: var(--color-white);
+            border-radius: var(--border-radius);
+        }
+
+        .type-label {
+            width: 80px;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--color-coral);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        /* Spacing */
+        .spacing-visual {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-5);
+            align-items: flex-end;
+            padding: var(--space-6);
+            background: var(--color-white);
+            border-radius: var(--border-radius-lg);
+        }
+
+        .spacing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .spacing-box {
+            background: linear-gradient(135deg, var(--color-plum) 0%, var(--color-coral) 100%);
+            border-radius: var(--border-radius-sm);
+        }
+
+        .spacing-label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--color-warm-gray);
+            font-weight: 500;
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-5);
+            font-family: var(--font-display);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--color-plum);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-plum-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-coral {
+            background: var(--color-coral);
+            color: var(--color-white);
+        }
+
+        .btn-coral:hover {
+            background: #D4714D;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-plum);
+            border: 2px solid var(--color-plum);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-plum);
+            color: var(--color-white);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-warm-gray);
+        }
+
+        .btn-ghost:hover {
+            background: var(--color-sand);
+            color: var(--color-charcoal);
+        }
+
+        .btn-sm {
+            padding: var(--space-2) var(--space-4);
+            font-size: 0.8125rem;
+        }
+
+        .btn-lg {
+            padding: var(--space-4) var(--space-7);
+            font-size: 1rem;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-5);
+        }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-charcoal);
+            margin-bottom: var(--space-2);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-3) var(--space-4);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            border: 2px solid rgba(0,0,0,0.1);
+            border-radius: var(--border-radius);
+            background: var(--color-white);
+            color: var(--color-charcoal);
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-plum);
+        }
+
+        .form-input::placeholder {
+            color: var(--color-warm-gray);
+        }
+
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237B7D7D' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-4) center;
+            padding-right: var(--space-8);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-5);
+        }
+
+        /* Employee Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .employee-card {
+            background: var(--color-white);
+            border-radius: var(--border-radius-lg);
+            padding: var(--space-6);
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .employee-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+        }
+
+        .employee-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--color-plum) 0%, var(--color-coral) 100%);
+            border-radius: 50%;
+            margin: 0 auto var(--space-4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .employee-name {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-charcoal);
+            margin-bottom: var(--space-1);
+        }
+
+        .employee-role {
+            font-size: 0.875rem;
+            color: var(--color-plum);
+            margin-bottom: var(--space-2);
+        }
+
+        .employee-department {
+            font-size: 0.75rem;
+            color: var(--color-warm-gray);
+            margin-bottom: var(--space-4);
+        }
+
+        .employee-stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-5);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--color-sand);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-charcoal);
+        }
+
+        .stat-label {
+            font-size: 0.6875rem;
+            color: var(--color-warm-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Data Table */
+        .table-wrapper {
+            overflow-x: auto;
+            background: var(--color-white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--color-sand);
+            padding: var(--space-4);
+            text-align: left;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-warm-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: var(--space-4);
+            border-bottom: 1px solid var(--color-sand);
+            color: var(--color-charcoal);
+        }
+
+        tr:hover td {
+            background: var(--color-sand);
+        }
+
+        .table-employee {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .table-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--color-plum) 0%, var(--color-coral) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .table-name {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--color-charcoal);
+        }
+
+        .table-email {
+            font-size: 0.8125rem;
+            color: var(--color-warm-gray);
+        }
+
+        /* Badges */
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: var(--space-2) var(--space-4);
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+        }
+
+        .badge-plum {
+            background: var(--color-plum);
+            color: var(--color-white);
+        }
+
+        .badge-coral {
+            background: var(--color-coral);
+            color: var(--color-white);
+        }
+
+        .badge-mint {
+            background: var(--color-mint);
+            color: var(--color-white);
+        }
+
+        .badge-sky {
+            background: var(--color-sky);
+            color: var(--color-white);
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 1px solid var(--color-warm-gray);
+            color: var(--color-warm-gray);
+        }
+
+        .badge-success {
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--color-success);
+        }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .principle-card {
+            padding: var(--space-6);
+            background: var(--color-white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .principle-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--color-plum) 0%, var(--color-coral) 100%);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-4);
+            font-size: 1.5rem;
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-charcoal);
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-text {
+            font-size: 0.9375rem;
+            color: var(--color-warm-gray);
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .animation-demo {
+            padding: var(--space-6);
+            background: var(--color-white);
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .animation-box {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--color-plum) 0%, var(--color-coral) 100%);
+            margin: 0 auto var(--space-4);
+            border-radius: var(--border-radius);
+        }
+
+        .demo-grow:hover .animation-box {
+            animation: grow 0.4s ease forwards;
+        }
+
+        .demo-wiggle:hover .animation-box {
+            animation: wiggle 0.5s ease;
+        }
+
+        .demo-fade:hover .animation-box {
+            animation: fadeIn 0.5s ease;
+        }
+
+        .demo-pop:hover .animation-box {
+            animation: pop 0.3s ease;
+        }
+
+        @keyframes grow {
+            to { transform: scale(1.15); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .animation-name {
+            font-family: var(--font-display);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--color-warm-gray);
+        }
+
+        /* Special Component - Org Chart Node */
+        .org-chart {
+            background: var(--color-white);
+            border-radius: var(--border-radius-lg);
+            padding: var(--space-7);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .org-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-5);
+        }
+
+        .org-person {
+            text-align: center;
+            position: relative;
+        }
+
+        .org-person::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background: var(--color-plum);
+        }
+
+        .org-person.no-line::after {
+            display: none;
+        }
+
+        .org-avatar-lg {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--color-plum) 0%, var(--color-coral) 100%);
+            border-radius: 50%;
+            margin: 0 auto var(--space-3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 600;
+            border: 4px solid var(--color-white);
+            box-shadow: 0 4px 16px rgba(91, 44, 111, 0.3);
+        }
+
+        .org-name {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-charcoal);
+        }
+
+        .org-title {
+            font-size: 0.875rem;
+            color: var(--color-plum);
+        }
+
+        .org-connector {
+            width: 60%;
+            height: 2px;
+            background: var(--color-plum);
+            position: relative;
+        }
+
+        .org-connector::before,
+        .org-connector::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 2px;
+            height: 20px;
+            background: var(--color-plum);
+        }
+
+        .org-connector::before {
+            left: 0;
+        }
+
+        .org-connector::after {
+            right: 0;
+        }
+
+        .org-row {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-8);
+        }
+
+        .org-row .org-person::after {
+            top: -20px;
+            bottom: auto;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-4) var(--space-5);
+            margin-bottom: var(--space-4);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+        }
+
+        .alert-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            margin-bottom: var(--space-1);
+        }
+
+        .alert-text {
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .alert-info {
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .alert-info .alert-title { color: var(--color-info); }
+        .alert-info .alert-icon { fill: var(--color-info); }
+
+        .alert-success {
+            background: rgba(39, 174, 96, 0.1);
+        }
+
+        .alert-success .alert-title { color: var(--color-success); }
+        .alert-success .alert-icon { fill: var(--color-success); }
+
+        .alert-warning {
+            background: rgba(243, 156, 18, 0.1);
+        }
+
+        .alert-warning .alert-title { color: var(--color-warning); }
+        .alert-warning .alert-icon { fill: var(--color-warning); }
+
+        .alert-error {
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .alert-error .alert-title { color: var(--color-error); }
+        .alert-error .alert-icon { fill: var(--color-error); }
+
+        /* Footer */
+        footer {
+            background: var(--color-plum);
+            padding: var(--space-8) var(--space-6);
+            margin-top: var(--space-10);
+        }
+
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .org-row {
+                flex-direction: column;
+                gap: var(--space-6);
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: var(--space-4);
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="#" class="nav-brand">Thrive</a>
+        <ul class="nav-links">
+            <li><a href="#colors">Colors</a></li>
+            <li><a href="#typography">Typography</a></li>
+            <li><a href="#components">Components</a></li>
+            <li><a href="#principles">Principles</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-eyebrow">HR Design System</span>
+            <h1>Thrive</h1>
+            <p>A people-first design system for HR platforms and employee experience applications. Warm, approachable, and built to foster connection.</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Color Palette -->
+        <section id="colors">
+            <div class="section-header">
+                <div class="section-number">01</div>
+                <h2>Color Palette</h2>
+            </div>
+            <p>Warm, inviting colors that create a welcoming atmosphere for employees.</p>
+
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-plum);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Plum</div>
+                        <div class="color-hex">#5B2C6F</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-coral);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Coral</div>
+                        <div class="color-hex">#E67E5A</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-mint);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Mint</div>
+                        <div class="color-hex">#48C9B0</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-sky);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Sky</div>
+                        <div class="color-hex">#5DADE2</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-sand);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Sand</div>
+                        <div class="color-hex">#F7F4F0</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-charcoal);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Charcoal</div>
+                        <div class="color-hex">#2C3E50</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Typography -->
+        <section id="typography">
+            <div class="section-header">
+                <div class="section-number">02</div>
+                <h2>Typography</h2>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-display">Outfit</div>
+                <div class="type-body">Source Sans 3 — friendly and readable</div>
+            </div>
+
+            <div class="type-scale">
+                <div class="type-row">
+                    <span class="type-label">H1</span>
+                    <span style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: var(--color-charcoal);">Welcome Back, Sarah</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">H2</span>
+                    <span style="font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--color-charcoal);">Your Team</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">H3</span>
+                    <span style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--color-charcoal);">Time Off Requests</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">Body</span>
+                    <span style="font-family: var(--font-body); font-size: 1rem; color: var(--color-warm-gray);">You have 15 vacation days remaining this year. Plan your time off today!</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Spacing -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">03</div>
+                <h2>Spacing Scale</h2>
+            </div>
+            <p>Generous spacing creates breathing room and reduces cognitive load.</p>
+
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 4px; height: 4px;"></div>
+                    <span class="spacing-label">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 8px; height: 8px;"></div>
+                    <span class="spacing-label">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 16px; height: 16px;"></div>
+                    <span class="spacing-label">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 24px; height: 24px;"></div>
+                    <span class="spacing-label">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 32px; height: 32px;"></div>
+                    <span class="spacing-label">32px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 48px; height: 48px;"></div>
+                    <span class="spacing-label">48px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 64px; height: 64px;"></div>
+                    <span class="spacing-label">64px</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Buttons -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">04</div>
+                <h2>Buttons</h2>
+            </div>
+
+            <h3>Primary Actions</h3>
+            <div class="button-grid">
+                <button class="btn btn-primary">Submit Request</button>
+                <button class="btn btn-coral">Approve</button>
+                <button class="btn btn-outline">View Profile</button>
+                <button class="btn btn-ghost">Cancel</button>
+            </div>
+
+            <h3>Sizes</h3>
+            <div class="button-grid">
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary">Default</button>
+                <button class="btn btn-primary btn-lg">Large</button>
+            </div>
+        </section>
+
+        <!-- 5. Forms -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">05</div>
+                <h2>Forms</h2>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="you@company.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Department</label>
+                    <select class="form-input form-select">
+                        <option>Select department</option>
+                        <option>Engineering</option>
+                        <option>Design</option>
+                        <option>Marketing</option>
+                        <option>Sales</option>
+                        <option>Human Resources</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Manager</label>
+                    <select class="form-input form-select">
+                        <option>Select manager</option>
+                        <option>Sarah Chen</option>
+                        <option>Michael Ross</option>
+                        <option>Emily Davis</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary">Save Changes</button>
+        </section>
+
+        <!-- 6. Employee Cards -->
+        <section id="components">
+            <div class="section-header">
+                <div class="section-number">06</div>
+                <h2>Employee Cards</h2>
+            </div>
+
+            <div class="card-grid">
+                <div class="employee-card">
+                    <div class="employee-avatar">SC</div>
+                    <h4 class="employee-name">Sarah Chen</h4>
+                    <div class="employee-role">VP of Engineering</div>
+                    <div class="employee-department">Engineering</div>
+                    <div class="employee-stats">
+                        <div class="stat">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Reports</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">4.2</div>
+                            <div class="stat-label">Years</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">98%</div>
+                            <div class="stat-label">Engagement</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="employee-card">
+                    <div class="employee-avatar">MR</div>
+                    <h4 class="employee-name">Michael Ross</h4>
+                    <div class="employee-role">Head of Design</div>
+                    <div class="employee-department">Design</div>
+                    <div class="employee-stats">
+                        <div class="stat">
+                            <div class="stat-value">8</div>
+                            <div class="stat-label">Reports</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">3.5</div>
+                            <div class="stat-label">Years</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">95%</div>
+                            <div class="stat-label">Engagement</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="employee-card">
+                    <div class="employee-avatar">ED</div>
+                    <h4 class="employee-name">Emily Davis</h4>
+                    <div class="employee-role">Marketing Director</div>
+                    <div class="employee-department">Marketing</div>
+                    <div class="employee-stats">
+                        <div class="stat">
+                            <div class="stat-value">6</div>
+                            <div class="stat-label">Reports</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">2.8</div>
+                            <div class="stat-label">Years</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">97%</div>
+                            <div class="stat-label">Engagement</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Data Table -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">07</div>
+                <h2>Data Table</h2>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Department</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Start Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="table-employee">
+                                    <div class="table-avatar">SC</div>
+                                    <div>
+                                        <div class="table-name">Sarah Chen</div>
+                                        <div class="table-email">sarah.chen@company.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Engineering</td>
+                            <td>San Francisco</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>Jan 15, 2020</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table-employee">
+                                    <div class="table-avatar">MR</div>
+                                    <div>
+                                        <div class="table-name">Michael Ross</div>
+                                        <div class="table-email">michael.ross@company.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Design</td>
+                            <td>New York</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>Jun 3, 2021</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table-employee">
+                                    <div class="table-avatar">ED</div>
+                                    <div>
+                                        <div class="table-name">Emily Davis</div>
+                                        <div class="table-email">emily.davis@company.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Marketing</td>
+                            <td>Austin</td>
+                            <td><span class="badge badge-mint">On Leave</span></td>
+                            <td>Mar 22, 2022</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 8. Badges -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">08</div>
+                <h2>Badges & Tags</h2>
+            </div>
+
+            <div class="badge-group">
+                <span class="badge badge-plum">Full-time</span>
+                <span class="badge badge-coral">Urgent</span>
+                <span class="badge badge-mint">On Leave</span>
+                <span class="badge badge-sky">Remote</span>
+                <span class="badge badge-outline">Part-time</span>
+                <span class="badge badge-success">Active</span>
+            </div>
+        </section>
+
+        <!-- 9. Design Principles -->
+        <section id="principles">
+            <div class="section-header">
+                <div class="section-number">09</div>
+                <h2>Design Principles</h2>
+            </div>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-icon">💜</div>
+                    <h4 class="principle-title">People First</h4>
+                    <p class="principle-text">Every design decision centers on the employee experience, fostering belonging and engagement.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">🌱</div>
+                    <h4 class="principle-title">Growth Mindset</h4>
+                    <p class="principle-text">Celebrate progress and potential. Design interfaces that encourage development and learning.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">🤝</div>
+                    <h4 class="principle-title">Inclusive</h4>
+                    <p class="principle-text">Accessible to all, regardless of ability, role, or location. Everyone belongs here.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">✨</div>
+                    <h4 class="principle-title">Delightful</h4>
+                    <p class="principle-text">Sprinkle moments of joy throughout. Work tools can be warm and human.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Animation -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">10</div>
+                <h2>Animation Effects</h2>
+            </div>
+            <p>Friendly, approachable animations that add personality without distraction.</p>
+
+            <div class="animation-grid">
+                <div class="animation-demo demo-grow">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Grow</div>
+                </div>
+                <div class="animation-demo demo-wiggle">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Wiggle</div>
+                </div>
+                <div class="animation-demo demo-fade">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Fade In</div>
+                </div>
+                <div class="animation-demo demo-pop">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Pop</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Special Component -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">11</div>
+                <h2>Org Chart</h2>
+            </div>
+
+            <div class="org-chart">
+                <div class="org-node">
+                    <div class="org-person">
+                        <div class="org-avatar-lg">JW</div>
+                        <div class="org-name">Jessica Williams</div>
+                        <div class="org-title">CEO</div>
+                    </div>
+                    <div class="org-connector"></div>
+                    <div class="org-row">
+                        <div class="org-person no-line">
+                            <div class="org-avatar-lg" style="width: 80px; height: 80px; font-size: 1.5rem;">SC</div>
+                            <div class="org-name">Sarah Chen</div>
+                            <div class="org-title">VP Engineering</div>
+                        </div>
+                        <div class="org-person no-line">
+                            <div class="org-avatar-lg" style="width: 80px; height: 80px; font-size: 1.5rem;">MR</div>
+                            <div class="org-name">Michael Ross</div>
+                            <div class="org-title">Head of Design</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Alerts -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">12</div>
+                <h2>Alert Messages</h2>
+            </div>
+
+            <div class="alert alert-info">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Performance Reviews</div>
+                    <p class="alert-text">Q4 performance review cycle begins next Monday. Prepare your self-assessment.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Request Approved</div>
+                    <p class="alert-text">Your time-off request for Dec 23-27 has been approved by your manager.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Benefits Enrollment</div>
+                    <p class="alert-text">Open enrollment ends in 5 days. Review and update your benefits selections.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-error">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Missing Information</div>
+                    <p class="alert-text">Please complete your emergency contact information in your profile settings.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">Thrive</div>
+            <div class="footer-text">HR Design System v1.0</div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construct — Engineering Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette - Technical Precision */
+            --color-black: #0D0D0D;
+            --color-carbon: #1A1A1A;
+            --color-graphite: #2D2D2D;
+            --color-steel: #525252;
+            --color-aluminum: #A3A3A3;
+            --color-silver: #D4D4D4;
+            --color-white: #FAFAFA;
+            --color-electric-blue: #0EA5E9;
+            --color-electric-blue-dark: #0284C7;
+            --color-neon-green: #22C55E;
+            --color-amber: #F59E0B;
+
+            /* Semantic Colors */
+            --color-success: #22C55E;
+            --color-warning: #F59E0B;
+            --color-error: #EF4444;
+            --color-info: #0EA5E9;
+
+            /* Typography */
+            --font-mono: 'Space Mono', monospace;
+            --font-body: 'Inter', sans-serif;
+
+            /* Spacing - 4px Base Unit */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.5rem;
+            --space-6: 2rem;
+            --space-7: 3rem;
+            --space-8: 4rem;
+            --space-9: 6rem;
+            --space-10: 8rem;
+
+            /* Layout */
+            --max-width: 1200px;
+            --border-radius: 4px;
+            --transition: 0.15s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--color-graphite);
+            background-color: var(--color-white);
+            font-size: 16px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-black);
+            padding: var(--space-3) var(--space-6);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--color-graphite);
+        }
+
+        .nav-brand {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .nav-brand::before {
+            content: '>';
+            color: var(--color-electric-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-5);
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-aluminum);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-electric-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: var(--space-10) var(--space-6);
+            padding-top: calc(var(--space-10) + 60px);
+            background: var(--color-black);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(14, 165, 233, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(14, 165, 233, 0.03) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .hero-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-terminal {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-aluminum);
+            margin-bottom: var(--space-4);
+        }
+
+        .hero-terminal span {
+            color: var(--color-electric-blue);
+        }
+
+        .hero h1 {
+            font-family: var(--font-mono);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: var(--color-white);
+            line-height: 1.2;
+            margin-bottom: var(--space-5);
+        }
+
+        .hero h1 .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background: var(--color-electric-blue);
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--color-aluminum);
+            max-width: 600px;
+            font-family: var(--font-body);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: var(--space-8);
+            margin-top: var(--space-7);
+            padding-top: var(--space-6);
+            border-top: 1px solid var(--color-graphite);
+        }
+
+        .stat {
+            font-family: var(--font-mono);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-electric-blue);
+        }
+
+        .stat-label {
+            font-size: 0.6875rem;
+            color: var(--color-aluminum);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Main Content */
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--space-9) var(--space-6);
+        }
+
+        section {
+            margin-bottom: var(--space-10);
+        }
+
+        .section-header {
+            margin-bottom: var(--space-6);
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .section-number {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-electric-blue);
+            padding: var(--space-1) var(--space-3);
+            background: rgba(14, 165, 233, 0.1);
+            border-radius: var(--border-radius);
+        }
+
+        h2 {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-black);
+        }
+
+        h3 {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-graphite);
+            margin-bottom: var(--space-4);
+        }
+
+        p {
+            margin-bottom: var(--space-4);
+            color: var(--color-steel);
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--space-3);
+        }
+
+        .color-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-silver);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .color-card:hover {
+            border-color: var(--color-electric-blue);
+        }
+
+        .color-swatch {
+            height: 60px;
+        }
+
+        .color-info {
+            padding: var(--space-3);
+            background: var(--color-black);
+        }
+
+        .color-name {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--color-aluminum);
+        }
+
+        /* Typography */
+        .type-specimen {
+            margin-bottom: var(--space-7);
+            padding: var(--space-6);
+            background: var(--color-black);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--color-graphite);
+        }
+
+        .type-display {
+            font-family: var(--font-mono);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: var(--space-3);
+        }
+
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 1.125rem;
+            color: var(--color-aluminum);
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            padding: var(--space-3);
+            background: var(--color-white);
+            border: 1px solid var(--color-silver);
+            border-radius: var(--border-radius);
+        }
+
+        .type-label {
+            width: 80px;
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--color-electric-blue);
+            flex-shrink: 0;
+        }
+
+        /* Spacing */
+        .spacing-visual {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            align-items: flex-end;
+            padding: var(--space-5);
+            background: var(--color-black);
+            border-radius: var(--border-radius);
+        }
+
+        .spacing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .spacing-box {
+            background: var(--color-electric-blue);
+            border-radius: 2px;
+        }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--color-aluminum);
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+            margin-bottom: var(--space-6);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-5);
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: 2px solid transparent;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--color-electric-blue);
+            color: var(--color-white);
+            border-color: var(--color-electric-blue);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-electric-blue-dark);
+            border-color: var(--color-electric-blue-dark);
+        }
+
+        .btn-secondary {
+            background: var(--color-black);
+            color: var(--color-white);
+            border-color: var(--color-black);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-graphite);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-black);
+            border-color: var(--color-black);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-steel);
+            border-color: transparent;
+        }
+
+        .btn-ghost:hover {
+            background: var(--color-silver);
+            color: var(--color-black);
+        }
+
+        .btn-sm {
+            padding: var(--space-2) var(--space-4);
+            font-size: 0.75rem;
+        }
+
+        .btn-lg {
+            padding: var(--space-4) var(--space-6);
+            font-size: 0.875rem;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-5);
+        }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-graphite);
+            margin-bottom: var(--space-2);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-3);
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            border: 2px solid var(--color-silver);
+            border-radius: var(--border-radius);
+            background: var(--color-white);
+            color: var(--color-black);
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-electric-blue);
+        }
+
+        .form-input::placeholder {
+            color: var(--color-aluminum);
+        }
+
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
+            font-family: var(--font-mono);
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23525252' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-3) center;
+            padding-right: var(--space-7);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-4);
+        }
+
+        /* Project Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .project-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-silver);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            border-color: var(--color-electric-blue);
+        }
+
+        .project-header {
+            background: var(--color-black);
+            padding: var(--space-4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .project-id {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-electric-blue);
+        }
+
+        .project-status {
+            font-family: var(--font-mono);
+            padding: var(--space-1) var(--space-2);
+            font-size: 0.625rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 2px;
+        }
+
+        .status-active {
+            background: var(--color-neon-green);
+            color: var(--color-black);
+        }
+
+        .status-review {
+            background: var(--color-amber);
+            color: var(--color-black);
+        }
+
+        .status-complete {
+            background: var(--color-electric-blue);
+            color: var(--color-white);
+        }
+
+        .project-body {
+            padding: var(--space-4);
+        }
+
+        .project-title {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: var(--space-2);
+        }
+
+        .project-description {
+            font-size: 0.875rem;
+            color: var(--color-steel);
+            margin-bottom: var(--space-4);
+        }
+
+        .project-meta {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-3);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--color-silver);
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-value {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--color-black);
+        }
+
+        .meta-label {
+            font-family: var(--font-mono);
+            font-size: 0.5625rem;
+            color: var(--color-aluminum);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Data Table */
+        .table-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--color-silver);
+            border-radius: var(--border-radius);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--color-black);
+            padding: var(--space-3);
+            text-align: left;
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            font-weight: 700;
+            color: var(--color-aluminum);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        td {
+            padding: var(--space-3);
+            border-bottom: 1px solid var(--color-silver);
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: var(--color-graphite);
+        }
+
+        tr:hover td {
+            background: rgba(14, 165, 233, 0.05);
+        }
+
+        .table-id {
+            color: var(--color-electric-blue);
+            font-weight: 700;
+        }
+
+        /* Badges */
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: var(--space-1) var(--space-3);
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 2px;
+        }
+
+        .badge-blue {
+            background: var(--color-electric-blue);
+            color: var(--color-white);
+        }
+
+        .badge-green {
+            background: var(--color-neon-green);
+            color: var(--color-black);
+        }
+
+        .badge-amber {
+            background: var(--color-amber);
+            color: var(--color-black);
+        }
+
+        .badge-black {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 1px solid var(--color-steel);
+            color: var(--color-steel);
+        }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .principle-card {
+            padding: var(--space-5);
+            background: var(--color-black);
+            border-radius: var(--border-radius);
+        }
+
+        .principle-number {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-electric-blue);
+            margin-bottom: var(--space-3);
+        }
+
+        .principle-title {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--color-white);
+            text-transform: uppercase;
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-text {
+            font-size: 0.875rem;
+            color: var(--color-aluminum);
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-3);
+        }
+
+        .animation-demo {
+            padding: var(--space-5);
+            background: var(--color-black);
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .animation-box {
+            width: 40px;
+            height: 40px;
+            background: var(--color-electric-blue);
+            margin: 0 auto var(--space-3);
+            border-radius: 2px;
+        }
+
+        .demo-scan:hover .animation-box {
+            animation: scan 0.6s ease infinite;
+        }
+
+        .demo-build:hover .animation-box {
+            animation: build 0.5s ease forwards;
+        }
+
+        .demo-pulse:hover .animation-box {
+            animation: pulse 0.8s ease infinite;
+        }
+
+        .demo-load:hover .animation-box {
+            animation: load 1s linear infinite;
+        }
+
+        @keyframes scan {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(14, 165, 233, 0); }
+        }
+
+        @keyframes build {
+            from { transform: scaleY(0); transform-origin: bottom; }
+            to { transform: scaleY(1); transform-origin: bottom; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes load {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .animation-name {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--color-aluminum);
+            text-transform: uppercase;
+        }
+
+        /* Special Component - Code Block */
+        .code-block {
+            background: var(--color-black);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: var(--color-carbon);
+            padding: var(--space-3) var(--space-4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--color-graphite);
+        }
+
+        .code-filename {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-aluminum);
+        }
+
+        .code-dots {
+            display: flex;
+            gap: var(--space-2);
+        }
+
+        .code-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #EF4444; }
+        .dot-yellow { background: #F59E0B; }
+        .dot-green { background: #22C55E; }
+
+        .code-body {
+            padding: var(--space-4);
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            display: flex;
+            gap: var(--space-4);
+        }
+
+        .line-number {
+            color: var(--color-steel);
+            user-select: none;
+            min-width: 24px;
+        }
+
+        .code-content {
+            color: var(--color-silver);
+        }
+
+        .code-keyword { color: var(--color-electric-blue); }
+        .code-string { color: var(--color-neon-green); }
+        .code-comment { color: var(--color-steel); font-style: italic; }
+        .code-function { color: var(--color-amber); }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-4);
+            margin-bottom: var(--space-4);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            border-left: 3px solid;
+            font-family: var(--font-mono);
+        }
+
+        .alert-icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 700;
+            font-size: 0.8125rem;
+            margin-bottom: var(--space-1);
+            text-transform: uppercase;
+        }
+
+        .alert-text {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .alert-info {
+            background: rgba(14, 165, 233, 0.1);
+            border-color: var(--color-info);
+        }
+
+        .alert-info .alert-title { color: var(--color-info); }
+        .alert-info .alert-icon { fill: var(--color-info); }
+
+        .alert-success {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: var(--color-success);
+        }
+
+        .alert-success .alert-title { color: var(--color-success); }
+        .alert-success .alert-icon { fill: var(--color-success); }
+
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: var(--color-warning);
+        }
+
+        .alert-warning .alert-title { color: var(--color-warning); }
+        .alert-warning .alert-icon { fill: var(--color-warning); }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: var(--color-error);
+        }
+
+        .alert-error .alert-title { color: var(--color-error); }
+        .alert-error .alert-icon { fill: var(--color-error); }
+
+        /* Footer */
+        footer {
+            background: var(--color-black);
+            padding: var(--space-7) var(--space-6);
+            margin-top: var(--space-10);
+            border-top: 1px solid var(--color-graphite);
+        }
+
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+
+        .footer-brand::before {
+            content: '> ';
+            color: var(--color-electric-blue);
+        }
+
+        .footer-text {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-aluminum);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: var(--space-5);
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: var(--space-4);
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="#" class="nav-brand">construct</a>
+        <ul class="nav-links">
+            <li><a href="#colors">Colors</a></li>
+            <li><a href="#typography">Typography</a></li>
+            <li><a href="#components">Components</a></li>
+            <li><a href="#principles">Principles</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-terminal">$ <span>init</span> design-system --version 1.0</div>
+            <h1>construct<span class="cursor"></span></h1>
+            <p>A technical design system built for engineering teams, developer tools, and technical documentation. Where precision meets productivity.</p>
+
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-value">4px</div>
+                    <div class="stat-label">Base Unit</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">AAA</div>
+                    <div class="stat-label">WCAG</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Dependencies</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Color Palette -->
+        <section id="colors">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2>color_palette</h2>
+            </div>
+            <p>A monochromatic base with high-visibility accents for technical interfaces.</p>
+
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-black);"></div>
+                    <div class="color-info">
+                        <div class="color-name">black</div>
+                        <div class="color-hex">#0D0D0D</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-carbon);"></div>
+                    <div class="color-info">
+                        <div class="color-name">carbon</div>
+                        <div class="color-hex">#1A1A1A</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-electric-blue);"></div>
+                    <div class="color-info">
+                        <div class="color-name">electric</div>
+                        <div class="color-hex">#0EA5E9</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-neon-green);"></div>
+                    <div class="color-info">
+                        <div class="color-name">neon</div>
+                        <div class="color-hex">#22C55E</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-amber);"></div>
+                    <div class="color-info">
+                        <div class="color-name">amber</div>
+                        <div class="color-hex">#F59E0B</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-silver);"></div>
+                    <div class="color-info">
+                        <div class="color-name">silver</div>
+                        <div class="color-hex">#D4D4D4</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Typography -->
+        <section id="typography">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2>typography</h2>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-display">Space Mono</div>
+                <div class="type-body">Inter — for readable body text</div>
+            </div>
+
+            <div class="type-scale">
+                <div class="type-row">
+                    <span class="type-label">H1</span>
+                    <span style="font-family: var(--font-mono); font-size: 2rem; font-weight: 700; color: var(--color-black);">PROJECT_INIT</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">H2</span>
+                    <span style="font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--color-black);">module_config</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">H3</span>
+                    <span style="font-family: var(--font-mono); font-size: 1rem; font-weight: 700; color: var(--color-graphite);">function_name()</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">BODY</span>
+                    <span style="font-family: var(--font-body); font-size: 1rem; color: var(--color-steel);">Build completed successfully in 2.4 seconds with zero errors.</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">CODE</span>
+                    <span style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--color-electric-blue);">const config = require('./config.js');</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Spacing -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2>spacing_scale</h2>
+            </div>
+            <p>A 4px base unit grid for pixel-perfect alignment.</p>
+
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 4px; height: 4px;"></div>
+                    <span class="spacing-label">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 8px; height: 8px;"></div>
+                    <span class="spacing-label">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 16px; height: 16px;"></div>
+                    <span class="spacing-label">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 24px; height: 24px;"></div>
+                    <span class="spacing-label">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 32px; height: 32px;"></div>
+                    <span class="spacing-label">32px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 48px; height: 48px;"></div>
+                    <span class="spacing-label">48px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 64px; height: 64px;"></div>
+                    <span class="spacing-label">64px</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Buttons -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2>buttons</h2>
+            </div>
+
+            <h3>// primary_actions</h3>
+            <div class="button-grid">
+                <button class="btn btn-primary">Deploy</button>
+                <button class="btn btn-secondary">Build</button>
+                <button class="btn btn-outline">Configure</button>
+                <button class="btn btn-ghost">Cancel</button>
+            </div>
+
+            <h3>// sizes</h3>
+            <div class="button-grid">
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary">Default</button>
+                <button class="btn btn-primary btn-lg">Large</button>
+            </div>
+        </section>
+
+        <!-- 5. Forms -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2>forms</h2>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">project_name</label>
+                    <input type="text" class="form-input" placeholder="my-project">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">version</label>
+                    <input type="text" class="form-input" placeholder="1.0.0">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">environment</label>
+                    <select class="form-input form-select">
+                        <option>development</option>
+                        <option>staging</option>
+                        <option>production</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">build_target</label>
+                    <select class="form-input form-select">
+                        <option>web</option>
+                        <option>mobile</option>
+                        <option>desktop</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary">Initialize Project</button>
+        </section>
+
+        <!-- 6. Project Cards -->
+        <section id="components">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2>project_cards</h2>
+            </div>
+
+            <div class="card-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">PRJ-2024-0847</span>
+                        <span class="project-status status-active">Active</span>
+                    </div>
+                    <div class="project-body">
+                        <h4 class="project-title">API Gateway v2.0</h4>
+                        <p class="project-description">High-performance API gateway with rate limiting, caching, and real-time analytics.</p>
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <div class="meta-value">247</div>
+                                <div class="meta-label">Commits</div>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-value">12</div>
+                                <div class="meta-label">Open PRs</div>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-value">98%</div>
+                                <div class="meta-label">Coverage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">PRJ-2024-0912</span>
+                        <span class="project-status status-review">Review</span>
+                    </div>
+                    <div class="project-body">
+                        <h4 class="project-title">Auth Service Refactor</h4>
+                        <p class="project-description">OAuth 2.0 implementation with PKCE flow and multi-factor authentication support.</p>
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <div class="meta-value">89</div>
+                                <div class="meta-label">Commits</div>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-value">3</div>
+                                <div class="meta-label">Open PRs</div>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-value">94%</div>
+                                <div class="meta-label">Coverage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">PRJ-2024-0756</span>
+                        <span class="project-status status-complete">Complete</span>
+                    </div>
+                    <div class="project-body">
+                        <h4 class="project-title">Data Pipeline Migration</h4>
+                        <p class="project-description">Migrated legacy ETL processes to modern streaming architecture with Kafka.</p>
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <div class="meta-value">412</div>
+                                <div class="meta-label">Commits</div>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-value">0</div>
+                                <div class="meta-label">Open PRs</div>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-value">99%</div>
+                                <div class="meta-label">Coverage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Data Table -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <h2>data_table</h2>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Build ID</th>
+                            <th>Branch</th>
+                            <th>Status</th>
+                            <th>Duration</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-id">#2847</td>
+                            <td>main</td>
+                            <td><span class="badge badge-green">passed</span></td>
+                            <td>2m 34s</td>
+                            <td>2024-03-15 14:32</td>
+                        </tr>
+                        <tr>
+                            <td class="table-id">#2846</td>
+                            <td>feature/auth</td>
+                            <td><span class="badge badge-amber">pending</span></td>
+                            <td>--</td>
+                            <td>2024-03-15 14:28</td>
+                        </tr>
+                        <tr>
+                            <td class="table-id">#2845</td>
+                            <td>fix/memory-leak</td>
+                            <td><span class="badge badge-green">passed</span></td>
+                            <td>1m 48s</td>
+                            <td>2024-03-15 14:15</td>
+                        </tr>
+                        <tr>
+                            <td class="table-id">#2844</td>
+                            <td>develop</td>
+                            <td><span class="badge badge-outline">skipped</span></td>
+                            <td>--</td>
+                            <td>2024-03-15 14:02</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 8. Badges -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">08</span>
+                <h2>badges</h2>
+            </div>
+
+            <div class="badge-group">
+                <span class="badge badge-blue">deployed</span>
+                <span class="badge badge-green">passed</span>
+                <span class="badge badge-amber">pending</span>
+                <span class="badge badge-black">archived</span>
+                <span class="badge badge-outline">skipped</span>
+            </div>
+        </section>
+
+        <!-- 9. Design Principles -->
+        <section id="principles">
+            <div class="section-header">
+                <span class="section-number">09</span>
+                <h2>design_principles</h2>
+            </div>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-number">01</div>
+                    <h4 class="principle-title">Precision</h4>
+                    <p class="principle-text">Every pixel matters. 4px grid ensures mathematical consistency across all interfaces.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">02</div>
+                    <h4 class="principle-title">Performance</h4>
+                    <p class="principle-text">Zero dependencies, minimal footprint. Built for speed-critical applications.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">03</div>
+                    <h4 class="principle-title">Clarity</h4>
+                    <p class="principle-text">Complex data made readable. Information hierarchy guides the eye naturally.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">04</div>
+                    <h4 class="principle-title">Consistency</h4>
+                    <p class="principle-text">Predictable patterns reduce cognitive load. Same action, same result, everywhere.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Animation -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">10</span>
+                <h2>animations</h2>
+            </div>
+            <p>Functional motion that communicates state changes without distraction.</p>
+
+            <div class="animation-grid">
+                <div class="animation-demo demo-scan">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">scan</div>
+                </div>
+                <div class="animation-demo demo-build">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">build</div>
+                </div>
+                <div class="animation-demo demo-pulse">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">pulse</div>
+                </div>
+                <div class="animation-demo demo-load">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">load</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Special Component -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">11</span>
+                <h2>code_block</h2>
+            </div>
+
+            <div class="code-block" style="max-width: 600px;">
+                <div class="code-header">
+                    <span class="code-filename">config.js</span>
+                    <div class="code-dots">
+                        <span class="code-dot dot-red"></span>
+                        <span class="code-dot dot-yellow"></span>
+                        <span class="code-dot dot-green"></span>
+                    </div>
+                </div>
+                <div class="code-body">
+                    <div class="code-line">
+                        <span class="line-number">1</span>
+                        <span class="code-content"><span class="code-comment">// Construct Design System Config</span></span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">2</span>
+                        <span class="code-content"><span class="code-keyword">const</span> config = {</span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">3</span>
+                        <span class="code-content">  theme: <span class="code-string">'dark'</span>,</span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">4</span>
+                        <span class="code-content">  baseUnit: <span class="code-function">4</span>,</span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">5</span>
+                        <span class="code-content">  animations: <span class="code-keyword">true</span></span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">6</span>
+                        <span class="code-content">};</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Alerts -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">12</span>
+                <h2>alerts</h2>
+            </div>
+
+            <div class="alert alert-info">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Build Started</div>
+                    <p class="alert-text">Pipeline #2847 has been triggered on branch main.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Deploy Complete</div>
+                    <p class="alert-text">v2.4.1 successfully deployed to production environment.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Deprecation Notice</div>
+                    <p class="alert-text">API v1 will be deprecated on 2024-06-01. Please migrate to v2.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-error">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Build Failed</div>
+                    <p class="alert-text">Test suite failed with 3 errors. Check logs for details.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">construct</div>
+            <div class="footer-text">Engineering Design System v1.0</div>
+        </div>
+    </footer>
+</body>
+</html>

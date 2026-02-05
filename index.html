@@ -589,6 +589,108 @@
             height: 18px;
             fill: currentColor;
         }
+
+        /* Sections */
+        .section {
+            padding: 60px 0 20px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        /* Professional Cards Base */
+        .card-pro {
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .card-pro:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: #D4D4D4;
+        }
+
+        .card-pro .card-title {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+        }
+
+        .card-pro .card-subtitle {
+            color: var(--text-muted);
+        }
+
+        .card-pro .card-tag {
+            background: var(--bg-alt);
+            color: var(--text-muted);
+        }
+
+        .card-pro .industry-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        /* Pro Card Color Variants */
+        .card-pro-blue .card-title { color: #2563EB; }
+        .card-pro-blue .industry-badge { background: #DBEAFE; color: #1E40AF; }
+
+        .card-pro-navy .card-title { color: #1E3A5F; }
+        .card-pro-navy .industry-badge { background: #FEF3C7; color: #92400E; }
+
+        .card-pro-teal .card-title { color: #0D9488; }
+        .card-pro-teal .industry-badge { background: #CCFBF1; color: #115E59; }
+
+        .card-pro-indigo .card-title { color: #4338CA; }
+        .card-pro-indigo .industry-badge { background: #E0E7FF; color: #3730A3; }
+
+        .card-pro-sky .card-title { color: #0284C7; }
+        .card-pro-sky .industry-badge { background: #E0F2FE; color: #075985; }
+
+        .card-pro-violet .card-title { color: #7C3AED; }
+        .card-pro-violet .industry-badge { background: #EDE9FE; color: #5B21B6; }
+
+        .card-pro-emerald .card-title { color: #059669; }
+        .card-pro-emerald .industry-badge { background: #D1FAE5; color: #065F46; }
+
+        .card-pro-slate .card-title { color: #334155; }
+        .card-pro-slate .industry-badge { background: #F1F5F9; color: #334155; }
+
+        .card-pro-sienna .card-title { color: #9A3412; }
+        .card-pro-sienna .industry-badge { background: #FFEDD5; color: #9A3412; }
+
+        .card-pro-copper .card-title { color: #B87333; }
+        .card-pro-copper .industry-badge { background: #FEF3C7; color: #92400E; }
+
+        .card-pro-orange .card-title { color: #EA580C; }
+        .card-pro-orange .industry-badge { background: #FFEDD5; color: #9A3412; }
+
+        .card-pro-plum .card-title { color: #7C3AED; }
+        .card-pro-plum .industry-badge { background: #F3E8FF; color: #6B21A8; }
+
+        .card-pro-cyan .card-title { color: #0891B2; }
+        .card-pro-cyan .industry-badge { background: #CFFAFE; color: #155E75; }
+
+        .card-pro-red .card-title { color: #DC2626; }
+        .card-pro-red .industry-badge { background: #FEE2E2; color: #991B1B; }
+
+        .card-pro-dark .card-title { color: #18181B; }
+        .card-pro-dark .industry-badge { background: #E4E4E7; color: #27272A; }
     </style>
 </head>
 <body>
@@ -596,8 +698,13 @@
         <header>
             <h1>HTML Style Guides</h1>
             <p>A collection of themed, single-file design systems. Each style guide showcases a unique aesthetic with colors, typography, components, and more.</p>
-            <span class="badge-count">10 Themes</span>
+            <span class="badge-count">30 Themes</span>
         </header>
+
+        <section class="section">
+            <h2 class="section-title">Creative Themes</h2>
+            <p class="section-subtitle">Artistic and expressive design systems with unique aesthetics</p>
+        </section>
 
         <main class="grid">
             <!-- Art Deco -->
@@ -741,6 +848,313 @@
                 </div>
             </a>
         </main>
+
+        <section class="section">
+            <h2 class="section-title">Professional Style Guides</h2>
+            <p class="section-subtitle">Enterprise-grade design systems for specific industries and use cases</p>
+        </section>
+
+        <div class="grid">
+            <!-- Corporate -->
+            <a href="styles/pro-corporate.html" class="card card-pro card-pro-blue">
+                <span class="industry-badge">Corporate</span>
+                <div class="card-content">
+                    <p class="card-number">01 — Professional</p>
+                    <h2 class="card-title">Meridian</h2>
+                    <p class="card-subtitle">Enterprise design system with professional blue palette</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Enterprise</span>
+                        <span class="card-tag">Blue</span>
+                        <span class="card-tag">Clean</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Legal -->
+            <a href="styles/pro-legal.html" class="card card-pro card-pro-navy">
+                <span class="industry-badge">Legal</span>
+                <div class="card-content">
+                    <p class="card-number">02 — Professional</p>
+                    <h2 class="card-title">Chambers</h2>
+                    <p class="card-subtitle">Authoritative legal design with navy and gold accents</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Legal</span>
+                        <span class="card-tag">Traditional</span>
+                        <span class="card-tag">Trust</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Healthcare -->
+            <a href="styles/pro-healthcare.html" class="card card-pro card-pro-teal">
+                <span class="industry-badge">Healthcare</span>
+                <div class="card-content">
+                    <p class="card-number">03 — Professional</p>
+                    <h2 class="card-title">Clarity Health</h2>
+                    <p class="card-subtitle">Calming healthcare design with healing greens and teals</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Medical</span>
+                        <span class="card-tag">Clean</span>
+                        <span class="card-tag">Calm</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Finance -->
+            <a href="styles/pro-finance.html" class="card card-pro card-pro-indigo">
+                <span class="industry-badge">Finance</span>
+                <div class="card-content">
+                    <p class="card-number">04 — Professional</p>
+                    <h2 class="card-title">Vault</h2>
+                    <p class="card-subtitle">Financial services design with data-focused precision</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Banking</span>
+                        <span class="card-tag">Data</span>
+                        <span class="card-tag">Trust</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- SaaS -->
+            <a href="styles/pro-saas.html" class="card card-pro card-pro-sky">
+                <span class="industry-badge">SaaS</span>
+                <div class="card-content">
+                    <p class="card-number">05 — Professional</p>
+                    <h2 class="card-title">Nexus</h2>
+                    <p class="card-subtitle">Modern SaaS dashboard design with gradient accents</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Dashboard</span>
+                        <span class="card-tag">Modern</span>
+                        <span class="card-tag">Tech</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Consulting -->
+            <a href="styles/pro-consulting.html" class="card card-pro card-pro-violet">
+                <span class="industry-badge">Consulting</span>
+                <div class="card-content">
+                    <p class="card-number">06 — Professional</p>
+                    <h2 class="card-title">Stratify</h2>
+                    <p class="card-subtitle">Executive consulting design with sophisticated violet</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Strategy</span>
+                        <span class="card-tag">Executive</span>
+                        <span class="card-tag">Premium</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Real Estate -->
+            <a href="styles/pro-realestate.html" class="card card-pro card-pro-emerald">
+                <span class="industry-badge">Real Estate</span>
+                <div class="card-content">
+                    <p class="card-number">07 — Professional</p>
+                    <h2 class="card-title">Keystone</h2>
+                    <p class="card-subtitle">Luxury property design with forest green and gold</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Luxury</span>
+                        <span class="card-tag">Property</span>
+                        <span class="card-tag">Premium</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Insurance -->
+            <a href="styles/pro-insurance.html" class="card card-pro card-pro-blue">
+                <span class="industry-badge">Insurance</span>
+                <div class="card-content">
+                    <p class="card-number">08 — Professional</p>
+                    <h2 class="card-title">Sentinel</h2>
+                    <p class="card-subtitle">Trust-focused insurance design with protective blue</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Trust</span>
+                        <span class="card-tag">Security</span>
+                        <span class="card-tag">Reliable</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Government -->
+            <a href="styles/pro-government.html" class="card card-pro card-pro-slate">
+                <span class="industry-badge">Government</span>
+                <div class="card-content">
+                    <p class="card-number">09 — Professional</p>
+                    <h2 class="card-title">Civitas</h2>
+                    <p class="card-subtitle">USWDS-inspired accessible government design</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Accessible</span>
+                        <span class="card-tag">Civic</span>
+                        <span class="card-tag">WCAG</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Education -->
+            <a href="styles/pro-education.html" class="card card-pro card-pro-sienna">
+                <span class="industry-badge">Education</span>
+                <div class="card-content">
+                    <p class="card-number">10 — Professional</p>
+                    <h2 class="card-title">Academica</h2>
+                    <p class="card-subtitle">Academic institution design with scholarly warmth</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Academic</span>
+                        <span class="card-tag">Learning</span>
+                        <span class="card-tag">Traditional</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Nonprofit -->
+            <a href="styles/pro-nonprofit.html" class="card card-pro card-pro-teal">
+                <span class="industry-badge">Nonprofit</span>
+                <div class="card-content">
+                    <p class="card-number">11 — Professional</p>
+                    <h2 class="card-title">Impact</h2>
+                    <p class="card-subtitle">Mission-driven nonprofit design with warm teal</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Mission</span>
+                        <span class="card-tag">Warm</span>
+                        <span class="card-tag">Accessible</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Accounting -->
+            <a href="styles/pro-accounting.html" class="card card-pro card-pro-teal">
+                <span class="industry-badge">Accounting</span>
+                <div class="card-content">
+                    <p class="card-number">12 — Professional</p>
+                    <h2 class="card-title">Ledger</h2>
+                    <p class="card-subtitle">Precision-focused accounting design with monospace</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Financial</span>
+                        <span class="card-tag">Precise</span>
+                        <span class="card-tag">Data</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Architecture -->
+            <a href="styles/pro-architecture.html" class="card card-pro card-pro-copper">
+                <span class="industry-badge">Architecture</span>
+                <div class="card-content">
+                    <p class="card-number">13 — Professional</p>
+                    <h2 class="card-title">Blueprint</h2>
+                    <p class="card-subtitle">Architectural design with copper and concrete tones</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Design</span>
+                        <span class="card-tag">Material</span>
+                        <span class="card-tag">Precision</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Manufacturing -->
+            <a href="styles/pro-manufacturing.html" class="card card-pro card-pro-orange">
+                <span class="industry-badge">Manufacturing</span>
+                <div class="card-content">
+                    <p class="card-number">14 — Professional</p>
+                    <h2 class="card-title">Forgepoint</h2>
+                    <p class="card-subtitle">Industrial design with safety orange and steel</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Industrial</span>
+                        <span class="card-tag">Safety</span>
+                        <span class="card-tag">Robust</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- E-commerce -->
+            <a href="styles/pro-ecommerce.html" class="card card-pro card-pro-dark">
+                <span class="industry-badge">E-Commerce</span>
+                <div class="card-content">
+                    <p class="card-number">15 — Professional</p>
+                    <h2 class="card-title">Storefront</h2>
+                    <p class="card-subtitle">Conversion-focused retail design with bold accents</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Retail</span>
+                        <span class="card-tag">Conversion</span>
+                        <span class="card-tag">Modern</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- HR -->
+            <a href="styles/pro-hr.html" class="card card-pro card-pro-plum">
+                <span class="industry-badge">HR</span>
+                <div class="card-content">
+                    <p class="card-number">16 — Professional</p>
+                    <h2 class="card-title">Thrive</h2>
+                    <p class="card-subtitle">People-first HR design with warm plum tones</p>
+                    <div class="card-tags">
+                        <span class="card-tag">People</span>
+                        <span class="card-tag">Warm</span>
+                        <span class="card-tag">Friendly</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Logistics -->
+            <a href="styles/pro-logistics.html" class="card card-pro card-pro-cyan">
+                <span class="industry-badge">Logistics</span>
+                <div class="card-content">
+                    <p class="card-number">17 — Professional</p>
+                    <h2 class="card-title">Transit</h2>
+                    <p class="card-subtitle">Real-time logistics design with electric cyan</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Tracking</span>
+                        <span class="card-tag">Global</span>
+                        <span class="card-tag">Data</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Media -->
+            <a href="styles/pro-media.html" class="card card-pro card-pro-red">
+                <span class="industry-badge">Media</span>
+                <div class="card-content">
+                    <p class="card-number">18 — Professional</p>
+                    <h2 class="card-title">Chronicle</h2>
+                    <p class="card-subtitle">Editorial design with classic typography and ink tones</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Editorial</span>
+                        <span class="card-tag">Typography</span>
+                        <span class="card-tag">Content</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Pharma -->
+            <a href="styles/pro-pharma.html" class="card card-pro card-pro-cyan">
+                <span class="industry-badge">Pharma</span>
+                <div class="card-content">
+                    <p class="card-number">19 — Professional</p>
+                    <h2 class="card-title">Helix</h2>
+                    <p class="card-subtitle">Scientific pharma design with clinical precision</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Scientific</span>
+                        <span class="card-tag">Clinical</span>
+                        <span class="card-tag">Compliant</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Engineering -->
+            <a href="styles/pro-engineering.html" class="card card-pro card-pro-dark">
+                <span class="industry-badge">Engineering</span>
+                <div class="card-content">
+                    <p class="card-number">20 — Professional</p>
+                    <h2 class="card-title">Construct</h2>
+                    <p class="card-subtitle">Technical engineering design with monospace and code</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Technical</span>
+                        <span class="card-tag">Developer</span>
+                        <span class="card-tag">Precise</span>
+                    </div>
+                </div>
+            </a>
+        </div>
 
         <footer>
             <p>Each style guide is a single HTML file with embedded CSS — no dependencies required.</p>

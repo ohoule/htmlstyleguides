@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgepoint — Industrial Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette - Industrial Steel & Safety */
+            --color-steel-dark: #1A1D21;
+            --color-steel: #2D3339;
+            --color-steel-light: #4A5259;
+            --color-aluminum: #8B939C;
+            --color-silver: #C9CED3;
+            --color-white: #F5F6F7;
+            --color-safety-orange: #FF6B2C;
+            --color-safety-yellow: #FFB800;
+            --color-safety-blue: #0077B6;
+
+            /* Semantic Colors */
+            --color-success: #2D9B5D;
+            --color-warning: #E5A000;
+            --color-error: #D63B3B;
+            --color-info: #0077B6;
+
+            /* Typography */
+            --font-display: 'Rajdhani', sans-serif;
+            --font-body: 'Barlow', sans-serif;
+
+            /* Spacing - 4px Grid */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.5rem;
+            --space-6: 2rem;
+            --space-7: 3rem;
+            --space-8: 4rem;
+            --space-9: 6rem;
+            --space-10: 8rem;
+
+            /* Layout */
+            --max-width: 1200px;
+            --border-radius: 4px;
+            --transition: 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--color-steel-dark);
+            background-color: var(--color-white);
+            font-size: 16px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-steel-dark);
+            padding: var(--space-4) var(--space-6);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-white);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-brand span {
+            color: var(--color-safety-orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-5);
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            color: var(--color-silver);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-safety-orange);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: var(--space-10) var(--space-6);
+            padding-top: calc(var(--space-10) + 80px);
+            background: var(--color-steel-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 49px,
+                    rgba(255,107,44,0.1) 49px,
+                    rgba(255,107,44,0.1) 50px
+                );
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: var(--space-5);
+            right: var(--space-6);
+            width: 200px;
+            height: 200px;
+            border: 2px solid var(--color-safety-orange);
+            border-radius: 50%;
+            opacity: 0.2;
+        }
+
+        .hero-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--color-safety-orange);
+            color: var(--color-white);
+            padding: var(--space-1) var(--space-4);
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: var(--space-5);
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            color: var(--color-white);
+            line-height: 1.1;
+            margin-bottom: var(--space-5);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hero h1 span {
+            color: var(--color-safety-orange);
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--color-aluminum);
+            max-width: 600px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: var(--space-8);
+            margin-top: var(--space-7);
+            padding-top: var(--space-6);
+            border-top: 1px solid var(--color-steel);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-safety-orange);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--color-aluminum);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Main Content */
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--space-9) var(--space-6);
+        }
+
+        section {
+            margin-bottom: var(--space-10);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .section-number {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-safety-orange);
+            line-height: 1;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-steel-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-steel);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-4);
+        }
+
+        p {
+            margin-bottom: var(--space-4);
+            color: var(--color-steel-light);
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .color-card {
+            background: var(--color-white);
+            border: 2px solid var(--color-silver);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .color-swatch {
+            height: 80px;
+            position: relative;
+        }
+
+        .color-swatch.striped {
+            background: repeating-linear-gradient(
+                -45deg,
+                var(--color-steel-dark),
+                var(--color-steel-dark) 10px,
+                var(--color-safety-yellow) 10px,
+                var(--color-safety-yellow) 20px
+            );
+        }
+
+        .color-info {
+            padding: var(--space-3);
+            background: var(--color-steel-dark);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-white);
+            text-transform: uppercase;
+        }
+
+        .color-hex {
+            font-size: 0.75rem;
+            color: var(--color-aluminum);
+            font-family: monospace;
+        }
+
+        /* Typography */
+        .type-specimen {
+            margin-bottom: var(--space-7);
+            padding: var(--space-6);
+            background: var(--color-steel-dark);
+            border-left: 4px solid var(--color-safety-orange);
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--color-white);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-3);
+        }
+
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            color: var(--color-aluminum);
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-5);
+            padding: var(--space-4);
+            background: var(--color-white);
+            border: 1px solid var(--color-silver);
+        }
+
+        .type-label {
+            width: 100px;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--color-aluminum);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            flex-shrink: 0;
+            font-weight: 600;
+        }
+
+        /* Spacing */
+        .spacing-visual {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            align-items: flex-end;
+            background: var(--color-steel-dark);
+            padding: var(--space-6);
+            border-radius: var(--border-radius);
+        }
+
+        .spacing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .spacing-box {
+            background: var(--color-safety-orange);
+            border-radius: 2px;
+        }
+
+        .spacing-label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--color-aluminum);
+            font-weight: 600;
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-5);
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            border: 2px solid transparent;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--color-safety-orange);
+            color: var(--color-white);
+            border-color: var(--color-safety-orange);
+        }
+
+        .btn-primary:hover {
+            background: #E55A20;
+            border-color: #E55A20;
+        }
+
+        .btn-secondary {
+            background: var(--color-steel-dark);
+            color: var(--color-white);
+            border-color: var(--color-steel-dark);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-steel);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-steel-dark);
+            border-color: var(--color-steel-dark);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-steel-dark);
+            color: var(--color-white);
+        }
+
+        .btn-warning {
+            background: var(--color-safety-yellow);
+            color: var(--color-steel-dark);
+            border-color: var(--color-safety-yellow);
+        }
+
+        .btn-warning:hover {
+            background: #E5A500;
+        }
+
+        .btn-sm {
+            padding: var(--space-2) var(--space-4);
+            font-size: 0.75rem;
+        }
+
+        .btn-lg {
+            padding: var(--space-4) var(--space-7);
+            font-size: 1rem;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-5);
+        }
+
+        .form-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-steel);
+            margin-bottom: var(--space-2);
+            font-weight: 600;
+        }
+
+        .form-label .required {
+            color: var(--color-safety-orange);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-3) var(--space-4);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            border: 2px solid var(--color-silver);
+            border-radius: var(--border-radius);
+            background: var(--color-white);
+            color: var(--color-steel-dark);
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-safety-orange);
+        }
+
+        .form-input::placeholder {
+            color: var(--color-aluminum);
+        }
+
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234A5259' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-4) center;
+            padding-right: var(--space-8);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-5);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .card {
+            background: var(--color-white);
+            border: 2px solid var(--color-silver);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            border-color: var(--color-safety-orange);
+        }
+
+        .card-header {
+            background: var(--color-steel-dark);
+            padding: var(--space-4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-id {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--color-aluminum);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .card-status {
+            padding: var(--space-1) var(--space-3);
+            font-family: var(--font-display);
+            font-size: 0.625rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 2px;
+        }
+
+        .status-operational {
+            background: var(--color-success);
+            color: var(--color-white);
+        }
+
+        .status-maintenance {
+            background: var(--color-warning);
+            color: var(--color-steel-dark);
+        }
+
+        .status-offline {
+            background: var(--color-error);
+            color: var(--color-white);
+        }
+
+        .card-body {
+            padding: var(--space-5);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-steel-dark);
+            text-transform: uppercase;
+            margin-bottom: var(--space-3);
+        }
+
+        .card-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-3);
+            margin-top: var(--space-4);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--color-silver);
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-safety-orange);
+        }
+
+        .metric-label {
+            font-size: 0.625rem;
+            color: var(--color-aluminum);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Data Table */
+        .table-wrapper {
+            overflow-x: auto;
+            border: 2px solid var(--color-steel-dark);
+            border-radius: var(--border-radius);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--color-steel-dark);
+            color: var(--color-white);
+            padding: var(--space-4);
+            text-align: left;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        td {
+            padding: var(--space-4);
+            border-bottom: 1px solid var(--color-silver);
+            color: var(--color-steel-light);
+        }
+
+        tr:hover td {
+            background: rgba(255, 107, 44, 0.05);
+        }
+
+        .table-unit {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--color-steel-dark);
+        }
+
+        /* Badges */
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-2) var(--space-3);
+            font-family: var(--font-display);
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            border-radius: 2px;
+        }
+
+        .badge-orange {
+            background: var(--color-safety-orange);
+            color: var(--color-white);
+        }
+
+        .badge-yellow {
+            background: var(--color-safety-yellow);
+            color: var(--color-steel-dark);
+        }
+
+        .badge-steel {
+            background: var(--color-steel-dark);
+            color: var(--color-white);
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 1px solid var(--color-steel);
+            color: var(--color-steel);
+        }
+
+        .badge-success {
+            background: var(--color-success);
+            color: var(--color-white);
+        }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .principle-card {
+            background: var(--color-steel-dark);
+            padding: var(--space-5);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--color-safety-orange);
+        }
+
+        .principle-number {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-safety-orange);
+            line-height: 1;
+            margin-bottom: var(--space-3);
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-white);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-3);
+        }
+
+        .principle-text {
+            font-size: 0.875rem;
+            color: var(--color-aluminum);
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .animation-demo {
+            padding: var(--space-5);
+            background: var(--color-steel-dark);
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .animation-box {
+            width: 50px;
+            height: 50px;
+            background: var(--color-safety-orange);
+            margin: 0 auto var(--space-4);
+            border-radius: var(--border-radius);
+        }
+
+        .demo-pulse:hover .animation-box {
+            animation: pulse 1s ease infinite;
+        }
+
+        .demo-rotate:hover .animation-box {
+            animation: spin 1s linear;
+        }
+
+        .demo-scale:hover .animation-box {
+            animation: scaleUp 0.3s ease forwards;
+        }
+
+        .demo-slide:hover .animation-box {
+            animation: slideRight 0.4s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes scaleUp {
+            to { transform: scale(1.2); }
+        }
+
+        @keyframes slideRight {
+            0% { transform: translateX(-20px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        .animation-name {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-aluminum);
+        }
+
+        /* Special Component - Control Panel */
+        .control-panel {
+            background: var(--color-steel-dark);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            background: var(--color-steel);
+            padding: var(--space-4) var(--space-5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-white);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .panel-status {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--color-success);
+            text-transform: uppercase;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-success);
+            border-radius: 50%;
+            animation: blink 2s ease infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .panel-body {
+            padding: var(--space-6);
+        }
+
+        .gauge-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-5);
+        }
+
+        .gauge {
+            text-align: center;
+        }
+
+        .gauge-visual {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-3);
+            border-radius: 50%;
+            border: 4px solid var(--color-steel);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gauge-visual::before {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: var(--color-safety-orange);
+            border-right-color: var(--color-safety-orange);
+        }
+
+        .gauge-value {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+
+        .gauge-label {
+            font-size: 0.6875rem;
+            color: var(--color-aluminum);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-4) var(--space-5);
+            margin-bottom: var(--space-4);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-4);
+            border-left: 4px solid;
+        }
+
+        .alert-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-1);
+        }
+
+        .alert-text {
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .alert-info {
+            background: rgba(0, 119, 182, 0.1);
+            border-color: var(--color-info);
+        }
+
+        .alert-info .alert-title { color: var(--color-info); }
+        .alert-info .alert-icon { fill: var(--color-info); }
+
+        .alert-success {
+            background: rgba(45, 155, 93, 0.1);
+            border-color: var(--color-success);
+        }
+
+        .alert-success .alert-title { color: var(--color-success); }
+        .alert-success .alert-icon { fill: var(--color-success); }
+
+        .alert-warning {
+            background: rgba(229, 160, 0, 0.1);
+            border-color: var(--color-warning);
+        }
+
+        .alert-warning .alert-title { color: var(--color-warning); }
+        .alert-warning .alert-icon { fill: var(--color-warning); }
+
+        .alert-error {
+            background: rgba(214, 59, 59, 0.1);
+            border-color: var(--color-error);
+        }
+
+        .alert-error .alert-title { color: var(--color-error); }
+        .alert-error .alert-icon { fill: var(--color-error); }
+
+        /* Footer */
+        footer {
+            background: var(--color-steel-dark);
+            padding: var(--space-7) var(--space-6);
+            margin-top: var(--space-10);
+        }
+
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-white);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-brand span {
+            color: var(--color-safety-orange);
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            color: var(--color-aluminum);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: var(--space-5);
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gauge-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: var(--space-4);
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="#" class="nav-brand">Forge<span>point</span></a>
+        <ul class="nav-links">
+            <li><a href="#colors">Colors</a></li>
+            <li><a href="#typography">Typography</a></li>
+            <li><a href="#components">Components</a></li>
+            <li><a href="#principles">Principles</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">Industrial Design System</span>
+            <h1>Forge<span>point</span></h1>
+            <p>A robust design system engineered for manufacturing, industrial operations, and factory management interfaces. Built for clarity, safety, and efficiency.</p>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value">99.8%</div>
+                    <div class="stat-label">Uptime</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Monitoring</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">ISO</div>
+                    <div class="stat-label">Compliant</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Color Palette -->
+        <section id="colors">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2>Color Palette</h2>
+            </div>
+            <p>Industrial-grade colors designed for high visibility and safety compliance.</p>
+
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-steel-dark);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Steel Dark</div>
+                        <div class="color-hex">#1A1D21</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-steel);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Steel</div>
+                        <div class="color-hex">#2D3339</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-safety-orange);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Safety Orange</div>
+                        <div class="color-hex">#FF6B2C</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-safety-yellow);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Safety Yellow</div>
+                        <div class="color-hex">#FFB800</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch striped"></div>
+                    <div class="color-info">
+                        <div class="color-name">Hazard Stripe</div>
+                        <div class="color-hex">Pattern</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-safety-blue);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Safety Blue</div>
+                        <div class="color-hex">#0077B6</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Typography -->
+        <section id="typography">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2>Typography</h2>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-display">Rajdhani</div>
+                <div class="type-body">Barlow — Engineered for readability</div>
+            </div>
+
+            <div class="type-scale">
+                <div class="type-row">
+                    <span class="type-label">Display</span>
+                    <span style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: var(--color-steel-dark); text-transform: uppercase;">PRODUCTION LINE A</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">H1</span>
+                    <span style="font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: var(--color-steel-dark); text-transform: uppercase;">Equipment Status</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">H2</span>
+                    <span style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--color-steel); text-transform: uppercase;">Maintenance Schedule</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">Body</span>
+                    <span style="font-family: var(--font-body); font-size: 1rem; color: var(--color-steel-light);">All machinery operating within normal parameters. Next scheduled maintenance in 72 hours.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Spacing -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2>Spacing Scale</h2>
+            </div>
+            <p>A 4-pixel base unit grid for precise, consistent layouts.</p>
+
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 4px; height: 4px;"></div>
+                    <span class="spacing-label">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 8px; height: 8px;"></div>
+                    <span class="spacing-label">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 16px; height: 16px;"></div>
+                    <span class="spacing-label">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 24px; height: 24px;"></div>
+                    <span class="spacing-label">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 32px; height: 32px;"></div>
+                    <span class="spacing-label">32px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 48px; height: 48px;"></div>
+                    <span class="spacing-label">48px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 64px; height: 64px;"></div>
+                    <span class="spacing-label">64px</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Buttons -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2>Buttons</h2>
+            </div>
+
+            <h3>Primary Actions</h3>
+            <div class="button-grid">
+                <button class="btn btn-primary">Start Process</button>
+                <button class="btn btn-secondary">View Details</button>
+                <button class="btn btn-outline">Configure</button>
+                <button class="btn btn-warning">Caution</button>
+            </div>
+
+            <h3>Sizes</h3>
+            <div class="button-grid">
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary">Default</button>
+                <button class="btn btn-primary btn-lg">Large</button>
+            </div>
+        </section>
+
+        <!-- 5. Forms -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2>Forms</h2>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Equipment ID <span class="required">*</span></label>
+                    <input type="text" class="form-input" placeholder="EQ-2024-001">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Operator Name <span class="required">*</span></label>
+                    <input type="text" class="form-input" placeholder="Enter operator name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Production Line</label>
+                    <select class="form-input form-select">
+                        <option>Line A - Assembly</option>
+                        <option>Line B - Packaging</option>
+                        <option>Line C - Quality Control</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Shift</label>
+                    <select class="form-input form-select">
+                        <option>Morning (06:00 - 14:00)</option>
+                        <option>Afternoon (14:00 - 22:00)</option>
+                        <option>Night (22:00 - 06:00)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Notes</label>
+                <textarea class="form-input" placeholder="Add maintenance notes or observations..."></textarea>
+            </div>
+            <button class="btn btn-primary">Submit Report</button>
+        </section>
+
+        <!-- 6. Cards -->
+        <section id="components">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2>Cards</h2>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-id">Unit CNC-001</span>
+                        <span class="card-status status-operational">Operational</span>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">CNC Milling Machine</h4>
+                        <p>5-axis precision milling center for complex part fabrication. Running production batch B-2024-156.</p>
+                        <div class="card-metrics">
+                            <div class="metric">
+                                <div class="metric-value">98%</div>
+                                <div class="metric-label">Efficiency</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">1,247</div>
+                                <div class="metric-label">Units/Day</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">72h</div>
+                                <div class="metric-label">Next Maint.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-id">Unit WLD-003</span>
+                        <span class="card-status status-maintenance">Maintenance</span>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Robotic Welder</h4>
+                        <p>Automated arc welding station. Currently undergoing scheduled torch tip replacement.</p>
+                        <div class="card-metrics">
+                            <div class="metric">
+                                <div class="metric-value">0%</div>
+                                <div class="metric-label">Efficiency</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">--</div>
+                                <div class="metric-label">Units/Day</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">4h</div>
+                                <div class="metric-label">Est. Return</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-id">Unit PKG-007</span>
+                        <span class="card-status status-offline">Offline</span>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Packaging Line</h4>
+                        <p>Automated packaging and palletizing system. Offline due to conveyor belt replacement.</p>
+                        <div class="card-metrics">
+                            <div class="metric">
+                                <div class="metric-value">0%</div>
+                                <div class="metric-label">Efficiency</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">--</div>
+                                <div class="metric-label">Units/Day</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">24h</div>
+                                <div class="metric-label">Est. Return</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Data Table -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <h2>Data Table</h2>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Unit ID</th>
+                            <th>Equipment</th>
+                            <th>Status</th>
+                            <th>Output</th>
+                            <th>Efficiency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-unit">CNC-001</td>
+                            <td>CNC Milling Machine</td>
+                            <td><span class="badge badge-success">Operational</span></td>
+                            <td>1,247 units</td>
+                            <td>98%</td>
+                        </tr>
+                        <tr>
+                            <td class="table-unit">ASM-002</td>
+                            <td>Assembly Robot Arm</td>
+                            <td><span class="badge badge-success">Operational</span></td>
+                            <td>3,580 units</td>
+                            <td>99%</td>
+                        </tr>
+                        <tr>
+                            <td class="table-unit">WLD-003</td>
+                            <td>Robotic Welder</td>
+                            <td><span class="badge badge-yellow">Maintenance</span></td>
+                            <td>--</td>
+                            <td>--</td>
+                        </tr>
+                        <tr>
+                            <td class="table-unit">QC-004</td>
+                            <td>Quality Scanner</td>
+                            <td><span class="badge badge-success">Operational</span></td>
+                            <td>5,200 scans</td>
+                            <td>100%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 8. Badges -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">08</span>
+                <h2>Badges & Tags</h2>
+            </div>
+
+            <div class="badge-group">
+                <span class="badge badge-orange">Priority</span>
+                <span class="badge badge-yellow">Caution</span>
+                <span class="badge badge-steel">Standard</span>
+                <span class="badge badge-outline">Archive</span>
+                <span class="badge badge-success">Operational</span>
+            </div>
+        </section>
+
+        <!-- 9. Design Principles -->
+        <section id="principles">
+            <div class="section-header">
+                <span class="section-number">09</span>
+                <h2>Design Principles</h2>
+            </div>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-number">01</div>
+                    <h4 class="principle-title">Safety First</h4>
+                    <p class="principle-text">High-contrast colors and clear visual hierarchies ensure critical information is never missed.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">02</div>
+                    <h4 class="principle-title">Efficiency</h4>
+                    <p class="principle-text">Streamlined interfaces minimize cognitive load, allowing operators to make quick, informed decisions.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">03</div>
+                    <h4 class="principle-title">Durability</h4>
+                    <p class="principle-text">Robust components designed to perform under demanding conditions and extended use.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">04</div>
+                    <h4 class="principle-title">Precision</h4>
+                    <p class="principle-text">Data visualization and typography optimized for accurate reading at a glance.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Animation -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">10</span>
+                <h2>Animation Effects</h2>
+            </div>
+            <p>Functional animations that communicate status and feedback without distraction.</p>
+
+            <div class="animation-grid">
+                <div class="animation-demo demo-pulse">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Pulse</div>
+                </div>
+                <div class="animation-demo demo-rotate">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Rotate</div>
+                </div>
+                <div class="animation-demo demo-scale">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Scale</div>
+                </div>
+                <div class="animation-demo demo-slide">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Slide</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Special Component -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">11</span>
+                <h2>Control Panel</h2>
+            </div>
+
+            <div class="control-panel">
+                <div class="panel-header">
+                    <h3 class="panel-title">Production Line A - Overview</h3>
+                    <div class="panel-status">
+                        <span class="status-dot"></span>
+                        System Online
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="gauge-grid">
+                        <div class="gauge">
+                            <div class="gauge-visual">
+                                <span class="gauge-value">72%</span>
+                            </div>
+                            <div class="gauge-label">Load</div>
+                        </div>
+                        <div class="gauge">
+                            <div class="gauge-visual">
+                                <span class="gauge-value">98%</span>
+                            </div>
+                            <div class="gauge-label">Efficiency</div>
+                        </div>
+                        <div class="gauge">
+                            <div class="gauge-visual">
+                                <span class="gauge-value">45°</span>
+                            </div>
+                            <div class="gauge-label">Temp</div>
+                        </div>
+                        <div class="gauge">
+                            <div class="gauge-visual">
+                                <span class="gauge-value">850</span>
+                            </div>
+                            <div class="gauge-label">RPM</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Alerts -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">12</span>
+                <h2>Alert Messages</h2>
+            </div>
+
+            <div class="alert alert-info">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Shift Change</div>
+                    <p class="alert-text">Morning shift ending in 30 minutes. Prepare handover documentation.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Batch Complete</div>
+                    <p class="alert-text">Production batch B-2024-156 completed successfully. 5,000 units processed.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Maintenance Due</div>
+                    <p class="alert-text">Unit WLD-003 scheduled maintenance approaching. Prepare replacement parts.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-error">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Emergency Stop Activated</div>
+                    <p class="alert-text">Unit PKG-007 emergency stop triggered. Supervisor inspection required before restart.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">Forge<span>point</span></div>
+            <div class="footer-text">Industrial Design System v1.0</div>
+        </div>
+    </footer>
+</body>
+</html>

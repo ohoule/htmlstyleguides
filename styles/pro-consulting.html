@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stratify Design System - Consulting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary-50: #FDF4FF;
+            --color-primary-100: #FAE8FF;
+            --color-primary-500: #A855F7;
+            --color-primary-600: #9333EA;
+            --color-primary-700: #7E22CE;
+            --color-primary-800: #6B21A8;
+
+            --color-slate-50: #F8FAFC;
+            --color-slate-100: #F1F5F9;
+            --color-slate-200: #E2E8F0;
+            --color-slate-300: #CBD5E1;
+            --color-slate-400: #94A3B8;
+            --color-slate-500: #64748B;
+            --color-slate-600: #475569;
+            --color-slate-700: #334155;
+            --color-slate-800: #1E293B;
+            --color-slate-900: #0F172A;
+
+            --color-success: #059669;
+            --color-success-light: #D1FAE5;
+            --color-warning: #D97706;
+            --color-warning-light: #FEF3C7;
+            --color-error: #DC2626;
+            --color-error-light: #FEE2E2;
+            --color-info: #0284C7;
+            --color-info-light: #E0F2FE;
+
+            --font-sans: 'DM Sans', system-ui, sans-serif;
+            --font-display: 'DM Serif Display', serif;
+
+            --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem;
+            --text-xl: 1.25rem; --text-2xl: 1.5rem; --text-3xl: 2rem; --text-4xl: 2.5rem;
+
+            --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+            --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-12: 3rem; --space-16: 4rem;
+
+            --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
+            --shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px rgb(0 0 0 / 0.1);
+
+            --radius: 0.5rem; --radius-lg: 0.75rem; --radius-xl: 1rem;
+            --transition: 200ms ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.6; color: var(--color-slate-900); background: var(--color-slate-50); }
+
+        header { background: var(--color-slate-900); color: white; padding: var(--space-4) var(--space-6); }
+        .header-content { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: var(--space-3); }
+        .logo-text { font-family: var(--font-display); font-size: var(--text-xl); }
+        nav { display: flex; gap: var(--space-1); }
+        nav a { padding: var(--space-2) var(--space-3); font-size: var(--text-sm); color: var(--color-slate-400); text-decoration: none; border-radius: var(--radius); transition: all var(--transition); }
+        nav a:hover { color: white; background: var(--color-slate-800); }
+
+        main { max-width: 1200px; margin: 0 auto; padding: var(--space-12) var(--space-6); }
+
+        .hero { text-align: center; margin-bottom: var(--space-16); }
+        .hero h1 { font-family: var(--font-display); font-size: var(--text-4xl); margin-bottom: var(--space-4); }
+        .hero p { font-size: var(--text-lg); color: var(--color-slate-600); max-width: 600px; margin: 0 auto; }
+
+        section { background: white; border: 1px solid var(--color-slate-200); border-radius: var(--radius-xl); padding: var(--space-8); margin-bottom: var(--space-8); }
+        section h2 { font-size: var(--text-xl); font-weight: 600; margin-bottom: var(--space-2); display: flex; align-items: center; gap: var(--space-3); }
+        .section-number { font-size: var(--text-sm); font-weight: 600; color: var(--color-primary-600); background: var(--color-primary-50); padding: var(--space-1) var(--space-2); border-radius: var(--radius); }
+        section > p { color: var(--color-slate-600); margin-bottom: var(--space-6); }
+        h3 { font-size: var(--text-base); font-weight: 600; color: var(--color-slate-700); margin: var(--space-6) 0 var(--space-3); }
+        h3:first-of-type { margin-top: 0; }
+
+        .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: var(--space-4); }
+        .color-swatch { text-align: center; }
+        .color-preview { height: 60px; border-radius: var(--radius-lg); margin-bottom: var(--space-2); }
+        .color-name { font-size: var(--text-sm); font-weight: 500; color: var(--color-slate-700); }
+        .color-value { font-size: var(--text-xs); color: var(--color-slate-500); font-family: monospace; }
+
+        .type-scale { display: flex; flex-direction: column; gap: var(--space-4); }
+        .type-item { display: flex; align-items: baseline; gap: var(--space-6); padding-bottom: var(--space-4); border-bottom: 1px solid var(--color-slate-100); }
+        .type-label { min-width: 80px; font-size: var(--text-sm); color: var(--color-slate-500); }
+        .type-display { font-family: var(--font-display); font-size: var(--text-4xl); }
+        .type-h1 { font-size: var(--text-3xl); font-weight: 700; }
+        .type-body { font-size: var(--text-base); }
+
+        .button-group { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-6); }
+        .btn { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 500; border-radius: var(--radius); border: none; cursor: pointer; transition: all var(--transition); padding: var(--space-2) var(--space-4); font-size: var(--text-sm); }
+        .btn-primary { background: var(--color-primary-600); color: white; }
+        .btn-primary:hover { background: var(--color-primary-700); }
+        .btn-secondary { background: white; color: var(--color-slate-700); border: 1px solid var(--color-slate-300); }
+        .btn-secondary:hover { background: var(--color-slate-50); }
+        .btn-ghost { background: transparent; color: var(--color-slate-600); }
+        .btn-ghost:hover { background: var(--color-slate-100); }
+
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-6); }
+        .form-group { display: flex; flex-direction: column; gap: var(--space-2); }
+        label { font-size: var(--text-sm); font-weight: 500; color: var(--color-slate-700); }
+        .input { padding: var(--space-2) var(--space-3); font-size: var(--text-base); border: 1px solid var(--color-slate-300); border-radius: var(--radius); background: white; transition: all var(--transition); }
+        .input:focus { outline: none; border-color: var(--color-primary-500); box-shadow: 0 0 0 3px var(--color-primary-100); }
+        textarea.input { min-height: 100px; resize: vertical; }
+
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-6); }
+        .card { background: white; border: 1px solid var(--color-slate-200); border-radius: var(--radius-xl); padding: var(--space-6); transition: all var(--transition); }
+        .card:hover { box-shadow: var(--shadow-md); }
+        .card-title { font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-2); }
+        .card-desc { font-size: var(--text-sm); color: var(--color-slate-600); }
+
+        .stat-card { background: linear-gradient(135deg, var(--color-slate-900), var(--color-slate-800)); color: white; border-radius: var(--radius-xl); padding: var(--space-5); }
+        .stat-label { font-size: var(--text-sm); color: var(--color-slate-400); margin-bottom: var(--space-1); }
+        .stat-value { font-family: var(--font-display); font-size: var(--text-3xl); }
+        .stat-change { font-size: var(--text-sm); margin-top: var(--space-2); color: var(--color-primary-400); }
+
+        .table-container { overflow-x: auto; border: 1px solid var(--color-slate-200); border-radius: var(--radius-lg); }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: var(--space-3) var(--space-4); font-size: var(--text-sm); font-weight: 600; color: var(--color-slate-600); background: var(--color-slate-50); border-bottom: 1px solid var(--color-slate-200); }
+        td { padding: var(--space-3) var(--space-4); font-size: var(--text-sm); color: var(--color-slate-700); border-bottom: 1px solid var(--color-slate-100); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--color-slate-50); }
+
+        .badge-group { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+        .badge { display: inline-flex; padding: var(--space-1) var(--space-2); font-size: var(--text-xs); font-weight: 500; border-radius: var(--radius); }
+        .badge-success { background: var(--color-success-light); color: var(--color-success); }
+        .badge-warning { background: var(--color-warning-light); color: var(--color-warning); }
+        .badge-error { background: var(--color-error-light); color: var(--color-error); }
+        .badge-info { background: var(--color-info-light); color: var(--color-info); }
+        .badge-neutral { background: var(--color-slate-100); color: var(--color-slate-600); }
+
+        .principles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-6); }
+        .principle { padding: var(--space-5); background: var(--color-slate-50); border-radius: var(--radius-lg); border-left: 3px solid var(--color-primary-500); }
+        .principle-number { font-size: var(--text-sm); font-weight: 600; color: var(--color-primary-600); margin-bottom: var(--space-2); }
+        .principle-title { font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-2); }
+        .principle-desc { font-size: var(--text-sm); color: var(--color-slate-600); }
+
+        .engagement-card { background: white; border: 1px solid var(--color-slate-200); border-radius: var(--radius-xl); overflow: hidden; }
+        .engagement-header { background: var(--color-slate-900); color: white; padding: var(--space-5); }
+        .engagement-title { font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-1); }
+        .engagement-client { font-size: var(--text-sm); color: var(--color-slate-400); }
+        .engagement-body { padding: var(--space-5); }
+        .engagement-meta { display: flex; gap: var(--space-6); margin-bottom: var(--space-4); }
+        .meta-item { }
+        .meta-label { font-size: var(--text-xs); color: var(--color-slate-500); text-transform: uppercase; letter-spacing: 0.05em; }
+        .meta-value { font-size: var(--text-sm); font-weight: 600; }
+
+        .alert { display: flex; gap: var(--space-3); padding: var(--space-4); border-radius: var(--radius-lg); margin-bottom: var(--space-3); }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 2px; font-size: var(--text-sm); }
+        .alert-description { font-size: var(--text-sm); opacity: 0.9; }
+        .alert-success { background: var(--color-success-light); color: #065F46; }
+        .alert-info { background: var(--color-info-light); color: #075985; }
+        .alert-warning { background: var(--color-warning-light); color: #92400E; }
+        .alert-error { background: var(--color-error-light); color: #991B1B; }
+
+        footer { background: var(--color-slate-900); color: white; padding: var(--space-8) var(--space-6); margin-top: var(--space-16); text-align: center; }
+        .footer-text { font-size: var(--text-sm); color: var(--color-slate-400); }
+
+        @media (max-width: 768px) { nav { display: none; } .hero h1 { font-size: var(--text-3xl); } section { padding: var(--space-5); } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo"><span class="logo-text">Stratify</span></div>
+            <nav>
+                <a href="#colors">Colors</a>
+                <a href="#typography">Typography</a>
+                <a href="#buttons">Buttons</a>
+                <a href="#forms">Forms</a>
+                <a href="#cards">Cards</a>
+                <a href="#table">Table</a>
+                <a href="#alerts">Alerts</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="hero">
+            <h1>Stratify Design System</h1>
+            <p>A refined design system for consulting firms. Built for strategic clarity, professional presence, and executive-level communication.</p>
+        </div>
+
+        <section id="colors">
+            <h2><span class="section-number">01</span> Color Palette</h2>
+            <p>A sophisticated violet primary with slate neutrals, projecting expertise and strategic thinking.</p>
+            <div class="color-grid">
+                <div class="color-swatch"><div class="color-preview" style="background: var(--color-primary-500);"></div><div class="color-name">Primary</div><div class="color-value">#A855F7</div></div>
+                <div class="color-swatch"><div class="color-preview" style="background: var(--color-primary-600);"></div><div class="color-name">Primary Dark</div><div class="color-value">#9333EA</div></div>
+                <div class="color-swatch"><div class="color-preview" style="background: var(--color-slate-900);"></div><div class="color-name">Slate 900</div><div class="color-value">#0F172A</div></div>
+                <div class="color-swatch"><div class="color-preview" style="background: var(--color-slate-500);"></div><div class="color-name">Slate 500</div><div class="color-value">#64748B</div></div>
+            </div>
+        </section>
+
+        <section id="typography">
+            <h2><span class="section-number">02</span> Typography</h2>
+            <p>DM Serif Display for executive headlines, DM Sans for clear body text.</p>
+            <div class="type-scale">
+                <div class="type-item"><span class="type-label">Display</span><span class="type-display">Strategic Vision</span></div>
+                <div class="type-item"><span class="type-label">H1</span><span class="type-h1">Executive Summary</span></div>
+                <div class="type-item"><span class="type-label">Body</span><span class="type-body">Delivering actionable insights that drive measurable business outcomes.</span></div>
+            </div>
+        </section>
+
+        <section id="buttons">
+            <h2><span class="section-number">04</span> Buttons</h2>
+            <p>Professional action buttons with clear hierarchy.</p>
+            <div class="button-group">
+                <button class="btn btn-primary">Schedule Consultation</button>
+                <button class="btn btn-secondary">View Case Study</button>
+                <button class="btn btn-ghost">Learn More</button>
+            </div>
+        </section>
+
+        <section id="forms">
+            <h2><span class="section-number">05</span> Form Elements</h2>
+            <p>Clean forms for client intake and project scoping.</p>
+            <div class="form-grid">
+                <div class="form-group"><label>Organization</label><input type="text" class="input" placeholder="Company name"></div>
+                <div class="form-group"><label>Industry</label><select class="input"><option>Select industry...</option><option>Financial Services</option><option>Technology</option><option>Healthcare</option></select></div>
+                <div class="form-group"><label>Project Scope</label><textarea class="input" placeholder="Describe your challenges..."></textarea></div>
+            </div>
+        </section>
+
+        <section id="cards">
+            <h2><span class="section-number">06</span> Cards</h2>
+            <p>Information containers for services and metrics.</p>
+            <div class="card-grid">
+                <div class="card"><div class="card-title">Strategy Consulting</div><div class="card-desc">Transform your organization with data-driven strategic planning and execution frameworks.</div></div>
+                <div class="stat-card"><div class="stat-label">Client Satisfaction</div><div class="stat-value">98%</div><div class="stat-change">↑ 4% YoY</div></div>
+                <div class="stat-card"><div class="stat-label">Projects Delivered</div><div class="stat-value">247</div><div class="stat-change">Since 2020</div></div>
+            </div>
+        </section>
+
+        <section id="table">
+            <h2><span class="section-number">07</span> Data Table</h2>
+            <p>Clear presentation for engagements and deliverables.</p>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Client</th><th>Engagement</th><th>Phase</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><td>TechCorp Inc</td><td>Digital Transformation</td><td>Implementation</td><td><span class="badge badge-success">On Track</span></td></tr>
+                        <tr><td>Global Finance</td><td>M&A Integration</td><td>Assessment</td><td><span class="badge badge-info">In Progress</span></td></tr>
+                        <tr><td>HealthFirst</td><td>Operational Excellence</td><td>Discovery</td><td><span class="badge badge-warning">Review</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="badges">
+            <h2><span class="section-number">08</span> Status Badges</h2>
+            <div class="badge-group">
+                <span class="badge badge-success">On Track</span>
+                <span class="badge badge-warning">At Risk</span>
+                <span class="badge badge-error">Delayed</span>
+                <span class="badge badge-info">In Progress</span>
+                <span class="badge badge-neutral">Pending</span>
+            </div>
+        </section>
+
+        <section id="principles">
+            <h2><span class="section-number">09</span> Design Principles</h2>
+            <div class="principles-grid">
+                <div class="principle"><div class="principle-number">01</div><div class="principle-title">Executive Presence</div><div class="principle-desc">Design should project authority and expertise befitting C-suite communication.</div></div>
+                <div class="principle"><div class="principle-number">02</div><div class="principle-title">Strategic Clarity</div><div class="principle-desc">Complex information must be distilled into clear, actionable insights.</div></div>
+                <div class="principle"><div class="principle-number">03</div><div class="principle-title">Data-Driven</div><div class="principle-desc">Visual hierarchy should emphasize metrics and measurable outcomes.</div></div>
+                <div class="principle"><div class="principle-number">04</div><div class="principle-title">Professional Polish</div><div class="principle-desc">Every detail reflects the quality of our consulting work.</div></div>
+            </div>
+        </section>
+
+        <section id="engagement">
+            <h2><span class="section-number">11</span> Engagement Card</h2>
+            <p>A client engagement overview component.</p>
+            <div class="engagement-card" style="max-width: 500px;">
+                <div class="engagement-header">
+                    <div class="engagement-title">Digital Transformation Initiative</div>
+                    <div class="engagement-client">TechCorp Inc • Enterprise</div>
+                </div>
+                <div class="engagement-body">
+                    <div class="engagement-meta">
+                        <div class="meta-item"><div class="meta-label">Duration</div><div class="meta-value">6 Months</div></div>
+                        <div class="meta-item"><div class="meta-label">Phase</div><div class="meta-value">Implementation</div></div>
+                        <div class="meta-item"><div class="meta-label">Team</div><div class="meta-value">8 Consultants</div></div>
+                    </div>
+                    <div class="badge badge-success">On Track</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="alerts">
+            <h2><span class="section-number">12</span> Alerts</h2>
+            <div class="alert alert-success"><div class="alert-content"><div class="alert-title">Milestone Achieved</div><div class="alert-description">Phase 2 deliverables approved by steering committee.</div></div></div>
+            <div class="alert alert-warning"><div class="alert-content"><div class="alert-title">Resource Constraint</div><div class="alert-description">Additional SME support required for data migration workstream.</div></div></div>
+            <div class="alert alert-error"><div class="alert-content"><div class="alert-title">Timeline Risk</div><div class="alert-description">Vendor delays may impact go-live date. Mitigation plan in progress.</div></div></div>
+        </section>
+    </main>
+
+    <footer><p class="footer-text">Stratify Design System v1.0 — Professional Standards for Consulting Excellence</p></footer>
+</body>
+</html>

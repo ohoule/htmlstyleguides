@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronicle — Media Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Serif+4:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette - Editorial Excellence */
+            --color-ink: #1A1A1A;
+            --color-charcoal: #2D2D2D;
+            --color-gray-dark: #4A4A4A;
+            --color-gray: #757575;
+            --color-gray-light: #ABABAB;
+            --color-paper: #F9F7F4;
+            --color-white: #FFFFFF;
+            --color-accent: #C41E3A;
+            --color-accent-dark: #9E1830;
+            --color-gold: #B8860B;
+
+            /* Semantic Colors */
+            --color-success: #2E7D32;
+            --color-warning: #ED6C02;
+            --color-error: #C41E3A;
+            --color-info: #0288D1;
+
+            /* Typography */
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Source Serif 4', serif;
+            --font-ui: 'Inter', sans-serif;
+
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.5rem;
+            --space-6: 2rem;
+            --space-7: 3rem;
+            --space-8: 4rem;
+            --space-9: 6rem;
+            --space-10: 8rem;
+
+            /* Layout */
+            --max-width: 1200px;
+            --border-radius: 2px;
+            --transition: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.7;
+            color: var(--color-charcoal);
+            background-color: var(--color-paper);
+            font-size: 18px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-white);
+            padding: var(--space-4) var(--space-6);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .nav-brand {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-ink);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-5);
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-ui);
+            font-size: 0.8125rem;
+            color: var(--color-gray);
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: var(--space-10) var(--space-6);
+            padding-top: calc(var(--space-10) + 80px);
+            background: var(--color-ink);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .hero-dateline {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: var(--space-4);
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
+            color: var(--color-white);
+            line-height: 1.1;
+            margin-bottom: var(--space-5);
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-family: var(--font-body);
+            font-size: 1.375rem;
+            color: var(--color-gray-light);
+            max-width: 640px;
+            line-height: 1.6;
+        }
+
+        .hero-byline {
+            margin-top: var(--space-6);
+            padding-top: var(--space-5);
+            border-top: 1px solid var(--color-gray-dark);
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .byline-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-family: var(--font-ui);
+            font-weight: 600;
+        }
+
+        .byline-info {
+            color: var(--color-gray-light);
+        }
+
+        .byline-name {
+            font-family: var(--font-ui);
+            font-weight: 600;
+            color: var(--color-white);
+        }
+
+        .byline-role {
+            font-size: 0.875rem;
+        }
+
+        /* Main Content */
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--space-9) var(--space-6);
+        }
+
+        section {
+            margin-bottom: var(--space-10);
+        }
+
+        .section-header {
+            margin-bottom: var(--space-6);
+            padding-bottom: var(--space-4);
+            border-bottom: 2px solid var(--color-ink);
+        }
+
+        .section-label {
+            font-family: var(--font-ui);
+            font-size: 0.6875rem;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: var(--space-2);
+            font-weight: 600;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-ink);
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-charcoal);
+            margin-bottom: var(--space-4);
+        }
+
+        p {
+            margin-bottom: var(--space-4);
+            color: var(--color-gray-dark);
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .color-card {
+            background: var(--color-white);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .color-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .color-swatch {
+            height: 100px;
+        }
+
+        .color-info {
+            padding: var(--space-4);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-top: none;
+        }
+
+        .color-name {
+            font-family: var(--font-ui);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-ink);
+        }
+
+        .color-hex {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            color: var(--color-gray);
+        }
+
+        /* Typography */
+        .type-specimen {
+            margin-bottom: var(--space-7);
+            padding: var(--space-7);
+            background: var(--color-white);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--color-ink);
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-4);
+            line-height: 1.1;
+        }
+
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 1.375rem;
+            color: var(--color-gray-dark);
+            font-style: italic;
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-5);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-5);
+            padding-bottom: var(--space-4);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .type-label {
+            width: 100px;
+            font-family: var(--font-ui);
+            font-size: 0.6875rem;
+            color: var(--color-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            flex-shrink: 0;
+            font-weight: 500;
+        }
+
+        /* Spacing */
+        .spacing-visual {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-5);
+            align-items: flex-end;
+            padding: var(--space-6);
+            background: var(--color-white);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .spacing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .spacing-box {
+            background: var(--color-accent);
+        }
+
+        .spacing-label {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            color: var(--color-gray);
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-5);
+            font-family: var(--font-ui);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--color-ink);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-charcoal);
+        }
+
+        .btn-accent {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .btn-accent:hover {
+            background: var(--color-accent-dark);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-ink);
+            border: 2px solid var(--color-ink);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-ink);
+            color: var(--color-white);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-gray);
+        }
+
+        .btn-ghost:hover {
+            color: var(--color-ink);
+        }
+
+        .btn-sm {
+            padding: var(--space-2) var(--space-4);
+            font-size: 0.75rem;
+        }
+
+        .btn-lg {
+            padding: var(--space-4) var(--space-7);
+            font-size: 0.875rem;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-5);
+        }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-gray-dark);
+            margin-bottom: var(--space-2);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-3) var(--space-4);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            border: 1px solid rgba(0,0,0,0.2);
+            background: var(--color-white);
+            color: var(--color-ink);
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-ink);
+        }
+
+        .form-input::placeholder {
+            color: var(--color-gray-light);
+        }
+
+        textarea.form-input {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234A4A4A' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-4) center;
+            padding-right: var(--space-8);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-5);
+        }
+
+        /* Article Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .article-card {
+            background: var(--color-white);
+            transition: var(--transition);
+        }
+
+        .article-card:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .article-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--color-gray-light) 0%, var(--color-gray) 100%);
+            position: relative;
+        }
+
+        .article-category {
+            position: absolute;
+            top: var(--space-4);
+            left: var(--space-4);
+            font-family: var(--font-ui);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-white);
+            background: var(--color-accent);
+            padding: var(--space-1) var(--space-3);
+        }
+
+        .article-body {
+            padding: var(--space-5);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-top: none;
+        }
+
+        .article-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-ink);
+            margin-bottom: var(--space-3);
+            line-height: 1.3;
+        }
+
+        .article-excerpt {
+            font-size: 1rem;
+            color: var(--color-gray-dark);
+            margin-bottom: var(--space-4);
+            line-height: 1.6;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--space-4);
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .meta-author {
+            font-family: var(--font-ui);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--color-gray-dark);
+        }
+
+        .meta-date {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            color: var(--color-gray);
+        }
+
+        /* Data Table */
+        .table-wrapper {
+            overflow-x: auto;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: var(--color-white);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--color-ink);
+            padding: var(--space-4);
+            text-align: left;
+            font-family: var(--font-ui);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            color: var(--color-white);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        td {
+            padding: var(--space-4);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            color: var(--color-gray-dark);
+            font-size: 0.9375rem;
+        }
+
+        tr:hover td {
+            background: var(--color-paper);
+        }
+
+        .table-title {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--color-ink);
+        }
+
+        /* Badges */
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: var(--space-1) var(--space-3);
+            font-family: var(--font-ui);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-ink {
+            background: var(--color-ink);
+            color: var(--color-white);
+        }
+
+        .badge-accent {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .badge-gold {
+            background: var(--color-gold);
+            color: var(--color-white);
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 1px solid var(--color-gray);
+            color: var(--color-gray);
+        }
+
+        .badge-paper {
+            background: var(--color-paper);
+            color: var(--color-gray-dark);
+        }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .principle-card {
+            padding: var(--space-6);
+            background: var(--color-white);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .principle-number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            line-height: 1;
+            margin-bottom: var(--space-3);
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-ink);
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-text {
+            font-size: 1rem;
+            color: var(--color-gray-dark);
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .animation-demo {
+            padding: var(--space-6);
+            background: var(--color-white);
+            border: 1px solid rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .animation-box {
+            width: 50px;
+            height: 50px;
+            background: var(--color-ink);
+            margin: 0 auto var(--space-4);
+        }
+
+        .demo-fade:hover .animation-box {
+            animation: fadeUp 0.5s ease;
+        }
+
+        .demo-underline:hover .animation-box {
+            animation: underlineGrow 0.4s ease forwards;
+        }
+
+        .demo-scale:hover .animation-box {
+            animation: scaleIn 0.3s ease;
+        }
+
+        .demo-slide:hover .animation-box {
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes underlineGrow {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .animation-name {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            color: var(--color-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Special Component - Pull Quote */
+        .pull-quote {
+            background: var(--color-white);
+            border: 1px solid rgba(0,0,0,0.1);
+            padding: var(--space-8);
+            position: relative;
+        }
+
+        .pull-quote::before {
+            content: '"';
+            position: absolute;
+            top: var(--space-4);
+            left: var(--space-5);
+            font-family: var(--font-display);
+            font-size: 6rem;
+            color: var(--color-accent);
+            line-height: 1;
+            opacity: 0.3;
+        }
+
+        .quote-text {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--color-ink);
+            line-height: 1.4;
+            margin-bottom: var(--space-5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-attribution {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .quote-avatar {
+            width: 56px;
+            height: 56px;
+            background: var(--color-ink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-family: var(--font-ui);
+            font-weight: 600;
+        }
+
+        .quote-author {
+            font-family: var(--font-ui);
+            font-weight: 600;
+            color: var(--color-ink);
+        }
+
+        .quote-role {
+            font-family: var(--font-ui);
+            font-size: 0.875rem;
+            color: var(--color-gray);
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-4) var(--space-5);
+            margin-bottom: var(--space-4);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-4);
+            border-left: 4px solid;
+            background: var(--color-white);
+        }
+
+        .alert-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-ui);
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: var(--space-1);
+        }
+
+        .alert-text {
+            font-size: 0.9375rem;
+            margin: 0;
+        }
+
+        .alert-info {
+            border-color: var(--color-info);
+        }
+
+        .alert-info .alert-title { color: var(--color-info); }
+        .alert-info .alert-icon { fill: var(--color-info); }
+
+        .alert-success {
+            border-color: var(--color-success);
+        }
+
+        .alert-success .alert-title { color: var(--color-success); }
+        .alert-success .alert-icon { fill: var(--color-success); }
+
+        .alert-warning {
+            border-color: var(--color-warning);
+        }
+
+        .alert-warning .alert-title { color: var(--color-warning); }
+        .alert-warning .alert-icon { fill: var(--color-warning); }
+
+        .alert-error {
+            border-color: var(--color-error);
+        }
+
+        .alert-error .alert-title { color: var(--color-error); }
+        .alert-error .alert-icon { fill: var(--color-error); }
+
+        /* Footer */
+        footer {
+            background: var(--color-ink);
+            padding: var(--space-8) var(--space-6);
+            margin-top: var(--space-10);
+        }
+
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+
+        .footer-text {
+            font-family: var(--font-ui);
+            font-size: 0.875rem;
+            color: var(--color-gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: var(--space-4);
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="#" class="nav-brand">Chronicle</a>
+        <ul class="nav-links">
+            <li><a href="#colors">Colors</a></li>
+            <li><a href="#typography">Typography</a></li>
+            <li><a href="#components">Components</a></li>
+            <li><a href="#principles">Principles</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-dateline">Media Design System</div>
+            <h1>Chronicle</h1>
+            <p>An editorial design system built for media companies, publishers, and content platforms. Where typography meets storytelling.</p>
+
+            <div class="hero-byline">
+                <div class="byline-avatar">ED</div>
+                <div class="byline-info">
+                    <div class="byline-name">Editorial Design Team</div>
+                    <div class="byline-role">Design System v1.0</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Color Palette -->
+        <section id="colors">
+            <div class="section-header">
+                <div class="section-label">Section 01</div>
+                <h2>Color Palette</h2>
+            </div>
+            <p>A refined palette inspired by print journalism and classic editorial design.</p>
+
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-ink);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Ink</div>
+                        <div class="color-hex">#1A1A1A</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-charcoal);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Charcoal</div>
+                        <div class="color-hex">#2D2D2D</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-accent);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Cardinal</div>
+                        <div class="color-hex">#C41E3A</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-gold);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Gold</div>
+                        <div class="color-hex">#B8860B</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-paper);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Paper</div>
+                        <div class="color-hex">#F9F7F4</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-gray);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Gray</div>
+                        <div class="color-hex">#757575</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Typography -->
+        <section id="typography">
+            <div class="section-header">
+                <div class="section-label">Section 02</div>
+                <h2>Typography</h2>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-display">Playfair Display</div>
+                <div class="type-body">Source Serif 4 — for immersive reading</div>
+            </div>
+
+            <div class="type-scale">
+                <div class="type-row">
+                    <span class="type-label">Headline</span>
+                    <span style="font-family: var(--font-display); font-size: 3rem; font-weight: 700; color: var(--color-ink);">Breaking News</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">Subhead</span>
+                    <span style="font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: var(--color-ink);">The Story Continues</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">Section</span>
+                    <span style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--color-charcoal);">In-Depth Analysis</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">Body</span>
+                    <span style="font-family: var(--font-body); font-size: 1.125rem; color: var(--color-gray-dark);">The best stories are the ones that reveal something true about the human experience.</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">Caption</span>
+                    <span style="font-family: var(--font-ui); font-size: 0.75rem; color: var(--color-gray); text-transform: uppercase; letter-spacing: 0.1em;">Photo by Editorial Staff</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Spacing -->
+        <section>
+            <div class="section-header">
+                <div class="section-label">Section 03</div>
+                <h2>Spacing Scale</h2>
+            </div>
+            <p>Generous whitespace allows content to breathe and improves readability.</p>
+
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 4px; height: 4px;"></div>
+                    <span class="spacing-label">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 8px; height: 8px;"></div>
+                    <span class="spacing-label">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 16px; height: 16px;"></div>
+                    <span class="spacing-label">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 24px; height: 24px;"></div>
+                    <span class="spacing-label">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 32px; height: 32px;"></div>
+                    <span class="spacing-label">32px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 48px; height: 48px;"></div>
+                    <span class="spacing-label">48px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 64px; height: 64px;"></div>
+                    <span class="spacing-label">64px</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Buttons -->
+        <section>
+            <div class="section-header">
+                <div class="section-label">Section 04</div>
+                <h2>Buttons</h2>
+            </div>
+
+            <h3>Primary Actions</h3>
+            <div class="button-grid">
+                <button class="btn btn-primary">Subscribe</button>
+                <button class="btn btn-accent">Read More</button>
+                <button class="btn btn-outline">Share Article</button>
+                <button class="btn btn-ghost">Save for Later</button>
+            </div>
+
+            <h3>Sizes</h3>
+            <div class="button-grid">
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary">Default</button>
+                <button class="btn btn-primary btn-lg">Large</button>
+            </div>
+        </section>
+
+        <!-- 5. Forms -->
+        <section>
+            <div class="section-header">
+                <div class="section-label">Section 05</div>
+                <h2>Forms</h2>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Category</label>
+                    <select class="form-input form-select">
+                        <option>Select category</option>
+                        <option>Politics</option>
+                        <option>Business</option>
+                        <option>Technology</option>
+                        <option>Culture</option>
+                        <option>Opinion</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Subscription</label>
+                    <select class="form-input form-select">
+                        <option>Select plan</option>
+                        <option>Monthly - $9.99</option>
+                        <option>Annual - $99.99</option>
+                        <option>Premium - $149.99</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary">Submit</button>
+        </section>
+
+        <!-- 6. Article Cards -->
+        <section id="components">
+            <div class="section-header">
+                <div class="section-label">Section 06</div>
+                <h2>Article Cards</h2>
+            </div>
+
+            <div class="card-grid">
+                <div class="article-card">
+                    <div class="article-image">
+                        <span class="article-category">Politics</span>
+                    </div>
+                    <div class="article-body">
+                        <h4 class="article-title">The Future of Digital Democracy</h4>
+                        <p class="article-excerpt">How technology is reshaping civic engagement and what it means for the next generation of voters.</p>
+                        <div class="article-meta">
+                            <span class="meta-author">By Sarah Mitchell</span>
+                            <span class="meta-date">Mar 15, 2024</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-image">
+                        <span class="article-category">Business</span>
+                    </div>
+                    <div class="article-body">
+                        <h4 class="article-title">The Rise of Sustainable Finance</h4>
+                        <p class="article-excerpt">ESG investing has moved from niche to mainstream. Here's what investors need to know.</p>
+                        <div class="article-meta">
+                            <span class="meta-author">By Michael Chen</span>
+                            <span class="meta-date">Mar 14, 2024</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-image">
+                        <span class="article-category">Culture</span>
+                    </div>
+                    <div class="article-body">
+                        <h4 class="article-title">The Architecture of Memory</h4>
+                        <p class="article-excerpt">A look at how cities are preserving their heritage while embracing modern development.</p>
+                        <div class="article-meta">
+                            <span class="meta-author">By Elena Rodriguez</span>
+                            <span class="meta-date">Mar 13, 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Data Table -->
+        <section>
+            <div class="section-header">
+                <div class="section-label">Section 07</div>
+                <h2>Content Table</h2>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Article</th>
+                            <th>Category</th>
+                            <th>Author</th>
+                            <th>Status</th>
+                            <th>Published</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-title">The Future of Digital Democracy</td>
+                            <td>Politics</td>
+                            <td>Sarah Mitchell</td>
+                            <td><span class="badge badge-ink">Published</span></td>
+                            <td>Mar 15, 2024</td>
+                        </tr>
+                        <tr>
+                            <td class="table-title">The Rise of Sustainable Finance</td>
+                            <td>Business</td>
+                            <td>Michael Chen</td>
+                            <td><span class="badge badge-ink">Published</span></td>
+                            <td>Mar 14, 2024</td>
+                        </tr>
+                        <tr>
+                            <td class="table-title">AI in the Newsroom</td>
+                            <td>Technology</td>
+                            <td>James Wright</td>
+                            <td><span class="badge badge-gold">Featured</span></td>
+                            <td>Mar 12, 2024</td>
+                        </tr>
+                        <tr>
+                            <td class="table-title">The Architecture of Memory</td>
+                            <td>Culture</td>
+                            <td>Elena Rodriguez</td>
+                            <td><span class="badge badge-outline">Draft</span></td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 8. Badges -->
+        <section>
+            <div class="section-header">
+                <div class="section-label">Section 08</div>
+                <h2>Badges & Tags</h2>
+            </div>
+
+            <div class="badge-group">
+                <span class="badge badge-ink">Published</span>
+                <span class="badge badge-accent">Breaking</span>
+                <span class="badge badge-gold">Featured</span>
+                <span class="badge badge-outline">Draft</span>
+                <span class="badge badge-paper">Archive</span>
+            </div>
+        </section>
+
+        <!-- 9. Design Principles -->
+        <section id="principles">
+            <div class="section-header">
+                <div class="section-label">Section 09</div>
+                <h2>Design Principles</h2>
+            </div>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-number">01</div>
+                    <h4 class="principle-title">Typography First</h4>
+                    <p class="principle-text">Beautiful, readable typography is the foundation of great editorial design.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">02</div>
+                    <h4 class="principle-title">Content is King</h4>
+                    <p class="principle-text">Every design element serves the story. Nothing competes with the content.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">03</div>
+                    <h4 class="principle-title">Timeless Elegance</h4>
+                    <p class="principle-text">Drawing from print traditions to create interfaces that feel authoritative and refined.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">04</div>
+                    <h4 class="principle-title">Accessible Truth</h4>
+                    <p class="principle-text">Information should be accessible to everyone, regardless of ability or device.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Animation -->
+        <section>
+            <div class="section-header">
+                <div class="section-label">Section 10</div>
+                <h2>Animation Effects</h2>
+            </div>
+            <p>Subtle, elegant animations that enhance without overwhelming.</p>
+
+            <div class="animation-grid">
+                <div class="animation-demo demo-fade">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Fade Up</div>
+                </div>
+                <div class="animation-demo demo-underline">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Underline</div>
+                </div>
+                <div class="animation-demo demo-scale">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Scale</div>
+                </div>
+                <div class="animation-demo demo-slide">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Slide In</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Special Component -->
+        <section>
+            <div class="section-header">
+                <div class="section-label">Section 11</div>
+                <h2>Pull Quote</h2>
+            </div>
+
+            <div class="pull-quote">
+                <p class="quote-text">The best journalism doesn't just inform — it illuminates the truth and empowers readers to understand the world around them.</p>
+                <div class="quote-attribution">
+                    <div class="quote-avatar">MW</div>
+                    <div>
+                        <div class="quote-author">Margaret Williams</div>
+                        <div class="quote-role">Editor-in-Chief</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Alerts -->
+        <section>
+            <div class="section-header">
+                <div class="section-label">Section 12</div>
+                <h2>Alert Messages</h2>
+            </div>
+
+            <div class="alert alert-info">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Editor's Note</div>
+                    <p class="alert-text">This article has been updated to reflect new information received after publication.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Subscription Confirmed</div>
+                    <p class="alert-text">Welcome to Chronicle. You now have unlimited access to all articles.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Article Limit Reached</div>
+                    <p class="alert-text">You've read your 3 free articles this month. Subscribe for unlimited access.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-error">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Content Unavailable</div>
+                    <p class="alert-text">This article is no longer available. It may have been removed or archived.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">Chronicle</div>
+            <div class="footer-text">Media Design System v1.0</div>
+        </div>
+    </footer>
+</body>
+</html>
