@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>静寂 Seijaku — Zen Design System v1.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --washi: #F8F6F1;
+            --kinari: #F3EDE4;
+            --sumi: #2C2C2C;
+            --hai: #6B6B6B;
+            --nezumi: #949494;
+            --shiro: #FFFFFF;
+
+            --matcha: #7B8B6F;
+            --take: #5B7A5B;
+            --cha: #8B7355;
+            --sakura: #E8D0D0;
+            --fuji: #8B7DA8;
+            --sora: #7BA0B8;
+
+            --kuro: #1A1A1A;
+            --stone: #4A4A4A;
+
+            --font-mincho: 'Shippori Mincho', 'Noto Serif JP', serif;
+            --font-gothic: 'Zen Kaku Gothic New', sans-serif;
+
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 16px;
+            --space-4: 24px;
+            --space-5: 32px;
+            --space-6: 48px;
+            --space-7: 64px;
+            --space-8: 96px;
+            --space-9: 128px;
+
+            --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-gothic);
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 1.9;
+            background: var(--washi);
+            color: var(--sumi);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Subtle texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        ::selection {
+            background: var(--matcha);
+            color: var(--shiro);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: var(--space-5);
+            right: var(--space-5);
+            z-index: 100;
+        }
+
+        .nav-toggle {
+            width: 44px;
+            height: 44px;
+            background: var(--washi);
+            border: 1px solid var(--nezumi);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mincho);
+            font-size: 14px;
+            color: var(--sumi);
+            transition: var(--transition);
+        }
+
+        .nav-toggle:hover {
+            background: var(--sumi);
+            color: var(--washi);
+            border-color: var(--sumi);
+        }
+
+        .nav-menu {
+            position: absolute;
+            top: 54px;
+            right: 0;
+            background: var(--washi);
+            border: 1px solid var(--nezumi);
+            padding: var(--space-3);
+            display: none;
+            min-width: 140px;
+        }
+
+        .nav-menu.active {
+            display: block;
+        }
+
+        .nav-link {
+            display: block;
+            font-size: 13px;
+            color: var(--hai);
+            text-decoration: none;
+            padding: var(--space-2) 0;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--sumi);
+        }
+
+        /* Sections */
+        section {
+            padding: var(--space-9) var(--space-5);
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-jp {
+            font-family: var(--font-mincho);
+            font-size: 12px;
+            color: var(--nezumi);
+            letter-spacing: 0.3em;
+            margin-bottom: var(--space-2);
+        }
+
+        /* Typography */
+        h1 {
+            font-family: var(--font-mincho);
+            font-size: clamp(40px, 10vw, 72px);
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            color: var(--sumi);
+            line-height: 1.3;
+        }
+
+        h2 {
+            font-family: var(--font-mincho);
+            font-size: clamp(28px, 5vw, 36px);
+            font-weight: 400;
+            color: var(--sumi);
+            margin-bottom: var(--space-4);
+            letter-spacing: 0.05em;
+        }
+
+        h3 {
+            font-family: var(--font-mincho);
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--stone);
+            margin-bottom: var(--space-3);
+        }
+
+        h4 {
+            font-family: var(--font-gothic);
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--nezumi);
+            margin-bottom: var(--space-3);
+        }
+
+        p {
+            max-width: 50ch;
+            color: var(--hai);
+        }
+
+        .lead {
+            font-family: var(--font-mincho);
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--stone);
+            line-height: 2;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--space-8);
+            position: relative;
+        }
+
+        .hero-kanji {
+            font-family: var(--font-mincho);
+            font-size: clamp(80px, 20vw, 200px);
+            font-weight: 300;
+            color: var(--kinari);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            user-select: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            margin-bottom: var(--space-4);
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-mincho);
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--hai);
+            letter-spacing: 0.2em;
+            margin-bottom: var(--space-3);
+        }
+
+        .hero-en {
+            font-family: var(--font-gothic);
+            font-size: 13px;
+            color: var(--nezumi);
+            letter-spacing: 0.1em;
+        }
+
+        .hero-version {
+            font-size: 11px;
+            color: var(--nezumi);
+            margin-top: var(--space-6);
+            letter-spacing: 0.15em;
+        }
+
+        /* Enso Circle Divider */
+        .enso {
+            width: 60px;
+            height: 60px;
+            margin: var(--space-7) auto;
+            position: relative;
+        }
+
+        .enso::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--nezumi);
+            border-radius: 50%;
+            clip-path: polygon(0 0, 95% 0, 95% 100%, 0 100%);
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: var(--space-3);
+            margin-top: var(--space-5);
+        }
+
+        .color-card {
+            text-align: center;
+        }
+
+        .color-swatch {
+            aspect-ratio: 1;
+            margin-bottom: var(--space-2);
+            position: relative;
+        }
+
+        .color-swatch::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: var(--sumi);
+            opacity: 0.1;
+        }
+
+        .color-jp {
+            font-family: var(--font-mincho);
+            font-size: 14px;
+            color: var(--sumi);
+            margin-bottom: var(--space-1);
+        }
+
+        .color-name {
+            font-size: 11px;
+            color: var(--nezumi);
+            margin-bottom: var(--space-1);
+        }
+
+        .color-hex {
+            font-size: 10px;
+            color: var(--nezumi);
+            letter-spacing: 0.05em;
+        }
+
+        /* Typography Specimen */
+        .type-specimen {
+            margin-top: var(--space-5);
+            padding: var(--space-6);
+            background: var(--shiro);
+            border: 1px solid var(--kinari);
+        }
+
+        .type-jp-large {
+            font-family: var(--font-mincho);
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 400;
+            color: var(--sumi);
+            margin-bottom: var(--space-4);
+            line-height: 1.5;
+        }
+
+        .type-jp-body {
+            font-family: var(--font-gothic);
+            font-size: 15px;
+            color: var(--hai);
+            max-width: 45ch;
+            margin-bottom: var(--space-5);
+        }
+
+        .font-info {
+            display: flex;
+            gap: var(--space-6);
+            padding-top: var(--space-5);
+            border-top: 1px solid var(--kinari);
+            flex-wrap: wrap;
+        }
+
+        .font-item {
+            min-width: 150px;
+        }
+
+        .font-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--nezumi);
+            margin-bottom: var(--space-1);
+        }
+
+        .font-name {
+            font-size: 14px;
+            color: var(--sumi);
+        }
+
+        /* Spacing */
+        .spacing-list {
+            margin-top: var(--space-5);
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            padding: var(--space-2) 0;
+        }
+
+        .spacing-bar {
+            height: 20px;
+            background: linear-gradient(90deg, var(--matcha), var(--take));
+            opacity: 0.7;
+        }
+
+        .spacing-label {
+            font-size: 12px;
+            color: var(--hai);
+            min-width: 60px;
+        }
+
+        .spacing-value {
+            font-size: 11px;
+            color: var(--nezumi);
+            min-width: 50px;
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-5);
+            margin-top: var(--space-5);
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .btn {
+            font-family: var(--font-gothic);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            padding: var(--space-3) var(--space-5);
+            border: 1px solid;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            min-width: 140px;
+            background: transparent;
+        }
+
+        .btn-primary {
+            background: var(--sumi);
+            color: var(--washi);
+            border-color: var(--sumi);
+        }
+
+        .btn-primary:hover {
+            background: var(--stone);
+            border-color: var(--stone);
+        }
+
+        .btn-secondary {
+            color: var(--sumi);
+            border-color: var(--sumi);
+        }
+
+        .btn-secondary:hover {
+            background: var(--sumi);
+            color: var(--washi);
+        }
+
+        .btn-matcha {
+            background: var(--matcha);
+            color: var(--shiro);
+            border-color: var(--matcha);
+        }
+
+        .btn-matcha:hover {
+            background: var(--take);
+            border-color: var(--take);
+        }
+
+        .btn-ghost {
+            color: var(--hai);
+            border-color: var(--nezumi);
+        }
+
+        .btn-ghost:hover {
+            color: var(--sumi);
+            border-color: var(--sumi);
+        }
+
+        .btn-sm {
+            padding: var(--space-2) var(--space-3);
+            font-size: 12px;
+            min-width: 100px;
+        }
+
+        .btn-lg {
+            padding: var(--space-4) var(--space-6);
+            font-size: 14px;
+            min-width: 180px;
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-5);
+            margin-top: var(--space-5);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .form-label {
+            font-size: 12px;
+            color: var(--hai);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            font-family: var(--font-gothic);
+            font-size: 14px;
+            padding: var(--space-3);
+            background: var(--shiro);
+            border: 1px solid var(--nezumi);
+            color: var(--sumi);
+            transition: var(--transition);
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--sumi);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--nezumi);
+        }
+
+        .form-input.error {
+            border-color: #B85450;
+        }
+
+        .form-error {
+            font-size: 11px;
+            color: #B85450;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B6B6B' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-3) center;
+            padding-right: var(--space-6);
+            cursor: pointer;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--hai);
+        }
+
+        .checkbox-input {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1px solid var(--nezumi);
+            background: var(--shiro);
+            cursor: pointer;
+            border-radius: 50%;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .checkbox-input:checked {
+            background: var(--sumi);
+            border-color: var(--sumi);
+        }
+
+        .checkbox-input:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background: var(--shiro);
+            border-radius: 50%;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-4);
+            margin-top: var(--space-5);
+        }
+
+        .card {
+            background: var(--shiro);
+            border: 1px solid var(--kinari);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-image {
+            height: 140px;
+            background: var(--kinari);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-icon {
+            font-size: 40px;
+            opacity: 0.6;
+        }
+
+        .card-body {
+            padding: var(--space-4);
+        }
+
+        .card-title {
+            font-family: var(--font-mincho);
+            font-size: 18px;
+            color: var(--sumi);
+            margin-bottom: var(--space-2);
+        }
+
+        .card-text {
+            font-size: 13px;
+            color: var(--hai);
+            margin-bottom: var(--space-3);
+        }
+
+        .card-footer {
+            padding: var(--space-3) var(--space-4);
+            border-top: 1px solid var(--kinari);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-meta {
+            font-size: 11px;
+            color: var(--nezumi);
+        }
+
+        /* Data Table */
+        .table-container {
+            overflow-x: auto;
+            margin-top: var(--space-5);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .data-table thead {
+            border-bottom: 1px solid var(--sumi);
+        }
+
+        .data-table th {
+            font-family: var(--font-gothic);
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--hai);
+            padding: var(--space-3);
+            text-align: left;
+        }
+
+        .data-table td {
+            padding: var(--space-3);
+            border-bottom: 1px solid var(--kinari);
+            color: var(--sumi);
+        }
+
+        .data-table tbody tr {
+            transition: var(--transition);
+        }
+
+        .data-table tbody tr:hover {
+            background: var(--kinari);
+        }
+
+        /* Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            margin-top: var(--space-3);
+        }
+
+        .badge {
+            font-size: 11px;
+            letter-spacing: 0.05em;
+            padding: var(--space-1) var(--space-3);
+            border-radius: 2px;
+        }
+
+        .badge-default {
+            background: var(--kinari);
+            color: var(--sumi);
+        }
+
+        .badge-dark {
+            background: var(--sumi);
+            color: var(--washi);
+        }
+
+        .badge-matcha {
+            background: var(--matcha);
+            color: var(--shiro);
+        }
+
+        .badge-sakura {
+            background: var(--sakura);
+            color: var(--sumi);
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 1px solid var(--nezumi);
+            color: var(--hai);
+        }
+
+        /* Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-5);
+            margin-top: var(--space-5);
+        }
+
+        .principle {
+            text-align: center;
+            padding: var(--space-5);
+        }
+
+        .principle-kanji {
+            font-family: var(--font-mincho);
+            font-size: 36px;
+            color: var(--sumi);
+            margin-bottom: var(--space-3);
+        }
+
+        .principle-title {
+            font-family: var(--font-mincho);
+            font-size: 16px;
+            color: var(--sumi);
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-text {
+            font-size: 13px;
+            color: var(--hai);
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-3);
+            margin-top: var(--space-5);
+        }
+
+        .animation-demo {
+            background: var(--shiro);
+            border: 1px solid var(--kinari);
+            padding: var(--space-5);
+            text-align: center;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-3);
+        }
+
+        .anim-circle {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--matcha);
+            border-radius: 50%;
+        }
+
+        .anim-breathe .anim-circle {
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.15); opacity: 0.7; }
+        }
+
+        .anim-fade .anim-circle {
+            animation: fade 3s ease-in-out infinite;
+        }
+
+        @keyframes fade {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .anim-float .anim-circle {
+            animation: gentleFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .anim-ripple .anim-circle {
+            animation: ripple 2s ease-out infinite;
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(123, 139, 111, 0.4); }
+            100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 20px rgba(123, 139, 111, 0); }
+        }
+
+        .animation-label {
+            font-size: 11px;
+            color: var(--nezumi);
+            letter-spacing: 0.1em;
+        }
+
+        /* Haiku Component */
+        .haiku-block {
+            margin-top: var(--space-5);
+            padding: var(--space-6);
+            background: var(--shiro);
+            border-left: 2px solid var(--matcha);
+            max-width: 400px;
+        }
+
+        .haiku-jp {
+            font-family: var(--font-mincho);
+            font-size: 20px;
+            line-height: 2.2;
+            color: var(--sumi);
+            margin-bottom: var(--space-4);
+            writing-mode: vertical-rl;
+            height: 200px;
+        }
+
+        .haiku-en {
+            font-family: var(--font-mincho);
+            font-size: 14px;
+            font-style: italic;
+            color: var(--hai);
+            line-height: 1.8;
+        }
+
+        .haiku-author {
+            font-size: 12px;
+            color: var(--nezumi);
+            margin-top: var(--space-4);
+        }
+
+        /* Alerts */
+        .alert-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+            margin-top: var(--space-5);
+        }
+
+        .alert {
+            padding: var(--space-4);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            background: var(--shiro);
+            border-left: 2px solid;
+        }
+
+        .alert-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: var(--space-1);
+        }
+
+        .alert-text {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        .alert-success {
+            border-color: var(--matcha);
+            color: var(--take);
+        }
+
+        .alert-info {
+            border-color: var(--sora);
+            color: var(--sora);
+        }
+
+        .alert-warning {
+            border-color: var(--cha);
+            color: var(--cha);
+        }
+
+        .alert-error {
+            border-color: #B85450;
+            color: #B85450;
+        }
+
+        /* Footer */
+        footer {
+            padding: var(--space-8) var(--space-5);
+            text-align: center;
+            border-top: 1px solid var(--kinari);
+            margin-top: var(--space-8);
+        }
+
+        .footer-kanji {
+            font-family: var(--font-mincho);
+            font-size: 32px;
+            color: var(--kinari);
+            margin-bottom: var(--space-3);
+        }
+
+        .footer-brand {
+            font-family: var(--font-mincho);
+            font-size: 18px;
+            color: var(--sumi);
+            margin-bottom: var(--space-2);
+        }
+
+        .footer-tagline {
+            font-size: 13px;
+            color: var(--hai);
+            font-style: italic;
+            margin-bottom: var(--space-4);
+        }
+
+        .footer-copy {
+            font-size: 11px;
+            color: var(--nezumi);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: var(--space-7) var(--space-4);
+            }
+
+            .hero {
+                padding: var(--space-7) var(--space-4);
+            }
+
+            .nav {
+                top: var(--space-3);
+                right: var(--space-3);
+            }
+
+            .haiku-jp {
+                writing-mode: horizontal-tb;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('active')">目</button>
+        <div class="nav-menu">
+            <a href="#colors" class="nav-link">色 Colors</a>
+            <a href="#typography" class="nav-link">文字 Typography</a>
+            <a href="#spacing" class="nav-link">間 Spacing</a>
+            <a href="#buttons" class="nav-link">釦 Buttons</a>
+            <a href="#forms" class="nav-link">形 Forms</a>
+            <a href="#cards" class="nav-link">札 Cards</a>
+            <a href="#tables" class="nav-link">表 Tables</a>
+            <a href="#badges" class="nav-link">印 Badges</a>
+            <a href="#principles" class="nav-link">道 Principles</a>
+            <a href="#animations" class="nav-link">動 Motion</a>
+            <a href="#haiku" class="nav-link">句 Haiku</a>
+            <a href="#alerts" class="nav-link">知 Alerts</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <span class="hero-kanji">静</span>
+        <div class="hero-content">
+            <p class="hero-subtitle">禅のデザインシステム</p>
+            <h1>静寂</h1>
+            <p class="hero-en">Seijaku — Tranquil Silence</p>
+            <p class="hero-version">Version 1.0</p>
+        </div>
+    </header>
+
+    <div class="enso"></div>
+
+    <!-- Colors -->
+    <section id="colors">
+        <p class="section-jp">一、色彩</p>
+        <h2>Color Palette</h2>
+        <p class="lead">Colors drawn from nature — the soft hues of washi paper, deep forest greens, and the subtle pink of cherry blossoms.</p>
+
+        <div class="color-grid">
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--washi);"></div>
+                <p class="color-jp">和紙</p>
+                <p class="color-name">Washi</p>
+                <p class="color-hex">#F8F6F1</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--sumi);"></div>
+                <p class="color-jp">墨</p>
+                <p class="color-name">Sumi</p>
+                <p class="color-hex">#2C2C2C</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--hai);"></div>
+                <p class="color-jp">灰</p>
+                <p class="color-name">Hai</p>
+                <p class="color-hex">#6B6B6B</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--matcha);"></div>
+                <p class="color-jp">抹茶</p>
+                <p class="color-name">Matcha</p>
+                <p class="color-hex">#7B8B6F</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--take);"></div>
+                <p class="color-jp">竹</p>
+                <p class="color-name">Take</p>
+                <p class="color-hex">#5B7A5B</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--cha);"></div>
+                <p class="color-jp">茶</p>
+                <p class="color-name">Cha</p>
+                <p class="color-hex">#8B7355</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--sakura);"></div>
+                <p class="color-jp">桜</p>
+                <p class="color-name">Sakura</p>
+                <p class="color-hex">#E8D0D0</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--sora);"></div>
+                <p class="color-jp">空</p>
+                <p class="color-name">Sora</p>
+                <p class="color-hex">#7BA0B8</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography -->
+    <section id="typography">
+        <p class="section-jp">二、文字</p>
+        <h2>Typography</h2>
+        <p class="lead">Japanese typefaces that honor tradition while embracing clarity. Mincho for elegance, Gothic for readability.</p>
+
+        <div class="type-specimen">
+            <p class="type-jp-large">一期一会<br>Every moment, once in a lifetime</p>
+            <p class="type-jp-body">The beauty of impermanence teaches us to treasure each encounter. In design, as in life, every element deserves mindful attention.</p>
+
+            <div class="font-info">
+                <div class="font-item">
+                    <p class="font-label">Mincho</p>
+                    <p class="font-name" style="font-family: var(--font-mincho);">Shippori Mincho</p>
+                </div>
+                <div class="font-item">
+                    <p class="font-label">Gothic</p>
+                    <p class="font-name" style="font-family: var(--font-gothic);">Zen Kaku Gothic</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spacing -->
+    <section id="spacing">
+        <p class="section-jp">三、間</p>
+        <h2>Spacing Scale</h2>
+        <p class="lead">Ma (間) — the space between. In Japanese aesthetics, emptiness is as important as form.</p>
+
+        <div class="spacing-list">
+            <div class="spacing-item">
+                <span class="spacing-label">space-1</span>
+                <div class="spacing-bar" style="width: 4px;"></div>
+                <span class="spacing-value">4px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-2</span>
+                <div class="spacing-bar" style="width: 8px;"></div>
+                <span class="spacing-value">8px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-3</span>
+                <div class="spacing-bar" style="width: 16px;"></div>
+                <span class="spacing-value">16px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-4</span>
+                <div class="spacing-bar" style="width: 24px;"></div>
+                <span class="spacing-value">24px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-5</span>
+                <div class="spacing-bar" style="width: 32px;"></div>
+                <span class="spacing-value">32px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-6</span>
+                <div class="spacing-bar" style="width: 48px;"></div>
+                <span class="spacing-value">48px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-7</span>
+                <div class="spacing-bar" style="width: 64px;"></div>
+                <span class="spacing-value">64px</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buttons -->
+    <section id="buttons">
+        <p class="section-jp">四、釦</p>
+        <h2>Buttons</h2>
+        <p class="lead">Understated actions. Each button invites with quiet confidence.</p>
+
+        <div class="button-grid">
+            <div class="button-group">
+                <h4>Variants</h4>
+                <button class="btn btn-primary">Primary</button>
+                <button class="btn btn-secondary">Secondary</button>
+                <button class="btn btn-matcha">Matcha</button>
+                <button class="btn btn-ghost">Ghost</button>
+            </div>
+
+            <div class="button-group">
+                <h4>Sizes</h4>
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary">Default</button>
+                <button class="btn btn-primary btn-lg">Large</button>
+            </div>
+
+            <div class="button-group">
+                <h4>States</h4>
+                <button class="btn btn-primary">Default</button>
+                <button class="btn btn-primary" disabled>Disabled</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forms -->
+    <section id="forms">
+        <p class="section-jp">五、形</p>
+        <h2>Forms</h2>
+        <p class="lead">Simple inputs that respect the user's focus. No unnecessary decoration.</p>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="form-label">お名前 Name</label>
+                <input type="text" class="form-input" placeholder="Enter your name">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">メール Email</label>
+                <input type="email" class="form-input" placeholder="you@example.com">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Error State</label>
+                <input type="text" class="form-input error" value="Invalid">
+                <span class="form-error">Please enter a valid value</span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">選択 Select</label>
+                <select class="form-select">
+                    <option>Choose...</option>
+                    <option>京都 Kyoto</option>
+                    <option>東京 Tokyo</option>
+                    <option>奈良 Nara</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">メッセージ Message</label>
+                <textarea class="form-textarea" placeholder="Write your message..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Options</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" checked>
+                        <span>Subscribe to updates</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input">
+                        <span>Accept terms</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards -->
+    <section id="cards">
+        <p class="section-jp">六、札</p>
+        <h2>Cards</h2>
+        <p class="lead">Containers that organize with gentle boundaries.</p>
+
+        <div class="card-grid">
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-icon">🍃</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">自然 Nature</h3>
+                    <p class="card-text">Design inspired by the organic patterns found in the natural world.</p>
+                    <button class="btn btn-secondary btn-sm">Explore</button>
+                </div>
+                <div class="card-footer">
+                    <span class="card-meta">Principle</span>
+                    <span class="badge badge-matcha">Core</span>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-icon">🎋</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">均衡 Balance</h3>
+                    <p class="card-text">Harmony between elements creates a sense of calm and order.</p>
+                    <button class="btn btn-secondary btn-sm">Explore</button>
+                </div>
+                <div class="card-footer">
+                    <span class="card-meta">Principle</span>
+                    <span class="badge badge-outline">Essential</span>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-icon">🌸</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">儚さ Transience</h3>
+                    <p class="card-text">The beauty of impermanence reminds us to appreciate each moment.</p>
+                    <button class="btn btn-secondary btn-sm">Explore</button>
+                </div>
+                <div class="card-footer">
+                    <span class="card-meta">Principle</span>
+                    <span class="badge badge-sakura">Wabi-sabi</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Data Table -->
+    <section id="tables">
+        <p class="section-jp">七、表</p>
+        <h2>Data Table</h2>
+        <p class="lead">Information presented with clarity and minimal adornment.</p>
+
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Season</th>
+                        <th>Japanese</th>
+                        <th>Element</th>
+                        <th>Color</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Spring</td>
+                        <td>春 Haru</td>
+                        <td>Wood</td>
+                        <td><span class="badge badge-matcha">Green</span></td>
+                    </tr>
+                    <tr>
+                        <td>Summer</td>
+                        <td>夏 Natsu</td>
+                        <td>Fire</td>
+                        <td><span class="badge badge-sakura">Red</span></td>
+                    </tr>
+                    <tr>
+                        <td>Autumn</td>
+                        <td>秋 Aki</td>
+                        <td>Metal</td>
+                        <td><span class="badge" style="background: var(--cha); color: var(--shiro);">Gold</span></td>
+                    </tr>
+                    <tr>
+                        <td>Winter</td>
+                        <td>冬 Fuyu</td>
+                        <td>Water</td>
+                        <td><span class="badge" style="background: var(--sora); color: var(--shiro);">Blue</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Badges -->
+    <section id="badges">
+        <p class="section-jp">八、印</p>
+        <h2>Badges</h2>
+        <p class="lead">Small markers that communicate status without demanding attention.</p>
+
+        <h4>Filled</h4>
+        <div class="badge-grid">
+            <span class="badge badge-default">Default</span>
+            <span class="badge badge-dark">Dark</span>
+            <span class="badge badge-matcha">Matcha</span>
+            <span class="badge badge-sakura">Sakura</span>
+        </div>
+
+        <h4 style="margin-top: var(--space-5);">Outline</h4>
+        <div class="badge-grid">
+            <span class="badge badge-outline">Label</span>
+            <span class="badge badge-outline">Tag</span>
+            <span class="badge badge-outline">Status</span>
+        </div>
+    </section>
+
+    <!-- Principles -->
+    <section id="principles">
+        <p class="section-jp">九、道</p>
+        <h2>Design Principles</h2>
+        <p class="lead">The path of Zen design — philosophy embodied in every choice.</p>
+
+        <div class="principles-grid">
+            <div class="principle">
+                <p class="principle-kanji">簡</p>
+                <h3 class="principle-title">Kanso — Simplicity</h3>
+                <p class="principle-text">Eliminate the unnecessary. Let only the essential remain.</p>
+            </div>
+
+            <div class="principle">
+                <p class="principle-kanji">静</p>
+                <h3 class="principle-title">Seijaku — Stillness</h3>
+                <p class="principle-text">Create calm through restraint. Quiet confidence over noise.</p>
+            </div>
+
+            <div class="principle">
+                <p class="principle-kanji">自</p>
+                <h3 class="principle-title">Shizen — Naturalness</h3>
+                <p class="principle-text">Avoid the artificial. Let design feel organic and inevitable.</p>
+            </div>
+
+            <div class="principle">
+                <p class="principle-kanji">幽</p>
+                <h3 class="principle-title">Yugen — Subtlety</h3>
+                <p class="principle-text">Suggest rather than reveal. Leave room for imagination.</p>
+            </div>
+
+            <div class="principle">
+                <p class="principle-kanji">渋</p>
+                <h3 class="principle-title">Shibui — Understated</h3>
+                <p class="principle-text">Beauty that grows with familiarity. Refined, not flashy.</p>
+            </div>
+
+            <div class="principle">
+                <p class="principle-kanji">間</p>
+                <h3 class="principle-title">Ma — Space</h3>
+                <p class="principle-text">Honor emptiness. The pause is as important as the note.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Animations -->
+    <section id="animations">
+        <p class="section-jp">十、動</p>
+        <h2>Animations</h2>
+        <p class="lead">Gentle motion that breathes life without distraction.</p>
+
+        <div class="animation-grid">
+            <div class="animation-demo anim-breathe">
+                <div class="anim-circle"></div>
+                <span class="animation-label">Breathe</span>
+            </div>
+
+            <div class="animation-demo anim-fade">
+                <div class="anim-circle"></div>
+                <span class="animation-label">Fade</span>
+            </div>
+
+            <div class="animation-demo anim-float">
+                <div class="anim-circle"></div>
+                <span class="animation-label">Float</span>
+            </div>
+
+            <div class="animation-demo anim-ripple">
+                <div class="anim-circle"></div>
+                <span class="animation-label">Ripple</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Haiku -->
+    <section id="haiku">
+        <p class="section-jp">十一、句</p>
+        <h2>Haiku Block</h2>
+        <p class="lead">A special component for moments of reflection.</p>
+
+        <div class="haiku-block">
+            <p class="haiku-jp">古池や<br>蛙飛び込む<br>水の音</p>
+            <p class="haiku-en">An old silent pond<br>A frog jumps into the pond<br>Splash! Silence again</p>
+            <p class="haiku-author">— 松尾芭蕉 Matsuo Bashō</p>
+        </div>
+    </section>
+
+    <!-- Alerts -->
+    <section id="alerts">
+        <p class="section-jp">十二、知</p>
+        <h2>Alerts</h2>
+        <p class="lead">Notifications that inform without alarming.</p>
+
+        <div class="alert-grid">
+            <div class="alert alert-success">
+                <span class="alert-icon">✓</span>
+                <div class="alert-content">
+                    <p class="alert-title">成功 Success</p>
+                    <p class="alert-text">Your changes have been saved successfully.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <span class="alert-icon">i</span>
+                <div class="alert-content">
+                    <p class="alert-title">情報 Information</p>
+                    <p class="alert-text">A new version of the system is available.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <span class="alert-icon">!</span>
+                <div class="alert-content">
+                    <p class="alert-title">注意 Warning</p>
+                    <p class="alert-text">Your session will expire soon.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-error">
+                <span class="alert-icon">×</span>
+                <div class="alert-content">
+                    <p class="alert-title">エラー Error</p>
+                    <p class="alert-text">Unable to complete the requested action.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-kanji">静寂</p>
+        <p class="footer-brand">Seijaku</p>
+        <p class="footer-tagline">"In stillness, clarity emerges"</p>
+        <p class="footer-copy">Zen Design System · Version 1.0</p>
+    </footer>
+</body>
+</html>

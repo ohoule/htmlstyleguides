@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURORA — Glassmorphism Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette */
+            --glass-white: rgba(255, 255, 255, 0.25);
+            --glass-white-strong: rgba(255, 255, 255, 0.4);
+            --glass-white-subtle: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-shadow: rgba(0, 0, 0, 0.1);
+
+            --aurora-purple: #8B5CF6;
+            --aurora-pink: #EC4899;
+            --aurora-blue: #3B82F6;
+            --aurora-cyan: #06B6D4;
+            --aurora-teal: #14B8A6;
+
+            --text-primary: rgba(255, 255, 255, 0.95);
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
+            --text-dark: #1E293B;
+
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --info: #3B82F6;
+
+            /* Typography */
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Sora', sans-serif;
+
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+
+            /* Glass Properties */
+            --blur-sm: 8px;
+            --blur-md: 16px;
+            --blur-lg: 24px;
+            --blur-xl: 40px;
+
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-full: 9999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Orbs */
+        .bg-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--aurora-purple);
+            top: -200px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--aurora-pink);
+            top: 50%;
+            right: -150px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: var(--aurora-cyan);
+            bottom: -100px;
+            left: 30%;
+            animation-delay: -10s;
+        }
+
+        .orb-4 {
+            width: 350px;
+            height: 350px;
+            background: var(--aurora-teal);
+            top: 40%;
+            left: 10%;
+            animation-delay: -15s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -50px) scale(1.1); }
+            50% { transform: translate(-30px, 30px) scale(0.95); }
+            75% { transform: translate(40px, 40px) scale(1.05); }
+        }
+
+        /* Glass Panel Base */
+        .glass {
+            background: var(--glass-white);
+            backdrop-filter: blur(var(--blur-md));
+            -webkit-backdrop-filter: blur(var(--blur-md));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 8px 32px var(--glass-shadow);
+        }
+
+        .glass-subtle {
+            background: var(--glass-white-subtle);
+            backdrop-filter: blur(var(--blur-sm));
+            -webkit-backdrop-filter: blur(var(--blur-sm));
+        }
+
+        .glass-strong {
+            background: var(--glass-white-strong);
+            backdrop-filter: blur(var(--blur-lg));
+            -webkit-backdrop-filter: blur(var(--blur-lg));
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: var(--space-lg);
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            padding: var(--space-sm) var(--space-md);
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: calc(100% - var(--space-xl));
+        }
+
+        nav a {
+            padding: var(--space-sm) var(--space-md);
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--text-secondary);
+            border-radius: var(--radius-full);
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+            background: var(--glass-white);
+        }
+
+        /* Header */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: var(--space-3xl) var(--space-xl);
+            text-align: center;
+        }
+
+        .logo-container {
+            margin-bottom: var(--space-xl);
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink), var(--aurora-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: glow 4s ease-in-out infinite;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink), var(--aurora-cyan));
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.6;
+        }
+
+        .logo span {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.4); }
+            50% { box-shadow: 0 0 60px rgba(236, 72, 153, 0.6); }
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: var(--space-lg);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--aurora-cyan) 50%, var(--aurora-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            font-weight: 300;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+        }
+
+        section {
+            margin-bottom: var(--space-3xl);
+            padding: var(--space-2xl);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 600;
+            margin-bottom: var(--space-xl);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        h2::before {
+            content: attr(data-number);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink));
+            border-radius: var(--radius-md);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Section 1: Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .color-card {
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            transition: all 0.3s ease;
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .color-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-preview::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .color-value {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-family: monospace;
+        }
+
+        /* Section 2: Typography */
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xl);
+        }
+
+        .type-specimen {
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(90deg, var(--text-primary), var(--aurora-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .type-heading {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .font-label {
+            display: inline-block;
+            padding: var(--space-xs) var(--space-md);
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: var(--radius-full);
+            margin-top: var(--space-md);
+        }
+
+        /* Section 3: Spacing */
+        .spacing-demo {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .spacing-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .spacing-label {
+            min-width: 80px;
+            font-family: var(--font-display);
+            font-weight: 500;
+        }
+
+        .spacing-bar {
+            height: 40px;
+            background: linear-gradient(90deg, var(--aurora-purple), var(--aurora-pink));
+            border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+        }
+
+        .spacing-bar:hover {
+            filter: brightness(1.2);
+            transform: scaleX(1.02);
+        }
+
+        .spacing-value {
+            min-width: 80px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-family: monospace;
+        }
+
+        /* Section 4: Buttons */
+        .button-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+            align-items: center;
+        }
+
+        .btn {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink));
+            color: white;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.6);
+        }
+
+        .btn-glass {
+            background: var(--glass-white);
+            backdrop-filter: blur(var(--blur-md));
+            -webkit-backdrop-filter: blur(var(--blur-md));
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-glass:hover {
+            background: var(--glass-white-strong);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--glass-border);
+        }
+
+        .btn-outline:hover {
+            background: var(--glass-white-subtle);
+            border-color: var(--aurora-cyan);
+        }
+
+        .btn-glow {
+            background: transparent;
+            color: var(--aurora-cyan);
+            border: 2px solid var(--aurora-cyan);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            background: var(--aurora-cyan);
+            filter: blur(15px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn-glow:hover::before {
+            opacity: 0.4;
+        }
+
+        .btn-glow:hover {
+            background: var(--aurora-cyan);
+            color: var(--text-dark);
+        }
+
+        /* Section 5: Forms */
+        .form-demo {
+            max-width: 450px;
+        }
+
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        label {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: var(--space-sm);
+            color: var(--text-secondary);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea,
+        select {
+            width: 100%;
+            padding: var(--space-md) var(--space-lg);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--text-primary);
+            background: var(--glass-white-subtle);
+            backdrop-filter: blur(var(--blur-sm));
+            -webkit-backdrop-filter: blur(var(--blur-sm));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--aurora-purple);
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
+            background: var(--glass-white);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='rgba(255,255,255,0.7)'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            cursor: pointer;
+        }
+
+        .checkbox-custom {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--glass-border);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            background: var(--glass-white-subtle);
+        }
+
+        .checkbox-wrapper:hover .checkbox-custom {
+            border-color: var(--aurora-purple);
+        }
+
+        .checkbox-wrapper input:checked + .checkbox-custom {
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink));
+            border-color: transparent;
+        }
+
+        .checkbox-wrapper input:checked + .checkbox-custom::after {
+            content: '✓';
+            color: white;
+            font-size: 0.85rem;
+        }
+
+        .checkbox-wrapper input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Section 6: Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .card {
+            padding: var(--space-xl);
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: var(--space-lg);
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink));
+        }
+
+        .card h3 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        /* Section 7: Data Table */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: var(--radius-lg);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: left;
+            padding: var(--space-md) var(--space-lg);
+            background: var(--glass-white-subtle);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: var(--glass-white-subtle);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-sm);
+            font-size: 0.8rem;
+            font-weight: 500;
+            border-radius: var(--radius-full);
+        }
+
+        .status-active {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .status-pending {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .status-inactive {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--error);
+        }
+
+        /* Section 8: Badges */
+        .badge-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: var(--space-xs) var(--space-md);
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 500;
+            border-radius: var(--radius-full);
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            transform: scale(1.05);
+        }
+
+        .badge-purple {
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink));
+            color: white;
+        }
+
+        .badge-cyan {
+            background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-teal));
+            color: var(--text-dark);
+        }
+
+        .badge-glass {
+            background: var(--glass-white);
+            backdrop-filter: blur(var(--blur-sm));
+            -webkit-backdrop-filter: blur(var(--blur-sm));
+            border: 1px solid var(--glass-border);
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 1px solid var(--aurora-purple);
+            color: var(--aurora-purple);
+        }
+
+        .badge-success { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+        .badge-warning { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+        .badge-error { background: rgba(239, 68, 68, 0.2); color: var(--error); }
+        .badge-info { background: rgba(59, 130, 246, 0.2); color: var(--info); }
+
+        /* Section 9: Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .principle {
+            padding: var(--space-xl);
+            position: relative;
+        }
+
+        .principle-number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--aurora-purple), transparent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.5;
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-lg);
+        }
+
+        .principle h3 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .principle p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        /* Section 10: Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .animation-demo {
+            text-align: center;
+            padding: var(--space-xl);
+        }
+
+        .anim-box {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto var(--space-md);
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink));
+        }
+
+        .anim-float {
+            animation: floatAnim 3s ease-in-out infinite;
+        }
+
+        @keyframes floatAnim {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .anim-pulse {
+            animation: pulseAnim 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseAnim {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .anim-glow {
+            animation: glowAnim 2s ease-in-out infinite;
+        }
+
+        @keyframes glowAnim {
+            0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(236, 72, 153, 0.8); }
+        }
+
+        .anim-morph {
+            animation: morphAnim 4s ease-in-out infinite;
+        }
+
+        @keyframes morphAnim {
+            0%, 100% { border-radius: var(--radius-md); }
+            50% { border-radius: 50%; }
+        }
+
+        .anim-shimmer {
+            background: linear-gradient(90deg, var(--aurora-purple), var(--aurora-pink), var(--aurora-cyan), var(--aurora-purple));
+            background-size: 300% 100%;
+            animation: shimmerAnim 3s linear infinite;
+        }
+
+        @keyframes shimmerAnim {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
+        .anim-rotate {
+            animation: rotateAnim 8s linear infinite;
+        }
+
+        @keyframes rotateAnim {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Section 11: Special Component - Glass Card Stack */
+        .card-stack-container {
+            display: flex;
+            justify-content: center;
+            padding: var(--space-2xl);
+        }
+
+        .card-stack {
+            position: relative;
+            width: 320px;
+            height: 400px;
+            perspective: 1000px;
+        }
+
+        .stack-card {
+            position: absolute;
+            width: 100%;
+            height: 320px;
+            padding: var(--space-xl);
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .stack-card:nth-child(1) {
+            transform: translateY(0) scale(1);
+            z-index: 3;
+        }
+
+        .stack-card:nth-child(2) {
+            transform: translateY(30px) scale(0.95);
+            z-index: 2;
+            opacity: 0.8;
+        }
+
+        .stack-card:nth-child(3) {
+            transform: translateY(60px) scale(0.9);
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        .card-stack:hover .stack-card:nth-child(1) {
+            transform: translateY(-20px) scale(1) rotateX(-5deg);
+        }
+
+        .card-stack:hover .stack-card:nth-child(2) {
+            transform: translateY(40px) scale(0.97);
+            opacity: 0.9;
+        }
+
+        .card-stack:hover .stack-card:nth-child(3) {
+            transform: translateY(80px) scale(0.94);
+            opacity: 0.7;
+        }
+
+        .stack-card-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stack-card-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .stack-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-teal));
+        }
+
+        .stack-card-title {
+            font-family: var(--font-display);
+            font-weight: 600;
+        }
+
+        .stack-card-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .stack-card-body {
+            flex: 1;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .stack-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* Section 12: Alerts */
+        .alert-stack {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .alert {
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            transition: all 0.3s ease;
+        }
+
+        .alert:hover {
+            transform: translateX(4px);
+        }
+
+        .alert-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .alert-info {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .alert-info .alert-icon {
+            background: var(--info);
+            color: white;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .alert-success .alert-icon {
+            background: var(--success);
+            color: white;
+        }
+
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .alert-warning .alert-icon {
+            background: var(--warning);
+            color: white;
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .alert-error .alert-icon {
+            background: var(--error);
+            color: white;
+        }
+
+        .alert-content h4 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .alert-content p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--space-3xl) var(--space-xl);
+            margin-top: var(--space-3xl);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: var(--space-2xl);
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .footer-dots {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin-top: var(--space-lg);
+        }
+
+        .footer-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .footer-dot:nth-child(1) { background: var(--aurora-purple); }
+        .footer-dot:nth-child(2) { background: var(--aurora-pink); }
+        .footer-dot:nth-child(3) { background: var(--aurora-cyan); }
+        .footer-dot:nth-child(4) { background: var(--aurora-teal); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                position: static;
+                transform: none;
+                margin-bottom: 0;
+                padding: var(--space-md);
+            }
+
+            header {
+                min-height: auto;
+                padding: var(--space-2xl) var(--space-lg);
+            }
+
+            section {
+                padding: var(--space-xl);
+            }
+
+            .card-stack-container {
+                padding: var(--space-lg);
+            }
+
+            .card-stack {
+                width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="glass">
+        <a href="#colors">Colors</a>
+        <a href="#typography">Typography</a>
+        <a href="#spacing">Spacing</a>
+        <a href="#buttons">Buttons</a>
+        <a href="#forms">Forms</a>
+        <a href="#cards">Cards</a>
+        <a href="#table">Table</a>
+        <a href="#badges">Badges</a>
+        <a href="#principles">Principles</a>
+        <a href="#animations">Motion</a>
+        <a href="#stack">Stack</a>
+        <a href="#alerts">Alerts</a>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo"><span>A</span></div>
+        </div>
+        <h1>AURORA</h1>
+        <p class="tagline">A glassmorphism design system built on light, transparency, and depth</p>
+    </header>
+
+    <main>
+        <!-- Section 1: Color Palette -->
+        <section id="colors" class="glass">
+            <h2 data-number="01">Color Palette</h2>
+            <p>Luminous colors inspired by the aurora borealis, designed to glow against dark backgrounds and complement frosted glass surfaces.</p>
+
+            <div class="color-grid">
+                <div class="color-card glass-subtle">
+                    <div class="color-preview" style="background: var(--aurora-purple);"></div>
+                    <div class="color-name">Aurora Purple</div>
+                    <div class="color-value">#8B5CF6</div>
+                </div>
+                <div class="color-card glass-subtle">
+                    <div class="color-preview" style="background: var(--aurora-pink);"></div>
+                    <div class="color-name">Aurora Pink</div>
+                    <div class="color-value">#EC4899</div>
+                </div>
+                <div class="color-card glass-subtle">
+                    <div class="color-preview" style="background: var(--aurora-blue);"></div>
+                    <div class="color-name">Aurora Blue</div>
+                    <div class="color-value">#3B82F6</div>
+                </div>
+                <div class="color-card glass-subtle">
+                    <div class="color-preview" style="background: var(--aurora-cyan);"></div>
+                    <div class="color-name">Aurora Cyan</div>
+                    <div class="color-value">#06B6D4</div>
+                </div>
+                <div class="color-card glass-subtle">
+                    <div class="color-preview" style="background: var(--aurora-teal);"></div>
+                    <div class="color-name">Aurora Teal</div>
+                    <div class="color-value">#14B8A6</div>
+                </div>
+                <div class="color-card glass-subtle">
+                    <div class="color-preview" style="background: var(--glass-white);backdrop-filter:blur(8px);"></div>
+                    <div class="color-name">Glass White</div>
+                    <div class="color-value">rgba(255,255,255,0.25)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Typography -->
+        <section id="typography" class="glass">
+            <h2 data-number="02">Typography</h2>
+            <p>Clean, modern typefaces that maintain legibility on transparent surfaces while adding sophistication.</p>
+
+            <div class="type-scale">
+                <div class="type-specimen glass-subtle">
+                    <div class="type-display">Outfit Display</div>
+                    <span class="font-label glass">Display — Outfit Bold</span>
+                </div>
+
+                <div class="type-specimen glass-subtle">
+                    <div class="type-heading">Headlines with Outfit</div>
+                    <span class="font-label glass">Heading — Outfit Semibold</span>
+                </div>
+
+                <div class="type-specimen glass-subtle">
+                    <p class="type-body">Sora provides excellent readability for body text, with its geometric yet friendly letterforms. The slightly rounded terminals add warmth while maintaining a contemporary, professional appearance that pairs beautifully with glass surfaces.</p>
+                    <span class="font-label glass">Body — Sora Regular</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Spacing -->
+        <section id="spacing" class="glass">
+            <h2 data-number="03">Spacing Scale</h2>
+            <p>A harmonious spacing system that creates breathing room and visual hierarchy.</p>
+
+            <div class="spacing-demo">
+                <div class="spacing-row">
+                    <span class="spacing-label">XS</span>
+                    <div class="spacing-bar" style="width: 20px;"></div>
+                    <span class="spacing-value">0.25rem</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">SM</span>
+                    <div class="spacing-bar" style="width: 40px;"></div>
+                    <span class="spacing-value">0.5rem</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">MD</span>
+                    <div class="spacing-bar" style="width: 80px;"></div>
+                    <span class="spacing-value">1rem</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">LG</span>
+                    <div class="spacing-bar" style="width: 120px;"></div>
+                    <span class="spacing-value">1.5rem</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">XL</span>
+                    <div class="spacing-bar" style="width: 160px;"></div>
+                    <span class="spacing-value">2rem</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">2XL</span>
+                    <div class="spacing-bar" style="width: 240px;"></div>
+                    <span class="spacing-value">3rem</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">3XL</span>
+                    <div class="spacing-bar" style="width: 320px;"></div>
+                    <span class="spacing-value">4rem</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Buttons -->
+        <section id="buttons" class="glass">
+            <h2 data-number="04">Buttons</h2>
+            <p>Interactive elements that blend seamlessly with glass aesthetics while providing clear affordances.</p>
+
+            <div class="button-showcase">
+                <button class="btn btn-primary">Primary Action</button>
+                <button class="btn btn-glass">Glass Button</button>
+                <button class="btn btn-outline">Outline</button>
+                <button class="btn btn-glow">Glow Effect</button>
+            </div>
+        </section>
+
+        <!-- Section 5: Forms -->
+        <section id="forms" class="glass">
+            <h2 data-number="05">Form Elements</h2>
+            <p>Inputs designed to be visible yet unobtrusive, maintaining the glass aesthetic.</p>
+
+            <div class="form-demo">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="theme">Preferred Theme</label>
+                    <select id="theme">
+                        <option>Aurora Purple</option>
+                        <option>Aurora Cyan</option>
+                        <option>Aurora Pink</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Tell us your thoughts..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        <span>Enable glass effects</span>
+                    </label>
+                </div>
+
+                <button class="btn btn-primary">Submit Form</button>
+            </div>
+        </section>
+
+        <!-- Section 6: Cards -->
+        <section id="cards" class="glass">
+            <h2 data-number="06">Cards</h2>
+            <p>Floating content containers with frosted glass backgrounds and subtle depth.</p>
+
+            <div class="card-grid">
+                <div class="card glass">
+                    <div class="card-icon">✨</div>
+                    <h3>Transparency</h3>
+                    <p>Glass surfaces reveal depth and create visual connections between layers of content.</p>
+                </div>
+
+                <div class="card glass">
+                    <div class="card-icon">🌊</div>
+                    <h3>Fluidity</h3>
+                    <p>Smooth transitions and subtle animations bring interfaces to life organically.</p>
+                </div>
+
+                <div class="card glass">
+                    <div class="card-icon">💫</div>
+                    <h3>Luminosity</h3>
+                    <p>Colors glow and blend, creating an ethereal atmosphere across the interface.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Data Table -->
+        <section id="table" class="glass">
+            <h2 data-number="07">Data Table</h2>
+            <p>Structured data presentation with glass styling and clear visual hierarchy.</p>
+
+            <div class="table-wrapper glass-subtle">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                            <th>Progress</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Aurora Dashboard</td>
+                            <td>Design System</td>
+                            <td><span class="status-badge status-active">● Active</span></td>
+                            <td>85%</td>
+                        </tr>
+                        <tr>
+                            <td>Glass Components</td>
+                            <td>UI Library</td>
+                            <td><span class="status-badge status-active">● Active</span></td>
+                            <td>92%</td>
+                        </tr>
+                        <tr>
+                            <td>Animation System</td>
+                            <td>Motion</td>
+                            <td><span class="status-badge status-pending">● Pending</span></td>
+                            <td>45%</td>
+                        </tr>
+                        <tr>
+                            <td>Dark Mode</td>
+                            <td>Theme</td>
+                            <td><span class="status-badge status-inactive">● Paused</span></td>
+                            <td>20%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 8: Badges -->
+        <section id="badges" class="glass">
+            <h2 data-number="08">Badges & Tags</h2>
+            <p>Compact labels that maintain visibility while complementing the glass aesthetic.</p>
+
+            <div class="badge-showcase">
+                <span class="badge badge-purple">Featured</span>
+                <span class="badge badge-cyan">New</span>
+                <span class="badge badge-glass">Glass</span>
+                <span class="badge badge-outline">Outline</span>
+                <span class="badge badge-success">Success</span>
+                <span class="badge badge-warning">Warning</span>
+                <span class="badge badge-error">Error</span>
+                <span class="badge badge-info">Info</span>
+            </div>
+        </section>
+
+        <!-- Section 9: Design Principles -->
+        <section id="principles" class="glass">
+            <h2 data-number="09">Design Principles</h2>
+            <p>The foundational concepts guiding the Aurora design system.</p>
+
+            <div class="principles-grid">
+                <div class="principle glass-subtle">
+                    <span class="principle-number">01</span>
+                    <h3>Depth Through Transparency</h3>
+                    <p>Use blur and opacity to create layers that reveal content beneath, adding dimensional richness.</p>
+                </div>
+
+                <div class="principle glass-subtle">
+                    <span class="principle-number">02</span>
+                    <h3>Subtle Illumination</h3>
+                    <p>Let colors glow softly rather than dominate. Light should feel ambient and atmospheric.</p>
+                </div>
+
+                <div class="principle glass-subtle">
+                    <span class="principle-number">03</span>
+                    <h3>Graceful Motion</h3>
+                    <p>Animations should feel natural and fluid, enhancing the sense of physical glass surfaces.</p>
+                </div>
+
+                <div class="principle glass-subtle">
+                    <span class="principle-number">04</span>
+                    <h3>Accessible Contrast</h3>
+                    <p>Despite transparency, maintain readable text and clear interactive states for all users.</p>
+                </div>
+
+                <div class="principle glass-subtle">
+                    <span class="principle-number">05</span>
+                    <h3>Cohesive Atmosphere</h3>
+                    <p>Every element should feel like it belongs in the same luminous, ethereal space.</p>
+                </div>
+
+                <div class="principle glass-subtle">
+                    <span class="principle-number">06</span>
+                    <h3>Purposeful Restraint</h3>
+                    <p>Use glass effects deliberately. Not everything needs to be transparent to be beautiful.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 10: Animations -->
+        <section id="animations" class="glass">
+            <h2 data-number="10">Animation Effects</h2>
+            <p>Motion that reinforces the ethereal, floating quality of glass interfaces.</p>
+
+            <div class="animation-grid">
+                <div class="animation-demo glass-subtle">
+                    <div class="anim-box anim-float"></div>
+                    <h3>Float</h3>
+                    <p>Gentle vertical drift</p>
+                </div>
+
+                <div class="animation-demo glass-subtle">
+                    <div class="anim-box anim-pulse"></div>
+                    <h3>Pulse</h3>
+                    <p>Breathing scale effect</p>
+                </div>
+
+                <div class="animation-demo glass-subtle">
+                    <div class="anim-box anim-glow"></div>
+                    <h3>Glow</h3>
+                    <p>Luminous shadow pulse</p>
+                </div>
+
+                <div class="animation-demo glass-subtle">
+                    <div class="anim-box anim-morph"></div>
+                    <h3>Morph</h3>
+                    <p>Shape transformation</p>
+                </div>
+
+                <div class="animation-demo glass-subtle">
+                    <div class="anim-box anim-shimmer"></div>
+                    <h3>Shimmer</h3>
+                    <p>Gradient motion</p>
+                </div>
+
+                <div class="animation-demo glass-subtle">
+                    <div class="anim-box anim-rotate"></div>
+                    <h3>Rotate</h3>
+                    <p>Continuous spin</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 11: Special Component -->
+        <section id="stack" class="glass">
+            <h2 data-number="11">Glass Card Stack</h2>
+            <p>A signature component showcasing depth and interactivity with stacked glass cards.</p>
+
+            <div class="card-stack-container">
+                <div class="card-stack">
+                    <div class="stack-card glass">
+                        <div class="stack-card-content">
+                            <div class="stack-card-header">
+                                <div class="stack-avatar"></div>
+                                <div>
+                                    <div class="stack-card-title">Aurora UI</div>
+                                    <div class="stack-card-subtitle">Design System</div>
+                                </div>
+                            </div>
+                            <div class="stack-card-body">
+                                A comprehensive glassmorphism design system built for modern interfaces that demand elegance and depth.
+                            </div>
+                            <div class="stack-card-footer">
+                                <span class="badge badge-purple">v2.0</span>
+                                <span class="badge badge-glass">Stable</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stack-card glass"></div>
+                    <div class="stack-card glass"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 12: Alerts -->
+        <section id="alerts" class="glass">
+            <h2 data-number="12">Alert Messages</h2>
+            <p>System notifications styled with translucent backgrounds and clear visual hierarchy.</p>
+
+            <div class="alert-stack">
+                <div class="alert alert-info">
+                    <div class="alert-icon">ℹ</div>
+                    <div class="alert-content">
+                        <h4>Information</h4>
+                        <p>Glass effects work best on colorful or gradient backgrounds for optimal visibility.</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <div class="alert-icon">✓</div>
+                    <div class="alert-content">
+                        <h4>Success</h4>
+                        <p>Your glass components have been successfully rendered with backdrop-filter support.</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <div class="alert-icon">⚠</div>
+                    <div class="alert-content">
+                        <h4>Warning</h4>
+                        <p>Backdrop-filter may impact performance on older devices. Use sparingly.</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-error">
+                    <div class="alert-icon">✕</div>
+                    <div class="alert-content">
+                        <h4>Error</h4>
+                        <p>Unable to apply glass effect. Please check browser compatibility.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content glass">
+            <div class="footer-logo">AURORA</div>
+            <p class="footer-text">A glassmorphism design system — Where light meets interface</p>
+            <div class="footer-dots">
+                <span class="footer-dot"></span>
+                <span class="footer-dot"></span>
+                <span class="footer-dot"></span>
+                <span class="footer-dot"></span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

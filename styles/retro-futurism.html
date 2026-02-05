@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATOMICA — Tomorrow's Design System Today v2.0.6.1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --atomic-orange: #FF6B35;
+            --atomic-red: #E63946;
+            --turquoise: #2EC4B6;
+            --turquoise-light: #5DD9CD;
+            --sky-blue: #87CEEB;
+            --cream: #FFF8F0;
+            --warm-white: #FFFEF9;
+            --mustard: #E9C46A;
+            --coral: #F4A261;
+            --navy: #1D3557;
+            --space-black: #0A0E17;
+            --charcoal: #2B2D42;
+
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+            --space-4xl: 96px;
+
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.6;
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+
+        ::selection {
+            background: var(--atomic-orange);
+            color: var(--warm-white);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: var(--space-lg);
+            right: var(--space-lg);
+            z-index: 1000;
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+            max-width: 400px;
+            justify-content: flex-end;
+        }
+
+        .nav-link {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--charcoal);
+            text-decoration: none;
+            padding: var(--space-sm) var(--space-md);
+            background: var(--warm-white);
+            border: 2px solid var(--charcoal);
+            border-radius: var(--radius-full);
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-link:hover {
+            background: var(--atomic-orange);
+            border-color: var(--atomic-orange);
+            color: var(--warm-white);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .nav { display: none; }
+        }
+
+        /* Sections */
+        section {
+            padding: var(--space-4xl) var(--space-xl);
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--atomic-orange);
+            background: rgba(255, 107, 53, 0.1);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-full);
+            margin-bottom: var(--space-md);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .section-badge::before {
+            content: '◉';
+        }
+
+        /* Typography */
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(48px, 12vw, 120px);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            color: var(--charcoal);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: var(--space-lg);
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: var(--space-md);
+        }
+
+        h4 {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--atomic-orange);
+            margin-bottom: var(--space-md);
+        }
+
+        p {
+            max-width: 60ch;
+            color: var(--charcoal);
+            opacity: 0.8;
+        }
+
+        .lead {
+            font-size: 20px;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: var(--space-4xl) var(--space-xl);
+            background: var(--space-black);
+            color: var(--warm-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Starfield */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, white, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, white, transparent),
+                radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.9), transparent),
+                radial-gradient(1px 1px at 230px 80px, white, transparent),
+                radial-gradient(2px 2px at 300px 150px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 350px 200px, white, transparent);
+            background-size: 400px 300px;
+            animation: twinkle 4s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Orbit rings */
+        .orbit {
+            position: absolute;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 50%;
+            animation: spin 30s linear infinite;
+        }
+
+        .orbit-1 {
+            width: 400px;
+            height: 400px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .orbit-2 {
+            width: 600px;
+            height: 600px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 45s;
+            animation-direction: reverse;
+        }
+
+        .orbit-3 {
+            width: 800px;
+            height: 800px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 60s;
+        }
+
+        @keyframes spin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .orbit::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--atomic-orange);
+            border-radius: 50%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px var(--atomic-orange);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--turquoise);
+            background: rgba(46, 196, 182, 0.15);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-full);
+            margin-bottom: var(--space-lg);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--turquoise);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero h1 {
+            color: var(--warm-white);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero h1 span {
+            color: var(--atomic-orange);
+        }
+
+        .hero-tagline {
+            font-size: 20px;
+            font-weight: 300;
+            color: var(--sky-blue);
+            max-width: 500px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero-version {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin: var(--space-3xl) 0;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--atomic-orange), transparent);
+        }
+
+        .divider-atom {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+
+        .divider-atom::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: var(--atomic-orange);
+            border-radius: 50%;
+        }
+
+        .divider-atom::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--atomic-orange);
+            border-radius: 50%;
+            animation: atomSpin 3s linear infinite;
+        }
+
+        @keyframes atomSpin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        .color-card {
+            background: var(--warm-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-swatch {
+            height: 100px;
+        }
+
+        .color-info {
+            padding: var(--space-md);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: var(--space-xs);
+        }
+
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--charcoal);
+            opacity: 0.6;
+        }
+
+        /* Typography Specimen */
+        .type-specimen {
+            background: var(--warm-white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            margin-top: var(--space-xl);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: clamp(40px, 8vw, 72px);
+            font-weight: 800;
+            color: var(--charcoal);
+            line-height: 1;
+            margin-bottom: var(--space-lg);
+        }
+
+        .type-display span {
+            color: var(--atomic-orange);
+        }
+
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 18px;
+            color: var(--charcoal);
+            max-width: 50ch;
+            margin-bottom: var(--space-lg);
+        }
+
+        .type-mono {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--turquoise);
+            background: rgba(46, 196, 182, 0.1);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--turquoise);
+        }
+
+        .font-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .font-item {
+            min-width: 150px;
+        }
+
+        .font-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--atomic-orange);
+            margin-bottom: var(--space-sm);
+        }
+
+        .font-name {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--charcoal);
+        }
+
+        /* Spacing */
+        .spacing-scale {
+            margin-top: var(--space-xl);
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            padding: var(--space-sm) 0;
+        }
+
+        .spacing-bar {
+            height: 28px;
+            background: linear-gradient(90deg, var(--atomic-orange), var(--coral));
+            border-radius: var(--radius-full);
+        }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--charcoal);
+            min-width: 70px;
+        }
+
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--charcoal);
+            opacity: 0.6;
+            min-width: 50px;
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .btn {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: var(--space-md) var(--space-xl);
+            border: 2px solid;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            min-width: 140px;
+        }
+
+        .btn-primary {
+            background: var(--atomic-orange);
+            color: var(--warm-white);
+            border-color: var(--atomic-orange);
+        }
+
+        .btn-primary:hover {
+            background: var(--atomic-red);
+            border-color: var(--atomic-red);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--turquoise);
+            color: var(--warm-white);
+            border-color: var(--turquoise);
+        }
+
+        .btn-secondary:hover {
+            background: var(--turquoise-light);
+            border-color: var(--turquoise-light);
+            transform: scale(1.05);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--charcoal);
+            border-color: var(--charcoal);
+        }
+
+        .btn-outline:hover {
+            background: var(--charcoal);
+            color: var(--warm-white);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--atomic-orange);
+            border-color: transparent;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        .btn-sm {
+            padding: var(--space-sm) var(--space-md);
+            font-size: 12px;
+            min-width: 100px;
+        }
+
+        .btn-lg {
+            padding: var(--space-lg) var(--space-2xl);
+            font-size: 16px;
+            min-width: 180px;
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .form-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--charcoal);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            font-family: var(--font-body);
+            font-size: 15px;
+            padding: var(--space-md) var(--space-lg);
+            background: var(--warm-white);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-lg);
+            color: var(--charcoal);
+            transition: var(--transition);
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--turquoise);
+            box-shadow: 0 0 0 4px rgba(46, 196, 182, 0.2);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--charcoal);
+            opacity: 0.4;
+        }
+
+        .form-input.error {
+            border-color: var(--atomic-red);
+        }
+
+        .form-error {
+            font-size: 12px;
+            color: var(--atomic-red);
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232B2D42' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-lg) center;
+            padding-right: var(--space-2xl);
+            cursor: pointer;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .checkbox-input {
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--charcoal);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .checkbox-input:checked {
+            background: var(--atomic-orange);
+            border-color: var(--atomic-orange);
+        }
+
+        .checkbox-input:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--warm-white);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .card {
+            background: var(--warm-white);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image {
+            height: 160px;
+            background: linear-gradient(135deg, var(--navy), var(--space-black));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 50%;
+            animation: cardOrbit 10s linear infinite;
+        }
+
+        @keyframes cardOrbit {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .card-icon {
+            font-size: 48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-body {
+            padding: var(--space-lg);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: var(--space-sm);
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: var(--charcoal);
+            opacity: 0.7;
+            margin-bottom: var(--space-md);
+        }
+
+        .card-footer {
+            padding: var(--space-md) var(--space-lg);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-meta {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--charcoal);
+            opacity: 0.5;
+        }
+
+        /* Data Table */
+        .table-container {
+            overflow-x: auto;
+            margin-top: var(--space-xl);
+            background: var(--warm-white);
+            border-radius: var(--radius-xl);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .data-table thead {
+            background: linear-gradient(90deg, var(--atomic-orange), var(--coral));
+        }
+
+        .data-table th {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--warm-white);
+            padding: var(--space-md) var(--space-lg);
+            text-align: left;
+        }
+
+        .data-table td {
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            color: var(--charcoal);
+        }
+
+        .data-table tbody tr {
+            transition: var(--transition);
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(255, 107, 53, 0.05);
+        }
+
+        /* Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+
+        .badge {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-full);
+        }
+
+        .badge-orange {
+            background: var(--atomic-orange);
+            color: var(--warm-white);
+        }
+
+        .badge-turquoise {
+            background: var(--turquoise);
+            color: var(--warm-white);
+        }
+
+        .badge-navy {
+            background: var(--navy);
+            color: var(--warm-white);
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 2px solid var(--charcoal);
+            color: var(--charcoal);
+        }
+
+        .badge-success {
+            background: #10B981;
+            color: var(--warm-white);
+        }
+
+        .badge-warning {
+            background: var(--mustard);
+            color: var(--charcoal);
+        }
+
+        .badge-danger {
+            background: var(--atomic-red);
+            color: var(--warm-white);
+        }
+
+        /* Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .principle {
+            background: var(--warm-white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .principle::before {
+            content: attr(data-number);
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-lg);
+            font-family: var(--font-display);
+            font-size: 64px;
+            font-weight: 800;
+            color: var(--atomic-orange);
+            opacity: 0.1;
+            line-height: 1;
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: var(--space-sm);
+        }
+
+        .principle-text {
+            font-size: 14px;
+            color: var(--charcoal);
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        .animation-demo {
+            background: var(--warm-white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            text-align: center;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .anim-planet {
+            width: 40px;
+            height: 40px;
+            background: var(--atomic-orange);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .anim-orbit .anim-planet::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--turquoise);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: orbitSpin 3s linear infinite;
+        }
+
+        @keyframes orbitSpin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .anim-launch .anim-planet {
+            animation: launch 2s ease-in-out infinite;
+        }
+
+        @keyframes launch {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .anim-pulse .anim-planet {
+            animation: planetPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes planetPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.4); }
+            50% { transform: scale(1.1); box-shadow: 0 0 20px 10px rgba(255, 107, 53, 0); }
+        }
+
+        .anim-spin .anim-planet {
+            animation: spin360 2s linear infinite;
+        }
+
+        @keyframes spin360 {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animation-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--charcoal);
+            opacity: 0.6;
+        }
+
+        /* Rocket Component */
+        .rocket-panel {
+            margin-top: var(--space-xl);
+            background: linear-gradient(135deg, var(--navy), var(--space-black));
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            color: var(--warm-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rocket-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.2) 0%, transparent 70%);
+        }
+
+        .rocket-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .rocket-icon {
+            font-size: 48px;
+            animation: rocketBob 2s ease-in-out infinite;
+        }
+
+        @keyframes rocketBob {
+            0%, 100% { transform: translateY(0) rotate(-45deg); }
+            50% { transform: translateY(-10px) rotate(-45deg); }
+        }
+
+        .rocket-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .rocket-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--atomic-orange);
+        }
+
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.7;
+        }
+
+        /* Alerts */
+        .alert-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        .alert {
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+        }
+
+        .alert-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .alert-text {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10B981;
+            color: #065F46;
+        }
+
+        .alert-info {
+            background: rgba(46, 196, 182, 0.1);
+            border-left: 4px solid var(--turquoise);
+            color: #0D5A54;
+        }
+
+        .alert-warning {
+            background: rgba(233, 196, 106, 0.2);
+            border-left: 4px solid var(--mustard);
+            color: #78570A;
+        }
+
+        .alert-error {
+            background: rgba(230, 57, 70, 0.1);
+            border-left: 4px solid var(--atomic-red);
+            color: #9B1C23;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--space-black);
+            color: var(--warm-white);
+            padding: var(--space-4xl) var(--space-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--atomic-orange), var(--turquoise), var(--atomic-orange));
+        }
+
+        .footer-orbit {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto var(--space-xl);
+            position: relative;
+        }
+
+        .footer-orbit::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background: var(--atomic-orange);
+            border-radius: 50%;
+            box-shadow: 0 0 30px var(--atomic-orange);
+        }
+
+        .footer-orbit::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 50%;
+            animation: spin 10s linear infinite;
+        }
+
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-tagline {
+            font-size: 16px;
+            color: var(--sky-blue);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-copy {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            opacity: 0.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: var(--space-3xl) var(--space-md);
+            }
+
+            .hero {
+                padding: var(--space-3xl) var(--space-md);
+            }
+
+            .button-grid {
+                flex-direction: column;
+            }
+
+            .orbit { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#colors" class="nav-link">Colors</a>
+        <a href="#typography" class="nav-link">Type</a>
+        <a href="#buttons" class="nav-link">Buttons</a>
+        <a href="#forms" class="nav-link">Forms</a>
+        <a href="#cards" class="nav-link">Cards</a>
+        <a href="#tables" class="nav-link">Tables</a>
+        <a href="#principles" class="nav-link">Principles</a>
+        <a href="#animations" class="nav-link">Motion</a>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="orbit orbit-1"></div>
+        <div class="orbit orbit-2"></div>
+        <div class="orbit orbit-3"></div>
+
+        <div class="hero-content">
+            <span class="hero-badge">Mission Control Online</span>
+            <h1>ATOMICA<span>.</span></h1>
+            <p class="hero-tagline">The future we dreamed of in 1962. Bold optimism, atomic energy, and the promise of tomorrow.</p>
+            <p class="hero-version">Design System v2.0.6.1</p>
+        </div>
+    </header>
+
+    <div class="divider" style="max-width: 1100px; margin-left: auto; margin-right: auto; padding: 0 var(--space-xl);">
+        <span class="divider-line"></span>
+        <span class="divider-atom"></span>
+        <span class="divider-line"></span>
+    </div>
+
+    <!-- Colors -->
+    <section id="colors">
+        <span class="section-badge">Section 01</span>
+        <h2>Color Palette</h2>
+        <p class="lead">Colors of the atomic age — optimistic oranges, space-age turquoise, and the deep navy of the cosmos.</p>
+
+        <div class="color-grid">
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--atomic-orange);"></div>
+                <div class="color-info">
+                    <p class="color-name">Atomic Orange</p>
+                    <p class="color-hex">#FF6B35</p>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--turquoise);"></div>
+                <div class="color-info">
+                    <p class="color-name">Turquoise</p>
+                    <p class="color-hex">#2EC4B6</p>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--sky-blue);"></div>
+                <div class="color-info">
+                    <p class="color-name">Sky Blue</p>
+                    <p class="color-hex">#87CEEB</p>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--mustard);"></div>
+                <div class="color-info">
+                    <p class="color-name">Mustard</p>
+                    <p class="color-hex">#E9C46A</p>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--coral);"></div>
+                <div class="color-info">
+                    <p class="color-name">Coral</p>
+                    <p class="color-hex">#F4A261</p>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--navy);"></div>
+                <div class="color-info">
+                    <p class="color-name">Navy</p>
+                    <p class="color-hex">#1D3557</p>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--space-black);"></div>
+                <div class="color-info">
+                    <p class="color-name">Space Black</p>
+                    <p class="color-hex">#0A0E17</p>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--cream);"></div>
+                <div class="color-info">
+                    <p class="color-name">Cream</p>
+                    <p class="color-hex">#FFF8F0</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography -->
+    <section id="typography">
+        <span class="section-badge">Section 02</span>
+        <h2>Typography</h2>
+        <p class="lead">Bold display faces that capture the optimism of the space age, paired with clean modern body text.</p>
+
+        <div class="type-specimen">
+            <p class="type-display">The <span>Future</span> is Now</p>
+            <p class="type-body">In the year 2000, we'll commute by jetpack, vacation on the moon, and robots will handle all the chores. At least, that's what they told us in 1962.</p>
+            <p class="type-mono">SYSTEM.LOG: Initiating launch sequence... T-minus 10 seconds.</p>
+
+            <div class="font-info">
+                <div class="font-item">
+                    <p class="font-label">Display</p>
+                    <p class="font-name" style="font-family: var(--font-display);">Syne</p>
+                </div>
+                <div class="font-item">
+                    <p class="font-label">Body</p>
+                    <p class="font-name" style="font-family: var(--font-body);">Outfit</p>
+                </div>
+                <div class="font-item">
+                    <p class="font-label">Mono</p>
+                    <p class="font-name" style="font-family: var(--font-mono);">Space Mono</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spacing -->
+    <section id="spacing">
+        <span class="section-badge">Section 03</span>
+        <h2>Spacing Scale</h2>
+        <p class="lead">A geometric progression of space, from compact cockpits to vast cosmic distances.</p>
+
+        <div class="spacing-scale">
+            <div class="spacing-item">
+                <span class="spacing-label">XS</span>
+                <div class="spacing-bar" style="width: 4px;"></div>
+                <span class="spacing-value">4px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">SM</span>
+                <div class="spacing-bar" style="width: 8px;"></div>
+                <span class="spacing-value">8px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">MD</span>
+                <div class="spacing-bar" style="width: 16px;"></div>
+                <span class="spacing-value">16px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">LG</span>
+                <div class="spacing-bar" style="width: 24px;"></div>
+                <span class="spacing-value">24px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">XL</span>
+                <div class="spacing-bar" style="width: 32px;"></div>
+                <span class="spacing-value">32px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">2XL</span>
+                <div class="spacing-bar" style="width: 48px;"></div>
+                <span class="spacing-value">48px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">3XL</span>
+                <div class="spacing-bar" style="width: 64px;"></div>
+                <span class="spacing-value">64px</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buttons -->
+    <section id="buttons">
+        <span class="section-badge">Section 04</span>
+        <h2>Buttons</h2>
+        <p class="lead">Launch controls for the digital age. Every click initiates a new mission.</p>
+
+        <div class="button-grid">
+            <div class="button-group">
+                <h4>Variants</h4>
+                <button class="btn btn-primary">Launch</button>
+                <button class="btn btn-secondary">Explore</button>
+                <button class="btn btn-outline">Configure</button>
+                <button class="btn btn-ghost">Learn More</button>
+            </div>
+
+            <div class="button-group">
+                <h4>Sizes</h4>
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary">Default</button>
+                <button class="btn btn-primary btn-lg">Large</button>
+            </div>
+
+            <div class="button-group">
+                <h4>States</h4>
+                <button class="btn btn-primary">Active</button>
+                <button class="btn btn-primary" disabled>Disabled</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forms -->
+    <section id="forms">
+        <span class="section-badge">Section 05</span>
+        <h2>Forms</h2>
+        <p class="lead">Mission control inputs. Every field brings us closer to liftoff.</p>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="form-label">Astronaut Name</label>
+                <input type="text" class="form-input" placeholder="Enter your callsign">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Transmission Frequency</label>
+                <input type="email" class="form-input" placeholder="contact@mission.ctrl">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Error State</label>
+                <input type="text" class="form-input error" value="Signal Lost">
+                <span class="form-error">Unable to establish connection</span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Destination</label>
+                <select class="form-select">
+                    <option>Select target...</option>
+                    <option>Moon Base Alpha</option>
+                    <option>Mars Colony</option>
+                    <option>Space Station Omega</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Mission Brief</label>
+                <textarea class="form-textarea" placeholder="Describe your mission objectives..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Protocols</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" checked>
+                        <span>Enable autopilot</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input">
+                        <span>Activate shields</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards -->
+    <section id="cards">
+        <span class="section-badge">Section 06</span>
+        <h2>Cards</h2>
+        <p class="lead">Mission briefing modules. Each card a window into the future.</p>
+
+        <div class="card-grid">
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-icon">🚀</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Project Mercury</h3>
+                    <p class="card-text">The first step toward the stars. Single-pilot missions that proved humanity could reach orbit.</p>
+                    <button class="btn btn-primary btn-sm">Explore Mission</button>
+                </div>
+                <div class="card-footer">
+                    <span class="card-meta">Est. 1958</span>
+                    <span class="badge badge-orange">Complete</span>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-icon">🌙</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Project Apollo</h3>
+                    <p class="card-text">One giant leap. The mission that landed humanity on the moon and changed everything.</p>
+                    <button class="btn btn-primary btn-sm">View Archive</button>
+                </div>
+                <div class="card-footer">
+                    <span class="card-meta">Est. 1961</span>
+                    <span class="badge badge-turquoise">Historic</span>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-icon">🔴</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Project Olympus</h3>
+                    <p class="card-text">The red planet awaits. Our next great adventure in the cosmic frontier.</p>
+                    <button class="btn btn-primary btn-sm">Join Mission</button>
+                </div>
+                <div class="card-footer">
+                    <span class="card-meta">Est. 2025</span>
+                    <span class="badge badge-outline">In Progress</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Data Table -->
+    <section id="tables">
+        <span class="section-badge">Section 07</span>
+        <h2>Data Table</h2>
+        <p class="lead">Mission telemetry. Every reading brings us closer to our destination.</p>
+
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Mission</th>
+                        <th>Launch Date</th>
+                        <th>Duration</th>
+                        <th>Crew</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Stargazer I</td>
+                        <td>2025-03-15</td>
+                        <td>14 days</td>
+                        <td>4 astronauts</td>
+                        <td><span class="badge badge-success">Complete</span></td>
+                    </tr>
+                    <tr>
+                        <td>Orbital Seven</td>
+                        <td>2025-06-22</td>
+                        <td>30 days</td>
+                        <td>6 astronauts</td>
+                        <td><span class="badge badge-turquoise">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td>Luna Express</td>
+                        <td>2025-09-01</td>
+                        <td>7 days</td>
+                        <td>3 astronauts</td>
+                        <td><span class="badge badge-warning">Scheduled</span></td>
+                    </tr>
+                    <tr>
+                        <td>Mars Pioneer</td>
+                        <td>2026-01-10</td>
+                        <td>180 days</td>
+                        <td>8 astronauts</td>
+                        <td><span class="badge badge-outline">Planning</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Badges -->
+    <section id="badges">
+        <span class="section-badge">Section 08</span>
+        <h2>Badges</h2>
+        <p class="lead">Mission patches and status indicators. Every badge tells a story.</p>
+
+        <h4>Colors</h4>
+        <div class="badge-grid">
+            <span class="badge badge-orange">Orange</span>
+            <span class="badge badge-turquoise">Turquoise</span>
+            <span class="badge badge-navy">Navy</span>
+            <span class="badge badge-outline">Outline</span>
+        </div>
+
+        <h4 style="margin-top: var(--space-xl);">Status</h4>
+        <div class="badge-grid">
+            <span class="badge badge-success">Success</span>
+            <span class="badge badge-warning">Warning</span>
+            <span class="badge badge-danger">Critical</span>
+        </div>
+    </section>
+
+    <!-- Principles -->
+    <section id="principles">
+        <span class="section-badge">Section 09</span>
+        <h2>Design Principles</h2>
+        <p class="lead">The mission parameters that guide every design decision.</p>
+
+        <div class="principles-grid">
+            <div class="principle" data-number="01">
+                <h3 class="principle-title">Bold Optimism</h3>
+                <p class="principle-text">Design for the future we want to see. Embrace possibility over limitation.</p>
+            </div>
+
+            <div class="principle" data-number="02">
+                <h3 class="principle-title">Atomic Simplicity</h3>
+                <p class="principle-text">Reduce to essential elements. Every component should have clear purpose.</p>
+            </div>
+
+            <div class="principle" data-number="03">
+                <h3 class="principle-title">Dynamic Energy</h3>
+                <p class="principle-text">Infuse motion and life. Static designs belong in museums.</p>
+            </div>
+
+            <div class="principle" data-number="04">
+                <h3 class="principle-title">Cosmic Scale</h3>
+                <p class="principle-text">Think big. Design systems that can scale from cockpit to cosmos.</p>
+            </div>
+
+            <div class="principle" data-number="05">
+                <h3 class="principle-title">Retro Innovation</h3>
+                <p class="principle-text">Honor the dreams of the past while building for tomorrow.</p>
+            </div>
+
+            <div class="principle" data-number="06">
+                <h3 class="principle-title">Mission Focus</h3>
+                <p class="principle-text">Every element serves the mission. No decorative debris.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Animations -->
+    <section id="animations">
+        <span class="section-badge">Section 10</span>
+        <h2>Animations</h2>
+        <p class="lead">Orbital mechanics in motion. Movement that captures the dance of celestial bodies.</p>
+
+        <div class="animation-grid">
+            <div class="animation-demo anim-orbit">
+                <div class="anim-planet"></div>
+                <span class="animation-label">Orbit</span>
+            </div>
+
+            <div class="animation-demo anim-launch">
+                <div class="anim-planet"></div>
+                <span class="animation-label">Launch</span>
+            </div>
+
+            <div class="animation-demo anim-pulse">
+                <div class="anim-planet"></div>
+                <span class="animation-label">Pulse</span>
+            </div>
+
+            <div class="animation-demo anim-spin">
+                <div class="anim-planet"></div>
+                <span class="animation-label">Spin</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rocket Panel -->
+    <section id="rocket">
+        <span class="section-badge">Section 11</span>
+        <h2>Mission Dashboard</h2>
+        <p class="lead">Real-time telemetry from the frontier of human exploration.</p>
+
+        <div class="rocket-panel">
+            <div class="rocket-header">
+                <span class="rocket-icon">🚀</span>
+                <span class="rocket-title">ATOMICA-7 Status</span>
+            </div>
+            <div class="rocket-stats">
+                <div class="stat">
+                    <p class="stat-value">384,400</p>
+                    <p class="stat-label">KM to Target</p>
+                </div>
+                <div class="stat">
+                    <p class="stat-value">28,000</p>
+                    <p class="stat-label">KM/H Velocity</p>
+                </div>
+                <div class="stat">
+                    <p class="stat-value">98.7%</p>
+                    <p class="stat-label">Fuel Remaining</p>
+                </div>
+                <div class="stat">
+                    <p class="stat-value">4</p>
+                    <p class="stat-label">Crew Aboard</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alerts -->
+    <section id="alerts">
+        <span class="section-badge">Section 12</span>
+        <h2>Alerts</h2>
+        <p class="lead">Mission control communications. From all-clear to red alert.</p>
+
+        <div class="alert-grid">
+            <div class="alert alert-success">
+                <span class="alert-icon">✓</span>
+                <div class="alert-content">
+                    <p class="alert-title">All Systems Go</p>
+                    <p class="alert-text">Launch sequence completed successfully. Welcome to orbit, astronaut.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <span class="alert-icon">ℹ</span>
+                <div class="alert-content">
+                    <p class="alert-title">Mission Update</p>
+                    <p class="alert-text">Orbital insertion confirmed. Proceeding to rendezvous coordinates.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <span class="alert-icon">⚠</span>
+                <div class="alert-content">
+                    <p class="alert-title">Attention Required</p>
+                    <p class="alert-text">Solar radiation levels elevated. Recommend activating shields.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-error">
+                <span class="alert-icon">⛔</span>
+                <div class="alert-content">
+                    <p class="alert-title">Critical Alert</p>
+                    <p class="alert-text">Proximity warning: Debris field detected. Evasive maneuvers required.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-orbit"></div>
+        <p class="footer-brand">ATOMICA</p>
+        <p class="footer-tagline">"The future isn't just coming — we're building it."</p>
+        <p class="footer-copy">Design System v2.0.6.1 · Est. 1962 (Reimagined)</p>
+    </footer>
+</body>
+</html>

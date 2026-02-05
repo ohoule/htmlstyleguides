@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEMPHIS MAYHEM - Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Space+Grotesk:wght@400;500;700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Memphis Color Palette */
+            --memphis-yellow: #FFE81F;
+            --memphis-pink: #FF6B9D;
+            --memphis-blue: #00D4FF;
+            --memphis-red: #FF3D3D;
+            --memphis-green: #7FFF00;
+            --memphis-purple: #B967FF;
+            --memphis-orange: #FF9F43;
+            --memphis-black: #1A1A2E;
+            --memphis-white: #FEFEFE;
+            --memphis-gray: #E8E8E8;
+
+            /* Typography */
+            --font-display: 'Rubik Mono One', monospace;
+            --font-heading: 'Archivo Black', sans-serif;
+            --font-body: 'Space Grotesk', sans-serif;
+
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 2rem;
+            --space-xl: 4rem;
+            --space-2xl: 8rem;
+
+            /* Border Radius */
+            --radius-none: 0;
+            --radius-squiggle: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            --radius-blob: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            --radius-pill: 100px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--memphis-white);
+            color: var(--memphis-black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Geometric Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image:
+                radial-gradient(circle at 10% 20%, var(--memphis-yellow) 2px, transparent 2px),
+                radial-gradient(circle at 90% 80%, var(--memphis-pink) 3px, transparent 3px),
+                radial-gradient(circle at 50% 50%, var(--memphis-blue) 1px, transparent 1px),
+                radial-gradient(circle at 30% 70%, var(--memphis-green) 2px, transparent 2px),
+                radial-gradient(circle at 70% 30%, var(--memphis-purple) 2px, transparent 2px);
+            background-size: 100px 100px, 150px 150px, 80px 80px, 120px 120px, 90px 90px;
+            opacity: 0.4;
+        }
+
+        /* Floating Navigation */
+        nav {
+            position: fixed;
+            top: var(--space-md);
+            right: var(--space-md);
+            z-index: 1000;
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+            max-width: 300px;
+            justify-content: flex-end;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: var(--space-xs) var(--space-sm);
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--memphis-black);
+            background: var(--memphis-yellow);
+            border: 3px solid var(--memphis-black);
+            transition: all 0.2s ease;
+        }
+
+        nav a:nth-child(2n) { background: var(--memphis-pink); }
+        nav a:nth-child(3n) { background: var(--memphis-blue); }
+        nav a:nth-child(4n) { background: var(--memphis-green); }
+        nav a:nth-child(5n) { background: var(--memphis-purple); color: var(--memphis-white); }
+
+        nav a:hover {
+            transform: rotate(-3deg) scale(1.1);
+            box-shadow: 4px 4px 0 var(--memphis-black);
+        }
+
+        /* Header */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: var(--space-xl);
+            position: relative;
+            background:
+                linear-gradient(135deg, var(--memphis-yellow) 25%, transparent 25%),
+                linear-gradient(225deg, var(--memphis-pink) 25%, transparent 25%),
+                linear-gradient(315deg, var(--memphis-blue) 25%, transparent 25%),
+                linear-gradient(45deg, var(--memphis-green) 25%, transparent 25%);
+            background-size: 60px 60px;
+            background-color: var(--memphis-white);
+        }
+
+        /* Floating Shapes */
+        .shape {
+            position: absolute;
+            z-index: 0;
+        }
+
+        .shape-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--memphis-red);
+            top: 15%;
+            left: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 86px solid var(--memphis-blue);
+            top: 20%;
+            right: 15%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .shape-squiggle {
+            width: 120px;
+            height: 30px;
+            background: var(--memphis-purple);
+            border-radius: var(--radius-squiggle);
+            bottom: 25%;
+            left: 8%;
+            animation: wiggle 4s ease-in-out infinite;
+        }
+
+        .shape-zigzag {
+            width: 100px;
+            height: 60px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--memphis-yellow) 0px,
+                var(--memphis-yellow) 10px,
+                transparent 10px,
+                transparent 20px
+            );
+            bottom: 30%;
+            right: 10%;
+            transform: skewY(-10deg);
+            animation: float 7s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 10vw, 8rem);
+            line-height: 1;
+            text-transform: uppercase;
+            color: var(--memphis-black);
+            text-shadow:
+                8px 8px 0 var(--memphis-yellow),
+                16px 16px 0 var(--memphis-pink),
+                24px 24px 0 var(--memphis-blue);
+            animation: colorShift 3s ease-in-out infinite;
+        }
+
+        @keyframes colorShift {
+            0%, 100% {
+                text-shadow:
+                    8px 8px 0 var(--memphis-yellow),
+                    16px 16px 0 var(--memphis-pink),
+                    24px 24px 0 var(--memphis-blue);
+            }
+            33% {
+                text-shadow:
+                    8px 8px 0 var(--memphis-pink),
+                    16px 16px 0 var(--memphis-blue),
+                    24px 24px 0 var(--memphis-green);
+            }
+            66% {
+                text-shadow:
+                    8px 8px 0 var(--memphis-blue),
+                    16px 16px 0 var(--memphis-green),
+                    24px 24px 0 var(--memphis-yellow);
+            }
+        }
+
+        .tagline {
+            font-family: var(--font-heading);
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin-top: var(--space-lg);
+            padding: var(--space-sm) var(--space-lg);
+            background: var(--memphis-black);
+            color: var(--memphis-white);
+            display: inline-block;
+            transform: rotate(-2deg);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-lg);
+        }
+
+        section {
+            margin-bottom: var(--space-2xl);
+            padding: var(--space-xl);
+            background: var(--memphis-white);
+            border: 5px solid var(--memphis-black);
+            position: relative;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: -10px;
+            bottom: -10px;
+            background: var(--memphis-yellow);
+            z-index: -1;
+            border: 3px solid var(--memphis-black);
+        }
+
+        section:nth-child(2n)::before { background: var(--memphis-pink); }
+        section:nth-child(3n)::before { background: var(--memphis-blue); }
+        section:nth-child(4n)::before { background: var(--memphis-green); }
+        section:nth-child(5n)::before { background: var(--memphis-purple); }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            text-transform: uppercase;
+            margin-bottom: var(--space-lg);
+            display: inline-block;
+            padding: var(--space-sm) var(--space-md);
+            background: var(--memphis-black);
+            color: var(--memphis-white);
+        }
+
+        h3 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            margin-bottom: var(--space-md);
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: var(--space-md);
+        }
+
+        /* Section 1: Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .color-swatch {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--space-sm);
+            border: 4px solid var(--memphis-black);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .color-swatch:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        .color-swatch::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 40%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 5px,
+                rgba(0,0,0,0.1) 5px,
+                rgba(0,0,0,0.1) 10px
+            );
+        }
+
+        .color-name {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            background: var(--memphis-white);
+            padding: var(--space-xs);
+            border: 2px solid var(--memphis-black);
+        }
+
+        .color-hex {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: var(--memphis-black);
+            color: var(--memphis-white);
+            padding: var(--space-xs);
+        }
+
+        /* Section 2: Typography */
+        .type-specimen {
+            margin-bottom: var(--space-xl);
+            padding: var(--space-lg);
+            border: 4px dashed var(--memphis-black);
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 6vw, 4rem);
+            line-height: 1.2;
+            margin-bottom: var(--space-md);
+        }
+
+        .type-heading {
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            line-height: 1.3;
+            margin-bottom: var(--space-md);
+        }
+
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+        }
+
+        .font-info {
+            display: inline-block;
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--memphis-yellow);
+            border: 2px solid var(--memphis-black);
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-top: var(--space-sm);
+        }
+
+        /* Section 3: Spacing */
+        .spacing-demo {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .spacing-block {
+            height: 40px;
+            background: var(--memphis-pink);
+            border: 3px solid var(--memphis-black);
+            transition: all 0.3s ease;
+        }
+
+        .spacing-block:hover {
+            background: var(--memphis-blue);
+            transform: scaleX(1.1);
+        }
+
+        .spacing-label {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            min-width: 100px;
+        }
+
+        .spacing-value {
+            font-family: var(--font-body);
+            font-weight: 700;
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--memphis-black);
+            color: var(--memphis-white);
+        }
+
+        /* Section 4: Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+            align-items: flex-start;
+        }
+
+        .btn {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            text-transform: uppercase;
+            padding: var(--space-md) var(--space-lg);
+            border: 4px solid var(--memphis-black);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            right: -6px;
+            bottom: -6px;
+            background: var(--memphis-black);
+            z-index: -1;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translate(3px, 3px);
+        }
+
+        .btn:hover::after {
+            transform: translate(-3px, -3px);
+        }
+
+        .btn-primary {
+            background: var(--memphis-yellow);
+            color: var(--memphis-black);
+        }
+
+        .btn-secondary {
+            background: var(--memphis-pink);
+            color: var(--memphis-black);
+        }
+
+        .btn-tertiary {
+            background: var(--memphis-blue);
+            color: var(--memphis-black);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--memphis-black);
+        }
+
+        .btn-wild {
+            background: linear-gradient(135deg, var(--memphis-yellow), var(--memphis-pink), var(--memphis-blue));
+            color: var(--memphis-black);
+            animation: gradientShift 2s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Section 5: Forms */
+        .form-demo {
+            max-width: 500px;
+        }
+
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        label {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: var(--space-sm);
+            padding-left: var(--space-sm);
+            border-left: 4px solid var(--memphis-yellow);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: var(--space-md);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            border: 4px solid var(--memphis-black);
+            background: var(--memphis-white);
+            transition: all 0.2s ease;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            box-shadow: 6px 6px 0 var(--memphis-pink);
+            transform: translate(-3px, -3px);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%231A1A2E'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            cursor: pointer;
+        }
+
+        .checkbox-custom {
+            width: 28px;
+            height: 28px;
+            border: 3px solid var(--memphis-black);
+            background: var(--memphis-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-group:hover .checkbox-custom {
+            background: var(--memphis-yellow);
+        }
+
+        .checkbox-group input:checked + .checkbox-custom {
+            background: var(--memphis-green);
+        }
+
+        .checkbox-group input:checked + .checkbox-custom::after {
+            content: '✓';
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .checkbox-group input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        /* Section 6: Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .card {
+            background: var(--memphis-white);
+            border: 4px solid var(--memphis-black);
+            padding: var(--space-lg);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: -8px;
+            bottom: -8px;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translate(-4px, -4px);
+        }
+
+        .card:hover::before {
+            top: 12px;
+            left: 12px;
+        }
+
+        .card-yellow::before { background: var(--memphis-yellow); }
+        .card-pink::before { background: var(--memphis-pink); }
+        .card-blue::before { background: var(--memphis-blue); }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            border: 3px solid var(--memphis-black);
+        }
+
+        .card-yellow .card-icon { background: var(--memphis-yellow); }
+        .card-pink .card-icon { background: var(--memphis-pink); border-radius: 50%; }
+        .card-blue .card-icon { background: var(--memphis-blue); border-radius: var(--radius-blob); }
+
+        .card h3 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .card p {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* Section 7: Data Table */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 4px solid var(--memphis-black);
+        }
+
+        th {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            text-align: left;
+            padding: var(--space-md);
+            background: var(--memphis-black);
+            color: var(--memphis-white);
+        }
+
+        th:nth-child(2n) { background: var(--memphis-pink); color: var(--memphis-black); }
+        th:nth-child(3n) { background: var(--memphis-blue); color: var(--memphis-black); }
+
+        td {
+            padding: var(--space-md);
+            border-bottom: 3px solid var(--memphis-black);
+            border-right: 3px solid var(--memphis-black);
+        }
+
+        td:last-child {
+            border-right: none;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background: var(--memphis-gray);
+        }
+
+        tr:hover {
+            background: var(--memphis-yellow);
+        }
+
+        /* Section 8: Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: var(--space-xs) var(--space-md);
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            border: 3px solid var(--memphis-black);
+            transition: all 0.2s ease;
+        }
+
+        .badge:hover {
+            transform: rotate(-5deg) scale(1.1);
+        }
+
+        .badge-yellow { background: var(--memphis-yellow); }
+        .badge-pink { background: var(--memphis-pink); }
+        .badge-blue { background: var(--memphis-blue); }
+        .badge-green { background: var(--memphis-green); }
+        .badge-purple { background: var(--memphis-purple); color: var(--memphis-white); }
+        .badge-red { background: var(--memphis-red); color: var(--memphis-white); }
+        .badge-orange { background: var(--memphis-orange); }
+
+        .badge-pill {
+            border-radius: var(--radius-pill);
+        }
+
+        .badge-blob {
+            border-radius: var(--radius-blob);
+        }
+
+        /* Section 9: Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .principle {
+            padding: var(--space-lg);
+            background: var(--memphis-white);
+            border: 4px solid var(--memphis-black);
+            position: relative;
+        }
+
+        .principle-number {
+            position: absolute;
+            top: -20px;
+            left: var(--space-md);
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            background: var(--memphis-white);
+            padding: 0 var(--space-sm);
+        }
+
+        .principle:nth-child(1) .principle-number { color: var(--memphis-yellow); -webkit-text-stroke: 2px var(--memphis-black); }
+        .principle:nth-child(2) .principle-number { color: var(--memphis-pink); -webkit-text-stroke: 2px var(--memphis-black); }
+        .principle:nth-child(3) .principle-number { color: var(--memphis-blue); -webkit-text-stroke: 2px var(--memphis-black); }
+        .principle:nth-child(4) .principle-number { color: var(--memphis-green); -webkit-text-stroke: 2px var(--memphis-black); }
+        .principle:nth-child(5) .principle-number { color: var(--memphis-purple); -webkit-text-stroke: 2px var(--memphis-black); }
+        .principle:nth-child(6) .principle-number { color: var(--memphis-orange); -webkit-text-stroke: 2px var(--memphis-black); }
+
+        .principle h3 {
+            margin-top: var(--space-md);
+        }
+
+        /* Section 10: Animations */
+        .animation-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .animation-demo {
+            text-align: center;
+            padding: var(--space-lg);
+            border: 3px dashed var(--memphis-black);
+        }
+
+        .anim-box {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-md);
+            border: 3px solid var(--memphis-black);
+        }
+
+        .anim-bounce {
+            background: var(--memphis-yellow);
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .anim-spin {
+            background: var(--memphis-pink);
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .anim-pulse {
+            background: var(--memphis-blue);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .anim-shake {
+            background: var(--memphis-green);
+            animation: shake 0.5s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px) rotate(-5deg); }
+            75% { transform: translateX(10px) rotate(5deg); }
+        }
+
+        .anim-morph {
+            background: var(--memphis-purple);
+            animation: morph 3s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0%, 100% { border-radius: 0; }
+            25% { border-radius: 50% 0 50% 0; }
+            50% { border-radius: 50%; }
+            75% { border-radius: 0 50% 0 50%; }
+        }
+
+        .anim-rainbow {
+            animation: rainbow 2s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% { background: var(--memphis-red); }
+            16% { background: var(--memphis-orange); }
+            33% { background: var(--memphis-yellow); }
+            50% { background: var(--memphis-green); }
+            66% { background: var(--memphis-blue); }
+            83% { background: var(--memphis-purple); }
+            100% { background: var(--memphis-red); }
+        }
+
+        /* Section 11: Special Component - Memphis Poster */
+        .poster-container {
+            display: flex;
+            justify-content: center;
+            padding: var(--space-lg);
+        }
+
+        .memphis-poster {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 3/4;
+            background: var(--memphis-white);
+            border: 6px solid var(--memphis-black);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: var(--space-xl);
+        }
+
+        .poster-shape {
+            position: absolute;
+        }
+
+        .poster-circle-1 {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--memphis-yellow);
+            border: 4px solid var(--memphis-black);
+            top: -50px;
+            right: -50px;
+        }
+
+        .poster-triangle {
+            width: 0;
+            height: 0;
+            border-left: 80px solid transparent;
+            border-right: 80px solid transparent;
+            border-bottom: 140px solid var(--memphis-pink);
+            bottom: 10%;
+            left: 5%;
+        }
+
+        .poster-squiggle {
+            width: 150px;
+            height: 20px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--memphis-blue) 0px,
+                var(--memphis-blue) 15px,
+                transparent 15px,
+                transparent 30px
+            );
+            bottom: 30%;
+            right: 10%;
+            transform: rotate(-20deg);
+        }
+
+        .poster-dots {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(var(--memphis-black) 20%, transparent 20%);
+            background-size: 15px 15px;
+            top: 60%;
+            left: 10%;
+        }
+
+        .poster-text {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .poster-text h3 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 6vw, 3rem);
+            text-transform: uppercase;
+            margin-bottom: var(--space-sm);
+            background: var(--memphis-white);
+            padding: var(--space-sm);
+        }
+
+        .poster-text p {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            background: var(--memphis-black);
+            color: var(--memphis-white);
+            padding: var(--space-xs) var(--space-md);
+            display: inline-block;
+        }
+
+        /* Section 12: Alerts */
+        .alert-stack {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .alert {
+            padding: var(--space-md) var(--space-lg);
+            border: 4px solid var(--memphis-black);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .alert:hover {
+            transform: translateX(5px);
+        }
+
+        .alert-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: 3px solid var(--memphis-black);
+            flex-shrink: 0;
+        }
+
+        .alert-info {
+            background: var(--memphis-blue);
+        }
+
+        .alert-info .alert-icon {
+            background: var(--memphis-white);
+        }
+
+        .alert-success {
+            background: var(--memphis-green);
+        }
+
+        .alert-success .alert-icon {
+            background: var(--memphis-white);
+            border-radius: 50%;
+        }
+
+        .alert-warning {
+            background: var(--memphis-yellow);
+        }
+
+        .alert-warning .alert-icon {
+            background: var(--memphis-white);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            border: none;
+        }
+
+        .alert-error {
+            background: var(--memphis-red);
+            color: var(--memphis-white);
+        }
+
+        .alert-error .alert-icon {
+            background: var(--memphis-white);
+            border-radius: var(--radius-blob);
+        }
+
+        .alert-content h4 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            text-transform: uppercase;
+            margin-bottom: var(--space-xs);
+        }
+
+        .alert-content p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--memphis-black);
+            color: var(--memphis-white);
+            padding: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--memphis-yellow) 0px,
+                var(--memphis-yellow) 20%,
+                var(--memphis-pink) 20%,
+                var(--memphis-pink) 40%,
+                var(--memphis-blue) 40%,
+                var(--memphis-blue) 60%,
+                var(--memphis-green) 60%,
+                var(--memphis-green) 80%,
+                var(--memphis-purple) 80%,
+                var(--memphis-purple) 100%
+            );
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+        }
+
+        .footer-shapes {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .footer-shape {
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--memphis-white);
+        }
+
+        .footer-shape:nth-child(1) { background: var(--memphis-yellow); }
+        .footer-shape:nth-child(2) { background: var(--memphis-pink); border-radius: 50%; }
+        .footer-shape:nth-child(3) { background: var(--memphis-blue); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); border: none; }
+
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                position: static;
+                justify-content: center;
+                max-width: 100%;
+                padding: var(--space-md);
+                background: var(--memphis-white);
+                border-bottom: 4px solid var(--memphis-black);
+            }
+
+            header {
+                min-height: auto;
+                padding: var(--space-2xl) var(--space-md);
+            }
+
+            section {
+                padding: var(--space-lg);
+            }
+
+            section::before {
+                top: 5px;
+                left: 5px;
+                right: -5px;
+                bottom: -5px;
+            }
+
+            .shape {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#colors">Colors</a>
+        <a href="#typography">Type</a>
+        <a href="#spacing">Space</a>
+        <a href="#buttons">Buttons</a>
+        <a href="#forms">Forms</a>
+        <a href="#cards">Cards</a>
+        <a href="#table">Table</a>
+        <a href="#badges">Badges</a>
+        <a href="#principles">Rules</a>
+        <a href="#animations">Motion</a>
+        <a href="#poster">Poster</a>
+        <a href="#alerts">Alerts</a>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="shape shape-circle"></div>
+        <div class="shape shape-triangle"></div>
+        <div class="shape shape-squiggle"></div>
+        <div class="shape shape-zigzag"></div>
+
+        <div class="header-content">
+            <h1>Memphis<br>Mayhem</h1>
+            <p class="tagline">Design System v1.0 — Bold. Playful. Radical.</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 1: Color Palette -->
+        <section id="colors">
+            <h2>01. Color Palette</h2>
+            <p>A bold, unapologetic palette inspired by the Memphis Group. Primary colors collide with neon accents for maximum visual impact.</p>
+
+            <div class="color-grid">
+                <div class="color-swatch" style="background: var(--memphis-yellow);">
+                    <span class="color-name">Electric Yellow</span>
+                    <span class="color-hex">#FFE81F</span>
+                </div>
+                <div class="color-swatch" style="background: var(--memphis-pink);">
+                    <span class="color-name">Hot Pink</span>
+                    <span class="color-hex">#FF6B9D</span>
+                </div>
+                <div class="color-swatch" style="background: var(--memphis-blue);">
+                    <span class="color-name">Cyber Cyan</span>
+                    <span class="color-hex">#00D4FF</span>
+                </div>
+                <div class="color-swatch" style="background: var(--memphis-red);">
+                    <span class="color-name">Radical Red</span>
+                    <span class="color-hex">#FF3D3D</span>
+                </div>
+                <div class="color-swatch" style="background: var(--memphis-green);">
+                    <span class="color-name">Neon Lime</span>
+                    <span class="color-hex">#7FFF00</span>
+                </div>
+                <div class="color-swatch" style="background: var(--memphis-purple);">
+                    <span class="color-name">Cosmic Purple</span>
+                    <span class="color-hex">#B967FF</span>
+                </div>
+                <div class="color-swatch" style="background: var(--memphis-orange);">
+                    <span class="color-name">Sunset Orange</span>
+                    <span class="color-hex">#FF9F43</span>
+                </div>
+                <div class="color-swatch" style="background: var(--memphis-black);">
+                    <span class="color-name" style="color: var(--memphis-white);">Void Black</span>
+                    <span class="color-hex">#1A1A2E</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Typography -->
+        <section id="typography">
+            <h2>02. Typography</h2>
+            <p>Bold, expressive typefaces that demand attention. Mix and match for maximum chaos.</p>
+
+            <div class="type-specimen">
+                <div class="type-display">RUBIK MONO ONE</div>
+                <span class="font-info">Display Font — Rubik Mono One</span>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-heading">Archivo Black for Headlines</div>
+                <span class="font-info">Heading Font — Archivo Black</span>
+            </div>
+
+            <div class="type-specimen">
+                <p class="type-body">Space Grotesk brings clarity to body text while maintaining that geometric, contemporary edge. It's readable yet still has personality—perfect for longer passages where you need legibility without sacrificing style.</p>
+                <span class="font-info">Body Font — Space Grotesk</span>
+            </div>
+        </section>
+
+        <!-- Section 3: Spacing -->
+        <section id="spacing">
+            <h2>03. Spacing Scale</h2>
+            <p>Consistent spacing creates rhythm. Our scale doubles with each step for dramatic contrast.</p>
+
+            <div class="spacing-demo">
+                <div class="spacing-item">
+                    <span class="spacing-label">XS</span>
+                    <div class="spacing-block" style="width: calc(var(--space-xs) * 20);"></div>
+                    <span class="spacing-value">0.25rem</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">SM</span>
+                    <div class="spacing-block" style="width: calc(var(--space-sm) * 20);"></div>
+                    <span class="spacing-value">0.5rem</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">MD</span>
+                    <div class="spacing-block" style="width: calc(var(--space-md) * 20);"></div>
+                    <span class="spacing-value">1rem</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">LG</span>
+                    <div class="spacing-block" style="width: calc(var(--space-lg) * 20);"></div>
+                    <span class="spacing-value">2rem</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">XL</span>
+                    <div class="spacing-block" style="width: calc(var(--space-xl) * 20);"></div>
+                    <span class="spacing-value">4rem</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">2XL</span>
+                    <div class="spacing-block" style="width: calc(var(--space-2xl) * 10);"></div>
+                    <span class="spacing-value">8rem</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Buttons -->
+        <section id="buttons">
+            <h2>04. Buttons</h2>
+            <p>Interactive elements with satisfying depth and playful hover states.</p>
+
+            <div class="button-grid">
+                <button class="btn btn-primary">Primary Action</button>
+                <button class="btn btn-secondary">Secondary</button>
+                <button class="btn btn-tertiary">Tertiary</button>
+                <button class="btn btn-outline">Outline</button>
+                <button class="btn btn-wild">Go Wild!</button>
+            </div>
+        </section>
+
+        <!-- Section 5: Forms -->
+        <section id="forms">
+            <h2>05. Form Elements</h2>
+            <p>Inputs that pop off the page with bold borders and playful focus states.</p>
+
+            <div class="form-demo">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your radical name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@memphis.design">
+                </div>
+
+                <div class="form-group">
+                    <label for="shape">Favorite Shape</label>
+                    <select id="shape">
+                        <option>Circle</option>
+                        <option>Triangle</option>
+                        <option>Squiggle</option>
+                        <option>Zigzag</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" placeholder="Tell us something wild..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-group">
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        <span>I embrace chaos in design</span>
+                    </label>
+                </div>
+
+                <button class="btn btn-primary">Submit Form</button>
+            </div>
+        </section>
+
+        <!-- Section 6: Cards -->
+        <section id="cards">
+            <h2>06. Cards</h2>
+            <p>Content containers with depth, dimension, and personality.</p>
+
+            <div class="card-grid">
+                <div class="card card-yellow">
+                    <div class="card-icon">★</div>
+                    <h3>Bold Choices</h3>
+                    <p>Every design decision should make a statement. No more playing it safe.</p>
+                </div>
+
+                <div class="card card-pink">
+                    <div class="card-icon">◆</div>
+                    <h3>Playful Spirit</h3>
+                    <p>Design should be fun. Embrace the joy and let it show in every pixel.</p>
+                </div>
+
+                <div class="card card-blue">
+                    <div class="card-icon">●</div>
+                    <h3>Pure Energy</h3>
+                    <p>Colors that vibrate, shapes that dance. Maximum impact, always.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Data Table -->
+        <section id="table">
+            <h2>07. Data Table</h2>
+            <p>Even data can be bold and beautiful with the Memphis treatment.</p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Shape</th>
+                            <th>Color</th>
+                            <th>Vibe</th>
+                            <th>Power Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Circle</td>
+                            <td>Hot Pink</td>
+                            <td>Playful</td>
+                            <td>9000+</td>
+                        </tr>
+                        <tr>
+                            <td>Triangle</td>
+                            <td>Electric Yellow</td>
+                            <td>Dynamic</td>
+                            <td>8500</td>
+                        </tr>
+                        <tr>
+                            <td>Squiggle</td>
+                            <td>Cyber Cyan</td>
+                            <td>Chaotic</td>
+                            <td>∞</td>
+                        </tr>
+                        <tr>
+                            <td>Zigzag</td>
+                            <td>Neon Lime</td>
+                            <td>Electric</td>
+                            <td>7777</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 8: Badges -->
+        <section id="badges">
+            <h2>08. Badges & Tags</h2>
+            <p>Small but mighty labels in every flavor of our palette.</p>
+
+            <div class="badge-grid">
+                <span class="badge badge-yellow">New</span>
+                <span class="badge badge-pink">Hot</span>
+                <span class="badge badge-blue">Cool</span>
+                <span class="badge badge-green">Fresh</span>
+                <span class="badge badge-purple">Cosmic</span>
+                <span class="badge badge-red">Fire</span>
+                <span class="badge badge-orange">Warm</span>
+                <span class="badge badge-yellow badge-pill">Pill Shape</span>
+                <span class="badge badge-pink badge-blob">Blob Shape</span>
+            </div>
+        </section>
+
+        <!-- Section 9: Design Principles -->
+        <section id="principles">
+            <h2>09. Design Principles</h2>
+            <p>The rules of radical design.</p>
+
+            <div class="principles-grid">
+                <div class="principle">
+                    <span class="principle-number">01</span>
+                    <h3>Reject Minimalism</h3>
+                    <p>More is more. Layer shapes, colors, and patterns until it feels alive.</p>
+                </div>
+
+                <div class="principle">
+                    <span class="principle-number">02</span>
+                    <h3>Embrace Contrast</h3>
+                    <p>Put colors that clash next to each other. Make it vibrate.</p>
+                </div>
+
+                <div class="principle">
+                    <span class="principle-number">03</span>
+                    <h3>Geometric Chaos</h3>
+                    <p>Circles, triangles, squiggles—throw them all in and let them party.</p>
+                </div>
+
+                <div class="principle">
+                    <span class="principle-number">04</span>
+                    <h3>Playful Always</h3>
+                    <p>Design should spark joy. If it doesn't make you smile, add more shapes.</p>
+                </div>
+
+                <div class="principle">
+                    <span class="principle-number">05</span>
+                    <h3>Bold Typography</h3>
+                    <p>Headlines that shout. Text that demands attention. Never whisper.</p>
+                </div>
+
+                <div class="principle">
+                    <span class="principle-number">06</span>
+                    <h3>Break the Grid</h3>
+                    <p>Rules are suggestions. Overlap, rotate, and let elements breathe freely.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 10: Animations -->
+        <section id="animations">
+            <h2>10. Animation Effects</h2>
+            <p>Movement brings designs to life. Each animation adds personality.</p>
+
+            <div class="animation-showcase">
+                <div class="animation-demo">
+                    <div class="anim-box anim-bounce"></div>
+                    <h3>Bounce</h3>
+                    <p>Playful vertical movement</p>
+                </div>
+
+                <div class="animation-demo">
+                    <div class="anim-box anim-spin"></div>
+                    <h3>Spin</h3>
+                    <p>Continuous rotation</p>
+                </div>
+
+                <div class="animation-demo">
+                    <div class="anim-box anim-pulse"></div>
+                    <h3>Pulse</h3>
+                    <p>Breathing scale effect</p>
+                </div>
+
+                <div class="animation-demo">
+                    <div class="anim-box anim-shake"></div>
+                    <h3>Shake</h3>
+                    <p>Energetic wobble</p>
+                </div>
+
+                <div class="animation-demo">
+                    <div class="anim-box anim-morph"></div>
+                    <h3>Morph</h3>
+                    <p>Shape transformation</p>
+                </div>
+
+                <div class="animation-demo">
+                    <div class="anim-box anim-rainbow"></div>
+                    <h3>Rainbow</h3>
+                    <p>Color cycling</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 11: Special Component -->
+        <section id="poster">
+            <h2>11. Memphis Poster</h2>
+            <p>A signature component showcasing the Memphis aesthetic in its full glory.</p>
+
+            <div class="poster-container">
+                <div class="memphis-poster">
+                    <div class="poster-shape poster-circle-1"></div>
+                    <div class="poster-shape poster-triangle"></div>
+                    <div class="poster-shape poster-squiggle"></div>
+                    <div class="poster-shape poster-dots"></div>
+
+                    <div class="poster-text">
+                        <h3>Design Is</h3>
+                        <p>A celebration of chaos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 12: Alerts -->
+        <section id="alerts">
+            <h2>12. Alert Messages</h2>
+            <p>System feedback that's impossible to ignore.</p>
+
+            <div class="alert-stack">
+                <div class="alert alert-info">
+                    <div class="alert-icon">ℹ</div>
+                    <div class="alert-content">
+                        <h4>Information</h4>
+                        <p>Here's something you should know about Memphis design!</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <div class="alert-icon">✓</div>
+                    <div class="alert-content">
+                        <h4>Success!</h4>
+                        <p>Your design is now 100% more radical. Great job!</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <div class="alert-icon">!</div>
+                    <div class="alert-content">
+                        <h4>Warning</h4>
+                        <p>Caution: Design may cause excessive joy and creativity.</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-error">
+                    <div class="alert-icon">✕</div>
+                    <div class="alert-content">
+                        <h4>Error</h4>
+                        <p>Too much minimalism detected. Please add more shapes immediately.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">MEMPHIS MAYHEM</div>
+            <div class="footer-shapes">
+                <div class="footer-shape"></div>
+                <div class="footer-shape"></div>
+                <div class="footer-shape"></div>
+            </div>
+            <p class="footer-text">Design System v1.0 — Inspired by the Memphis Group, Milano 1981</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Athenaeum — A Scholarly Design System, Vol. I</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inconsolata:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --parchment: #F5F0E6;
+            --cream: #FAF7F0;
+            --antique: #E8DCC4;
+            --coffee: #D4B896;
+            --leather: #8B6914;
+            --mahogany: #4A2C2A;
+            --oxblood: #722F37;
+            --hunter: #2D4A3E;
+            --navy: #1C2841;
+            --ink: #1A1510;
+            --charcoal: #2C2416;
+            --gold: #BFA054;
+            --brass: #A68B4C;
+
+            --font-display: 'Cormorant', serif;
+            --font-body: 'EB Garamond', serif;
+            --font-mono: 'Inconsolata', monospace;
+
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 16px;
+            --space-4: 24px;
+            --space-5: 32px;
+            --space-6: 48px;
+            --space-7: 64px;
+            --space-8: 96px;
+
+            --transition: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 17px;
+            line-height: 1.8;
+            background: var(--ink);
+            color: var(--parchment);
+        }
+
+        /* Paper texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        ::selection {
+            background: var(--oxblood);
+            color: var(--parchment);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: var(--space-5);
+            right: var(--space-5);
+            z-index: 100;
+        }
+
+        .nav-toggle {
+            width: 44px;
+            height: 44px;
+            background: var(--charcoal);
+            border: 1px solid var(--brass);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-style: italic;
+            color: var(--gold);
+            transition: var(--transition);
+        }
+
+        .nav-toggle:hover {
+            background: var(--mahogany);
+        }
+
+        .nav-menu {
+            position: absolute;
+            top: 52px;
+            right: 0;
+            background: var(--charcoal);
+            border: 1px solid var(--brass);
+            padding: var(--space-3);
+            display: none;
+            min-width: 180px;
+        }
+
+        .nav-menu.active {
+            display: block;
+        }
+
+        .nav-link {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--coffee);
+            text-decoration: none;
+            padding: var(--space-2) 0;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+        }
+
+        /* Sections */
+        section {
+            padding: var(--space-8) var(--space-5);
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-numeral {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-style: italic;
+            color: var(--brass);
+            letter-spacing: 0.2em;
+            margin-bottom: var(--space-2);
+        }
+
+        /* Typography */
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(48px, 10vw, 80px);
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.1;
+            color: var(--parchment);
+            letter-spacing: 0.02em;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 6vw, 44px);
+            font-weight: 400;
+            color: var(--parchment);
+            margin-bottom: var(--space-4);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--coffee);
+            margin-bottom: var(--space-3);
+        }
+
+        h4 {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--brass);
+            margin-bottom: var(--space-3);
+        }
+
+        p {
+            max-width: 60ch;
+            color: var(--antique);
+        }
+
+        .lead {
+            font-size: 20px;
+            font-style: italic;
+            color: var(--coffee);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--space-8);
+            background: linear-gradient(180deg, var(--ink) 0%, var(--charcoal) 50%, var(--ink) 100%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(ellipse, rgba(191, 160, 84, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-emblem {
+            font-size: 48px;
+            color: var(--brass);
+            margin-bottom: var(--space-4);
+            opacity: 0.6;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: var(--brass);
+            margin-bottom: var(--space-3);
+        }
+
+        .hero h1 {
+            margin-bottom: var(--space-4);
+        }
+
+        .hero-tagline {
+            font-family: var(--font-body);
+            font-size: 18px;
+            font-style: italic;
+            color: var(--coffee);
+            max-width: 450px;
+            margin: 0 auto var(--space-5);
+        }
+
+        .hero-edition {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--brass);
+            letter-spacing: 0.15em;
+            opacity: 0.7;
+        }
+
+        /* Ornamental Divider */
+        .ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-3);
+            margin: var(--space-7) 0;
+            color: var(--brass);
+        }
+
+        .ornament-line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--brass), transparent);
+        }
+
+        .ornament-symbol {
+            font-size: 18px;
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: var(--space-3);
+            margin-top: var(--space-5);
+        }
+
+        .color-card {
+            text-align: center;
+        }
+
+        .color-swatch {
+            aspect-ratio: 1;
+            border: 1px solid var(--brass);
+            margin-bottom: var(--space-2);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-style: italic;
+            color: var(--parchment);
+            margin-bottom: var(--space-1);
+        }
+
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--brass);
+        }
+
+        /* Typography Specimen */
+        .type-specimen {
+            margin-top: var(--space-5);
+            padding: var(--space-6);
+            background: var(--charcoal);
+            border: 1px solid var(--brass);
+            position: relative;
+        }
+
+        .type-specimen::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 20%;
+            right: 20%;
+            height: 3px;
+            background: var(--brass);
+        }
+
+        .type-quote {
+            font-family: var(--font-display);
+            font-size: clamp(28px, 5vw, 40px);
+            font-style: italic;
+            font-weight: 400;
+            color: var(--parchment);
+            line-height: 1.4;
+            margin-bottom: var(--space-4);
+        }
+
+        .type-quote::before {
+            content: '"';
+            color: var(--brass);
+        }
+
+        .type-quote::after {
+            content: '"';
+            color: var(--brass);
+        }
+
+        .type-attribution {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--brass);
+            letter-spacing: 0.1em;
+        }
+
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 17px;
+            color: var(--antique);
+            margin-top: var(--space-5);
+            padding-top: var(--space-5);
+            border-top: 1px solid var(--mahogany);
+        }
+
+        .font-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-5);
+            margin-top: var(--space-5);
+            padding-top: var(--space-5);
+            border-top: 1px solid var(--mahogany);
+        }
+
+        .font-item {
+            min-width: 150px;
+        }
+
+        .font-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--brass);
+            margin-bottom: var(--space-1);
+        }
+
+        .font-name {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-style: italic;
+            color: var(--coffee);
+        }
+
+        /* Spacing */
+        .spacing-list {
+            margin-top: var(--space-5);
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            padding: var(--space-2) 0;
+            border-bottom: 1px solid var(--mahogany);
+        }
+
+        .spacing-bar {
+            height: 20px;
+            background: linear-gradient(90deg, var(--oxblood), var(--mahogany));
+        }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--coffee);
+            min-width: 60px;
+        }
+
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--brass);
+            min-width: 50px;
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-5);
+            margin-top: var(--space-5);
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .btn {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-style: italic;
+            letter-spacing: 0.05em;
+            padding: var(--space-3) var(--space-5);
+            border: 1px solid;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            min-width: 140px;
+            background: transparent;
+        }
+
+        .btn-primary {
+            background: var(--oxblood);
+            color: var(--parchment);
+            border-color: var(--oxblood);
+        }
+
+        .btn-primary:hover {
+            background: var(--mahogany);
+            border-color: var(--mahogany);
+        }
+
+        .btn-secondary {
+            background: var(--hunter);
+            color: var(--parchment);
+            border-color: var(--hunter);
+        }
+
+        .btn-secondary:hover {
+            background: #3D5A4E;
+            border-color: #3D5A4E;
+        }
+
+        .btn-outline {
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--ink);
+        }
+
+        .btn-ghost {
+            color: var(--coffee);
+            border-color: var(--mahogany);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .btn-sm {
+            padding: var(--space-2) var(--space-3);
+            font-size: 13px;
+            min-width: 100px;
+        }
+
+        .btn-lg {
+            padding: var(--space-4) var(--space-6);
+            font-size: 16px;
+            min-width: 180px;
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-5);
+            margin-top: var(--space-5);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .form-label {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-style: italic;
+            color: var(--coffee);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            font-family: var(--font-body);
+            font-size: 15px;
+            padding: var(--space-3);
+            background: var(--charcoal);
+            border: 1px solid var(--mahogany);
+            color: var(--parchment);
+            transition: var(--transition);
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--brass);
+            font-style: italic;
+            opacity: 0.6;
+        }
+
+        .form-input.error {
+            border-color: var(--oxblood);
+        }
+
+        .form-error {
+            font-size: 13px;
+            font-style: italic;
+            color: #C77B7B;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23BFA054' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-3) center;
+            padding-right: var(--space-6);
+            cursor: pointer;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            cursor: pointer;
+            font-size: 15px;
+            color: var(--antique);
+        }
+
+        .checkbox-input {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1px solid var(--brass);
+            background: var(--charcoal);
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .checkbox-input:checked {
+            background: var(--oxblood);
+            border-color: var(--oxblood);
+        }
+
+        .checkbox-input:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--parchment);
+            font-size: 12px;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-4);
+            margin-top: var(--space-5);
+        }
+
+        .card {
+            background: var(--charcoal);
+            border: 1px solid var(--mahogany);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            border-color: var(--brass);
+        }
+
+        .card-image {
+            height: 150px;
+            background: linear-gradient(135deg, var(--mahogany), var(--ink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--mahogany);
+        }
+
+        .card-icon {
+            font-size: 40px;
+            opacity: 0.7;
+        }
+
+        .card-body {
+            padding: var(--space-4);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-style: italic;
+            color: var(--parchment);
+            margin-bottom: var(--space-2);
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: var(--antique);
+            margin-bottom: var(--space-3);
+        }
+
+        .card-footer {
+            padding: var(--space-3) var(--space-4);
+            border-top: 1px solid var(--mahogany);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-meta {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--brass);
+        }
+
+        /* Data Table */
+        .table-container {
+            overflow-x: auto;
+            margin-top: var(--space-5);
+            border: 1px solid var(--mahogany);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .data-table thead {
+            background: var(--mahogany);
+        }
+
+        .data-table th {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-style: italic;
+            color: var(--parchment);
+            padding: var(--space-3) var(--space-4);
+            text-align: left;
+        }
+
+        .data-table td {
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 1px solid var(--mahogany);
+            color: var(--antique);
+        }
+
+        .data-table tbody tr {
+            background: var(--charcoal);
+            transition: var(--transition);
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(114, 47, 55, 0.2);
+        }
+
+        /* Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            margin-top: var(--space-3);
+        }
+
+        .badge {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: var(--space-1) var(--space-3);
+            border: 1px solid;
+        }
+
+        .badge-oxblood {
+            background: var(--oxblood);
+            color: var(--parchment);
+            border-color: var(--oxblood);
+        }
+
+        .badge-hunter {
+            background: var(--hunter);
+            color: var(--parchment);
+            border-color: var(--hunter);
+        }
+
+        .badge-navy {
+            background: var(--navy);
+            color: var(--parchment);
+            border-color: var(--navy);
+        }
+
+        .badge-outline {
+            background: transparent;
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .badge-success {
+            background: var(--hunter);
+            color: var(--parchment);
+            border-color: var(--hunter);
+        }
+
+        .badge-warning {
+            background: var(--leather);
+            color: var(--ink);
+            border-color: var(--leather);
+        }
+
+        .badge-danger {
+            background: var(--oxblood);
+            color: var(--parchment);
+            border-color: var(--oxblood);
+        }
+
+        /* Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-4);
+            margin-top: var(--space-5);
+        }
+
+        .principle {
+            padding: var(--space-4);
+            border-left: 2px solid var(--brass);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .principle-numeral {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-style: italic;
+            color: var(--brass);
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-style: italic;
+            color: var(--parchment);
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-text {
+            font-size: 14px;
+            color: var(--antique);
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-3);
+            margin-top: var(--space-5);
+        }
+
+        .animation-demo {
+            background: var(--charcoal);
+            border: 1px solid var(--mahogany);
+            padding: var(--space-5);
+            text-align: center;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-3);
+        }
+
+        .anim-book {
+            font-size: 32px;
+        }
+
+        .anim-glow .anim-book {
+            animation: candleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes candleGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(191, 160, 84, 0.3)); }
+            50% { filter: drop-shadow(0 0 15px rgba(191, 160, 84, 0.6)); }
+        }
+
+        .anim-float .anim-book {
+            animation: gentleFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .anim-fade .anim-book {
+            animation: ghostFade 3s ease-in-out infinite;
+        }
+
+        @keyframes ghostFade {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .anim-turn .anim-book {
+            animation: pageTurn 2s ease-in-out infinite;
+        }
+
+        @keyframes pageTurn {
+            0%, 100% { transform: rotateY(0deg); }
+            50% { transform: rotateY(15deg); }
+        }
+
+        .animation-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--brass);
+        }
+
+        /* Book Plate Component */
+        .book-plate {
+            margin-top: var(--space-5);
+            max-width: 400px;
+            background: var(--parchment);
+            color: var(--ink);
+            padding: var(--space-5);
+            border: 3px double var(--mahogany);
+            text-align: center;
+            position: relative;
+        }
+
+        .book-plate::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid var(--mahogany);
+            pointer-events: none;
+        }
+
+        .book-plate-title {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--mahogany);
+            margin-bottom: var(--space-3);
+        }
+
+        .book-plate-emblem {
+            font-size: 48px;
+            margin-bottom: var(--space-3);
+        }
+
+        .book-plate-text {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-style: italic;
+            color: var(--charcoal);
+            line-height: 1.5;
+        }
+
+        .book-plate-owner {
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--mahogany);
+            margin-top: var(--space-3);
+            padding-top: var(--space-3);
+            border-top: 1px solid var(--antique);
+        }
+
+        /* Alerts */
+        .alert-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+            margin-top: var(--space-5);
+        }
+
+        .alert {
+            padding: var(--space-4);
+            border: 1px solid;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            background: var(--charcoal);
+        }
+
+        .alert-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-style: italic;
+            margin-bottom: var(--space-1);
+        }
+
+        .alert-text {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .alert-success {
+            border-color: var(--hunter);
+            color: #8FBC8F;
+        }
+
+        .alert-info {
+            border-color: var(--navy);
+            color: #87CEEB;
+        }
+
+        .alert-warning {
+            border-color: var(--leather);
+            color: var(--coffee);
+        }
+
+        .alert-error {
+            border-color: var(--oxblood);
+            color: #C77B7B;
+        }
+
+        /* Footer */
+        footer {
+            padding: var(--space-8) var(--space-5);
+            text-align: center;
+            border-top: 1px solid var(--mahogany);
+            background: var(--charcoal);
+        }
+
+        .footer-ornament {
+            color: var(--brass);
+            margin-bottom: var(--space-4);
+        }
+
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-style: italic;
+            color: var(--parchment);
+            margin-bottom: var(--space-2);
+        }
+
+        .footer-tagline {
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-style: italic;
+            color: var(--coffee);
+            margin-bottom: var(--space-4);
+        }
+
+        .footer-copy {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--brass);
+            letter-spacing: 0.1em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: var(--space-6) var(--space-4);
+            }
+
+            .hero {
+                padding: var(--space-6) var(--space-4);
+            }
+
+            .nav {
+                top: var(--space-3);
+                right: var(--space-3);
+            }
+
+            .button-grid {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('active')">§</button>
+        <div class="nav-menu">
+            <a href="#colors" class="nav-link">I. Colours</a>
+            <a href="#typography" class="nav-link">II. Typography</a>
+            <a href="#spacing" class="nav-link">III. Spacing</a>
+            <a href="#buttons" class="nav-link">IV. Buttons</a>
+            <a href="#forms" class="nav-link">V. Forms</a>
+            <a href="#cards" class="nav-link">VI. Cards</a>
+            <a href="#tables" class="nav-link">VII. Tables</a>
+            <a href="#badges" class="nav-link">VIII. Badges</a>
+            <a href="#principles" class="nav-link">IX. Principles</a>
+            <a href="#animations" class="nav-link">X. Motion</a>
+            <a href="#bookplate" class="nav-link">XI. Book Plate</a>
+            <a href="#alerts" class="nav-link">XII. Alerts</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-emblem">📚</div>
+            <p class="hero-subtitle">A Scholarly Design System</p>
+            <h1>The Athenaeum</h1>
+            <p class="hero-tagline">"For those who find beauty in weathered pages, candlelit studies, and the eternal pursuit of knowledge."</p>
+            <p class="hero-edition">Volume I · First Edition</p>
+        </div>
+    </header>
+
+    <div class="ornament">
+        <span class="ornament-line"></span>
+        <span class="ornament-symbol">❧</span>
+        <span class="ornament-line"></span>
+    </div>
+
+    <!-- Colors -->
+    <section id="colors">
+        <p class="section-numeral">Chapter I</p>
+        <h2>Colour Palette</h2>
+        <p class="lead">The rich hues of old libraries — leather bindings, aged parchment, and the deep oxblood of scholarly tradition.</p>
+
+        <div class="color-grid">
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--parchment);"></div>
+                <p class="color-name">Parchment</p>
+                <p class="color-hex">#F5F0E6</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--coffee);"></div>
+                <p class="color-name">Coffee</p>
+                <p class="color-hex">#D4B896</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--leather);"></div>
+                <p class="color-name">Leather</p>
+                <p class="color-hex">#8B6914</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--mahogany);"></div>
+                <p class="color-name">Mahogany</p>
+                <p class="color-hex">#4A2C2A</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--oxblood);"></div>
+                <p class="color-name">Oxblood</p>
+                <p class="color-hex">#722F37</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--hunter);"></div>
+                <p class="color-name">Hunter</p>
+                <p class="color-hex">#2D4A3E</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--navy);"></div>
+                <p class="color-name">Navy</p>
+                <p class="color-hex">#1C2841</p>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: var(--gold);"></div>
+                <p class="color-name">Gold</p>
+                <p class="color-hex">#BFA054</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography -->
+    <section id="typography">
+        <p class="section-numeral">Chapter II</p>
+        <h2>Typography</h2>
+        <p class="lead">Classical typefaces that honor the printed word — elegant serifs for an age of thoughtful reading.</p>
+
+        <div class="type-specimen">
+            <p class="type-quote">The only true wisdom is in knowing you know nothing.</p>
+            <p class="type-attribution">— Socrates</p>
+
+            <p class="type-body">In the hallowed halls of learning, where dust motes dance in shafts of amber light, the pursuit of knowledge remains humanity's noblest endeavor. Each volume upon these shelves holds the distilled wisdom of ages past.</p>
+
+            <div class="font-info">
+                <div class="font-item">
+                    <p class="font-label">Display</p>
+                    <p class="font-name" style="font-family: var(--font-display);">Cormorant</p>
+                </div>
+                <div class="font-item">
+                    <p class="font-label">Body</p>
+                    <p class="font-name" style="font-family: var(--font-body);">EB Garamond</p>
+                </div>
+                <div class="font-item">
+                    <p class="font-label">Monospace</p>
+                    <p class="font-name" style="font-family: var(--font-mono);">Inconsolata</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spacing -->
+    <section id="spacing">
+        <p class="section-numeral">Chapter III</p>
+        <h2>Spacing Scale</h2>
+        <p class="lead">Measured proportions befitting scholarly composition — margins as thoughtfully considered as the text itself.</p>
+
+        <div class="spacing-list">
+            <div class="spacing-item">
+                <span class="spacing-label">space-1</span>
+                <div class="spacing-bar" style="width: 4px;"></div>
+                <span class="spacing-value">4px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-2</span>
+                <div class="spacing-bar" style="width: 8px;"></div>
+                <span class="spacing-value">8px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-3</span>
+                <div class="spacing-bar" style="width: 16px;"></div>
+                <span class="spacing-value">16px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-4</span>
+                <div class="spacing-bar" style="width: 24px;"></div>
+                <span class="spacing-value">24px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-5</span>
+                <div class="spacing-bar" style="width: 32px;"></div>
+                <span class="spacing-value">32px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-6</span>
+                <div class="spacing-bar" style="width: 48px;"></div>
+                <span class="spacing-value">48px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">space-7</span>
+                <div class="spacing-bar" style="width: 64px;"></div>
+                <span class="spacing-value">64px</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buttons -->
+    <section id="buttons">
+        <p class="section-numeral">Chapter IV</p>
+        <h2>Buttons</h2>
+        <p class="lead">Invitations to action, styled with the dignity of embossed leather and gilded lettering.</p>
+
+        <div class="button-grid">
+            <div class="button-group">
+                <h4>Variants</h4>
+                <button class="btn btn-primary">Proceed</button>
+                <button class="btn btn-secondary">Explore</button>
+                <button class="btn btn-outline">Enquire</button>
+                <button class="btn btn-ghost">Peruse</button>
+            </div>
+
+            <div class="button-group">
+                <h4>Sizes</h4>
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary">Default</button>
+                <button class="btn btn-primary btn-lg">Large</button>
+            </div>
+
+            <div class="button-group">
+                <h4>States</h4>
+                <button class="btn btn-primary">Active</button>
+                <button class="btn btn-primary" disabled>Disabled</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forms -->
+    <section id="forms">
+        <p class="section-numeral">Chapter V</p>
+        <h2>Forms</h2>
+        <p class="lead">Fields for inscription — as essential as the blank pages awaiting the scholar's pen.</p>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" placeholder="Enter your name...">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Correspondence Address</label>
+                <input type="email" class="form-input" placeholder="scholar@university.edu">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Error State</label>
+                <input type="text" class="form-input error" value="Invalid entry">
+                <span class="form-error">This field requires correction</span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Field of Study</label>
+                <select class="form-select">
+                    <option>Select discipline...</option>
+                    <option>Classical Literature</option>
+                    <option>Philosophy</option>
+                    <option>History</option>
+                    <option>Art History</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Research Notes</label>
+                <textarea class="form-textarea" placeholder="Record your observations..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Preferences</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" checked>
+                        <span>Receive correspondence</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input">
+                        <span>Join the society</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards -->
+    <section id="cards">
+        <p class="section-numeral">Chapter VI</p>
+        <h2>Cards</h2>
+        <p class="lead">Catalogue entries — each a window into collected knowledge and curated wisdom.</p>
+
+        <div class="card-grid">
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-icon">📜</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Ancient Manuscripts</h3>
+                    <p class="card-text">Illuminated texts from centuries past, preserved for future generations of scholars.</p>
+                    <button class="btn btn-outline btn-sm">View Collection</button>
+                </div>
+                <div class="card-footer">
+                    <span class="card-meta">Est. 1456</span>
+                    <span class="badge badge-oxblood">Rare</span>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-icon">🏛️</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Classical Studies</h3>
+                    <p class="card-text">The wisdom of Greece and Rome, foundation stones of Western thought.</p>
+                    <button class="btn btn-outline btn-sm">Explore</button>
+                </div>
+                <div class="card-footer">
+                    <span class="card-meta">Core Studies</span>
+                    <span class="badge badge-hunter">Essential</span>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-icon">🕯️</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Philosophy</h3>
+                    <p class="card-text">From Plato to the present — the eternal questions that define us.</p>
+                    <button class="btn btn-outline btn-sm">Contemplate</button>
+                </div>
+                <div class="card-footer">
+                    <span class="card-meta">Timeless</span>
+                    <span class="badge badge-outline">Foundational</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Data Table -->
+    <section id="tables">
+        <p class="section-numeral">Chapter VII</p>
+        <h2>Data Table</h2>
+        <p class="lead">Catalogued information — ordered and indexed for the discerning researcher.</p>
+
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Year</th>
+                        <th>Subject</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>The Republic</td>
+                        <td>Plato</td>
+                        <td>c. 375 BCE</td>
+                        <td>Philosophy</td>
+                        <td><span class="badge badge-success">Available</span></td>
+                    </tr>
+                    <tr>
+                        <td>Meditations</td>
+                        <td>Marcus Aurelius</td>
+                        <td>c. 170 CE</td>
+                        <td>Philosophy</td>
+                        <td><span class="badge badge-success">Available</span></td>
+                    </tr>
+                    <tr>
+                        <td>The Divine Comedy</td>
+                        <td>Dante Alighieri</td>
+                        <td>c. 1320</td>
+                        <td>Literature</td>
+                        <td><span class="badge badge-warning">On Hold</span></td>
+                    </tr>
+                    <tr>
+                        <td>Principia Mathematica</td>
+                        <td>Isaac Newton</td>
+                        <td>1687</td>
+                        <td>Natural Philosophy</td>
+                        <td><span class="badge badge-danger">Restricted</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Badges -->
+    <section id="badges">
+        <p class="section-numeral">Chapter VIII</p>
+        <h2>Badges</h2>
+        <p class="lead">Markers of distinction — labels befitting a scholarly catalogue.</p>
+
+        <h4>Colours</h4>
+        <div class="badge-grid">
+            <span class="badge badge-oxblood">Oxblood</span>
+            <span class="badge badge-hunter">Hunter</span>
+            <span class="badge badge-navy">Navy</span>
+            <span class="badge badge-outline">Outline</span>
+        </div>
+
+        <h4 style="margin-top: var(--space-5);">Status</h4>
+        <div class="badge-grid">
+            <span class="badge badge-success">Available</span>
+            <span class="badge badge-warning">Reserved</span>
+            <span class="badge badge-danger">Restricted</span>
+        </div>
+    </section>
+
+    <!-- Principles -->
+    <section id="principles">
+        <p class="section-numeral">Chapter IX</p>
+        <h2>Design Principles</h2>
+        <p class="lead">The guiding tenets of scholarly aesthetics — principles as enduring as the texts they honour.</p>
+
+        <div class="principles-grid">
+            <div class="principle">
+                <p class="principle-numeral">I.</p>
+                <h3 class="principle-title">Reverence for Tradition</h3>
+                <p class="principle-text">Honor the aesthetic lineage of centuries. Classical beauty endures.</p>
+            </div>
+
+            <div class="principle">
+                <p class="principle-numeral">II.</p>
+                <h3 class="principle-title">Warmth in Darkness</h3>
+                <p class="principle-text">Rich, warm tones that evoke candlelit studies and leather-bound volumes.</p>
+            </div>
+
+            <div class="principle">
+                <p class="principle-numeral">III.</p>
+                <h3 class="principle-title">Measured Elegance</h3>
+                <p class="principle-text">Restraint and proportion. Nothing excessive, nothing lacking.</p>
+            </div>
+
+            <div class="principle">
+                <p class="principle-numeral">IV.</p>
+                <h3 class="principle-title">Textural Depth</h3>
+                <p class="principle-text">Layers of visual texture that reward prolonged contemplation.</p>
+            </div>
+
+            <div class="principle">
+                <p class="principle-numeral">V.</p>
+                <h3 class="principle-title">Timeless Typography</h3>
+                <p class="principle-text">Typefaces that honor the printed word and the act of reading.</p>
+            </div>
+
+            <div class="principle">
+                <p class="principle-numeral">VI.</p>
+                <h3 class="principle-title">Scholarly Gravity</h3>
+                <p class="principle-text">A serious aesthetic for serious pursuits. Dignity in every detail.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Animations -->
+    <section id="animations">
+        <p class="section-numeral">Chapter X</p>
+        <h2>Animations</h2>
+        <p class="lead">Subtle movements — like the flicker of candlelight or the turning of ancient pages.</p>
+
+        <div class="animation-grid">
+            <div class="animation-demo anim-glow">
+                <span class="anim-book">📖</span>
+                <span class="animation-label">Candlelight</span>
+            </div>
+
+            <div class="animation-demo anim-float">
+                <span class="anim-book">📖</span>
+                <span class="animation-label">Float</span>
+            </div>
+
+            <div class="animation-demo anim-fade">
+                <span class="anim-book">📖</span>
+                <span class="animation-label">Fade</span>
+            </div>
+
+            <div class="animation-demo anim-turn">
+                <span class="anim-book">📖</span>
+                <span class="animation-label">Page Turn</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Book Plate -->
+    <section id="bookplate">
+        <p class="section-numeral">Chapter XI</p>
+        <h2>Book Plate</h2>
+        <p class="lead">A traditional component — the ex libris that marks ownership and provenance.</p>
+
+        <div class="book-plate">
+            <p class="book-plate-title">Ex Libris</p>
+            <div class="book-plate-emblem">🦉</div>
+            <p class="book-plate-text">"The reading of all good books is like a conversation with the finest minds of past centuries."</p>
+            <p class="book-plate-owner">— From the Library of <strong>The Athenaeum</strong></p>
+        </div>
+    </section>
+
+    <!-- Alerts -->
+    <section id="alerts">
+        <p class="section-numeral">Chapter XII</p>
+        <h2>Alerts</h2>
+        <p class="lead">Notices and advisements — communications befitting an institution of learning.</p>
+
+        <div class="alert-grid">
+            <div class="alert alert-success">
+                <span class="alert-icon">✓</span>
+                <div class="alert-content">
+                    <p class="alert-title">Success</p>
+                    <p class="alert-text">Your research has been submitted to the archives successfully.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <span class="alert-icon">ℹ</span>
+                <div class="alert-content">
+                    <p class="alert-title">Notice</p>
+                    <p class="alert-text">The reading room will close at 9 o'clock this evening.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <span class="alert-icon">!</span>
+                <div class="alert-content">
+                    <p class="alert-title">Caution</p>
+                    <p class="alert-text">Handle archival materials with the utmost care.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-error">
+                <span class="alert-icon">×</span>
+                <div class="alert-content">
+                    <p class="alert-title">Restricted</p>
+                    <p class="alert-text">This collection requires special permissions to access.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-ornament">❧ ❦ ❧</div>
+        <p class="footer-brand">The Athenaeum</p>
+        <p class="footer-tagline">"In pursuit of wisdom, we find ourselves."</p>
+        <p class="footer-copy">A Scholarly Design System · Volume I · First Edition</p>
+    </footer>
+</body>
+</html>
