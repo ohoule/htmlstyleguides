@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verdant - Solarpunk Style Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Solarpunk Color Palette - Nature meets technology */
+            --leaf-green: #2D5A27;
+            --bright-green: #4CAF50;
+            --mint: #A8E6CF;
+            --solar-gold: #FFD54F;
+            --warm-amber: #FF8F00;
+            --sky-blue: #81D4FA;
+            --terracotta: #D4715E;
+            --cream: #FFF8E7;
+            --bark-brown: #5D4037;
+            --deep-forest: #1B3D1B;
+            --white: #FFFFFF;
+
+            /* Typography */
+            --font-display: 'Fraunces', serif;
+            --font-body: 'Outfit', sans-serif;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+
+            /* Border Radius - Organic shapes */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-organic: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(180deg, var(--cream) 0%, var(--mint) 100%);
+            min-height: 100vh;
+            color: var(--deep-forest);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: var(--space-3xl) var(--space-xl);
+            position: relative;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 600;
+            color: var(--leaf-green);
+            margin-bottom: var(--space-md);
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo::after {
+            content: '☀';
+            position: absolute;
+            top: -10px;
+            right: -40px;
+            font-size: 1.5rem;
+            color: var(--solar-gold);
+            animation: sun-rotate 10s linear infinite;
+        }
+
+        @keyframes sun-rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .tagline {
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            color: var(--bright-green);
+            font-weight: 400;
+        }
+
+        /* Decorative leaf border */
+        .leaf-border {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin: var(--space-xl) 0;
+            opacity: 0.6;
+        }
+
+        .leaf {
+            font-size: 1.5rem;
+            color: var(--bright-green);
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: var(--space-3xl);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            border: 2px solid rgba(45, 90, 39, 0.2);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--leaf-green);
+            margin-bottom: var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        h2::before {
+            content: '🌿';
+        }
+
+        h3 {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--bark-brown);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .color-swatch {
+            height: 120px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--space-md);
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-swatch:hover {
+            transform: translateY(-4px);
+        }
+
+        .color-swatch span {
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: var(--white);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            color: var(--deep-forest);
+        }
+
+        /* Typography */
+        .type-sample {
+            margin-bottom: var(--space-xl);
+        }
+
+        .display-text {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--leaf-green);
+            line-height: 1.2;
+        }
+
+        .body-text {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            max-width: 600px;
+            color: var(--deep-forest);
+        }
+
+        /* Spacing Scale */
+        .spacing-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            align-items: flex-end;
+        }
+
+        .spacing-block {
+            background: linear-gradient(135deg, var(--bright-green), var(--leaf-green));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .btn {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-xl);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--bright-green), var(--leaf-green));
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--solar-gold);
+            color: var(--deep-forest);
+            box-shadow: 0 4px 15px rgba(255, 213, 79, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: var(--warm-amber);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--leaf-green);
+            border: 2px solid var(--bright-green);
+        }
+
+        .btn-outline:hover {
+            background: var(--mint);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            color: var(--leaf-green);
+            margin-bottom: var(--space-sm);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            max-width: 400px;
+            padding: var(--space-md);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            border: 2px solid var(--mint);
+            border-radius: var(--radius-md);
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--bright-green);
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .card:nth-child(1) .card-image {
+            background: linear-gradient(135deg, var(--mint), var(--bright-green));
+        }
+
+        .card:nth-child(2) .card-image {
+            background: linear-gradient(135deg, var(--solar-gold), var(--warm-amber));
+        }
+
+        .card:nth-child(3) .card-image {
+            background: linear-gradient(135deg, var(--sky-blue), var(--mint));
+        }
+
+        .card-content {
+            padding: var(--space-lg);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--leaf-green);
+            margin-bottom: var(--space-sm);
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: var(--bark-brown);
+        }
+
+        /* Data Table */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+        }
+
+        th {
+            background: var(--leaf-green);
+            color: var(--white);
+            font-weight: 600;
+            padding: var(--space-md);
+            text-align: left;
+        }
+
+        td {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--mint);
+        }
+
+        tr:hover {
+            background: rgba(168, 230, 207, 0.3);
+        }
+
+        /* Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-xl);
+        }
+
+        .badge-green {
+            background: var(--mint);
+            color: var(--leaf-green);
+        }
+
+        .badge-gold {
+            background: var(--solar-gold);
+            color: var(--bark-brown);
+        }
+
+        .badge-blue {
+            background: var(--sky-blue);
+            color: var(--deep-forest);
+        }
+
+        .badge-terracotta {
+            background: var(--terracotta);
+            color: var(--white);
+        }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .principle {
+            text-align: center;
+            padding: var(--space-xl);
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            transition: transform 0.3s ease;
+        }
+
+        .principle:hover {
+            transform: translateY(-4px);
+        }
+
+        .principle-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--leaf-green);
+            margin-bottom: var(--space-sm);
+        }
+
+        .principle-text {
+            font-size: 0.9rem;
+            color: var(--bark-brown);
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .animation-demo {
+            height: 150px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .grow-demo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--bright-green), var(--leaf-green));
+            border-radius: var(--radius-organic);
+            animation: grow 3s ease-in-out infinite;
+        }
+
+        @keyframes grow {
+            0%, 100% { transform: scale(0.8); }
+            50% { transform: scale(1.2); }
+        }
+
+        .sun-demo {
+            width: 60px;
+            height: 60px;
+            background: var(--solar-gold);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 213, 79, 0.5);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 213, 79, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 213, 79, 0.7); }
+        }
+
+        .wave-demo {
+            width: 100px;
+            height: 20px;
+            background: linear-gradient(90deg, var(--sky-blue), var(--mint));
+            border-radius: var(--radius-xl);
+            animation: wave 2s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleX(0.8) translateX(-10px); }
+            50% { transform: scaleX(1.2) translateX(10px); }
+        }
+
+        /* Special Component: Energy Dashboard */
+        .energy-dashboard {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .energy-stat {
+            text-align: center;
+            padding: var(--space-lg);
+            background: linear-gradient(135deg, rgba(168, 230, 207, 0.3), rgba(129, 212, 250, 0.3));
+            border-radius: var(--radius-md);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--leaf-green);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--bark-brown);
+        }
+
+        .stat-bar {
+            height: 8px;
+            background: var(--mint);
+            border-radius: var(--radius-xl);
+            margin-top: var(--space-md);
+            overflow: hidden;
+        }
+
+        .stat-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--bright-green), var(--solar-gold));
+            border-radius: var(--radius-xl);
+            animation: progress-fill 2s ease-out forwards;
+        }
+
+        @keyframes progress-fill {
+            from { width: 0; }
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            border-left: 4px solid;
+        }
+
+        .alert-icon {
+            font-size: 1.5rem;
+        }
+
+        .alert-info {
+            background: rgba(129, 212, 250, 0.2);
+            border-color: var(--sky-blue);
+        }
+
+        .alert-success {
+            background: rgba(168, 230, 207, 0.3);
+            border-color: var(--bright-green);
+        }
+
+        .alert-warning {
+            background: rgba(255, 213, 79, 0.2);
+            border-color: var(--solar-gold);
+        }
+
+        .alert-error {
+            background: rgba(212, 113, 94, 0.2);
+            border-color: var(--terracotta);
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--leaf-green);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: var(--space-xl);
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--bright-green);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--space-2xl);
+            color: var(--leaf-green);
+        }
+
+        footer p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Gallery</a>
+
+        <header>
+            <h1 class="logo">Verdant</h1>
+            <p class="tagline">Design for a Sustainable Tomorrow</p>
+            <div class="leaf-border">
+                <span class="leaf">🌱</span>
+                <span class="leaf">🌿</span>
+                <span class="leaf">☀️</span>
+                <span class="leaf">🌿</span>
+                <span class="leaf">🌱</span>
+            </div>
+        </header>
+
+        <!-- Color Palette -->
+        <section>
+            <h2>Color Palette</h2>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: var(--leaf-green);">
+                    <span>Leaf Green</span>
+                </div>
+                <div class="color-swatch" style="background: var(--bright-green);">
+                    <span>Bright Green</span>
+                </div>
+                <div class="color-swatch" style="background: var(--mint);">
+                    <span>Mint</span>
+                </div>
+                <div class="color-swatch" style="background: var(--solar-gold);">
+                    <span>Solar Gold</span>
+                </div>
+                <div class="color-swatch" style="background: var(--warm-amber);">
+                    <span>Warm Amber</span>
+                </div>
+                <div class="color-swatch" style="background: var(--sky-blue);">
+                    <span>Sky Blue</span>
+                </div>
+                <div class="color-swatch" style="background: var(--terracotta);">
+                    <span>Terracotta</span>
+                </div>
+                <div class="color-swatch" style="background: var(--bark-brown);">
+                    <span>Bark Brown</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section>
+            <h2>Typography</h2>
+            <div class="type-sample">
+                <h3>Display Font - Fraunces</h3>
+                <p class="display-text">Growing a Better Future</p>
+            </div>
+            <div class="type-sample">
+                <h3>Body Font - Outfit</h3>
+                <p class="body-text">Solarpunk envisions a sustainable civilization in harmony with nature, powered by renewable energy and built on principles of cooperation and regeneration. It's optimistic sci-fi for the climate generation—imagining what we can build together.</p>
+            </div>
+        </section>
+
+        <!-- Spacing Scale -->
+        <section>
+            <h2>Spacing Scale</h2>
+            <div class="spacing-demo">
+                <div class="spacing-block" style="width: 28px; height: 28px;">4</div>
+                <div class="spacing-block" style="width: 40px; height: 40px;">8</div>
+                <div class="spacing-block" style="width: 56px; height: 56px;">16</div>
+                <div class="spacing-block" style="width: 72px; height: 72px;">24</div>
+                <div class="spacing-block" style="width: 88px; height: 88px;">32</div>
+                <div class="spacing-block" style="width: 104px; height: 104px;">48</div>
+            </div>
+        </section>
+
+        <!-- Buttons -->
+        <section>
+            <h2>Buttons</h2>
+            <div class="button-grid">
+                <button class="btn btn-primary">🌱 Plant Seeds</button>
+                <button class="btn btn-secondary">☀️ Solar Power</button>
+                <button class="btn btn-outline">Learn More</button>
+            </div>
+        </section>
+
+        <!-- Forms -->
+        <section>
+            <h2>Forms</h2>
+            <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="you@example.com">
+            </div>
+            <div class="form-group">
+                <label>Your Ideas</label>
+                <textarea placeholder="Share your vision for a sustainable future..."></textarea>
+            </div>
+            <button class="btn btn-primary">Submit</button>
+        </section>
+
+        <!-- Cards -->
+        <section>
+            <h2>Cards</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-image">🌳</div>
+                    <div class="card-content">
+                        <h4 class="card-title">Urban Forests</h4>
+                        <p class="card-text">Vertical gardens and tree-covered buildings that produce oxygen and food for city dwellers.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">⚡</div>
+                    <div class="card-content">
+                        <h4 class="card-title">Clean Energy</h4>
+                        <p class="card-text">Solar panels, wind turbines, and community microgrids powering sustainable communities.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">💧</div>
+                    <div class="card-content">
+                        <h4 class="card-title">Water Systems</h4>
+                        <p class="card-text">Rainwater harvesting and natural filtration systems that work with nature, not against it.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Table -->
+        <section>
+            <h2>Data Table</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Resource</th>
+                            <th>Production</th>
+                            <th>Consumption</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Solar Energy</td>
+                            <td>450 kWh</td>
+                            <td>320 kWh</td>
+                            <td><span class="badge badge-green">Surplus</span></td>
+                        </tr>
+                        <tr>
+                            <td>Rainwater</td>
+                            <td>2,400 L</td>
+                            <td>1,800 L</td>
+                            <td><span class="badge badge-blue">Optimal</span></td>
+                        </tr>
+                        <tr>
+                            <td>Compost</td>
+                            <td>85 kg</td>
+                            <td>90 kg</td>
+                            <td><span class="badge badge-gold">Balanced</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Badges -->
+        <section>
+            <h2>Badges & Tags</h2>
+            <div class="badge-grid">
+                <span class="badge badge-green">Renewable</span>
+                <span class="badge badge-gold">Solar Powered</span>
+                <span class="badge badge-blue">Water Positive</span>
+                <span class="badge badge-terracotta">Community</span>
+            </div>
+        </section>
+
+        <!-- Design Principles -->
+        <section>
+            <h2>Design Principles</h2>
+            <div class="principles-grid">
+                <div class="principle">
+                    <span class="principle-icon">🌱</span>
+                    <h4 class="principle-title">Regenerative</h4>
+                    <p class="principle-text">Design that gives back more than it takes from the environment</p>
+                </div>
+                <div class="principle">
+                    <span class="principle-icon">☀️</span>
+                    <h4 class="principle-title">Optimistic</h4>
+                    <p class="principle-text">Bright, hopeful aesthetics that inspire positive action</p>
+                </div>
+                <div class="principle">
+                    <span class="principle-icon">🤝</span>
+                    <h4 class="principle-title">Community</h4>
+                    <p class="principle-text">Systems designed for collective benefit and cooperation</p>
+                </div>
+                <div class="principle">
+                    <span class="principle-icon">🔄</span>
+                    <h4 class="principle-title">Circular</h4>
+                    <p class="principle-text">Zero waste through thoughtful lifecycle design</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animations -->
+        <section>
+            <h2>Animation & Micro-interactions</h2>
+            <div class="animation-grid">
+                <div>
+                    <h3>Organic Growth</h3>
+                    <div class="animation-demo">
+                        <div class="grow-demo"></div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Solar Glow</h3>
+                    <div class="animation-demo">
+                        <div class="sun-demo"></div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Water Flow</h3>
+                    <div class="animation-demo">
+                        <div class="wave-demo"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Component: Energy Dashboard -->
+        <section>
+            <h2>Special Component: Energy Dashboard</h2>
+            <div class="energy-dashboard">
+                <div class="energy-stat">
+                    <span class="stat-icon">☀️</span>
+                    <div class="stat-value">87%</div>
+                    <div class="stat-label">Solar Collection</div>
+                    <div class="stat-bar">
+                        <div class="stat-progress" style="width: 87%;"></div>
+                    </div>
+                </div>
+                <div class="energy-stat">
+                    <span class="stat-icon">💧</span>
+                    <div class="stat-value">72%</div>
+                    <div class="stat-label">Water Reserve</div>
+                    <div class="stat-bar">
+                        <div class="stat-progress" style="width: 72%;"></div>
+                    </div>
+                </div>
+                <div class="energy-stat">
+                    <span class="stat-icon">🌿</span>
+                    <div class="stat-value">94%</div>
+                    <div class="stat-label">Air Quality</div>
+                    <div class="stat-bar">
+                        <div class="stat-progress" style="width: 94%;"></div>
+                    </div>
+                </div>
+                <div class="energy-stat">
+                    <span class="stat-icon">♻️</span>
+                    <div class="stat-value">98%</div>
+                    <div class="stat-label">Waste Recycled</div>
+                    <div class="stat-bar">
+                        <div class="stat-progress" style="width: 98%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alerts -->
+        <section>
+            <h2>Alert Messages</h2>
+            <div class="alert alert-info">
+                <span class="alert-icon">💧</span>
+                <span>Rainwater collection system is at optimal capacity.</span>
+            </div>
+            <div class="alert alert-success">
+                <span class="alert-icon">☀️</span>
+                <span>Solar panels are generating surplus energy for the grid.</span>
+            </div>
+            <div class="alert alert-warning">
+                <span class="alert-icon">🌱</span>
+                <span>Garden irrigation scheduled for evening to conserve water.</span>
+            </div>
+            <div class="alert alert-error">
+                <span class="alert-icon">🔧</span>
+                <span>Wind turbine maintenance required within 48 hours.</span>
+            </div>
+        </section>
+
+        <footer>
+            <p>🌍 Built for Future Generations 🌿</p>
+        </footer>
+    </div>
+</body>
+</html>

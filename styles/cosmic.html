@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEBULA - Cosmic Style Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Cosmic Color Palette - Deep space, stars, nebulae */
+            --void-black: #0A0A0F;
+            --deep-space: #0D1B2A;
+            --nebula-purple: #5C4B8A;
+            --cosmic-violet: #9D4EDD;
+            --stellar-blue: #3A86FF;
+            --aurora-cyan: #00F5D4;
+            --star-white: #F8F9FA;
+            --solar-gold: #FFD93D;
+            --mars-red: #FF6B6B;
+            --comet-tail: rgba(157, 78, 221, 0.3);
+
+            /* Typography */
+            --font-display: 'Orbitron', sans-serif;
+            --font-body: 'Exo 2', sans-serif;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-full: 50%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--void-black);
+            color: var(--star-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Starfield background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 30%, rgba(93, 75, 138, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(58, 134, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(157, 78, 221, 0.1) 0%, transparent 70%);
+            z-index: -2;
+        }
+
+        /* Animated stars */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, var(--star-white), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(248, 249, 250, 0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, var(--star-white), transparent),
+                radial-gradient(2px 2px at 130px 80px, rgba(248, 249, 250, 0.6), transparent),
+                radial-gradient(1px 1px at 160px 120px, var(--star-white), transparent),
+                radial-gradient(2px 2px at 200px 50px, rgba(248, 249, 250, 0.7), transparent),
+                radial-gradient(1px 1px at 250px 160px, var(--star-white), transparent),
+                radial-gradient(2px 2px at 300px 90px, rgba(248, 249, 250, 0.5), transparent);
+            background-repeat: repeat;
+            background-size: 350px 200px;
+            animation: twinkle 8s ease-in-out infinite;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.5; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: var(--space-3xl) var(--space-xl);
+            position: relative;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            color: var(--star-white);
+            text-shadow:
+                0 0 10px var(--cosmic-violet),
+                0 0 30px var(--cosmic-violet),
+                0 0 60px var(--nebula-purple);
+            margin-bottom: var(--space-md);
+        }
+
+        .tagline {
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: var(--aurora-cyan);
+            letter-spacing: 0.2em;
+        }
+
+        /* Orbital decoration */
+        .orbit-ring {
+            width: 200px;
+            height: 200px;
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: orbit-rotate 20s linear infinite;
+        }
+
+        .orbit-ring::before {
+            content: '✦';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--solar-gold);
+            font-size: 1rem;
+        }
+
+        @keyframes orbit-rotate {
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: var(--space-3xl);
+            background: linear-gradient(135deg, rgba(13, 27, 42, 0.8), rgba(10, 10, 15, 0.9));
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--cosmic-violet), transparent);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--aurora-cyan);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-xl);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        h2::before {
+            content: '◆';
+            color: var(--cosmic-violet);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--stellar-blue);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .color-swatch {
+            height: 120px;
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--space-md);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .color-swatch::after {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 20%;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.3;
+            box-shadow: 0 0 10px white;
+        }
+
+        .color-swatch span {
+            font-family: var(--font-display);
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            background: rgba(10, 10, 15, 0.8);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Typography */
+        .type-sample {
+            margin-bottom: var(--space-xl);
+            text-align: center;
+        }
+
+        .display-text {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            background: linear-gradient(135deg, var(--cosmic-violet), var(--stellar-blue), var(--aurora-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .body-text {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            font-weight: 300;
+            max-width: 650px;
+            margin: 0 auto;
+            color: rgba(248, 249, 250, 0.9);
+        }
+
+        /* Spacing Scale */
+        .spacing-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .spacing-block {
+            background: linear-gradient(135deg, var(--nebula-purple), var(--cosmic-violet));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--star-white);
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            box-shadow: 0 0 20px var(--comet-tail);
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            justify-content: center;
+        }
+
+        .btn {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+        }
+
+        .btn:hover::before {
+            width: 200%;
+            height: 200%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--cosmic-violet), var(--nebula-purple));
+            color: var(--star-white);
+            box-shadow: 0 4px 20px rgba(157, 78, 221, 0.4);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 30px rgba(157, 78, 221, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--stellar-blue), var(--aurora-cyan));
+            color: var(--void-black);
+            box-shadow: 0 4px 20px rgba(58, 134, 255, 0.4);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 6px 30px rgba(58, 134, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--aurora-cyan);
+            border: 1px solid var(--aurora-cyan);
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 245, 212, 0.1);
+            box-shadow: 0 0 20px rgba(0, 245, 212, 0.3);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-lg);
+            max-width: 400px;
+        }
+
+        label {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--stellar-blue);
+            text-transform: uppercase;
+            margin-bottom: var(--space-sm);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: var(--space-md);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            border-radius: var(--radius-md);
+            background: rgba(13, 27, 42, 0.8);
+            color: var(--star-white);
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: rgba(248, 249, 250, 0.4);
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--cosmic-violet);
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.3);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(13, 27, 42, 0.9), rgba(10, 10, 15, 0.9));
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--cosmic-violet);
+            box-shadow: 0 20px 50px rgba(157, 78, 221, 0.2);
+        }
+
+        .card-image {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+        }
+
+        .card:nth-child(1) .card-image {
+            background: radial-gradient(circle at 30% 30%, var(--cosmic-violet) 0%, var(--void-black) 70%);
+        }
+
+        .card:nth-child(2) .card-image {
+            background: radial-gradient(circle at 70% 70%, var(--stellar-blue) 0%, var(--void-black) 70%);
+        }
+
+        .card:nth-child(3) .card-image {
+            background: radial-gradient(circle at 50% 50%, var(--solar-gold) 0%, var(--void-black) 70%);
+        }
+
+        .card-content {
+            padding: var(--space-lg);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--aurora-cyan);
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .card-text {
+            font-size: 0.95rem;
+            color: rgba(248, 249, 250, 0.8);
+        }
+
+        /* Data Table */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(157, 78, 221, 0.3);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--nebula-purple), var(--cosmic-violet));
+            color: var(--star-white);
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: var(--space-md);
+            text-align: left;
+        }
+
+        td {
+            padding: var(--space-md);
+            border-bottom: 1px solid rgba(157, 78, 221, 0.2);
+            font-size: 0.95rem;
+        }
+
+        tr:nth-child(even) {
+            background: rgba(157, 78, 221, 0.05);
+        }
+
+        tr:hover {
+            background: rgba(157, 78, 221, 0.1);
+        }
+
+        /* Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            justify-content: center;
+        }
+
+        .badge {
+            font-family: var(--font-display);
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-md);
+            border: 1px solid;
+        }
+
+        .badge-purple {
+            background: rgba(157, 78, 221, 0.2);
+            color: var(--cosmic-violet);
+            border-color: var(--cosmic-violet);
+        }
+
+        .badge-blue {
+            background: rgba(58, 134, 255, 0.2);
+            color: var(--stellar-blue);
+            border-color: var(--stellar-blue);
+        }
+
+        .badge-cyan {
+            background: rgba(0, 245, 212, 0.2);
+            color: var(--aurora-cyan);
+            border-color: var(--aurora-cyan);
+        }
+
+        .badge-gold {
+            background: rgba(255, 217, 61, 0.2);
+            color: var(--solar-gold);
+            border-color: var(--solar-gold);
+        }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .principle {
+            text-align: center;
+            padding: var(--space-xl);
+            background: rgba(13, 27, 42, 0.5);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(157, 78, 221, 0.2);
+        }
+
+        .principle-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-md);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .principle:nth-child(2) .principle-icon { animation-delay: 1s; }
+        .principle:nth-child(3) .principle-icon { animation-delay: 2s; }
+        .principle:nth-child(4) .principle-icon { animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--aurora-cyan);
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .principle-text {
+            font-size: 0.9rem;
+            color: rgba(248, 249, 250, 0.8);
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .animation-demo {
+            height: 150px;
+            background: rgba(13, 27, 42, 0.5);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .orbit-demo {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        .orbit-demo .planet {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, var(--stellar-blue), var(--aurora-cyan));
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px var(--stellar-blue);
+        }
+
+        .orbit-demo .moon {
+            width: 8px;
+            height: 8px;
+            background: var(--star-white);
+            border-radius: 50%;
+            position: absolute;
+            animation: moon-orbit 2s linear infinite;
+        }
+
+        @keyframes moon-orbit {
+            0% { transform: rotate(0deg) translateX(30px); }
+            100% { transform: rotate(360deg) translateX(30px); }
+        }
+
+        .pulse-demo {
+            width: 40px;
+            height: 40px;
+            background: var(--cosmic-violet);
+            border-radius: 50%;
+            animation: cosmic-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes cosmic-pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(157, 78, 221, 0.7);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 0 30px rgba(157, 78, 221, 0);
+                transform: scale(1.1);
+            }
+        }
+
+        .shooting-star-demo {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .shooting-star {
+            width: 4px;
+            height: 4px;
+            background: var(--star-white);
+            border-radius: 50%;
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            animation: shoot 2s linear infinite;
+        }
+
+        .shooting-star::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--star-white), transparent);
+            transform: translateX(-100%) rotate(-30deg);
+            transform-origin: right center;
+        }
+
+        @keyframes shoot {
+            0% {
+                top: 20%;
+                left: 10%;
+                opacity: 1;
+            }
+            100% {
+                top: 80%;
+                left: 90%;
+                opacity: 0;
+            }
+        }
+
+        /* Special Component: Solar System */
+        .solar-system {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            position: relative;
+            background: radial-gradient(circle, rgba(255, 217, 61, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .sun {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, var(--solar-gold), #FF8C00);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow:
+                0 0 30px var(--solar-gold),
+                0 0 60px rgba(255, 217, 61, 0.5);
+            animation: sun-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes sun-pulse {
+            0%, 100% { box-shadow: 0 0 30px var(--solar-gold), 0 0 60px rgba(255, 217, 61, 0.5); }
+            50% { box-shadow: 0 0 50px var(--solar-gold), 0 0 100px rgba(255, 217, 61, 0.7); }
+        }
+
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .orbit-1 { width: 100px; height: 100px; }
+        .orbit-2 { width: 160px; height: 160px; }
+        .orbit-3 { width: 220px; height: 220px; }
+
+        .planet-wrapper {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: planet-orbit linear infinite;
+        }
+
+        .orbit-1 .planet-wrapper { animation-duration: 4s; }
+        .orbit-2 .planet-wrapper { animation-duration: 7s; }
+        .orbit-3 .planet-wrapper { animation-duration: 11s; }
+
+        @keyframes planet-orbit {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .planet {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .orbit-1 .planet {
+            background: var(--mars-red);
+            box-shadow: 0 0 10px var(--mars-red);
+        }
+
+        .orbit-2 .planet {
+            background: var(--stellar-blue);
+            box-shadow: 0 0 10px var(--stellar-blue);
+            width: 16px;
+            height: 16px;
+            top: -8px;
+        }
+
+        .orbit-3 .planet {
+            background: var(--aurora-cyan);
+            box-shadow: 0 0 10px var(--aurora-cyan);
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            border: 1px solid;
+            background: rgba(13, 27, 42, 0.8);
+        }
+
+        .alert-icon {
+            font-size: 1.25rem;
+        }
+
+        .alert-info {
+            border-color: var(--stellar-blue);
+            color: var(--stellar-blue);
+        }
+
+        .alert-success {
+            border-color: var(--aurora-cyan);
+            color: var(--aurora-cyan);
+        }
+
+        .alert-warning {
+            border-color: var(--solar-gold);
+            color: var(--solar-gold);
+        }
+
+        .alert-error {
+            border-color: var(--mars-red);
+            color: var(--mars-red);
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--aurora-cyan);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-xl);
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--cosmic-violet);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--space-2xl);
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: rgba(248, 249, 250, 0.5);
+        }
+
+        footer span {
+            color: var(--aurora-cyan);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Gallery</a>
+
+        <header>
+            <div class="orbit-ring"></div>
+            <h1 class="logo">NEBULA</h1>
+            <p class="tagline">Explore the Infinite Design Space</p>
+        </header>
+
+        <!-- Color Palette -->
+        <section>
+            <h2>Color Palette</h2>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: linear-gradient(135deg, var(--nebula-purple), var(--cosmic-violet));">
+                    <span>Nebula Purple</span>
+                </div>
+                <div class="color-swatch" style="background: linear-gradient(135deg, var(--cosmic-violet), var(--stellar-blue));">
+                    <span>Cosmic Violet</span>
+                </div>
+                <div class="color-swatch" style="background: var(--stellar-blue);">
+                    <span>Stellar Blue</span>
+                </div>
+                <div class="color-swatch" style="background: var(--aurora-cyan);">
+                    <span>Aurora Cyan</span>
+                </div>
+                <div class="color-swatch" style="background: radial-gradient(circle, var(--solar-gold), #FF8C00);">
+                    <span>Solar Gold</span>
+                </div>
+                <div class="color-swatch" style="background: var(--mars-red);">
+                    <span>Mars Red</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section>
+            <h2>Typography</h2>
+            <div class="type-sample">
+                <h3>Display Font - Orbitron</h3>
+                <p class="display-text">AD ASTRA</p>
+            </div>
+            <div class="type-sample">
+                <h3>Body Font - Exo 2</h3>
+                <p class="body-text">The universe stretches infinitely in all directions—a vast canvas of stars, nebulae, and galaxies waiting to be explored. Our cosmic design system captures the wonder of deep space while maintaining clarity and usability.</p>
+            </div>
+        </section>
+
+        <!-- Spacing Scale -->
+        <section>
+            <h2>Spacing Scale</h2>
+            <div class="spacing-demo">
+                <div class="spacing-block" style="width: 28px; height: 28px;">4</div>
+                <div class="spacing-block" style="width: 40px; height: 40px;">8</div>
+                <div class="spacing-block" style="width: 56px; height: 56px;">16</div>
+                <div class="spacing-block" style="width: 72px; height: 72px;">24</div>
+                <div class="spacing-block" style="width: 88px; height: 88px;">32</div>
+                <div class="spacing-block" style="width: 104px; height: 104px;">48</div>
+            </div>
+        </section>
+
+        <!-- Buttons -->
+        <section>
+            <h2>Buttons</h2>
+            <div class="button-grid">
+                <button class="btn btn-primary">Launch Mission</button>
+                <button class="btn btn-secondary">Explore</button>
+                <button class="btn btn-outline">Learn More</button>
+            </div>
+        </section>
+
+        <!-- Forms -->
+        <section>
+            <h2>Forms</h2>
+            <div class="form-group">
+                <label>Astronaut ID</label>
+                <input type="text" placeholder="Enter your ID">
+            </div>
+            <div class="form-group">
+                <label>Transmission Frequency</label>
+                <input type="email" placeholder="your@starship.com">
+            </div>
+            <div class="form-group">
+                <label>Mission Report</label>
+                <textarea placeholder="Transmit your findings..."></textarea>
+            </div>
+            <button class="btn btn-primary">Transmit</button>
+        </section>
+
+        <!-- Cards -->
+        <section>
+            <h2>Cards</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-image">🌌</div>
+                    <div class="card-content">
+                        <h4 class="card-title">Nebula</h4>
+                        <p class="card-text">Stellar nurseries where new stars are born from cosmic dust and gas.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">🪐</div>
+                    <div class="card-content">
+                        <h4 class="card-title">Exoplanet</h4>
+                        <p class="card-text">Worlds beyond our solar system, each with unique characteristics.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">⭐</div>
+                    <div class="card-content">
+                        <h4 class="card-title">Star System</h4>
+                        <p class="card-text">Gravitationally bound stellar bodies orbiting a common center.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Table -->
+        <section>
+            <h2>Data Table</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Celestial Body</th>
+                            <th>Distance</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Proxima Centauri</td>
+                            <td>4.24 ly</td>
+                            <td>Red Dwarf</td>
+                            <td><span class="badge badge-cyan">Mapped</span></td>
+                        </tr>
+                        <tr>
+                            <td>Kepler-442b</td>
+                            <td>112 ly</td>
+                            <td>Super-Earth</td>
+                            <td><span class="badge badge-purple">Exploring</span></td>
+                        </tr>
+                        <tr>
+                            <td>TRAPPIST-1e</td>
+                            <td>39 ly</td>
+                            <td>Terrestrial</td>
+                            <td><span class="badge badge-gold">Priority</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Badges -->
+        <section>
+            <h2>Badges & Tags</h2>
+            <div class="badge-grid">
+                <span class="badge badge-purple">Nebula</span>
+                <span class="badge badge-blue">Stellar</span>
+                <span class="badge badge-cyan">Explored</span>
+                <span class="badge badge-gold">Priority</span>
+            </div>
+        </section>
+
+        <!-- Design Principles -->
+        <section>
+            <h2>Design Principles</h2>
+            <div class="principles-grid">
+                <div class="principle">
+                    <span class="principle-icon">🌌</span>
+                    <h4 class="principle-title">Depth</h4>
+                    <p class="principle-text">Layered elements that suggest infinite space</p>
+                </div>
+                <div class="principle">
+                    <span class="principle-icon">✨</span>
+                    <h4 class="principle-title">Luminance</h4>
+                    <p class="principle-text">Strategic use of glow and light effects</p>
+                </div>
+                <div class="principle">
+                    <span class="principle-icon">🔮</span>
+                    <h4 class="principle-title">Mystery</h4>
+                    <p class="principle-text">Dark backgrounds that invite exploration</p>
+                </div>
+                <div class="principle">
+                    <span class="principle-icon">🚀</span>
+                    <h4 class="principle-title">Movement</h4>
+                    <p class="principle-text">Subtle animations suggesting cosmic motion</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animations -->
+        <section>
+            <h2>Animation & Micro-interactions</h2>
+            <div class="animation-grid">
+                <div>
+                    <h3>Orbit</h3>
+                    <div class="animation-demo">
+                        <div class="orbit-demo">
+                            <div class="planet"></div>
+                            <div class="moon"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Pulse</h3>
+                    <div class="animation-demo">
+                        <div class="pulse-demo"></div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Shooting Star</h3>
+                    <div class="animation-demo">
+                        <div class="shooting-star-demo">
+                            <div class="shooting-star"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Component: Solar System -->
+        <section>
+            <h2>Special Component: Solar System</h2>
+            <div class="solar-system">
+                <div class="sun"></div>
+                <div class="orbit orbit-1">
+                    <div class="planet-wrapper">
+                        <div class="planet"></div>
+                    </div>
+                </div>
+                <div class="orbit orbit-2">
+                    <div class="planet-wrapper">
+                        <div class="planet"></div>
+                    </div>
+                </div>
+                <div class="orbit orbit-3">
+                    <div class="planet-wrapper">
+                        <div class="planet"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alerts -->
+        <section>
+            <h2>Alert Messages</h2>
+            <div class="alert alert-info">
+                <span class="alert-icon">📡</span>
+                <span>Incoming transmission from deep space probe.</span>
+            </div>
+            <div class="alert alert-success">
+                <span class="alert-icon">✓</span>
+                <span>Mission parameters confirmed. Ready for launch.</span>
+            </div>
+            <div class="alert alert-warning">
+                <span class="alert-icon">⚠</span>
+                <span>Solar flare activity detected. Shield systems engaged.</span>
+            </div>
+            <div class="alert alert-error">
+                <span class="alert-icon">✗</span>
+                <span>Navigation system offline. Manual override required.</span>
+            </div>
+        </section>
+
+        <footer>
+            <p>◆ <span>NEBULA</span> ◆ Design System for the Cosmos ◆</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opulence - Baroque Style Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Baroque Color Palette - Rich, dramatic, luxurious */
+            --royal-gold: #D4AF37;
+            --deep-gold: #B8860B;
+            --burgundy: #722F37;
+            --deep-burgundy: #4A0D15;
+            --royal-blue: #1E3A5F;
+            --midnight-blue: #0D1B2A;
+            --ivory: #FFFFF0;
+            --cream: #FDF5E6;
+            --charcoal: #1A1A1A;
+            --bronze: #CD7F32;
+
+            /* Typography */
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Libre Baskerville', serif;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--charcoal);
+            color: var(--ivory);
+            line-height: 1.8;
+        }
+
+        /* Background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(212, 175, 55, 0.03) 40px,
+                    rgba(212, 175, 55, 0.03) 80px
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Ornate divider */
+        .ornate-divider {
+            text-align: center;
+            color: var(--royal-gold);
+            font-size: 1.5rem;
+            margin: var(--space-xl) 0;
+            opacity: 0.7;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: var(--space-3xl) var(--space-xl);
+            border: 3px double var(--royal-gold);
+            margin-bottom: var(--space-3xl);
+            position: relative;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(74, 13, 21, 0.3));
+        }
+
+        header::before,
+        header::after {
+            content: '❧';
+            position: absolute;
+            font-size: 2rem;
+            color: var(--royal-gold);
+        }
+
+        header::before { top: var(--space-md); left: var(--space-lg); }
+        header::after { bottom: var(--space-md); right: var(--space-lg); transform: rotate(180deg); }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--royal-gold);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.1em;
+        }
+
+        .tagline {
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--cream);
+            margin-top: var(--space-md);
+        }
+
+        .crown {
+            font-size: 3rem;
+            margin-bottom: var(--space-md);
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: var(--space-3xl);
+            background: linear-gradient(180deg, rgba(114, 47, 55, 0.1), rgba(26, 26, 26, 0.9));
+            border: 2px solid var(--royal-gold);
+            padding: var(--space-2xl);
+            position: relative;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 20%;
+            right: 20%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--royal-gold), transparent);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--royal-gold);
+            text-align: center;
+            margin-bottom: var(--space-xl);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--cream);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .color-swatch {
+            height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--space-md);
+            position: relative;
+            border: 1px solid var(--royal-gold);
+        }
+
+        .color-swatch::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            height: 20px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        .color-swatch span {
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: var(--charcoal);
+            padding: var(--space-xs) var(--space-sm);
+            color: var(--ivory);
+            border: 1px solid var(--royal-gold);
+        }
+
+        /* Typography */
+        .type-sample {
+            margin-bottom: var(--space-xl);
+            text-align: center;
+        }
+
+        .display-text {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--royal-gold);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .body-text {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0 auto;
+            color: var(--cream);
+        }
+
+        /* Spacing Scale */
+        .spacing-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .spacing-block {
+            background: linear-gradient(135deg, var(--burgundy), var(--deep-burgundy));
+            border: 1px solid var(--royal-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ivory);
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            justify-content: center;
+        }
+
+        .btn {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-style: italic;
+            padding: var(--space-md) var(--space-2xl);
+            border: 2px solid;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(180deg, var(--royal-gold), var(--deep-gold));
+            color: var(--charcoal);
+            border-color: var(--royal-gold);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(180deg, var(--burgundy), var(--deep-burgundy));
+            color: var(--ivory);
+            border-color: var(--burgundy);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(180deg, var(--deep-burgundy), var(--burgundy));
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--royal-gold);
+            border-color: var(--royal-gold);
+        }
+
+        .btn-outline:hover {
+            background: var(--royal-gold);
+            color: var(--charcoal);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-lg);
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        label {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-style: italic;
+            color: var(--royal-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: var(--space-sm);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: var(--space-md);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            border: 1px solid var(--royal-gold);
+            background: rgba(26, 26, 26, 0.8);
+            color: var(--ivory);
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: rgba(255, 255, 240, 0.5);
+            font-style: italic;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--royal-gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(114, 47, 55, 0.2), rgba(26, 26, 26, 0.9));
+            border: 2px solid var(--royal-gold);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid var(--royal-gold);
+            margin: 8px;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .card-image {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border-bottom: 1px solid var(--royal-gold);
+        }
+
+        .card:nth-child(1) .card-image { background: linear-gradient(135deg, var(--burgundy), var(--deep-burgundy)); }
+        .card:nth-child(2) .card-image { background: linear-gradient(135deg, var(--royal-blue), var(--midnight-blue)); }
+        .card:nth-child(3) .card-image { background: linear-gradient(135deg, var(--deep-gold), var(--bronze)); }
+
+        .card-content {
+            padding: var(--space-lg);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--royal-gold);
+            margin-bottom: var(--space-sm);
+        }
+
+        .card-text {
+            font-size: 0.95rem;
+            color: var(--cream);
+        }
+
+        /* Data Table */
+        .table-wrapper {
+            border: 2px solid var(--royal-gold);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: linear-gradient(180deg, var(--deep-gold), var(--royal-gold));
+            color: var(--charcoal);
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: var(--space-md);
+            text-align: left;
+        }
+
+        td {
+            padding: var(--space-md);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            font-size: 0.95rem;
+        }
+
+        tr:nth-child(even) {
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        tr:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        /* Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            justify-content: center;
+        }
+
+        .badge {
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: var(--space-xs) var(--space-md);
+            border: 1px solid;
+        }
+
+        .badge-gold {
+            background: var(--royal-gold);
+            color: var(--charcoal);
+            border-color: var(--royal-gold);
+        }
+
+        .badge-burgundy {
+            background: var(--burgundy);
+            color: var(--ivory);
+            border-color: var(--burgundy);
+        }
+
+        .badge-blue {
+            background: var(--royal-blue);
+            color: var(--ivory);
+            border-color: var(--royal-blue);
+        }
+
+        .badge-outline {
+            background: transparent;
+            color: var(--royal-gold);
+            border-color: var(--royal-gold);
+        }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .principle {
+            text-align: center;
+            padding: var(--space-xl);
+            border: 1px solid var(--royal-gold);
+            background: rgba(114, 47, 55, 0.1);
+        }
+
+        .principle-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--royal-gold);
+            margin-bottom: var(--space-sm);
+        }
+
+        .principle-text {
+            font-size: 0.9rem;
+            color: var(--cream);
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .animation-demo {
+            height: 150px;
+            background: rgba(114, 47, 55, 0.1);
+            border: 1px solid var(--royal-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .glow-demo {
+            width: 60px;
+            height: 60px;
+            background: var(--royal-gold);
+            border-radius: 50%;
+            animation: baroque-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes baroque-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
+            50% { box-shadow: 0 0 50px rgba(212, 175, 55, 0.8), 0 0 80px rgba(212, 175, 55, 0.4); }
+        }
+
+        .curtain-demo {
+            width: 80px;
+            height: 100px;
+            background: linear-gradient(180deg, var(--burgundy), var(--deep-burgundy));
+            position: relative;
+            animation: curtain-sway 3s ease-in-out infinite;
+            border-top: 4px solid var(--royal-gold);
+        }
+
+        .curtain-demo::before,
+        .curtain-demo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 30%;
+            height: 20px;
+            background: var(--royal-gold);
+        }
+
+        .curtain-demo::before { left: 10%; border-radius: 0 0 50% 50%; }
+        .curtain-demo::after { right: 10%; border-radius: 0 0 50% 50%; }
+
+        @keyframes curtain-sway {
+            0%, 100% { transform: skewX(0deg); }
+            25% { transform: skewX(2deg); }
+            75% { transform: skewX(-2deg); }
+        }
+
+        .scroll-demo {
+            width: 60px;
+            height: 80px;
+            background: var(--cream);
+            position: relative;
+            border-radius: 5px;
+            animation: scroll-unfurl 3s ease-in-out infinite;
+        }
+
+        .scroll-demo::before,
+        .scroll-demo::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 15px;
+            background: linear-gradient(180deg, var(--deep-gold), var(--royal-gold));
+            left: -5px;
+            border-radius: 8px;
+        }
+
+        .scroll-demo::before { top: -5px; }
+        .scroll-demo::after { bottom: -5px; }
+
+        @keyframes scroll-unfurl {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.1); }
+        }
+
+        /* Special Component: Royal Crest */
+        .royal-crest {
+            text-align: center;
+            padding: var(--space-2xl);
+            background: linear-gradient(180deg, rgba(114, 47, 55, 0.2), rgba(26, 26, 26, 0.9));
+            border: 3px double var(--royal-gold);
+            position: relative;
+        }
+
+        .crest-shield {
+            width: 150px;
+            height: 180px;
+            margin: 0 auto var(--space-lg);
+            background: linear-gradient(135deg, var(--burgundy), var(--deep-burgundy));
+            clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 3px solid var(--royal-gold);
+        }
+
+        .crest-symbol {
+            font-size: 4rem;
+            color: var(--royal-gold);
+        }
+
+        .crest-ribbon {
+            background: var(--royal-gold);
+            color: var(--charcoal);
+            padding: var(--space-sm) var(--space-xl);
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        .crest-ribbon::before,
+        .crest-ribbon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 100%;
+            background: var(--deep-gold);
+            transform: translateY(-50%);
+        }
+
+        .crest-ribbon::before {
+            left: -25px;
+            clip-path: polygon(100% 0, 100% 100%, 0 50%);
+        }
+
+        .crest-ribbon::after {
+            right: -25px;
+            clip-path: polygon(0 0, 0 100%, 100% 50%);
+        }
+
+        .crest-motto {
+            margin-top: var(--space-lg);
+            font-family: var(--font-body);
+            font-style: italic;
+            color: var(--cream);
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-md) var(--space-lg);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            border: 1px solid;
+            position: relative;
+        }
+
+        .alert::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+        }
+
+        .alert-icon {
+            font-size: 1.25rem;
+        }
+
+        .alert-content {
+            font-size: 0.95rem;
+        }
+
+        .alert-info {
+            background: rgba(30, 58, 95, 0.2);
+            border-color: var(--royal-blue);
+        }
+
+        .alert-info::before { background: var(--royal-blue); }
+
+        .alert-success {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--royal-gold);
+        }
+
+        .alert-success::before { background: var(--royal-gold); }
+
+        .alert-warning {
+            background: rgba(205, 127, 50, 0.1);
+            border-color: var(--bronze);
+        }
+
+        .alert-warning::before { background: var(--bronze); }
+
+        .alert-error {
+            background: rgba(114, 47, 55, 0.2);
+            border-color: var(--burgundy);
+        }
+
+        .alert-error::before { background: var(--burgundy); }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--royal-gold);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-bottom: var(--space-xl);
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--cream);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--space-2xl);
+            border-top: 2px solid var(--royal-gold);
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--royal-gold);
+        }
+
+        footer .ornament {
+            font-size: 1.5rem;
+            margin-bottom: var(--space-md);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Return to Gallery</a>
+
+        <header>
+            <div class="crown">👑</div>
+            <h1 class="logo">Opulence</h1>
+            <p class="tagline">A Baroque Design System of Grand Proportions</p>
+        </header>
+
+        <!-- Color Palette -->
+        <section>
+            <h2>Color Palette</h2>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: linear-gradient(180deg, var(--royal-gold), var(--deep-gold));">
+                    <span>Royal Gold</span>
+                </div>
+                <div class="color-swatch" style="background: linear-gradient(180deg, var(--burgundy), var(--deep-burgundy));">
+                    <span>Burgundy</span>
+                </div>
+                <div class="color-swatch" style="background: linear-gradient(180deg, var(--royal-blue), var(--midnight-blue));">
+                    <span>Royal Blue</span>
+                </div>
+                <div class="color-swatch" style="background: var(--bronze);">
+                    <span>Bronze</span>
+                </div>
+                <div class="color-swatch" style="background: var(--ivory);">
+                    <span style="color: var(--charcoal);">Ivory</span>
+                </div>
+                <div class="color-swatch" style="background: var(--charcoal);">
+                    <span>Charcoal</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section>
+            <h2>Typography</h2>
+            <div class="type-sample">
+                <h3>Display — Playfair Display</h3>
+                <p class="display-text">Magnificence</p>
+            </div>
+            <div class="type-sample">
+                <h3>Body — Libre Baskerville</h3>
+                <p class="body-text">The Baroque style emerged in Rome around 1600, characterized by grandeur, drama, and emotional intensity. It sought to evoke feelings of awe through ornate decoration, rich colors, and theatrical effects that celebrated the power and glory of the divine and the monarchical.</p>
+            </div>
+        </section>
+
+        <!-- Spacing Scale -->
+        <section>
+            <h2>Spacing Scale</h2>
+            <div class="spacing-demo">
+                <div class="spacing-block" style="width: 28px; height: 28px;">4</div>
+                <div class="spacing-block" style="width: 40px; height: 40px;">8</div>
+                <div class="spacing-block" style="width: 56px; height: 56px;">16</div>
+                <div class="spacing-block" style="width: 72px; height: 72px;">24</div>
+                <div class="spacing-block" style="width: 88px; height: 88px;">32</div>
+                <div class="spacing-block" style="width: 104px; height: 104px;">48</div>
+            </div>
+        </section>
+
+        <!-- Buttons -->
+        <section>
+            <h2>Buttons</h2>
+            <div class="button-grid">
+                <button class="btn btn-primary">Proceed</button>
+                <button class="btn btn-secondary">Enquire</button>
+                <button class="btn btn-outline">Learn More</button>
+            </div>
+        </section>
+
+        <!-- Forms -->
+        <section>
+            <h2>Forms</h2>
+            <div class="form-group">
+                <label>Your Noble Name</label>
+                <input type="text" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label>Correspondence Address</label>
+                <input type="email" placeholder="your@estate.com">
+            </div>
+            <div class="form-group">
+                <label>Your Petition</label>
+                <textarea placeholder="State your request..."></textarea>
+            </div>
+            <div style="text-align: center;">
+                <button class="btn btn-primary">Submit Petition</button>
+            </div>
+        </section>
+
+        <!-- Cards -->
+        <section>
+            <h2>Cards</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-image">🎭</div>
+                    <div class="card-content">
+                        <h4 class="card-title">Drama</h4>
+                        <p class="card-text">Theatrical compositions that command attention and stir the soul.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">🏛️</div>
+                    <div class="card-content">
+                        <h4 class="card-title">Architecture</h4>
+                        <p class="card-text">Grand structures adorned with columns, domes, and gilded ornament.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">🎨</div>
+                    <div class="card-content">
+                        <h4 class="card-title">Artistry</h4>
+                        <p class="card-text">Rich pigments and dynamic compositions that celebrate divine glory.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Table -->
+        <section>
+            <h2>Data Table</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Master</th>
+                            <th>Medium</th>
+                            <th>Era</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Caravaggio</td>
+                            <td>Painting</td>
+                            <td>1593-1610</td>
+                            <td><span class="badge badge-gold">Master</span></td>
+                        </tr>
+                        <tr>
+                            <td>Bernini</td>
+                            <td>Sculpture</td>
+                            <td>1623-1680</td>
+                            <td><span class="badge badge-burgundy">Virtuoso</span></td>
+                        </tr>
+                        <tr>
+                            <td>Borromini</td>
+                            <td>Architecture</td>
+                            <td>1634-1667</td>
+                            <td><span class="badge badge-blue">Architect</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Badges -->
+        <section>
+            <h2>Badges & Tags</h2>
+            <div class="badge-grid">
+                <span class="badge badge-gold">Royal</span>
+                <span class="badge badge-burgundy">Noble</span>
+                <span class="badge badge-blue">Imperial</span>
+                <span class="badge badge-outline">Classic</span>
+            </div>
+        </section>
+
+        <!-- Design Principles -->
+        <section>
+            <h2>Design Principles</h2>
+            <div class="principles-grid">
+                <div class="principle">
+                    <span class="principle-icon">✨</span>
+                    <h4 class="principle-title">Grandeur</h4>
+                    <p class="principle-text">Scale and proportion that inspire awe and reverence</p>
+                </div>
+                <div class="principle">
+                    <span class="principle-icon">🎭</span>
+                    <h4 class="principle-title">Drama</h4>
+                    <p class="principle-text">Contrast and tension that evoke powerful emotions</p>
+                </div>
+                <div class="principle">
+                    <span class="principle-icon">💫</span>
+                    <h4 class="principle-title">Ornamentation</h4>
+                    <p class="principle-text">Rich detail that celebrates craftsmanship</p>
+                </div>
+                <div class="principle">
+                    <span class="principle-icon">👑</span>
+                    <h4 class="principle-title">Majesty</h4>
+                    <p class="principle-text">Regal presence that commands respect</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animations -->
+        <section>
+            <h2>Animation & Micro-interactions</h2>
+            <div class="animation-grid">
+                <div>
+                    <h3>Golden Glow</h3>
+                    <div class="animation-demo">
+                        <div class="glow-demo"></div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Curtain Sway</h3>
+                    <div class="animation-demo">
+                        <div class="curtain-demo"></div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Scroll Unfurl</h3>
+                    <div class="animation-demo">
+                        <div class="scroll-demo"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Component: Royal Crest -->
+        <section>
+            <h2>Special Component: Royal Crest</h2>
+            <div class="royal-crest">
+                <div class="crest-shield">
+                    <span class="crest-symbol">⚜</span>
+                </div>
+                <div class="crest-ribbon">House of Excellence</div>
+                <p class="crest-motto">"Per aspera ad astra" — Through hardship to the stars</p>
+            </div>
+        </section>
+
+        <!-- Alerts -->
+        <section>
+            <h2>Alert Messages</h2>
+            <div class="alert alert-info">
+                <span class="alert-icon">📜</span>
+                <span class="alert-content">A royal proclamation has been issued. Attend to it forthwith.</span>
+            </div>
+            <div class="alert alert-success">
+                <span class="alert-icon">✓</span>
+                <span class="alert-content">Your petition has been received and granted by the court.</span>
+            </div>
+            <div class="alert alert-warning">
+                <span class="alert-icon">⚠</span>
+                <span class="alert-content">The treasury advises caution in these uncertain times.</span>
+            </div>
+            <div class="alert alert-error">
+                <span class="alert-icon">✗</span>
+                <span class="alert-content">Your request has been denied by royal decree.</span>
+            </div>
+        </section>
+
+        <footer>
+            <div class="ornament">❧ ❦ ❧</div>
+            <p>Opulence Design System</p>
+            <p>Crafted in the Tradition of the Masters</p>
+        </footer>
+    </div>
+</body>
+</html>

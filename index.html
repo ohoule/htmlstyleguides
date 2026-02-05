@@ -6,7 +6,7 @@
     <title>HTML Style Guides — A Collection of Themed Design Systems</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=Poiret+One&family=Archivo+Black&family=VT323&family=Orbitron:wght@700&family=Cormorant+Garamond:wght@400;500&family=Cinzel:wght@500;600&family=Noto+Serif+JP:wght@400;500&family=Space+Mono:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Fredoka:wght@500;600&family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=Poiret+One&family=Archivo+Black&family=VT323&family=Orbitron:wght@400;700&family=Cormorant+Garamond:wght@400;500&family=Cinzel:wght@500;600&family=Noto+Serif+JP:wght@400;500&family=Space+Mono:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Fredoka:wght@500;600&family=Quicksand:wght@500;600&family=Silkscreen&family=Monoton&family=Comfortaa:wght@500&family=Press+Start+2P&family=Outfit:wght@500&family=Cormorant+Infant:wght@500&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #FAFAFA;
@@ -543,6 +543,327 @@
             border: 1px solid rgba(255,255,255,0.3);
         }
 
+        /* Cyberpunk */
+        .card-cyberpunk {
+            background: linear-gradient(135deg, #0a0a0f 0%, #0d0d15 100%);
+            border: 2px solid #00fff9;
+            color: #e0e0e0;
+        }
+
+        .card-cyberpunk:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 249, 0.4), 0 0 60px rgba(255, 0, 128, 0.2);
+        }
+
+        .card-cyberpunk .card-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00fff9;
+            font-size: 20px;
+            letter-spacing: 0.05em;
+        }
+
+        .card-cyberpunk .card-number {
+            font-family: 'VT323', monospace;
+            color: #ff0080;
+        }
+
+        .card-cyberpunk .card-tag {
+            background: transparent;
+            border: 1px solid #00fff9;
+            color: #00fff9;
+        }
+
+        /* Cottagecore */
+        .card-cottagecore {
+            background: #faf6f0;
+            border: 1px solid #c7b299;
+            color: #4a4a3a;
+        }
+
+        .card-cottagecore:hover {
+            box-shadow: 0 15px 40px rgba(167, 143, 110, 0.2);
+        }
+
+        .card-cottagecore .card-title {
+            font-family: 'Cormorant Infant', serif;
+            color: #6b5d4d;
+            font-size: 28px;
+        }
+
+        .card-cottagecore .card-number {
+            color: #8b9a6b;
+        }
+
+        .card-cottagecore .card-tag {
+            background: #8b9a6b;
+            color: #faf6f0;
+        }
+
+        .card-cottagecore::before {
+            content: '🌿';
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 20px;
+        }
+
+        /* Y2K */
+        .card-y2k {
+            background: linear-gradient(135deg, #e8f4ff 0%, #ffe8f5 50%, #e8fff0 100%);
+            border: 3px solid #c0c0c0;
+            color: #1a1a1a;
+        }
+
+        .card-y2k:hover {
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
+            border-color: #ff69b4;
+        }
+
+        .card-y2k .card-title {
+            font-family: 'Silkscreen', cursive;
+            color: #ff69b4;
+            font-size: 18px;
+        }
+
+        .card-y2k .card-number {
+            font-family: 'Silkscreen', cursive;
+            color: #00bfff;
+            font-size: 10px;
+        }
+
+        .card-y2k .card-tag {
+            background: linear-gradient(180deg, #ff8dc7, #ff69b4);
+            color: #ffffff;
+            border-radius: 20px;
+        }
+
+        /* Bauhaus */
+        .card-bauhaus {
+            background: #fafafa;
+            border: 4px solid #212121;
+            border-radius: 0;
+            color: #212121;
+        }
+
+        .card-bauhaus:hover {
+            box-shadow: 8px 8px 0 #e53935;
+            transform: translate(-4px, -4px);
+        }
+
+        .card-bauhaus .card-title {
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            font-size: 20px;
+            letter-spacing: 0.1em;
+        }
+
+        .card-bauhaus .card-tag {
+            border-radius: 0;
+        }
+
+        .card-bauhaus .card-tag:nth-child(1) { background: #e53935; color: #fff; }
+        .card-bauhaus .card-tag:nth-child(2) { background: #fdd835; color: #212121; }
+        .card-bauhaus .card-tag:nth-child(3) { background: #1e88e5; color: #fff; }
+
+        /* Solarpunk */
+        .card-solarpunk {
+            background: linear-gradient(135deg, #fff8e7 0%, #a8e6cf 100%);
+            border: 2px solid #4caf50;
+            color: #1b3d1b;
+        }
+
+        .card-solarpunk:hover {
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.3);
+        }
+
+        .card-solarpunk .card-title {
+            font-family: 'Outfit', sans-serif;
+            color: #2d5a27;
+            font-size: 24px;
+        }
+
+        .card-solarpunk .card-number {
+            color: #ff8f00;
+        }
+
+        .card-solarpunk .card-tag {
+            background: #4caf50;
+            color: #fff;
+        }
+
+        .card-solarpunk::before {
+            content: '☀️';
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 20px;
+        }
+
+        /* Art Nouveau */
+        .card-art-nouveau {
+            background: #f5f0e6;
+            border: 2px solid #c5a572;
+            color: #3a3a3a;
+        }
+
+        .card-art-nouveau:hover {
+            box-shadow: 0 15px 40px rgba(197, 165, 114, 0.3);
+        }
+
+        .card-art-nouveau .card-title {
+            font-family: 'Cinzel', serif;
+            color: #2f5d62;
+            font-size: 26px;
+            letter-spacing: 0.1em;
+        }
+
+        .card-art-nouveau .card-number {
+            color: #c5a572;
+        }
+
+        .card-art-nouveau .card-tag {
+            background: #2f5d62;
+            color: #fffff0;
+        }
+
+        .card-art-nouveau::before {
+            content: '❧';
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 24px;
+            color: #c5a572;
+        }
+
+        /* Psychedelic */
+        .card-psychedelic {
+            background: linear-gradient(135deg, #0d001a 0%, #1a0033 100%);
+            border: 2px solid #ff1493;
+            color: #ffffff;
+        }
+
+        .card-psychedelic:hover {
+            box-shadow: 0 0 40px rgba(255, 20, 147, 0.5), 0 0 80px rgba(57, 255, 20, 0.3);
+        }
+
+        .card-psychedelic .card-title {
+            font-family: 'Monoton', cursive;
+            background: linear-gradient(90deg, #ff1493, #00ffff, #39ff14);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 22px;
+        }
+
+        .card-psychedelic .card-number {
+            font-family: 'Comfortaa', cursive;
+            color: #00ffff;
+        }
+
+        .card-psychedelic .card-tag {
+            background: transparent;
+            border: 1px solid #39ff14;
+            color: #39ff14;
+        }
+
+        /* Baroque */
+        .card-baroque {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c1810 100%);
+            border: 2px solid #d4af37;
+            color: #f5f0e1;
+        }
+
+        .card-baroque:hover {
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .card-baroque .card-title {
+            font-family: 'Playfair Display', serif;
+            color: #d4af37;
+            font-size: 28px;
+            font-style: italic;
+        }
+
+        .card-baroque .card-number {
+            color: #722f37;
+            font-style: italic;
+        }
+
+        .card-baroque .card-tag {
+            background: linear-gradient(180deg, #d4af37, #b8860b);
+            color: #1a1a1a;
+        }
+
+        .card-baroque::before {
+            content: '👑';
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 20px;
+        }
+
+        /* Pixel Art */
+        .card-pixel {
+            background: #1d1d1d;
+            border: 4px solid #c2c3c7;
+            border-radius: 0;
+            color: #fff1e8;
+            image-rendering: pixelated;
+        }
+
+        .card-pixel:hover {
+            box-shadow: 4px 4px 0 #ff004d, 8px 8px 0 #00e436;
+            transform: translate(-4px, -4px);
+        }
+
+        .card-pixel .card-title {
+            font-family: 'Press Start 2P', cursive;
+            color: #ffec27;
+            font-size: 14px;
+        }
+
+        .card-pixel .card-number {
+            font-family: 'VT323', monospace;
+            color: #00e436;
+            font-size: 14px;
+        }
+
+        .card-pixel .card-tag {
+            background: #ff004d;
+            color: #fff1e8;
+            border-radius: 0;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 8px;
+        }
+
+        /* Cosmic */
+        .card-cosmic {
+            background: linear-gradient(135deg, #0a0a0f 0%, #0d1b2a 100%);
+            border: 1px solid rgba(157, 78, 221, 0.5);
+            color: #f8f9fa;
+        }
+
+        .card-cosmic:hover {
+            box-shadow: 0 0 40px rgba(157, 78, 221, 0.4), 0 0 80px rgba(58, 134, 255, 0.2);
+            border-color: #9d4edd;
+        }
+
+        .card-cosmic .card-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00f5d4;
+            font-size: 22px;
+            letter-spacing: 0.15em;
+        }
+
+        .card-cosmic .card-number {
+            color: #9d4edd;
+        }
+
+        .card-cosmic .card-tag {
+            background: rgba(157, 78, 221, 0.2);
+            color: #9d4edd;
+            border: 1px solid #9d4edd;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -698,7 +1019,7 @@
         <header>
             <h1>HTML Style Guides</h1>
             <p>A collection of themed, single-file design systems. Each style guide showcases a unique aesthetic with colors, typography, components, and more.</p>
-            <span class="badge-count">30 Themes</span>
+            <span class="badge-count">40 Themes</span>
         </header>
 
         <section class="section">
@@ -844,6 +1165,146 @@
                         <span class="card-tag">Glass</span>
                         <span class="card-tag">Blur</span>
                         <span class="card-tag">Modern</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Cyberpunk -->
+            <a href="styles/cyberpunk.html" class="card card-cyberpunk">
+                <div class="card-content">
+                    <p class="card-number">11 — SYS://INIT</p>
+                    <h2 class="card-title">NEON//GRID</h2>
+                    <p class="card-subtitle">High-tech low-life with neon colors and terminal aesthetics</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Neon</span>
+                        <span class="card-tag">Tech</span>
+                        <span class="card-tag">Dark</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Cottagecore -->
+            <a href="styles/cottagecore.html" class="card card-cottagecore">
+                <div class="card-content">
+                    <p class="card-number">12 — Style Guide</p>
+                    <h2 class="card-title">Meadowbrook</h2>
+                    <p class="card-subtitle">Soft pastoral charm with natural textures and handcrafted warmth</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Natural</span>
+                        <span class="card-tag">Soft</span>
+                        <span class="card-tag">Cozy</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Y2K -->
+            <a href="styles/y2k.html" class="card card-y2k">
+                <div class="card-content">
+                    <p class="card-number">13 — YEAR 2000</p>
+                    <h2 class="card-title">FUTURE//NOW</h2>
+                    <p class="card-subtitle">Bubbly chrome aesthetics with hot pink and electric blue</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Chrome</span>
+                        <span class="card-tag">Bubble</span>
+                        <span class="card-tag">Retro</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Bauhaus -->
+            <a href="styles/bauhaus.html" class="card card-bauhaus">
+                <div class="card-content">
+                    <p class="card-number">14 — STYLE GUIDE</p>
+                    <h2 class="card-title">BAUFORM</h2>
+                    <p class="card-subtitle">Primary colors, geometric shapes, and functional modernism</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Red</span>
+                        <span class="card-tag">Yellow</span>
+                        <span class="card-tag">Blue</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Solarpunk -->
+            <a href="styles/solarpunk.html" class="card card-solarpunk">
+                <div class="card-content">
+                    <p class="card-number">15 — Style Guide</p>
+                    <h2 class="card-title">Verdant</h2>
+                    <p class="card-subtitle">Eco-futurist optimism with solar gold and living greens</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Eco</span>
+                        <span class="card-tag">Solar</span>
+                        <span class="card-tag">Future</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Art Nouveau -->
+            <a href="styles/art-nouveau.html" class="card card-art-nouveau">
+                <div class="card-content">
+                    <p class="card-number">16 — Style Guide</p>
+                    <h2 class="card-title">Floréal</h2>
+                    <p class="card-subtitle">Organic curves and botanical motifs inspired by nature</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Organic</span>
+                        <span class="card-tag">Nature</span>
+                        <span class="card-tag">Elegant</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Psychedelic -->
+            <a href="styles/psychedelic.html" class="card card-psychedelic">
+                <div class="card-content">
+                    <p class="card-number">17 — Style Guide</p>
+                    <h2 class="card-title">MINDSCAPE</h2>
+                    <p class="card-subtitle">Trippy vibrant colors with flowing forms and cosmic energy</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Trippy</span>
+                        <span class="card-tag">Vibrant</span>
+                        <span class="card-tag">60s</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Baroque -->
+            <a href="styles/baroque.html" class="card card-baroque">
+                <div class="card-content">
+                    <p class="card-number">18 — Style Guide</p>
+                    <h2 class="card-title">Opulence</h2>
+                    <p class="card-subtitle">Dramatic luxury with gold, burgundy, and ornate grandeur</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Luxury</span>
+                        <span class="card-tag">Gold</span>
+                        <span class="card-tag">Drama</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Pixel Art -->
+            <a href="styles/pixel-art.html" class="card card-pixel">
+                <div class="card-content">
+                    <p class="card-number">19 — INSERT COIN</p>
+                    <h2 class="card-title">8-BIT QUEST</h2>
+                    <p class="card-subtitle">Retro gaming nostalgia with limited palette and crisp pixels</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Retro</span>
+                        <span class="card-tag">Game</span>
+                        <span class="card-tag">8-Bit</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Cosmic -->
+            <a href="styles/cosmic.html" class="card card-cosmic">
+                <div class="card-content">
+                    <p class="card-number">20 — Deep Space</p>
+                    <h2 class="card-title">NEBULA</h2>
+                    <p class="card-subtitle">Celestial depths with nebula purples and stellar blues</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Space</span>
+                        <span class="card-tag">Stars</span>
+                        <span class="card-tag">Cosmos</span>
                     </div>
                 </div>
             </a>

@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINDSCAPE - Psychedelic Style Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Psychedelic Color Palette - Vibrant, trippy, electric */
+            --electric-purple: #9D00FF;
+            --hot-pink: #FF1493;
+            --acid-green: #39FF14;
+            --sunshine-yellow: #FFFF00;
+            --tangerine: #FF6600;
+            --turquoise: #00FFFF;
+            --deep-violet: #1A0033;
+            --cosmic-black: #0D001A;
+
+            /* Typography */
+            --font-display: 'Monoton', cursive;
+            --font-body: 'Comfortaa', cursive;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-full: 50%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--cosmic-black);
+            color: #FFFFFF;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(157, 0, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 20, 147, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(57, 255, 20, 0.2) 0%, transparent 50%);
+            animation: background-shift 10s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes background-shift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: var(--space-3xl) var(--space-xl);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            background: linear-gradient(90deg,
+                var(--hot-pink),
+                var(--sunshine-yellow),
+                var(--acid-green),
+                var(--turquoise),
+                var(--electric-purple),
+                var(--hot-pink));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbow-flow 3s linear infinite;
+            text-shadow: 0 0 40px rgba(255, 20, 147, 0.5);
+        }
+
+        @keyframes rainbow-flow {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            color: var(--turquoise);
+            margin-top: var(--space-md);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { text-shadow: 0 0 10px currentColor; }
+            50% { text-shadow: 0 0 30px currentColor; }
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: var(--space-3xl);
+            background: linear-gradient(135deg, rgba(157, 0, 255, 0.1), rgba(255, 20, 147, 0.1));
+            border: 2px solid;
+            border-image: linear-gradient(135deg, var(--electric-purple), var(--hot-pink), var(--turquoise)) 1;
+            padding: var(--space-xl);
+            position: relative;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            background: linear-gradient(90deg, var(--sunshine-yellow), var(--tangerine), var(--hot-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-xl);
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--acid-green);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .color-swatch {
+            height: 130px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--space-md);
+            position: relative;
+            overflow: hidden;
+            animation: color-breathe 3s ease-in-out infinite;
+        }
+
+        .color-swatch:nth-child(odd) { animation-delay: 0.5s; }
+
+        @keyframes color-breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .color-swatch::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: spotlight 4s linear infinite;
+        }
+
+        @keyframes spotlight {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .color-swatch span {
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.7);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Typography */
+        .type-sample {
+            margin-bottom: var(--space-xl);
+            text-align: center;
+        }
+
+        .display-text {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            background: linear-gradient(90deg, var(--hot-pink), var(--electric-purple), var(--turquoise));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: hue-rotate 5s linear infinite;
+        }
+
+        @keyframes hue-rotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .body-text {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Spacing Scale */
+        .spacing-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .spacing-block {
+            background: linear-gradient(135deg, var(--electric-purple), var(--hot-pink));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 0.75rem;
+            box-shadow: 0 0 20px rgba(157, 0, 255, 0.5);
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            justify-content: center;
+        }
+
+        .btn {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transition: all 0.5s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--hot-pink), var(--electric-purple));
+            color: #FFFFFF;
+            box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(255, 20, 147, 0.7);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--acid-green), var(--turquoise));
+            color: var(--cosmic-black);
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.5);
+        }
+
+        .btn-secondary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(57, 255, 20, 0.7);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--sunshine-yellow);
+            border: 2px solid var(--sunshine-yellow);
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
+        }
+
+        .btn-outline:hover {
+            background: var(--sunshine-yellow);
+            color: var(--cosmic-black);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-lg);
+            max-width: 400px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: var(--turquoise);
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.8rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: var(--space-md);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            border: 2px solid var(--electric-purple);
+            border-radius: var(--radius-md);
+            background: rgba(157, 0, 255, 0.1);
+            color: #FFFFFF;
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--hot-pink);
+            box-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(157, 0, 255, 0.2), rgba(255, 20, 147, 0.2));
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--hot-pink);
+            box-shadow: 0 20px 60px rgba(255, 20, 147, 0.3);
+        }
+
+        .card-image {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:nth-child(1) .card-image {
+            background: linear-gradient(135deg, var(--hot-pink), var(--tangerine));
+        }
+
+        .card:nth-child(2) .card-image {
+            background: linear-gradient(135deg, var(--electric-purple), var(--turquoise));
+        }
+
+        .card:nth-child(3) .card-image {
+            background: linear-gradient(135deg, var(--acid-green), var(--sunshine-yellow));
+        }
+
+        .card-content {
+            padding: var(--space-lg);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--sunshine-yellow);
+            margin-bottom: var(--space-sm);
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Data Table */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: var(--radius-lg);
+            border: 2px solid var(--electric-purple);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--electric-purple), var(--hot-pink));
+            color: #FFFFFF;
+            font-weight: 600;
+            padding: var(--space-md);
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.8rem;
+        }
+
+        td {
+            padding: var(--space-md);
+            border-bottom: 1px solid rgba(157, 0, 255, 0.3);
+        }
+
+        tr:nth-child(even) {
+            background: rgba(157, 0, 255, 0.1);
+        }
+
+        tr:hover {
+            background: rgba(255, 20, 147, 0.2);
+        }
+
+        /* Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            justify-content: center;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: var(--space-xs) var(--space-md);
+            border-radius: 50px;
+            animation: badge-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes badge-glow {
+            0%, 100% { box-shadow: 0 0 10px currentColor; }
+            50% { box-shadow: 0 0 20px currentColor; }
+        }
+
+        .badge-pink {
+            background: var(--hot-pink);
+            color: #FFFFFF;
+        }
+
+        .badge-green {
+            background: var(--acid-green);
+            color: var(--cosmic-black);
+        }
+
+        .badge-purple {
+            background: var(--electric-purple);
+            color: #FFFFFF;
+        }
+
+        .badge-yellow {
+            background: var(--sunshine-yellow);
+            color: var(--cosmic-black);
+        }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .principle {
+            text-align: center;
+            padding: var(--space-xl);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            transition: all 0.3s ease;
+        }
+
+        .principle:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        .principle-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-md);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .principle:nth-child(2) .principle-icon { animation-delay: 0.5s; }
+        .principle:nth-child(3) .principle-icon { animation-delay: 1s; }
+        .principle:nth-child(4) .principle-icon { animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            color: var(--turquoise);
+            margin-bottom: var(--space-sm);
+        }
+
+        .principle-text {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .animation-demo {
+            height: 150px;
+            background: rgba(157, 0, 255, 0.1);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .spiral-demo {
+            width: 80px;
+            height: 80px;
+            border: 4px solid transparent;
+            border-top-color: var(--hot-pink);
+            border-right-color: var(--electric-purple);
+            border-radius: 50%;
+            animation: spiral 1s linear infinite;
+            position: relative;
+        }
+
+        .spiral-demo::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 4px solid transparent;
+            border-top-color: var(--turquoise);
+            border-right-color: var(--acid-green);
+            border-radius: 50%;
+            animation: spiral 0.75s linear infinite reverse;
+        }
+
+        @keyframes spiral {
+            100% { transform: rotate(360deg); }
+        }
+
+        .pulse-demo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--sunshine-yellow), var(--tangerine));
+            border-radius: 50%;
+            animation: pulse-scale 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-scale {
+            0%, 100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(255, 255, 0, 0.7); }
+            50% { transform: scale(1.2); box-shadow: 0 0 0 30px rgba(255, 255, 0, 0); }
+        }
+
+        .wave-demo {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .wave-bar {
+            width: 8px;
+            height: 40px;
+            border-radius: 4px;
+            animation: wave 1s ease-in-out infinite;
+        }
+
+        .wave-bar:nth-child(1) { background: var(--hot-pink); animation-delay: 0s; }
+        .wave-bar:nth-child(2) { background: var(--tangerine); animation-delay: 0.1s; }
+        .wave-bar:nth-child(3) { background: var(--sunshine-yellow); animation-delay: 0.2s; }
+        .wave-bar:nth-child(4) { background: var(--acid-green); animation-delay: 0.3s; }
+        .wave-bar:nth-child(5) { background: var(--turquoise); animation-delay: 0.4s; }
+        .wave-bar:nth-child(6) { background: var(--electric-purple); animation-delay: 0.5s; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(0.5); }
+            50% { transform: scaleY(1.5); }
+        }
+
+        /* Special Component: Kaleidoscope */
+        .kaleidoscope {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 50%;
+            overflow: hidden;
+            animation: kaleidoscope-rotate 20s linear infinite;
+        }
+
+        @keyframes kaleidoscope-rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .kaleidoscope-segment {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: 100% 100%;
+        }
+
+        .kaleidoscope-segment:nth-child(1) { transform: rotate(0deg); background: linear-gradient(135deg, var(--hot-pink), transparent); }
+        .kaleidoscope-segment:nth-child(2) { transform: rotate(45deg); background: linear-gradient(135deg, var(--tangerine), transparent); }
+        .kaleidoscope-segment:nth-child(3) { transform: rotate(90deg); background: linear-gradient(135deg, var(--sunshine-yellow), transparent); }
+        .kaleidoscope-segment:nth-child(4) { transform: rotate(135deg); background: linear-gradient(135deg, var(--acid-green), transparent); }
+        .kaleidoscope-segment:nth-child(5) { transform: rotate(180deg); background: linear-gradient(135deg, var(--turquoise), transparent); }
+        .kaleidoscope-segment:nth-child(6) { transform: rotate(225deg); background: linear-gradient(135deg, var(--electric-purple), transparent); }
+        .kaleidoscope-segment:nth-child(7) { transform: rotate(270deg); background: linear-gradient(135deg, var(--hot-pink), transparent); }
+        .kaleidoscope-segment:nth-child(8) { transform: rotate(315deg); background: linear-gradient(135deg, var(--tangerine), transparent); }
+
+        .kaleidoscope-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #FFFFFF, var(--electric-purple));
+            border-radius: 50%;
+            animation: kaleidoscope-rotate 10s linear infinite reverse;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            border: 2px solid;
+        }
+
+        .alert-icon {
+            font-size: 1.5rem;
+        }
+
+        .alert-info {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: var(--turquoise);
+            color: var(--turquoise);
+        }
+
+        .alert-success {
+            background: rgba(57, 255, 20, 0.1);
+            border-color: var(--acid-green);
+            color: var(--acid-green);
+        }
+
+        .alert-warning {
+            background: rgba(255, 255, 0, 0.1);
+            border-color: var(--sunshine-yellow);
+            color: var(--sunshine-yellow);
+        }
+
+        .alert-error {
+            background: rgba(255, 20, 147, 0.1);
+            border-color: var(--hot-pink);
+            color: var(--hot-pink);
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--turquoise);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: var(--space-xl);
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--hot-pink);
+            text-shadow: 0 0 20px currentColor;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--space-2xl);
+            font-family: var(--font-display);
+            font-size: 1rem;
+            background: linear-gradient(90deg, var(--hot-pink), var(--electric-purple), var(--turquoise));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Gallery</a>
+
+        <header>
+            <h1 class="logo">MINDSCAPE</h1>
+            <p class="tagline">✦ Expand Your Perception ✦</p>
+        </header>
+
+        <!-- Color Palette -->
+        <section>
+            <h2>Color Palette</h2>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: var(--electric-purple);">
+                    <span>Electric Purple</span>
+                </div>
+                <div class="color-swatch" style="background: var(--hot-pink);">
+                    <span>Hot Pink</span>
+                </div>
+                <div class="color-swatch" style="background: var(--acid-green);">
+                    <span>Acid Green</span>
+                </div>
+                <div class="color-swatch" style="background: var(--sunshine-yellow);">
+                    <span>Sunshine Yellow</span>
+                </div>
+                <div class="color-swatch" style="background: var(--tangerine);">
+                    <span>Tangerine</span>
+                </div>
+                <div class="color-swatch" style="background: var(--turquoise);">
+                    <span>Turquoise</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section>
+            <h2>Typography</h2>
+            <div class="type-sample">
+                <h3>Display Font - Monoton</h3>
+                <p class="display-text">Turn On Tune In</p>
+            </div>
+            <div class="type-sample">
+                <h3>Body Font - Comfortaa</h3>
+                <p class="body-text">Open your mind to infinite possibilities. The psychedelic aesthetic breaks free from conventional boundaries, celebrating vibrant colors, flowing forms, and the beauty of expanded consciousness.</p>
+            </div>
+        </section>
+
+        <!-- Spacing Scale -->
+        <section>
+            <h2>Spacing Scale</h2>
+            <div class="spacing-demo">
+                <div class="spacing-block" style="width: 28px; height: 28px;">4</div>
+                <div class="spacing-block" style="width: 40px; height: 40px;">8</div>
+                <div class="spacing-block" style="width: 56px; height: 56px;">16</div>
+                <div class="spacing-block" style="width: 72px; height: 72px;">24</div>
+                <div class="spacing-block" style="width: 88px; height: 88px;">32</div>
+                <div class="spacing-block" style="width: 104px; height: 104px;">48</div>
+            </div>
+        </section>
+
+        <!-- Buttons -->
+        <section>
+            <h2>Buttons</h2>
+            <div class="button-grid">
+                <button class="btn btn-primary">Explore ✨</button>
+                <button class="btn btn-secondary">Discover 🌀</button>
+                <button class="btn btn-outline">Learn More</button>
+            </div>
+        </section>
+
+        <!-- Forms -->
+        <section>
+            <h2>Forms</h2>
+            <div class="form-group">
+                <label>Your Cosmic Name</label>
+                <input type="text" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label>Astral Email</label>
+                <input type="email" placeholder="you@universe.com">
+            </div>
+            <div class="form-group">
+                <label>Share Your Vision</label>
+                <textarea placeholder="What do you see?"></textarea>
+            </div>
+            <button class="btn btn-primary">Send to the Cosmos</button>
+        </section>
+
+        <!-- Cards -->
+        <section>
+            <h2>Cards</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-image">🌈</div>
+                    <div class="card-content">
+                        <h4 class="card-title">Chromatic</h4>
+                        <p class="card-text">Experience the full spectrum of consciousness through vibrant color.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">🔮</div>
+                    <div class="card-content">
+                        <h4 class="card-title">Mystical</h4>
+                        <p class="card-text">Dive deep into the mysteries that lie beyond ordinary perception.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">🌀</div>
+                    <div class="card-content">
+                        <h4 class="card-title">Infinite</h4>
+                        <p class="card-text">Explore patterns that spiral into the depths of the mind.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Table -->
+        <section>
+            <h2>Data Table</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Experience</th>
+                            <th>Intensity</th>
+                            <th>Duration</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Visual Expansion</td>
+                            <td>High</td>
+                            <td>∞</td>
+                            <td><span class="badge badge-pink">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td>Color Synesthesia</td>
+                            <td>Medium</td>
+                            <td>Ongoing</td>
+                            <td><span class="badge badge-green">Flowing</span></td>
+                        </tr>
+                        <tr>
+                            <td>Pattern Recognition</td>
+                            <td>Peak</td>
+                            <td>Eternal</td>
+                            <td><span class="badge badge-purple">Transcendent</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Badges -->
+        <section>
+            <h2>Badges & Tags</h2>
+            <div class="badge-grid">
+                <span class="badge badge-pink">Groovy</span>
+                <span class="badge badge-green">Far Out</span>
+                <span class="badge badge-purple">Cosmic</span>
+                <span class="badge badge-yellow">Electric</span>
+            </div>
+        </section>
+
+        <!-- Design Principles -->
+        <section>
+            <h2>Design Principles</h2>
+            <div class="principles-grid">
+                <div class="principle">
+                    <span class="principle-icon">🌊</span>
+                    <h4 class="principle-title">Fluidity</h4>
+                    <p class="principle-text">Organic, flowing forms that reject rigid structure</p>
+                </div>
+                <div class="principle">
+                    <span class="principle-icon">🎨</span>
+                    <h4 class="principle-title">Vibrance</h4>
+                    <p class="principle-text">Saturated colors that pulse with energy and life</p>
+                </div>
+                <div class="principle">
+                    <span class="principle-icon">♾️</span>
+                    <h4 class="principle-title">Infinity</h4>
+                    <p class="principle-text">Patterns that suggest endless depth and dimension</p>
+                </div>
+                <div class="principle">
+                    <span class="principle-icon">✨</span>
+                    <h4 class="principle-title">Transcendence</h4>
+                    <p class="principle-text">Design that elevates beyond the ordinary</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animations -->
+        <section>
+            <h2>Animation & Micro-interactions</h2>
+            <div class="animation-grid">
+                <div>
+                    <h3>Spiral</h3>
+                    <div class="animation-demo">
+                        <div class="spiral-demo"></div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Pulse</h3>
+                    <div class="animation-demo">
+                        <div class="pulse-demo"></div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Wave</h3>
+                    <div class="animation-demo">
+                        <div class="wave-demo">
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Component: Kaleidoscope -->
+        <section>
+            <h2>Special Component: Kaleidoscope</h2>
+            <div class="kaleidoscope">
+                <div class="kaleidoscope-segment"></div>
+                <div class="kaleidoscope-segment"></div>
+                <div class="kaleidoscope-segment"></div>
+                <div class="kaleidoscope-segment"></div>
+                <div class="kaleidoscope-segment"></div>
+                <div class="kaleidoscope-segment"></div>
+                <div class="kaleidoscope-segment"></div>
+                <div class="kaleidoscope-segment"></div>
+                <div class="kaleidoscope-center">👁</div>
+            </div>
+        </section>
+
+        <!-- Alerts -->
+        <section>
+            <h2>Alert Messages</h2>
+            <div class="alert alert-info">
+                <span class="alert-icon">💫</span>
+                <span>Your consciousness is expanding. Embrace the journey.</span>
+            </div>
+            <div class="alert alert-success">
+                <span class="alert-icon">✨</span>
+                <span>You've reached a new level of awareness. Keep flowing.</span>
+            </div>
+            <div class="alert alert-warning">
+                <span class="alert-icon">🌀</span>
+                <span>Reality shift detected. Stay grounded and breathe.</span>
+            </div>
+            <div class="alert alert-error">
+                <span class="alert-icon">⚡</span>
+                <span>System overload. Take a moment to center yourself.</span>
+            </div>
+        </section>
+
+        <footer>
+            <p>✦ MINDSCAPE ✦ Since the Summer of Love ✦</p>
+        </footer>
+    </div>
+</body>
+</html>

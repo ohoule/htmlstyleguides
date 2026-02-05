@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8-BIT QUEST - Pixel Art Style Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* 8-Bit Color Palette - Limited, vibrant, retro */
+            --pixel-red: #FF004D;
+            --pixel-orange: #FFA300;
+            --pixel-yellow: #FFEC27;
+            --pixel-green: #00E436;
+            --pixel-cyan: #29ADFF;
+            --pixel-blue: #1D2B53;
+            --pixel-purple: #7E2553;
+            --pixel-pink: #FF77A8;
+            --pixel-black: #000000;
+            --pixel-dark: #1D1D1D;
+            --pixel-gray: #5F574F;
+            --pixel-light: #C2C3C7;
+            --pixel-white: #FFF1E8;
+
+            /* Typography */
+            --font-display: 'Press Start 2P', cursive;
+            --font-body: 'VT323', monospace;
+
+            /* Spacing - 8px grid */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* Disable anti-aliasing for that crisp pixel look */
+            image-rendering: pixelated;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--pixel-dark);
+            color: var(--pixel-white);
+            line-height: 1.6;
+            font-size: 18px;
+        }
+
+        /* CRT scanline effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1) 0px,
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: var(--space-3xl) var(--space-xl);
+            border: 4px solid var(--pixel-cyan);
+            background: var(--pixel-blue);
+            margin-bottom: var(--space-3xl);
+            position: relative;
+        }
+
+        header::before {
+            content: '★ ★ ★';
+            position: absolute;
+            top: var(--space-md);
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--pixel-yellow);
+            font-family: var(--font-display);
+            font-size: 0.5rem;
+            letter-spacing: 0.5em;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--pixel-yellow);
+            text-shadow:
+                4px 4px 0 var(--pixel-orange),
+                -2px -2px 0 var(--pixel-red);
+            margin-bottom: var(--space-md);
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .tagline {
+            font-family: var(--font-body);
+            font-size: 1.5rem;
+            color: var(--pixel-green);
+        }
+
+        .coin {
+            display: inline-block;
+            animation: coin-spin 0.5s steps(4) infinite;
+        }
+
+        @keyframes coin-spin {
+            0% { transform: scaleX(1); }
+            25% { transform: scaleX(0.5); }
+            50% { transform: scaleX(0); }
+            75% { transform: scaleX(0.5); }
+            100% { transform: scaleX(1); }
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: var(--space-3xl);
+            background: var(--pixel-black);
+            border: 4px solid var(--pixel-light);
+            padding: var(--space-xl);
+            position: relative;
+        }
+
+        /* Pixel corners */
+        section::before,
+        section::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--pixel-cyan);
+        }
+
+        section::before { top: -4px; left: -4px; }
+        section::after { top: -4px; right: -4px; }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            color: var(--pixel-cyan);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            border-bottom: 4px solid var(--pixel-cyan);
+            text-transform: uppercase;
+        }
+
+        h2::before {
+            content: '> ';
+            color: var(--pixel-green);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 0.625rem;
+            color: var(--pixel-yellow);
+            text-transform: uppercase;
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+
+        .color-swatch {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--space-sm);
+            border: 2px solid var(--pixel-dark);
+        }
+
+        .color-swatch span {
+            font-family: var(--font-display);
+            font-size: 0.5rem;
+            color: var(--pixel-black);
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .swatch-dark span {
+            color: var(--pixel-white);
+            text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        /* Typography */
+        .type-sample {
+            margin-bottom: var(--space-xl);
+        }
+
+        .display-text {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--pixel-pink);
+            text-shadow: 2px 2px 0 var(--pixel-purple);
+        }
+
+        .body-text {
+            font-family: var(--font-body);
+            font-size: 1.5rem;
+            color: var(--pixel-white);
+            max-width: 600px;
+        }
+
+        /* Spacing Scale */
+        .spacing-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            align-items: flex-end;
+        }
+
+        .spacing-block {
+            background: var(--pixel-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--pixel-black);
+            font-family: var(--font-display);
+            font-size: 0.5rem;
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .btn {
+            font-family: var(--font-display);
+            font-size: 0.625rem;
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            cursor: pointer;
+            transition: transform 0.1s;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 4px;
+            right: 0;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+        }
+
+        .btn:active::after {
+            height: 2px;
+            bottom: -2px;
+        }
+
+        .btn-primary {
+            background: var(--pixel-red);
+            color: var(--pixel-white);
+            box-shadow: inset -4px -4px 0 var(--pixel-purple);
+        }
+
+        .btn-secondary {
+            background: var(--pixel-green);
+            color: var(--pixel-black);
+            box-shadow: inset -4px -4px 0 #00A029;
+        }
+
+        .btn-tertiary {
+            background: var(--pixel-cyan);
+            color: var(--pixel-black);
+            box-shadow: inset -4px -4px 0 #0085CC;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        label {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 0.5rem;
+            color: var(--pixel-yellow);
+            text-transform: uppercase;
+            margin-bottom: var(--space-sm);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            max-width: 400px;
+            padding: var(--space-md);
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            border: 4px solid var(--pixel-light);
+            background: var(--pixel-blue);
+            color: var(--pixel-white);
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--pixel-cyan);
+            box-shadow: 0 0 0 4px rgba(41, 173, 255, 0.3);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--pixel-gray);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .card {
+            background: var(--pixel-blue);
+            border: 4px solid var(--pixel-light);
+            transition: transform 0.1s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--pixel-yellow);
+        }
+
+        .card-image {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border-bottom: 4px solid var(--pixel-light);
+        }
+
+        .card:nth-child(1) .card-image { background: var(--pixel-red); }
+        .card:nth-child(2) .card-image { background: var(--pixel-green); }
+        .card:nth-child(3) .card-image { background: var(--pixel-cyan); }
+
+        .card-content {
+            padding: var(--space-md);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 0.625rem;
+            color: var(--pixel-yellow);
+            margin-bottom: var(--space-sm);
+        }
+
+        .card-text {
+            font-size: 1.25rem;
+            color: var(--pixel-light);
+        }
+
+        /* Data Table */
+        .table-wrapper {
+            border: 4px solid var(--pixel-light);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--pixel-purple);
+            color: var(--pixel-white);
+            font-family: var(--font-display);
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            padding: var(--space-md);
+            text-align: left;
+            border: 2px solid var(--pixel-pink);
+        }
+
+        td {
+            padding: var(--space-md);
+            border: 2px solid var(--pixel-gray);
+            font-size: 1.25rem;
+        }
+
+        tr:nth-child(even) {
+            background: var(--pixel-blue);
+        }
+
+        /* Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .badge {
+            font-family: var(--font-display);
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            padding: var(--space-xs) var(--space-sm);
+            border: 2px solid;
+        }
+
+        .badge-red {
+            background: var(--pixel-red);
+            color: var(--pixel-white);
+            border-color: var(--pixel-white);
+        }
+
+        .badge-green {
+            background: var(--pixel-green);
+            color: var(--pixel-black);
+            border-color: var(--pixel-black);
+        }
+
+        .badge-yellow {
+            background: var(--pixel-yellow);
+            color: var(--pixel-black);
+            border-color: var(--pixel-black);
+        }
+
+        .badge-cyan {
+            background: var(--pixel-cyan);
+            color: var(--pixel-black);
+            border-color: var(--pixel-black);
+        }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+
+        .principle {
+            background: var(--pixel-blue);
+            border: 4px solid var(--pixel-light);
+            padding: var(--space-lg);
+            text-align: center;
+        }
+
+        .principle-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-sm);
+            animation: bounce 0.5s steps(2) infinite;
+        }
+
+        .principle:nth-child(2) .principle-icon { animation-delay: 0.1s; }
+        .principle:nth-child(3) .principle-icon { animation-delay: 0.2s; }
+        .principle:nth-child(4) .principle-icon { animation-delay: 0.3s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 0.5rem;
+            color: var(--pixel-green);
+            margin-bottom: var(--space-xs);
+        }
+
+        .principle-text {
+            font-size: 1.25rem;
+            color: var(--pixel-light);
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        .animation-demo {
+            height: 120px;
+            background: var(--pixel-blue);
+            border: 4px solid var(--pixel-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .walk-demo {
+            width: 32px;
+            height: 32px;
+            background: var(--pixel-red);
+            animation: walk 0.5s steps(4) infinite;
+            position: relative;
+        }
+
+        .walk-demo::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 8px;
+            width: 16px;
+            height: 8px;
+            background: var(--pixel-white);
+        }
+
+        @keyframes walk {
+            0%, 100% { transform: translateX(-30px); }
+            50% { transform: translateX(30px); }
+        }
+
+        .jump-demo {
+            width: 24px;
+            height: 24px;
+            background: var(--pixel-yellow);
+            animation: jump 0.6s steps(3) infinite;
+        }
+
+        @keyframes jump {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-40px); }
+        }
+
+        .spin-demo {
+            width: 32px;
+            height: 32px;
+            background: var(--pixel-green);
+            animation: pixel-spin 0.4s steps(4) infinite;
+        }
+
+        @keyframes pixel-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Special Component: Game HUD */
+        .game-hud {
+            background: var(--pixel-black);
+            border: 4px solid var(--pixel-yellow);
+            padding: var(--space-lg);
+        }
+
+        .hud-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 2px dashed var(--pixel-gray);
+        }
+
+        .hud-score {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+        }
+
+        .hud-score .label {
+            color: var(--pixel-yellow);
+        }
+
+        .hud-score .value {
+            color: var(--pixel-white);
+        }
+
+        .hud-lives {
+            display: flex;
+            gap: var(--space-xs);
+        }
+
+        .heart {
+            font-size: 1.5rem;
+            color: var(--pixel-red);
+        }
+
+        .heart.empty {
+            color: var(--pixel-gray);
+        }
+
+        .hud-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: var(--space-xs);
+        }
+
+        .stat-bar {
+            height: 16px;
+            background: var(--pixel-gray);
+            border: 2px solid var(--pixel-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-fill {
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: fill-pulse 2s steps(4) infinite;
+        }
+
+        .stat-fill.hp { background: var(--pixel-red); width: 75%; }
+        .stat-fill.mp { background: var(--pixel-cyan); width: 50%; }
+        .stat-fill.xp { background: var(--pixel-green); width: 90%; }
+
+        @keyframes fill-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .stat-label {
+            font-family: var(--font-display);
+            font-size: 0.5rem;
+            color: var(--pixel-yellow);
+            margin-top: var(--space-xs);
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            border: 4px solid;
+            font-size: 1.25rem;
+        }
+
+        .alert-icon {
+            font-size: 1.5rem;
+            animation: alert-blink 0.5s steps(2) infinite;
+        }
+
+        @keyframes alert-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .alert-info {
+            background: var(--pixel-blue);
+            border-color: var(--pixel-cyan);
+            color: var(--pixel-cyan);
+        }
+
+        .alert-success {
+            background: var(--pixel-blue);
+            border-color: var(--pixel-green);
+            color: var(--pixel-green);
+        }
+
+        .alert-warning {
+            background: var(--pixel-blue);
+            border-color: var(--pixel-yellow);
+            color: var(--pixel-yellow);
+        }
+
+        .alert-error {
+            background: var(--pixel-blue);
+            border-color: var(--pixel-red);
+            color: var(--pixel-red);
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--pixel-cyan);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.625rem;
+            margin-bottom: var(--space-xl);
+            transition: color 0.1s;
+        }
+
+        .back-link:hover {
+            color: var(--pixel-yellow);
+        }
+
+        .back-link::before {
+            content: '◄';
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--space-2xl);
+            font-family: var(--font-display);
+            font-size: 0.5rem;
+            color: var(--pixel-gray);
+        }
+
+        footer .credits {
+            color: var(--pixel-yellow);
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .color-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .animation-grid,
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hud-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">Back to Gallery</a>
+
+        <header>
+            <h1 class="logo">8-BIT QUEST</h1>
+            <p class="tagline">INSERT <span class="coin">●</span> TO CONTINUE</p>
+        </header>
+
+        <!-- Color Palette -->
+        <section>
+            <h2>Color Palette</h2>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: var(--pixel-red);">
+                    <span>Red</span>
+                </div>
+                <div class="color-swatch" style="background: var(--pixel-orange);">
+                    <span>Orange</span>
+                </div>
+                <div class="color-swatch" style="background: var(--pixel-yellow);">
+                    <span>Yellow</span>
+                </div>
+                <div class="color-swatch" style="background: var(--pixel-green);">
+                    <span>Green</span>
+                </div>
+                <div class="color-swatch" style="background: var(--pixel-cyan);">
+                    <span>Cyan</span>
+                </div>
+                <div class="color-swatch swatch-dark" style="background: var(--pixel-blue);">
+                    <span>Blue</span>
+                </div>
+                <div class="color-swatch swatch-dark" style="background: var(--pixel-purple);">
+                    <span>Purple</span>
+                </div>
+                <div class="color-swatch" style="background: var(--pixel-pink);">
+                    <span>Pink</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section>
+            <h2>Typography</h2>
+            <div class="type-sample">
+                <h3>Display - Press Start 2P</h3>
+                <p class="display-text">GAME OVER</p>
+            </div>
+            <div class="type-sample">
+                <h3>Body - VT323</h3>
+                <p class="body-text">Welcome, brave adventurer! Your quest begins in the pixelated realm of 8-bit glory. Collect coins, defeat enemies, and save the kingdom from the forces of darkness!</p>
+            </div>
+        </section>
+
+        <!-- Spacing Scale -->
+        <section>
+            <h2>Spacing Scale</h2>
+            <div class="spacing-demo">
+                <div class="spacing-block" style="width: 24px; height: 24px;">4</div>
+                <div class="spacing-block" style="width: 32px; height: 32px;">8</div>
+                <div class="spacing-block" style="width: 48px; height: 48px;">16</div>
+                <div class="spacing-block" style="width: 64px; height: 64px;">24</div>
+                <div class="spacing-block" style="width: 80px; height: 80px;">32</div>
+                <div class="spacing-block" style="width: 96px; height: 96px;">48</div>
+            </div>
+        </section>
+
+        <!-- Buttons -->
+        <section>
+            <h2>Buttons</h2>
+            <div class="button-grid">
+                <button class="btn btn-primary">Start</button>
+                <button class="btn btn-secondary">Continue</button>
+                <button class="btn btn-tertiary">Options</button>
+            </div>
+        </section>
+
+        <!-- Forms -->
+        <section>
+            <h2>Forms</h2>
+            <div class="form-group">
+                <label>Player Name</label>
+                <input type="text" placeholder="ENTER NAME..." maxlength="8">
+            </div>
+            <div class="form-group">
+                <label>High Score Email</label>
+                <input type="email" placeholder="YOUR@EMAIL.COM">
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                <textarea placeholder="TYPE YOUR MESSAGE..."></textarea>
+            </div>
+            <button class="btn btn-primary">Submit</button>
+        </section>
+
+        <!-- Cards -->
+        <section>
+            <h2>Cards</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-image">⚔️</div>
+                    <div class="card-content">
+                        <h4 class="card-title">Sword</h4>
+                        <p class="card-text">ATK +10</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">🛡️</div>
+                    <div class="card-content">
+                        <h4 class="card-title">Shield</h4>
+                        <p class="card-text">DEF +8</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">🧪</div>
+                    <div class="card-content">
+                        <h4 class="card-title">Potion</h4>
+                        <p class="card-text">HP +50</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Table -->
+        <section>
+            <h2>Data Table</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                            <th>Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1ST</td>
+                            <td>AAA</td>
+                            <td>999999</td>
+                            <td><span class="badge badge-yellow">MAX</span></td>
+                        </tr>
+                        <tr>
+                            <td>2ND</td>
+                            <td>BOB</td>
+                            <td>850000</td>
+                            <td><span class="badge badge-green">42</span></td>
+                        </tr>
+                        <tr>
+                            <td>3RD</td>
+                            <td>CAT</td>
+                            <td>720000</td>
+                            <td><span class="badge badge-cyan">38</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Badges -->
+        <section>
+            <h2>Badges & Tags</h2>
+            <div class="badge-grid">
+                <span class="badge badge-red">Boss</span>
+                <span class="badge badge-green">1-UP</span>
+                <span class="badge badge-yellow">Star</span>
+                <span class="badge badge-cyan">Save</span>
+            </div>
+        </section>
+
+        <!-- Design Principles -->
+        <section>
+            <h2>Design Principles</h2>
+            <div class="principles-grid">
+                <div class="principle">
+                    <span class="principle-icon">🎮</span>
+                    <h4 class="principle-title">Constraints</h4>
+                    <p class="principle-text">Limited palette creates cohesion</p>
+                </div>
+                <div class="principle">
+                    <span class="principle-icon">📐</span>
+                    <h4 class="principle-title">Grid-Based</h4>
+                    <p class="principle-text">Everything aligns to 8px</p>
+                </div>
+                <div class="principle">
+                    <span class="principle-icon">✨</span>
+                    <h4 class="principle-title">Clarity</h4>
+                    <p class="principle-text">Simple shapes, clear meaning</p>
+                </div>
+                <div class="principle">
+                    <span class="principle-icon">🕹️</span>
+                    <h4 class="principle-title">Fun</h4>
+                    <p class="principle-text">Nostalgia meets usability</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animations -->
+        <section>
+            <h2>Animations</h2>
+            <div class="animation-grid">
+                <div>
+                    <h3>Walk</h3>
+                    <div class="animation-demo">
+                        <div class="walk-demo"></div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Jump</h3>
+                    <div class="animation-demo">
+                        <div class="jump-demo"></div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Spin</h3>
+                    <div class="animation-demo">
+                        <div class="spin-demo"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Component: Game HUD -->
+        <section>
+            <h2>Special Component: Game HUD</h2>
+            <div class="game-hud">
+                <div class="hud-top">
+                    <div class="hud-score">
+                        <span class="label">SCORE:</span>
+                        <span class="value">0012450</span>
+                    </div>
+                    <div class="hud-lives">
+                        <span class="heart">♥</span>
+                        <span class="heart">♥</span>
+                        <span class="heart empty">♥</span>
+                    </div>
+                </div>
+                <div class="hud-stats">
+                    <div class="stat">
+                        <div class="stat-icon">❤️</div>
+                        <div class="stat-bar">
+                            <div class="stat-fill hp"></div>
+                        </div>
+                        <div class="stat-label">HP</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-icon">💧</div>
+                        <div class="stat-bar">
+                            <div class="stat-fill mp"></div>
+                        </div>
+                        <div class="stat-label">MP</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-bar">
+                            <div class="stat-fill xp"></div>
+                        </div>
+                        <div class="stat-label">XP</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alerts -->
+        <section>
+            <h2>Alert Messages</h2>
+            <div class="alert alert-info">
+                <span class="alert-icon">💬</span>
+                <span>HINT: Press A to jump over obstacles!</span>
+            </div>
+            <div class="alert alert-success">
+                <span class="alert-icon">✓</span>
+                <span>LEVEL COMPLETE! +1000 bonus points!</span>
+            </div>
+            <div class="alert alert-warning">
+                <span class="alert-icon">⚠</span>
+                <span>LOW HEALTH! Find a potion quickly!</span>
+            </div>
+            <div class="alert alert-error">
+                <span class="alert-icon">✗</span>
+                <span>GAME OVER! Continue? 9...8...7...</span>
+            </div>
+        </section>
+
+        <footer>
+            <p class="credits">★ 8-BIT QUEST ★</p>
+            <p>© 1985 PIXEL GAMES INC.</p>
+        </footer>
+    </div>
+</body>
+</html>

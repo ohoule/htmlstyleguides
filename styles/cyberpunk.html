@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON//GRID — Cyberpunk Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-void: #0A0A0F;
+            --color-dark: #12121A;
+            --color-surface: #1A1A25;
+            --color-muted: #2A2A3A;
+            --color-neon-pink: #FF00FF;
+            --color-neon-cyan: #00FFFF;
+            --color-neon-yellow: #FFFF00;
+            --color-neon-green: #39FF14;
+            --color-chrome: #C0C0C0;
+            --color-text: #E0E0E0;
+
+            --color-success: #39FF14;
+            --color-warning: #FFFF00;
+            --color-error: #FF0040;
+            --color-info: #00FFFF;
+
+            --font-display: 'Orbitron', sans-serif;
+            --font-mono: 'Share Tech Mono', monospace;
+
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.5rem;
+            --space-6: 2rem;
+            --space-7: 3rem;
+            --space-8: 4rem;
+
+            --border-radius: 0;
+            --transition: 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-mono);
+            background: var(--color-void);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        /* Scanline effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            z-index: 10000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 15, 0.95);
+            border-bottom: 1px solid var(--color-neon-cyan);
+            padding: var(--space-4) var(--space-6);
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-brand {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--color-neon-cyan);
+            text-decoration: none;
+            text-shadow: 0 0 10px var(--color-neon-cyan);
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-5);
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--color-chrome);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-neon-pink);
+            text-shadow: 0 0 10px var(--color-neon-pink);
+        }
+
+        /* Hero */
+        .hero {
+            padding: calc(var(--space-8) * 2) 0 var(--space-8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                linear-gradient(90deg, transparent 49%, var(--color-muted) 49%, var(--color-muted) 51%, transparent 51%),
+                linear-gradient(transparent 49%, var(--color-muted) 49%, var(--color-muted) 51%, transparent 51%);
+            background-size: 50px 50px;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-glitch {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--color-neon-green);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: var(--space-4);
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            line-height: 1;
+            margin-bottom: var(--space-5);
+        }
+
+        .hero h1 .line1 {
+            color: var(--color-neon-cyan);
+            text-shadow: 0 0 30px var(--color-neon-cyan), 0 0 60px var(--color-neon-cyan);
+        }
+
+        .hero h1 .line2 {
+            color: var(--color-neon-pink);
+            text-shadow: 0 0 30px var(--color-neon-pink), 0 0 60px var(--color-neon-pink);
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--color-chrome);
+            max-width: 500px;
+        }
+
+        /* Sections */
+        section {
+            padding: var(--space-8) 0;
+            border-top: 1px solid var(--color-muted);
+        }
+
+        .section-header {
+            margin-bottom: var(--space-6);
+        }
+
+        .section-id {
+            font-family: var(--font-display);
+            font-size: 0.625rem;
+            color: var(--color-neon-pink);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: var(--space-2);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-chrome);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-4);
+        }
+
+        p {
+            margin-bottom: var(--space-4);
+            color: var(--color-text);
+        }
+
+        /* Colors */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .color-card {
+            border: 1px solid var(--color-muted);
+            background: var(--color-dark);
+        }
+
+        .color-swatch {
+            height: 80px;
+            position: relative;
+        }
+
+        .color-swatch.neon::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            box-shadow: inset 0 0 30px currentColor;
+            opacity: 0.5;
+        }
+
+        .color-info {
+            padding: var(--space-3);
+            border-top: 1px solid var(--color-muted);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--color-chrome);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .color-hex {
+            font-size: 0.6875rem;
+            color: var(--color-text);
+            opacity: 0.6;
+        }
+
+        /* Typography */
+        .type-showcase {
+            background: var(--color-dark);
+            border: 1px solid var(--color-neon-cyan);
+            padding: var(--space-6);
+            margin-bottom: var(--space-6);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--color-neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 20px var(--color-neon-cyan);
+            margin-bottom: var(--space-3);
+        }
+
+        .type-mono {
+            font-size: 1.25rem;
+            color: var(--color-neon-pink);
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-5);
+            padding: var(--space-4);
+            border: 1px solid var(--color-muted);
+            background: var(--color-dark);
+        }
+
+        .type-label {
+            width: 80px;
+            font-family: var(--font-display);
+            font-size: 0.625rem;
+            color: var(--color-neon-green);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Spacing */
+        .spacing-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            align-items: flex-end;
+        }
+
+        .spacing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .spacing-box {
+            background: linear-gradient(135deg, var(--color-neon-cyan), var(--color-neon-pink));
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+        }
+
+        .spacing-label {
+            font-size: 0.6875rem;
+            color: var(--color-chrome);
+        }
+
+        /* Buttons */
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .btn {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: var(--space-3) var(--space-5);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+
+        .btn-primary {
+            background: var(--color-neon-cyan);
+            color: var(--color-void);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--color-neon-pink);
+            color: var(--color-void);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 0 40px rgba(255, 0, 255, 0.8);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-neon-cyan);
+            border: 1px solid var(--color-neon-cyan);
+            clip-path: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--color-neon-cyan);
+            color: var(--color-void);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-chrome);
+            clip-path: none;
+        }
+
+        .btn-ghost:hover {
+            color: var(--color-neon-pink);
+            text-shadow: 0 0 10px var(--color-neon-pink);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-5);
+        }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-neon-green);
+            margin-bottom: var(--space-2);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-3) var(--space-4);
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            background: var(--color-dark);
+            border: 1px solid var(--color-muted);
+            color: var(--color-text);
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .form-input::placeholder {
+            color: var(--color-muted);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-5);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .card {
+            background: var(--color-dark);
+            border: 1px solid var(--color-muted);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-neon-cyan), var(--color-neon-pink));
+        }
+
+        .card:hover {
+            border-color: var(--color-neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .card-header {
+            padding: var(--space-4);
+            border-bottom: 1px solid var(--color-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-id {
+            font-family: var(--font-display);
+            font-size: 0.6875rem;
+            color: var(--color-neon-cyan);
+            letter-spacing: 0.1em;
+        }
+
+        .card-status {
+            font-family: var(--font-display);
+            font-size: 0.5625rem;
+            padding: var(--space-1) var(--space-2);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .status-online {
+            background: var(--color-neon-green);
+            color: var(--color-void);
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+        }
+
+        .status-offline {
+            background: var(--color-error);
+            color: var(--color-void);
+        }
+
+        .card-body {
+            padding: var(--space-5);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            color: var(--color-chrome);
+            text-transform: uppercase;
+            margin-bottom: var(--space-2);
+        }
+
+        .card-text {
+            font-size: 0.875rem;
+            color: var(--color-text);
+            opacity: 0.8;
+        }
+
+        /* Table */
+        .table-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--color-muted);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--color-surface);
+            padding: var(--space-4);
+            text-align: left;
+            font-family: var(--font-display);
+            font-size: 0.625rem;
+            color: var(--color-neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            border-bottom: 1px solid var(--color-neon-cyan);
+        }
+
+        td {
+            padding: var(--space-4);
+            border-bottom: 1px solid var(--color-muted);
+            font-size: 0.875rem;
+        }
+
+        tr:hover td {
+            background: rgba(0, 255, 255, 0.05);
+        }
+
+        /* Badges */
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .badge {
+            font-family: var(--font-display);
+            font-size: 0.5625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: var(--space-1) var(--space-3);
+        }
+
+        .badge-cyan {
+            background: var(--color-neon-cyan);
+            color: var(--color-void);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .badge-pink {
+            background: var(--color-neon-pink);
+            color: var(--color-void);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+
+        .badge-green {
+            background: var(--color-neon-green);
+            color: var(--color-void);
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+        }
+
+        .badge-yellow {
+            background: var(--color-neon-yellow);
+            color: var(--color-void);
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 1px solid var(--color-chrome);
+            color: var(--color-chrome);
+        }
+
+        /* Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .principle {
+            padding: var(--space-5);
+            background: var(--color-dark);
+            border: 1px solid var(--color-muted);
+            border-left: 3px solid var(--color-neon-pink);
+        }
+
+        .principle-number {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--color-neon-pink);
+            text-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+            margin-bottom: var(--space-3);
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            color: var(--color-chrome);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-text {
+            font-size: 0.875rem;
+            color: var(--color-text);
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .animation-demo {
+            padding: var(--space-5);
+            background: var(--color-dark);
+            border: 1px solid var(--color-muted);
+            text-align: center;
+        }
+
+        .animation-box {
+            width: 40px;
+            height: 40px;
+            background: var(--color-neon-cyan);
+            margin: 0 auto var(--space-3);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .demo-glitch:hover .animation-box {
+            animation: glitch 0.3s ease infinite;
+        }
+
+        .demo-flicker:hover .animation-box {
+            animation: flicker 0.5s ease infinite;
+        }
+
+        .demo-scan:hover .animation-box {
+            animation: scan 1s linear infinite;
+        }
+
+        .demo-pulse:hover .animation-box {
+            animation: neonPulse 0.8s ease infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(2px, -2px); }
+            60% { transform: translate(-2px, -2px); }
+            80% { transform: translate(2px, 2px); }
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+            52% { opacity: 1; }
+            54% { opacity: 0.7; }
+        }
+
+        @keyframes scan {
+            0% { box-shadow: 0 -40px 20px rgba(0, 255, 255, 0.3); }
+            100% { box-shadow: 0 40px 20px rgba(0, 255, 255, 0.3); }
+        }
+
+        @keyframes neonPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(0, 255, 255, 0.8), 0 0 60px rgba(255, 0, 255, 0.5); }
+        }
+
+        .animation-name {
+            font-family: var(--font-display);
+            font-size: 0.625rem;
+            color: var(--color-chrome);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Special: Terminal */
+        .terminal {
+            background: var(--color-void);
+            border: 1px solid var(--color-neon-green);
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
+        }
+
+        .terminal-header {
+            background: var(--color-dark);
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 1px solid var(--color-muted);
+            display: flex;
+            gap: var(--space-2);
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #FF5F56; }
+        .terminal-dot.yellow { background: #FFBD2E; }
+        .terminal-dot.green { background: #27CA40; }
+
+        .terminal-body {
+            padding: var(--space-5);
+            font-size: 0.875rem;
+            line-height: 1.8;
+        }
+
+        .terminal-line {
+            margin-bottom: var(--space-2);
+        }
+
+        .terminal-prompt {
+            color: var(--color-neon-green);
+        }
+
+        .terminal-command {
+            color: var(--color-chrome);
+        }
+
+        .terminal-output {
+            color: var(--color-text);
+            opacity: 0.7;
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: var(--color-neon-green);
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-4);
+            margin-bottom: var(--space-4);
+            border-left: 3px solid;
+            display: flex;
+            gap: var(--space-3);
+        }
+
+        .alert-title {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-1);
+        }
+
+        .alert-text {
+            font-size: 0.875rem;
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .alert-info {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: var(--color-neon-cyan);
+        }
+        .alert-info .alert-title { color: var(--color-neon-cyan); }
+
+        .alert-success {
+            background: rgba(57, 255, 20, 0.1);
+            border-color: var(--color-neon-green);
+        }
+        .alert-success .alert-title { color: var(--color-neon-green); }
+
+        .alert-warning {
+            background: rgba(255, 255, 0, 0.1);
+            border-color: var(--color-neon-yellow);
+        }
+        .alert-warning .alert-title { color: var(--color-neon-yellow); }
+
+        .alert-error {
+            background: rgba(255, 0, 64, 0.1);
+            border-color: var(--color-error);
+        }
+        .alert-error .alert-title { color: var(--color-error); }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-neon-cyan);
+            padding: var(--space-7) 0;
+            margin-top: var(--space-8);
+            text-align: center;
+            box-shadow: 0 -10px 30px rgba(0, 255, 255, 0.1);
+        }
+
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: var(--color-neon-cyan);
+            text-shadow: 0 0 10px var(--color-neon-cyan);
+            letter-spacing: 0.2em;
+        }
+
+        .footer-text {
+            font-size: 0.75rem;
+            color: var(--color-chrome);
+            margin-top: var(--space-2);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .form-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">NEON//GRID</a>
+            <ul class="nav-links">
+                <li><a href="#colors">Colors</a></li>
+                <li><a href="#type">Typography</a></li>
+                <li><a href="#components">Components</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="hero">
+            <div class="hero-content">
+                <div class="hero-glitch">[SYS_INIT] Loading design_matrix...</div>
+                <h1>
+                    <span class="line1">NEON</span><br>
+                    <span class="line2">//GRID</span>
+                </h1>
+                <p>A high-voltage design system for the digital underground. Jack in, tune out, and build the future.</p>
+            </div>
+        </header>
+
+        <!-- Colors -->
+        <section id="colors">
+            <div class="section-header">
+                <div class="section-id">[01] // Color.Matrix</div>
+                <h2>Color Palette</h2>
+            </div>
+            <p>High-contrast neons against the void. Maximum visibility, zero subtlety.</p>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-void);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Void</div>
+                        <div class="color-hex">#0A0A0F</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch neon" style="background: var(--color-neon-cyan); color: var(--color-neon-cyan);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Neon Cyan</div>
+                        <div class="color-hex">#00FFFF</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch neon" style="background: var(--color-neon-pink); color: var(--color-neon-pink);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Neon Pink</div>
+                        <div class="color-hex">#FF00FF</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch neon" style="background: var(--color-neon-green); color: var(--color-neon-green);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Neon Green</div>
+                        <div class="color-hex">#39FF14</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch neon" style="background: var(--color-neon-yellow); color: var(--color-neon-yellow);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Neon Yellow</div>
+                        <div class="color-hex">#FFFF00</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-chrome);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Chrome</div>
+                        <div class="color-hex">#C0C0C0</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section id="type">
+            <div class="section-header">
+                <div class="section-id">[02] // Type.Face</div>
+                <h2>Typography</h2>
+            </div>
+            <div class="type-showcase">
+                <div class="type-display">ORBITRON</div>
+                <div class="type-mono">Share Tech Mono // System Font</div>
+            </div>
+            <div class="type-scale">
+                <div class="type-row">
+                    <span class="type-label">DISPLAY</span>
+                    <span style="font-family: var(--font-display); font-size: 2rem; font-weight: 900; color: var(--color-neon-cyan);">SYSTEM_ONLINE</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">HEADER</span>
+                    <span style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--color-chrome);">NEURAL_INTERFACE</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">BODY</span>
+                    <span style="font-family: var(--font-mono); font-size: 1rem; color: var(--color-text);">The streets find their own uses for things.</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">CODE</span>
+                    <span style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--color-neon-green);">$ ./hack_the_planet.sh --verbose</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacing -->
+        <section>
+            <div class="section-header">
+                <div class="section-id">[03] // Grid.Space</div>
+                <h2>Spacing Scale</h2>
+            </div>
+            <div class="spacing-grid">
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 4px; height: 4px;"></div>
+                    <span class="spacing-label">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 8px; height: 8px;"></div>
+                    <span class="spacing-label">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 16px; height: 16px;"></div>
+                    <span class="spacing-label">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 24px; height: 24px;"></div>
+                    <span class="spacing-label">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 32px; height: 32px;"></div>
+                    <span class="spacing-label">32px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 48px; height: 48px;"></div>
+                    <span class="spacing-label">48px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 64px; height: 64px;"></div>
+                    <span class="spacing-label">64px</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Buttons -->
+        <section>
+            <div class="section-header">
+                <div class="section-id">[04] // Input.Actions</div>
+                <h2>Buttons</h2>
+            </div>
+            <h3>Primary Actions</h3>
+            <div class="button-row">
+                <button class="btn btn-primary">JACK IN</button>
+                <button class="btn btn-secondary">OVERRIDE</button>
+                <button class="btn btn-outline">DECRYPT</button>
+                <button class="btn btn-ghost">ABORT</button>
+            </div>
+        </section>
+
+        <!-- Forms -->
+        <section>
+            <div class="section-header">
+                <div class="section-id">[05] // Data.Input</div>
+                <h2>Forms</h2>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">User.Handle</label>
+                    <input type="text" class="form-input" placeholder="Enter handle...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Access.Code</label>
+                    <input type="password" class="form-input" placeholder="••••••••">
+                </div>
+            </div>
+            <button class="btn btn-primary">AUTHENTICATE</button>
+        </section>
+
+        <!-- Cards -->
+        <section id="components">
+            <div class="section-header">
+                <div class="section-id">[06] // Data.Cards</div>
+                <h2>Cards</h2>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-id">NODE_001</span>
+                        <span class="card-status status-online">ONLINE</span>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Neural Interface</h4>
+                        <p class="card-text">Direct cortical connection established. Bandwidth: 10TB/s. Latency: 0.3ms.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-id">NODE_002</span>
+                        <span class="card-status status-offline">OFFLINE</span>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Firewall Breach</h4>
+                        <p class="card-text">ICE detected. Initiating countermeasures. ETA: 12 seconds.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Table -->
+        <section>
+            <div class="section-header">
+                <div class="section-id">[07] // Data.Table</div>
+                <h2>Data Table</h2>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Node.ID</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Uptime</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: var(--color-neon-cyan);">NX-7742</td>
+                            <td>Server</td>
+                            <td><span class="badge badge-green">ACTIVE</span></td>
+                            <td>99.97%</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--color-neon-cyan);">NX-7743</td>
+                            <td>Router</td>
+                            <td><span class="badge badge-yellow">WARNING</span></td>
+                            <td>94.21%</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--color-neon-cyan);">NX-7744</td>
+                            <td>Terminal</td>
+                            <td><span class="badge badge-cyan">STANDBY</span></td>
+                            <td>100%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Badges -->
+        <section>
+            <div class="section-header">
+                <div class="section-id">[08] // Status.Tags</div>
+                <h2>Badges</h2>
+            </div>
+            <div class="badge-group">
+                <span class="badge badge-cyan">ACTIVE</span>
+                <span class="badge badge-pink">PRIORITY</span>
+                <span class="badge badge-green">SECURE</span>
+                <span class="badge badge-yellow">WARNING</span>
+                <span class="badge badge-outline">ARCHIVED</span>
+            </div>
+        </section>
+
+        <!-- Principles -->
+        <section>
+            <div class="section-header">
+                <div class="section-id">[09] // Core.Values</div>
+                <h2>Design Principles</h2>
+            </div>
+            <div class="principles-grid">
+                <div class="principle">
+                    <div class="principle-number">01</div>
+                    <h4 class="principle-title">High Contrast</h4>
+                    <p class="principle-text">Neon against void. Maximum visibility in any environment.</p>
+                </div>
+                <div class="principle">
+                    <div class="principle-number">02</div>
+                    <h4 class="principle-title">Information Dense</h4>
+                    <p class="principle-text">Every pixel carries data. No wasted space.</p>
+                </div>
+                <div class="principle">
+                    <div class="principle-number">03</div>
+                    <h4 class="principle-title">Tech Aesthetic</h4>
+                    <p class="principle-text">The interface is the art. Form follows function.</p>
+                </div>
+                <div class="principle">
+                    <div class="principle-number">04</div>
+                    <h4 class="principle-title">Glitch Ready</h4>
+                    <p class="principle-text">Embrace imperfection. Digital decay is beautiful.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animations -->
+        <section>
+            <div class="section-header">
+                <div class="section-id">[10] // Motion.FX</div>
+                <h2>Animations</h2>
+            </div>
+            <div class="animation-grid">
+                <div class="animation-demo demo-glitch">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Glitch</div>
+                </div>
+                <div class="animation-demo demo-flicker">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Flicker</div>
+                </div>
+                <div class="animation-demo demo-scan">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Scan</div>
+                </div>
+                <div class="animation-demo demo-pulse">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Pulse</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special: Terminal -->
+        <section>
+            <div class="section-header">
+                <div class="section-id">[11] // Sys.Terminal</div>
+                <h2>Terminal</h2>
+            </div>
+            <div class="terminal">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">root@neon:~$ </span>
+                        <span class="terminal-command">./initialize_grid.sh</span>
+                    </div>
+                    <div class="terminal-line terminal-output">[OK] Neural link established</div>
+                    <div class="terminal-line terminal-output">[OK] Firewall bypassed</div>
+                    <div class="terminal-line terminal-output">[OK] System ready</div>
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">root@neon:~$ </span>
+                        <span class="terminal-cursor"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alerts -->
+        <section>
+            <div class="section-header">
+                <div class="section-id">[12] // Sys.Alerts</div>
+                <h2>Alert Messages</h2>
+            </div>
+            <div class="alert alert-info">
+                <div>
+                    <div class="alert-title">System Update</div>
+                    <p class="alert-text">New firmware available. Download initiating...</p>
+                </div>
+            </div>
+            <div class="alert alert-success">
+                <div>
+                    <div class="alert-title">Connection Secure</div>
+                    <p class="alert-text">Encrypted tunnel established. 256-bit AES active.</p>
+                </div>
+            </div>
+            <div class="alert alert-warning">
+                <div>
+                    <div class="alert-title">ICE Detected</div>
+                    <p class="alert-text">Intrusion countermeasures active. Proceed with caution.</p>
+                </div>
+            </div>
+            <div class="alert alert-error">
+                <div>
+                    <div class="alert-title">Breach Alert</div>
+                    <p class="alert-text">Unauthorized access attempt. Trace initiated.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-brand">NEON//GRID</div>
+            <div class="footer-text">Design System v2.0.77 // The Future Is Now</div>
+        </div>
+    </footer>
+</body>
+</html>
