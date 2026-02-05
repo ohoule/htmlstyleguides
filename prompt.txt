@@ -1,0 +1,42 @@
+First, read the frontend-design skill at /mnt/skills/public/frontend-design/SKILL.md before starting.
+
+Create a complete, single-file HTML style guide/design system page with a randomly generated aesthetic theme.
+
+THEME GENERATION:
+Pick a unique, cohesive visual theme at random. Examples include (but don't limit yourself to): Art Deco, Brutalist, Vaporwave, Nordic Minimalist, Steampunk, Botanical, Memphis Design, Japanese Zen, Retro-Futurism, Glassmorphism, Dark Academia, Tropical, Industrial, Psychedelic, Space Age, Gothic, Swiss/International, Bauhaus, Cottagecore, Y2K, etc.
+
+Invent a creative name and version number for the design system that fits the theme.
+
+REQUIRED SECTIONS (numbered):
+1. **Color Palette** - Primary colors, accent colors, and surface/background colors with hex codes
+2. **Typography** - 2-3 Google Fonts that match the aesthetic, showing display, heading, body, and mono styles with sizes/weights
+3. **Spacing Scale** - Visual representation of spacing units (base unit of your choice)
+4. **Buttons** - Multiple variants (primary, secondary, danger, etc.), sizes (sm, md, lg), and states (hover, disabled, special effects)
+5. **Forms** - Input fields, selects, textareas with labels, placeholders, error states, and focus styles
+6. **Cards** - 2-3 card variants for displaying grouped content
+7. **Data Table** - Styled table with mock data relevant to the theme
+8. **Badges/Tags** - Status indicators in outline and filled variants
+9. **Design Principles** - 4-6 principles that define the aesthetic philosophy
+10. **Animation Effects** - CSS animations that fit the theme (hover effects, transitions, special FX)
+11. **Terminal/Special Component** - A unique component that fits the theme (could be a terminal, quote block, media player, etc.)
+12. **Alert Messages** - Success, info, warning, and error states
+
+TECHNICAL REQUIREMENTS:
+- Single HTML file with embedded CSS and minimal JS if needed
+- Import Google Fonts via CDN
+- Fully responsive design
+- CSS custom properties (variables) for all colors, fonts, and spacing
+- Smooth transitions and hover effects throughout
+- A cohesive header/hero section introducing the design system
+- A themed footer with decorative elements
+- Add atmospheric details (subtle patterns, gradients, decorative elements) that reinforce the theme
+- Include a floating navigation or section indicators
+
+STYLE RULES:
+- All components must feel like they belong to the same visual universe
+- Use the theme's vocabulary in all placeholder text, labels, and mock content
+- Color choices should be harmonious and purposeful
+- Include at least one "special effect" unique to the theme
+- The page itself should BE the design system (not just document it)
+
+Output only the complete HTML code, no explanations.
