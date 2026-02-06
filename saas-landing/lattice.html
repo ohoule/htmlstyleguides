@@ -1,0 +1,2149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lattice v1.0 — PainOnSocial Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            /* Brand — PainOnSocial */
+            --teal: #0891B2;
+            --teal-light: #22D3EE;
+            --teal-dark: #0E7490;
+            --orange: #F97316;
+            --purple: #A855F7;
+            --teal-glow: rgba(8,145,178,0.15);
+            --teal-glow-strong: rgba(8,145,178,0.25);
+
+            /* Indigo — Secondary Accent */
+            --indigo: #4F46E5;
+            --indigo-light: #818CF8;
+            --indigo-glow: rgba(79,70,229,0.15);
+            --indigo-glow-strong: rgba(79,70,229,0.3);
+            --indigo-border: rgba(79,70,229,0.35);
+
+            /* Dark Surfaces */
+            --bg-deepest: #0F0F1A;
+            --bg-dark: #16162A;
+            --bg-medium: #1E1E35;
+            --card-bg: rgba(30,30,53,0.6);
+            --card-bg-solid: #1C1C34;
+            --card-border: rgba(255,255,255,0.06);
+            --card-border-hover: rgba(34,211,238,0.25);
+
+            /* Text */
+            --text-1: #EEEEF5;
+            --text-2: #9494AD;
+            --text-3: #6B6B85;
+            --border: rgba(255,255,255,0.07);
+            --border-subtle: rgba(255,255,255,0.03);
+
+            /* Semantic */
+            --success: #16A34A;
+            --success-bg: rgba(22,163,74,0.1);
+            --success-border: rgba(22,163,74,0.3);
+            --warning: #EAB308;
+            --warning-bg: rgba(234,179,8,0.1);
+            --warning-border: rgba(234,179,8,0.3);
+            --error: #EF4444;
+            --error-bg: rgba(239,68,68,0.1);
+            --error-border: rgba(239,68,68,0.3);
+            --info: #0891B2;
+            --info-bg: rgba(8,145,178,0.1);
+            --info-border: rgba(8,145,178,0.3);
+
+            /* Typography */
+            --font-display: 'Syne', system-ui, sans-serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+            --font-mono: 'Space Mono', monospace;
+
+            /* Spacing */
+            --sp-1: 4px;
+            --sp-2: 8px;
+            --sp-3: 12px;
+            --sp-4: 16px;
+            --sp-5: 24px;
+            --sp-6: 32px;
+            --sp-7: 48px;
+            --sp-8: 64px;
+            --sp-9: 96px;
+            --sp-10: 128px;
+
+            /* Radius — geometric, minimal */
+            --radius-sm: 4px;
+            --radius-md: 6px;
+            --radius-lg: 8px;
+            --radius-xl: 12px;
+        }
+
+        /* ========== BASE ========== */
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-deepest);
+            color: var(--text-1);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        ::selection { background: rgba(79,70,229,0.35); color: #fff; }
+
+        /* Diamond lattice background pattern */
+        .lattice-bg {
+            background-image:
+                linear-gradient(45deg, rgba(79,70,229,0.04) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(79,70,229,0.04) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(79,70,229,0.04) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(79,70,229,0.04) 75%);
+            background-size: 40px 40px;
+            background-position: 0 0, 0 20px, 20px -20px, -20px 0;
+        }
+
+        .lattice-bg-strong {
+            background-image:
+                linear-gradient(45deg, rgba(79,70,229,0.07) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(79,70,229,0.07) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(79,70,229,0.07) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(79,70,229,0.07) 75%);
+            background-size: 40px 40px;
+            background-position: 0 0, 0 20px, 20px -20px, -20px 0;
+        }
+
+        .lattice-bg-teal {
+            background-image:
+                linear-gradient(45deg, rgba(8,145,178,0.04) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(8,145,178,0.04) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(8,145,178,0.04) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(8,145,178,0.04) 75%);
+            background-size: 40px 40px;
+            background-position: 0 0, 0 20px, 20px -20px, -20px 0;
+        }
+
+        /* Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--sp-5); }
+        .container-sm { max-width: 900px; margin: 0 auto; padding: 0 var(--sp-5); }
+
+        /* Section wrapper */
+        .section { padding: var(--sp-9) 0; position: relative; }
+        .section-tight { padding: var(--sp-7) 0; position: relative; }
+
+        /* Diamond marker for section numbers */
+        .diamond-marker {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--indigo-glow);
+            border: 1px solid var(--indigo-border);
+            transform: rotate(45deg);
+            margin-bottom: var(--sp-4);
+        }
+        .diamond-marker span {
+            transform: rotate(-45deg);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--indigo-light);
+            letter-spacing: 0;
+        }
+
+        /* Section label */
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--indigo-light);
+            margin-bottom: var(--sp-3);
+        }
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-1);
+            margin-bottom: var(--sp-5);
+            line-height: 1.2;
+        }
+        .section-desc {
+            color: var(--text-2);
+            max-width: 600px;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* Chevron divider */
+        .chevron-divider {
+            width: 100%;
+            height: 24px;
+            position: relative;
+            overflow: hidden;
+            margin: var(--sp-7) 0;
+        }
+        .chevron-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--border);
+        }
+        .chevron-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            border-right: 1px solid var(--indigo);
+            border-bottom: 1px solid var(--indigo);
+            transform: translate(-50%, -50%) rotate(45deg);
+            background: var(--bg-deepest);
+        }
+
+        .chevron-divider-wide {
+            width: 100%;
+            height: 32px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin: var(--sp-7) 0;
+        }
+        .chevron-divider-wide::before,
+        .chevron-divider-wide::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* Art-deco card top border */
+        .deco-border-top {
+            position: relative;
+        }
+        .deco-border-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--indigo) 0px,
+                var(--indigo) 8px,
+                transparent 8px,
+                transparent 12px,
+                var(--teal) 12px,
+                var(--teal) 20px,
+                transparent 20px,
+                transparent 24px
+            );
+        }
+
+        /* Card base */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: var(--sp-6);
+            backdrop-filter: blur(8px);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            border-color: var(--card-border-hover);
+            box-shadow: 0 0 24px rgba(8,145,178,0.06);
+        }
+
+        /* ========== 01. NAVIGATION ========== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: var(--sp-4) 0;
+            background: rgba(15,15,26,0.85);
+            backdrop-filter: blur(16px) saturate(1.4);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--sp-5);
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+            text-decoration: none;
+        }
+        .nav-logo-text {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text-1);
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-6);
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: 14px;
+            color: var(--text-2);
+            text-decoration: none;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+        .nav-links a:hover { color: var(--text-1); }
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            padding: 8px 20px;
+            background: var(--teal);
+            color: #fff !important;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 13px;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .nav-cta:hover {
+            background: var(--teal-light);
+            box-shadow: 0 0 20px var(--teal-glow);
+        }
+        .nav-mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .nav-mobile-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text-2);
+            border-radius: 1px;
+            transition: all 0.3s;
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-mobile-toggle { display: flex; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(15,15,26,0.97);
+                backdrop-filter: blur(16px);
+                padding: var(--sp-5);
+                border-bottom: 1px solid var(--border);
+                gap: var(--sp-4);
+            }
+        }
+
+        /* ========== 02. HERO ========== */
+        .hero {
+            padding: 160px 0 var(--sp-9);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-lattice {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(45deg, rgba(79,70,229,0.06) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(79,70,229,0.06) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(79,70,229,0.06) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(79,70,229,0.06) 75%);
+            background-size: 48px 48px;
+            background-position: 0 0, 0 24px, 24px -24px, -24px 0;
+            mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 70%);
+        }
+        .hero-diamond {
+            position: absolute;
+            top: 80px;
+            right: 8%;
+            width: 140px;
+            height: 140px;
+            border: 1px solid rgba(79,70,229,0.2);
+            transform: rotate(45deg);
+            opacity: 0.5;
+        }
+        .hero-diamond::before {
+            content: '';
+            position: absolute;
+            inset: 16px;
+            border: 1px solid rgba(8,145,178,0.15);
+        }
+        .hero-diamond::after {
+            content: '';
+            position: absolute;
+            inset: 32px;
+            border: 1px solid rgba(79,70,229,0.12);
+            background: rgba(79,70,229,0.03);
+        }
+        .hero-diamond-sm {
+            position: absolute;
+            bottom: 120px;
+            left: 5%;
+            width: 60px;
+            height: 60px;
+            border: 1px solid rgba(8,145,178,0.15);
+            transform: rotate(45deg);
+            opacity: 0.4;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 780px;
+        }
+        .hero-overline {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--indigo-light);
+            margin-bottom: var(--sp-5);
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+        .hero-overline .diamond-inline {
+            width: 8px;
+            height: 8px;
+            background: var(--indigo);
+            transform: rotate(45deg);
+            display: inline-block;
+        }
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(40px, 6vw, 64px);
+            font-weight: 800;
+            line-height: 1.08;
+            color: var(--text-1);
+            margin-bottom: var(--sp-5);
+            letter-spacing: -0.02em;
+        }
+        .hero h1 .teal { color: var(--teal-light); }
+        .hero-sub {
+            font-size: 18px;
+            color: var(--text-2);
+            line-height: 1.7;
+            max-width: 560px;
+            margin-bottom: var(--sp-7);
+        }
+        .hero-actions {
+            display: flex;
+            gap: var(--sp-4);
+            margin-bottom: var(--sp-7);
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            padding: 14px 32px;
+            background: var(--teal);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            background: var(--teal-light);
+            box-shadow: 0 4px 24px var(--teal-glow-strong), 0 0 0 1px rgba(34,211,238,0.2);
+            transform: translateY(-1px);
+        }
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            padding: 14px 32px;
+            background: transparent;
+            color: var(--text-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+        }
+        .btn-ghost:hover {
+            border-color: var(--indigo);
+            color: var(--text-1);
+            background: var(--indigo-glow);
+        }
+        .hero-metrics {
+            display: flex;
+            gap: var(--sp-7);
+            flex-wrap: wrap;
+        }
+        .hero-metric {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-3);
+        }
+        .hero-metric strong {
+            color: var(--teal-light);
+            font-weight: 700;
+        }
+
+        /* ========== 03. SOCIAL PROOF ========== */
+        .social-proof {
+            padding: var(--sp-7) 0;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .proof-grid {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp-6);
+            flex-wrap: wrap;
+        }
+        .tier-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            padding: 6px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .tier-badge.explorer {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-2);
+        }
+        .tier-badge.scout {
+            background: var(--teal-glow);
+            border: 1px solid rgba(8,145,178,0.3);
+            color: var(--teal-light);
+        }
+        .tier-badge.prospector {
+            background: var(--indigo-glow);
+            border: 1px solid var(--indigo-border);
+            color: var(--indigo-light);
+        }
+        .proof-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 500;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            color: var(--text-2);
+        }
+        .proof-pill .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--teal);
+        }
+        .trusted-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-3);
+        }
+        .trust-logos {
+            display: flex;
+            gap: var(--sp-7);
+            align-items: center;
+            justify-content: center;
+            margin-top: var(--sp-5);
+            flex-wrap: wrap;
+        }
+        .trust-logo {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-3);
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+        .trust-logo:hover { opacity: 0.8; }
+
+        /* ========== 04. FEATURES ========== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--sp-5);
+        }
+        @media (max-width: 640px) {
+            .features-grid { grid-template-columns: 1fr; }
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: var(--sp-6);
+            position: relative;
+            transition: all 0.3s;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--indigo) 0px,
+                var(--indigo) 6px,
+                transparent 6px,
+                transparent 10px
+            );
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        .feature-card:hover {
+            border-color: var(--teal);
+            box-shadow: 0 4px 32px rgba(8,145,178,0.08);
+        }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-num {
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--indigo-glow);
+            border: 1px solid var(--indigo-border);
+            transform: rotate(45deg);
+            margin-bottom: var(--sp-4);
+        }
+        .feature-num span {
+            transform: rotate(-45deg);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--indigo-light);
+        }
+        .feature-card h3 {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: var(--sp-3);
+            color: var(--text-1);
+        }
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-2);
+            line-height: 1.7;
+        }
+
+        /* ========== 05. STATS ========== */
+        .stats-section { background: var(--bg-dark); }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+        @media (max-width: 640px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        .stat-cell {
+            padding: var(--sp-6);
+            text-align: center;
+            border-right: 1px solid var(--border);
+            position: relative;
+        }
+        .stat-cell:last-child { border-right: none; }
+        @media (max-width: 640px) {
+            .stat-cell:nth-child(2) { border-right: none; }
+            .stat-cell:nth-child(1), .stat-cell:nth-child(2) { border-bottom: 1px solid var(--border); }
+        }
+        .stat-num {
+            font-family: var(--font-display);
+            font-size: 40px;
+            font-weight: 800;
+            color: var(--teal-light);
+            line-height: 1;
+            margin-bottom: var(--sp-2);
+        }
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-3);
+        }
+
+        /* ========== 06. TESTIMONIALS ========== */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--sp-5);
+        }
+        @media (max-width: 640px) {
+            .testimonials-grid { grid-template-columns: 1fr; }
+        }
+        .testimonial-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: var(--sp-6);
+            border-left: 3px solid var(--teal);
+            position: relative;
+        }
+        .testimonial-quote {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-1);
+            line-height: 1.5;
+            margin-bottom: var(--sp-5);
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+        .testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            background: var(--indigo-glow);
+            border: 1px solid var(--indigo-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--indigo-light);
+        }
+        .testimonial-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-1);
+        }
+        .testimonial-role {
+            font-size: 12px;
+            color: var(--text-3);
+        }
+
+        /* ========== 07. PRICING ========== */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--sp-5);
+            align-items: start;
+        }
+        @media (max-width: 768px) {
+            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+        }
+        .pricing-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: var(--sp-6);
+            position: relative;
+            transition: border-color 0.3s;
+        }
+        .pricing-card.featured {
+            border-color: var(--teal);
+            box-shadow: 0 0 40px rgba(8,145,178,0.08);
+        }
+        .pricing-popular {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .pricing-popular-diamond {
+            width: 24px;
+            height: 24px;
+            background: var(--teal);
+            transform: rotate(45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pricing-popular-diamond svg {
+            transform: rotate(-45deg);
+            width: 12px;
+            height: 12px;
+        }
+        .pricing-popular-text {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--teal-light);
+            white-space: nowrap;
+        }
+        .pricing-tier {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-1);
+            margin-bottom: var(--sp-2);
+        }
+        .pricing-desc {
+            font-size: 13px;
+            color: var(--text-3);
+            margin-bottom: var(--sp-5);
+            line-height: 1.5;
+        }
+        .pricing-amount {
+            font-family: var(--font-display);
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--text-1);
+            line-height: 1;
+            margin-bottom: var(--sp-1);
+        }
+        .pricing-amount span {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-3);
+        }
+        .pricing-period {
+            font-size: 13px;
+            color: var(--text-3);
+            margin-bottom: var(--sp-5);
+        }
+        .pricing-features {
+            list-style: none;
+            margin-bottom: var(--sp-6);
+        }
+        .pricing-features li {
+            font-size: 14px;
+            color: var(--text-2);
+            padding: var(--sp-2) 0;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            gap: var(--sp-2);
+        }
+        .pricing-features li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--indigo);
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+        .pricing-card.featured .pricing-features li::before {
+            background: var(--teal);
+        }
+        .btn-full {
+            width: 100%;
+            justify-content: center;
+        }
+        .btn-indigo {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            padding: 14px 32px;
+            background: var(--indigo-glow);
+            color: var(--indigo-light);
+            border: 1px solid var(--indigo-border);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+        }
+        .btn-indigo:hover {
+            background: var(--indigo-glow-strong);
+            border-color: var(--indigo-light);
+            color: #fff;
+        }
+
+        /* ========== 08. FORMS ========== */
+        .form-group { margin-bottom: var(--sp-5); }
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-2);
+            margin-bottom: var(--sp-2);
+            letter-spacing: 0.02em;
+        }
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-1);
+            font-family: var(--font-body);
+            font-size: 14px;
+            transition: all 0.2s;
+            outline: none;
+        }
+        .form-input:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px var(--teal-glow);
+        }
+        .form-input::placeholder { color: var(--text-3); }
+        .form-input.error {
+            border-color: var(--error);
+            box-shadow: 0 0 0 3px var(--error-bg);
+        }
+        .form-error {
+            font-size: 12px;
+            color: var(--error);
+            margin-top: var(--sp-1);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .form-hint {
+            font-size: 12px;
+            color: var(--text-3);
+            margin-top: var(--sp-1);
+        }
+        textarea.form-input { resize: vertical; min-height: 100px; }
+        select.form-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B6B85' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+        }
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--sp-3) 0;
+        }
+        .toggle-label { font-size: 14px; color: var(--text-2); }
+        .toggle-switch {
+            width: 44px;
+            height: 24px;
+            background: var(--bg-medium);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 16px;
+            height: 16px;
+            background: var(--text-3);
+            border-radius: 50%;
+            transition: all 0.25s;
+        }
+        .toggle-switch.active {
+            background: var(--teal);
+            border-color: var(--teal);
+        }
+        .toggle-switch.active::after {
+            left: 23px;
+            background: #fff;
+        }
+        .signup-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: var(--sp-6);
+            position: relative;
+            overflow: hidden;
+        }
+        .signup-box-lattice {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(45deg, rgba(79,70,229,0.05) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(79,70,229,0.05) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(79,70,229,0.05) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(79,70,229,0.05) 75%);
+            background-size: 32px 32px;
+            background-position: 0 0, 0 16px, 16px -16px, -16px 0;
+            pointer-events: none;
+        }
+        .signup-inline {
+            display: flex;
+            gap: var(--sp-3);
+            position: relative;
+            z-index: 2;
+        }
+        .signup-inline .form-input { flex: 1; }
+        @media (max-width: 480px) {
+            .signup-inline { flex-direction: column; }
+        }
+
+        /* ========== 09. FOOTER ========== */
+        .footer {
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            padding: var(--sp-8) 0 var(--sp-6);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: var(--sp-7);
+            margin-bottom: var(--sp-7);
+        }
+        @media (max-width: 640px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--sp-5); }
+        }
+        .footer-brand-desc {
+            font-size: 13px;
+            color: var(--text-3);
+            line-height: 1.7;
+            margin-top: var(--sp-3);
+        }
+        .footer-col h4 {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-1);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--sp-4);
+        }
+        .footer-col a {
+            display: block;
+            font-size: 13px;
+            color: var(--text-3);
+            text-decoration: none;
+            padding: 4px 0;
+            transition: color 0.2s;
+        }
+        .footer-col a:hover { color: var(--teal-light); }
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: var(--sp-6);
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: var(--sp-3);
+        }
+        .footer-copy {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-3);
+        }
+        .footer-legal {
+            display: flex;
+            gap: var(--sp-5);
+        }
+        .footer-legal a {
+            font-size: 12px;
+            color: var(--text-3);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-legal a:hover { color: var(--text-2); }
+
+        /* ========== GROUP DIVIDER ========== */
+        .group-divider {
+            padding: var(--sp-8) 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .group-divider-pattern {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(45deg, rgba(79,70,229,0.04) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(79,70,229,0.04) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(79,70,229,0.04) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(79,70,229,0.04) 75%);
+            background-size: 32px 32px;
+            background-position: 0 0, 0 16px, 16px -16px, -16px 0;
+        }
+        .group-divider-inner {
+            position: relative;
+            z-index: 2;
+        }
+        .group-divider-line {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-4);
+            margin-bottom: var(--sp-5);
+        }
+        .group-divider-line::before,
+        .group-divider-line::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--indigo-border), transparent);
+        }
+        .group-divider-diamond {
+            width: 20px;
+            height: 20px;
+            background: var(--indigo);
+            transform: rotate(45deg);
+        }
+        .group-divider-title {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-1);
+            margin-bottom: var(--sp-2);
+        }
+        .group-divider-sub {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--indigo-light);
+        }
+
+        /* ========== 10. COLOR PALETTE ========== */
+        .palette-section { display: flex; flex-direction: column; gap: var(--sp-6); }
+        .palette-group-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: var(--sp-3);
+        }
+        .palette-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: var(--sp-3);
+        }
+        .swatch {
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .swatch-color {
+            height: 56px;
+            position: relative;
+        }
+        .swatch-info {
+            padding: var(--sp-2) var(--sp-3);
+            background: var(--bg-dark);
+        }
+        .swatch-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-1);
+        }
+        .swatch-hex {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+        }
+
+        /* ========== 11. TYPOGRAPHY ========== */
+        .type-specimen { margin-bottom: var(--sp-6); }
+        .type-meta {
+            display: flex;
+            align-items: baseline;
+            gap: var(--sp-4);
+            margin-bottom: var(--sp-2);
+            flex-wrap: wrap;
+        }
+        .type-meta-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--indigo-light);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .type-meta-specs {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+        }
+        .type-divider {
+            border: none;
+            border-top: 1px solid var(--border-subtle);
+            margin: var(--sp-4) 0;
+        }
+
+        /* ========== 12. SPACING ========== */
+        .spacing-row {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-5);
+            margin-bottom: var(--sp-3);
+        }
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-3);
+            width: 80px;
+            flex-shrink: 0;
+        }
+        .spacing-bar {
+            height: 20px;
+            background: linear-gradient(90deg, var(--teal), var(--indigo));
+            border-radius: 2px;
+            opacity: 0.7;
+        }
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-2);
+            width: 50px;
+            flex-shrink: 0;
+            text-align: right;
+        }
+
+        /* ========== 13. BUTTONS ========== */
+        .btn-row {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-4);
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-5);
+        }
+        .btn-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 4px;
+            background: none;
+            border: none;
+            color: var(--teal-light);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+        }
+        .btn-text:hover { border-bottom-color: var(--teal-light); }
+        .btn-disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* ========== 14. DIVIDERS ========== */
+        .divider-demo {
+            padding: var(--sp-5) 0;
+            border: 1px dashed var(--border);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--sp-4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp-4);
+        }
+        .indigo-separator {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--indigo), transparent);
+        }
+        .teal-separator {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--teal), transparent);
+        }
+        .geometric-border-demo {
+            width: 100%;
+            max-width: 400px;
+            height: 80px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            position: relative;
+        }
+        .geometric-border-demo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--indigo) 0px, var(--indigo) 6px,
+                transparent 6px, transparent 10px,
+                var(--teal) 10px, var(--teal) 16px,
+                transparent 16px, transparent 20px
+            );
+        }
+        .lattice-demo {
+            width: 100%;
+            max-width: 400px;
+            height: 80px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background-color: var(--bg-deepest);
+            background-image:
+                linear-gradient(45deg, rgba(79,70,229,0.08) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(79,70,229,0.08) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(79,70,229,0.08) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(79,70,229,0.08) 75%);
+            background-size: 24px 24px;
+            background-position: 0 0, 0 12px, 12px -12px, -12px 0;
+        }
+
+        /* ========== 15. ALERTS ========== */
+        .alert {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--sp-3);
+            padding: var(--sp-4) var(--sp-5);
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--sp-3);
+            position: relative;
+        }
+        .alert::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+        }
+        .alert-success::before { background: var(--success); }
+        .alert-warning::before { background: var(--warning); }
+        .alert-error::before { background: var(--error); }
+        .alert-info::before { background: var(--info); }
+        .alert-icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .alert-content { flex: 1; }
+        .alert-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-1);
+            margin-bottom: 2px;
+        }
+        .alert-msg {
+            font-size: 13px;
+            color: var(--text-2);
+            line-height: 1.5;
+        }
+        .toast {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-3);
+            padding: var(--sp-3) var(--sp-5);
+            background: rgba(30,30,53,0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--indigo-border);
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            color: var(--text-1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .toast-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ========== ANIMATIONS ========== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .fade-up.visible {
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        /* ========== SCROLL OFFSET ========== */
+        [id] { scroll-margin-top: 80px; }
+    </style>
+</head>
+<body>
+
+    <!-- ========== 01. NAVIGATION ========== -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.15)" stroke="#22D3EE" stroke-width="1.5"/>
+                    <circle cx="14" cy="14" r="3" stroke="#22D3EE" stroke-width="1.5"/>
+                    <line x1="14" y1="8" x2="14" y2="11" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="14" y1="17" x2="14" y2="20" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="8" y1="14" x2="11" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="17" y1="14" x2="20" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <span class="nav-logo-text">PainOnSocial</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#testimonials">Proof</a></li>
+                <li><a href="#design-system">Design System</a></li>
+                <li><a href="#signup" class="nav-cta">Start Free &rarr;</a></li>
+            </ul>
+            <button class="nav-mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ========== 02. HERO ========== -->
+    <section class="hero" id="hero">
+        <div class="hero-lattice"></div>
+        <div class="hero-diamond"></div>
+        <div class="hero-diamond-sm"></div>
+        <div class="container">
+            <div class="hero-content fade-up">
+                <div class="hero-overline">
+                    <span class="diamond-inline"></span>
+                    Lattice v1.0 &mdash; Structure the chaos
+                </div>
+                <h1>Stop guessing what to build.<br>Start with <span class="teal">validated pain.</span></h1>
+                <p class="hero-sub">PainOnSocial scans thousands of Reddit discussions to surface real business pain points, severity-score them, and generate solution ideas &mdash; so you build what people actually need.</p>
+                <div class="hero-actions">
+                    <a href="#signup" class="btn-primary">Discover Pain Points &rarr;</a>
+                    <a href="#features" class="btn-ghost">See How It Works</a>
+                </div>
+                <div class="hero-metrics">
+                    <div class="hero-metric"><strong>14.2M+</strong> posts analyzed</div>
+                    <div class="hero-metric"><strong>89,400</strong> pain points scored</div>
+                    <div class="hero-metric"><strong>2,100+</strong> founders served</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 03. SOCIAL PROOF ========== -->
+    <section class="social-proof" id="social-proof">
+        <div class="container">
+            <div class="proof-grid" style="margin-bottom: var(--sp-5);">
+                <span class="tier-badge explorer">Explorer</span>
+                <span class="tier-badge scout">Scout</span>
+                <span class="tier-badge prospector">Prospector</span>
+                <span class="proof-pill"><span class="dot"></span> 2,100+ active teams</span>
+                <span class="proof-pill"><span class="dot" style="background: var(--indigo-light);"></span> SOC 2 Compliant</span>
+            </div>
+            <div style="text-align: center; margin-bottom: var(--sp-4);">
+                <span class="trusted-label">Trusted by teams at</span>
+            </div>
+            <div class="trust-logos">
+                <span class="trust-logo">Stripe</span>
+                <span class="trust-logo">Vercel</span>
+                <span class="trust-logo">Linear</span>
+                <span class="trust-logo">Notion</span>
+                <span class="trust-logo">Resend</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 04. FEATURE CARDS ========== -->
+    <section class="section" id="features">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: var(--sp-7);">
+                <div class="diamond-marker" style="margin: 0 auto var(--sp-4);"><span>04</span></div>
+                <div class="section-label">Core Capabilities</div>
+                <h2 class="section-title" style="max-width: 500px; margin-left: auto; margin-right: auto;">Four pillars of validated discovery</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-up">
+                    <div class="feature-num"><span>01</span></div>
+                    <h3>Community Discovery</h3>
+                    <p>AI-powered scanning of Reddit communities to identify where your target audience discusses their deepest frustrations and unmet needs.</p>
+                </div>
+                <div class="feature-card fade-up" style="animation-delay: 0.1s;">
+                    <div class="feature-num"><span>02</span></div>
+                    <h3>Pain Point Analysis</h3>
+                    <p>NLP-driven severity scoring that quantifies pain intensity, frequency of mention, and willingness to pay for solutions.</p>
+                </div>
+                <div class="feature-card fade-up" style="animation-delay: 0.2s;">
+                    <div class="feature-num"><span>03</span></div>
+                    <h3>Solution Ideation</h3>
+                    <p>Generate validated product concepts backed by real user language and demand signals from authentic community discussions.</p>
+                </div>
+                <div class="feature-card fade-up" style="animation-delay: 0.3s;">
+                    <div class="feature-num"><span>04</span></div>
+                    <h3>Evidence Trail</h3>
+                    <p>Every insight linked to source threads, upvote counts, and sentiment analysis &mdash; full transparency into your data pipeline.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 05. STATS ========== -->
+    <section class="section stats-section lattice-bg" id="stats">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: var(--sp-7);">
+                <div class="diamond-marker" style="margin: 0 auto var(--sp-4);"><span>05</span></div>
+                <div class="section-label">By the numbers</div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-cell">
+                    <div class="stat-num">14.2M</div>
+                    <div class="stat-label">Posts Analyzed</div>
+                </div>
+                <div class="stat-cell">
+                    <div class="stat-num">89.4K</div>
+                    <div class="stat-label">Pain Points</div>
+                </div>
+                <div class="stat-cell">
+                    <div class="stat-num">94%</div>
+                    <div class="stat-label">Accuracy Rate</div>
+                </div>
+                <div class="stat-cell">
+                    <div class="stat-num">3.2x</div>
+                    <div class="stat-label">Faster Research</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 06. TESTIMONIALS ========== -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: var(--sp-7);">
+                <div class="diamond-marker" style="margin: 0 auto var(--sp-4);"><span>06</span></div>
+                <div class="section-label">What builders say</div>
+                <h2 class="section-title" style="max-width: 480px; margin-left: auto; margin-right: auto;">Real results from real founders</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-up">
+                    <p class="testimonial-quote">"PainOnSocial replaced three weeks of manual Reddit scrolling with a 20-minute severity report. We pivoted our entire roadmap based on one discovery session."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MC</div>
+                        <div>
+                            <div class="testimonial-name">Maya Chen</div>
+                            <div class="testimonial-role">CPO, NovaBuild &mdash; Scout tier</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-up" style="animation-delay: 0.1s;">
+                    <p class="testimonial-quote">"The evidence trail feature is what sold us. Every pain point links back to real threads with real upvotes. It's not guesswork anymore &mdash; it's data-driven product strategy."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar" style="background: var(--teal-glow); border-color: rgba(8,145,178,0.3); color: var(--teal-light);">JK</div>
+                        <div>
+                            <div class="testimonial-name">James Kowalski</div>
+                            <div class="testimonial-role">Founder, Taskweave &mdash; Prospector tier</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 07. PRICING ========== -->
+    <section class="section lattice-bg-teal" id="pricing">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: var(--sp-7);">
+                <div class="diamond-marker" style="margin: 0 auto var(--sp-4);"><span>07</span></div>
+                <div class="section-label">Pricing</div>
+                <h2 class="section-title" style="max-width: 500px; margin-left: auto; margin-right: auto;">Choose your discovery depth</h2>
+            </div>
+            <div class="pricing-grid">
+                <!-- Explorer -->
+                <div class="pricing-card fade-up">
+                    <div class="pricing-tier">Explorer</div>
+                    <div class="pricing-desc">For solo founders testing the waters</div>
+                    <div class="pricing-amount">$0<span>/mo</span></div>
+                    <div class="pricing-period">Free forever</div>
+                    <ul class="pricing-features">
+                        <li>3 community scans/month</li>
+                        <li>Top 10 pain points</li>
+                        <li>Basic severity scores</li>
+                        <li>7-day data retention</li>
+                    </ul>
+                    <button class="btn-ghost btn-full">Start Exploring</button>
+                </div>
+                <!-- Scout -->
+                <div class="pricing-card featured fade-up" style="animation-delay: 0.1s;">
+                    <div class="pricing-popular">
+                        <div class="pricing-popular-diamond">
+                            <svg viewBox="0 0 12 12" fill="none"><path d="M6 1l5 5-5 5-5-5z" fill="#fff"/></svg>
+                        </div>
+                        <span class="pricing-popular-text">Most Popular</span>
+                    </div>
+                    <div class="pricing-tier">Scout</div>
+                    <div class="pricing-desc">For teams building with conviction</div>
+                    <div class="pricing-amount">$49<span>/mo</span></div>
+                    <div class="pricing-period">Billed annually at $468</div>
+                    <ul class="pricing-features">
+                        <li>Unlimited community scans</li>
+                        <li>Full pain point analysis</li>
+                        <li>Solution ideation engine</li>
+                        <li>Evidence trail &amp; sources</li>
+                        <li>API access</li>
+                    </ul>
+                    <button class="btn-primary btn-full">Start Scouting &rarr;</button>
+                </div>
+                <!-- Prospector -->
+                <div class="pricing-card fade-up" style="animation-delay: 0.2s;">
+                    <div class="pricing-tier">Prospector</div>
+                    <div class="pricing-desc">For teams that need depth &amp; scale</div>
+                    <div class="pricing-amount">$149<span>/mo</span></div>
+                    <div class="pricing-period">Billed annually at $1,428</div>
+                    <ul class="pricing-features">
+                        <li>Everything in Scout</li>
+                        <li>Multi-platform analysis</li>
+                        <li>Custom severity models</li>
+                        <li>Team workspaces (10 seats)</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="btn-indigo btn-full">Go Prospector</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 08. FORMS ========== -->
+    <section class="section" id="signup">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: var(--sp-7);">
+                <div class="diamond-marker" style="margin: 0 auto var(--sp-4);"><span>08</span></div>
+                <div class="section-label">Get started</div>
+                <h2 class="section-title" style="max-width: 500px; margin-left: auto; margin-right: auto;">Start discovering pain points today</h2>
+            </div>
+            <div class="container-sm">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-7);">
+                    <!-- Form Samples -->
+                    <div>
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-input" placeholder="Jane Doe">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-input" placeholder="jane@company.com">
+                            <div class="form-hint">We'll never share your email.</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Company (error state)</label>
+                            <input type="text" class="form-input error" value="A">
+                            <div class="form-error">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#EF4444" stroke-width="1.2"/><path d="M6 3.5v3M6 8h.005" stroke="#EF4444" stroke-width="1.2" stroke-linecap="round"/></svg>
+                                Company name must be at least 2 characters.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Target Market</label>
+                            <select class="form-input">
+                                <option>Select a market...</option>
+                                <option>B2B SaaS</option>
+                                <option>E-commerce</option>
+                                <option>Developer Tools</option>
+                                <option>Fintech</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">What are you building?</label>
+                            <textarea class="form-input" placeholder="Describe your product idea..."></textarea>
+                        </div>
+                        <div class="toggle-row">
+                            <span class="toggle-label">Email notifications</span>
+                            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                        <div class="toggle-row">
+                            <span class="toggle-label">Weekly digest</span>
+                            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+                        </div>
+                    </div>
+                    <!-- Signup CTA -->
+                    <div>
+                        <div class="signup-box" style="margin-bottom: var(--sp-5);">
+                            <div class="signup-box-lattice"></div>
+                            <h3 style="font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: var(--sp-2); position: relative; z-index: 2;">Quick Start</h3>
+                            <p style="font-size: 14px; color: var(--text-2); margin-bottom: var(--sp-5); position: relative; z-index: 2;">Enter your email to start a free Explorer account.</p>
+                            <div class="signup-inline">
+                                <input type="email" class="form-input" placeholder="you@company.com">
+                                <button class="btn-primary" style="white-space: nowrap;">Start Free &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="signup-box">
+                            <div class="signup-box-lattice"></div>
+                            <h3 style="font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: var(--sp-2); position: relative; z-index: 2;">Join the waitlist</h3>
+                            <p style="font-size: 14px; color: var(--text-2); margin-bottom: var(--sp-5); position: relative; z-index: 2;">Get early access to Prospector-tier features.</p>
+                            <div class="signup-inline">
+                                <input type="email" class="form-input" placeholder="team@company.com">
+                                <button class="btn-indigo" style="white-space: nowrap;">Reserve Spot</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 09. FOOTER ========== -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#" class="nav-logo" style="margin-bottom: var(--sp-3); display: inline-flex;">
+                        <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+                            <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.15)" stroke="#22D3EE" stroke-width="1.5"/>
+                            <circle cx="14" cy="14" r="3" stroke="#22D3EE" stroke-width="1.5"/>
+                            <line x1="14" y1="8" x2="14" y2="11" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="14" y1="17" x2="14" y2="20" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="8" y1="14" x2="11" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="17" y1="14" x2="20" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span class="nav-logo-text" style="font-size: 16px;">PainOnSocial</span>
+                    </a>
+                    <p class="footer-brand-desc">AI-powered Reddit analysis for validated business pain points. Structure the chaos.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <a href="#">Community Discovery</a>
+                    <a href="#">Pain Analysis</a>
+                    <a href="#">Solution Ideation</a>
+                    <a href="#">Evidence Trail</a>
+                    <a href="#">API Docs</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="#">About</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <a href="#">Documentation</a>
+                    <a href="#">Changelog</a>
+                    <a href="#">Status</a>
+                    <a href="#">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span class="footer-copy">&copy; 2026 PainOnSocial. All rights reserved.</span>
+                <div class="footer-legal">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Security</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== GROUP DIVIDER ========== -->
+    <div class="group-divider" id="design-system">
+        <div class="group-divider-pattern"></div>
+        <div class="group-divider-inner container">
+            <div class="group-divider-line">
+                <div class="group-divider-diamond"></div>
+            </div>
+            <div class="group-divider-title">Design System Reference</div>
+            <div class="group-divider-sub">Lattice v1.0 &mdash; Sections 10&ndash;15</div>
+        </div>
+    </div>
+
+    <!-- ========== 10. COLOR PALETTE ========== -->
+    <section class="section" id="colors">
+        <div class="container">
+            <div class="diamond-marker"><span>10</span></div>
+            <div class="section-label">Color Palette</div>
+            <h2 class="section-title">Structured chromatics</h2>
+
+            <div class="palette-section">
+                <!-- Brand -->
+                <div>
+                    <div class="palette-group-label">Brand Colors</div>
+                    <div class="palette-row">
+                        <div class="swatch"><div class="swatch-color" style="background: #0891B2;"></div><div class="swatch-info"><div class="swatch-name">Primary Teal</div><div class="swatch-hex">#0891B2</div></div></div>
+                        <div class="swatch"><div class="swatch-color" style="background: #22D3EE;"></div><div class="swatch-info"><div class="swatch-name">Teal Light</div><div class="swatch-hex">#22D3EE</div></div></div>
+                        <div class="swatch"><div class="swatch-color" style="background: #0E7490;"></div><div class="swatch-info"><div class="swatch-name">Teal Dark</div><div class="swatch-hex">#0E7490</div></div></div>
+                        <div class="swatch"><div class="swatch-color" style="background: #F97316;"></div><div class="swatch-info"><div class="swatch-name">Accent Orange</div><div class="swatch-hex">#F97316</div></div></div>
+                        <div class="swatch"><div class="swatch-color" style="background: #A855F7;"></div><div class="swatch-info"><div class="swatch-name">Accent Purple</div><div class="swatch-hex">#A855F7</div></div></div>
+                    </div>
+                </div>
+
+                <!-- Indigo -->
+                <div>
+                    <div class="palette-group-label">Indigo Accent Scale</div>
+                    <div class="palette-row">
+                        <div class="swatch"><div class="swatch-color" style="background: #4F46E5;"></div><div class="swatch-info"><div class="swatch-name">Indigo</div><div class="swatch-hex">#4F46E5</div></div></div>
+                        <div class="swatch"><div class="swatch-color" style="background: #818CF8;"></div><div class="swatch-info"><div class="swatch-name">Indigo Light</div><div class="swatch-hex">#818CF8</div></div></div>
+                        <div class="swatch"><div class="swatch-color" style="background: rgba(79,70,229,0.15); border: 1px solid rgba(79,70,229,0.3);"></div><div class="swatch-info"><div class="swatch-name">Indigo Glow</div><div class="swatch-hex">rgba(79,70,229,0.15)</div></div></div>
+                    </div>
+                </div>
+
+                <!-- Surfaces -->
+                <div>
+                    <div class="palette-group-label">Surface Scale</div>
+                    <div class="palette-row">
+                        <div class="swatch"><div class="swatch-color" style="background: #0F0F1A;"></div><div class="swatch-info"><div class="swatch-name">Deepest</div><div class="swatch-hex">#0F0F1A</div></div></div>
+                        <div class="swatch"><div class="swatch-color" style="background: #16162A;"></div><div class="swatch-info"><div class="swatch-name">Dark</div><div class="swatch-hex">#16162A</div></div></div>
+                        <div class="swatch"><div class="swatch-color" style="background: #1E1E35;"></div><div class="swatch-info"><div class="swatch-name">Medium</div><div class="swatch-hex">#1E1E35</div></div></div>
+                        <div class="swatch"><div class="swatch-color" style="background: rgba(30,30,53,0.6); border: 1px solid rgba(255,255,255,0.06);"></div><div class="swatch-info"><div class="swatch-name">Card</div><div class="swatch-hex">rgba(30,30,53,0.6)</div></div></div>
+                    </div>
+                </div>
+
+                <!-- Text -->
+                <div>
+                    <div class="palette-group-label">Text & Border</div>
+                    <div class="palette-row">
+                        <div class="swatch"><div class="swatch-color" style="background: #EEEEF5;"></div><div class="swatch-info"><div class="swatch-name">Primary Text</div><div class="swatch-hex">#EEEEF5</div></div></div>
+                        <div class="swatch"><div class="swatch-color" style="background: #9494AD;"></div><div class="swatch-info"><div class="swatch-name">Secondary Text</div><div class="swatch-hex">#9494AD</div></div></div>
+                        <div class="swatch"><div class="swatch-color" style="background: #6B6B85;"></div><div class="swatch-info"><div class="swatch-name">Muted Text</div><div class="swatch-hex">#6B6B85</div></div></div>
+                    </div>
+                </div>
+
+                <!-- Semantic -->
+                <div>
+                    <div class="palette-group-label">Semantic</div>
+                    <div class="palette-row">
+                        <div class="swatch"><div class="swatch-color" style="background: #16A34A;"></div><div class="swatch-info"><div class="swatch-name">Success</div><div class="swatch-hex">#16A34A</div></div></div>
+                        <div class="swatch"><div class="swatch-color" style="background: #EAB308;"></div><div class="swatch-info"><div class="swatch-name">Warning</div><div class="swatch-hex">#EAB308</div></div></div>
+                        <div class="swatch"><div class="swatch-color" style="background: #EF4444;"></div><div class="swatch-info"><div class="swatch-name">Error</div><div class="swatch-hex">#EF4444</div></div></div>
+                        <div class="swatch"><div class="swatch-color" style="background: #0891B2;"></div><div class="swatch-info"><div class="swatch-name">Info</div><div class="swatch-hex">#0891B2</div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container"><div class="chevron-divider"></div></div>
+
+    <!-- ========== 11. TYPOGRAPHY ========== -->
+    <section class="section" id="typography">
+        <div class="container">
+            <div class="diamond-marker"><span>11</span></div>
+            <div class="section-label">Typography</div>
+            <h2 class="section-title">Geometric hierarchy</h2>
+            <p class="section-desc" style="margin-bottom: var(--sp-7);">Syne for display. Inter for body. Space Mono for code and data. Three voices, one lattice.</p>
+
+            <div class="type-specimen">
+                <div class="type-meta">
+                    <span class="type-meta-label">Hero</span>
+                    <span class="type-meta-specs">Syne &middot; 56px &middot; 800 &middot; -0.02em</span>
+                </div>
+                <div style="font-family: var(--font-display); font-size: 56px; font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; color: var(--text-1);">Structure the chaos.</div>
+                <hr class="type-divider">
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-meta">
+                    <span class="type-meta-label">H1</span>
+                    <span class="type-meta-specs">Syne &middot; 40px &middot; 700 &middot; -0.015em</span>
+                </div>
+                <div style="font-family: var(--font-display); font-size: 40px; font-weight: 700; line-height: 1.15; letter-spacing: -0.015em; color: var(--text-1);">Validated discovery engine</div>
+                <hr class="type-divider">
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-meta">
+                    <span class="type-meta-label">H2</span>
+                    <span class="type-meta-specs">Syne &middot; 32px &middot; 700 &middot; -0.01em</span>
+                </div>
+                <div style="font-family: var(--font-display); font-size: 32px; font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; color: var(--text-1);">Four pillars of insight</div>
+                <hr class="type-divider">
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-meta">
+                    <span class="type-meta-label">H3</span>
+                    <span class="type-meta-specs">Syne &middot; 22px &middot; 700</span>
+                </div>
+                <div style="font-family: var(--font-display); font-size: 22px; font-weight: 700; line-height: 1.3; color: var(--text-1);">Community Discovery</div>
+                <hr class="type-divider">
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-meta">
+                    <span class="type-meta-label">H4</span>
+                    <span class="type-meta-specs">Syne &middot; 18px &middot; 600</span>
+                </div>
+                <div style="font-family: var(--font-display); font-size: 18px; font-weight: 600; line-height: 1.4; color: var(--text-1);">Pain point severity analysis</div>
+                <hr class="type-divider">
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-meta">
+                    <span class="type-meta-label">Body</span>
+                    <span class="type-meta-specs">Inter &middot; 15px &middot; 400 &middot; 1.7 leading</span>
+                </div>
+                <div style="font-family: var(--font-body); font-size: 15px; font-weight: 400; line-height: 1.7; color: var(--text-2); max-width: 640px;">PainOnSocial scans thousands of Reddit discussions to surface real business pain points, severity-score them, and generate solution ideas &mdash; so you build what people actually need.</div>
+                <hr class="type-divider">
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-meta">
+                    <span class="type-meta-label">Caption</span>
+                    <span class="type-meta-specs">Inter &middot; 12px &middot; 500 &middot; var(--text-3)</span>
+                </div>
+                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--text-3);">Last analyzed: 2 hours ago &middot; 847 new pain points discovered</div>
+                <hr class="type-divider">
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-meta">
+                    <span class="type-meta-label">Overline</span>
+                    <span class="type-meta-specs">Space Mono &middot; 11px &middot; 0.15em tracking &middot; uppercase</span>
+                </div>
+                <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--indigo-light);">Design System Reference</div>
+                <hr class="type-divider">
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-meta">
+                    <span class="type-meta-label">Monospace</span>
+                    <span class="type-meta-specs">Space Mono &middot; 14px &middot; 400</span>
+                </div>
+                <div style="font-family: var(--font-mono); font-size: 14px; color: var(--teal-light);">severity_score: 8.7 | mentions: 1,247 | willingness_to_pay: HIGH</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container"><div class="chevron-divider"></div></div>
+
+    <!-- ========== 12. SPACING ========== -->
+    <section class="section-tight" id="spacing">
+        <div class="container">
+            <div class="diamond-marker"><span>12</span></div>
+            <div class="section-label">Spacing Scale</div>
+            <h2 class="section-title">8px geometric grid</h2>
+            <p class="section-desc" style="margin-bottom: var(--sp-6);">Every measurement snapped to an 8px base. Mathematical precision in whitespace.</p>
+
+            <div class="spacing-row"><span class="spacing-label">--sp-1</span><div class="spacing-bar" style="width: 4px;"></div><span class="spacing-value">4px</span></div>
+            <div class="spacing-row"><span class="spacing-label">--sp-2</span><div class="spacing-bar" style="width: 8px;"></div><span class="spacing-value">8px</span></div>
+            <div class="spacing-row"><span class="spacing-label">--sp-3</span><div class="spacing-bar" style="width: 12px;"></div><span class="spacing-value">12px</span></div>
+            <div class="spacing-row"><span class="spacing-label">--sp-4</span><div class="spacing-bar" style="width: 16px;"></div><span class="spacing-value">16px</span></div>
+            <div class="spacing-row"><span class="spacing-label">--sp-5</span><div class="spacing-bar" style="width: 24px;"></div><span class="spacing-value">24px</span></div>
+            <div class="spacing-row"><span class="spacing-label">--sp-6</span><div class="spacing-bar" style="width: 32px;"></div><span class="spacing-value">32px</span></div>
+            <div class="spacing-row"><span class="spacing-label">--sp-7</span><div class="spacing-bar" style="width: 48px;"></div><span class="spacing-value">48px</span></div>
+            <div class="spacing-row"><span class="spacing-label">--sp-8</span><div class="spacing-bar" style="width: 64px;"></div><span class="spacing-value">64px</span></div>
+            <div class="spacing-row"><span class="spacing-label">--sp-9</span><div class="spacing-bar" style="width: 96px;"></div><span class="spacing-value">96px</span></div>
+            <div class="spacing-row"><span class="spacing-label">--sp-10</span><div class="spacing-bar" style="width: 128px;"></div><span class="spacing-value">128px</span></div>
+        </div>
+    </section>
+
+    <div class="container"><div class="chevron-divider"></div></div>
+
+    <!-- ========== 13. BUTTONS ========== -->
+    <section class="section-tight" id="buttons">
+        <div class="container">
+            <div class="diamond-marker"><span>13</span></div>
+            <div class="section-label">Buttons</div>
+            <h2 class="section-title">Action components</h2>
+            <p class="section-desc" style="margin-bottom: var(--sp-6);">Teal for primary actions. Indigo for secondary structure. Ghost for low-emphasis. All geometrically precise.</p>
+
+            <div style="margin-bottom: var(--sp-5);">
+                <div class="palette-group-label" style="margin-bottom: var(--sp-3);">Default</div>
+                <div class="btn-row">
+                    <button class="btn-primary">Primary Action &rarr;</button>
+                    <button class="btn-indigo">Secondary Action</button>
+                    <button class="btn-ghost">Ghost Button</button>
+                    <a href="#" class="btn-text">Text Link &rarr;</a>
+                </div>
+            </div>
+
+            <div style="margin-bottom: var(--sp-5);">
+                <div class="palette-group-label" style="margin-bottom: var(--sp-3);">Small</div>
+                <div class="btn-row">
+                    <button class="btn-primary" style="padding: 8px 20px; font-size: 13px;">Small Primary</button>
+                    <button class="btn-indigo" style="padding: 8px 20px; font-size: 13px;">Small Secondary</button>
+                    <button class="btn-ghost" style="padding: 8px 20px; font-size: 13px;">Small Ghost</button>
+                </div>
+            </div>
+
+            <div style="margin-bottom: var(--sp-5);">
+                <div class="palette-group-label" style="margin-bottom: var(--sp-3);">Disabled</div>
+                <div class="btn-row">
+                    <button class="btn-primary btn-disabled">Disabled Primary</button>
+                    <button class="btn-indigo btn-disabled">Disabled Secondary</button>
+                    <button class="btn-ghost btn-disabled">Disabled Ghost</button>
+                </div>
+            </div>
+
+            <div>
+                <div class="palette-group-label" style="margin-bottom: var(--sp-3);">Full Width</div>
+                <div style="max-width: 400px; display: flex; flex-direction: column; gap: var(--sp-3);">
+                    <button class="btn-primary btn-full">Full Width Primary &rarr;</button>
+                    <button class="btn-indigo btn-full">Full Width Secondary</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container"><div class="chevron-divider"></div></div>
+
+    <!-- ========== 14. DIVIDERS ========== -->
+    <section class="section-tight" id="dividers">
+        <div class="container">
+            <div class="diamond-marker"><span>14</span></div>
+            <div class="section-label">Dividers &amp; Patterns</div>
+            <h2 class="section-title">Geometric separators</h2>
+            <p class="section-desc" style="margin-bottom: var(--sp-6);">Chevrons, lattices, and geometric borders &mdash; never a plain line.</p>
+
+            <div style="margin-bottom: var(--sp-5);">
+                <div class="palette-group-label" style="margin-bottom: var(--sp-3);">Chevron Divider</div>
+                <div class="divider-demo" style="padding: var(--sp-6) var(--sp-5);">
+                    <div style="font-size: 13px; color: var(--text-3);">Content above</div>
+                    <div class="chevron-divider" style="margin: var(--sp-4) 0;"></div>
+                    <div style="font-size: 13px; color: var(--text-3);">Content below</div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: var(--sp-5);">
+                <div class="palette-group-label" style="margin-bottom: var(--sp-3);">Diamond Lattice Pattern</div>
+                <div class="divider-demo">
+                    <div class="lattice-demo"></div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: var(--sp-5);">
+                <div class="palette-group-label" style="margin-bottom: var(--sp-3);">Geometric Top Border (Art-Deco)</div>
+                <div class="divider-demo">
+                    <div class="geometric-border-demo"></div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: var(--sp-5);">
+                <div class="palette-group-label" style="margin-bottom: var(--sp-3);">Indigo Separator</div>
+                <div class="divider-demo" style="gap: var(--sp-5);">
+                    <div class="indigo-separator" style="max-width: 400px;"></div>
+                    <div class="teal-separator" style="max-width: 400px;"></div>
+                </div>
+            </div>
+
+            <div>
+                <div class="palette-group-label" style="margin-bottom: var(--sp-3);">Wide Chevron with Center Diamond</div>
+                <div class="divider-demo" style="padding: var(--sp-6) var(--sp-5);">
+                    <div class="chevron-divider-wide" style="width: 100%; margin: 0;">
+                        <div style="width: 12px; height: 12px; background: var(--indigo); transform: rotate(45deg); flex-shrink: 0;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container"><div class="chevron-divider"></div></div>
+
+    <!-- ========== 15. ALERTS ========== -->
+    <section class="section-tight" id="alerts">
+        <div class="container">
+            <div class="diamond-marker"><span>15</span></div>
+            <div class="section-label">Alerts &amp; Toasts</div>
+            <h2 class="section-title">Notification components</h2>
+            <p class="section-desc" style="margin-bottom: var(--sp-6);">Indigo-dark panels with semantic left borders. Toasts use indigo glass-morphism.</p>
+
+            <div style="max-width: 640px;">
+                <div class="alert alert-success">
+                    <svg class="alert-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#16A34A" stroke-width="1.3"/><path d="M5.5 9.5l2 2 5-5" stroke="#16A34A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <div class="alert-content">
+                        <div class="alert-title">Scan complete</div>
+                        <div class="alert-msg">247 new pain points discovered in r/SaaS. Severity report ready.</div>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <svg class="alert-icon" viewBox="0 0 18 18" fill="none"><path d="M9 2L1.5 15.5h15L9 2z" stroke="#EAB308" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 7v3.5M9 13h.005" stroke="#EAB308" stroke-width="1.3" stroke-linecap="round"/></svg>
+                    <div class="alert-content">
+                        <div class="alert-title">Rate limit approaching</div>
+                        <div class="alert-msg">You've used 85% of your monthly scan quota. Upgrade to Scout for unlimited.</div>
+                    </div>
+                </div>
+
+                <div class="alert alert-error">
+                    <svg class="alert-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#EF4444" stroke-width="1.3"/><path d="M6.5 6.5l5 5M11.5 6.5l-5 5" stroke="#EF4444" stroke-width="1.3" stroke-linecap="round"/></svg>
+                    <div class="alert-content">
+                        <div class="alert-title">Analysis failed</div>
+                        <div class="alert-msg">Unable to access r/PrivateCommunity. The subreddit may be restricted or archived.</div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <svg class="alert-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#0891B2" stroke-width="1.3"/><path d="M9 8v5M9 5.5h.005" stroke="#0891B2" stroke-width="1.3" stroke-linecap="round"/></svg>
+                    <div class="alert-content">
+                        <div class="alert-title">New feature available</div>
+                        <div class="alert-msg">Multi-platform analysis now supports HackerNews and Indie Hackers forums.</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: var(--sp-6);">
+                    <div class="palette-group-label" style="margin-bottom: var(--sp-3);">Toast Notifications</div>
+                    <div style="display: flex; flex-direction: column; gap: var(--sp-3); align-items: flex-start;">
+                        <div class="toast">
+                            <div class="toast-dot" style="background: var(--success);"></div>
+                            <span>Pain point saved to collection</span>
+                        </div>
+                        <div class="toast">
+                            <div class="toast-dot" style="background: var(--teal);"></div>
+                            <span>Community scan initiated</span>
+                        </div>
+                        <div class="toast">
+                            <div class="toast-dot" style="background: var(--error);"></div>
+                            <span>Export failed &mdash; retry in 30s</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final spacer -->
+    <div style="padding: var(--sp-8) 0; text-align: center;">
+        <div class="container">
+            <div class="chevron-divider-wide" style="margin-bottom: var(--sp-5);">
+                <div style="width: 10px; height: 10px; background: var(--indigo); transform: rotate(45deg); flex-shrink: 0;"></div>
+            </div>
+            <p style="font-family: var(--font-mono); font-size: 12px; color: var(--text-3); letter-spacing: 0.1em;">LATTICE v1.0 &mdash; STRUCTURE THE CHAOS &mdash; PAINONSOCIAL DESIGN SYSTEM</p>
+        </div>
+    </div>
+
+    <script>
+        // Scroll-triggered fade-up animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

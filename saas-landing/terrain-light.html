@@ -1,0 +1,2393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terrain Light v1.0 — PainOnSocial Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600;700&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            /* ——— Brand ——— */
+            --teal: #0891B2;
+            --teal-dark: #0E7490;
+            --teal-10: rgba(8,145,178,0.10);
+            --teal-20: rgba(8,145,178,0.20);
+            --teal-06: rgba(8,145,178,0.06);
+            --orange: #F97316;
+            --orange-bg: rgba(249,115,22,0.06);
+            --purple: #A855F7;
+            --purple-bg: rgba(168,85,247,0.06);
+
+            /* ——— Sage / Olive ——— */
+            --sage: #65A30D;
+            --sage-light: #84CC16;
+            --sage-glow: rgba(101,163,13,0.08);
+            --sage-06: rgba(101,163,13,0.06);
+            --sage-border: rgba(101,163,13,0.25);
+
+            /* ——— Natural Surfaces ——— */
+            --bg: #FAFBF7;
+            --surface-1: #F2F5EE;
+            --surface-2: #E8EDE2;
+            --card: #FFFFFF;
+
+            /* ——— Text ——— */
+            --text-1: #1A2412;
+            --text-2: #4A5A3E;
+            --text-3: #8A9A7E;
+
+            /* ——— Borders & Shadows ——— */
+            --border: rgba(26,36,18,0.08);
+            --border-heavy: rgba(26,36,18,0.14);
+            --shadow-sm: 0 2px 8px rgba(26,36,18,0.04);
+            --shadow: 0 4px 24px rgba(26,36,18,0.06);
+            --shadow-lg: 0 8px 40px rgba(26,36,18,0.08), 0 2px 8px rgba(26,36,18,0.04);
+            --shadow-hover: 0 8px 32px rgba(26,36,18,0.10), 0 2px 8px rgba(26,36,18,0.04);
+
+            /* ——— Semantic ——— */
+            --success: #65A30D;
+            --success-bg: rgba(101,163,13,0.06);
+            --success-border: rgba(101,163,13,0.25);
+            --warning: #D97706;
+            --warning-bg: rgba(217,119,6,0.06);
+            --warning-border: rgba(217,119,6,0.25);
+            --error: #EF4444;
+            --error-bg: rgba(239,68,68,0.06);
+            --error-border: rgba(239,68,68,0.25);
+            --info: #0891B2;
+            --info-bg: rgba(8,145,178,0.06);
+            --info-border: rgba(8,145,178,0.25);
+
+            /* ——— Typography ——— */
+            --font-display: 'Manrope', system-ui, sans-serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+            --font-mono: 'Inconsolata', 'Courier New', monospace;
+
+            /* ——— Spacing (8px base) ——— */
+            --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+            --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+            /* ——— Radius ——— */
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-pill: 9999px;
+
+            /* ——— Motion ——— */
+            --ease: 200ms ease;
+            --ease-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-1);
+            background: var(--bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ——— Strata Layers Background ——— */
+        .strata {
+            position: relative;
+        }
+        .strata::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(180deg,
+                    transparent 0%,
+                    rgba(101,163,13,0.02) 8%,
+                    transparent 12%,
+                    rgba(217,184,120,0.02) 22%,
+                    transparent 28%,
+                    rgba(101,163,13,0.015) 38%,
+                    transparent 44%,
+                    rgba(194,174,140,0.02) 55%,
+                    transparent 62%,
+                    rgba(101,163,13,0.02) 72%,
+                    transparent 78%,
+                    rgba(180,160,120,0.015) 88%,
+                    transparent 95%
+                );
+            z-index: 0;
+        }
+
+        .strata-dense::before {
+            background:
+                linear-gradient(180deg,
+                    rgba(101,163,13,0.03) 0%,
+                    transparent 6%,
+                    rgba(194,174,140,0.03) 12%,
+                    transparent 18%,
+                    rgba(101,163,13,0.025) 24%,
+                    transparent 30%,
+                    rgba(217,184,120,0.03) 36%,
+                    transparent 42%,
+                    rgba(101,163,13,0.02) 50%,
+                    transparent 56%,
+                    rgba(180,160,120,0.025) 64%,
+                    transparent 70%,
+                    rgba(101,163,13,0.03) 78%,
+                    transparent 84%,
+                    rgba(194,174,140,0.02) 92%,
+                    transparent 100%
+                );
+        }
+
+        /* ——— Leaf SVG Icon (inline helper) ——— */
+        .leaf-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+
+        /* ——— Container ——— */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--sp-5); }
+        .container-tight { max-width: 960px; margin: 0 auto; padding: 0 var(--sp-5); }
+
+        /* ——— Section ——— */
+        .section {
+            padding: var(--sp-9) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ——— Section Label with Leaf ——— */
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: var(--sp-3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 32px;
+            line-height: 1.15;
+            color: var(--text-1);
+            margin-bottom: var(--sp-4);
+            letter-spacing: -0.02em;
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: var(--text-2);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        /* ——— Leaf SVG template ——— */
+        .leaf-svg {
+            fill: none;
+            stroke: var(--sage);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ======================================================
+           01 — NAVIGATION BAR
+           ====================================================== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(250,251,247,0.82);
+            backdrop-filter: blur(16px) saturate(1.4);
+            -webkit-backdrop-filter: blur(16px) saturate(1.4);
+            border-bottom: 1px solid var(--border);
+            padding: 0 var(--sp-5);
+        }
+
+        .navbar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+            text-decoration: none;
+            color: var(--text-1);
+        }
+
+        .navbar-logo svg { flex-shrink: 0; }
+
+        .navbar-logo-text {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.02em;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-6);
+            list-style: none;
+        }
+
+        .navbar-links a {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-2);
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+
+        .navbar-links a:hover { color: var(--text-1); }
+
+        .navbar-cta {
+            background: var(--teal);
+            color: #FFFFFF !important;
+            padding: 10px 24px;
+            font-weight: 600 !important;
+            font-size: 14px !important;
+            border: none;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all var(--ease);
+            font-family: var(--font-body);
+            text-decoration: none;
+        }
+
+        .navbar-cta:hover { background: var(--teal-dark); color: #FFFFFF !important; box-shadow: var(--shadow); }
+
+        .navbar-mobile-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--border-heavy);
+            padding: 8px;
+            cursor: pointer;
+            border-radius: var(--radius-sm);
+        }
+
+        .navbar-mobile-toggle span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--text-1);
+            margin: 4px 0;
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links { display: none; }
+            .navbar-mobile-toggle { display: block; }
+            .navbar-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(250,251,247,0.96);
+                backdrop-filter: blur(16px);
+                border-bottom: 1px solid var(--border);
+                padding: var(--sp-5);
+                gap: var(--sp-4);
+            }
+        }
+
+        /* ======================================================
+           02 — HERO
+           ====================================================== */
+        .hero {
+            padding: 80px 0 96px;
+            background: var(--bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-strata {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(180deg,
+                    transparent 0%,
+                    rgba(101,163,13,0.025) 10%,
+                    transparent 18%,
+                    rgba(194,174,140,0.025) 30%,
+                    transparent 40%,
+                    rgba(101,163,13,0.02) 55%,
+                    transparent 65%,
+                    rgba(180,160,120,0.02) 80%,
+                    transparent 95%
+                );
+        }
+
+        .hero-leaf-deco {
+            position: absolute;
+            top: 60px;
+            right: 8%;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 780px;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: var(--sp-5);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(40px, 5.5vw, 68px);
+            line-height: 1.06;
+            letter-spacing: -0.03em;
+            color: var(--text-1);
+            margin-bottom: var(--sp-5);
+        }
+
+        .hero h1 .text-sage { color: var(--sage); }
+
+        .hero-subhead {
+            font-size: 18px;
+            color: var(--text-2);
+            max-width: 540px;
+            line-height: 1.7;
+            margin-bottom: var(--sp-7);
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: var(--sp-4);
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-7);
+        }
+
+        .btn-primary {
+            background: var(--teal);
+            color: #FFFFFF;
+            padding: 14px 32px;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all var(--ease);
+            font-family: var(--font-body);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover { background: var(--teal-dark); box-shadow: var(--shadow); transform: translateY(-1px); }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-2);
+            padding: 14px 32px;
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid var(--border-heavy);
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all var(--ease);
+            font-family: var(--font-body);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-ghost:hover { border-color: var(--sage); color: var(--sage); background: var(--sage-glow); }
+
+        .hero-metrics {
+            display: flex;
+            gap: var(--sp-7);
+            flex-wrap: wrap;
+        }
+
+        .hero-metric {
+            text-align: left;
+        }
+
+        .hero-metric-value {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--teal);
+            letter-spacing: 0.02em;
+        }
+
+        .hero-metric-label {
+            font-size: 13px;
+            color: var(--text-3);
+            margin-top: 2px;
+        }
+
+        /* ======================================================
+           03 — SOCIAL PROOF / BADGES
+           ====================================================== */
+        .social-proof {
+            padding: var(--sp-8) 0;
+            background: var(--surface-1);
+        }
+
+        .badges-row {
+            display: flex;
+            gap: var(--sp-4);
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-7);
+            justify-content: center;
+        }
+
+        .badge {
+            padding: 8px 20px;
+            border-radius: var(--radius-pill);
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--ease);
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 1.5px solid var(--border-heavy);
+            color: var(--text-2);
+        }
+
+        .badge-teal {
+            background: var(--teal);
+            border: 1.5px solid var(--teal);
+            color: #FFFFFF;
+        }
+
+        .badge-sage {
+            background: var(--sage);
+            border: 1.5px solid var(--sage);
+            color: #FFFFFF;
+        }
+
+        .badge-orange {
+            background: var(--orange);
+            border: 1.5px solid var(--orange);
+            color: #FFFFFF;
+        }
+
+        .badge-purple {
+            background: var(--purple);
+            border: 1.5px solid var(--purple);
+            color: #FFFFFF;
+        }
+
+        .trusted-by {
+            text-align: center;
+        }
+
+        .trusted-by-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: var(--sp-5);
+        }
+
+        .trusted-logos {
+            display: flex;
+            gap: var(--sp-8);
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .trusted-logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text-3);
+            opacity: 0.5;
+            letter-spacing: -0.01em;
+        }
+
+        /* ======================================================
+           04 — FEATURE CARDS
+           ====================================================== */
+        .features {
+            padding: var(--sp-9) 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--sp-5);
+            margin-top: var(--sp-7);
+        }
+
+        @media (max-width: 768px) {
+            .features-grid { grid-template-columns: 1fr; }
+        }
+
+        .feature-card {
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            border-left: 3px solid transparent;
+            transition: all var(--ease-slow);
+            position: relative;
+        }
+
+        .feature-card:hover {
+            border-left-color: var(--sage);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .feature-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: var(--sage-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--sp-4);
+        }
+
+        .feature-card h3 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text-1);
+            margin-bottom: var(--sp-2);
+            letter-spacing: -0.01em;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-2);
+            line-height: 1.65;
+        }
+
+        /* ======================================================
+           05 — STATS
+           ====================================================== */
+        .stats {
+            padding: var(--sp-8) 0;
+            background: var(--surface-1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--sp-5);
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: var(--sp-5);
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 40px;
+            color: var(--text-1);
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: var(--sp-2);
+        }
+
+        .stat-value .teal { color: var(--teal); }
+        .stat-value .sage { color: var(--sage); }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-3);
+        }
+
+        /* ======================================================
+           06 — TESTIMONIALS
+           ====================================================== */
+        .testimonials {
+            padding: var(--sp-9) 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--sp-5);
+            margin-top: var(--sp-7);
+        }
+
+        @media (max-width: 768px) {
+            .testimonials-grid { grid-template-columns: 1fr; }
+        }
+
+        .testimonial-card {
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--teal);
+            position: relative;
+        }
+
+        .testimonial-quote-mark {
+            font-family: var(--font-display);
+            font-size: 64px;
+            font-weight: 800;
+            color: var(--sage);
+            opacity: 0.2;
+            line-height: 1;
+            position: absolute;
+            top: 16px;
+            right: 24px;
+        }
+
+        .testimonial-text {
+            font-size: 15px;
+            color: var(--text-2);
+            line-height: 1.7;
+            margin-bottom: var(--sp-5);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+
+        .testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--sage-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--sage);
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-1);
+        }
+
+        .testimonial-role {
+            font-size: 13px;
+            color: var(--text-3);
+        }
+
+        /* ======================================================
+           07 — PRICING
+           ====================================================== */
+        .pricing {
+            padding: var(--sp-9) 0;
+            background: var(--surface-1);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--sp-5);
+            margin-top: var(--sp-7);
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
+        }
+
+        .pricing-card {
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all var(--ease-slow);
+        }
+
+        .pricing-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--teal);
+            position: relative;
+        }
+
+        .pricing-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -13px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--teal);
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 16px;
+            border-radius: var(--radius-pill);
+            font-family: var(--font-body);
+            letter-spacing: 0.02em;
+        }
+
+        .pricing-tier {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--text-1);
+            margin-bottom: var(--sp-2);
+        }
+
+        .pricing-desc {
+            font-size: 14px;
+            color: var(--text-3);
+            margin-bottom: var(--sp-5);
+        }
+
+        .pricing-price {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 44px;
+            color: var(--text-1);
+            letter-spacing: -0.03em;
+            margin-bottom: var(--sp-1);
+        }
+
+        .pricing-price span {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-3);
+        }
+
+        .pricing-period {
+            font-size: 13px;
+            color: var(--text-3);
+            margin-bottom: var(--sp-5);
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: var(--sp-6);
+        }
+
+        .pricing-features li {
+            font-size: 14px;
+            color: var(--text-2);
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pricing-features li:last-child { border-bottom: none; }
+
+        .pricing-features .check {
+            color: var(--sage);
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .btn-secondary {
+            background: var(--surface-1);
+            color: var(--text-2);
+            padding: 12px 28px;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid var(--border-heavy);
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all var(--ease);
+            font-family: var(--font-body);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .btn-secondary:hover { border-color: var(--sage); color: var(--sage); }
+
+        .btn-sage {
+            background: var(--sage);
+            color: #FFFFFF;
+            padding: 12px 28px;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all var(--ease);
+            font-family: var(--font-body);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .btn-sage:hover { background: #558B0A; box-shadow: var(--shadow); }
+
+        .btn-primary-full {
+            background: var(--teal);
+            color: #FFFFFF;
+            padding: 12px 28px;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all var(--ease);
+            font-family: var(--font-body);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .btn-primary-full:hover { background: var(--teal-dark); box-shadow: var(--shadow); }
+
+        /* ======================================================
+           08 — FORMS
+           ====================================================== */
+        .forms-section {
+            padding: var(--sp-9) 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--sp-7);
+            margin-top: var(--sp-7);
+        }
+
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+        }
+
+        .form-group {
+            margin-bottom: var(--sp-5);
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-2);
+            margin-bottom: var(--sp-2);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 18px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--text-1);
+            background: var(--card);
+            border: 1.5px solid var(--border-heavy);
+            border-radius: var(--radius-pill);
+            outline: none;
+            transition: all var(--ease);
+        }
+
+        .form-input:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px var(--teal-10);
+        }
+
+        .form-input::placeholder { color: var(--text-3); }
+
+        .form-input.error {
+            border-color: var(--error);
+            box-shadow: 0 0 0 3px var(--error-bg);
+        }
+
+        .form-input.success {
+            border-color: var(--success);
+            box-shadow: 0 0 0 3px var(--success-bg);
+        }
+
+        .form-hint {
+            font-size: 12px;
+            color: var(--text-3);
+            margin-top: var(--sp-1);
+        }
+
+        .form-hint.error { color: var(--error); }
+        .form-hint.success { color: var(--success); }
+
+        textarea.form-input {
+            border-radius: var(--radius-md);
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Toggle */
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+            margin-bottom: var(--sp-4);
+        }
+
+        .toggle {
+            width: 44px;
+            height: 24px;
+            background: var(--surface-2);
+            border-radius: var(--radius-pill);
+            position: relative;
+            cursor: pointer;
+            transition: background var(--ease);
+            border: none;
+            flex-shrink: 0;
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 18px;
+            height: 18px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            transition: transform var(--ease);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        }
+
+        .toggle.active {
+            background: var(--teal);
+        }
+
+        .toggle.active::after {
+            transform: translateX(20px);
+        }
+
+        .toggle-label {
+            font-size: 14px;
+            color: var(--text-2);
+        }
+
+        /* Signup mini form on natural bg */
+        .signup-mini {
+            background: var(--surface-1);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+            border: 1px solid var(--border);
+        }
+
+        .signup-mini h4 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: var(--sp-4);
+            color: var(--text-1);
+        }
+
+        .signup-mini-row {
+            display: flex;
+            gap: var(--sp-3);
+        }
+
+        .signup-mini-row .form-input {
+            flex: 1;
+        }
+
+        /* ======================================================
+           09 — FOOTER
+           ====================================================== */
+        .footer {
+            background: var(--surface-2);
+            padding: var(--sp-8) 0 var(--sp-6);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--sp-7);
+            margin-bottom: var(--sp-7);
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            color: var(--text-3);
+            line-height: 1.65;
+            margin-top: var(--sp-3);
+            max-width: 280px;
+        }
+
+        .footer-col-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-1);
+            margin-bottom: var(--sp-4);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--sp-2);
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: var(--text-3);
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+
+        .footer-links a:hover { color: var(--teal); }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: var(--sp-5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--sp-4);
+        }
+
+        .footer-copy {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-3);
+            letter-spacing: 0.02em;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: var(--sp-5);
+        }
+
+        .footer-legal a {
+            font-size: 13px;
+            color: var(--text-3);
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+
+        .footer-legal a:hover { color: var(--teal); }
+
+        /* ======================================================
+           GROUP DIVIDER
+           ====================================================== */
+        .group-divider {
+            padding: var(--sp-8) 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp-4);
+            position: relative;
+        }
+
+        .group-divider::before,
+        .group-divider::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--sage), transparent);
+            opacity: 0.3;
+        }
+
+        .group-divider-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: var(--sage-glow);
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--sage-border);
+        }
+
+        .group-divider-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--sage);
+        }
+
+        /* ======================================================
+           10 — COLOR PALETTE
+           ====================================================== */
+        .color-palette {
+            padding: var(--sp-9) 0;
+        }
+
+        .color-group {
+            margin-bottom: var(--sp-7);
+        }
+
+        .color-group-title {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: var(--sp-4);
+        }
+
+        .color-row {
+            display: flex;
+            gap: var(--sp-3);
+            flex-wrap: wrap;
+        }
+
+        .color-chip {
+            width: 120px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--card);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .color-chip-swatch {
+            height: 72px;
+            width: 100%;
+        }
+
+        .color-chip-info {
+            padding: 10px 12px;
+        }
+
+        .color-chip-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-1);
+            margin-bottom: 2px;
+        }
+
+        .color-chip-hex {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+        }
+
+        /* ======================================================
+           11 — TYPOGRAPHY
+           ====================================================== */
+        .type-section {
+            padding: var(--sp-9) 0;
+            background: var(--surface-1);
+        }
+
+        .type-specimen {
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-bottom: var(--sp-5);
+        }
+
+        .type-specimen-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: var(--sp-3);
+            padding-bottom: var(--sp-3);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            padding: var(--sp-4) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .type-row:last-child { border-bottom: none; }
+
+        .type-meta {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            text-align: right;
+            white-space: nowrap;
+            flex-shrink: 0;
+            margin-left: var(--sp-5);
+        }
+
+        /* ======================================================
+           12 — SPACING
+           ====================================================== */
+        .spacing-section {
+            padding: var(--sp-9) 0;
+        }
+
+        .spacing-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp-4);
+            margin-top: var(--sp-7);
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-5);
+        }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-3);
+            width: 100px;
+            flex-shrink: 0;
+        }
+
+        .spacing-bar {
+            height: 24px;
+            background: linear-gradient(135deg, var(--teal-10), var(--sage-glow));
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .spacing-bar::after {
+            content: attr(data-px);
+            position: absolute;
+            right: -48px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+        }
+
+        /* ======================================================
+           13 — BUTTONS
+           ====================================================== */
+        .buttons-section {
+            padding: var(--sp-9) 0;
+            background: var(--surface-1);
+        }
+
+        .btn-row {
+            display: flex;
+            gap: var(--sp-4);
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: var(--sp-5);
+        }
+
+        .btn-text-link {
+            background: none;
+            border: none;
+            color: var(--teal);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            padding: 0;
+            transition: color var(--ease);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-text-link:hover { color: var(--teal-dark); text-decoration: underline; }
+
+        /* ======================================================
+           14 — DIVIDERS
+           ====================================================== */
+        .dividers-section {
+            padding: var(--sp-9) 0;
+        }
+
+        .divider-demo {
+            margin-bottom: var(--sp-7);
+        }
+
+        .divider-demo-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: var(--sp-4);
+        }
+
+        .divider-strata {
+            height: 120px;
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+            background: var(--bg);
+            border: 1px solid var(--border);
+        }
+
+        .divider-strata::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg,
+                    rgba(101,163,13,0.04) 0%,
+                    transparent 10%,
+                    rgba(194,174,140,0.04) 20%,
+                    transparent 30%,
+                    rgba(101,163,13,0.03) 40%,
+                    transparent 50%,
+                    rgba(217,184,120,0.04) 60%,
+                    transparent 70%,
+                    rgba(101,163,13,0.03) 80%,
+                    transparent 90%,
+                    rgba(180,160,120,0.03) 100%
+                );
+        }
+
+        .divider-sage-bar {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--sage), transparent);
+            border-radius: var(--radius-pill);
+            margin: var(--sp-5) 0;
+        }
+
+        .divider-leaf {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-4);
+            margin: var(--sp-5) 0;
+        }
+
+        .divider-leaf::before,
+        .divider-leaf::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .divider-natural {
+            height: 1px;
+            background: var(--border);
+            margin: var(--sp-5) 0;
+        }
+
+        .divider-natural-heavy {
+            height: 1px;
+            background: var(--border-heavy);
+            margin: var(--sp-5) 0;
+        }
+
+        /* ======================================================
+           15 — ALERTS
+           ====================================================== */
+        .alerts-section {
+            padding: var(--sp-9) 0;
+            background: var(--surface-1);
+        }
+
+        .alert {
+            padding: var(--sp-4) var(--sp-5);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--sp-4);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--sp-3);
+            font-size: 14px;
+            line-height: 1.6;
+            border-left: 3px solid;
+        }
+
+        .alert-success {
+            background: var(--success-bg);
+            border-left-color: var(--success);
+            color: var(--text-1);
+        }
+
+        .alert-warning {
+            background: var(--warning-bg);
+            border-left-color: var(--warning);
+            color: var(--text-1);
+        }
+
+        .alert-error {
+            background: var(--error-bg);
+            border-left-color: var(--error);
+            color: var(--text-1);
+        }
+
+        .alert-info {
+            background: var(--info-bg);
+            border-left-color: var(--info);
+            color: var(--text-1);
+        }
+
+        .alert-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+            line-height: 1.4;
+        }
+
+        .alert-content strong {
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* Toast */
+        .toast-demo {
+            margin-top: var(--sp-7);
+        }
+
+        .toast {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-3);
+            padding: var(--sp-3) var(--sp-5);
+            background: var(--card);
+            border-radius: var(--radius-pill);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text-1);
+        }
+
+        .toast-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .toast-dot.success { background: var(--success); }
+        .toast-dot.error { background: var(--error); }
+        .toast-dot.info { background: var(--info); }
+
+        /* ——— Utility ——— */
+        .text-center { text-align: center; }
+        .mb-0 { margin-bottom: 0; }
+        .mt-4 { margin-top: var(--sp-4); }
+        .mt-5 { margin-top: var(--sp-5); }
+        .mt-6 { margin-top: var(--sp-6); }
+        .mt-7 { margin-top: var(--sp-7); }
+
+        /* ——— Animations ——— */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .fade-in-d1 { animation-delay: 0.1s; }
+        .fade-in-d2 { animation-delay: 0.2s; }
+        .fade-in-d3 { animation-delay: 0.3s; }
+        .fade-in-d4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+
+<!-- ======================================================
+     01 — NAVIGATION BAR
+     ====================================================== -->
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a href="#" class="navbar-logo">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.1)" stroke="#0891B2" stroke-width="1.5"/>
+                <circle cx="14" cy="14" r="3" stroke="#0891B2" stroke-width="1.5"/>
+                <line x1="14" y1="8" x2="14" y2="11" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="14" y1="17" x2="14" y2="20" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="8" y1="14" x2="11" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="17" y1="14" x2="20" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="navbar-logo-text">PainOnSocial</span>
+        </a>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#" class="navbar-cta">Start Free Trial</a></li>
+        </ul>
+        <button class="navbar-mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ======================================================
+     02 — HERO
+     ====================================================== -->
+<section class="hero strata">
+    <div class="hero-strata"></div>
+    <!-- Leaf decoration -->
+    <svg class="hero-leaf-deco" width="200" height="300" viewBox="0 0 200 300" fill="none">
+        <path d="M100 10 C60 60, 20 120, 30 200 C40 250, 80 280, 100 290 C120 280, 160 250, 170 200 C180 120, 140 60, 100 10z" stroke="#65A30D" stroke-width="1" fill="rgba(101,163,13,0.03)"/>
+        <line x1="100" y1="10" x2="100" y2="290" stroke="#65A30D" stroke-width="0.5" opacity="0.3"/>
+        <path d="M100 80 C80 95, 50 110, 40 130" stroke="#65A30D" stroke-width="0.5" opacity="0.2" fill="none"/>
+        <path d="M100 120 C120 135, 150 150, 160 170" stroke="#65A30D" stroke-width="0.5" opacity="0.2" fill="none"/>
+        <path d="M100 160 C80 175, 55 190, 45 210" stroke="#65A30D" stroke-width="0.5" opacity="0.2" fill="none"/>
+        <path d="M100 200 C120 215, 145 230, 155 250" stroke="#65A30D" stroke-width="0.5" opacity="0.2" fill="none"/>
+    </svg>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-eyebrow fade-in">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+                Terrain Light v1.0
+            </div>
+            <h1 class="fade-in fade-in-d1">Discover <span class="text-sage">validated pain</span> from real conversations</h1>
+            <p class="hero-subhead fade-in fade-in-d2">AI-powered Reddit analysis that surfaces real business pain points, severity-scores them, and generates actionable solution ideas. Ground your decisions in evidence.</p>
+            <div class="hero-ctas fade-in fade-in-d3">
+                <a href="#" class="btn-primary">
+                    Start Free Analysis
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#" class="btn-ghost">See How It Works</a>
+            </div>
+            <div class="hero-metrics fade-in fade-in-d4">
+                <div class="hero-metric">
+                    <div class="hero-metric-value">2.4M+ threads</div>
+                    <div class="hero-metric-label">analyzed monthly</div>
+                </div>
+                <div class="hero-metric">
+                    <div class="hero-metric-value">847 subreddits</div>
+                    <div class="hero-metric-label">actively monitored</div>
+                </div>
+                <div class="hero-metric">
+                    <div class="hero-metric-value">94% accuracy</div>
+                    <div class="hero-metric-label">pain point detection</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     03 — SOCIAL PROOF / BADGES
+     ====================================================== -->
+<section class="social-proof">
+    <div class="container text-center">
+        <div class="section-label" style="justify-content: center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+            03 &mdash; Tiers &amp; Trust
+        </div>
+        <div class="badges-row">
+            <span class="badge badge-outline">Explorer</span>
+            <span class="badge badge-teal">Scout</span>
+            <span class="badge badge-sage">Prospector</span>
+            <span class="badge badge-orange">Accent Orange</span>
+            <span class="badge badge-purple">Accent Purple</span>
+        </div>
+        <div class="trusted-by">
+            <div class="trusted-by-label">Trusted by teams at</div>
+            <div class="trusted-logos">
+                <span class="trusted-logo">Basecamp</span>
+                <span class="trusted-logo">ConvertKit</span>
+                <span class="trusted-logo">Notion</span>
+                <span class="trusted-logo">Linear</span>
+                <span class="trusted-logo">Vercel</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     04 — FEATURE CARDS
+     ====================================================== -->
+<section class="features section" id="features">
+    <div class="container">
+        <div class="section-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+            04 &mdash; Features
+        </div>
+        <div class="section-title">Everything you need to find real pain</div>
+        <p class="section-desc">Four core capabilities that transform Reddit noise into validated business opportunities.</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                </div>
+                <h3>Pain Discovery Engine</h3>
+                <p>Automatically scans Reddit discussions to identify genuine pain points people express in their own words. No surveys, no bias.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <h3>Severity Scoring</h3>
+                <p>AI assigns severity scores based on frequency, emotional intensity, and willingness to pay. Prioritize what matters most.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3>Solution Generator</h3>
+                <p>Transforms validated pain points into concrete solution ideas with market sizing, competitive analysis, and go-to-market hints.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                </div>
+                <h3>Community Mapping</h3>
+                <p>Track which subreddits cluster around specific pain points. Understand community dynamics and where your audience gathers.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     05 — STATS
+     ====================================================== -->
+<section class="stats">
+    <div class="container">
+        <div class="section-label" style="justify-content: center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+            05 &mdash; Impact
+        </div>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-value"><span class="teal">2.4</span>M+</div>
+                <div class="stat-label">Threads analyzed monthly</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value"><span class="sage">12</span>K</div>
+                <div class="stat-label">Pain points discovered</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value"><span class="teal">94</span>%</div>
+                <div class="stat-label">Detection accuracy</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value"><span class="sage">3.2</span>x</div>
+                <div class="stat-label">Faster than manual research</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     06 — TESTIMONIALS
+     ====================================================== -->
+<section class="testimonials section" id="testimonials">
+    <div class="container">
+        <div class="section-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+            06 &mdash; Testimonials
+        </div>
+        <div class="section-title">Grounded in real results</div>
+        <p class="section-desc">Hear from founders who used PainOnSocial to validate their next venture.</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-quote-mark">&ldquo;</div>
+                <p class="testimonial-text">PainOnSocial completely changed how we approach product ideation. Instead of guessing, we now start with validated pain points that real people are expressing. We launched our SaaS based on a severity-9 pain point and hit $10K MRR in two months.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MC</div>
+                    <div>
+                        <div class="testimonial-name">Maya Chen</div>
+                        <div class="testimonial-role">Founder, DataPulse &middot; Scout Plan</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-quote-mark">&ldquo;</div>
+                <p class="testimonial-text">We were stuck choosing between three product directions. PainOnSocial showed us the severity scores across Reddit communities and the answer became obvious. The solution generator even gave us a head start on the pitch deck. Truly invaluable.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">JK</div>
+                    <div>
+                        <div class="testimonial-name">James Kowalski</div>
+                        <div class="testimonial-role">CPO, NorthBeam Labs &middot; Prospector Plan</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     07 — PRICING
+     ====================================================== -->
+<section class="pricing section" id="pricing">
+    <div class="container">
+        <div class="section-label" style="justify-content: center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+            07 &mdash; Pricing
+        </div>
+        <div class="section-title text-center">Choose your expedition</div>
+        <p class="section-desc text-center" style="margin: 0 auto var(--sp-3) auto;">Simple, transparent pricing. No hidden fees.</p>
+        <div class="pricing-grid">
+            <!-- Explorer -->
+            <div class="pricing-card">
+                <div class="pricing-tier">Explorer</div>
+                <div class="pricing-desc">For solo founders testing ideas</div>
+                <div class="pricing-price">$0<span>/mo</span></div>
+                <div class="pricing-period">Free forever</div>
+                <ul class="pricing-features">
+                    <li><span class="check">&#10003;</span> 50 thread analyses / month</li>
+                    <li><span class="check">&#10003;</span> 3 subreddit monitors</li>
+                    <li><span class="check">&#10003;</span> Basic severity scoring</li>
+                    <li><span class="check">&#10003;</span> Community support</li>
+                </ul>
+                <button class="btn-secondary">Get Started Free</button>
+            </div>
+            <!-- Scout (Featured) -->
+            <div class="pricing-card featured">
+                <div class="pricing-tier">Scout</div>
+                <div class="pricing-desc">For serious builders validating fast</div>
+                <div class="pricing-price">$49<span>/mo</span></div>
+                <div class="pricing-period">Billed annually at $468</div>
+                <ul class="pricing-features">
+                    <li><span class="check">&#10003;</span> Unlimited thread analyses</li>
+                    <li><span class="check">&#10003;</span> 25 subreddit monitors</li>
+                    <li><span class="check">&#10003;</span> Advanced severity scoring</li>
+                    <li><span class="check">&#10003;</span> Solution generator</li>
+                    <li><span class="check">&#10003;</span> Priority support</li>
+                </ul>
+                <button class="btn-primary-full">Start Scout Trial</button>
+            </div>
+            <!-- Prospector -->
+            <div class="pricing-card">
+                <div class="pricing-tier">Prospector</div>
+                <div class="pricing-desc">For teams and agencies at scale</div>
+                <div class="pricing-price">$149<span>/mo</span></div>
+                <div class="pricing-period">Billed annually at $1,428</div>
+                <ul class="pricing-features">
+                    <li><span class="check">&#10003;</span> Everything in Scout</li>
+                    <li><span class="check">&#10003;</span> Unlimited monitors</li>
+                    <li><span class="check">&#10003;</span> Team collaboration</li>
+                    <li><span class="check">&#10003;</span> API access</li>
+                    <li><span class="check">&#10003;</span> Custom reports &amp; exports</li>
+                    <li><span class="check">&#10003;</span> Dedicated account manager</li>
+                </ul>
+                <button class="btn-sage">Start Prospector Trial</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     08 — FORMS
+     ====================================================== -->
+<section class="forms-section section">
+    <div class="container">
+        <div class="section-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+            08 &mdash; Forms
+        </div>
+        <div class="section-title">Inputs &amp; Controls</div>
+        <p class="section-desc">Organic pill-radius inputs with teal focus states and natural validation.</p>
+        <div class="form-grid">
+            <div>
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" placeholder="Maya Chen">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="maya@datapulse.io">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Company (optional)</label>
+                    <input type="text" class="form-input" placeholder="DataPulse">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-input" placeholder="Tell us about your use case..."></textarea>
+                </div>
+            </div>
+            <div>
+                <!-- Validation states -->
+                <div class="form-group">
+                    <label class="form-label">Valid Email (success)</label>
+                    <input type="email" class="form-input success" value="james@northbeam.co">
+                    <div class="form-hint success">Looks good! We'll send a verification link.</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Invalid Email (error)</label>
+                    <input type="email" class="form-input error" value="james@north">
+                    <div class="form-hint error">Please enter a valid email address.</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Toggles</label>
+                    <div class="toggle-row">
+                        <button class="toggle active" onclick="this.classList.toggle('active')"></button>
+                        <span class="toggle-label">Email notifications</span>
+                    </div>
+                    <div class="toggle-row">
+                        <button class="toggle" onclick="this.classList.toggle('active')"></button>
+                        <span class="toggle-label">Weekly digest</span>
+                    </div>
+                    <div class="toggle-row">
+                        <button class="toggle active" onclick="this.classList.toggle('active')"></button>
+                        <span class="toggle-label">Auto-analyze new threads</span>
+                    </div>
+                </div>
+                <!-- Mini signup -->
+                <div class="signup-mini">
+                    <h4>Quick Signup</h4>
+                    <div class="signup-mini-row">
+                        <input type="email" class="form-input" placeholder="your@email.com">
+                        <button class="btn-primary" style="white-space: nowrap;">Join Free</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     09 — FOOTER
+     ====================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="navbar-logo" style="margin-bottom: 8px;">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.1)" stroke="#0891B2" stroke-width="1.5"/>
+                        <circle cx="14" cy="14" r="3" stroke="#0891B2" stroke-width="1.5"/>
+                        <line x1="14" y1="8" x2="14" y2="11" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="14" y1="17" x2="14" y2="20" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="8" y1="14" x2="11" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="17" y1="14" x2="20" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span class="navbar-logo-text">PainOnSocial</span>
+                </a>
+                <p>AI-powered Reddit analysis for validated business pain points. Ground your decisions in evidence, not assumptions.</p>
+            </div>
+            <div>
+                <div class="footer-col-title">Product</div>
+                <ul class="footer-links">
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">API Docs</a></li>
+                    <li><a href="#">Changelog</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Company</div>
+                <ul class="footer-links">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Legal</div>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-copy">&copy; 2026 PainOnSocial. All rights reserved. &mdash; Terrain Light v1.0</div>
+            <div class="footer-legal">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Status</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ======================================================
+     GROUP DIVIDER
+     ====================================================== -->
+<div class="group-divider">
+    <div class="group-divider-content">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+        <span class="group-divider-label">Design System Reference</span>
+    </div>
+</div>
+
+<!-- ======================================================
+     10 — COLOR PALETTE
+     ====================================================== -->
+<section class="color-palette section">
+    <div class="container">
+        <div class="section-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+            10 &mdash; Color Palette
+        </div>
+        <div class="section-title">Palette</div>
+        <p class="section-desc">Natural, earth-rooted colors with teal and sage accents on warm white.</p>
+
+        <!-- Brand -->
+        <div class="color-group mt-7">
+            <div class="color-group-title">Brand Colors</div>
+            <div class="color-row">
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #0891B2;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Teal</div><div class="color-chip-hex">#0891B2</div></div>
+                </div>
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #0E7490;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Teal Dark</div><div class="color-chip-hex">#0E7490</div></div>
+                </div>
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #F97316;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Orange</div><div class="color-chip-hex">#F97316</div></div>
+                </div>
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #A855F7;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Purple</div><div class="color-chip-hex">#A855F7</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sage -->
+        <div class="color-group">
+            <div class="color-group-title">Sage / Olive Accent</div>
+            <div class="color-row">
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #65A30D;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Sage</div><div class="color-chip-hex">#65A30D</div></div>
+                </div>
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #84CC16;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Sage Light</div><div class="color-chip-hex">#84CC16</div></div>
+                </div>
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: rgba(101,163,13,0.08); border: 1px dashed rgba(101,163,13,0.3);"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Sage Glow</div><div class="color-chip-hex">rgba(101,163,13,0.08)</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Surfaces -->
+        <div class="color-group">
+            <div class="color-group-title">Natural Surfaces</div>
+            <div class="color-row">
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #FAFBF7;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Body BG</div><div class="color-chip-hex">#FAFBF7</div></div>
+                </div>
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #F2F5EE;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Surface 1</div><div class="color-chip-hex">#F2F5EE</div></div>
+                </div>
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #E8EDE2;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Surface 2</div><div class="color-chip-hex">#E8EDE2</div></div>
+                </div>
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #FFFFFF;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Card</div><div class="color-chip-hex">#FFFFFF</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Text -->
+        <div class="color-group">
+            <div class="color-group-title">Text Colors</div>
+            <div class="color-row">
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #1A2412;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Forest Primary</div><div class="color-chip-hex">#1A2412</div></div>
+                </div>
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #4A5A3E;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Olive Secondary</div><div class="color-chip-hex">#4A5A3E</div></div>
+                </div>
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #8A9A7E;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Sage Muted</div><div class="color-chip-hex">#8A9A7E</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Semantic -->
+        <div class="color-group mb-0">
+            <div class="color-group-title">Semantic</div>
+            <div class="color-row">
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #65A30D;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Success</div><div class="color-chip-hex">#65A30D</div></div>
+                </div>
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #D97706;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Warning</div><div class="color-chip-hex">#D97706</div></div>
+                </div>
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #EF4444;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Error</div><div class="color-chip-hex">#EF4444</div></div>
+                </div>
+                <div class="color-chip">
+                    <div class="color-chip-swatch" style="background: #0891B2;"></div>
+                    <div class="color-chip-info"><div class="color-chip-name">Info</div><div class="color-chip-hex">#0891B2</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     11 — TYPOGRAPHY
+     ====================================================== -->
+<section class="type-section section">
+    <div class="container">
+        <div class="section-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+            11 &mdash; Typography
+        </div>
+        <div class="section-title">Type Scale</div>
+        <p class="section-desc">Manrope for display warmth, Inter for body clarity, Inconsolata for mono friendliness.</p>
+
+        <!-- Display: Manrope -->
+        <div class="type-specimen mt-7">
+            <div class="type-specimen-label">Display &mdash; Manrope</div>
+            <div class="type-row">
+                <span style="font-family: var(--font-display); font-weight: 800; font-size: 48px; line-height: 1.1; letter-spacing: -0.03em;">Display XL</span>
+                <span class="type-meta">Manrope 800 / 48px / -0.03em</span>
+            </div>
+            <div class="type-row">
+                <span style="font-family: var(--font-display); font-weight: 800; font-size: 36px; line-height: 1.15; letter-spacing: -0.02em;">Display Large</span>
+                <span class="type-meta">Manrope 800 / 36px / -0.02em</span>
+            </div>
+            <div class="type-row">
+                <span style="font-family: var(--font-display); font-weight: 700; font-size: 28px; line-height: 1.2; letter-spacing: -0.02em;">Heading 1</span>
+                <span class="type-meta">Manrope 700 / 28px / -0.02em</span>
+            </div>
+            <div class="type-row">
+                <span style="font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.25;">Heading 2</span>
+                <span class="type-meta">Manrope 700 / 22px</span>
+            </div>
+            <div class="type-row">
+                <span style="font-family: var(--font-display); font-weight: 700; font-size: 18px; line-height: 1.3;">Heading 3</span>
+                <span class="type-meta">Manrope 700 / 18px</span>
+            </div>
+        </div>
+
+        <!-- Body: Inter -->
+        <div class="type-specimen">
+            <div class="type-specimen-label">Body &mdash; Inter</div>
+            <div class="type-row">
+                <span style="font-family: var(--font-body); font-size: 18px; line-height: 1.7; color: var(--text-2);">Body Large &mdash; AI-powered Reddit analysis that surfaces real business pain points and severity-scores them.</span>
+                <span class="type-meta">Inter 400 / 18px / 1.7</span>
+            </div>
+            <div class="type-row">
+                <span style="font-family: var(--font-body); font-size: 16px; line-height: 1.65; color: var(--text-2);">Body Default &mdash; Automatically scans discussions to identify genuine pain points people express in their own words.</span>
+                <span class="type-meta">Inter 400 / 16px / 1.65</span>
+            </div>
+            <div class="type-row">
+                <span style="font-family: var(--font-body); font-size: 14px; line-height: 1.6; color: var(--text-2);">Body Small &mdash; Track which subreddits cluster around specific pain points.</span>
+                <span class="type-meta">Inter 400 / 14px / 1.6</span>
+            </div>
+            <div class="type-row">
+                <span style="font-family: var(--font-body); font-size: 13px; line-height: 1.5; color: var(--text-3);">Caption &mdash; Updated 2 hours ago</span>
+                <span class="type-meta">Inter 400 / 13px / 1.5</span>
+            </div>
+        </div>
+
+        <!-- Mono: Inconsolata -->
+        <div class="type-specimen mb-0">
+            <div class="type-specimen-label">Mono &mdash; Inconsolata</div>
+            <div class="type-row">
+                <span style="font-family: var(--font-mono); font-size: 14px; color: var(--teal);">severity_score: 8.7 &mdash; pain_category: "workflow_friction"</span>
+                <span class="type-meta">Inconsolata 400 / 14px</span>
+            </div>
+            <div class="type-row">
+                <span style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage);">Section Label &mdash; Terrain Light v1.0</span>
+                <span class="type-meta">Inconsolata 600 / 12px / 0.1em</span>
+            </div>
+            <div class="type-row">
+                <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-3);">const painPoints = await analyze(subreddit, { depth: 'deep' });</span>
+                <span class="type-meta">Inconsolata 400 / 11px</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     12 — SPACING
+     ====================================================== -->
+<section class="spacing-section section">
+    <div class="container">
+        <div class="section-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+            12 &mdash; Spacing
+        </div>
+        <div class="section-title">Spacing Scale</div>
+        <p class="section-desc">8px base grid with organic breathing room.</p>
+        <div class="spacing-scale">
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-1</span>
+                <div class="spacing-bar" style="width: 4px;" data-px="4px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-2</span>
+                <div class="spacing-bar" style="width: 8px;" data-px="8px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-3</span>
+                <div class="spacing-bar" style="width: 12px;" data-px="12px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-4</span>
+                <div class="spacing-bar" style="width: 16px;" data-px="16px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-5</span>
+                <div class="spacing-bar" style="width: 24px;" data-px="24px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-6</span>
+                <div class="spacing-bar" style="width: 32px;" data-px="32px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-7</span>
+                <div class="spacing-bar" style="width: 48px;" data-px="48px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-8</span>
+                <div class="spacing-bar" style="width: 64px;" data-px="64px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-9</span>
+                <div class="spacing-bar" style="width: 96px;" data-px="96px"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     13 — BUTTONS
+     ====================================================== -->
+<section class="buttons-section section">
+    <div class="container">
+        <div class="section-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+            13 &mdash; Buttons
+        </div>
+        <div class="section-title">Button System</div>
+        <p class="section-desc">Pill-shaped, organic buttons with teal and sage accents. All with white text on colored backgrounds.</p>
+
+        <div class="mt-7">
+            <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: var(--sp-4);">Primary (Teal)</div>
+            <div class="btn-row">
+                <button class="btn-primary">Start Free Trial</button>
+                <button class="btn-primary" style="opacity: 0.6; pointer-events: none;">Disabled</button>
+            </div>
+
+            <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: var(--sp-4); margin-top: var(--sp-6);">Secondary (Natural)</div>
+            <div class="btn-row">
+                <button class="btn-secondary" style="width: auto;">Learn More</button>
+                <button class="btn-secondary" style="width: auto; opacity: 0.6; pointer-events: none;">Disabled</button>
+            </div>
+
+            <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: var(--sp-4); margin-top: var(--sp-6);">Ghost (Pill)</div>
+            <div class="btn-row">
+                <button class="btn-ghost">See How It Works</button>
+            </div>
+
+            <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: var(--sp-4); margin-top: var(--sp-6);">Sage Accent</div>
+            <div class="btn-row">
+                <button class="btn-sage" style="width: auto;">Start Prospector Trial</button>
+            </div>
+
+            <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: var(--sp-4); margin-top: var(--sp-6);">Text Link</div>
+            <div class="btn-row">
+                <a href="#" class="btn-text-link">View Documentation
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     14 — DIVIDERS
+     ====================================================== -->
+<section class="dividers-section section">
+    <div class="container">
+        <div class="section-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+            14 &mdash; Dividers
+        </div>
+        <div class="section-title">Dividers &amp; Separators</div>
+        <p class="section-desc">Strata layers, leaf accents, sage bars, and natural separators.</p>
+
+        <div class="mt-7">
+            <!-- Strata Demo -->
+            <div class="divider-demo">
+                <div class="divider-demo-label">Strata Layers</div>
+                <div class="divider-strata"></div>
+            </div>
+
+            <!-- Sage Bar -->
+            <div class="divider-demo">
+                <div class="divider-demo-label">Sage Gradient Bar</div>
+                <div class="divider-sage-bar"></div>
+            </div>
+
+            <!-- Leaf Divider -->
+            <div class="divider-demo">
+                <div class="divider-demo-label">Leaf Element Divider</div>
+                <div class="divider-leaf">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+                </div>
+            </div>
+
+            <!-- Natural Separators -->
+            <div class="divider-demo">
+                <div class="divider-demo-label">Natural Separator (Light)</div>
+                <div class="divider-natural"></div>
+            </div>
+
+            <div class="divider-demo mb-0">
+                <div class="divider-demo-label">Natural Separator (Heavy)</div>
+                <div class="divider-natural-heavy"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     15 — ALERTS
+     ====================================================== -->
+<section class="alerts-section section">
+    <div class="container">
+        <div class="section-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#65A30D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+            15 &mdash; Alerts
+        </div>
+        <div class="section-title">Alerts &amp; Toasts</div>
+        <p class="section-desc">Natural light alerts with colored left borders and organic radius. Plus floating toasts.</p>
+
+        <div class="mt-7">
+            <div class="alert alert-success">
+                <span class="alert-icon">&#10003;</span>
+                <div class="alert-content">
+                    <strong>Analysis complete</strong>
+                    Found 847 pain points across 12 subreddits. View your report to explore severity scores and solution ideas.
+                </div>
+            </div>
+            <div class="alert alert-warning">
+                <span class="alert-icon">&#9888;</span>
+                <div class="alert-content">
+                    <strong>Rate limit approaching</strong>
+                    You've used 42 of 50 thread analyses this month. Upgrade to Scout for unlimited access.
+                </div>
+            </div>
+            <div class="alert alert-error">
+                <span class="alert-icon">&#10007;</span>
+                <div class="alert-content">
+                    <strong>Subreddit not found</strong>
+                    The subreddit r/EntrepreneurIdeas doesn't exist or is private. Check the name and try again.
+                </div>
+            </div>
+            <div class="alert alert-info">
+                <span class="alert-icon">&#8505;</span>
+                <div class="alert-content">
+                    <strong>New feature available</strong>
+                    Solution Generator is now live. Transform validated pain points into concrete business ideas.
+                </div>
+            </div>
+
+            <!-- Toasts -->
+            <div class="toast-demo">
+                <div class="divider-demo-label">Toast Notifications</div>
+                <div style="display: flex; flex-direction: column; gap: var(--sp-4); align-items: flex-start;">
+                    <div class="toast">
+                        <span class="toast-dot success"></span>
+                        Pain point saved to collection
+                    </div>
+                    <div class="toast">
+                        <span class="toast-dot error"></span>
+                        Failed to export report. Try again.
+                    </div>
+                    <div class="toast">
+                        <span class="toast-dot info"></span>
+                        New threads detected in r/SaaS
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ——— Final Sage Bar ——— -->
+<div style="padding: var(--sp-7) var(--sp-5);">
+    <div class="container text-center">
+        <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-3); letter-spacing: 0.06em;">
+            Terrain Light v1.0 &mdash; "Ground your decisions." &mdash; PainOnSocial Design System
+        </div>
+        <div class="divider-sage-bar" style="max-width: 200px; margin: var(--sp-4) auto 0;"></div>
+    </div>
+</div>
+
+</body>
+</html>

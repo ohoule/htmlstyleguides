@@ -1,0 +1,2769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lattice Light v1.0 — PainOnSocial Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            /* ——— Brand ——— */
+            --teal: #0891B2;
+            --teal-dark: #0E7490;
+            --teal-glow: rgba(8,145,178,0.10);
+            --teal-glow-md: rgba(8,145,178,0.16);
+            --teal-glow-lg: rgba(8,145,178,0.22);
+            --teal-border: rgba(8,145,178,0.25);
+            --orange: #F97316;
+            --orange-bg: rgba(249,115,22,0.06);
+            --purple: #A855F7;
+            --purple-bg: rgba(168,85,247,0.06);
+
+            /* ——— Indigo Accent ——— */
+            --indigo: #4F46E5;
+            --indigo-light: #818CF8;
+            --indigo-glow: rgba(79,70,229,0.08);
+            --indigo-border: rgba(79,70,229,0.18);
+            --indigo-glow-md: rgba(79,70,229,0.14);
+
+            /* ——— Light Surfaces ——— */
+            --surface-body: #FAFAFF;
+            --surface-raised: #F2F2FA;
+            --surface-mid: #E8E8F2;
+            --surface-card: #FFFFFF;
+
+            /* ——— Text ——— */
+            --text-1: #0F0F1A;
+            --text-2: #4A4A65;
+            --text-3: #9494AD;
+
+            /* ——— Functional ——— */
+            --bg: #FAFAFF;
+            --card: #FFFFFF;
+            --card-border: rgba(15,15,26,0.08);
+            --card-border-hover: rgba(8,145,178,0.35);
+            --border: rgba(15,15,26,0.08);
+            --border-subtle: rgba(15,15,26,0.04);
+
+            /* ——— Semantic ——— */
+            --success: #16A34A;
+            --success-bg: rgba(22,163,74,0.06);
+            --success-border: rgba(22,163,74,0.2);
+            --warning: #EAB308;
+            --warning-bg: rgba(234,179,8,0.06);
+            --warning-border: rgba(234,179,8,0.2);
+            --error: #EF4444;
+            --error-bg: rgba(239,68,68,0.06);
+            --error-border: rgba(239,68,68,0.2);
+            --info: #0891B2;
+            --info-bg: rgba(8,145,178,0.06);
+            --info-border: rgba(8,145,178,0.2);
+
+            /* ——— Typography ——— */
+            --font-display: 'Syne', system-ui, sans-serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+            --font-mono: 'Space Mono', monospace;
+
+            /* ——— Spacing (8px base) ——— */
+            --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+            --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+            /* ——— Shadows ——— */
+            --shadow-sm: 0 1px 3px rgba(15,15,26,0.04);
+            --shadow-card: 0 4px 24px rgba(15,15,26,0.06);
+            --shadow-md: 0 8px 32px rgba(15,15,26,0.08);
+            --shadow-lg: 0 16px 48px rgba(15,15,26,0.10);
+            --shadow-teal: 0 4px 24px rgba(8,145,178,0.18);
+            --shadow-indigo: 0 4px 24px rgba(79,70,229,0.15);
+
+            /* ——— Radii ——— */
+            --radius-sm: 6px; --radius-md: 8px; --radius-lg: 12px;
+            --radius-xl: 16px; --radius-full: 9999px;
+
+            /* ——— Motion ——— */
+            --ease: 200ms ease; --ease-slow: 300ms ease;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-1);
+            background: var(--bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ——— Diamond Lattice Background Pattern ——— */
+        .diamond-lattice {
+            position: relative;
+        }
+        .diamond-lattice::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(45deg, var(--indigo-glow) 25%, transparent 25%),
+                linear-gradient(-45deg, var(--indigo-glow) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, var(--indigo-glow) 75%),
+                linear-gradient(-45deg, transparent 75%, var(--indigo-glow) 75%);
+            background-size: 40px 40px;
+            background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* ——— Chevron Divider ——— */
+        .chevron-divider {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 40px 0;
+        }
+        .chevron-divider .chevron-line {
+            flex: 1;
+            height: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        .chevron-divider .chevron-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                linear-gradient(135deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0,
+                linear-gradient(225deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0,
+                linear-gradient(315deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0,
+                linear-gradient(45deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0;
+            background-size: 12px 12px;
+            background-repeat: repeat-x;
+        }
+
+        /* ——— Diamond Section Marker ——— */
+        .section-marker {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .section-marker .diamond {
+            width: 36px;
+            height: 36px;
+            background: var(--teal);
+            transform: rotate(45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .section-marker .diamond span {
+            transform: rotate(-45deg);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0;
+        }
+        .section-marker h2 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 28px;
+            letter-spacing: -0.5px;
+            color: var(--text-1);
+        }
+        .section-marker .marker-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--surface-mid), transparent);
+        }
+
+        /* ——— Geometric Top Border ——— */
+        .geo-border-top {
+            position: relative;
+        }
+        .geo-border-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--teal) 0px, var(--teal) 8px,
+                transparent 8px, transparent 12px,
+                var(--indigo) 12px, var(--indigo) 20px,
+                transparent 20px, transparent 24px
+            );
+        }
+
+        /* ——— Container ——— */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ——— Section ——— */
+        .section {
+            padding: 80px 0;
+        }
+
+        /* ——— Utility Classes ——— */
+        .font-display { font-family: var(--font-display); }
+        .font-mono { font-family: var(--font-mono); }
+        .text-teal { color: var(--teal); }
+        .text-indigo { color: var(--indigo); }
+        .text-2 { color: var(--text-2); }
+        .text-3 { color: var(--text-3); }
+        .bg-raised { background: var(--surface-raised); }
+        .bg-mid { background: var(--surface-mid); }
+
+        /* ========================== */
+        /* 01. NAVIGATION BAR         */
+        /* ========================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(250,250,255,0.82);
+            backdrop-filter: blur(20px) saturate(1.3);
+            -webkit-backdrop-filter: blur(20px) saturate(1.3);
+            border-bottom: 1px solid var(--border);
+            transition: box-shadow var(--ease);
+        }
+        .nav.scrolled {
+            box-shadow: var(--shadow-card);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .nav-logo svg {
+            width: 28px;
+            height: 28px;
+        }
+        .nav-logo span {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--text-1);
+            letter-spacing: -0.3px;
+        }
+        .nav-logo .logo-accent {
+            color: var(--teal);
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-2);
+            text-decoration: none;
+            transition: color var(--ease);
+            letter-spacing: 0.01em;
+        }
+        .nav-links a:hover {
+            color: var(--teal);
+        }
+        .nav-cta {
+            background: var(--teal);
+            color: #fff !important;
+            padding: 8px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 600 !important;
+            transition: all var(--ease);
+        }
+        .nav-cta:hover {
+            background: var(--teal-dark);
+            box-shadow: var(--shadow-teal);
+        }
+        .nav-mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .nav-mobile-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text-1);
+            margin: 5px 0;
+            transition: all var(--ease);
+            border-radius: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(250,250,255,0.96);
+                backdrop-filter: blur(20px);
+                padding: 24px;
+                gap: 20px;
+                border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-md);
+            }
+            .nav-mobile-toggle { display: block; }
+        }
+
+
+        /* ========================== */
+        /* 02. HERO                    */
+        /* ========================== */
+        .hero {
+            padding: 160px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(45deg, rgba(79,70,229,0.04) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(79,70,229,0.04) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(79,70,229,0.04) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(79,70,229,0.04) 75%);
+            background-size: 48px 48px;
+            background-position: 0 0, 0 24px, 24px -24px, -24px 0px;
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(8,145,178,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--teal);
+            background: var(--teal-glow);
+            border: 1px solid var(--teal-border);
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            margin-bottom: 32px;
+            letter-spacing: 0.04em;
+        }
+        .hero-badge .diamond-icon {
+            width: 8px;
+            height: 8px;
+            background: var(--teal);
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+        .hero h1 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(40px, 6vw, 68px);
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+            color: var(--text-1);
+            margin-bottom: 24px;
+        }
+        .hero h1 .highlight {
+            color: var(--teal);
+        }
+        .hero p {
+            font-size: 18px;
+            color: var(--text-2);
+            line-height: 1.7;
+            max-width: 560px;
+            margin: 0 auto 40px;
+        }
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: var(--teal);
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all var(--ease);
+        }
+        .btn-primary:hover {
+            background: var(--teal-dark);
+            box-shadow: var(--shadow-teal);
+            transform: translateY(-1px);
+        }
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: transparent;
+            color: var(--text-1);
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all var(--ease);
+        }
+        .btn-ghost:hover {
+            border-color: var(--indigo);
+            color: var(--indigo);
+            background: var(--indigo-glow);
+        }
+        .hero-metrics {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+        .hero-metric {
+            text-align: center;
+        }
+        .hero-metric .number {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--teal);
+            letter-spacing: 0.04em;
+        }
+        .hero-metric .label {
+            font-size: 12px;
+            color: var(--text-3);
+            margin-top: 4px;
+            letter-spacing: 0.02em;
+        }
+
+
+        /* ========================== */
+        /* 03. SOCIAL PROOF / BADGES   */
+        /* ========================== */
+        .social-proof {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .badges-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        .badge-pill {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 13px;
+            padding: 8px 20px;
+            border-radius: var(--radius-full);
+            letter-spacing: 0.02em;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .badge-pill .badge-diamond {
+            width: 7px;
+            height: 7px;
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+        .badge-explorer {
+            background: transparent;
+            border: 1.5px solid var(--border);
+            color: var(--text-2);
+        }
+        .badge-explorer .badge-diamond { background: var(--text-3); }
+        .badge-scout {
+            background: var(--teal);
+            border: 1.5px solid var(--teal);
+            color: #fff;
+        }
+        .badge-scout .badge-diamond { background: rgba(255,255,255,0.5); }
+        .badge-prospector {
+            background: var(--indigo);
+            border: 1.5px solid var(--indigo);
+            color: #fff;
+        }
+        .badge-prospector .badge-diamond { background: rgba(255,255,255,0.5); }
+
+        .trusted-by {
+            text-align: center;
+        }
+        .trusted-by .label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .trusted-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .trusted-logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-3);
+            opacity: 0.7;
+            transition: opacity var(--ease);
+        }
+        .trusted-logo:hover {
+            opacity: 1;
+            color: var(--text-2);
+        }
+
+
+        /* ========================== */
+        /* 04. FEATURE CARDS           */
+        /* ========================== */
+        .features {
+            padding: 80px 0;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 36px 32px;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--ease-slow);
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--teal) 0px, var(--teal) 8px,
+                transparent 8px, transparent 12px,
+                var(--indigo) 12px, var(--indigo) 20px,
+                transparent 20px, transparent 24px
+            );
+        }
+        .feature-card:hover {
+            border-color: var(--card-border-hover);
+            box-shadow: var(--shadow-card);
+            transform: translateY(-2px);
+        }
+        .feature-card:nth-child(2) { margin-top: 32px; }
+        .feature-card:nth-child(3) { margin-top: -32px; }
+        .feature-card .feature-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--teal-glow);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .feature-card .feature-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--teal);
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .feature-card:nth-child(even) .feature-icon {
+            background: var(--indigo-glow);
+        }
+        .feature-card:nth-child(even) .feature-icon svg {
+            stroke: var(--indigo);
+        }
+        .feature-card h3 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 10px;
+            letter-spacing: -0.3px;
+        }
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-2);
+            line-height: 1.7;
+        }
+
+        @media (max-width: 640px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .feature-card:nth-child(2),
+            .feature-card:nth-child(3) { margin-top: 0; }
+        }
+
+
+        /* ========================== */
+        /* 05. STATS                   */
+        /* ========================== */
+        .stats {
+            background: var(--surface-raised);
+            padding: 72px 0;
+            position: relative;
+        }
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--teal) 0px, var(--teal) 4px,
+                transparent 4px, transparent 8px
+            );
+        }
+        .stats::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--indigo) 0px, var(--indigo) 4px,
+                transparent 4px, transparent 8px
+            );
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            text-align: center;
+        }
+        .stat-item .stat-number {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(36px, 4vw, 52px);
+            color: var(--text-1);
+            letter-spacing: -1px;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .stat-item .stat-number .teal { color: var(--teal); }
+        .stat-item .stat-number .indigo { color: var(--indigo); }
+        .stat-item .stat-label {
+            font-size: 14px;
+            color: var(--text-2);
+        }
+        .stat-item .stat-sub {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            margin-top: 4px;
+            letter-spacing: 0.04em;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        }
+
+
+        /* ========================== */
+        /* 06. TESTIMONIALS            */
+        /* ========================== */
+        .testimonials {
+            padding: 80px 0;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .testimonial-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 36px 32px;
+            border-left: 3px solid var(--teal);
+            position: relative;
+        }
+        .testimonial-card .quote-mark {
+            font-family: var(--font-display);
+            font-size: 56px;
+            font-weight: 800;
+            color: var(--teal-glow-md);
+            line-height: 1;
+            position: absolute;
+            top: 20px;
+            right: 28px;
+        }
+        .testimonial-card blockquote {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-1);
+            margin-bottom: 24px;
+            letter-spacing: -0.2px;
+        }
+        .testimonial-card blockquote .highlight {
+            color: var(--teal);
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 14px;
+            color: #fff;
+        }
+        .testimonial-author-info .name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-1);
+        }
+        .testimonial-author-info .role {
+            font-size: 12px;
+            color: var(--text-3);
+        }
+
+        @media (max-width: 640px) {
+            .testimonials-grid { grid-template-columns: 1fr; }
+        }
+
+
+        /* ========================== */
+        /* 07. PRICING                 */
+        /* ========================== */
+        .pricing {
+            padding: 80px 0;
+            background: var(--surface-raised);
+            position: relative;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .pricing-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 36px 28px;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--ease-slow);
+        }
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--surface-mid);
+        }
+        .pricing-card.featured {
+            border-color: var(--teal);
+        }
+        .pricing-card.featured::before {
+            background: linear-gradient(90deg, var(--teal), var(--teal-dark));
+            height: 4px;
+        }
+        .pricing-card:hover {
+            box-shadow: var(--shadow-card);
+            transform: translateY(-2px);
+        }
+        .pricing-card .plan-badge {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            margin-bottom: 16px;
+        }
+        .pricing-card .plan-badge.explorer-badge {
+            background: var(--surface-raised);
+            color: var(--text-2);
+        }
+        .pricing-card .plan-badge.scout-badge {
+            background: var(--teal-glow);
+            color: var(--teal);
+        }
+        .pricing-card .plan-badge.prospector-badge {
+            background: var(--indigo-glow);
+            color: var(--indigo);
+        }
+        .pricing-card .plan-name {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 24px;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+        .pricing-card .plan-desc {
+            font-size: 13px;
+            color: var(--text-3);
+            margin-bottom: 24px;
+        }
+        .pricing-card .plan-price {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: 24px;
+        }
+        .pricing-card .plan-price .currency {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--text-2);
+        }
+        .pricing-card .plan-price .amount {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 48px;
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+        .pricing-card .plan-price .period {
+            font-size: 13px;
+            color: var(--text-3);
+        }
+        .pricing-card .plan-features {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+        .pricing-card .plan-features li {
+            font-size: 14px;
+            color: var(--text-2);
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .pricing-card .plan-features li::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: var(--teal);
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+        .pricing-card .plan-features li:last-child {
+            border-bottom: none;
+        }
+        .pricing-card .plan-btn {
+            width: 100%;
+            padding: 12px 24px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--ease);
+            text-align: center;
+        }
+        .plan-btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-1);
+        }
+        .plan-btn-outline:hover {
+            border-color: var(--teal);
+            color: var(--teal);
+        }
+        .plan-btn-primary {
+            background: var(--teal);
+            color: #fff;
+        }
+        .plan-btn-primary:hover {
+            background: var(--teal-dark);
+            box-shadow: var(--shadow-teal);
+        }
+        .plan-btn-indigo {
+            background: var(--indigo);
+            color: #fff;
+        }
+        .plan-btn-indigo:hover {
+            background: #4338CA;
+            box-shadow: var(--shadow-indigo);
+        }
+
+        @media (max-width: 768px) {
+            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+        }
+
+
+        /* ========================== */
+        /* 08. FORMS                   */
+        /* ========================== */
+        .forms-section {
+            padding: 80px 0;
+        }
+        .form-demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-top: 48px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-1);
+            margin-bottom: 6px;
+            letter-spacing: 0.01em;
+        }
+        .form-input {
+            width: 100%;
+            padding: 10px 14px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--text-1);
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            outline: none;
+            transition: all var(--ease);
+        }
+        .form-input::placeholder {
+            color: var(--text-3);
+        }
+        .form-input:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px var(--teal-glow);
+        }
+        .form-input.error {
+            border-color: var(--error);
+            box-shadow: 0 0 0 3px var(--error-bg);
+        }
+        .form-input.success {
+            border-color: var(--success);
+            box-shadow: 0 0 0 3px var(--success-bg);
+        }
+        .form-hint {
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        .form-hint.error { color: var(--error); }
+        .form-hint.success { color: var(--success); }
+
+        .form-select {
+            width: 100%;
+            padding: 10px 14px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--text-1);
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            outline: none;
+            transition: all var(--ease);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%234A4A65' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            cursor: pointer;
+        }
+        .form-select:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px var(--teal-glow);
+        }
+
+        /* Toggle Switch */
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .toggle {
+            width: 44px;
+            height: 24px;
+            border-radius: 12px;
+            background: var(--surface-mid);
+            position: relative;
+            cursor: pointer;
+            transition: background var(--ease);
+            border: none;
+            outline: none;
+            flex-shrink: 0;
+        }
+        .toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--ease);
+        }
+        .toggle.active {
+            background: var(--teal);
+        }
+        .toggle.active::after {
+            transform: translateX(20px);
+        }
+        .toggle-label {
+            font-size: 14px;
+            color: var(--text-2);
+        }
+
+        .mini-signup {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        .mini-signup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--teal), var(--indigo));
+        }
+        .mini-signup h3 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+        .mini-signup .sub {
+            font-size: 13px;
+            color: var(--text-3);
+            margin-bottom: 20px;
+        }
+        .inline-form {
+            display: flex;
+            gap: 10px;
+        }
+        .inline-form .form-input {
+            flex: 1;
+        }
+
+        @media (max-width: 640px) {
+            .form-demo-grid { grid-template-columns: 1fr; }
+            .inline-form { flex-direction: column; }
+        }
+
+
+        /* ========================== */
+        /* 09. FOOTER                  */
+        /* ========================== */
+        .footer {
+            background: var(--surface-raised);
+            padding: 64px 0 32px;
+            border-top: 1px solid var(--border);
+            position: relative;
+        }
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 12px;
+            overflow: hidden;
+            background:
+                linear-gradient(135deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0,
+                linear-gradient(225deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0,
+                linear-gradient(315deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0,
+                linear-gradient(45deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0;
+            background-size: 12px 12px;
+            background-repeat: repeat-x;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        .footer-brand .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            text-decoration: none;
+        }
+        .footer-brand .footer-logo svg { width: 24px; height: 24px; }
+        .footer-brand .footer-logo span {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--text-1);
+        }
+        .footer-brand .footer-logo .logo-accent { color: var(--teal); }
+        .footer-brand p {
+            font-size: 13px;
+            color: var(--text-3);
+            line-height: 1.6;
+            max-width: 260px;
+        }
+        .footer-col h4 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--text-1);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        .footer-col ul a {
+            font-size: 13px;
+            color: var(--text-3);
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+        .footer-col ul a:hover {
+            color: var(--teal);
+        }
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-bottom .copyright {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            letter-spacing: 0.03em;
+        }
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+        .footer-bottom-links a {
+            font-size: 12px;
+            color: var(--text-3);
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+        .footer-bottom-links a:hover { color: var(--teal); }
+
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+        @media (max-width: 480px) {
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+
+        /* ========================== */
+        /* GROUP DIVIDER               */
+        /* ========================== */
+        .group-divider {
+            padding: 60px 0;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .group-divider .gd-line {
+            flex: 1;
+            height: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        .group-divider .gd-line::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0,
+                linear-gradient(225deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0,
+                linear-gradient(315deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0,
+                linear-gradient(45deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0;
+            background-size: 12px 12px;
+            background-repeat: repeat-x;
+        }
+        .group-divider .gd-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .group-divider .gd-diamond {
+            width: 16px;
+            height: 16px;
+            background: var(--indigo);
+            transform: rotate(45deg);
+        }
+        .group-divider .gd-text {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--indigo);
+        }
+
+
+        /* ========================== */
+        /* 10. COLOR PALETTE           */
+        /* ========================== */
+        .color-palette {
+            padding: 80px 0;
+        }
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+        .color-swatch {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            background: var(--card);
+        }
+        .color-swatch .swatch-fill {
+            height: 72px;
+            width: 100%;
+        }
+        .color-swatch .swatch-info {
+            padding: 10px 12px;
+        }
+        .color-swatch .swatch-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-1);
+            margin-bottom: 2px;
+        }
+        .color-swatch .swatch-hex {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+        }
+        .color-group-label {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-2);
+            margin-top: 32px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .color-group-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--teal);
+            transform: rotate(45deg);
+        }
+
+
+        /* ========================== */
+        /* 11. TYPOGRAPHY              */
+        /* ========================== */
+        .typography-section {
+            padding: 80px 0;
+            background: var(--surface-raised);
+        }
+        .type-specimen {
+            margin-top: 48px;
+        }
+        .type-row {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 24px;
+            align-items: baseline;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .type-meta {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            letter-spacing: 0.04em;
+        }
+        .type-meta .type-font {
+            color: var(--teal);
+            display: block;
+            margin-top: 2px;
+        }
+
+        @media (max-width: 640px) {
+            .type-row { grid-template-columns: 1fr; gap: 8px; }
+        }
+
+
+        /* ========================== */
+        /* 12. SPACING                 */
+        /* ========================== */
+        .spacing-section {
+            padding: 80px 0;
+        }
+        .spacing-scale {
+            margin-top: 48px;
+        }
+        .spacing-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-3);
+            width: 80px;
+            flex-shrink: 0;
+            text-align: right;
+        }
+        .spacing-bar {
+            height: 24px;
+            background: linear-gradient(90deg, var(--teal-glow-lg), var(--indigo-glow));
+            border-radius: 2px;
+            border-left: 3px solid var(--teal);
+            position: relative;
+        }
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-2);
+            margin-left: 12px;
+        }
+
+
+        /* ========================== */
+        /* 13. BUTTONS                 */
+        /* ========================== */
+        .buttons-section {
+            padding: 80px 0;
+            background: var(--surface-raised);
+        }
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 24px;
+            margin-bottom: 40px;
+            align-items: center;
+        }
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: var(--surface-mid);
+            color: var(--text-1);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all var(--ease);
+        }
+        .btn-secondary:hover {
+            background: var(--surface-raised);
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-indigo {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: var(--indigo);
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all var(--ease);
+        }
+        .btn-indigo:hover {
+            background: #4338CA;
+            box-shadow: var(--shadow-indigo);
+            transform: translateY(-1px);
+        }
+        .btn-text-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--teal);
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+        .btn-text-link:hover {
+            color: var(--teal-dark);
+        }
+        .btn-text-link svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            transition: transform var(--ease);
+        }
+        .btn-text-link:hover svg {
+            transform: translateX(3px);
+        }
+
+        /* Button sizes */
+        .btn-sm { padding: 8px 18px; font-size: 13px; }
+        .btn-lg { padding: 16px 36px; font-size: 16px; }
+
+
+        /* ========================== */
+        /* 14. DIVIDERS                */
+        /* ========================== */
+        .dividers-section {
+            padding: 80px 0;
+        }
+        .divider-demo {
+            margin-top: 24px;
+            margin-bottom: 40px;
+        }
+        .divider-label-inline {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .divider-chevron {
+            height: 12px;
+            position: relative;
+            overflow: hidden;
+            margin: 16px 0;
+        }
+        .divider-chevron::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0,
+                linear-gradient(225deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0,
+                linear-gradient(315deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0,
+                linear-gradient(45deg, var(--surface-mid) 33.33%, transparent 33.33%) 0 0;
+            background-size: 12px 12px;
+            background-repeat: repeat-x;
+        }
+
+        .divider-lattice {
+            height: 64px;
+            position: relative;
+            overflow: hidden;
+            margin: 16px 0;
+            border-radius: var(--radius-md);
+        }
+        .divider-lattice::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(45deg, rgba(79,70,229,0.05) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(79,70,229,0.05) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(79,70,229,0.05) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(79,70,229,0.05) 75%);
+            background-size: 32px 32px;
+            background-position: 0 0, 0 16px, 16px -16px, -16px 0px;
+        }
+
+        .divider-geo-border {
+            height: 3px;
+            margin: 16px 0;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--teal) 0px, var(--teal) 8px,
+                transparent 8px, transparent 12px,
+                var(--indigo) 12px, var(--indigo) 20px,
+                transparent 20px, transparent 24px
+            );
+        }
+
+        .divider-lavender {
+            height: 1px;
+            margin: 16px 0;
+            background: var(--surface-mid);
+        }
+
+        .divider-dashed {
+            height: 1px;
+            margin: 16px 0;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--teal) 0px, var(--teal) 6px,
+                transparent 6px, transparent 12px
+            );
+        }
+
+
+        /* ========================== */
+        /* 15. ALERTS                  */
+        /* ========================== */
+        .alerts-section {
+            padding: 80px 0;
+            background: var(--surface-raised);
+        }
+        .alert {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            border-left: 3px solid;
+            position: relative;
+        }
+        .alert-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .alert-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .alert-content {
+            flex: 1;
+        }
+        .alert-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+        .alert-desc {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+        .alert-success {
+            background: var(--success-bg);
+            border-left-color: var(--success);
+            color: var(--success);
+        }
+        .alert-success .alert-icon svg { stroke: var(--success); }
+        .alert-warning {
+            background: var(--warning-bg);
+            border-left-color: var(--warning);
+            color: #92710B;
+        }
+        .alert-warning .alert-icon svg { stroke: #92710B; }
+        .alert-error {
+            background: var(--error-bg);
+            border-left-color: var(--error);
+            color: var(--error);
+        }
+        .alert-error .alert-icon svg { stroke: var(--error); }
+        .alert-info {
+            background: var(--info-bg);
+            border-left-color: var(--info);
+            color: var(--info);
+        }
+        .alert-info .alert-icon svg { stroke: var(--info); }
+
+        .alert-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity var(--ease);
+            padding: 0;
+            line-height: 1;
+            font-size: 18px;
+            color: inherit;
+        }
+        .alert-close:hover { opacity: 1; }
+
+        /* Toast */
+        .toast-demo {
+            margin-top: 32px;
+        }
+        .toast {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            font-size: 14px;
+            color: var(--text-1);
+            animation: toastIn 0.4s ease;
+        }
+        .toast .toast-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+        /* ========================== */
+        /* SCROLL ANIMATIONS           */
+        /* ========================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================== */
+        /* DESIGN SYSTEM HEADER        */
+        /* ========================== */
+        .ds-header {
+            text-align: center;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+            background: var(--surface-raised);
+        }
+        .ds-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(45deg, rgba(79,70,229,0.03) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(79,70,229,0.03) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(79,70,229,0.03) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(79,70,229,0.03) 75%);
+            background-size: 48px 48px;
+            background-position: 0 0, 0 24px, 24px -24px, -24px 0px;
+            pointer-events: none;
+        }
+        .ds-header .ds-version {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--teal);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        .ds-header h1 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(44px, 5vw, 64px);
+            letter-spacing: -1.5px;
+            color: var(--text-1);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 12px;
+        }
+        .ds-header .ds-tagline {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--text-3);
+            letter-spacing: 0.06em;
+            position: relative;
+            z-index: 1;
+        }
+        .ds-header .ds-tagline .accent {
+            color: var(--indigo);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================== -->
+<!-- 01. NAVIGATION BAR             -->
+<!-- ============================== -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">
+            <svg viewBox="0 0 28 28" fill="none">
+                <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.1)" stroke="#0891B2" stroke-width="1.5"/>
+                <circle cx="14" cy="14" r="3" stroke="#0891B2" stroke-width="1.5"/>
+                <line x1="14" y1="8" x2="14" y2="11" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="14" y1="17" x2="14" y2="20" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="8" y1="14" x2="11" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="17" y1="14" x2="20" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Pain<span class="logo-accent">On</span>Social</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#" class="nav-cta">Start Free</a></li>
+        </ul>
+        <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+
+<!-- ============================== -->
+<!-- DESIGN SYSTEM HEADER           -->
+<!-- ============================== -->
+<header class="ds-header">
+    <div class="container">
+        <div class="ds-version">Lattice Light v1.0</div>
+        <h1>Lattice <span class="text-teal">Light</span></h1>
+        <p class="ds-tagline">"Structure the chaos." &mdash; <span class="accent">Light Edition</span></p>
+    </div>
+</header>
+
+
+<!-- ============================== -->
+<!-- 02. HERO                       -->
+<!-- ============================== -->
+<section class="hero diamond-lattice" id="hero">
+    <div class="container">
+        <div class="hero-inner reveal">
+            <div class="hero-badge">
+                <span class="diamond-icon"></span>
+                AI-powered pain discovery
+            </div>
+            <h1>Discover <span class="highlight">validated pain</span> points from real conversations</h1>
+            <p>PainOnSocial scans thousands of Reddit threads to surface genuine business problems, severity-score them, and generate solution blueprints &mdash; so you build what people actually need.</p>
+            <div class="hero-ctas">
+                <a href="#" class="btn-primary">
+                    Start Discovering
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#" class="btn-ghost">See How It Works</a>
+            </div>
+            <div class="hero-metrics">
+                <div class="hero-metric">
+                    <div class="number">2.4M+</div>
+                    <div class="label">Threads analyzed</div>
+                </div>
+                <div class="hero-metric">
+                    <div class="number">847K</div>
+                    <div class="label">Pain points scored</div>
+                </div>
+                <div class="hero-metric">
+                    <div class="number">12.8K</div>
+                    <div class="label">Solutions generated</div>
+                </div>
+                <div class="hero-metric">
+                    <div class="number">94%</div>
+                    <div class="label">Accuracy rate</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================== -->
+<!-- 03. SOCIAL PROOF / BADGES      -->
+<!-- ============================== -->
+<section class="social-proof section" id="badges">
+    <div class="container reveal">
+        <div class="badges-row">
+            <span class="badge-pill badge-explorer">
+                <span class="badge-diamond"></span>
+                Explorer
+            </span>
+            <span class="badge-pill badge-scout">
+                <span class="badge-diamond"></span>
+                Scout
+            </span>
+            <span class="badge-pill badge-prospector">
+                <span class="badge-diamond"></span>
+                Prospector
+            </span>
+        </div>
+        <div class="trusted-by">
+            <div class="label">Trusted by teams at</div>
+            <div class="trusted-logos">
+                <span class="trusted-logo">Vercel</span>
+                <span class="trusted-logo">Linear</span>
+                <span class="trusted-logo">Raycast</span>
+                <span class="trusted-logo">Resend</span>
+                <span class="trusted-logo">Cal.com</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================== -->
+<!-- 04. FEATURE CARDS              -->
+<!-- ============================== -->
+<section class="features section" id="features">
+    <div class="container">
+        <div class="section-marker reveal">
+            <div class="diamond"><span>04</span></div>
+            <h2>Features</h2>
+            <div class="marker-line"></div>
+        </div>
+        <p class="text-2" style="max-width:540px; margin-bottom: 8px;">Every tool you need to go from raw community signals to validated product ideas.</p>
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                </div>
+                <h3>Pain Discovery</h3>
+                <p>Automated scanning of Reddit threads to extract genuine user complaints, frustrations, and unmet needs using fine-tuned NLP models.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <h3>Severity Scoring</h3>
+                <p>Each pain point receives a composite severity score based on frequency, emotional intensity, and willingness-to-pay signals in the data.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3>Solution Generation</h3>
+                <p>AI-generated solution blueprints complete with feature specs, competitive analysis, and go-to-market strategy drafts.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                </div>
+                <h3>Community Intel</h3>
+                <p>Track emerging pain points across subreddits in real-time. Set alerts for new complaint patterns and competitive mentions.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================== -->
+<!-- 05. STATS                      -->
+<!-- ============================== -->
+<section class="stats" id="stats">
+    <div class="container">
+        <div class="stats-grid reveal">
+            <div class="stat-item">
+                <div class="stat-number">2.4<span class="teal">M</span></div>
+                <div class="stat-label">Threads Analyzed</div>
+                <div class="stat-sub">across 1,200+ subreddits</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">94<span class="indigo">%</span></div>
+                <div class="stat-label">Accuracy Rate</div>
+                <div class="stat-sub">validated by human review</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">3.2<span class="teal">x</span></div>
+                <div class="stat-label">Faster Discovery</div>
+                <div class="stat-sub">vs. manual research</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">$<span class="indigo">47</span>M</div>
+                <div class="stat-label">Revenue Unlocked</div>
+                <div class="stat-sub">by customer products</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================== -->
+<!-- 06. TESTIMONIALS               -->
+<!-- ============================== -->
+<section class="testimonials section" id="testimonials">
+    <div class="container">
+        <div class="section-marker reveal">
+            <div class="diamond"><span>06</span></div>
+            <h2>Testimonials</h2>
+            <div class="marker-line"></div>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal">
+                <div class="quote-mark">&ldquo;</div>
+                <blockquote>PainOnSocial helped us find a <span class="highlight">$2M pain point</span> we'd been blind to for months. The severity scoring is uncannily accurate &mdash; it prioritized the exact problems our biggest customers confirmed in interviews.</blockquote>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar" style="background: linear-gradient(135deg, var(--teal), var(--teal-dark));">MC</div>
+                    <div class="testimonial-author-info">
+                        <div class="name">Maya Chen</div>
+                        <div class="role">Head of Product, Velociti</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="quote-mark">&ldquo;</div>
+                <blockquote>We went from <span class="highlight">idea to validated MVP</span> in 3 weeks instead of 3 months. The solution blueprints gave us a framework that our engineering team could actually ship against.</blockquote>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar" style="background: linear-gradient(135deg, var(--indigo), #4338CA);">JK</div>
+                    <div class="testimonial-author-info">
+                        <div class="name">James Kowalski</div>
+                        <div class="role">Founder & CEO, Stackmeld</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================== -->
+<!-- 07. PRICING                    -->
+<!-- ============================== -->
+<section class="pricing section" id="pricing">
+    <div class="container">
+        <div class="section-marker reveal">
+            <div class="diamond"><span>07</span></div>
+            <h2>Pricing</h2>
+            <div class="marker-line"></div>
+        </div>
+        <p class="text-2 reveal" style="max-width:480px;">Simple, transparent pricing. Start free and scale as your discovery needs grow.</p>
+        <div class="pricing-grid">
+            <div class="pricing-card reveal">
+                <span class="plan-badge explorer-badge">Explorer</span>
+                <div class="plan-name">Explorer</div>
+                <div class="plan-desc">Perfect for indie hackers and early-stage ideas.</div>
+                <div class="plan-price">
+                    <span class="currency">$</span>
+                    <span class="amount">0</span>
+                    <span class="period">/month</span>
+                </div>
+                <ul class="plan-features">
+                    <li>100 threads/month</li>
+                    <li>Basic severity scoring</li>
+                    <li>3 subreddit monitors</li>
+                    <li>Community access</li>
+                </ul>
+                <button class="plan-btn plan-btn-outline">Get Started Free</button>
+            </div>
+            <div class="pricing-card featured reveal">
+                <span class="plan-badge scout-badge">Scout</span>
+                <div class="plan-name">Scout</div>
+                <div class="plan-desc">For product teams running continuous discovery.</div>
+                <div class="plan-price">
+                    <span class="currency">$</span>
+                    <span class="amount">49</span>
+                    <span class="period">/month</span>
+                </div>
+                <ul class="plan-features">
+                    <li>5,000 threads/month</li>
+                    <li>Advanced severity + trends</li>
+                    <li>25 subreddit monitors</li>
+                    <li>Solution blueprints</li>
+                    <li>API access</li>
+                </ul>
+                <button class="plan-btn plan-btn-primary">Start 14-Day Trial</button>
+            </div>
+            <div class="pricing-card reveal">
+                <span class="plan-badge prospector-badge">Prospector</span>
+                <div class="plan-name">Prospector</div>
+                <div class="plan-desc">Enterprise-grade discovery for product orgs.</div>
+                <div class="plan-price">
+                    <span class="currency">$</span>
+                    <span class="amount">199</span>
+                    <span class="period">/month</span>
+                </div>
+                <ul class="plan-features">
+                    <li>Unlimited threads</li>
+                    <li>Custom AI models</li>
+                    <li>Unlimited monitors</li>
+                    <li>Priority support</li>
+                    <li>SSO + team management</li>
+                </ul>
+                <button class="plan-btn plan-btn-indigo">Contact Sales</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================== -->
+<!-- 08. FORMS                      -->
+<!-- ============================== -->
+<section class="forms-section section" id="forms">
+    <div class="container">
+        <div class="section-marker reveal">
+            <div class="diamond"><span>08</span></div>
+            <h2>Forms</h2>
+            <div class="marker-line"></div>
+        </div>
+        <div class="form-demo-grid">
+            <div class="reveal">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="you@company.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input success" value="strongPassword123">
+                    <div class="form-hint success">Strong password</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Company URL</label>
+                    <input type="url" class="form-input error" value="not-a-url">
+                    <div class="form-hint error">Please enter a valid URL</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Plan Selection</label>
+                    <select class="form-select">
+                        <option>Explorer (Free)</option>
+                        <option>Scout ($49/mo)</option>
+                        <option>Prospector ($199/mo)</option>
+                    </select>
+                </div>
+                <div style="margin-top:24px;">
+                    <div class="toggle-row">
+                        <button class="toggle active" onclick="this.classList.toggle('active')"></button>
+                        <span class="toggle-label">Enable email notifications</span>
+                    </div>
+                    <div class="toggle-row">
+                        <button class="toggle" onclick="this.classList.toggle('active')"></button>
+                        <span class="toggle-label">Weekly digest reports</span>
+                    </div>
+                    <div class="toggle-row">
+                        <button class="toggle active" onclick="this.classList.toggle('active')"></button>
+                        <span class="toggle-label">Real-time pain alerts</span>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal">
+                <div class="mini-signup">
+                    <h3>Start discovering pain points</h3>
+                    <p class="sub">Free forever. No credit card required.</p>
+                    <div class="inline-form">
+                        <input type="email" class="form-input" placeholder="Enter your email">
+                        <button class="btn-primary" style="white-space:nowrap;">Get Started</button>
+                    </div>
+                </div>
+                <div style="margin-top:24px;">
+                    <div class="form-group">
+                        <label class="form-label">Subreddit to Monitor</label>
+                        <div style="display:flex;gap:10px;">
+                            <input type="text" class="form-input" placeholder="r/SaaS" style="flex:1;">
+                            <button class="btn-indigo btn-sm" style="white-space:nowrap;">+ Add</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Pain Keywords (comma-separated)</label>
+                        <input type="text" class="form-input" placeholder="frustrated, wish, hate, need help">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Minimum Severity Score</label>
+                        <input type="range" style="width:100%;accent-color:var(--teal);margin-top:4px;" min="0" max="100" value="65">
+                        <div style="display:flex;justify-content:space-between;">
+                            <span class="form-hint" style="color:var(--text-3);">Low (0)</span>
+                            <span class="form-hint" style="color:var(--teal);font-weight:600;">65</span>
+                            <span class="form-hint" style="color:var(--text-3);">Critical (100)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================== -->
+<!-- 09. FOOTER                     -->
+<!-- ============================== -->
+<footer class="footer" id="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="footer-logo">
+                    <svg viewBox="0 0 28 28" fill="none">
+                        <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.1)" stroke="#0891B2" stroke-width="1.5"/>
+                        <circle cx="14" cy="14" r="3" stroke="#0891B2" stroke-width="1.5"/>
+                        <line x1="14" y1="8" x2="14" y2="11" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="14" y1="17" x2="14" y2="20" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="8" y1="14" x2="11" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="17" y1="14" x2="20" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span>Pain<span class="logo-accent">On</span>Social</span>
+                </a>
+                <p>AI-powered pain point discovery from Reddit discussions. Build products people actually need.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">API</a></li>
+                    <li><a href="#">Changelog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Case Studies</a></li>
+                    <li><a href="#">Community</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="copyright">&copy; 2025 PainOnSocial. All rights reserved.</span>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Status</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ============================== -->
+<!-- GROUP DIVIDER                  -->
+<!-- ============================== -->
+<div class="container">
+    <div class="group-divider">
+        <div class="gd-line"></div>
+        <div class="gd-label">
+            <div class="gd-diamond"></div>
+            <span class="gd-text">Design System Reference</span>
+            <div class="gd-diamond"></div>
+        </div>
+        <div class="gd-line"></div>
+    </div>
+</div>
+
+
+<!-- ============================== -->
+<!-- 10. COLOR PALETTE              -->
+<!-- ============================== -->
+<section class="color-palette section" id="colors">
+    <div class="container">
+        <div class="section-marker reveal">
+            <div class="diamond"><span>10</span></div>
+            <h2>Color Palette</h2>
+            <div class="marker-line"></div>
+        </div>
+
+        <div class="color-group-label">Brand Colors</div>
+        <div class="color-grid reveal">
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#0891B2;"></div>
+                <div class="swatch-info"><div class="swatch-name">Primary Teal</div><div class="swatch-hex">#0891B2</div></div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#0E7490;"></div>
+                <div class="swatch-info"><div class="swatch-name">Teal Dark</div><div class="swatch-hex">#0E7490</div></div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#F97316;"></div>
+                <div class="swatch-info"><div class="swatch-name">Accent Orange</div><div class="swatch-hex">#F97316</div></div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#A855F7;"></div>
+                <div class="swatch-info"><div class="swatch-name">Accent Purple</div><div class="swatch-hex">#A855F7</div></div>
+            </div>
+        </div>
+
+        <div class="color-group-label">Indigo Accent</div>
+        <div class="color-grid reveal">
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#4F46E5;"></div>
+                <div class="swatch-info"><div class="swatch-name">Indigo</div><div class="swatch-hex">#4F46E5</div></div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#818CF8;"></div>
+                <div class="swatch-info"><div class="swatch-name">Indigo Light</div><div class="swatch-hex">#818CF8</div></div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:rgba(79,70,229,0.08); border:1px dashed var(--indigo-border);"></div>
+                <div class="swatch-info"><div class="swatch-name">Indigo Glow</div><div class="swatch-hex">rgba(79,70,229,0.08)</div></div>
+            </div>
+        </div>
+
+        <div class="color-group-label">Light Surfaces</div>
+        <div class="color-grid reveal">
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#FAFAFF;"></div>
+                <div class="swatch-info"><div class="swatch-name">Body</div><div class="swatch-hex">#FAFAFF</div></div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#F2F2FA;"></div>
+                <div class="swatch-info"><div class="swatch-name">Raised</div><div class="swatch-hex">#F2F2FA</div></div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#E8E8F2;"></div>
+                <div class="swatch-info"><div class="swatch-name">Medium</div><div class="swatch-hex">#E8E8F2</div></div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#FFFFFF; border:1px solid var(--border);"></div>
+                <div class="swatch-info"><div class="swatch-name">Card</div><div class="swatch-hex">#FFFFFF</div></div>
+            </div>
+        </div>
+
+        <div class="color-group-label">Text</div>
+        <div class="color-grid reveal">
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#0F0F1A;"></div>
+                <div class="swatch-info"><div class="swatch-name">Primary</div><div class="swatch-hex">#0F0F1A</div></div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#4A4A65;"></div>
+                <div class="swatch-info"><div class="swatch-name">Secondary</div><div class="swatch-hex">#4A4A65</div></div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#9494AD;"></div>
+                <div class="swatch-info"><div class="swatch-name">Muted</div><div class="swatch-hex">#9494AD</div></div>
+            </div>
+        </div>
+
+        <div class="color-group-label">Semantic</div>
+        <div class="color-grid reveal">
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#16A34A;"></div>
+                <div class="swatch-info"><div class="swatch-name">Success</div><div class="swatch-hex">#16A34A</div></div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#EAB308;"></div>
+                <div class="swatch-info"><div class="swatch-name">Warning</div><div class="swatch-hex">#EAB308</div></div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#EF4444;"></div>
+                <div class="swatch-info"><div class="swatch-name">Error</div><div class="swatch-hex">#EF4444</div></div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-fill" style="background:#0891B2;"></div>
+                <div class="swatch-info"><div class="swatch-name">Info</div><div class="swatch-hex">#0891B2</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================== -->
+<!-- 11. TYPOGRAPHY                 -->
+<!-- ============================== -->
+<section class="typography-section section" id="typography">
+    <div class="container">
+        <div class="section-marker reveal">
+            <div class="diamond"><span>11</span></div>
+            <h2>Typography</h2>
+            <div class="marker-line"></div>
+        </div>
+        <div class="type-specimen">
+            <div class="type-row reveal">
+                <div class="type-meta">
+                    Display / 64px<br>
+                    <span class="type-font">Syne 800</span>
+                </div>
+                <div style="font-family:var(--font-display);font-weight:800;font-size:64px;letter-spacing:-2px;line-height:1.05;">Structure the chaos</div>
+            </div>
+            <div class="type-row reveal">
+                <div class="type-meta">
+                    H1 / 48px<br>
+                    <span class="type-font">Syne 800</span>
+                </div>
+                <div style="font-family:var(--font-display);font-weight:800;font-size:48px;letter-spacing:-1.5px;line-height:1.1;">Validated pain points</div>
+            </div>
+            <div class="type-row reveal">
+                <div class="type-meta">
+                    H2 / 36px<br>
+                    <span class="type-font">Syne 700</span>
+                </div>
+                <div style="font-family:var(--font-display);font-weight:700;font-size:36px;letter-spacing:-1px;line-height:1.15;">Severity scoring</div>
+            </div>
+            <div class="type-row reveal">
+                <div class="type-meta">
+                    H3 / 28px<br>
+                    <span class="type-font">Syne 700</span>
+                </div>
+                <div style="font-family:var(--font-display);font-weight:700;font-size:28px;letter-spacing:-0.5px;line-height:1.2;">Solution blueprints</div>
+            </div>
+            <div class="type-row reveal">
+                <div class="type-meta">
+                    H4 / 22px<br>
+                    <span class="type-font">Syne 600</span>
+                </div>
+                <div style="font-family:var(--font-display);font-weight:600;font-size:22px;letter-spacing:-0.3px;line-height:1.3;">Community intelligence</div>
+            </div>
+            <div class="type-row reveal">
+                <div class="type-meta">
+                    Body / 16px<br>
+                    <span class="type-font">Inter 400</span>
+                </div>
+                <div style="font-family:var(--font-body);font-size:16px;line-height:1.6;color:var(--text-2);max-width:600px;">PainOnSocial scans thousands of Reddit discussions using advanced NLP to surface genuine business problems, severity-score them based on frequency and emotional intensity, and generate actionable solution blueprints.</div>
+            </div>
+            <div class="type-row reveal">
+                <div class="type-meta">
+                    Body Small / 14px<br>
+                    <span class="type-font">Inter 400</span>
+                </div>
+                <div style="font-family:var(--font-body);font-size:14px;line-height:1.6;color:var(--text-2);">Each pain point receives a composite severity score based on frequency, emotional intensity, and willingness-to-pay signals in the data.</div>
+            </div>
+            <div class="type-row reveal">
+                <div class="type-meta">
+                    Caption / 12px<br>
+                    <span class="type-font">Inter 500</span>
+                </div>
+                <div style="font-family:var(--font-body);font-size:12px;font-weight:500;line-height:1.5;color:var(--text-3);letter-spacing:0.02em;">Updated 2 hours ago &middot; 847K pain points scored</div>
+            </div>
+            <div class="type-row reveal">
+                <div class="type-meta">
+                    Mono / 14px<br>
+                    <span class="type-font">Space Mono 400</span>
+                </div>
+                <div style="font-family:var(--font-mono);font-size:14px;line-height:1.6;color:var(--teal);letter-spacing:0.04em;">severity_score: 87.4 // critical_threshold</div>
+            </div>
+            <div class="type-row reveal">
+                <div class="type-meta">
+                    Mono Small / 11px<br>
+                    <span class="type-font">Space Mono 400</span>
+                </div>
+                <div style="font-family:var(--font-mono);font-size:11px;line-height:1.5;color:var(--text-3);letter-spacing:0.06em;">LATTICE LIGHT v1.0 // PAINONSOCIAL DESIGN SYSTEM</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================== -->
+<!-- 12. SPACING                    -->
+<!-- ============================== -->
+<section class="spacing-section section" id="spacing">
+    <div class="container">
+        <div class="section-marker reveal">
+            <div class="diamond"><span>12</span></div>
+            <h2>Spacing Scale</h2>
+            <div class="marker-line"></div>
+        </div>
+        <p class="text-2" style="margin-bottom:8px;">8px base grid system. All spacing values are multiples or fractions of 8.</p>
+        <div class="spacing-scale reveal">
+            <div class="spacing-row">
+                <div class="spacing-label">sp-1</div>
+                <div class="spacing-bar" style="width:4px;"></div>
+                <div class="spacing-value">4px</div>
+            </div>
+            <div class="spacing-row">
+                <div class="spacing-label">sp-2</div>
+                <div class="spacing-bar" style="width:8px;"></div>
+                <div class="spacing-value">8px</div>
+            </div>
+            <div class="spacing-row">
+                <div class="spacing-label">sp-3</div>
+                <div class="spacing-bar" style="width:12px;"></div>
+                <div class="spacing-value">12px</div>
+            </div>
+            <div class="spacing-row">
+                <div class="spacing-label">sp-4</div>
+                <div class="spacing-bar" style="width:16px;"></div>
+                <div class="spacing-value">16px</div>
+            </div>
+            <div class="spacing-row">
+                <div class="spacing-label">sp-5</div>
+                <div class="spacing-bar" style="width:24px;"></div>
+                <div class="spacing-value">24px</div>
+            </div>
+            <div class="spacing-row">
+                <div class="spacing-label">sp-6</div>
+                <div class="spacing-bar" style="width:32px;"></div>
+                <div class="spacing-value">32px</div>
+            </div>
+            <div class="spacing-row">
+                <div class="spacing-label">sp-7</div>
+                <div class="spacing-bar" style="width:48px;"></div>
+                <div class="spacing-value">48px</div>
+            </div>
+            <div class="spacing-row">
+                <div class="spacing-label">sp-8</div>
+                <div class="spacing-bar" style="width:64px;"></div>
+                <div class="spacing-value">64px</div>
+            </div>
+            <div class="spacing-row">
+                <div class="spacing-label">sp-9</div>
+                <div class="spacing-bar" style="width:96px;"></div>
+                <div class="spacing-value">96px</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================== -->
+<!-- 13. BUTTONS                    -->
+<!-- ============================== -->
+<section class="buttons-section section" id="buttons">
+    <div class="container">
+        <div class="section-marker reveal">
+            <div class="diamond"><span>13</span></div>
+            <h2>Buttons</h2>
+            <div class="marker-line"></div>
+        </div>
+
+        <div class="color-group-label">Standard Sizes</div>
+        <div class="button-grid reveal">
+            <button class="btn-primary">Primary Teal</button>
+            <button class="btn-secondary">Secondary</button>
+            <button class="btn-ghost">Ghost</button>
+            <button class="btn-indigo">Indigo Accent</button>
+            <a href="#" class="btn-text-link">Text Link <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+        <div class="color-group-label">Small Buttons</div>
+        <div class="button-grid reveal">
+            <button class="btn-primary btn-sm">Primary Small</button>
+            <button class="btn-secondary btn-sm">Secondary Small</button>
+            <button class="btn-ghost btn-sm">Ghost Small</button>
+            <button class="btn-indigo btn-sm">Indigo Small</button>
+        </div>
+
+        <div class="color-group-label">Large Buttons</div>
+        <div class="button-grid reveal">
+            <button class="btn-primary btn-lg">Primary Large</button>
+            <button class="btn-secondary btn-lg">Secondary Large</button>
+            <button class="btn-ghost btn-lg">Ghost Large</button>
+            <button class="btn-indigo btn-lg">Indigo Large</button>
+        </div>
+
+        <div class="color-group-label">With Icons</div>
+        <div class="button-grid reveal">
+            <button class="btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                Discover Pain
+            </button>
+            <button class="btn-indigo">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                Score Severity
+            </button>
+            <button class="btn-ghost">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                Generate Solutions
+            </button>
+        </div>
+
+        <div class="color-group-label">Disabled State</div>
+        <div class="button-grid reveal">
+            <button class="btn-primary" disabled style="opacity:0.5;cursor:not-allowed;">Disabled Primary</button>
+            <button class="btn-indigo" disabled style="opacity:0.5;cursor:not-allowed;">Disabled Indigo</button>
+            <button class="btn-ghost" disabled style="opacity:0.5;cursor:not-allowed;">Disabled Ghost</button>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================== -->
+<!-- 14. DIVIDERS                   -->
+<!-- ============================== -->
+<section class="dividers-section section" id="dividers">
+    <div class="container">
+        <div class="section-marker reveal">
+            <div class="diamond"><span>14</span></div>
+            <h2>Dividers &amp; Patterns</h2>
+            <div class="marker-line"></div>
+        </div>
+
+        <div class="reveal">
+            <div class="divider-label-inline">Chevron Divider</div>
+            <div class="divider-chevron"></div>
+        </div>
+
+        <div class="reveal" style="margin-top:32px;">
+            <div class="divider-label-inline">Diamond Lattice Pattern</div>
+            <div class="divider-lattice"></div>
+        </div>
+
+        <div class="reveal" style="margin-top:32px;">
+            <div class="divider-label-inline">Geometric Art-Deco Border</div>
+            <div class="divider-geo-border"></div>
+        </div>
+
+        <div class="reveal" style="margin-top:32px;">
+            <div class="divider-label-inline">Lavender Separator</div>
+            <div class="divider-lavender"></div>
+        </div>
+
+        <div class="reveal" style="margin-top:32px;">
+            <div class="divider-label-inline">Teal Dashed Line</div>
+            <div class="divider-dashed"></div>
+        </div>
+
+        <div class="reveal" style="margin-top:40px;">
+            <div class="divider-label-inline">Combined: Chevron + Diamond Marker + Label</div>
+            <div style="display:flex;align-items:center;gap:16px;margin-top:12px;">
+                <div style="flex:1;height:12px;position:relative;overflow:hidden;">
+                    <div style="position:absolute;inset:0;background:linear-gradient(135deg,var(--surface-mid) 33.33%,transparent 33.33%) 0 0,linear-gradient(225deg,var(--surface-mid) 33.33%,transparent 33.33%) 0 0,linear-gradient(315deg,var(--surface-mid) 33.33%,transparent 33.33%) 0 0,linear-gradient(45deg,var(--surface-mid) 33.33%,transparent 33.33%) 0 0;background-size:12px 12px;background-repeat:repeat-x;"></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:12px;height:12px;background:var(--indigo);transform:rotate(45deg);"></div>
+                    <span style="font-family:var(--font-display);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:var(--indigo);">Section Label</span>
+                    <div style="width:12px;height:12px;background:var(--indigo);transform:rotate(45deg);"></div>
+                </div>
+                <div style="flex:1;height:12px;position:relative;overflow:hidden;">
+                    <div style="position:absolute;inset:0;background:linear-gradient(135deg,var(--surface-mid) 33.33%,transparent 33.33%) 0 0,linear-gradient(225deg,var(--surface-mid) 33.33%,transparent 33.33%) 0 0,linear-gradient(315deg,var(--surface-mid) 33.33%,transparent 33.33%) 0 0,linear-gradient(45deg,var(--surface-mid) 33.33%,transparent 33.33%) 0 0;background-size:12px 12px;background-repeat:repeat-x;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reveal" style="margin-top:40px;">
+            <div class="divider-label-inline">Card with Art-Deco Top Border</div>
+            <div class="geo-border-top" style="background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius-lg);padding:28px 24px;margin-top:12px;">
+                <p style="font-family:var(--font-display);font-weight:700;font-size:16px;margin-bottom:6px;">Sample Card</p>
+                <p style="font-size:14px;color:var(--text-2);">This card demonstrates the geometric art-deco top border pattern with alternating teal and indigo segments.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================== -->
+<!-- 15. ALERTS                     -->
+<!-- ============================== -->
+<section class="alerts-section section" id="alerts">
+    <div class="container">
+        <div class="section-marker reveal">
+            <div class="diamond"><span>15</span></div>
+            <h2>Alerts &amp; Toasts</h2>
+            <div class="marker-line"></div>
+        </div>
+
+        <div style="max-width:640px; margin-top:32px;">
+            <div class="alert alert-success reveal">
+                <div class="alert-icon">
+                    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                </div>
+                <div class="alert-content">
+                    <div class="alert-title">Discovery Complete</div>
+                    <div class="alert-desc">847 new pain points found across 12 subreddits. Severity scoring in progress.</div>
+                </div>
+                <button class="alert-close" aria-label="Close">&times;</button>
+            </div>
+
+            <div class="alert alert-warning reveal">
+                <div class="alert-icon">
+                    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </div>
+                <div class="alert-content">
+                    <div class="alert-title">Rate Limit Approaching</div>
+                    <div class="alert-desc">You've used 4,200 of 5,000 threads this month. Consider upgrading to Prospector.</div>
+                </div>
+                <button class="alert-close" aria-label="Close">&times;</button>
+            </div>
+
+            <div class="alert alert-error reveal">
+                <div class="alert-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                </div>
+                <div class="alert-content">
+                    <div class="alert-title">Analysis Failed</div>
+                    <div class="alert-desc">Unable to process r/startups. The subreddit may be private or restricted.</div>
+                </div>
+                <button class="alert-close" aria-label="Close">&times;</button>
+            </div>
+
+            <div class="alert alert-info reveal">
+                <div class="alert-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                </div>
+                <div class="alert-content">
+                    <div class="alert-title">New Subreddit Available</div>
+                    <div class="alert-desc">r/microsaas has been indexed. Add it to your monitors for real-time pain tracking.</div>
+                </div>
+                <button class="alert-close" aria-label="Close">&times;</button>
+            </div>
+        </div>
+
+        <div class="toast-demo reveal">
+            <div class="color-group-label" style="margin-top:40px;">Toast Notifications</div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px;">
+                <div class="toast">
+                    <div class="toast-indicator" style="background:var(--success);"></div>
+                    <span><strong>Saved.</strong> Monitor settings updated successfully.</span>
+                </div>
+                <div class="toast">
+                    <div class="toast-indicator" style="background:var(--teal);"></div>
+                    <span><strong>Scanning...</strong> Analyzing 340 new threads in r/SaaS.</span>
+                </div>
+                <div class="toast">
+                    <div class="toast-indicator" style="background:var(--error);"></div>
+                    <span><strong>Error.</strong> API key is invalid or expired.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================== -->
+<!-- BOTTOM LATTICE FOOTER          -->
+<!-- ============================== -->
+<div style="padding:48px 0;text-align:center;background:var(--surface-raised);border-top:1px solid var(--border);">
+    <div class="container">
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px;">
+            <div style="width:10px;height:10px;background:var(--teal);transform:rotate(45deg);"></div>
+            <div style="width:10px;height:10px;background:var(--indigo);transform:rotate(45deg);"></div>
+            <div style="width:10px;height:10px;background:var(--teal);transform:rotate(45deg);"></div>
+        </div>
+        <p style="font-family:var(--font-display);font-weight:800;font-size:18px;letter-spacing:-0.3px;margin-bottom:6px;">Lattice Light v1.0</p>
+        <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-3);letter-spacing:0.06em;">PAINONSOCIAL DESIGN SYSTEM // STRUCTURE THE CHAOS</p>
+    </div>
+</div>
+
+
+<!-- ============================== -->
+<!-- JAVASCRIPT                     -->
+<!-- ============================== -->
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+});
+
+// Mobile nav toggle
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+});
+
+// Scroll reveal
+const revealElements = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.classList.add('visible');
+            }, index * 60);
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+revealElements.forEach(el => observer.observe(el));
+
+// Alert close buttons
+document.querySelectorAll('.alert-close').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const alert = btn.closest('.alert');
+        alert.style.opacity = '0';
+        alert.style.transform = 'translateX(20px)';
+        alert.style.transition = 'all 0.3s ease';
+        setTimeout(() => alert.style.display = 'none', 300);
+    });
+});
+</script>
+
+</body>
+</html>
