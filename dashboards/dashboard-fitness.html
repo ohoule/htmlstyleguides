@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PULSE ACTIVE v1.0 - Fitness Tracker Dashboard Style Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Nunito+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Core Palette */
+            --energy-orange: #F97316;
+            --energy-glow: rgba(249, 115, 22, 0.3);
+            --heart-red: #EF4444;
+            --heart-glow: rgba(239, 68, 68, 0.3);
+            --recovery-green: #22C55E;
+            --recovery-glow: rgba(34, 197, 94, 0.3);
+            --hydration-blue: #0EA5E9;
+            --hydration-glow: rgba(14, 165, 233, 0.3);
+            --rest-purple: #A855F7;
+            --rest-glow: rgba(168, 85, 247, 0.3);
+
+            /* Backgrounds */
+            --bg-dark: #18181B;
+            --bg-card: #27272A;
+            --bg-elevated: #3F3F46;
+            --bg-input: #1F1F23;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-active: rgba(249, 115, 22, 0.4);
+
+            /* Text */
+            --text-primary: #FAFAFA;
+            --text-secondary: #A1A1AA;
+            --text-muted: #71717A;
+            --text-dim: #52525B;
+
+            /* Typography */
+            --font-display: 'Rajdhani', sans-serif;
+            --font-ui: 'Nunito Sans', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+
+            /* Borders */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 20px;
+            --radius-full: 9999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-ui);
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Dynamic Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, var(--energy-glow) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, var(--rest-glow) 0%, transparent 50%);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .dashboard-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: var(--space-2xl);
+        }
+
+        /* Header */
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+            padding: var(--space-2xl);
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-dark) 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--energy-orange), var(--heart-red), var(--rest-purple));
+        }
+
+        .dashboard-header h1 {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            background: linear-gradient(135deg, var(--energy-orange), var(--heart-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-sm);
+        }
+
+        .dashboard-header .version {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--energy-orange);
+            letter-spacing: 0.2em;
+        }
+
+        .dashboard-header .tagline {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-top: var(--space-md);
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: var(--space-3xl);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            color: var(--energy-orange);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            border-bottom: 2px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .section-title::before {
+            content: '●';
+            color: var(--heart-red);
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        /* ==================== 1. COLOR PALETTE ==================== */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .color-swatch {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .color-swatch:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .color-preview {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .color-preview.energy { background: var(--energy-orange); }
+        .color-preview.heart { background: var(--heart-red); }
+        .color-preview.recovery { background: var(--recovery-green); }
+        .color-preview.hydration { background: var(--hydration-blue); }
+        .color-preview.rest { background: var(--rest-purple); }
+        .color-preview.dark { background: var(--bg-dark); border-bottom: 1px solid var(--border-subtle); }
+
+        .color-info {
+            padding: var(--space-md);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+        }
+
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ==================== 2. TYPOGRAPHY ==================== */
+        .typography-showcase {
+            display: grid;
+            gap: var(--space-lg);
+        }
+
+        .type-specimen {
+            background: var(--bg-card);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--energy-orange);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-md);
+        }
+
+        .display-font {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .ui-font {
+            font-family: var(--font-ui);
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .mono-font {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--recovery-green);
+        }
+
+        /* ==================== 3. SPACING & GRID ==================== */
+        .spacing-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            align-items: flex-end;
+        }
+
+        .space-block {
+            background: linear-gradient(135deg, var(--energy-orange), var(--heart-red));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .space-block span {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-sm);
+            margin-top: var(--space-xl);
+        }
+
+        .grid-cell {
+            height: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-active);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* ==================== 4. METRIC CARDS ==================== */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .metric-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .metric-card.calories::after { background: var(--energy-orange); }
+        .metric-card.steps::after { background: var(--recovery-green); }
+        .metric-card.heart::after { background: var(--heart-red); }
+        .metric-card.active::after { background: var(--hydration-blue); }
+
+        .metric-icon {
+            font-size: 1.8rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .metric-label {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .metric-value {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .metric-unit {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-left: var(--space-xs);
+        }
+
+        .metric-goal {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .goal-bar {
+            flex: 1;
+            height: 4px;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+
+        .goal-progress {
+            height: 100%;
+            border-radius: var(--radius-full);
+            transition: width 0.5s ease;
+        }
+
+        .goal-progress.orange { background: var(--energy-orange); }
+        .goal-progress.green { background: var(--recovery-green); }
+        .goal-progress.red { background: var(--heart-red); }
+        .goal-progress.blue { background: var(--hydration-blue); }
+
+        /* ==================== 5. CSS-ONLY CHARTS ==================== */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+        }
+
+        .chart-title {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Activity Rings */
+        .activity-rings {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        .ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 12px solid var(--bg-elevated);
+        }
+
+        .ring::before {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            border-radius: 50%;
+            border: 12px solid transparent;
+            border-top-color: currentColor;
+            border-right-color: currentColor;
+        }
+
+        .ring.move {
+            width: 180px;
+            height: 180px;
+            color: var(--heart-red);
+        }
+
+        .ring.move::before {
+            transform: rotate(270deg);
+        }
+
+        .ring.exercise {
+            width: 140px;
+            height: 140px;
+            color: var(--recovery-green);
+        }
+
+        .ring.exercise::before {
+            transform: rotate(200deg);
+        }
+
+        .ring.stand {
+            width: 100px;
+            height: 100px;
+            color: var(--hydration-blue);
+        }
+
+        .ring.stand::before {
+            transform: rotate(320deg);
+        }
+
+        .rings-legend {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        /* Weekly Steps */
+        .steps-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 150px;
+            padding-top: var(--space-md);
+        }
+
+        .step-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--bg-elevated), var(--recovery-green));
+            border-radius: var(--radius-sm);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .step-bar:hover {
+            filter: brightness(1.2);
+        }
+
+        .step-bar::after {
+            content: attr(data-day);
+            position: absolute;
+            bottom: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        /* Heart Rate Zones */
+        .hr-zones {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .hr-zone {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .zone-label {
+            width: 80px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .zone-bar {
+            flex: 1;
+            height: 20px;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+
+        .zone-fill {
+            height: 100%;
+            border-radius: var(--radius-sm);
+            transition: width 0.5s ease;
+        }
+
+        .zone-fill.peak { background: var(--heart-red); }
+        .zone-fill.cardio { background: var(--energy-orange); }
+        .zone-fill.fat-burn { background: var(--recovery-green); }
+        .zone-fill.warm-up { background: var(--hydration-blue); }
+        .zone-fill.rest { background: var(--rest-purple); }
+
+        .zone-value {
+            width: 50px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-align: right;
+        }
+
+        /* ==================== 6. DATA TABLES ==================== */
+        .data-table-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table thead {
+            background: var(--bg-elevated);
+        }
+
+        .data-table th {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            text-align: left;
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .data-table td {
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.9rem;
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(249, 115, 22, 0.05);
+        }
+
+        .workout-type {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .workout-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .workout-icon.run { background: rgba(249, 115, 22, 0.2); }
+        .workout-icon.cycle { background: rgba(14, 165, 233, 0.2); }
+        .workout-icon.strength { background: rgba(168, 85, 247, 0.2); }
+        .workout-icon.yoga { background: rgba(34, 197, 94, 0.2); }
+
+        .stat-cell {
+            font-family: var(--font-mono);
+            color: var(--text-primary);
+        }
+
+        .duration-cell {
+            font-family: var(--font-mono);
+            color: var(--text-secondary);
+        }
+
+        /* ==================== 7. SIDEBAR NAVIGATION ==================== */
+        .sidebar-demo {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        .sidebar {
+            width: 240px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--energy-orange), var(--heart-red));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .logo-text {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: var(--space-xs);
+        }
+
+        .nav-item:hover {
+            background: rgba(249, 115, 22, 0.1);
+            color: var(--energy-orange);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(249, 115, 22, 0.2), transparent);
+            color: var(--energy-orange);
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 3px;
+            height: 20px;
+            background: var(--energy-orange);
+            border-radius: 0 2px 2px 0;
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+        }
+
+        /* ==================== 8. FORMS & FILTERS ==================== */
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .form-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+        }
+
+        .form-title {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-md);
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: var(--space-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .form-input {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            color: var(--text-primary);
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--energy-orange);
+            box-shadow: 0 0 0 3px var(--energy-glow);
+        }
+
+        .goal-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: var(--radius-full);
+            background: var(--bg-elevated);
+            outline: none;
+            margin-top: var(--space-sm);
+        }
+
+        .goal-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--energy-orange);
+            cursor: pointer;
+            box-shadow: 0 2px 8px var(--energy-glow);
+        }
+
+        /* ==================== 9. BUTTONS ==================== */
+        .buttons-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--energy-orange), #EA580C);
+            color: white;
+            box-shadow: 0 4px 15px var(--energy-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px var(--energy-glow);
+        }
+
+        .btn-heart {
+            background: linear-gradient(135deg, var(--heart-red), #DC2626);
+            color: white;
+            box-shadow: 0 4px 15px var(--heart-glow);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--recovery-green), #16A34A);
+            color: white;
+            box-shadow: 0 4px 15px var(--recovery-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--energy-orange);
+            color: var(--energy-orange);
+        }
+
+        .btn-outline:hover {
+            background: var(--energy-orange);
+            color: white;
+        }
+
+        .btn-ghost {
+            background: rgba(249, 115, 22, 0.1);
+            color: var(--energy-orange);
+        }
+
+        /* ==================== 10. STATUS INDICATORS ==================== */
+        .status-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+        }
+
+        .status-group {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+
+        .status-group-title {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-md);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-full);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-badge.high-intensity {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--heart-red);
+        }
+
+        .status-badge.moderate {
+            background: rgba(249, 115, 22, 0.15);
+            color: var(--energy-orange);
+        }
+
+        .status-badge.recovered {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--recovery-green);
+        }
+
+        .status-badge.resting {
+            background: rgba(168, 85, 247, 0.15);
+            color: var(--rest-purple);
+        }
+
+        .status-badge.goal-met {
+            background: rgba(14, 165, 233, 0.15);
+            color: var(--hydration-blue);
+        }
+
+        /* ==================== 11. WIDGET CARDS ==================== */
+        .widgets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .widget-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .widget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .widget-title {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .widget-content {
+            padding: var(--space-lg);
+        }
+
+        /* Daily Goals Checklist */
+        .goals-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .goal-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-sm);
+            border-radius: var(--radius-md);
+            transition: background 0.2s ease;
+        }
+
+        .goal-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .goal-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: white;
+        }
+
+        .goal-check.done {
+            background: var(--recovery-green);
+            border-color: var(--recovery-green);
+        }
+
+        .goal-text {
+            flex: 1;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .goal-text.done {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        /* Streak Widget */
+        .streak-display {
+            text-align: center;
+        }
+
+        .streak-number {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--energy-orange), var(--heart-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .streak-label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .streak-flames {
+            font-size: 1.5rem;
+            margin-top: var(--space-sm);
+        }
+
+        /* Achievements */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-sm);
+        }
+
+        .achievement {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-elevated);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            opacity: 0.4;
+            transition: all 0.3s ease;
+        }
+
+        .achievement.unlocked {
+            opacity: 1;
+            background: linear-gradient(135deg, var(--energy-orange), var(--heart-red));
+            box-shadow: 0 4px 15px var(--energy-glow);
+        }
+
+        /* ==================== 12. ALERTS & NOTIFICATIONS ==================== */
+        .alerts-showcase {
+            display: grid;
+            gap: var(--space-md);
+        }
+
+        .alert {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            border-left: 4px solid;
+        }
+
+        .alert-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .alert-message {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .alert.success {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: var(--recovery-green);
+        }
+
+        .alert.success .alert-title { color: var(--recovery-green); }
+
+        .alert.warning {
+            background: rgba(249, 115, 22, 0.1);
+            border-color: var(--energy-orange);
+        }
+
+        .alert.warning .alert-title { color: var(--energy-orange); }
+
+        .alert.heart {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: var(--heart-red);
+        }
+
+        .alert.heart .alert-title { color: var(--heart-red); }
+
+        .alert.rest {
+            background: rgba(168, 85, 247, 0.1);
+            border-color: var(--rest-purple);
+        }
+
+        .alert.rest .alert-title { color: var(--rest-purple); }
+
+        /* ==================== 13. SPECIAL: HEART RATE MONITOR ==================== */
+        .heart-monitor {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            text-align: center;
+        }
+
+        .bpm-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .heart-icon {
+            font-size: 4rem;
+            animation: heartbeat 1s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.15); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.1); }
+            60% { transform: scale(1); }
+        }
+
+        .bpm-number {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--heart-red);
+            text-shadow: 0 0 30px var(--heart-glow);
+        }
+
+        .bpm-label {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        /* ECG Line */
+        .ecg-container {
+            height: 80px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(to bottom, transparent, rgba(239, 68, 68, 0.05), transparent);
+            border-radius: var(--radius-md);
+        }
+
+        .ecg-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 200%;
+            height: 2px;
+            animation: ecgScroll 2s linear infinite;
+        }
+
+        .ecg-line svg {
+            width: 100%;
+            height: 80px;
+            margin-top: -40px;
+        }
+
+        .ecg-line path {
+            fill: none;
+            stroke: var(--heart-red);
+            stroke-width: 2;
+            filter: drop-shadow(0 0 8px var(--heart-glow));
+        }
+
+        @keyframes ecgScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .hr-zones-mini {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .zone-mini {
+            text-align: center;
+        }
+
+        .zone-mini-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            margin-bottom: var(--space-xs);
+        }
+
+        .zone-mini-value {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .zone-mini-value.rest { color: var(--hydration-blue); }
+        .zone-mini-value.fat { color: var(--recovery-green); }
+        .zone-mini-value.cardio { color: var(--energy-orange); }
+        .zone-mini-value.peak { color: var(--heart-red); }
+
+        /* Footer */
+        .dashboard-footer {
+            text-align: center;
+            padding: var(--space-2xl) var(--space-lg);
+            margin-top: var(--space-3xl);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: var(--space-sm);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: var(--space-lg);
+            }
+
+            .dashboard-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .metrics-grid,
+            .charts-grid,
+            .widgets-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-demo {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .bpm-number {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <h1>PULSE ACTIVE</h1>
+            <div class="version">v1.0 FITNESS TRACKER</div>
+            <p class="tagline">Track Your Progress. Crush Your Goals.</p>
+        </header>
+
+        <!-- 1. Color Palette -->
+        <section class="section">
+            <h2 class="section-title">COLOR PALETTE</h2>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-preview energy">🔥</div>
+                    <div class="color-info">
+                        <div class="color-name">Energy Orange</div>
+                        <div class="color-hex">#F97316</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview heart">❤️</div>
+                    <div class="color-info">
+                        <div class="color-name">Heart Red</div>
+                        <div class="color-hex">#EF4444</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview recovery">💚</div>
+                    <div class="color-info">
+                        <div class="color-name">Recovery Green</div>
+                        <div class="color-hex">#22C55E</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview hydration">💧</div>
+                    <div class="color-info">
+                        <div class="color-name">Hydration Blue</div>
+                        <div class="color-hex">#0EA5E9</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview rest">😴</div>
+                    <div class="color-info">
+                        <div class="color-name">Rest Purple</div>
+                        <div class="color-hex">#A855F7</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview dark"></div>
+                    <div class="color-info">
+                        <div class="color-name">Charcoal</div>
+                        <div class="color-hex">#18181B</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Typography -->
+        <section class="section">
+            <h2 class="section-title">TYPOGRAPHY</h2>
+            <div class="typography-showcase">
+                <div class="type-specimen">
+                    <div class="type-label">Display / Rajdhani</div>
+                    <div class="display-font">PUSH YOUR LIMITS</div>
+                </div>
+                <div class="type-specimen">
+                    <div class="type-label">UI Text / Nunito Sans</div>
+                    <div class="ui-font">Great workout today! You've burned 542 calories and completed 8,432 steps. Keep pushing towards your goals.</div>
+                </div>
+                <div class="type-specimen">
+                    <div class="type-label">Data / Space Mono</div>
+                    <div class="mono-font">542 cal | 8,432 steps | 72 BPM avg</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Spacing & Grid -->
+        <section class="section">
+            <h2 class="section-title">SPACING & GRID</h2>
+            <div class="spacing-demo">
+                <div class="space-block" style="width: 4px; height: 4px;"></div>
+                <div class="space-block" style="width: 8px; height: 8px;"></div>
+                <div class="space-block" style="width: 16px; height: 16px;"></div>
+                <div class="space-block" style="width: 24px; height: 24px;"></div>
+                <div class="space-block" style="width: 32px; height: 32px;"><span>32</span></div>
+                <div class="space-block" style="width: 48px; height: 48px;"><span>48</span></div>
+                <div class="space-block" style="width: 64px; height: 64px;"><span>64</span></div>
+            </div>
+            <div class="grid-demo">
+                <div class="grid-cell">1</div>
+                <div class="grid-cell">2</div>
+                <div class="grid-cell">3</div>
+                <div class="grid-cell">4</div>
+                <div class="grid-cell">5</div>
+                <div class="grid-cell">6</div>
+                <div class="grid-cell">7</div>
+                <div class="grid-cell">8</div>
+                <div class="grid-cell">9</div>
+                <div class="grid-cell">10</div>
+                <div class="grid-cell">11</div>
+                <div class="grid-cell">12</div>
+            </div>
+        </section>
+
+        <!-- 4. Metric Cards -->
+        <section class="section">
+            <h2 class="section-title">METRIC CARDS</h2>
+            <div class="metrics-grid">
+                <div class="metric-card calories">
+                    <div class="metric-icon">🔥</div>
+                    <div class="metric-label">Calories Burned</div>
+                    <div class="metric-value">542<span class="metric-unit">cal</span></div>
+                    <div class="metric-goal">
+                        <div class="goal-bar"><div class="goal-progress orange" style="width: 72%;"></div></div>
+                        <span>72%</span>
+                    </div>
+                </div>
+                <div class="metric-card steps">
+                    <div class="metric-icon">👟</div>
+                    <div class="metric-label">Steps Today</div>
+                    <div class="metric-value">8,432</div>
+                    <div class="metric-goal">
+                        <div class="goal-bar"><div class="goal-progress green" style="width: 84%;"></div></div>
+                        <span>84%</span>
+                    </div>
+                </div>
+                <div class="metric-card heart">
+                    <div class="metric-icon">❤️</div>
+                    <div class="metric-label">Heart Rate</div>
+                    <div class="metric-value">72<span class="metric-unit">BPM</span></div>
+                    <div class="metric-goal">
+                        <div class="goal-bar"><div class="goal-progress red" style="width: 45%;"></div></div>
+                        <span>Resting</span>
+                    </div>
+                </div>
+                <div class="metric-card active">
+                    <div class="metric-icon">⏱️</div>
+                    <div class="metric-label">Active Minutes</div>
+                    <div class="metric-value">47<span class="metric-unit">min</span></div>
+                    <div class="metric-goal">
+                        <div class="goal-bar"><div class="goal-progress blue" style="width: 78%;"></div></div>
+                        <span>78%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CSS-Only Charts -->
+        <section class="section">
+            <h2 class="section-title">CSS-ONLY CHARTS</h2>
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Activity Rings</div>
+                    <div class="activity-rings">
+                        <div class="ring move"></div>
+                        <div class="ring exercise"></div>
+                        <div class="ring stand"></div>
+                    </div>
+                    <div class="rings-legend">
+                        <div class="legend-item"><span class="legend-dot" style="background: var(--heart-red);"></span>Move</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: var(--recovery-green);"></span>Exercise</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: var(--hydration-blue);"></span>Stand</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Weekly Steps</div>
+                    <div class="steps-chart">
+                        <div class="step-bar" style="height: 65%;" data-day="Mon"></div>
+                        <div class="step-bar" style="height: 82%;" data-day="Tue"></div>
+                        <div class="step-bar" style="height: 58%;" data-day="Wed"></div>
+                        <div class="step-bar" style="height: 95%;" data-day="Thu"></div>
+                        <div class="step-bar" style="height: 72%;" data-day="Fri"></div>
+                        <div class="step-bar" style="height: 45%;" data-day="Sat"></div>
+                        <div class="step-bar" style="height: 88%;" data-day="Sun"></div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Heart Rate Zones</div>
+                    <div class="hr-zones">
+                        <div class="hr-zone">
+                            <span class="zone-label">Peak</span>
+                            <div class="zone-bar"><div class="zone-fill peak" style="width: 15%;"></div></div>
+                            <span class="zone-value">8 min</span>
+                        </div>
+                        <div class="hr-zone">
+                            <span class="zone-label">Cardio</span>
+                            <div class="zone-bar"><div class="zone-fill cardio" style="width: 35%;"></div></div>
+                            <span class="zone-value">18 min</span>
+                        </div>
+                        <div class="hr-zone">
+                            <span class="zone-label">Fat Burn</span>
+                            <div class="zone-bar"><div class="zone-fill fat-burn" style="width: 55%;"></div></div>
+                            <span class="zone-value">28 min</span>
+                        </div>
+                        <div class="hr-zone">
+                            <span class="zone-label">Warm Up</span>
+                            <div class="zone-bar"><div class="zone-fill warm-up" style="width: 25%;"></div></div>
+                            <span class="zone-value">12 min</span>
+                        </div>
+                        <div class="hr-zone">
+                            <span class="zone-label">Rest</span>
+                            <div class="zone-bar"><div class="zone-fill rest" style="width: 70%;"></div></div>
+                            <span class="zone-value">Rest</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Data Tables -->
+        <section class="section">
+            <h2 class="section-title">DATA TABLES</h2>
+            <div class="data-table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Workout</th>
+                            <th>Duration</th>
+                            <th>Calories</th>
+                            <th>Avg HR</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><div class="workout-type"><div class="workout-icon run">🏃</div>Morning Run</div></td>
+                            <td class="duration-cell">32:15</td>
+                            <td class="stat-cell">342 cal</td>
+                            <td class="stat-cell">145 BPM</td>
+                            <td class="duration-cell">Today</td>
+                        </tr>
+                        <tr>
+                            <td><div class="workout-type"><div class="workout-icon strength">💪</div>Strength Training</div></td>
+                            <td class="duration-cell">45:00</td>
+                            <td class="stat-cell">285 cal</td>
+                            <td class="stat-cell">118 BPM</td>
+                            <td class="duration-cell">Yesterday</td>
+                        </tr>
+                        <tr>
+                            <td><div class="workout-type"><div class="workout-icon cycle">🚴</div>Cycling</div></td>
+                            <td class="duration-cell">1:15:30</td>
+                            <td class="stat-cell">520 cal</td>
+                            <td class="stat-cell">132 BPM</td>
+                            <td class="duration-cell">2 days ago</td>
+                        </tr>
+                        <tr>
+                            <td><div class="workout-type"><div class="workout-icon yoga">🧘</div>Yoga Flow</div></td>
+                            <td class="duration-cell">30:00</td>
+                            <td class="stat-cell">95 cal</td>
+                            <td class="stat-cell">85 BPM</td>
+                            <td class="duration-cell">3 days ago</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 7. Sidebar Navigation -->
+        <section class="section">
+            <h2 class="section-title">SIDEBAR NAVIGATION</h2>
+            <div class="sidebar-demo">
+                <div class="sidebar">
+                    <div class="sidebar-logo">
+                        <div class="logo-icon">💪</div>
+                        <div class="logo-text">PULSE</div>
+                    </div>
+                    <div class="nav-item active">
+                        <span class="nav-icon">📊</span>
+                        Dashboard
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">🏋️</span>
+                        Workouts
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">🍎</span>
+                        Nutrition
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">😴</span>
+                        Sleep
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">👤</span>
+                        Profile
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Forms & Filters -->
+        <section class="section">
+            <h2 class="section-title">FORMS & FILTERS</h2>
+            <div class="forms-grid">
+                <div class="form-card">
+                    <div class="form-title">Date Range</div>
+                    <div class="form-group">
+                        <label class="form-label">From</label>
+                        <input type="date" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">To</label>
+                        <input type="date" class="form-input">
+                    </div>
+                </div>
+                <div class="form-card">
+                    <div class="form-title">Goal Settings</div>
+                    <div class="form-group">
+                        <label class="form-label">Daily Step Goal: 10,000</label>
+                        <input type="range" class="goal-slider" min="5000" max="20000" value="10000">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Calorie Target: 750</label>
+                        <input type="range" class="goal-slider" min="300" max="1500" value="750">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Buttons -->
+        <section class="section">
+            <h2 class="section-title">BUTTONS</h2>
+            <div class="buttons-showcase">
+                <button class="btn btn-primary">Start Workout</button>
+                <button class="btn btn-heart">Log Heart Rate</button>
+                <button class="btn btn-success">Goal Complete</button>
+                <button class="btn btn-outline">View History</button>
+                <button class="btn btn-ghost">More Stats</button>
+            </div>
+        </section>
+
+        <!-- 10. Status Indicators -->
+        <section class="section">
+            <h2 class="section-title">STATUS INDICATORS</h2>
+            <div class="status-grid">
+                <div class="status-group">
+                    <div class="status-group-title">Workout Intensity</div>
+                    <span class="status-badge high-intensity">🔥 High Intensity</span>
+                </div>
+                <div class="status-group">
+                    <div class="status-group-title">Recovery Status</div>
+                    <span class="status-badge recovered">✓ Fully Recovered</span>
+                </div>
+                <div class="status-group">
+                    <div class="status-group-title">Goal Progress</div>
+                    <span class="status-badge goal-met">🎯 On Track</span>
+                </div>
+                <div class="status-group">
+                    <div class="status-group-title">Rest Mode</div>
+                    <span class="status-badge resting">😴 Resting</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Widget Cards -->
+        <section class="section">
+            <h2 class="section-title">WIDGET CARDS</h2>
+            <div class="widgets-grid">
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <span class="widget-title">DAILY GOALS</span>
+                    </div>
+                    <div class="widget-content">
+                        <div class="goals-list">
+                            <div class="goal-item">
+                                <div class="goal-check done">✓</div>
+                                <span class="goal-text done">10,000 steps</span>
+                            </div>
+                            <div class="goal-item">
+                                <div class="goal-check done">✓</div>
+                                <span class="goal-text done">30 min exercise</span>
+                            </div>
+                            <div class="goal-item">
+                                <div class="goal-check"></div>
+                                <span class="goal-text">Burn 750 calories</span>
+                            </div>
+                            <div class="goal-item">
+                                <div class="goal-check"></div>
+                                <span class="goal-text">8 glasses of water</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <span class="widget-title">WORKOUT STREAK</span>
+                    </div>
+                    <div class="widget-content">
+                        <div class="streak-display">
+                            <div class="streak-number">14</div>
+                            <div class="streak-label">Day Streak</div>
+                            <div class="streak-flames">🔥🔥🔥</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <span class="widget-title">ACHIEVEMENTS</span>
+                    </div>
+                    <div class="widget-content">
+                        <div class="achievements-grid">
+                            <div class="achievement unlocked">🏃</div>
+                            <div class="achievement unlocked">💪</div>
+                            <div class="achievement unlocked">🔥</div>
+                            <div class="achievement unlocked">🎯</div>
+                            <div class="achievement">🏆</div>
+                            <div class="achievement">⭐</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Alerts & Notifications -->
+        <section class="section">
+            <h2 class="section-title">ALERTS & NOTIFICATIONS</h2>
+            <div class="alerts-showcase">
+                <div class="alert success">
+                    <div class="alert-icon">🎉</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Goal Achieved!</div>
+                        <div class="alert-message">Congratulations! You've hit your 10,000 step goal for today.</div>
+                    </div>
+                </div>
+                <div class="alert warning">
+                    <div class="alert-icon">⚡</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Almost There</div>
+                        <div class="alert-message">You're 208 calories away from your daily burn target.</div>
+                    </div>
+                </div>
+                <div class="alert heart">
+                    <div class="alert-icon">❤️</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Elevated Heart Rate</div>
+                        <div class="alert-message">Your heart rate has been above 140 BPM for 20 minutes.</div>
+                    </div>
+                </div>
+                <div class="alert rest">
+                    <div class="alert-icon">💤</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Recovery Reminder</div>
+                        <div class="alert-message">You've worked out 5 days in a row. Consider a rest day tomorrow.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13. Special: Heart Rate Monitor -->
+        <section class="section">
+            <h2 class="section-title">SPECIAL: HEART RATE MONITOR</h2>
+            <div class="heart-monitor">
+                <div class="bpm-display">
+                    <div class="heart-icon">❤️</div>
+                    <div>
+                        <div class="bpm-number">72</div>
+                        <div class="bpm-label">Beats Per Minute</div>
+                    </div>
+                </div>
+                <div class="ecg-container">
+                    <div class="ecg-line">
+                        <svg viewBox="0 0 800 80" preserveAspectRatio="none">
+                            <path d="M0,40 L50,40 L60,40 L70,35 L80,45 L90,20 L100,60 L110,40 L130,40 L200,40 L210,40 L220,35 L230,45 L240,20 L250,60 L260,40 L280,40 L350,40 L360,40 L370,35 L380,45 L390,20 L400,60 L410,40 L430,40 L500,40 L510,40 L520,35 L530,45 L540,20 L550,60 L560,40 L580,40 L650,40 L660,40 L670,35 L680,45 L690,20 L700,60 L710,40 L730,40 L800,40" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="hr-zones-mini">
+                    <div class="zone-mini">
+                        <div class="zone-mini-label">Rest</div>
+                        <div class="zone-mini-value rest">60-70</div>
+                    </div>
+                    <div class="zone-mini">
+                        <div class="zone-mini-label">Fat Burn</div>
+                        <div class="zone-mini-value fat">100-120</div>
+                    </div>
+                    <div class="zone-mini">
+                        <div class="zone-mini-label">Cardio</div>
+                        <div class="zone-mini-value cardio">130-150</div>
+                    </div>
+                    <div class="zone-mini">
+                        <div class="zone-mini-label">Peak</div>
+                        <div class="zone-mini-value peak">160+</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <div class="footer-logo">PULSE ACTIVE v1.0</div>
+            <p class="footer-text">Fitness Tracker Dashboard Style Guide</p>
+        </footer>
+    </div>
+</body>
+</html>

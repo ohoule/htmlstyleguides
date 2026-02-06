@@ -1,0 +1,2544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENTINEL v1.0 — Security Operations Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Deep Backgrounds */
+            --bg-void: #030712;
+            --bg-primary: #0F172A;
+            --bg-secondary: #1E293B;
+            --bg-tertiary: #334155;
+            --bg-elevated: #475569;
+
+            /* Tactical Colors */
+            --threat: #DC2626;
+            --threat-dim: rgba(220, 38, 38, 0.15);
+            --threat-glow: rgba(220, 38, 38, 0.4);
+            --secure: #10B981;
+            --secure-dim: rgba(16, 185, 129, 0.15);
+            --secure-glow: rgba(16, 185, 129, 0.4);
+            --alert: #F59E0B;
+            --alert-dim: rgba(245, 158, 11, 0.15);
+            --scanner: #06B6D4;
+            --scanner-dim: rgba(6, 182, 212, 0.15);
+            --scanner-glow: rgba(6, 182, 212, 0.4);
+
+            /* Text */
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --text-dim: #475569;
+
+            /* Borders */
+            --border: #334155;
+            --border-subtle: #1E293B;
+
+            /* Typography */
+            --font-display: 'Chakra Petch', sans-serif;
+            --font-ui: 'Source Sans 3', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+
+            /* Spacing */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 24px;
+            --space-6: 32px;
+            --space-7: 48px;
+            --space-8: 64px;
+
+            /* Radius */
+            --radius-sm: 4px;
+            --radius-md: 6px;
+            --radius-lg: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-ui);
+            background: var(--bg-void);
+            color: var(--text-primary);
+            line-height: 1.5;
+            font-size: 14px;
+            min-height: 100vh;
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.03) 2px,
+                rgba(0, 0, 0, 0.03) 4px
+            );
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           LAYOUT
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            grid-template-rows: 56px 1fr;
+            min-height: 100vh;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-5);
+        }
+
+        .sidebar {
+            background: var(--bg-primary);
+            border-right: 1px solid var(--border);
+            padding: var(--space-4);
+            overflow-y: auto;
+        }
+
+        .main-content {
+            background: var(--bg-void);
+            padding: var(--space-5);
+            overflow-y: auto;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           HEADER
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--scanner);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border: 1px solid var(--scanner);
+            border-radius: var(--radius-md);
+            opacity: 0.5;
+            animation: logoPulse 2s infinite;
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0; transform: scale(1.1); }
+        }
+
+        .logo-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--bg-void);
+        }
+
+        .logo-text {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+        }
+
+        .logo-version {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--scanner);
+            background: var(--scanner-dim);
+            padding: 2px 6px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--scanner);
+        }
+
+        .header-status {
+            display: flex;
+            align-items: center;
+            gap: var(--space-5);
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-3);
+            background: var(--secure-dim);
+            border: 1px solid var(--secure);
+            border-radius: var(--radius-sm);
+        }
+
+        .system-status .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--secure);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--secure);
+            animation: statusPulse 2s infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .system-status .label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--secure);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .threat-level {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .threat-level-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .threat-level-indicator {
+            display: flex;
+            gap: 3px;
+        }
+
+        .threat-bar {
+            width: 4px;
+            height: 16px;
+            background: var(--bg-tertiary);
+            border-radius: 2px;
+        }
+
+        .threat-bar.active.low { background: var(--secure); }
+        .threat-bar.active.medium { background: var(--alert); }
+        .threat-bar.active.high { background: var(--threat); }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .header-btn {
+            width: 36px;
+            height: 36px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .header-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--text-secondary);
+        }
+
+        .header-btn:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--scanner);
+        }
+
+        .header-btn:hover svg {
+            fill: var(--scanner);
+        }
+
+        .header-btn .alert-dot {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 8px;
+            height: 8px;
+            background: var(--threat);
+            border-radius: 50%;
+            animation: alertPulse 1s infinite;
+        }
+
+        @keyframes alertPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-3);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+        }
+
+        .user-avatar {
+            width: 28px;
+            height: 28px;
+            background: var(--scanner);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--bg-void);
+        }
+
+        .user-info {
+            line-height: 1.2;
+        }
+
+        .user-name {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .user-role {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           GUIDE CONTENT
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .guide-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: var(--space-8);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-5);
+            padding-bottom: var(--space-3);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-number {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--scanner);
+            background: var(--scanner-dim);
+            padding: var(--space-1) var(--space-2);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--scanner);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .component-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+        }
+
+        .component-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-3);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           1. COLOR PALETTE
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: var(--space-3);
+        }
+
+        .color-swatch {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .color-preview {
+            height: 64px;
+            position: relative;
+        }
+
+        .color-info {
+            padding: var(--space-3);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           2. TYPOGRAPHY
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .type-specimen {
+            margin-bottom: var(--space-5);
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            line-height: 1.1;
+            color: var(--text-primary);
+        }
+
+        .type-heading {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .type-body {
+            font-family: var(--font-ui);
+            font-size: 14px;
+            color: var(--text-secondary);
+            max-width: 500px;
+        }
+
+        .type-data {
+            font-family: var(--font-mono);
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--scanner);
+        }
+
+        .type-log {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-secondary);
+            background: var(--bg-void);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-sm);
+            border-left: 2px solid var(--scanner);
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
+            margin-top: var(--space-2);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           3. SPACING
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .spacing-demo {
+            display: flex;
+            align-items: flex-end;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+        }
+
+        .spacing-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .spacing-box {
+            background: var(--scanner-dim);
+            border: 1px solid var(--scanner);
+        }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-2);
+            margin-top: var(--space-5);
+        }
+
+        .grid-col {
+            height: 48px;
+            background: var(--scanner-dim);
+            border: 1px solid var(--scanner);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--scanner);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           4. METRIC CARDS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .metric-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+        }
+
+        .metric-card.threat::before { background: var(--threat); box-shadow: 0 0 10px var(--threat); }
+        .metric-card.secure::before { background: var(--secure); box-shadow: 0 0 10px var(--secure); }
+        .metric-card.alert::before { background: var(--alert); box-shadow: 0 0 10px var(--alert); }
+        .metric-card.scanner::before { background: var(--scanner); box-shadow: 0 0 10px var(--scanner); }
+
+        .metric-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: var(--space-3);
+        }
+
+        .metric-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .metric-icon.threat { background: var(--threat-dim); color: var(--threat); }
+        .metric-icon.secure { background: var(--secure-dim); color: var(--secure); }
+        .metric-icon.alert { background: var(--alert-dim); color: var(--alert); }
+        .metric-icon.scanner { background: var(--scanner-dim); color: var(--scanner); }
+
+        .metric-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        .metric-badge {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+        }
+
+        .metric-badge.critical {
+            background: var(--threat-dim);
+            color: var(--threat);
+            border: 1px solid var(--threat);
+        }
+
+        .metric-badge.normal {
+            background: var(--secure-dim);
+            color: var(--secure);
+            border: 1px solid var(--secure);
+        }
+
+        .metric-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--space-1);
+        }
+
+        .metric-value {
+            font-family: var(--font-mono);
+            font-size: 32px;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .metric-card.threat .metric-value { color: var(--threat); }
+        .metric-card.secure .metric-value { color: var(--secure); }
+        .metric-card.alert .metric-value { color: var(--alert); }
+        .metric-card.scanner .metric-value { color: var(--scanner); }
+
+        .metric-change {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            margin-top: var(--space-2);
+        }
+
+        .metric-change.up { color: var(--threat); }
+        .metric-change.down { color: var(--secure); }
+
+        .metric-chart {
+            margin-top: var(--space-3);
+            height: 32px;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+        }
+
+        .metric-bar {
+            flex: 1;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+
+        .metric-card.threat .metric-bar { background: var(--threat-dim); }
+        .metric-card.secure .metric-bar { background: var(--secure-dim); }
+        .metric-card.alert .metric-bar { background: var(--alert-dim); }
+        .metric-card.scanner .metric-bar { background: var(--scanner-dim); }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           5. CHARTS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .chart-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+        }
+
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-4);
+        }
+
+        .chart-title {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: var(--space-4);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+        }
+
+        /* Threat Timeline */
+        .threat-timeline {
+            display: flex;
+            align-items: flex-end;
+            gap: var(--space-2);
+            height: 120px;
+        }
+
+        .timeline-bar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            align-items: stretch;
+        }
+
+        .timeline-segment {
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+
+        .timeline-segment.critical { background: var(--threat); }
+        .timeline-segment.high { background: var(--alert); }
+        .timeline-segment.medium { background: var(--scanner); }
+        .timeline-segment.low { background: var(--secure); }
+
+        .timeline-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: var(--space-2);
+            padding: 0 var(--space-1);
+        }
+
+        .timeline-label {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--text-dim);
+        }
+
+        /* Severity Distribution */
+        .severity-chart {
+            display: flex;
+            height: 24px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            margin-bottom: var(--space-4);
+        }
+
+        .severity-segment {
+            transition: all 0.3s;
+        }
+
+        .severity-segment.critical { background: var(--threat); }
+        .severity-segment.high { background: var(--alert); }
+        .severity-segment.medium { background: var(--scanner); }
+        .severity-segment.low { background: var(--secure); }
+
+        .severity-legend {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-3);
+        }
+
+        .severity-item {
+            text-align: center;
+        }
+
+        .severity-value {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .severity-item.critical .severity-value { color: var(--threat); }
+        .severity-item.high .severity-value { color: var(--alert); }
+        .severity-item.medium .severity-value { color: var(--scanner); }
+        .severity-item.low .severity-value { color: var(--secure); }
+
+        .severity-label {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           6. DATA TABLES
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .data-table-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            background: var(--bg-tertiary);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            text-align: left;
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .data-table td {
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 13px;
+        }
+
+        .data-table tr:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .severity-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+        }
+
+        .severity-badge.critical {
+            background: var(--threat-dim);
+            color: var(--threat);
+            border: 1px solid var(--threat);
+        }
+
+        .severity-badge.high {
+            background: var(--alert-dim);
+            color: var(--alert);
+            border: 1px solid var(--alert);
+        }
+
+        .severity-badge.medium {
+            background: var(--scanner-dim);
+            color: var(--scanner);
+            border: 1px solid var(--scanner);
+        }
+
+        .severity-badge.low {
+            background: var(--secure-dim);
+            color: var(--secure);
+            border: 1px solid var(--secure);
+        }
+
+        .ip-address {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-primary);
+        }
+
+        .attack-type {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .timestamp {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .action-btn {
+            padding: 4px 8px;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 500;
+            border: 1px solid var(--border);
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            border-color: var(--scanner);
+            color: var(--scanner);
+        }
+
+        .action-btn.block {
+            border-color: var(--threat);
+            color: var(--threat);
+        }
+
+        .action-btn.block:hover {
+            background: var(--threat);
+            color: var(--bg-void);
+        }
+
+        .table-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-3) var(--space-4);
+            background: var(--bg-tertiary);
+        }
+
+        .table-info {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .pagination {
+            display: flex;
+            gap: var(--space-1);
+        }
+
+        .pagination-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .pagination-btn:hover {
+            border-color: var(--scanner);
+            color: var(--scanner);
+        }
+
+        .pagination-btn.active {
+            background: var(--scanner);
+            border-color: var(--scanner);
+            color: var(--bg-void);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           7. SIDEBAR NAVIGATION
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .nav-section {
+            margin-bottom: var(--space-5);
+        }
+
+        .nav-section-title {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: var(--space-2);
+            padding: 0 var(--space-2);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: var(--scanner-dim);
+            color: var(--scanner);
+            border: 1px solid var(--scanner);
+        }
+
+        .nav-item svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .nav-item .label {
+            font-size: 13px;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .nav-item .count {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: var(--radius-sm);
+            background: var(--bg-tertiary);
+        }
+
+        .nav-item .count.alert {
+            background: var(--threat);
+            color: white;
+        }
+
+        .nav-divider {
+            height: 1px;
+            background: var(--border);
+            margin: var(--space-3) 0;
+        }
+
+        /* System Health */
+        .system-health {
+            padding: var(--space-3);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+        }
+
+        .system-health-title {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: var(--space-3);
+        }
+
+        .health-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-2) 0;
+        }
+
+        .health-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .health-value {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .health-value.good { color: var(--secure); }
+        .health-value.warning { color: var(--alert); }
+        .health-value.critical { color: var(--threat); }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           8. FORMS & FILTERS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .form-group {
+            margin-bottom: var(--space-4);
+        }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-2) var(--space-3);
+            background: var(--bg-void);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--scanner);
+            box-shadow: 0 0 0 2px var(--scanner-dim);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .form-select {
+            appearance: none;
+            width: 100%;
+            padding: var(--space-2) var(--space-3);
+            padding-right: 32px;
+            background: var(--bg-void) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748B' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E") no-repeat right 10px center;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--scanner);
+            box-shadow: 0 0 0 2px var(--scanner-dim);
+        }
+
+        .filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+
+        .filter-chip {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-1) var(--space-3);
+            background: var(--bg-void);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-chip:hover {
+            border-color: var(--scanner);
+            color: var(--scanner);
+        }
+
+        .filter-chip.active {
+            background: var(--scanner-dim);
+            border-color: var(--scanner);
+            color: var(--scanner);
+        }
+
+        .filter-chip.critical.active {
+            background: var(--threat-dim);
+            border-color: var(--threat);
+            color: var(--threat);
+        }
+
+        .filter-chip.high.active {
+            background: var(--alert-dim);
+            border-color: var(--alert);
+            color: var(--alert);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           9. BUTTONS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .btn-primary {
+            background: var(--scanner);
+            color: var(--bg-void);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 20px var(--scanner-glow);
+        }
+
+        .btn-danger {
+            background: var(--threat);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            box-shadow: 0 0 20px var(--threat-glow);
+        }
+
+        .btn-success {
+            background: var(--secure);
+            color: var(--bg-void);
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 0 20px var(--secure-glow);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--scanner);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+        }
+
+        .btn-ghost:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .btn-icon:hover {
+            border-color: var(--scanner);
+            color: var(--scanner);
+        }
+
+        .button-group {
+            display: flex;
+            gap: var(--space-2);
+            flex-wrap: wrap;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           10. STATUS INDICATORS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .status-indicators {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+        }
+
+        .status-dot {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .status-dot .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .status-dot .dot.online {
+            background: var(--secure);
+            box-shadow: 0 0 8px var(--secure);
+        }
+
+        .status-dot .dot.offline {
+            background: var(--text-dim);
+        }
+
+        .status-dot .dot.alert {
+            background: var(--threat);
+            box-shadow: 0 0 8px var(--threat);
+            animation: alertPulse 1s infinite;
+        }
+
+        .status-dot .dot.warning {
+            background: var(--alert);
+            box-shadow: 0 0 8px var(--alert);
+        }
+
+        .status-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        /* Protection Level */
+        .protection-level {
+            display: flex;
+            gap: 4px;
+        }
+
+        .protection-bar {
+            width: 8px;
+            height: 24px;
+            background: var(--bg-tertiary);
+            border-radius: 2px;
+        }
+
+        .protection-bar.active { background: var(--secure); }
+        .protection-bar.warning { background: var(--alert); }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           11. WIDGET CARDS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .widget {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .widget-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-tertiary);
+        }
+
+        .widget-title {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .widget-action {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--scanner);
+            cursor: pointer;
+        }
+
+        .widget-body {
+            padding: var(--space-4);
+        }
+
+        /* Alert List */
+        .alert-item {
+            display: flex;
+            gap: var(--space-3);
+            padding: var(--space-3) 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .alert-item:last-child {
+            border-bottom: none;
+        }
+
+        .alert-severity {
+            width: 4px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .alert-severity.critical { background: var(--threat); }
+        .alert-severity.high { background: var(--alert); }
+        .alert-severity.medium { background: var(--scanner); }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title-text {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .alert-meta {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* Top Attackers */
+        .attacker-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3) 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .attacker-item:last-child {
+            border-bottom: none;
+        }
+
+        .attacker-rank {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-dim);
+            width: 20px;
+        }
+
+        .attacker-ip {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-primary);
+            flex: 1;
+        }
+
+        .attacker-country {
+            font-size: 16px;
+        }
+
+        .attacker-count {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--threat);
+            font-weight: 500;
+        }
+
+        /* Blocked Countries */
+        .country-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+
+        .country-tag {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-1) var(--space-2);
+            background: var(--threat-dim);
+            border: 1px solid var(--threat);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--threat);
+        }
+
+        .country-tag .flag {
+            font-size: 12px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           12. ALERTS & NOTIFICATIONS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .alert {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            padding: var(--space-3) var(--space-4);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-3);
+            border-left: 3px solid;
+        }
+
+        .alert svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .alert-content-wrapper {
+            flex: 1;
+        }
+
+        .alert-title-main {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 2px;
+        }
+
+        .alert-message {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .alert-close {
+            background: none;
+            border: none;
+            color: inherit;
+            opacity: 0.5;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .alert-close:hover { opacity: 1; }
+
+        .alert-critical {
+            background: var(--threat-dim);
+            border-color: var(--threat);
+            color: #FCA5A5;
+        }
+
+        .alert-critical svg { fill: var(--threat); }
+
+        .alert-warning {
+            background: var(--alert-dim);
+            border-color: var(--alert);
+            color: #FCD34D;
+        }
+
+        .alert-warning svg { fill: var(--alert); }
+
+        .alert-info {
+            background: var(--scanner-dim);
+            border-color: var(--scanner);
+            color: #67E8F9;
+        }
+
+        .alert-info svg { fill: var(--scanner); }
+
+        .alert-success {
+            background: var(--secure-dim);
+            border-color: var(--secure);
+            color: #6EE7B7;
+        }
+
+        .alert-success svg { fill: var(--secure); }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           13. SPECIAL COMPONENT - Threat Feed
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .threat-feed {
+            background: var(--bg-void);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .threat-feed-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-3) var(--space-4);
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .threat-feed-title {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .threat-feed-title .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--threat);
+            border-radius: 50%;
+            animation: livePulse 1.5s infinite;
+        }
+
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--threat-glow); }
+            50% { opacity: 0.5; box-shadow: 0 0 0 4px transparent; }
+        }
+
+        .threat-feed-status {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .threat-feed-body {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .threat-entry {
+            display: flex;
+            gap: var(--space-3);
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 1px solid var(--border-subtle);
+            animation: threatSlide 0.3s ease-out;
+        }
+
+        @keyframes threatSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .threat-entry:hover {
+            background: var(--bg-secondary);
+        }
+
+        .threat-indicator {
+            width: 3px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .threat-indicator.critical { background: var(--threat); box-shadow: 0 0 8px var(--threat); }
+        .threat-indicator.high { background: var(--alert); box-shadow: 0 0 8px var(--alert); }
+        .threat-indicator.medium { background: var(--scanner); }
+        .threat-indicator.low { background: var(--secure); }
+
+        .threat-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .threat-main {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            margin-bottom: 4px;
+        }
+
+        .threat-type {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .threat-severity-tag {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            font-weight: 500;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            border-radius: var(--radius-sm);
+        }
+
+        .threat-severity-tag.critical {
+            background: var(--threat-dim);
+            color: var(--threat);
+        }
+
+        .threat-severity-tag.high {
+            background: var(--alert-dim);
+            color: var(--alert);
+        }
+
+        .threat-severity-tag.medium {
+            background: var(--scanner-dim);
+            color: var(--scanner);
+        }
+
+        .threat-meta-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .threat-ip {
+            color: var(--text-secondary);
+        }
+
+        .threat-time {
+            margin-left: auto;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-dim);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        @media (max-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .component-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                </div>
+                <span class="logo-text">SENTINEL</span>
+                <span class="logo-version">v1.0</span>
+            </div>
+
+            <div class="header-status">
+                <div class="system-status">
+                    <span class="dot"></span>
+                    <span class="label">All Systems Operational</span>
+                </div>
+                <div class="threat-level">
+                    <span class="threat-level-label">Threat Level</span>
+                    <div class="threat-level-indicator">
+                        <div class="threat-bar active low"></div>
+                        <div class="threat-bar active low"></div>
+                        <div class="threat-bar active medium"></div>
+                        <div class="threat-bar"></div>
+                        <div class="threat-bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button class="header-btn">
+                    <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+                    <span class="alert-dot"></span>
+                </button>
+                <button class="header-btn">
+                    <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                </button>
+                <div class="user-badge">
+                    <div class="user-avatar">JC</div>
+                    <div class="user-info">
+                        <div class="user-name">J. Carter</div>
+                        <div class="user-role">SOC Analyst</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav>
+                <div class="nav-section">
+                    <div class="nav-section-title">Monitor</div>
+                    <div class="nav-item active">
+                        <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+                        <span class="label">Dashboard</span>
+                    </div>
+                    <div class="nav-item">
+                        <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                        <span class="label">Threats</span>
+                        <span class="count alert">12</span>
+                    </div>
+                    <div class="nav-item">
+                        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                        <span class="label">Firewall</span>
+                    </div>
+                    <div class="nav-item">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        <span class="label">Logs</span>
+                    </div>
+                </div>
+
+                <div class="nav-divider"></div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Analysis</div>
+                    <div class="nav-item">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                        <span class="label">Reports</span>
+                    </div>
+                    <div class="nav-item">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        <span class="label">Geo Analysis</span>
+                    </div>
+                </div>
+
+                <div class="nav-divider"></div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">System Health</div>
+                    <div class="system-health">
+                        <div class="health-item">
+                            <span class="health-label">CPU Usage</span>
+                            <span class="health-value good">24%</span>
+                        </div>
+                        <div class="health-item">
+                            <span class="health-label">Memory</span>
+                            <span class="health-value warning">68%</span>
+                        </div>
+                        <div class="health-item">
+                            <span class="health-label">Network</span>
+                            <span class="health-value good">1.2 Gbps</span>
+                        </div>
+                        <div class="health-item">
+                            <span class="health-label">Storage</span>
+                            <span class="health-value good">42%</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="guide-container">
+
+                <!-- Section 1: Color Palette -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">01</span>
+                        <h2 class="section-title">COLOR PALETTE</h2>
+                    </div>
+
+                    <div class="component-card">
+                        <p class="component-label">Tactical Colors</p>
+                        <div class="color-grid">
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: #DC2626;"></div>
+                                <div class="color-info">
+                                    <div class="color-name">THREAT RED</div>
+                                    <div class="color-hex">#DC2626</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: #10B981;"></div>
+                                <div class="color-info">
+                                    <div class="color-name">SECURE GREEN</div>
+                                    <div class="color-hex">#10B981</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: #F59E0B;"></div>
+                                <div class="color-info">
+                                    <div class="color-name">ALERT AMBER</div>
+                                    <div class="color-hex">#F59E0B</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: #06B6D4;"></div>
+                                <div class="color-info">
+                                    <div class="color-name">SCANNER BLUE</div>
+                                    <div class="color-hex">#06B6D4</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="component-card" style="margin-top: var(--space-4);">
+                        <p class="component-label">Background Scale</p>
+                        <div class="color-grid">
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: #030712;"></div>
+                                <div class="color-info">
+                                    <div class="color-name">VOID</div>
+                                    <div class="color-hex">#030712</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: #0F172A;"></div>
+                                <div class="color-info">
+                                    <div class="color-name">PRIMARY</div>
+                                    <div class="color-hex">#0F172A</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: #1E293B;"></div>
+                                <div class="color-info">
+                                    <div class="color-name">SECONDARY</div>
+                                    <div class="color-hex">#1E293B</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: #334155;"></div>
+                                <div class="color-info">
+                                    <div class="color-name">TERTIARY</div>
+                                    <div class="color-hex">#334155</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Typography -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">02</span>
+                        <h2 class="section-title">TYPOGRAPHY</h2>
+                    </div>
+
+                    <div class="component-grid">
+                        <div class="component-card">
+                            <div class="type-specimen">
+                                <div class="type-display">SENTINEL</div>
+                                <p class="type-label">Display — Chakra Petch 42px Bold</p>
+                            </div>
+                            <div class="type-specimen">
+                                <div class="type-heading">THREAT ANALYSIS</div>
+                                <p class="type-label">Heading — Chakra Petch 24px Semibold</p>
+                            </div>
+                            <div class="type-specimen">
+                                <p class="type-body">Advanced threat detection and response system monitoring network traffic, analyzing patterns, and protecting against intrusions in real-time.</p>
+                                <p class="type-label">Body — Source Sans 3 14px</p>
+                            </div>
+                        </div>
+
+                        <div class="component-card">
+                            <div class="type-specimen">
+                                <div class="type-data">2,847</div>
+                                <p class="type-label">Data — Fira Code 28px Semibold</p>
+                            </div>
+                            <div class="type-specimen">
+                                <div class="type-log">[2024-01-15 14:32:07] ALERT: Suspicious activity detected from 192.168.1.105</div>
+                                <p class="type-label">Log — Fira Code 12px</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Metric Cards -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">04</span>
+                        <h2 class="section-title">METRIC CARDS</h2>
+                    </div>
+
+                    <div class="component-grid">
+                        <div class="metric-card threat">
+                            <div class="metric-header">
+                                <div class="metric-icon threat">
+                                    <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                                </div>
+                                <span class="metric-badge critical">Critical</span>
+                            </div>
+                            <div class="metric-label">Active Threats</div>
+                            <div class="metric-value">12</div>
+                            <div class="metric-change up">↑ 4 from yesterday</div>
+                            <div class="metric-chart">
+                                <div class="metric-bar" style="height: 40%;"></div>
+                                <div class="metric-bar" style="height: 60%;"></div>
+                                <div class="metric-bar" style="height: 45%;"></div>
+                                <div class="metric-bar" style="height: 80%;"></div>
+                                <div class="metric-bar" style="height: 70%;"></div>
+                                <div class="metric-bar" style="height: 90%;"></div>
+                                <div class="metric-bar" style="height: 85%;"></div>
+                                <div class="metric-bar" style="height: 100%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card secure">
+                            <div class="metric-header">
+                                <div class="metric-icon secure">
+                                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                                </div>
+                                <span class="metric-badge normal">Normal</span>
+                            </div>
+                            <div class="metric-label">Blocked Today</div>
+                            <div class="metric-value">2,847</div>
+                            <div class="metric-change down">↓ 12% from average</div>
+                            <div class="metric-chart">
+                                <div class="metric-bar" style="height: 70%;"></div>
+                                <div class="metric-bar" style="height: 85%;"></div>
+                                <div class="metric-bar" style="height: 60%;"></div>
+                                <div class="metric-bar" style="height: 75%;"></div>
+                                <div class="metric-bar" style="height: 90%;"></div>
+                                <div class="metric-bar" style="height: 65%;"></div>
+                                <div class="metric-bar" style="height: 80%;"></div>
+                                <div class="metric-bar" style="height: 70%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card alert">
+                            <div class="metric-header">
+                                <div class="metric-icon alert">
+                                    <svg viewBox="0 0 24 24"><path d="M17.81 4.47c-.08 0-.16-.02-.23-.06C15.66 3.42 14 3 12.01 3c-1.98 0-3.86.47-5.57 1.41-.24.13-.54.04-.68-.2-.13-.24-.04-.55.2-.68C7.82 2.52 9.86 2 12.01 2c2.13 0 3.99.47 6.03 1.52.25.13.34.43.21.67-.09.18-.26.28-.44.28zM3.5 9.72c-.1 0-.2-.03-.29-.09-.23-.16-.28-.47-.12-.7.99-1.4 2.25-2.5 3.75-3.27C9.98 4.04 14 4.03 17.15 5.65c1.5.77 2.76 1.86 3.75 3.25.16.22.11.54-.12.7-.23.16-.54.11-.7-.12-.9-1.26-2.04-2.25-3.39-2.94-2.87-1.47-6.54-1.47-9.4.01-1.36.7-2.5 1.7-3.4 2.96-.08.14-.23.21-.39.21zm6.25 12.07c-.13 0-.26-.05-.35-.15-.87-.87-1.34-1.43-2.01-2.64-.69-1.23-1.05-2.73-1.05-4.34 0-2.97 2.54-5.39 5.66-5.39s5.66 2.42 5.66 5.39c0 .28-.22.5-.5.5s-.5-.22-.5-.5c0-2.42-2.09-4.39-4.66-4.39-2.57 0-4.66 1.97-4.66 4.39 0 1.44.32 2.77.93 3.85.64 1.15 1.08 1.64 1.85 2.42.19.2.19.51 0 .71-.11.1-.24.15-.37.15zm7.17-1.85c-1.19 0-2.24-.3-3.1-.89-1.49-1.01-2.38-2.65-2.38-4.39 0-.28.22-.5.5-.5s.5.22.5.5c0 1.41.72 2.74 1.94 3.56.71.48 1.54.71 2.54.71.24 0 .64-.03 1.04-.1.27-.05.53.13.58.41.05.27-.13.53-.41.58-.57.11-1.07.12-1.21.12zM14.91 22c-.04 0-.09-.01-.13-.02-1.59-.44-2.63-1.03-3.72-2.1-1.4-1.39-2.17-3.24-2.17-5.22 0-1.62 1.38-2.94 3.08-2.94 1.7 0 3.08 1.32 3.08 2.94 0 1.07.93 1.94 2.08 1.94s2.08-.87 2.08-1.94c0-3.77-3.25-6.83-7.25-6.83-2.84 0-5.44 1.58-6.61 4.03-.39.81-.59 1.76-.59 2.8 0 .78.07 2.01.67 3.61.1.26-.03.55-.29.64-.26.1-.55-.04-.64-.29-.49-1.31-.73-2.61-.73-3.96 0-1.2.23-2.29.68-3.24 1.33-2.79 4.28-4.6 7.51-4.6 4.55 0 8.25 3.51 8.25 7.83 0 1.62-1.38 2.94-3.08 2.94s-3.08-1.32-3.08-2.94c0-1.07-.93-1.94-2.08-1.94s-2.08.87-2.08 1.94c0 1.71.66 3.31 1.87 4.51.95.94 1.86 1.46 3.27 1.85.27.07.42.35.35.61-.05.23-.26.38-.47.38z"/></svg>
+                                </div>
+                                <span class="metric-badge normal">Active</span>
+                            </div>
+                            <div class="metric-label">Firewall Rules</div>
+                            <div class="metric-value">1,247</div>
+                            <div class="metric-change" style="color: var(--text-muted);">23 modified today</div>
+                            <div class="metric-chart">
+                                <div class="metric-bar" style="height: 100%;"></div>
+                                <div class="metric-bar" style="height: 100%;"></div>
+                                <div class="metric-bar" style="height: 100%;"></div>
+                                <div class="metric-bar" style="height: 100%;"></div>
+                                <div class="metric-bar" style="height: 100%;"></div>
+                                <div class="metric-bar" style="height: 100%;"></div>
+                                <div class="metric-bar" style="height: 100%;"></div>
+                                <div class="metric-bar" style="height: 100%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card scanner">
+                            <div class="metric-header">
+                                <div class="metric-icon scanner">
+                                    <svg viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+                                </div>
+                                <span class="metric-badge normal">Healthy</span>
+                            </div>
+                            <div class="metric-label">Network Health</div>
+                            <div class="metric-value">98.7%</div>
+                            <div class="metric-change down">↓ 0.2% latency</div>
+                            <div class="metric-chart">
+                                <div class="metric-bar" style="height: 95%;"></div>
+                                <div class="metric-bar" style="height: 98%;"></div>
+                                <div class="metric-bar" style="height: 97%;"></div>
+                                <div class="metric-bar" style="height: 99%;"></div>
+                                <div class="metric-bar" style="height: 98%;"></div>
+                                <div class="metric-bar" style="height: 100%;"></div>
+                                <div class="metric-bar" style="height: 99%;"></div>
+                                <div class="metric-bar" style="height: 98%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 5: Charts -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">05</span>
+                        <h2 class="section-title">CHARTS & DATA VIZ</h2>
+                    </div>
+
+                    <div class="component-grid">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <span class="chart-title">SEVERITY DISTRIBUTION</span>
+                            </div>
+                            <div class="severity-chart">
+                                <div class="severity-segment critical" style="flex: 15;"></div>
+                                <div class="severity-segment high" style="flex: 25;"></div>
+                                <div class="severity-segment medium" style="flex: 35;"></div>
+                                <div class="severity-segment low" style="flex: 25;"></div>
+                            </div>
+                            <div class="severity-legend">
+                                <div class="severity-item critical">
+                                    <div class="severity-value">147</div>
+                                    <div class="severity-label">Critical</div>
+                                </div>
+                                <div class="severity-item high">
+                                    <div class="severity-value">256</div>
+                                    <div class="severity-label">High</div>
+                                </div>
+                                <div class="severity-item medium">
+                                    <div class="severity-value">384</div>
+                                    <div class="severity-label">Medium</div>
+                                </div>
+                                <div class="severity-item low">
+                                    <div class="severity-value">213</div>
+                                    <div class="severity-label">Low</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <span class="chart-title">THREAT TIMELINE (24H)</span>
+                                <div class="chart-legend">
+                                    <div class="legend-item">
+                                        <div class="legend-dot" style="background: var(--threat);"></div>
+                                        <span>Critical</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-dot" style="background: var(--alert);"></div>
+                                        <span>High</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="threat-timeline">
+                                <div class="timeline-bar">
+                                    <div class="timeline-segment critical" style="height: 10px;"></div>
+                                    <div class="timeline-segment high" style="height: 20px;"></div>
+                                    <div class="timeline-segment medium" style="height: 30px;"></div>
+                                </div>
+                                <div class="timeline-bar">
+                                    <div class="timeline-segment critical" style="height: 5px;"></div>
+                                    <div class="timeline-segment high" style="height: 15px;"></div>
+                                    <div class="timeline-segment medium" style="height: 25px;"></div>
+                                </div>
+                                <div class="timeline-bar">
+                                    <div class="timeline-segment high" style="height: 25px;"></div>
+                                    <div class="timeline-segment medium" style="height: 35px;"></div>
+                                </div>
+                                <div class="timeline-bar">
+                                    <div class="timeline-segment critical" style="height: 15px;"></div>
+                                    <div class="timeline-segment high" style="height: 30px;"></div>
+                                    <div class="timeline-segment medium" style="height: 25px;"></div>
+                                </div>
+                                <div class="timeline-bar">
+                                    <div class="timeline-segment critical" style="height: 20px;"></div>
+                                    <div class="timeline-segment high" style="height: 35px;"></div>
+                                    <div class="timeline-segment medium" style="height: 20px;"></div>
+                                </div>
+                                <div class="timeline-bar">
+                                    <div class="timeline-segment critical" style="height: 25px;"></div>
+                                    <div class="timeline-segment high" style="height: 40px;"></div>
+                                    <div class="timeline-segment medium" style="height: 15px;"></div>
+                                </div>
+                                <div class="timeline-bar">
+                                    <div class="timeline-segment critical" style="height: 10px;"></div>
+                                    <div class="timeline-segment high" style="height: 20px;"></div>
+                                    <div class="timeline-segment medium" style="height: 40px;"></div>
+                                </div>
+                                <div class="timeline-bar">
+                                    <div class="timeline-segment high" style="height: 15px;"></div>
+                                    <div class="timeline-segment medium" style="height: 45px;"></div>
+                                </div>
+                            </div>
+                            <div class="timeline-labels">
+                                <span class="timeline-label">00:00</span>
+                                <span class="timeline-label">06:00</span>
+                                <span class="timeline-label">12:00</span>
+                                <span class="timeline-label">18:00</span>
+                                <span class="timeline-label">NOW</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 6: Data Tables -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">06</span>
+                        <h2 class="section-title">SECURITY EVENT TABLE</h2>
+                    </div>
+
+                    <div class="data-table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Severity</th>
+                                    <th>Source IP</th>
+                                    <th>Attack Type</th>
+                                    <th>Timestamp</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="severity-badge critical">Critical</span></td>
+                                    <td><span class="ip-address">192.168.1.105</span></td>
+                                    <td><span class="attack-type">SQL Injection Attempt</span></td>
+                                    <td><span class="timestamp">2024-01-15 14:32:07</span></td>
+                                    <td><span class="severity-badge critical">Active</span></td>
+                                    <td>
+                                        <button class="action-btn block">Block</button>
+                                        <button class="action-btn">Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="severity-badge high">High</span></td>
+                                    <td><span class="ip-address">10.0.0.45</span></td>
+                                    <td><span class="attack-type">Brute Force SSH</span></td>
+                                    <td><span class="timestamp">2024-01-15 14:28:43</span></td>
+                                    <td><span class="severity-badge medium">Blocked</span></td>
+                                    <td>
+                                        <button class="action-btn">Unblock</button>
+                                        <button class="action-btn">Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="severity-badge medium">Medium</span></td>
+                                    <td><span class="ip-address">172.16.0.23</span></td>
+                                    <td><span class="attack-type">Port Scan Detected</span></td>
+                                    <td><span class="timestamp">2024-01-15 14:15:22</span></td>
+                                    <td><span class="severity-badge low">Monitored</span></td>
+                                    <td>
+                                        <button class="action-btn block">Block</button>
+                                        <button class="action-btn">Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="severity-badge critical">Critical</span></td>
+                                    <td><span class="ip-address">203.0.113.42</span></td>
+                                    <td><span class="attack-type">DDoS Attack</span></td>
+                                    <td><span class="timestamp">2024-01-15 14:02:11</span></td>
+                                    <td><span class="severity-badge critical">Active</span></td>
+                                    <td>
+                                        <button class="action-btn block">Block</button>
+                                        <button class="action-btn">Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="severity-badge low">Low</span></td>
+                                    <td><span class="ip-address">192.168.2.87</span></td>
+                                    <td><span class="attack-type">Failed Login Attempt</span></td>
+                                    <td><span class="timestamp">2024-01-15 13:58:05</span></td>
+                                    <td><span class="severity-badge low">Resolved</span></td>
+                                    <td>
+                                        <button class="action-btn">Details</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="table-footer">
+                            <span class="table-info">Showing 1-5 of 1,247 events</span>
+                            <div class="pagination">
+                                <button class="pagination-btn">‹</button>
+                                <button class="pagination-btn active">1</button>
+                                <button class="pagination-btn">2</button>
+                                <button class="pagination-btn">3</button>
+                                <button class="pagination-btn">...</button>
+                                <button class="pagination-btn">250</button>
+                                <button class="pagination-btn">›</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 9: Buttons -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">09</span>
+                        <h2 class="section-title">BUTTONS</h2>
+                    </div>
+
+                    <div class="component-card">
+                        <p class="component-label">Button Variants</p>
+                        <div class="button-group" style="margin-bottom: var(--space-5);">
+                            <button class="btn btn-primary">
+                                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                                Enable Shield
+                            </button>
+                            <button class="btn btn-danger">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8 0-1.85.63-3.55 1.69-4.9L16.9 18.31C15.55 19.37 13.85 20 12 20zm6.31-3.1L7.1 5.69C8.45 4.63 10.15 4 12 4c4.42 0 8 3.58 8 8 0 1.85-.63 3.55-1.69 4.9z"/></svg>
+                                Block All
+                            </button>
+                            <button class="btn btn-success">Whitelist</button>
+                            <button class="btn btn-secondary">Export</button>
+                            <button class="btn btn-ghost">Cancel</button>
+                        </div>
+
+                        <p class="component-label">Icon Buttons</p>
+                        <div class="button-group">
+                            <button class="btn btn-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                            </button>
+                            <button class="btn btn-icon">
+                                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                            </button>
+                            <button class="btn btn-icon">
+                                <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 11: Widgets -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">11</span>
+                        <h2 class="section-title">WIDGET CARDS</h2>
+                    </div>
+
+                    <div class="component-grid">
+                        <!-- Recent Alerts -->
+                        <div class="widget">
+                            <div class="widget-header">
+                                <span class="widget-title">RECENT ALERTS</span>
+                                <span class="widget-action">View All →</span>
+                            </div>
+                            <div class="widget-body">
+                                <div class="alert-item">
+                                    <div class="alert-severity critical"></div>
+                                    <div class="alert-content">
+                                        <div class="alert-title-text">SQL Injection Detected</div>
+                                        <div class="alert-meta">192.168.1.105 • 2 min ago</div>
+                                    </div>
+                                </div>
+                                <div class="alert-item">
+                                    <div class="alert-severity high"></div>
+                                    <div class="alert-content">
+                                        <div class="alert-title-text">Brute Force Attack</div>
+                                        <div class="alert-meta">10.0.0.45 • 8 min ago</div>
+                                    </div>
+                                </div>
+                                <div class="alert-item">
+                                    <div class="alert-severity medium"></div>
+                                    <div class="alert-content">
+                                        <div class="alert-title-text">Suspicious Port Scan</div>
+                                        <div class="alert-meta">172.16.0.23 • 15 min ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Top Attackers -->
+                        <div class="widget">
+                            <div class="widget-header">
+                                <span class="widget-title">TOP ATTACKERS</span>
+                                <span class="widget-action">Block All →</span>
+                            </div>
+                            <div class="widget-body">
+                                <div class="attacker-item">
+                                    <span class="attacker-rank">1</span>
+                                    <span class="attacker-ip">203.0.113.42</span>
+                                    <span class="attacker-country">🇨🇳</span>
+                                    <span class="attacker-count">847</span>
+                                </div>
+                                <div class="attacker-item">
+                                    <span class="attacker-rank">2</span>
+                                    <span class="attacker-ip">198.51.100.23</span>
+                                    <span class="attacker-country">🇷🇺</span>
+                                    <span class="attacker-count">623</span>
+                                </div>
+                                <div class="attacker-item">
+                                    <span class="attacker-rank">3</span>
+                                    <span class="attacker-ip">192.0.2.178</span>
+                                    <span class="attacker-country">🇰🇵</span>
+                                    <span class="attacker-count">412</span>
+                                </div>
+                                <div class="attacker-item">
+                                    <span class="attacker-rank">4</span>
+                                    <span class="attacker-ip">185.220.101.45</span>
+                                    <span class="attacker-country">🇮🇷</span>
+                                    <span class="attacker-count">287</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blocked Countries -->
+                        <div class="widget">
+                            <div class="widget-header">
+                                <span class="widget-title">BLOCKED REGIONS</span>
+                                <span class="widget-action">Manage →</span>
+                            </div>
+                            <div class="widget-body">
+                                <div class="country-list">
+                                    <span class="country-tag"><span class="flag">🇨🇳</span> China</span>
+                                    <span class="country-tag"><span class="flag">🇷🇺</span> Russia</span>
+                                    <span class="country-tag"><span class="flag">🇰🇵</span> N. Korea</span>
+                                    <span class="country-tag"><span class="flag">🇮🇷</span> Iran</span>
+                                    <span class="country-tag"><span class="flag">🇻🇳</span> Vietnam</span>
+                                    <span class="country-tag"><span class="flag">🇳🇬</span> Nigeria</span>
+                                    <span class="country-tag"><span class="flag">🇷🇴</span> Romania</span>
+                                    <span class="country-tag"><span class="flag">🇺🇦</span> Ukraine</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 12: Alerts -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">12</span>
+                        <h2 class="section-title">ALERTS & NOTIFICATIONS</h2>
+                    </div>
+
+                    <div class="component-card">
+                        <p class="component-label">Alert Types</p>
+                        <div class="alert alert-critical">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                            <div class="alert-content-wrapper">
+                                <div class="alert-title-main">CRITICAL: Active DDoS Attack</div>
+                                <div class="alert-message">High volume traffic from 203.0.113.42 targeting port 443. Immediate action required.</div>
+                            </div>
+                            <button class="alert-close">×</button>
+                        </div>
+                        <div class="alert alert-warning">
+                            <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                            <div class="alert-content-wrapper">
+                                <div class="alert-title-main">Brute Force Attempt Detected</div>
+                                <div class="alert-message">Multiple failed SSH login attempts from 10.0.0.45. Consider blocking this IP.</div>
+                            </div>
+                            <button class="alert-close">×</button>
+                        </div>
+                        <div class="alert alert-info">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            <div class="alert-content-wrapper">
+                                <div class="alert-title-main">Firewall Rules Updated</div>
+                                <div class="alert-message">23 new rules have been applied. All systems operating normally.</div>
+                            </div>
+                            <button class="alert-close">×</button>
+                        </div>
+                        <div class="alert alert-success">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <div class="alert-content-wrapper">
+                                <div class="alert-title-main">Threat Neutralized</div>
+                                <div class="alert-message">SQL injection attempt from 192.168.1.105 has been blocked and logged.</div>
+                            </div>
+                            <button class="alert-close">×</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 13: Threat Feed -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">13</span>
+                        <h2 class="section-title">REAL-TIME THREAT FEED</h2>
+                    </div>
+
+                    <div class="threat-feed">
+                        <div class="threat-feed-header">
+                            <div class="threat-feed-title">
+                                <span class="live-dot"></span>
+                                LIVE THREAT MONITOR
+                            </div>
+                            <div class="threat-feed-status">Last update: 2 seconds ago</div>
+                        </div>
+                        <div class="threat-feed-body">
+                            <div class="threat-entry">
+                                <div class="threat-indicator critical"></div>
+                                <div class="threat-details">
+                                    <div class="threat-main">
+                                        <span class="threat-type">SQL Injection Attempt</span>
+                                        <span class="threat-severity-tag critical">Critical</span>
+                                    </div>
+                                    <div class="threat-meta-info">
+                                        <span class="threat-ip">192.168.1.105</span>
+                                        <span>→ /api/users</span>
+                                    </div>
+                                </div>
+                                <span class="threat-time">Just now</span>
+                            </div>
+                            <div class="threat-entry">
+                                <div class="threat-indicator high"></div>
+                                <div class="threat-details">
+                                    <div class="threat-main">
+                                        <span class="threat-type">Brute Force SSH</span>
+                                        <span class="threat-severity-tag high">High</span>
+                                    </div>
+                                    <div class="threat-meta-info">
+                                        <span class="threat-ip">10.0.0.45</span>
+                                        <span>→ Port 22</span>
+                                    </div>
+                                </div>
+                                <span class="threat-time">4 min ago</span>
+                            </div>
+                            <div class="threat-entry">
+                                <div class="threat-indicator medium"></div>
+                                <div class="threat-details">
+                                    <div class="threat-main">
+                                        <span class="threat-type">Port Scan Detected</span>
+                                        <span class="threat-severity-tag medium">Medium</span>
+                                    </div>
+                                    <div class="threat-meta-info">
+                                        <span class="threat-ip">172.16.0.23</span>
+                                        <span>→ Ports 1-1024</span>
+                                    </div>
+                                </div>
+                                <span class="threat-time">8 min ago</span>
+                            </div>
+                            <div class="threat-entry">
+                                <div class="threat-indicator critical"></div>
+                                <div class="threat-details">
+                                    <div class="threat-main">
+                                        <span class="threat-type">DDoS Attack</span>
+                                        <span class="threat-severity-tag critical">Critical</span>
+                                    </div>
+                                    <div class="threat-meta-info">
+                                        <span class="threat-ip">203.0.113.42</span>
+                                        <span>→ 847 req/sec</span>
+                                    </div>
+                                </div>
+                                <span class="threat-time">12 min ago</span>
+                            </div>
+                            <div class="threat-entry">
+                                <div class="threat-indicator high"></div>
+                                <div class="threat-details">
+                                    <div class="threat-main">
+                                        <span class="threat-type">XSS Attempt</span>
+                                        <span class="threat-severity-tag high">High</span>
+                                    </div>
+                                    <div class="threat-meta-info">
+                                        <span class="threat-ip">198.51.100.87</span>
+                                        <span>→ /search</span>
+                                    </div>
+                                </div>
+                                <span class="threat-time">18 min ago</span>
+                            </div>
+                            <div class="threat-entry">
+                                <div class="threat-indicator low"></div>
+                                <div class="threat-details">
+                                    <div class="threat-main">
+                                        <span class="threat-type">Failed Login</span>
+                                        <span class="threat-severity-tag medium">Low</span>
+                                    </div>
+                                    <div class="threat-meta-info">
+                                        <span class="threat-ip">192.168.2.87</span>
+                                        <span>→ /admin</span>
+                                    </div>
+                                </div>
+                                <span class="threat-time">25 min ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>

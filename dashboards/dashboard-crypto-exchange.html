@@ -1,0 +1,2539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIPHER TRADE v1.0 - Crypto Exchange Dashboard Style Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Core Palette */
+            --bitcoin-orange: #F7931A;
+            --bitcoin-glow: rgba(247, 147, 26, 0.4);
+            --ethereum-purple: #627EEA;
+            --ethereum-glow: rgba(98, 126, 234, 0.4);
+            --gain-green: #00FF88;
+            --gain-glow: rgba(0, 255, 136, 0.3);
+            --loss-red: #FF3366;
+            --loss-glow: rgba(255, 51, 102, 0.3);
+
+            /* Backgrounds */
+            --void-black: #0A0A0F;
+            --space-black: #12121A;
+            --panel-bg: #1A1A24;
+            --card-bg: #1E1E2A;
+            --elevated-bg: #252532;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-glow: rgba(98, 126, 234, 0.3);
+
+            /* Text */
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0B8;
+            --text-muted: #6B6B80;
+            --text-dim: #4A4A5A;
+
+            /* Accent Colors */
+            --neon-cyan: #00D4FF;
+            --neon-cyan-glow: rgba(0, 212, 255, 0.3);
+            --solana-gradient: linear-gradient(135deg, #9945FF, #14F195);
+
+            /* Typography */
+            --font-display: 'Orbitron', sans-serif;
+            --font-ui: 'Exo 2', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+
+            /* Borders */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-ui);
+            background: var(--void-black);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Animated Background Grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                linear-gradient(90deg, rgba(98, 126, 234, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(98, 126, 234, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Floating Particles Effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(2px 2px at 20% 30%, var(--bitcoin-orange), transparent),
+                radial-gradient(2px 2px at 80% 20%, var(--ethereum-purple), transparent),
+                radial-gradient(2px 2px at 40% 70%, var(--neon-cyan), transparent),
+                radial-gradient(2px 2px at 90% 80%, var(--gain-green), transparent),
+                radial-gradient(1px 1px at 60% 50%, rgba(255,255,255,0.3), transparent);
+            background-size: 100% 100%;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatParticles 20s linear infinite;
+        }
+
+        @keyframes floatParticles {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        .dashboard-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: var(--space-2xl);
+        }
+
+        /* Header */
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+            padding: var(--space-2xl);
+            background: linear-gradient(135deg, var(--panel-bg) 0%, var(--space-black) 100%);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--bitcoin-orange), var(--ethereum-purple), var(--neon-cyan));
+            animation: headerGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes headerGlow {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .dashboard-header h1 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            background: linear-gradient(135deg, var(--text-primary), var(--ethereum-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-sm);
+            text-shadow: 0 0 40px var(--ethereum-glow);
+        }
+
+        .dashboard-header .version {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--neon-cyan);
+            letter-spacing: 0.3em;
+        }
+
+        .dashboard-header .tagline {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-top: var(--space-md);
+            font-weight: 300;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: var(--space-3xl);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            color: var(--ethereum-purple);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--ethereum-purple);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--ethereum-glow);
+        }
+
+        /* ==================== 1. COLOR PALETTE ==================== */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .color-swatch {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .color-swatch:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glow);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .color-preview {
+            height: 100px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .color-preview.bitcoin { background: var(--bitcoin-orange); box-shadow: inset 0 0 40px var(--bitcoin-glow); }
+        .color-preview.ethereum { background: var(--ethereum-purple); box-shadow: inset 0 0 40px var(--ethereum-glow); }
+        .color-preview.gain { background: var(--gain-green); box-shadow: inset 0 0 40px var(--gain-glow); }
+        .color-preview.loss { background: var(--loss-red); box-shadow: inset 0 0 40px var(--loss-glow); }
+        .color-preview.cyan { background: var(--neon-cyan); box-shadow: inset 0 0 40px var(--neon-cyan-glow); }
+        .color-preview.void { background: var(--void-black); border-bottom: 1px solid var(--border-subtle); }
+        .color-preview.space { background: var(--space-black); }
+        .color-preview.panel { background: var(--panel-bg); }
+
+        .color-preview .icon {
+            font-size: 2rem;
+            opacity: 0.9;
+        }
+
+        .color-info {
+            padding: var(--space-md);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ==================== 2. TYPOGRAPHY ==================== */
+        .typography-showcase {
+            display: grid;
+            gap: var(--space-lg);
+        }
+
+        .type-specimen {
+            background: var(--card-bg);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--neon-cyan);
+            letter-spacing: 0.15em;
+            margin-bottom: var(--space-md);
+            text-transform: uppercase;
+        }
+
+        .display-font {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            background: linear-gradient(90deg, var(--bitcoin-orange), var(--ethereum-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .ui-font {
+            font-family: var(--font-ui);
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .mono-font {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            color: var(--gain-green);
+        }
+
+        .type-weights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+
+        .weight-sample {
+            color: var(--text-muted);
+        }
+
+        .weight-sample span {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-top: var(--space-xs);
+        }
+
+        /* ==================== 3. SPACING & GRID ==================== */
+        .spacing-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            align-items: flex-end;
+        }
+
+        .space-block {
+            background: linear-gradient(135deg, var(--ethereum-purple), var(--neon-cyan));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.8;
+        }
+
+        .space-block span {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--void-black);
+            font-weight: 600;
+        }
+
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-sm);
+            margin-top: var(--space-xl);
+        }
+
+        .grid-cell {
+            height: 40px;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* ==================== 4. METRIC CARDS ==================== */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--panel-bg) 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--ethereum-purple), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glow);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .metric-card:hover::before {
+            opacity: 1;
+        }
+
+        .metric-card.bitcoin-card { border-left: 3px solid var(--bitcoin-orange); }
+        .metric-card.ethereum-card { border-left: 3px solid var(--ethereum-purple); }
+        .metric-card.gain-card { border-left: 3px solid var(--gain-green); }
+        .metric-card.loss-card { border-left: 3px solid var(--loss-red); }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-md);
+        }
+
+        .metric-label {
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .metric-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .metric-icon.btc { background: rgba(247, 147, 26, 0.15); color: var(--bitcoin-orange); }
+        .metric-icon.eth { background: rgba(98, 126, 234, 0.15); color: var(--ethereum-purple); }
+        .metric-icon.gain { background: rgba(0, 255, 136, 0.1); color: var(--gain-green); }
+        .metric-icon.loss { background: rgba(255, 51, 102, 0.1); color: var(--loss-red); }
+
+        .metric-value {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .metric-change {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+        }
+
+        .metric-change.positive {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--gain-green);
+        }
+
+        .metric-change.negative {
+            background: rgba(255, 51, 102, 0.1);
+            color: var(--loss-red);
+        }
+
+        /* Sparkline in metric cards */
+        .metric-sparkline {
+            margin-top: var(--space-md);
+            height: 40px;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+        }
+
+        .spark-bar {
+            flex: 1;
+            background: var(--ethereum-purple);
+            border-radius: 2px 2px 0 0;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover .spark-bar {
+            opacity: 1;
+        }
+
+        /* ==================== 5. CSS-ONLY CHARTS ==================== */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .chart-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+        }
+
+        .chart-title {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .chart-title::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        /* Price Chart with Gradient */
+        .price-chart {
+            height: 150px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            padding-bottom: var(--space-lg);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .price-bar {
+            flex: 1;
+            border-radius: 3px 3px 0 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .price-bar.up {
+            background: linear-gradient(to top, rgba(0, 255, 136, 0.2), var(--gain-green));
+        }
+
+        .price-bar.down {
+            background: linear-gradient(to top, rgba(255, 51, 102, 0.2), var(--loss-red));
+        }
+
+        .price-bar:hover {
+            filter: brightness(1.2);
+            transform: scaleY(1.02);
+        }
+
+        .price-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: var(--space-sm);
+        }
+
+        .price-labels span {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+        }
+
+        /* Portfolio Pie Chart */
+        .portfolio-pie {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--bitcoin-orange) 0deg 144deg,
+                var(--ethereum-purple) 144deg 234deg,
+                var(--gain-green) 234deg 288deg,
+                var(--neon-cyan) 288deg 324deg,
+                var(--loss-red) 324deg 360deg
+            );
+            margin: 0 auto;
+            position: relative;
+            box-shadow:
+                0 0 30px var(--bitcoin-glow),
+                inset 0 0 40px rgba(0,0,0,0.5);
+        }
+
+        .portfolio-pie::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            border: 2px solid var(--border-subtle);
+        }
+
+        .portfolio-pie::after {
+            content: '100%';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        .pie-legend {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-sm);
+            margin-top: var(--space-xl);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        /* Volume Bars */
+        .volume-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            height: 120px;
+            padding: var(--space-md) 0;
+        }
+
+        .volume-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--panel-bg), var(--ethereum-purple));
+            border-radius: 3px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .volume-bar::after {
+            content: attr(data-volume);
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .volume-bar:hover {
+            background: linear-gradient(to top, var(--panel-bg), var(--neon-cyan));
+        }
+
+        .volume-bar:hover::after {
+            opacity: 1;
+        }
+
+        /* ==================== 6. DATA TABLES ==================== */
+        .data-table-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table thead {
+            background: var(--panel-bg);
+        }
+
+        .data-table th {
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            text-align: left;
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .data-table td {
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.9rem;
+            vertical-align: middle;
+        }
+
+        .data-table tbody tr {
+            transition: all 0.2s ease;
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(98, 126, 234, 0.05);
+        }
+
+        .coin-cell {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .coin-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .coin-icon.btc { background: var(--bitcoin-orange); color: var(--void-black); }
+        .coin-icon.eth { background: var(--ethereum-purple); color: white; }
+        .coin-icon.sol { background: linear-gradient(135deg, #9945FF, #14F195); color: white; }
+        .coin-icon.bnb { background: #F3BA2F; color: var(--void-black); }
+        .coin-icon.xrp { background: #23292F; color: white; }
+        .coin-icon.ada { background: #0033AD; color: white; }
+
+        .coin-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .coin-symbol {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .price-cell {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .change-cell {
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .change-cell.positive { color: var(--gain-green); }
+        .change-cell.negative { color: var(--loss-red); }
+
+        .market-cap-cell {
+            font-family: var(--font-mono);
+            color: var(--text-secondary);
+        }
+
+        .mini-chart {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            height: 24px;
+        }
+
+        .mini-chart span {
+            width: 3px;
+            background: var(--gain-green);
+            border-radius: 1px;
+        }
+
+        .mini-chart.down span {
+            background: var(--loss-red);
+        }
+
+        /* ==================== 7. SIDEBAR NAVIGATION ==================== */
+        .sidebar-demo {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        .sidebar {
+            width: 260px;
+            background: linear-gradient(180deg, var(--panel-bg) 0%, var(--space-black) 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .sidebar-logo .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--bitcoin-orange), var(--ethereum-purple));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-logo .logo-text {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-section {
+            margin-bottom: var(--space-lg);
+        }
+
+        .nav-section-title {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0 var(--space-md);
+            margin-bottom: var(--space-sm);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background: rgba(98, 126, 234, 0.1);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(98, 126, 234, 0.2), transparent);
+            color: var(--ethereum-purple);
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 20px;
+            background: var(--ethereum-purple);
+            border-radius: 0 2px 2px 0;
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .nav-badge {
+            margin-left: auto;
+            background: var(--loss-red);
+            color: white;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        /* ==================== 8. FORMS & FILTERS ==================== */
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+        }
+
+        .form-title {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-md);
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: var(--space-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input {
+            width: 100%;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--ethereum-purple);
+            box-shadow: 0 0 0 3px var(--ethereum-glow);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon .form-input {
+            padding-left: 40px;
+        }
+
+        .input-with-icon .input-icon {
+            position: absolute;
+            left: var(--space-md);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .form-select {
+            width: 100%;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            color: var(--text-primary);
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23627EEA' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+        }
+
+        /* Trade Form */
+        .trade-tabs {
+            display: flex;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-lg);
+        }
+
+        .trade-tab {
+            flex: 1;
+            padding: var(--space-sm) var(--space-md);
+            background: var(--panel-bg);
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .trade-tab.active.buy {
+            background: var(--gain-green);
+            color: var(--void-black);
+        }
+
+        .trade-tab.active.sell {
+            background: var(--loss-red);
+            color: white;
+        }
+
+        .trade-tab:hover:not(.active) {
+            background: var(--elevated-bg);
+        }
+
+        .price-input-group {
+            display: flex;
+            align-items: center;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .price-input-group input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: var(--space-md);
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+
+        .price-input-group input:focus {
+            outline: none;
+        }
+
+        .price-input-group .currency {
+            padding: var(--space-md);
+            background: var(--elevated-bg);
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+        }
+
+        /* ==================== 9. BUTTONS ==================== */
+        .buttons-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--ethereum-purple), #4A5FCC);
+            color: white;
+            box-shadow: 0 4px 15px var(--ethereum-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px var(--ethereum-glow);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--gain-green), #00CC6E);
+            color: var(--void-black);
+            box-shadow: 0 4px 15px var(--gain-glow);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--loss-red), #CC2952);
+            color: white;
+            box-shadow: 0 4px 15px var(--loss-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--ethereum-purple);
+            color: var(--ethereum-purple);
+        }
+
+        .btn-outline:hover {
+            background: var(--ethereum-purple);
+            color: white;
+        }
+
+        .btn-ghost {
+            background: rgba(98, 126, 234, 0.1);
+            color: var(--ethereum-purple);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(98, 126, 234, 0.2);
+        }
+
+        .btn-bitcoin {
+            background: linear-gradient(135deg, var(--bitcoin-orange), #CC7A15);
+            color: var(--void-black);
+            box-shadow: 0 4px 15px var(--bitcoin-glow);
+        }
+
+        .btn-sm {
+            padding: var(--space-sm) var(--space-md);
+            font-size: 0.7rem;
+        }
+
+        .btn-lg {
+            padding: var(--space-lg) var(--space-2xl);
+            font-size: 0.9rem;
+        }
+
+        /* ==================== 10. STATUS INDICATORS ==================== */
+        .status-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+        }
+
+        .status-group {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            min-width: 200px;
+        }
+
+        .status-group-title {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-md);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .status-badge.online {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--gain-green);
+        }
+
+        .status-badge.online::before {
+            background: var(--gain-green);
+            box-shadow: 0 0 8px var(--gain-green);
+        }
+
+        .status-badge.offline {
+            background: rgba(255, 51, 102, 0.1);
+            color: var(--loss-red);
+        }
+
+        .status-badge.offline::before {
+            background: var(--loss-red);
+            box-shadow: 0 0 8px var(--loss-red);
+        }
+
+        .status-badge.pending {
+            background: rgba(247, 147, 26, 0.1);
+            color: var(--bitcoin-orange);
+        }
+
+        .status-badge.pending::before {
+            background: var(--bitcoin-orange);
+            box-shadow: 0 0 8px var(--bitcoin-orange);
+            animation: statusBlink 1s ease-in-out infinite;
+        }
+
+        @keyframes statusBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .status-badge.syncing {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--neon-cyan);
+        }
+
+        .status-badge.syncing::before {
+            background: var(--neon-cyan);
+            box-shadow: 0 0 8px var(--neon-cyan);
+        }
+
+        /* Connection Status */
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--panel-bg);
+            border-radius: var(--radius-md);
+            margin-top: var(--space-md);
+        }
+
+        .connection-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(0, 255, 136, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gain-green);
+            font-size: 1.2rem;
+        }
+
+        .connection-info {
+            flex: 1;
+        }
+
+        .connection-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .connection-address {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        /* ==================== 11. WIDGET CARDS ==================== */
+        .widgets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .widget-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .widget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .widget-title {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .widget-action {
+            font-size: 0.7rem;
+            color: var(--ethereum-purple);
+            cursor: pointer;
+        }
+
+        .widget-list {
+            padding: var(--space-md);
+        }
+
+        .widget-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-sm) var(--space-sm);
+            border-radius: var(--radius-md);
+            transition: background 0.2s ease;
+        }
+
+        .widget-item:hover {
+            background: rgba(98, 126, 234, 0.05);
+        }
+
+        .widget-rank {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            width: 20px;
+        }
+
+        .widget-coin {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            flex: 1;
+        }
+
+        .widget-coin-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 0.5rem;
+            font-weight: 700;
+        }
+
+        .widget-coin-name {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+
+        .widget-change {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .widget-change.up { color: var(--gain-green); }
+        .widget-change.down { color: var(--loss-red); }
+
+        /* ==================== 12. ALERTS & NOTIFICATIONS ==================== */
+        .alerts-showcase {
+            display: grid;
+            gap: var(--space-md);
+        }
+
+        .alert {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .alert::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+        }
+
+        .alert-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-xs);
+        }
+
+        .alert-message {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .alert-time {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-top: var(--space-sm);
+        }
+
+        .alert.success {
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        .alert.success::before { background: var(--gain-green); }
+        .alert.success .alert-icon { background: rgba(0, 255, 136, 0.2); color: var(--gain-green); }
+        .alert.success .alert-title { color: var(--gain-green); }
+
+        .alert.error {
+            background: rgba(255, 51, 102, 0.05);
+        }
+
+        .alert.error::before { background: var(--loss-red); }
+        .alert.error .alert-icon { background: rgba(255, 51, 102, 0.2); color: var(--loss-red); }
+        .alert.error .alert-title { color: var(--loss-red); }
+
+        .alert.warning {
+            background: rgba(247, 147, 26, 0.05);
+        }
+
+        .alert.warning::before { background: var(--bitcoin-orange); }
+        .alert.warning .alert-icon { background: rgba(247, 147, 26, 0.2); color: var(--bitcoin-orange); }
+        .alert.warning .alert-title { color: var(--bitcoin-orange); }
+
+        .alert.info {
+            background: rgba(98, 126, 234, 0.05);
+        }
+
+        .alert.info::before { background: var(--ethereum-purple); }
+        .alert.info .alert-icon { background: rgba(98, 126, 234, 0.2); color: var(--ethereum-purple); }
+        .alert.info .alert-title { color: var(--ethereum-purple); }
+
+        /* ==================== 13. SPECIAL: LIVE ORDER BOOK ==================== */
+        .order-book {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .order-book-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .order-book-title {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .order-book-title::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--gain-green);
+            border-radius: 50%;
+            animation: liveIndicator 1.5s ease-in-out infinite;
+        }
+
+        @keyframes liveIndicator {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--gain-glow); }
+            50% { opacity: 0.7; box-shadow: 0 0 0 6px transparent; }
+        }
+
+        .order-book-pair {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .order-book-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .order-column {
+            padding: var(--space-md);
+        }
+
+        .order-column.bids {
+            border-right: 1px solid var(--border-subtle);
+        }
+
+        .order-column-header {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-sm) var(--space-md);
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-xs) var(--space-md);
+            position: relative;
+            transition: all 0.3s ease;
+            animation: orderSlide 0.5s ease-out;
+        }
+
+        @keyframes orderSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .order-row::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            opacity: 0.15;
+            transition: width 0.3s ease;
+        }
+
+        .order-row.bid::before {
+            background: var(--gain-green);
+        }
+
+        .order-row.ask::before {
+            background: var(--loss-red);
+            left: 0;
+            right: auto;
+        }
+
+        .order-row:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .order-price {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .order-row.bid .order-price { color: var(--gain-green); }
+        .order-row.ask .order-price { color: var(--loss-red); }
+
+        .order-amount {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .order-total {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .spread-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-lg);
+            padding: var(--space-md);
+            background: var(--panel-bg);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .spread-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+        }
+
+        .spread-value {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--neon-cyan);
+        }
+
+        .current-price {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        /* Depth Visualization */
+        .depth-viz {
+            padding: var(--space-lg);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .depth-chart {
+            height: 80px;
+            display: flex;
+            align-items: flex-end;
+            position: relative;
+        }
+
+        .depth-side {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .depth-side.bids {
+            justify-content: flex-end;
+        }
+
+        .depth-side.asks {
+            justify-content: flex-start;
+        }
+
+        .depth-bar {
+            width: 8px;
+            margin: 0 1px;
+            border-radius: 2px 2px 0 0;
+            transition: height 0.3s ease;
+        }
+
+        .depth-side.bids .depth-bar {
+            background: linear-gradient(to top, transparent, var(--gain-green));
+        }
+
+        .depth-side.asks .depth-bar {
+            background: linear-gradient(to top, transparent, var(--loss-red));
+        }
+
+        .depth-center {
+            width: 2px;
+            height: 100%;
+            background: var(--border-subtle);
+            position: relative;
+        }
+
+        .depth-center::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        /* Footer */
+        .dashboard-footer {
+            text-align: center;
+            padding: var(--space-2xl) var(--space-lg);
+            margin-top: var(--space-3xl);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-text {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: var(--space-lg);
+            }
+
+            .dashboard-header h1 {
+                font-size: 1.8rem;
+                letter-spacing: 0.1em;
+            }
+
+            .metrics-grid,
+            .charts-grid,
+            .widgets-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-demo {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .order-book-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .order-column.bids {
+                border-right: none;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <h1>CIPHER TRADE</h1>
+            <div class="version">v1.0 MAINNET</div>
+            <p class="tagline">Next-Generation Cryptocurrency Exchange Dashboard</p>
+        </header>
+
+        <!-- 1. Color Palette -->
+        <section class="section">
+            <h2 class="section-title">COLOR PALETTE</h2>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-preview bitcoin"><span class="icon">₿</span></div>
+                    <div class="color-info">
+                        <div class="color-name">BITCOIN ORANGE</div>
+                        <div class="color-hex">#F7931A</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview ethereum"><span class="icon">Ξ</span></div>
+                    <div class="color-info">
+                        <div class="color-name">ETHEREUM PURPLE</div>
+                        <div class="color-hex">#627EEA</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview gain"><span class="icon">↗</span></div>
+                    <div class="color-info">
+                        <div class="color-name">GAIN GREEN</div>
+                        <div class="color-hex">#00FF88</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview loss"><span class="icon">↘</span></div>
+                    <div class="color-info">
+                        <div class="color-name">LOSS RED</div>
+                        <div class="color-hex">#FF3366</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview cyan"><span class="icon">◈</span></div>
+                    <div class="color-info">
+                        <div class="color-name">NEON CYAN</div>
+                        <div class="color-hex">#00D4FF</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview void"></div>
+                    <div class="color-info">
+                        <div class="color-name">VOID BLACK</div>
+                        <div class="color-hex">#0A0A0F</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview space"></div>
+                    <div class="color-info">
+                        <div class="color-name">SPACE BLACK</div>
+                        <div class="color-hex">#12121A</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview panel"></div>
+                    <div class="color-info">
+                        <div class="color-name">PANEL BG</div>
+                        <div class="color-hex">#1A1A24</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Typography -->
+        <section class="section">
+            <h2 class="section-title">TYPOGRAPHY</h2>
+            <div class="typography-showcase">
+                <div class="type-specimen">
+                    <div class="type-label">Display / Orbitron</div>
+                    <div class="display-font">CIPHER TRADE EXCHANGE</div>
+                    <div class="type-weights">
+                        <div class="weight-sample">Regular<br><span style="font-family: var(--font-display); font-weight: 400;">Aa Bb Cc</span></div>
+                        <div class="weight-sample">Medium<br><span style="font-family: var(--font-display); font-weight: 500;">Aa Bb Cc</span></div>
+                        <div class="weight-sample">Bold<br><span style="font-family: var(--font-display); font-weight: 700;">Aa Bb Cc</span></div>
+                        <div class="weight-sample">Black<br><span style="font-family: var(--font-display); font-weight: 900;">Aa Bb Cc</span></div>
+                    </div>
+                </div>
+                <div class="type-specimen">
+                    <div class="type-label">UI Text / Exo 2</div>
+                    <div class="ui-font">Trade cryptocurrencies with confidence using our advanced platform with real-time market data and instant execution.</div>
+                </div>
+                <div class="type-specimen">
+                    <div class="type-label">Monospace / JetBrains Mono</div>
+                    <div class="mono-font">$67,432.89 | +2.47% | VOL: 24.5B</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Spacing & Grid -->
+        <section class="section">
+            <h2 class="section-title">SPACING & GRID</h2>
+            <div class="spacing-demo">
+                <div class="space-block" style="width: 4px; height: 4px;"><span></span></div>
+                <div class="space-block" style="width: 8px; height: 8px;"><span></span></div>
+                <div class="space-block" style="width: 16px; height: 16px;"><span></span></div>
+                <div class="space-block" style="width: 24px; height: 24px;"><span></span></div>
+                <div class="space-block" style="width: 32px; height: 32px;"><span>32</span></div>
+                <div class="space-block" style="width: 48px; height: 48px;"><span>48</span></div>
+                <div class="space-block" style="width: 64px; height: 64px;"><span>64</span></div>
+            </div>
+            <div class="grid-demo">
+                <div class="grid-cell">1</div>
+                <div class="grid-cell">2</div>
+                <div class="grid-cell">3</div>
+                <div class="grid-cell">4</div>
+                <div class="grid-cell">5</div>
+                <div class="grid-cell">6</div>
+                <div class="grid-cell">7</div>
+                <div class="grid-cell">8</div>
+                <div class="grid-cell">9</div>
+                <div class="grid-cell">10</div>
+                <div class="grid-cell">11</div>
+                <div class="grid-cell">12</div>
+            </div>
+        </section>
+
+        <!-- 4. Metric Cards -->
+        <section class="section">
+            <h2 class="section-title">METRIC CARDS</h2>
+            <div class="metrics-grid">
+                <div class="metric-card bitcoin-card">
+                    <div class="metric-header">
+                        <span class="metric-label">Portfolio Value</span>
+                        <div class="metric-icon btc">₿</div>
+                    </div>
+                    <div class="metric-value">$247,892.45</div>
+                    <span class="metric-change positive">↗ +12.4% (24h)</span>
+                    <div class="metric-sparkline">
+                        <div class="spark-bar" style="height: 40%"></div>
+                        <div class="spark-bar" style="height: 55%"></div>
+                        <div class="spark-bar" style="height: 45%"></div>
+                        <div class="spark-bar" style="height: 70%"></div>
+                        <div class="spark-bar" style="height: 65%"></div>
+                        <div class="spark-bar" style="height: 80%"></div>
+                        <div class="spark-bar" style="height: 75%"></div>
+                        <div class="spark-bar" style="height: 90%"></div>
+                        <div class="spark-bar" style="height: 85%"></div>
+                        <div class="spark-bar" style="height: 100%"></div>
+                    </div>
+                </div>
+                <div class="metric-card gain-card">
+                    <div class="metric-header">
+                        <span class="metric-label">24H Change</span>
+                        <div class="metric-icon gain">↗</div>
+                    </div>
+                    <div class="metric-value">+$28,456.12</div>
+                    <span class="metric-change positive">↗ Best day this month</span>
+                </div>
+                <div class="metric-card ethereum-card">
+                    <div class="metric-header">
+                        <span class="metric-label">BTC Price</span>
+                        <div class="metric-icon btc">₿</div>
+                    </div>
+                    <div class="metric-value">$67,432.89</div>
+                    <span class="metric-change positive">↗ +2.47%</span>
+                </div>
+                <div class="metric-card ethereum-card">
+                    <div class="metric-header">
+                        <span class="metric-label">ETH Price</span>
+                        <div class="metric-icon eth">Ξ</div>
+                    </div>
+                    <div class="metric-value">$3,892.14</div>
+                    <span class="metric-change negative">↘ -0.82%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CSS-Only Charts -->
+        <section class="section">
+            <h2 class="section-title">CSS-ONLY CHARTS</h2>
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">PRICE HISTORY (7D)</div>
+                    <div class="price-chart">
+                        <div class="price-bar up" style="height: 65%"></div>
+                        <div class="price-bar up" style="height: 72%"></div>
+                        <div class="price-bar down" style="height: 58%"></div>
+                        <div class="price-bar up" style="height: 68%"></div>
+                        <div class="price-bar down" style="height: 52%"></div>
+                        <div class="price-bar down" style="height: 48%"></div>
+                        <div class="price-bar up" style="height: 62%"></div>
+                        <div class="price-bar up" style="height: 78%"></div>
+                        <div class="price-bar up" style="height: 85%"></div>
+                        <div class="price-bar down" style="height: 72%"></div>
+                        <div class="price-bar up" style="height: 80%"></div>
+                        <div class="price-bar up" style="height: 92%"></div>
+                        <div class="price-bar up" style="height: 88%"></div>
+                        <div class="price-bar up" style="height: 95%"></div>
+                    </div>
+                    <div class="price-labels">
+                        <span>Mon</span>
+                        <span>Tue</span>
+                        <span>Wed</span>
+                        <span>Thu</span>
+                        <span>Fri</span>
+                        <span>Sat</span>
+                        <span>Sun</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">PORTFOLIO ALLOCATION</div>
+                    <div class="portfolio-pie"></div>
+                    <div class="pie-legend">
+                        <div class="legend-item"><span class="legend-dot" style="background: var(--bitcoin-orange);"></span>BTC 40%</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: var(--ethereum-purple);"></span>ETH 25%</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: var(--gain-green);"></span>SOL 15%</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: var(--neon-cyan);"></span>BNB 10%</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: var(--loss-red);"></span>Other 10%</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">TRADING VOLUME (24H)</div>
+                    <div class="volume-chart">
+                        <div class="volume-bar" style="height: 45%" data-volume="1.2B"></div>
+                        <div class="volume-bar" style="height: 62%" data-volume="1.8B"></div>
+                        <div class="volume-bar" style="height: 38%" data-volume="0.9B"></div>
+                        <div class="volume-bar" style="height: 85%" data-volume="2.4B"></div>
+                        <div class="volume-bar" style="height: 72%" data-volume="2.1B"></div>
+                        <div class="volume-bar" style="height: 55%" data-volume="1.5B"></div>
+                        <div class="volume-bar" style="height: 90%" data-volume="2.6B"></div>
+                        <div class="volume-bar" style="height: 78%" data-volume="2.2B"></div>
+                        <div class="volume-bar" style="height: 65%" data-volume="1.9B"></div>
+                        <div class="volume-bar" style="height: 95%" data-volume="2.8B"></div>
+                        <div class="volume-bar" style="height: 82%" data-volume="2.3B"></div>
+                        <div class="volume-bar" style="height: 100%" data-volume="3.1B"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Data Tables -->
+        <section class="section">
+            <h2 class="section-title">DATA TABLES</h2>
+            <div class="data-table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Asset</th>
+                            <th>Price</th>
+                            <th>24H Change</th>
+                            <th>Market Cap</th>
+                            <th>7D Chart</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="coin-cell">
+                                    <div class="coin-icon btc">₿</div>
+                                    <div>
+                                        <div class="coin-name">Bitcoin</div>
+                                        <div class="coin-symbol">BTC</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="price-cell">$67,432.89</td>
+                            <td class="change-cell positive">+2.47%</td>
+                            <td class="market-cap-cell">$1.32T</td>
+                            <td>
+                                <div class="mini-chart">
+                                    <span style="height: 12px"></span>
+                                    <span style="height: 16px"></span>
+                                    <span style="height: 14px"></span>
+                                    <span style="height: 20px"></span>
+                                    <span style="height: 18px"></span>
+                                    <span style="height: 22px"></span>
+                                    <span style="height: 24px"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="coin-cell">
+                                    <div class="coin-icon eth">Ξ</div>
+                                    <div>
+                                        <div class="coin-name">Ethereum</div>
+                                        <div class="coin-symbol">ETH</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="price-cell">$3,892.14</td>
+                            <td class="change-cell negative">-0.82%</td>
+                            <td class="market-cap-cell">$468.2B</td>
+                            <td>
+                                <div class="mini-chart down">
+                                    <span style="height: 20px"></span>
+                                    <span style="height: 18px"></span>
+                                    <span style="height: 22px"></span>
+                                    <span style="height: 16px"></span>
+                                    <span style="height: 14px"></span>
+                                    <span style="height: 12px"></span>
+                                    <span style="height: 10px"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="coin-cell">
+                                    <div class="coin-icon sol">◎</div>
+                                    <div>
+                                        <div class="coin-name">Solana</div>
+                                        <div class="coin-symbol">SOL</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="price-cell">$178.92</td>
+                            <td class="change-cell positive">+5.23%</td>
+                            <td class="market-cap-cell">$82.4B</td>
+                            <td>
+                                <div class="mini-chart">
+                                    <span style="height: 8px"></span>
+                                    <span style="height: 12px"></span>
+                                    <span style="height: 16px"></span>
+                                    <span style="height: 14px"></span>
+                                    <span style="height: 20px"></span>
+                                    <span style="height: 24px"></span>
+                                    <span style="height: 22px"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="coin-cell">
+                                    <div class="coin-icon bnb">B</div>
+                                    <div>
+                                        <div class="coin-name">BNB</div>
+                                        <div class="coin-symbol">BNB</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="price-cell">$612.45</td>
+                            <td class="change-cell positive">+1.12%</td>
+                            <td class="market-cap-cell">$91.8B</td>
+                            <td>
+                                <div class="mini-chart">
+                                    <span style="height: 14px"></span>
+                                    <span style="height: 16px"></span>
+                                    <span style="height: 14px"></span>
+                                    <span style="height: 18px"></span>
+                                    <span style="height: 16px"></span>
+                                    <span style="height: 20px"></span>
+                                    <span style="height: 18px"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="coin-cell">
+                                    <div class="coin-icon xrp">X</div>
+                                    <div>
+                                        <div class="coin-name">XRP</div>
+                                        <div class="coin-symbol">XRP</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="price-cell">$0.6234</td>
+                            <td class="change-cell negative">-1.45%</td>
+                            <td class="market-cap-cell">$34.2B</td>
+                            <td>
+                                <div class="mini-chart down">
+                                    <span style="height: 18px"></span>
+                                    <span style="height: 16px"></span>
+                                    <span style="height: 14px"></span>
+                                    <span style="height: 16px"></span>
+                                    <span style="height: 12px"></span>
+                                    <span style="height: 10px"></span>
+                                    <span style="height: 8px"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="coin-cell">
+                                    <div class="coin-icon ada">A</div>
+                                    <div>
+                                        <div class="coin-name">Cardano</div>
+                                        <div class="coin-symbol">ADA</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="price-cell">$0.4512</td>
+                            <td class="change-cell positive">+3.67%</td>
+                            <td class="market-cap-cell">$15.9B</td>
+                            <td>
+                                <div class="mini-chart">
+                                    <span style="height: 10px"></span>
+                                    <span style="height: 14px"></span>
+                                    <span style="height: 12px"></span>
+                                    <span style="height: 18px"></span>
+                                    <span style="height: 20px"></span>
+                                    <span style="height: 22px"></span>
+                                    <span style="height: 24px"></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 7. Sidebar Navigation -->
+        <section class="section">
+            <h2 class="section-title">SIDEBAR NAVIGATION</h2>
+            <div class="sidebar-demo">
+                <div class="sidebar">
+                    <div class="sidebar-logo">
+                        <div class="logo-icon">CT</div>
+                        <div class="logo-text">CIPHER</div>
+                    </div>
+                    <div class="nav-section">
+                        <div class="nav-section-title">Main</div>
+                        <div class="nav-item active">
+                            <span class="nav-icon">◈</span>
+                            Dashboard
+                        </div>
+                        <div class="nav-item">
+                            <span class="nav-icon">◊</span>
+                            Markets
+                            <span class="nav-badge">NEW</span>
+                        </div>
+                        <div class="nav-item">
+                            <span class="nav-icon">◉</span>
+                            Wallet
+                        </div>
+                        <div class="nav-item">
+                            <span class="nav-icon">◇</span>
+                            History
+                        </div>
+                    </div>
+                    <div class="nav-section">
+                        <div class="nav-section-title">Settings</div>
+                        <div class="nav-item">
+                            <span class="nav-icon">⚙</span>
+                            Settings
+                        </div>
+                        <div class="nav-item">
+                            <span class="nav-icon">?</span>
+                            Help
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Forms & Filters -->
+        <section class="section">
+            <h2 class="section-title">FORMS & FILTERS</h2>
+            <div class="forms-grid">
+                <div class="form-card">
+                    <div class="form-title">Search & Filter</div>
+                    <div class="form-group">
+                        <label class="form-label">Search Coin</label>
+                        <div class="input-with-icon">
+                            <span class="input-icon">🔍</span>
+                            <input type="text" class="form-input" placeholder="BTC, ETH, SOL...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Market Type</label>
+                        <select class="form-select">
+                            <option>All Markets</option>
+                            <option>Spot</option>
+                            <option>Futures</option>
+                            <option>Margin</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Price Alert</label>
+                        <div class="price-input-group">
+                            <input type="number" placeholder="70000">
+                            <span class="currency">USD</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-card">
+                    <div class="form-title">Trade BTC/USDT</div>
+                    <div class="trade-tabs">
+                        <button class="trade-tab active buy">BUY</button>
+                        <button class="trade-tab sell">SELL</button>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Price</label>
+                        <div class="price-input-group">
+                            <input type="number" placeholder="67,432.89">
+                            <span class="currency">USDT</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Amount</label>
+                        <div class="price-input-group">
+                            <input type="number" placeholder="0.00">
+                            <span class="currency">BTC</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Total</label>
+                        <div class="price-input-group">
+                            <input type="number" placeholder="0.00" disabled>
+                            <span class="currency">USDT</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" style="width: 100%; margin-top: var(--space-md);">BUY BTC</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Buttons -->
+        <section class="section">
+            <h2 class="section-title">BUTTONS</h2>
+            <div class="buttons-showcase">
+                <button class="btn btn-primary">Primary</button>
+                <button class="btn btn-success">Buy / Long</button>
+                <button class="btn btn-danger">Sell / Short</button>
+                <button class="btn btn-bitcoin">Connect Wallet</button>
+                <button class="btn btn-outline">Outline</button>
+                <button class="btn btn-ghost">Ghost</button>
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary btn-lg">Large Button</button>
+            </div>
+        </section>
+
+        <!-- 10. Status Indicators -->
+        <section class="section">
+            <h2 class="section-title">STATUS INDICATORS</h2>
+            <div class="status-grid">
+                <div class="status-group">
+                    <div class="status-group-title">Market Status</div>
+                    <span class="status-badge online">Market Open</span>
+                </div>
+                <div class="status-group">
+                    <div class="status-group-title">Connection</div>
+                    <span class="status-badge syncing">Syncing...</span>
+                </div>
+                <div class="status-group">
+                    <div class="status-group-title">Transaction</div>
+                    <span class="status-badge pending">Pending</span>
+                </div>
+                <div class="status-group">
+                    <div class="status-group-title">System</div>
+                    <span class="status-badge offline">Maintenance</span>
+                </div>
+            </div>
+            <div class="connection-status">
+                <div class="connection-icon">🔗</div>
+                <div class="connection-info">
+                    <div class="connection-label">Wallet Connected</div>
+                    <div class="connection-address">0x7a16...4E2f</div>
+                </div>
+                <span class="status-badge online">Active</span>
+            </div>
+        </section>
+
+        <!-- 11. Widget Cards -->
+        <section class="section">
+            <h2 class="section-title">WIDGET CARDS</h2>
+            <div class="widgets-grid">
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <span class="widget-title">TOP GAINERS</span>
+                        <span class="widget-action">View All →</span>
+                    </div>
+                    <div class="widget-list">
+                        <div class="widget-item">
+                            <span class="widget-rank">1</span>
+                            <div class="widget-coin">
+                                <div class="widget-coin-icon" style="background: linear-gradient(135deg, #9945FF, #14F195);">◎</div>
+                                <span class="widget-coin-name">SOL</span>
+                            </div>
+                            <span class="widget-change up">+12.4%</span>
+                        </div>
+                        <div class="widget-item">
+                            <span class="widget-rank">2</span>
+                            <div class="widget-coin">
+                                <div class="widget-coin-icon" style="background: #E84142;">A</div>
+                                <span class="widget-coin-name">AVAX</span>
+                            </div>
+                            <span class="widget-change up">+8.7%</span>
+                        </div>
+                        <div class="widget-item">
+                            <span class="widget-rank">3</span>
+                            <div class="widget-coin">
+                                <div class="widget-coin-icon" style="background: #2775CA;">L</div>
+                                <span class="widget-coin-name">LINK</span>
+                            </div>
+                            <span class="widget-change up">+6.2%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <span class="widget-title">TOP LOSERS</span>
+                        <span class="widget-action">View All →</span>
+                    </div>
+                    <div class="widget-list">
+                        <div class="widget-item">
+                            <span class="widget-rank">1</span>
+                            <div class="widget-coin">
+                                <div class="widget-coin-icon" style="background: #26A17B;">T</div>
+                                <span class="widget-coin-name">TRX</span>
+                            </div>
+                            <span class="widget-change down">-5.8%</span>
+                        </div>
+                        <div class="widget-item">
+                            <span class="widget-rank">2</span>
+                            <div class="widget-coin">
+                                <div class="widget-coin-icon" style="background: #F0B90B;">D</div>
+                                <span class="widget-coin-name">DOGE</span>
+                            </div>
+                            <span class="widget-change down">-4.2%</span>
+                        </div>
+                        <div class="widget-item">
+                            <span class="widget-rank">3</span>
+                            <div class="widget-coin">
+                                <div class="widget-coin-icon" style="background: #8DC351;">L</div>
+                                <span class="widget-coin-name">LTC</span>
+                            </div>
+                            <span class="widget-change down">-3.1%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <span class="widget-title">TRENDING</span>
+                        <span class="widget-action">View All →</span>
+                    </div>
+                    <div class="widget-list">
+                        <div class="widget-item">
+                            <span class="widget-rank">🔥</span>
+                            <div class="widget-coin">
+                                <div class="widget-coin-icon" style="background: var(--bitcoin-orange);">₿</div>
+                                <span class="widget-coin-name">BTC</span>
+                            </div>
+                            <span class="widget-change up">+2.4%</span>
+                        </div>
+                        <div class="widget-item">
+                            <span class="widget-rank">🔥</span>
+                            <div class="widget-coin">
+                                <div class="widget-coin-icon" style="background: #00EF8B;">S</div>
+                                <span class="widget-coin-name">SUI</span>
+                            </div>
+                            <span class="widget-change up">+18.2%</span>
+                        </div>
+                        <div class="widget-item">
+                            <span class="widget-rank">🔥</span>
+                            <div class="widget-coin">
+                                <div class="widget-coin-icon" style="background: #0052FF;">B</div>
+                                <span class="widget-coin-name">BASE</span>
+                            </div>
+                            <span class="widget-change up">+9.4%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Alerts & Notifications -->
+        <section class="section">
+            <h2 class="section-title">ALERTS & NOTIFICATIONS</h2>
+            <div class="alerts-showcase">
+                <div class="alert success">
+                    <div class="alert-icon">✓</div>
+                    <div class="alert-content">
+                        <div class="alert-title">TRADE EXECUTED</div>
+                        <div class="alert-message">Successfully bought 0.5 BTC at $67,432.89</div>
+                        <div class="alert-time">2 minutes ago</div>
+                    </div>
+                </div>
+                <div class="alert error">
+                    <div class="alert-icon">✕</div>
+                    <div class="alert-content">
+                        <div class="alert-title">ORDER FAILED</div>
+                        <div class="alert-message">Insufficient balance. Please deposit funds to continue.</div>
+                        <div class="alert-time">5 minutes ago</div>
+                    </div>
+                </div>
+                <div class="alert warning">
+                    <div class="alert-icon">!</div>
+                    <div class="alert-content">
+                        <div class="alert-title">PRICE ALERT</div>
+                        <div class="alert-message">BTC has reached your target price of $67,000</div>
+                        <div class="alert-time">12 minutes ago</div>
+                    </div>
+                </div>
+                <div class="alert info">
+                    <div class="alert-icon">i</div>
+                    <div class="alert-content">
+                        <div class="alert-title">SYSTEM UPDATE</div>
+                        <div class="alert-message">New trading pairs added: SOL/EUR, AVAX/GBP</div>
+                        <div class="alert-time">1 hour ago</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13. Special Component: Live Order Book -->
+        <section class="section">
+            <h2 class="section-title">SPECIAL: LIVE ORDER BOOK</h2>
+            <div class="order-book">
+                <div class="order-book-header">
+                    <div class="order-book-title">ORDER BOOK</div>
+                    <div class="order-book-pair">BTC/USDT</div>
+                </div>
+                <div class="order-book-grid">
+                    <div class="order-column bids">
+                        <div class="order-column-header">
+                            <span>Price (USDT)</span>
+                            <span>Amount (BTC)</span>
+                        </div>
+                        <div class="order-row bid" style="animation-delay: 0.1s"><div class="order-price">67,428.50</div><div class="order-amount">2.4521</div></div>
+                        <div class="order-row bid" style="animation-delay: 0.15s; --depth: 85%;"><div class="order-price">67,425.00</div><div class="order-amount">1.8934</div></div>
+                        <div class="order-row bid" style="animation-delay: 0.2s; --depth: 70%;"><div class="order-price">67,420.25</div><div class="order-amount">3.2156</div></div>
+                        <div class="order-row bid" style="animation-delay: 0.25s; --depth: 60%;"><div class="order-price">67,418.00</div><div class="order-amount">0.9823</div></div>
+                        <div class="order-row bid" style="animation-delay: 0.3s; --depth: 45%;"><div class="order-price">67,415.75</div><div class="order-amount">4.1267</div></div>
+                        <div class="order-row bid" style="animation-delay: 0.35s; --depth: 30%;"><div class="order-price">67,410.00</div><div class="order-amount">1.5489</div></div>
+                    </div>
+                    <div class="order-column asks">
+                        <div class="order-column-header">
+                            <span>Price (USDT)</span>
+                            <span>Amount (BTC)</span>
+                        </div>
+                        <div class="order-row ask" style="animation-delay: 0.1s"><div class="order-price">67,435.25</div><div class="order-amount">1.7823</div></div>
+                        <div class="order-row ask" style="animation-delay: 0.15s"><div class="order-price">67,438.50</div><div class="order-amount">2.3456</div></div>
+                        <div class="order-row ask" style="animation-delay: 0.2s"><div class="order-price">67,442.00</div><div class="order-amount">0.8912</div></div>
+                        <div class="order-row ask" style="animation-delay: 0.25s"><div class="order-price">67,445.75</div><div class="order-amount">3.6789</div></div>
+                        <div class="order-row ask" style="animation-delay: 0.3s"><div class="order-price">67,450.00</div><div class="order-amount">1.2345</div></div>
+                        <div class="order-row ask" style="animation-delay: 0.35s"><div class="order-price">67,455.25</div><div class="order-amount">2.8901</div></div>
+                    </div>
+                </div>
+                <div class="spread-indicator">
+                    <div class="spread-label">SPREAD</div>
+                    <div class="spread-value">$6.75 (0.01%)</div>
+                    <div class="current-price">$67,432.89</div>
+                </div>
+                <div class="depth-viz">
+                    <div class="chart-title">MARKET DEPTH</div>
+                    <div class="depth-chart">
+                        <div class="depth-side bids">
+                            <div class="depth-bar" style="height: 30%"></div>
+                            <div class="depth-bar" style="height: 45%"></div>
+                            <div class="depth-bar" style="height: 55%"></div>
+                            <div class="depth-bar" style="height: 70%"></div>
+                            <div class="depth-bar" style="height: 85%"></div>
+                            <div class="depth-bar" style="height: 95%"></div>
+                        </div>
+                        <div class="depth-center"></div>
+                        <div class="depth-side asks">
+                            <div class="depth-bar" style="height: 90%"></div>
+                            <div class="depth-bar" style="height: 75%"></div>
+                            <div class="depth-bar" style="height: 60%"></div>
+                            <div class="depth-bar" style="height: 50%"></div>
+                            <div class="depth-bar" style="height: 35%"></div>
+                            <div class="depth-bar" style="height: 25%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <div class="footer-logo">CIPHER TRADE v1.0</div>
+            <p class="footer-text">Cryptocurrency Exchange Dashboard Style Guide</p>
+        </footer>
+    </div>
+</body>
+</html>

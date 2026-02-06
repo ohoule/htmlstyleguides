@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS IOT v1.0 - IoT Sensor Dashboard Style Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Core Palette */
+            --active-green: #22C55E;
+            --active-glow: rgba(34, 197, 94, 0.3);
+            --warning-orange: #F97316;
+            --warning-glow: rgba(249, 115, 22, 0.3);
+            --critical-red: #DC2626;
+            --critical-glow: rgba(220, 38, 38, 0.3);
+            --data-blue: #3B82F6;
+            --data-glow: rgba(59, 130, 246, 0.3);
+            --offline-gray: #6B7280;
+
+            /* Backgrounds */
+            --bg-dark: #0F172A;
+            --bg-card: #1E293B;
+            --bg-elevated: #334155;
+            --bg-input: #0F172A;
+            --border-subtle: rgba(148, 163, 184, 0.1);
+            --border-active: rgba(59, 130, 246, 0.4);
+
+            /* Text */
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --text-dim: #475569;
+
+            /* Typography */
+            --font-display: 'Chakra Petch', sans-serif;
+            --font-ui: 'Inter', sans-serif;
+            --font-mono: 'Source Code Pro', monospace;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+
+            /* Borders */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-ui);
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Grid Pattern Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .dashboard-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: var(--space-2xl);
+        }
+
+        /* Header */
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+            padding: var(--space-2xl);
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-dark) 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--active-green), var(--data-blue), var(--warning-orange));
+        }
+
+        .dashboard-header h1 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            background: linear-gradient(135deg, var(--data-blue), var(--active-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-sm);
+        }
+
+        .dashboard-header .version {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--data-blue);
+            letter-spacing: 0.2em;
+        }
+
+        .dashboard-header .tagline {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: var(--space-md);
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: var(--space-3xl);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            color: var(--data-blue);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .section-title::before {
+            content: '◆';
+            font-size: 0.8rem;
+        }
+
+        /* ==================== 1. COLOR PALETTE ==================== */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .color-swatch {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .color-swatch:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .color-preview {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .color-preview.active { background: var(--active-green); }
+        .color-preview.warning { background: var(--warning-orange); }
+        .color-preview.critical { background: var(--critical-red); }
+        .color-preview.data { background: var(--data-blue); }
+        .color-preview.offline { background: var(--offline-gray); }
+        .color-preview.slate { background: var(--bg-dark); border-bottom: 1px solid var(--border-subtle); }
+
+        .color-info {
+            padding: var(--space-md);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--text-primary);
+        }
+
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ==================== 2. TYPOGRAPHY ==================== */
+        .typography-showcase {
+            display: grid;
+            gap: var(--space-lg);
+        }
+
+        .type-specimen {
+            background: var(--bg-card);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--data-blue);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-md);
+        }
+
+        .display-font {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+        }
+
+        .ui-font {
+            font-family: var(--font-ui);
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .mono-font {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--active-green);
+        }
+
+        /* ==================== 3. SPACING & GRID ==================== */
+        .spacing-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            align-items: flex-end;
+        }
+
+        .space-block {
+            background: linear-gradient(135deg, var(--data-blue), var(--active-green));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .space-block span {
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-sm);
+            margin-top: var(--space-xl);
+        }
+
+        .grid-cell {
+            height: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-active);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* ==================== 4. METRIC CARDS ==================== */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            border-color: var(--border-active);
+            box-shadow: 0 0 20px var(--data-glow);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .metric-card.sensors::before { background: var(--active-green); }
+        .metric-card.data::before { background: var(--data-blue); }
+        .metric-card.latency::before { background: var(--warning-orange); }
+        .metric-card.alerts::before { background: var(--critical-red); }
+
+        .metric-icon {
+            font-size: 1.5rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .metric-label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .metric-value {
+            font-family: var(--font-mono);
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .metric-unit {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-left: var(--space-xs);
+        }
+
+        .metric-status {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            margin-top: var(--space-md);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+        }
+
+        .metric-status.good {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--active-green);
+        }
+
+        .metric-status.warning {
+            background: rgba(249, 115, 22, 0.15);
+            color: var(--warning-orange);
+        }
+
+        /* ==================== 5. CSS-ONLY CHARTS ==================== */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+        }
+
+        .chart-title {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Sensor Readings Chart */
+        .sensor-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 120px;
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .sensor-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--bg-elevated), var(--data-blue));
+            border-radius: 2px 2px 0 0;
+            transition: all 0.3s ease;
+        }
+
+        .sensor-bar:hover {
+            background: linear-gradient(to top, var(--bg-elevated), var(--active-green));
+        }
+
+        /* Device Distribution Donut */
+        .device-donut {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--active-green) 0deg 144deg,
+                var(--data-blue) 144deg 234deg,
+                var(--warning-orange) 234deg 288deg,
+                var(--offline-gray) 288deg 360deg
+            );
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .device-donut::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: var(--bg-card);
+            border-radius: 50%;
+        }
+
+        .device-donut::after {
+            content: '247';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .donut-legend {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-sm);
+            margin-top: var(--space-lg);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        /* Latency Histogram */
+        .latency-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            height: 100px;
+        }
+
+        .latency-bar {
+            flex: 1;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .latency-bar.good { background: var(--active-green); }
+        .latency-bar.moderate { background: var(--data-blue); }
+        .latency-bar.high { background: var(--warning-orange); }
+        .latency-bar.critical { background: var(--critical-red); }
+
+        /* ==================== 6. DATA TABLES ==================== */
+        .data-table-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table thead {
+            background: var(--bg-elevated);
+        }
+
+        .data-table th {
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            text-align: left;
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .data-table td {
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.85rem;
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .sensor-id {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--data-blue);
+        }
+
+        .sensor-type {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .type-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .type-icon.temp { background: rgba(249, 115, 22, 0.2); }
+        .type-icon.humidity { background: rgba(59, 130, 246, 0.2); }
+        .type-icon.pressure { background: rgba(147, 51, 234, 0.2); }
+        .type-icon.motion { background: rgba(34, 197, 94, 0.2); }
+
+        .reading-cell {
+            font-family: var(--font-mono);
+            color: var(--text-primary);
+        }
+
+        .battery-cell {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .battery-bar {
+            width: 40px;
+            height: 12px;
+            background: var(--bg-elevated);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .battery-fill {
+            height: 100%;
+            border-radius: 2px;
+        }
+
+        .battery-fill.high { background: var(--active-green); }
+        .battery-fill.medium { background: var(--warning-orange); }
+        .battery-fill.low { background: var(--critical-red); }
+
+        .battery-text {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .status-dot.online { background: var(--active-green); box-shadow: 0 0 8px var(--active-glow); }
+        .status-dot.offline { background: var(--offline-gray); }
+        .status-dot.error { background: var(--critical-red); box-shadow: 0 0 8px var(--critical-glow); }
+
+        /* ==================== 7. SIDEBAR NAVIGATION ==================== */
+        .sidebar-demo {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        .sidebar {
+            width: 240px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--data-blue), var(--active-green));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: var(--space-xs);
+        }
+
+        .nav-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent);
+            color: var(--data-blue);
+        }
+
+        .nav-icon {
+            font-size: 1.1rem;
+        }
+
+        .nav-badge {
+            margin-left: auto;
+            background: var(--critical-red);
+            color: white;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        /* ==================== 8. FORMS & FILTERS ==================== */
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .form-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+        }
+
+        .form-title {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-md);
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: var(--space-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .form-input {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--data-blue);
+            box-shadow: 0 0 0 3px var(--data-glow);
+        }
+
+        .form-select {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            color: var(--text-primary);
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        /* ==================== 9. BUTTONS ==================== */
+        .buttons-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--data-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 20px var(--data-glow);
+        }
+
+        .btn-success {
+            background: var(--active-green);
+            color: var(--bg-dark);
+        }
+
+        .btn-warning {
+            background: var(--warning-orange);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--critical-red);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--data-blue);
+            color: var(--data-blue);
+        }
+
+        .btn-outline:hover {
+            background: var(--data-blue);
+            color: white;
+        }
+
+        /* ==================== 10. STATUS INDICATORS ==================== */
+        .status-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+        }
+
+        .status-group {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+
+        .status-group-title {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-md);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+        }
+
+        .status-badge.online {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--active-green);
+        }
+
+        .status-badge.offline {
+            background: rgba(107, 114, 128, 0.15);
+            color: var(--offline-gray);
+        }
+
+        .status-badge.error {
+            background: rgba(220, 38, 38, 0.15);
+            color: var(--critical-red);
+        }
+
+        /* Battery Indicators */
+        .battery-indicator {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--bg-elevated);
+            border-radius: var(--radius-sm);
+        }
+
+        .battery-icon {
+            font-size: 1rem;
+        }
+
+        .battery-level {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+        }
+
+        .battery-level.high { color: var(--active-green); }
+        .battery-level.medium { color: var(--warning-orange); }
+        .battery-level.low { color: var(--critical-red); }
+
+        /* Signal Strength */
+        .signal-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 16px;
+        }
+
+        .signal-bar {
+            width: 4px;
+            background: var(--bg-elevated);
+            border-radius: 1px;
+        }
+
+        .signal-bar.active { background: var(--active-green); }
+
+        /* ==================== 11. WIDGET CARDS ==================== */
+        .widgets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .widget-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .widget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .widget-title {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+        }
+
+        .widget-content {
+            padding: var(--space-lg);
+        }
+
+        /* Alert List */
+        .alert-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .alert-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-sm);
+            border-radius: var(--radius-sm);
+            background: var(--bg-elevated);
+        }
+
+        .alert-severity {
+            width: 4px;
+            height: 32px;
+            border-radius: 2px;
+        }
+
+        .alert-severity.critical { background: var(--critical-red); }
+        .alert-severity.warning { background: var(--warning-orange); }
+        .alert-severity.info { background: var(--data-blue); }
+
+        .alert-info {
+            flex: 1;
+        }
+
+        .alert-text {
+            font-size: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .alert-time {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        /* Maintenance Schedule */
+        .schedule-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .schedule-item:last-child {
+            border-bottom: none;
+        }
+
+        .schedule-date {
+            width: 50px;
+            text-align: center;
+        }
+
+        .schedule-day {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        .schedule-month {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .schedule-info {
+            flex: 1;
+        }
+
+        .schedule-title {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+
+        .schedule-type {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* ==================== 12. ALERTS & NOTIFICATIONS ==================== */
+        .alerts-showcase {
+            display: grid;
+            gap: var(--space-md);
+        }
+
+        .alert {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            border-left: 4px solid;
+        }
+
+        .alert-icon {
+            font-size: 1.2rem;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-xs);
+        }
+
+        .alert-message {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .alert.success {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: var(--active-green);
+        }
+
+        .alert.success .alert-title { color: var(--active-green); }
+
+        .alert.warning {
+            background: rgba(249, 115, 22, 0.1);
+            border-color: var(--warning-orange);
+        }
+
+        .alert.warning .alert-title { color: var(--warning-orange); }
+
+        .alert.critical {
+            background: rgba(220, 38, 38, 0.1);
+            border-color: var(--critical-red);
+        }
+
+        .alert.critical .alert-title { color: var(--critical-red); }
+
+        .alert.info {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--data-blue);
+        }
+
+        .alert.info .alert-title { color: var(--data-blue); }
+
+        /* ==================== 13. SPECIAL: REAL-TIME SENSOR GRID ==================== */
+        .sensor-grid-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+        }
+
+        .sensor-grid-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .sensor-grid-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .live-indicator {
+            width: 8px;
+            height: 8px;
+            background: var(--active-green);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--active-glow); }
+            50% { opacity: 0.7; box-shadow: 0 0 0 8px transparent; }
+        }
+
+        .sensor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .sensor-node {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .sensor-node:hover {
+            border-color: var(--border-active);
+            box-shadow: 0 0 15px var(--data-glow);
+        }
+
+        .sensor-node::before {
+            content: '';
+            position: absolute;
+            top: var(--space-sm);
+            right: var(--space-sm);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        .sensor-node.online::before { background: var(--active-green); box-shadow: 0 0 6px var(--active-glow); }
+        .sensor-node.warning::before { background: var(--warning-orange); box-shadow: 0 0 6px var(--warning-glow); }
+        .sensor-node.offline::before { background: var(--offline-gray); animation: none; }
+        .sensor-node.critical::before { background: var(--critical-red); box-shadow: 0 0 6px var(--critical-glow); }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .node-id {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            margin-bottom: var(--space-sm);
+        }
+
+        .node-type {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .node-reading {
+            font-family: var(--font-mono);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .node-reading .unit {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .node-timestamp {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            margin-top: var(--space-sm);
+        }
+
+        /* Footer */
+        .dashboard-footer {
+            text-align: center;
+            padding: var(--space-2xl) var(--space-lg);
+            margin-top: var(--space-3xl);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: var(--space-sm);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: var(--space-lg);
+            }
+
+            .dashboard-header h1 {
+                font-size: 2rem;
+            }
+
+            .metrics-grid,
+            .charts-grid,
+            .widgets-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-demo {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .sensor-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <h1>NEXUS IOT</h1>
+            <div class="version">v1.0 SENSOR NETWORK</div>
+            <p class="tagline">Industrial IoT Monitoring & Analytics Platform</p>
+        </header>
+
+        <!-- 1. Color Palette -->
+        <section class="section">
+            <h2 class="section-title">COLOR PALETTE</h2>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-preview active">●</div>
+                    <div class="color-info">
+                        <div class="color-name">ACTIVE GREEN</div>
+                        <div class="color-hex">#22C55E</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview warning">!</div>
+                    <div class="color-info">
+                        <div class="color-name">WARNING ORANGE</div>
+                        <div class="color-hex">#F97316</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview critical">✕</div>
+                    <div class="color-info">
+                        <div class="color-name">CRITICAL RED</div>
+                        <div class="color-hex">#DC2626</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview data">◈</div>
+                    <div class="color-info">
+                        <div class="color-name">DATA BLUE</div>
+                        <div class="color-hex">#3B82F6</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview offline">○</div>
+                    <div class="color-info">
+                        <div class="color-name">OFFLINE GRAY</div>
+                        <div class="color-hex">#6B7280</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview slate"></div>
+                    <div class="color-info">
+                        <div class="color-name">DARK SLATE</div>
+                        <div class="color-hex">#0F172A</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Typography -->
+        <section class="section">
+            <h2 class="section-title">TYPOGRAPHY</h2>
+            <div class="typography-showcase">
+                <div class="type-specimen">
+                    <div class="type-label">Display / Chakra Petch</div>
+                    <div class="display-font">SENSOR NETWORK ONLINE</div>
+                </div>
+                <div class="type-specimen">
+                    <div class="type-label">UI Text / Inter</div>
+                    <div class="ui-font">Monitor real-time sensor data across your entire IoT network with advanced analytics and predictive maintenance alerts.</div>
+                </div>
+                <div class="type-specimen">
+                    <div class="type-label">Data / Source Code Pro</div>
+                    <div class="mono-font">SNR-TMP-001 | 23.4°C | 45.2% RH | 1013.25 hPa</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Spacing & Grid -->
+        <section class="section">
+            <h2 class="section-title">SPACING & GRID</h2>
+            <div class="spacing-demo">
+                <div class="space-block" style="width: 4px; height: 4px;"></div>
+                <div class="space-block" style="width: 8px; height: 8px;"></div>
+                <div class="space-block" style="width: 16px; height: 16px;"></div>
+                <div class="space-block" style="width: 24px; height: 24px;"></div>
+                <div class="space-block" style="width: 32px; height: 32px;"><span>32</span></div>
+                <div class="space-block" style="width: 48px; height: 48px;"><span>48</span></div>
+                <div class="space-block" style="width: 64px; height: 64px;"><span>64</span></div>
+            </div>
+            <div class="grid-demo">
+                <div class="grid-cell">1</div>
+                <div class="grid-cell">2</div>
+                <div class="grid-cell">3</div>
+                <div class="grid-cell">4</div>
+                <div class="grid-cell">5</div>
+                <div class="grid-cell">6</div>
+                <div class="grid-cell">7</div>
+                <div class="grid-cell">8</div>
+                <div class="grid-cell">9</div>
+                <div class="grid-cell">10</div>
+                <div class="grid-cell">11</div>
+                <div class="grid-cell">12</div>
+            </div>
+        </section>
+
+        <!-- 4. Metric Cards -->
+        <section class="section">
+            <h2 class="section-title">METRIC CARDS</h2>
+            <div class="metrics-grid">
+                <div class="metric-card sensors">
+                    <div class="metric-icon">📡</div>
+                    <div class="metric-label">Active Sensors</div>
+                    <div class="metric-value">247<span class="metric-unit">/ 256</span></div>
+                    <span class="metric-status good">● 96.5% Online</span>
+                </div>
+                <div class="metric-card data">
+                    <div class="metric-icon">📊</div>
+                    <div class="metric-label">Data Points/sec</div>
+                    <div class="metric-value">12.4K</div>
+                    <span class="metric-status good">↑ Normal Rate</span>
+                </div>
+                <div class="metric-card latency">
+                    <div class="metric-icon">⚡</div>
+                    <div class="metric-label">Avg Latency</div>
+                    <div class="metric-value">24<span class="metric-unit">ms</span></div>
+                    <span class="metric-status good">● Low Latency</span>
+                </div>
+                <div class="metric-card alerts">
+                    <div class="metric-icon">🔔</div>
+                    <div class="metric-label">Alerts Triggered</div>
+                    <div class="metric-value">7</div>
+                    <span class="metric-status warning">! 3 Critical</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CSS-Only Charts -->
+        <section class="section">
+            <h2 class="section-title">CSS-ONLY CHARTS</h2>
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">SENSOR READINGS (24H)</div>
+                    <div class="sensor-chart">
+                        <div class="sensor-bar" style="height: 45%"></div>
+                        <div class="sensor-bar" style="height: 62%"></div>
+                        <div class="sensor-bar" style="height: 58%"></div>
+                        <div class="sensor-bar" style="height: 75%"></div>
+                        <div class="sensor-bar" style="height: 82%"></div>
+                        <div class="sensor-bar" style="height: 68%"></div>
+                        <div class="sensor-bar" style="height: 55%"></div>
+                        <div class="sensor-bar" style="height: 72%"></div>
+                        <div class="sensor-bar" style="height: 88%"></div>
+                        <div class="sensor-bar" style="height: 78%"></div>
+                        <div class="sensor-bar" style="height: 65%"></div>
+                        <div class="sensor-bar" style="height: 92%"></div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">DEVICE DISTRIBUTION</div>
+                    <div class="device-donut"></div>
+                    <div class="donut-legend">
+                        <div class="legend-item"><span class="legend-dot" style="background: var(--active-green);"></span>Online 40%</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: var(--data-blue);"></span>Idle 25%</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: var(--warning-orange);"></span>Warning 15%</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: var(--offline-gray);"></span>Offline 20%</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">LATENCY HISTOGRAM</div>
+                    <div class="latency-chart">
+                        <div class="latency-bar good" style="height: 90%"></div>
+                        <div class="latency-bar good" style="height: 85%"></div>
+                        <div class="latency-bar good" style="height: 78%"></div>
+                        <div class="latency-bar moderate" style="height: 55%"></div>
+                        <div class="latency-bar moderate" style="height: 42%"></div>
+                        <div class="latency-bar high" style="height: 28%"></div>
+                        <div class="latency-bar high" style="height: 18%"></div>
+                        <div class="latency-bar critical" style="height: 8%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Data Tables -->
+        <section class="section">
+            <h2 class="section-title">DATA TABLES</h2>
+            <div class="data-table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>SENSOR ID</th>
+                            <th>TYPE</th>
+                            <th>STATUS</th>
+                            <th>LAST READING</th>
+                            <th>BATTERY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="sensor-id">SNR-TMP-001</td>
+                            <td>
+                                <div class="sensor-type">
+                                    <div class="type-icon temp">🌡</div>
+                                    Temperature
+                                </div>
+                            </td>
+                            <td><span class="status-dot online"></span> Online</td>
+                            <td class="reading-cell">23.4°C</td>
+                            <td>
+                                <div class="battery-cell">
+                                    <div class="battery-bar"><div class="battery-fill high" style="width: 92%;"></div></div>
+                                    <span class="battery-text">92%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="sensor-id">SNR-HUM-004</td>
+                            <td>
+                                <div class="sensor-type">
+                                    <div class="type-icon humidity">💧</div>
+                                    Humidity
+                                </div>
+                            </td>
+                            <td><span class="status-dot online"></span> Online</td>
+                            <td class="reading-cell">45.2% RH</td>
+                            <td>
+                                <div class="battery-cell">
+                                    <div class="battery-bar"><div class="battery-fill high" style="width: 78%;"></div></div>
+                                    <span class="battery-text">78%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="sensor-id">SNR-PRS-012</td>
+                            <td>
+                                <div class="sensor-type">
+                                    <div class="type-icon pressure">📊</div>
+                                    Pressure
+                                </div>
+                            </td>
+                            <td><span class="status-dot error"></span> Error</td>
+                            <td class="reading-cell">1013.25 hPa</td>
+                            <td>
+                                <div class="battery-cell">
+                                    <div class="battery-bar"><div class="battery-fill low" style="width: 12%;"></div></div>
+                                    <span class="battery-text">12%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="sensor-id">SNR-MOT-007</td>
+                            <td>
+                                <div class="sensor-type">
+                                    <div class="type-icon motion">👁</div>
+                                    Motion
+                                </div>
+                            </td>
+                            <td><span class="status-dot offline"></span> Offline</td>
+                            <td class="reading-cell">No Signal</td>
+                            <td>
+                                <div class="battery-cell">
+                                    <div class="battery-bar"><div class="battery-fill medium" style="width: 45%;"></div></div>
+                                    <span class="battery-text">45%</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 7. Sidebar Navigation -->
+        <section class="section">
+            <h2 class="section-title">SIDEBAR NAVIGATION</h2>
+            <div class="sidebar-demo">
+                <div class="sidebar">
+                    <div class="sidebar-logo">
+                        <div class="logo-icon">◈</div>
+                        <div class="logo-text">NEXUS</div>
+                    </div>
+                    <div class="nav-item active">
+                        <span class="nav-icon">📊</span>
+                        Dashboard
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">📡</span>
+                        Devices
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">📈</span>
+                        Analytics
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">🔔</span>
+                        Alerts
+                        <span class="nav-badge">7</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">⚙️</span>
+                        Settings
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Forms & Filters -->
+        <section class="section">
+            <h2 class="section-title">FORMS & FILTERS</h2>
+            <div class="forms-grid">
+                <div class="form-card">
+                    <div class="form-title">DEVICE SEARCH</div>
+                    <div class="form-group">
+                        <label class="form-label">Device ID</label>
+                        <input type="text" class="form-input" placeholder="SNR-XXX-000">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Device Type</label>
+                        <select class="form-select">
+                            <option>All Types</option>
+                            <option>Temperature</option>
+                            <option>Humidity</option>
+                            <option>Pressure</option>
+                            <option>Motion</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-card">
+                    <div class="form-title">FILTERS</div>
+                    <div class="form-group">
+                        <label class="form-label">Status</label>
+                        <select class="form-select">
+                            <option>All Statuses</option>
+                            <option>Online</option>
+                            <option>Offline</option>
+                            <option>Error</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Location</label>
+                        <select class="form-select">
+                            <option>All Locations</option>
+                            <option>Building A</option>
+                            <option>Building B</option>
+                            <option>Warehouse</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Buttons -->
+        <section class="section">
+            <h2 class="section-title">BUTTONS</h2>
+            <div class="buttons-showcase">
+                <button class="btn btn-primary">Refresh Data</button>
+                <button class="btn btn-success">Add Device</button>
+                <button class="btn btn-warning">Acknowledge</button>
+                <button class="btn btn-danger">Emergency Stop</button>
+                <button class="btn btn-outline">Export</button>
+            </div>
+        </section>
+
+        <!-- 10. Status Indicators -->
+        <section class="section">
+            <h2 class="section-title">STATUS INDICATORS</h2>
+            <div class="status-grid">
+                <div class="status-group">
+                    <div class="status-group-title">Device Status</div>
+                    <span class="status-badge online">● Online</span>
+                    <span class="status-badge offline">○ Offline</span>
+                    <span class="status-badge error">✕ Error</span>
+                </div>
+                <div class="status-group">
+                    <div class="status-group-title">Battery Level</div>
+                    <div class="battery-indicator">
+                        <span class="battery-icon">🔋</span>
+                        <span class="battery-level high">92%</span>
+                    </div>
+                    <div class="battery-indicator">
+                        <span class="battery-icon">🪫</span>
+                        <span class="battery-level low">12%</span>
+                    </div>
+                </div>
+                <div class="status-group">
+                    <div class="status-group-title">Signal Strength</div>
+                    <div style="display: flex; gap: var(--space-md);">
+                        <div class="signal-bars">
+                            <div class="signal-bar active" style="height: 4px;"></div>
+                            <div class="signal-bar active" style="height: 8px;"></div>
+                            <div class="signal-bar active" style="height: 12px;"></div>
+                            <div class="signal-bar active" style="height: 16px;"></div>
+                        </div>
+                        <div class="signal-bars">
+                            <div class="signal-bar active" style="height: 4px;"></div>
+                            <div class="signal-bar active" style="height: 8px;"></div>
+                            <div class="signal-bar" style="height: 12px;"></div>
+                            <div class="signal-bar" style="height: 16px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Widget Cards -->
+        <section class="section">
+            <h2 class="section-title">WIDGET CARDS</h2>
+            <div class="widgets-grid">
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <span class="widget-title">RECENT ALERTS</span>
+                    </div>
+                    <div class="widget-content">
+                        <div class="alert-list">
+                            <div class="alert-item">
+                                <div class="alert-severity critical"></div>
+                                <div class="alert-info">
+                                    <div class="alert-text">Sensor offline: SNR-MOT-007</div>
+                                    <div class="alert-time">2 min ago</div>
+                                </div>
+                            </div>
+                            <div class="alert-item">
+                                <div class="alert-severity warning"></div>
+                                <div class="alert-info">
+                                    <div class="alert-text">Low battery: SNR-PRS-012</div>
+                                    <div class="alert-time">15 min ago</div>
+                                </div>
+                            </div>
+                            <div class="alert-item">
+                                <div class="alert-severity info"></div>
+                                <div class="alert-info">
+                                    <div class="alert-text">Firmware update available</div>
+                                    <div class="alert-time">1 hour ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <span class="widget-title">MAINTENANCE</span>
+                    </div>
+                    <div class="widget-content">
+                        <div class="schedule-item">
+                            <div class="schedule-date">
+                                <div class="schedule-day">15</div>
+                                <div class="schedule-month">FEB</div>
+                            </div>
+                            <div class="schedule-info">
+                                <div class="schedule-title">Battery Replacement</div>
+                                <div class="schedule-type">Building A - Zone 3</div>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-date">
+                                <div class="schedule-day">22</div>
+                                <div class="schedule-month">FEB</div>
+                            </div>
+                            <div class="schedule-info">
+                                <div class="schedule-title">Firmware Update</div>
+                                <div class="schedule-type">All Devices</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <span class="widget-title">FIRMWARE</span>
+                    </div>
+                    <div class="widget-content">
+                        <div style="text-align: center;">
+                            <div style="font-family: var(--font-display); font-size: 2rem; color: var(--warning-orange);">12</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: var(--space-md);">Updates Available</div>
+                            <button class="btn btn-outline" style="width: 100%;">Update All</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Alerts & Notifications -->
+        <section class="section">
+            <h2 class="section-title">ALERTS & NOTIFICATIONS</h2>
+            <div class="alerts-showcase">
+                <div class="alert success">
+                    <div class="alert-icon">✓</div>
+                    <div class="alert-content">
+                        <div class="alert-title">SENSOR RESTORED</div>
+                        <div class="alert-message">SNR-TMP-001 is back online and reporting normal readings.</div>
+                    </div>
+                </div>
+                <div class="alert warning">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-content">
+                        <div class="alert-title">LOW BATTERY WARNING</div>
+                        <div class="alert-message">SNR-PRS-012 battery at 12%. Schedule replacement soon.</div>
+                    </div>
+                </div>
+                <div class="alert critical">
+                    <div class="alert-icon">🔴</div>
+                    <div class="alert-content">
+                        <div class="alert-title">SENSOR OFFLINE</div>
+                        <div class="alert-message">SNR-MOT-007 has been unresponsive for 15 minutes.</div>
+                    </div>
+                </div>
+                <div class="alert info">
+                    <div class="alert-icon">ℹ️</div>
+                    <div class="alert-content">
+                        <div class="alert-title">FIRMWARE UPDATE</div>
+                        <div class="alert-message">New firmware v2.4.1 available for 12 devices.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13. Special: Real-time Sensor Grid -->
+        <section class="section">
+            <h2 class="section-title">SPECIAL: REAL-TIME SENSOR GRID</h2>
+            <div class="sensor-grid-container">
+                <div class="sensor-grid-header">
+                    <div class="sensor-grid-title">
+                        <span class="live-indicator"></span>
+                        LIVE SENSOR DATA
+                    </div>
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">Last update: 2s ago</span>
+                </div>
+                <div class="sensor-grid">
+                    <div class="sensor-node online">
+                        <div class="node-id">SNR-TMP-001</div>
+                        <div class="node-type">Temperature</div>
+                        <div class="node-reading">23.4<span class="unit">°C</span></div>
+                        <div class="node-timestamp">2s ago</div>
+                    </div>
+                    <div class="sensor-node online">
+                        <div class="node-id">SNR-HUM-004</div>
+                        <div class="node-type">Humidity</div>
+                        <div class="node-reading">45.2<span class="unit">%</span></div>
+                        <div class="node-timestamp">1s ago</div>
+                    </div>
+                    <div class="sensor-node warning">
+                        <div class="node-id">SNR-PRS-012</div>
+                        <div class="node-type">Pressure</div>
+                        <div class="node-reading">1013<span class="unit">hPa</span></div>
+                        <div class="node-timestamp">5s ago</div>
+                    </div>
+                    <div class="sensor-node offline">
+                        <div class="node-id">SNR-MOT-007</div>
+                        <div class="node-type">Motion</div>
+                        <div class="node-reading">--<span class="unit"></span></div>
+                        <div class="node-timestamp">15m ago</div>
+                    </div>
+                    <div class="sensor-node online">
+                        <div class="node-id">SNR-TMP-002</div>
+                        <div class="node-type">Temperature</div>
+                        <div class="node-reading">21.8<span class="unit">°C</span></div>
+                        <div class="node-timestamp">3s ago</div>
+                    </div>
+                    <div class="sensor-node online">
+                        <div class="node-id">SNR-HUM-005</div>
+                        <div class="node-type">Humidity</div>
+                        <div class="node-reading">52.1<span class="unit">%</span></div>
+                        <div class="node-timestamp">2s ago</div>
+                    </div>
+                    <div class="sensor-node critical">
+                        <div class="node-id">SNR-TMP-009</div>
+                        <div class="node-type">Temperature</div>
+                        <div class="node-reading">38.7<span class="unit">°C</span></div>
+                        <div class="node-timestamp">1s ago</div>
+                    </div>
+                    <div class="sensor-node online">
+                        <div class="node-id">SNR-PRS-003</div>
+                        <div class="node-type">Pressure</div>
+                        <div class="node-reading">1015<span class="unit">hPa</span></div>
+                        <div class="node-timestamp">4s ago</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <div class="footer-logo">NEXUS IOT v1.0</div>
+            <p class="footer-text">IoT Sensor Dashboard Style Guide</p>
+        </footer>
+    </div>
+</body>
+</html>

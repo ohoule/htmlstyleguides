@@ -1,0 +1,2625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HABITAT v1.0 — Smart Home Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Warm Backgrounds */
+            --bg-primary: #FFFBF5;
+            --bg-secondary: #FFF8F0;
+            --bg-tertiary: #FFF5EB;
+            --bg-card: #FFFFFF;
+            --bg-dark: #1F2937;
+
+            /* Smart Home Colors */
+            --orange: #F97316;
+            --orange-light: #FFF7ED;
+            --orange-glow: rgba(249, 115, 22, 0.3);
+            --blue: #0EA5E9;
+            --blue-light: #F0F9FF;
+            --green: #22C55E;
+            --green-light: #F0FDF4;
+            --purple: #8B5CF6;
+            --purple-light: #F5F3FF;
+
+            /* Text Colors */
+            --text-primary: #1F2937;
+            --text-secondary: #4B5563;
+            --text-muted: #9CA3AF;
+            --text-light: #D1D5DB;
+
+            /* Borders */
+            --border: #F3E8DB;
+            --border-light: #FBF3EA;
+
+            /* Typography */
+            --font-display: 'Quicksand', sans-serif;
+            --font-ui: 'Nunito', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+
+            /* Spacing */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 24px;
+            --space-6: 32px;
+            --space-7: 48px;
+            --space-8: 64px;
+
+            /* Radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-ui);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 14px;
+            min-height: 100vh;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           LAYOUT
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            grid-template-rows: 72px 1fr;
+            min-height: 100vh;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-6);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        }
+
+        .sidebar {
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            padding: var(--space-5);
+            overflow-y: auto;
+        }
+
+        .main-content {
+            background: var(--bg-primary);
+            padding: var(--space-6);
+            overflow-y: auto;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           HEADER
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--orange), #FDBA74);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px var(--orange-glow);
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+        }
+
+        .logo-text {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo-version {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--orange);
+            background: var(--orange-light);
+            padding: 3px 8px;
+            border-radius: var(--radius-full);
+            font-weight: 500;
+        }
+
+        .header-center {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .weather-widget {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-2) var(--space-4);
+            background: var(--bg-secondary);
+            border-radius: var(--radius-full);
+        }
+
+        .weather-icon {
+            font-size: 24px;
+        }
+
+        .weather-info {
+            line-height: 1.3;
+        }
+
+        .weather-temp {
+            font-family: var(--font-mono);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .weather-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-full);
+            padding: var(--space-2) var(--space-4);
+            width: 280px;
+            transition: all 0.3s;
+        }
+
+        .search-box:focus-within {
+            border-color: var(--orange);
+            box-shadow: 0 0 0 3px var(--orange-light);
+            background: var(--bg-card);
+        }
+
+        .search-box svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--text-muted);
+        }
+
+        .search-box input {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-family: var(--font-ui);
+            font-size: 14px;
+            width: 100%;
+            outline: none;
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .header-btn {
+            width: 44px;
+            height: 44px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .header-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--text-secondary);
+        }
+
+        .header-btn:hover {
+            background: var(--orange-light);
+            border-color: var(--orange);
+        }
+
+        .header-btn:hover svg {
+            fill: var(--orange);
+        }
+
+        .header-btn .notification-dot {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 10px;
+            height: 10px;
+            background: var(--orange);
+            border: 2px solid var(--bg-card);
+            border-radius: 50%;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-2) var(--space-3);
+            background: var(--bg-secondary);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .user-profile:hover {
+            background: var(--orange-light);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           GUIDE CONTENT
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .guide-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: var(--space-8);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-5);
+        }
+
+        .section-number {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: white;
+            background: linear-gradient(135deg, var(--orange), #FB923C);
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-full);
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .component-label {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--space-3);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           1. COLOR PALETTE
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: var(--space-3);
+        }
+
+        .color-swatch {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        .color-preview {
+            height: 72px;
+            position: relative;
+        }
+
+        .color-preview::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.1) 100%);
+        }
+
+        .color-info {
+            padding: var(--space-3);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           2. TYPOGRAPHY
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .type-specimen {
+            margin-bottom: var(--space-5);
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--text-primary);
+        }
+
+        .type-heading {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .type-body {
+            font-family: var(--font-ui);
+            font-size: 15px;
+            color: var(--text-secondary);
+            max-width: 480px;
+        }
+
+        .type-data {
+            font-family: var(--font-mono);
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--orange);
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           3. SPACING
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .spacing-demo {
+            display: flex;
+            align-items: flex-end;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+        }
+
+        .spacing-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .spacing-box {
+            background: linear-gradient(135deg, var(--orange-light), var(--orange));
+            border-radius: var(--radius-sm);
+        }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-2);
+            margin-top: var(--space-5);
+        }
+
+        .grid-col {
+            height: 48px;
+            background: linear-gradient(135deg, var(--orange-light), #FED7AA);
+            border: 1px dashed var(--orange);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--orange);
+            font-weight: 500;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           4. METRIC CARDS - Smart Home Stats
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .metric-card.temp::before { background: linear-gradient(90deg, var(--orange), #FDBA74); }
+        .metric-card.humidity::before { background: linear-gradient(90deg, var(--blue), #7DD3FC); }
+        .metric-card.energy::before { background: linear-gradient(90deg, var(--green), #86EFAC); }
+        .metric-card.air::before { background: linear-gradient(90deg, var(--purple), #C4B5FD); }
+
+        .metric-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: var(--space-3);
+        }
+
+        .metric-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .metric-icon.temp { background: var(--orange-light); color: var(--orange); }
+        .metric-icon.humidity { background: var(--blue-light); color: var(--blue); }
+        .metric-icon.energy { background: var(--green-light); color: var(--green); }
+        .metric-icon.air { background: var(--purple-light); color: var(--purple); }
+
+        .metric-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .metric-trend {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: var(--radius-full);
+        }
+
+        .metric-trend.up {
+            background: var(--green-light);
+            color: var(--green);
+        }
+
+        .metric-trend.down {
+            background: var(--blue-light);
+            color: var(--blue);
+        }
+
+        .metric-label {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: var(--space-1);
+        }
+
+        .metric-value {
+            font-family: var(--font-mono);
+            font-size: 36px;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .metric-card.temp .metric-value { color: var(--orange); }
+        .metric-card.humidity .metric-value { color: var(--blue); }
+        .metric-card.energy .metric-value { color: var(--green); }
+        .metric-card.air .metric-value { color: var(--purple); }
+
+        .metric-unit {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-left: var(--space-1);
+        }
+
+        .metric-mini-chart {
+            margin-top: var(--space-3);
+            height: 36px;
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+        }
+
+        .mini-bar {
+            flex: 1;
+            border-radius: 3px;
+            transition: all 0.2s;
+        }
+
+        .metric-card.temp .mini-bar { background: var(--orange-light); }
+        .metric-card.humidity .mini-bar { background: var(--blue-light); }
+        .metric-card.energy .mini-bar { background: var(--green-light); }
+        .metric-card.air .mini-bar { background: var(--purple-light); }
+
+        .metric-card:hover .mini-bar {
+            opacity: 0.8;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           5. CHARTS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+        }
+
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-4);
+        }
+
+        .chart-title {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .chart-period {
+            display: flex;
+            gap: var(--space-1);
+        }
+
+        .period-btn {
+            padding: var(--space-1) var(--space-3);
+            font-family: var(--font-ui);
+            font-size: 12px;
+            font-weight: 500;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-full);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .period-btn.active {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: white;
+        }
+
+        .period-btn:hover:not(.active) {
+            border-color: var(--orange);
+            color: var(--orange);
+        }
+
+        /* Energy Bars */
+        .energy-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 160px;
+            padding: var(--space-4) 0;
+        }
+
+        .energy-bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .energy-bar {
+            width: 32px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(180deg, var(--green), #86EFAC);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .energy-bar:hover {
+            transform: scaleY(1.02);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+        }
+
+        .energy-bar::before {
+            content: attr(data-value);
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .energy-bar:hover::before {
+            opacity: 1;
+        }
+
+        .energy-label {
+            margin-top: var(--space-2);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Temperature Timeline */
+        .temp-timeline {
+            position: relative;
+            height: 120px;
+            padding: var(--space-4) 0;
+        }
+
+        .temp-line {
+            position: absolute;
+            top: var(--space-4);
+            left: 0;
+            right: 0;
+            height: calc(100% - var(--space-8));
+        }
+
+        .temp-path {
+            fill: none;
+            stroke: var(--orange);
+            stroke-width: 3;
+            stroke-linecap: round;
+        }
+
+        .temp-area {
+            fill: url(#tempGradient);
+        }
+
+        .temp-points {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 80px;
+        }
+
+        .temp-point {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .temp-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--orange);
+            border: 2px solid white;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px var(--orange-glow);
+        }
+
+        .temp-time {
+            margin-top: var(--space-2);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           6. DATA TABLES - Devices
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .data-table-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            background: var(--bg-secondary);
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            text-align: left;
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .data-table td {
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 1px solid var(--border-light);
+            font-size: 13px;
+        }
+
+        .data-table tr:hover {
+            background: var(--bg-secondary);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .device-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .device-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .device-icon.light { background: #FEF9C3; }
+        .device-icon.thermostat { background: var(--orange-light); }
+        .device-icon.lock { background: var(--green-light); }
+        .device-icon.speaker { background: var(--purple-light); }
+        .device-icon.camera { background: var(--blue-light); }
+
+        .device-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .device-room {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .device-status {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+        }
+
+        .device-status.online {
+            background: var(--green-light);
+            color: var(--green);
+        }
+
+        .device-status.offline {
+            background: var(--bg-tertiary);
+            color: var(--text-muted);
+        }
+
+        .device-status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .device-value {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .table-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-3) var(--space-4);
+            background: var(--bg-secondary);
+        }
+
+        .table-info {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .pagination {
+            display: flex;
+            gap: var(--space-1);
+        }
+
+        .pagination-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .pagination-btn:hover {
+            border-color: var(--orange);
+            color: var(--orange);
+        }
+
+        .pagination-btn.active {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: white;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           7. SIDEBAR NAVIGATION
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .nav-section {
+            margin-bottom: var(--space-5);
+        }
+
+        .nav-section-title {
+            font-family: var(--font-display);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+            padding: 0 var(--space-3);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, var(--orange-light), #FED7AA);
+            color: var(--orange);
+        }
+
+        .nav-item svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .nav-item .label {
+            font-size: 14px;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .nav-item .count {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            background: var(--bg-card);
+        }
+
+        .nav-item.active .count {
+            background: var(--orange);
+            color: white;
+        }
+
+        .nav-divider {
+            height: 1px;
+            background: var(--border);
+            margin: var(--space-3) 0;
+        }
+
+        /* Scene Cards */
+        .scene-cards {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .scene-card {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .scene-card:hover {
+            background: var(--bg-card);
+            border-color: var(--orange);
+        }
+
+        .scene-card.active {
+            background: linear-gradient(135deg, var(--orange-light), #FED7AA);
+            border-color: var(--orange);
+        }
+
+        .scene-icon {
+            font-size: 20px;
+        }
+
+        .scene-name {
+            font-size: 13px;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .scene-toggle {
+            width: 36px;
+            height: 20px;
+            background: var(--border);
+            border-radius: 10px;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .scene-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .scene-card.active .scene-toggle {
+            background: var(--orange);
+        }
+
+        .scene-card.active .scene-toggle::after {
+            left: 18px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           8. FORMS & FILTERS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .form-group {
+            margin-bottom: var(--space-4);
+        }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-2);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-3) var(--space-4);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: var(--font-ui);
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--orange);
+            box-shadow: 0 0 0 3px var(--orange-light);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-select {
+            appearance: none;
+            width: 100%;
+            padding: var(--space-3) var(--space-4);
+            padding-right: 40px;
+            background: var(--bg-card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%239CA3AF' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E") no-repeat right 12px center;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: var(--font-ui);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--orange);
+            box-shadow: 0 0 0 3px var(--orange-light);
+        }
+
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            cursor: pointer;
+        }
+
+        .toggle-track {
+            width: 48px;
+            height: 26px;
+            background: var(--border);
+            border-radius: 13px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .toggle-thumb {
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .toggle-switch.active .toggle-track {
+            background: var(--orange);
+        }
+
+        .toggle-switch.active .toggle-thumb {
+            left: 24px;
+        }
+
+        .toggle-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+
+        .filter-chip {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-3);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-chip:hover {
+            border-color: var(--orange);
+        }
+
+        .filter-chip.active {
+            background: var(--orange-light);
+            border-color: var(--orange);
+            color: var(--orange);
+        }
+
+        .filter-chip .emoji {
+            font-size: 14px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           9. BUTTONS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-5);
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--orange), #FB923C);
+            color: white;
+            box-shadow: 0 4px 12px var(--orange-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--orange-glow);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card);
+            border-color: var(--orange);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+        }
+
+        .btn-ghost:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .btn-icon {
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: var(--radius-md);
+        }
+
+        .btn-icon:hover {
+            border-color: var(--orange);
+            color: var(--orange);
+            background: var(--orange-light);
+        }
+
+        .btn-sm {
+            padding: var(--space-2) var(--space-4);
+            font-size: 12px;
+        }
+
+        .btn-lg {
+            padding: var(--space-4) var(--space-6);
+            font-size: 16px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           10. STATUS INDICATORS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .status-indicators {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+        }
+
+        .status-dot {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .status-dot .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .status-dot .dot.online {
+            background: var(--green);
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+        }
+
+        .status-dot .dot.offline {
+            background: var(--text-light);
+        }
+
+        .status-dot .dot.warning {
+            background: var(--orange);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .status-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Battery Level */
+        .battery-indicator {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .battery-shell {
+            width: 28px;
+            height: 14px;
+            border: 2px solid var(--text-muted);
+            border-radius: 3px;
+            position: relative;
+            padding: 2px;
+        }
+
+        .battery-shell::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: 3px;
+            width: 3px;
+            height: 6px;
+            background: var(--text-muted);
+            border-radius: 0 2px 2px 0;
+        }
+
+        .battery-level {
+            height: 100%;
+            border-radius: 1px;
+            transition: width 0.3s;
+        }
+
+        .battery-level.high { background: var(--green); }
+        .battery-level.medium { background: var(--orange); }
+        .battery-level.low { background: #EF4444; }
+
+        .battery-percent {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Connection Strength */
+        .signal-indicator {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 16px;
+        }
+
+        .signal-bar {
+            width: 4px;
+            background: var(--text-light);
+            border-radius: 2px;
+        }
+
+        .signal-bar.active { background: var(--green); }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           11. WIDGET CARDS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .widget {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .widget-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-4);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .widget-title {
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .widget-action {
+            font-size: 12px;
+            color: var(--orange);
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .widget-body {
+            padding: var(--space-4);
+        }
+
+        /* Room Overview */
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-3);
+        }
+
+        .room-card {
+            padding: var(--space-3);
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .room-card:hover {
+            background: var(--orange-light);
+        }
+
+        .room-card.active {
+            background: linear-gradient(135deg, var(--orange-light), #FED7AA);
+            box-shadow: 0 4px 12px var(--orange-glow);
+        }
+
+        .room-emoji {
+            font-size: 24px;
+            margin-bottom: var(--space-2);
+        }
+
+        .room-name {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .room-devices {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Quick Controls */
+        .quick-controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-3);
+        }
+
+        .quick-control {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-4);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-control:hover {
+            background: var(--bg-card);
+            border-color: var(--orange);
+        }
+
+        .quick-control.active {
+            background: var(--orange-light);
+            border-color: var(--orange);
+        }
+
+        .quick-control-icon {
+            font-size: 28px;
+        }
+
+        .quick-control-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .quick-control.active .quick-control-label {
+            color: var(--orange);
+        }
+
+        /* Activity Log */
+        .activity-item {
+            display: flex;
+            gap: var(--space-3);
+            padding: var(--space-3) 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            background: var(--bg-secondary);
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            font-size: 13px;
+        }
+
+        .activity-time {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           12. ALERTS & NOTIFICATIONS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .alert {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            padding: var(--space-4);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-3);
+        }
+
+        .alert-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .alert-message {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .alert-close {
+            background: none;
+            border: none;
+            color: inherit;
+            opacity: 0.6;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .alert-close:hover { opacity: 1; }
+
+        .alert-success {
+            background: var(--green-light);
+            border: 1px solid var(--green);
+            color: #166534;
+        }
+
+        .alert-warning {
+            background: var(--orange-light);
+            border: 1px solid var(--orange);
+            color: #9A3412;
+        }
+
+        .alert-info {
+            background: var(--blue-light);
+            border: 1px solid var(--blue);
+            color: #1E40AF;
+        }
+
+        .alert-error {
+            background: #FEF2F2;
+            border: 1px solid #EF4444;
+            color: #991B1B;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           13. SPECIAL COMPONENT - Room Selector
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .room-selector {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: var(--space-5);
+        }
+
+        .room-selector-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-5);
+        }
+
+        .room-selector-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .room-selector-count {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .floor-plan {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: var(--space-3);
+            min-height: 280px;
+        }
+
+        .floor-room {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .floor-room:hover {
+            border-color: var(--orange);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .floor-room.active {
+            border-color: var(--orange);
+            background: var(--orange-light);
+        }
+
+        .floor-room.large {
+            grid-column: span 2;
+        }
+
+        .floor-room-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: auto;
+        }
+
+        .floor-room-emoji {
+            font-size: 28px;
+        }
+
+        .floor-room-badge {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-full);
+            color: var(--text-secondary);
+        }
+
+        .floor-room.active .floor-room-badge {
+            background: var(--orange);
+            color: white;
+        }
+
+        .floor-room-info {
+            margin-top: var(--space-3);
+        }
+
+        .floor-room-name {
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .floor-room-temp {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .floor-room-devices {
+            display: flex;
+            gap: var(--space-2);
+            margin-top: var(--space-3);
+        }
+
+        .floor-device-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .floor-device-dot.on { background: var(--green); }
+        .floor-device-dot.off { background: var(--text-light); }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        @media (max-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .component-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .floor-plan {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .floor-room.large {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                </div>
+                <span class="logo-text">HABITAT</span>
+                <span class="logo-version">v1.0</span>
+            </div>
+
+            <div class="header-center">
+                <div class="weather-widget">
+                    <span class="weather-icon">☀️</span>
+                    <div class="weather-info">
+                        <div class="weather-temp">72°F</div>
+                        <div class="weather-desc">Sunny, Portland</div>
+                    </div>
+                </div>
+                <div class="search-box">
+                    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                    <input type="text" placeholder="Search devices or rooms...">
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button class="header-btn">
+                    <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+                    <span class="notification-dot"></span>
+                </button>
+                <button class="header-btn">
+                    <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                </button>
+                <div class="user-profile">
+                    <div class="user-avatar">SM</div>
+                    <span class="user-name">Sarah</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav>
+                <div class="nav-section">
+                    <div class="nav-section-title">Rooms</div>
+                    <div class="nav-item active">
+                        <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                        <span class="label">All Rooms</span>
+                        <span class="count">6</span>
+                    </div>
+                    <div class="nav-item">
+                        <svg viewBox="0 0 24 24"><path d="M21 9V7l-8-4-8 4v2l8 4 8-4zm-8 5l-6-3v5.18l6 3.82 6-3.82V11l-6 3z"/></svg>
+                        <span class="label">Living Room</span>
+                        <span class="count">8</span>
+                    </div>
+                    <div class="nav-item">
+                        <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-6c-1.1 0-2 .9-2 2v5h10V9c0-1.1-.9-2-2-2zm-2 4h-4v-2h4v2zm-6 9c1.1 0 2-.9 2-2H9c0 1.1.9 2 2 2z"/></svg>
+                        <span class="label">Bedroom</span>
+                        <span class="count">5</span>
+                    </div>
+                    <div class="nav-item">
+                        <svg viewBox="0 0 24 24"><path d="M18 2H9c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 5H9V4h9v3zM4 10v7h4.51c.36.59.78 1.13 1.27 1.62L4 24v-2.71l4.21-4.15c.04.13.09.26.14.38-.28-.21-.54-.44-.78-.7L4 21.29V20l3.57-3.5c.13.26.28.51.44.74L4 21.29V10h4.26c-.17-.31-.26-.67-.26-1.04V7H4c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h4.6c.1 0 .21-.01.31-.02-.45-.62-.82-1.3-1.09-2.02-.02.02-.05.04-.07.04H4v-7z"/></svg>
+                        <span class="label">Kitchen</span>
+                        <span class="count">6</span>
+                    </div>
+                </div>
+
+                <div class="nav-divider"></div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Scenes</div>
+                    <div class="scene-cards">
+                        <div class="scene-card active">
+                            <span class="scene-icon">☀️</span>
+                            <span class="scene-name">Good Morning</span>
+                            <div class="scene-toggle"></div>
+                        </div>
+                        <div class="scene-card">
+                            <span class="scene-icon">🌙</span>
+                            <span class="scene-name">Good Night</span>
+                            <div class="scene-toggle"></div>
+                        </div>
+                        <div class="scene-card">
+                            <span class="scene-icon">🎬</span>
+                            <span class="scene-name">Movie Time</span>
+                            <div class="scene-toggle"></div>
+                        </div>
+                        <div class="scene-card">
+                            <span class="scene-icon">🏠</span>
+                            <span class="scene-name">Away Mode</span>
+                            <div class="scene-toggle"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-divider"></div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Quick Settings</div>
+                    <div class="nav-item">
+                        <svg viewBox="0 0 24 24"><path d="M12 3v18m-9-9h18"/></svg>
+                        <span class="label">Add Device</span>
+                    </div>
+                    <div class="nav-item">
+                        <svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/></svg>
+                        <span class="label">Automations</span>
+                        <span class="count">4</span>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="guide-container">
+
+                <!-- Section 1: Color Palette -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">01</span>
+                        <h2 class="section-title">Color Palette</h2>
+                    </div>
+
+                    <div class="component-card">
+                        <p class="component-label">Smart Home Colors</p>
+                        <div class="color-grid">
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: linear-gradient(135deg, #F97316, #FB923C);"></div>
+                                <div class="color-info">
+                                    <div class="color-name">Ambient Orange</div>
+                                    <div class="color-hex">#F97316</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: linear-gradient(135deg, #0EA5E9, #38BDF8);"></div>
+                                <div class="color-info">
+                                    <div class="color-name">Smart Blue</div>
+                                    <div class="color-hex">#0EA5E9</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: linear-gradient(135deg, #22C55E, #4ADE80);"></div>
+                                <div class="color-info">
+                                    <div class="color-name">Eco Green</div>
+                                    <div class="color-hex">#22C55E</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA);"></div>
+                                <div class="color-info">
+                                    <div class="color-name">Night Purple</div>
+                                    <div class="color-hex">#8B5CF6</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="component-card" style="margin-top: var(--space-4);">
+                        <p class="component-label">Warm Backgrounds</p>
+                        <div class="color-grid">
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: #FFFBF5; border: 1px solid #F3E8DB;"></div>
+                                <div class="color-info">
+                                    <div class="color-name">Cream</div>
+                                    <div class="color-hex">#FFFBF5</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: #FFF8F0;"></div>
+                                <div class="color-info">
+                                    <div class="color-name">Warm White</div>
+                                    <div class="color-hex">#FFF8F0</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: #FFF5EB;"></div>
+                                <div class="color-info">
+                                    <div class="color-name">Peach Tint</div>
+                                    <div class="color-hex">#FFF5EB</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-preview" style="background: #1F2937;"></div>
+                                <div class="color-info">
+                                    <div class="color-name">Night Mode</div>
+                                    <div class="color-hex">#1F2937</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Typography -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">02</span>
+                        <h2 class="section-title">Typography</h2>
+                    </div>
+
+                    <div class="component-grid">
+                        <div class="component-card">
+                            <div class="type-specimen">
+                                <div class="type-display">Welcome Home</div>
+                                <p class="type-label">Display — Quicksand 48px Bold</p>
+                            </div>
+                            <div class="type-specimen">
+                                <div class="type-heading">Living Room</div>
+                                <p class="type-label">Heading — Quicksand 28px Semibold</p>
+                            </div>
+                            <div class="type-specimen">
+                                <p class="type-body">Control your entire home from one place. Adjust lighting, temperature, and security with just a tap. Your smart home, simplified.</p>
+                                <p class="type-label">Body — Nunito 15px Regular</p>
+                            </div>
+                        </div>
+
+                        <div class="component-card">
+                            <div class="type-specimen">
+                                <div class="type-data">72°F</div>
+                                <p class="type-label">Data — Fira Code 32px Semibold</p>
+                            </div>
+                            <div class="type-specimen">
+                                <p style="font-family: var(--font-mono); font-size: 14px; color: var(--text-secondary);">Temp: 72°F | Humidity: 45% | AQI: 42</p>
+                                <p class="type-label">Mono — Fira Code 14px</p>
+                            </div>
+                            <div class="type-specimen">
+                                <p style="font-family: var(--font-display); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted);">Device Status</p>
+                                <p class="type-label">Label — Quicksand 11px Semibold</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Metric Cards -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">04</span>
+                        <h2 class="section-title">Metric Cards</h2>
+                    </div>
+
+                    <div class="component-grid">
+                        <div class="metric-card temp">
+                            <div class="metric-header">
+                                <div class="metric-icon temp">
+                                    <svg viewBox="0 0 24 24"><path d="M15 13V5c0-1.66-1.34-3-3-3S9 3.34 9 5v8c-1.21.91-2 2.37-2 4 0 2.76 2.24 5 5 5s5-2.24 5-5c0-1.63-.79-3.09-2-4zm-4-8c0-.55.45-1 1-1s1 .45 1 1h-1v1h1v2h-1v1h1v2h-2V5z"/></svg>
+                                </div>
+                                <span class="metric-trend up">↑ 2°</span>
+                            </div>
+                            <div class="metric-label">Temperature</div>
+                            <div class="metric-value">72<span class="metric-unit">°F</span></div>
+                            <div class="metric-mini-chart">
+                                <div class="mini-bar" style="height: 60%;"></div>
+                                <div class="mini-bar" style="height: 65%;"></div>
+                                <div class="mini-bar" style="height: 70%;"></div>
+                                <div class="mini-bar" style="height: 68%;"></div>
+                                <div class="mini-bar" style="height: 72%;"></div>
+                                <div class="mini-bar" style="height: 75%;"></div>
+                                <div class="mini-bar" style="height: 72%;"></div>
+                                <div class="mini-bar" style="height: 70%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card humidity">
+                            <div class="metric-header">
+                                <div class="metric-icon humidity">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8zm0 18c-3.35 0-6-2.57-6-6.2 0-2.34 1.95-5.44 6-9.14 4.05 3.7 6 6.79 6 9.14 0 3.63-2.65 6.2-6 6.2z"/></svg>
+                                </div>
+                                <span class="metric-trend down">↓ 5%</span>
+                            </div>
+                            <div class="metric-label">Humidity</div>
+                            <div class="metric-value">45<span class="metric-unit">%</span></div>
+                            <div class="metric-mini-chart">
+                                <div class="mini-bar" style="height: 80%;"></div>
+                                <div class="mini-bar" style="height: 75%;"></div>
+                                <div class="mini-bar" style="height: 70%;"></div>
+                                <div class="mini-bar" style="height: 65%;"></div>
+                                <div class="mini-bar" style="height: 60%;"></div>
+                                <div class="mini-bar" style="height: 55%;"></div>
+                                <div class="mini-bar" style="height: 50%;"></div>
+                                <div class="mini-bar" style="height: 45%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card energy">
+                            <div class="metric-header">
+                                <div class="metric-icon energy">
+                                    <svg viewBox="0 0 24 24"><path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z"/></svg>
+                                </div>
+                                <span class="metric-trend up">↑ 12%</span>
+                            </div>
+                            <div class="metric-label">Energy Today</div>
+                            <div class="metric-value">8.4<span class="metric-unit">kWh</span></div>
+                            <div class="metric-mini-chart">
+                                <div class="mini-bar" style="height: 40%;"></div>
+                                <div class="mini-bar" style="height: 55%;"></div>
+                                <div class="mini-bar" style="height: 45%;"></div>
+                                <div class="mini-bar" style="height: 70%;"></div>
+                                <div class="mini-bar" style="height: 85%;"></div>
+                                <div class="mini-bar" style="height: 60%;"></div>
+                                <div class="mini-bar" style="height: 75%;"></div>
+                                <div class="mini-bar" style="height: 90%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card air">
+                            <div class="metric-header">
+                                <div class="metric-icon air">
+                                    <svg viewBox="0 0 24 24"><path d="M14.5 17c0 1.65-1.35 3-3 3s-3-1.35-3-3h2c0 .55.45 1 1 1s1-.45 1-1-.45-1-1-1H2v-2h9.5c1.65 0 3 1.35 3 3zM19 6.5C19 4.57 17.43 3 15.5 3S12 4.57 12 6.5h2c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5S16.33 8 15.5 8H2v2h13.5c1.93 0 3.5-1.57 3.5-3.5zm-.5 4.5H2v2h16.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5v2c1.93 0 3.5-1.57 3.5-3.5S20.43 11 18.5 11z"/></svg>
+                                </div>
+                                <span class="metric-trend up">Good</span>
+                            </div>
+                            <div class="metric-label">Air Quality</div>
+                            <div class="metric-value">42<span class="metric-unit">AQI</span></div>
+                            <div class="metric-mini-chart">
+                                <div class="mini-bar" style="height: 35%;"></div>
+                                <div class="mini-bar" style="height: 40%;"></div>
+                                <div class="mini-bar" style="height: 38%;"></div>
+                                <div class="mini-bar" style="height: 42%;"></div>
+                                <div class="mini-bar" style="height: 45%;"></div>
+                                <div class="mini-bar" style="height: 40%;"></div>
+                                <div class="mini-bar" style="height: 38%;"></div>
+                                <div class="mini-bar" style="height: 42%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 6: Device Tables -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">06</span>
+                        <h2 class="section-title">Device Tables</h2>
+                    </div>
+
+                    <div class="data-table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Device</th>
+                                    <th>Room</th>
+                                    <th>Status</th>
+                                    <th>Value</th>
+                                    <th>Battery</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="device-info">
+                                            <div class="device-icon light">💡</div>
+                                            <div>
+                                                <div class="device-name">Ceiling Light</div>
+                                                <div class="device-room">Philips Hue</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Living Room</td>
+                                    <td><span class="device-status online">Online</span></td>
+                                    <td><span class="device-value">75%</span></td>
+                                    <td>—</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="device-info">
+                                            <div class="device-icon thermostat">🌡️</div>
+                                            <div>
+                                                <div class="device-name">Smart Thermostat</div>
+                                                <div class="device-room">Nest</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Hallway</td>
+                                    <td><span class="device-status online">Online</span></td>
+                                    <td><span class="device-value">72°F</span></td>
+                                    <td>—</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="device-info">
+                                            <div class="device-icon lock">🔒</div>
+                                            <div>
+                                                <div class="device-name">Front Door Lock</div>
+                                                <div class="device-room">August</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Entryway</td>
+                                    <td><span class="device-status online">Online</span></td>
+                                    <td><span class="device-value">Locked</span></td>
+                                    <td>
+                                        <div class="battery-indicator">
+                                            <div class="battery-shell">
+                                                <div class="battery-level high" style="width: 85%;"></div>
+                                            </div>
+                                            <span class="battery-percent">85%</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="device-info">
+                                            <div class="device-icon speaker">🔊</div>
+                                            <div>
+                                                <div class="device-name">Smart Speaker</div>
+                                                <div class="device-room">Sonos One</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Kitchen</td>
+                                    <td><span class="device-status offline">Offline</span></td>
+                                    <td><span class="device-value">—</span></td>
+                                    <td>—</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="device-info">
+                                            <div class="device-icon camera">📹</div>
+                                            <div>
+                                                <div class="device-name">Security Camera</div>
+                                                <div class="device-room">Ring</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Backyard</td>
+                                    <td><span class="device-status online">Online</span></td>
+                                    <td><span class="device-value">Recording</span></td>
+                                    <td>
+                                        <div class="battery-indicator">
+                                            <div class="battery-shell">
+                                                <div class="battery-level medium" style="width: 45%;"></div>
+                                            </div>
+                                            <span class="battery-percent">45%</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="table-footer">
+                            <span class="table-info">Showing 1-5 of 24 devices</span>
+                            <div class="pagination">
+                                <button class="pagination-btn">‹</button>
+                                <button class="pagination-btn active">1</button>
+                                <button class="pagination-btn">2</button>
+                                <button class="pagination-btn">3</button>
+                                <button class="pagination-btn">›</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 9: Buttons -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">09</span>
+                        <h2 class="section-title">Buttons</h2>
+                    </div>
+
+                    <div class="component-card">
+                        <p class="component-label">Button Variants</p>
+                        <div class="button-group" style="margin-bottom: var(--space-5);">
+                            <button class="btn btn-primary">
+                                <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                                Add Device
+                            </button>
+                            <button class="btn btn-secondary">Settings</button>
+                            <button class="btn btn-ghost">Cancel</button>
+                        </div>
+
+                        <p class="component-label">Button Sizes</p>
+                        <div class="button-group" style="margin-bottom: var(--space-5);">
+                            <button class="btn btn-primary btn-sm">Small</button>
+                            <button class="btn btn-primary">Default</button>
+                            <button class="btn btn-primary btn-lg">Large</button>
+                        </div>
+
+                        <p class="component-label">Icon Buttons</p>
+                        <div class="button-group">
+                            <button class="btn btn-icon">💡</button>
+                            <button class="btn btn-icon">🌡️</button>
+                            <button class="btn btn-icon">🔒</button>
+                            <button class="btn btn-icon">📹</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 10: Status Indicators -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">10</span>
+                        <h2 class="section-title">Status Indicators</h2>
+                    </div>
+
+                    <div class="component-grid">
+                        <div class="component-card">
+                            <p class="component-label">Device Status</p>
+                            <div class="status-indicators" style="margin-bottom: var(--space-5);">
+                                <div class="status-dot">
+                                    <span class="dot online"></span>
+                                    <span class="status-label">Online</span>
+                                </div>
+                                <div class="status-dot">
+                                    <span class="dot offline"></span>
+                                    <span class="status-label">Offline</span>
+                                </div>
+                                <div class="status-dot">
+                                    <span class="dot warning"></span>
+                                    <span class="status-label">Low Battery</span>
+                                </div>
+                            </div>
+
+                            <p class="component-label">Battery Levels</p>
+                            <div style="display: flex; gap: var(--space-5); flex-wrap: wrap;">
+                                <div class="battery-indicator">
+                                    <div class="battery-shell">
+                                        <div class="battery-level high" style="width: 100%;"></div>
+                                    </div>
+                                    <span class="battery-percent">100%</span>
+                                </div>
+                                <div class="battery-indicator">
+                                    <div class="battery-shell">
+                                        <div class="battery-level medium" style="width: 50%;"></div>
+                                    </div>
+                                    <span class="battery-percent">50%</span>
+                                </div>
+                                <div class="battery-indicator">
+                                    <div class="battery-shell">
+                                        <div class="battery-level low" style="width: 15%;"></div>
+                                    </div>
+                                    <span class="battery-percent">15%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="component-card">
+                            <p class="component-label">Connection Strength</p>
+                            <div style="display: flex; gap: var(--space-5); flex-wrap: wrap;">
+                                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                                    <div class="signal-indicator">
+                                        <div class="signal-bar active" style="height: 4px;"></div>
+                                        <div class="signal-bar active" style="height: 8px;"></div>
+                                        <div class="signal-bar active" style="height: 12px;"></div>
+                                        <div class="signal-bar active" style="height: 16px;"></div>
+                                    </div>
+                                    <span class="status-label">Excellent</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                                    <div class="signal-indicator">
+                                        <div class="signal-bar active" style="height: 4px;"></div>
+                                        <div class="signal-bar active" style="height: 8px;"></div>
+                                        <div class="signal-bar" style="height: 12px;"></div>
+                                        <div class="signal-bar" style="height: 16px;"></div>
+                                    </div>
+                                    <span class="status-label">Fair</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                                    <div class="signal-indicator">
+                                        <div class="signal-bar active" style="height: 4px;"></div>
+                                        <div class="signal-bar" style="height: 8px;"></div>
+                                        <div class="signal-bar" style="height: 12px;"></div>
+                                        <div class="signal-bar" style="height: 16px;"></div>
+                                    </div>
+                                    <span class="status-label">Weak</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 11: Widgets -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">11</span>
+                        <h2 class="section-title">Widget Cards</h2>
+                    </div>
+
+                    <div class="component-grid">
+                        <!-- Room Overview -->
+                        <div class="widget">
+                            <div class="widget-header">
+                                <span class="widget-title">Rooms</span>
+                                <span class="widget-action">View All</span>
+                            </div>
+                            <div class="widget-body">
+                                <div class="room-grid">
+                                    <div class="room-card active">
+                                        <div class="room-emoji">🛋️</div>
+                                        <div class="room-name">Living Room</div>
+                                        <div class="room-devices">8 devices</div>
+                                    </div>
+                                    <div class="room-card">
+                                        <div class="room-emoji">🛏️</div>
+                                        <div class="room-name">Bedroom</div>
+                                        <div class="room-devices">5 devices</div>
+                                    </div>
+                                    <div class="room-card">
+                                        <div class="room-emoji">🍳</div>
+                                        <div class="room-name">Kitchen</div>
+                                        <div class="room-devices">6 devices</div>
+                                    </div>
+                                    <div class="room-card">
+                                        <div class="room-emoji">🚿</div>
+                                        <div class="room-name">Bathroom</div>
+                                        <div class="room-devices">3 devices</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Controls -->
+                        <div class="widget">
+                            <div class="widget-header">
+                                <span class="widget-title">Quick Controls</span>
+                            </div>
+                            <div class="widget-body">
+                                <div class="quick-controls">
+                                    <div class="quick-control active">
+                                        <span class="quick-control-icon">💡</span>
+                                        <span class="quick-control-label">All Lights</span>
+                                    </div>
+                                    <div class="quick-control">
+                                        <span class="quick-control-icon">🔒</span>
+                                        <span class="quick-control-label">All Locks</span>
+                                    </div>
+                                    <div class="quick-control active">
+                                        <span class="quick-control-icon">❄️</span>
+                                        <span class="quick-control-label">AC</span>
+                                    </div>
+                                    <div class="quick-control">
+                                        <span class="quick-control-icon">📺</span>
+                                        <span class="quick-control-label">TV</span>
+                                    </div>
+                                    <div class="quick-control active">
+                                        <span class="quick-control-icon">🔊</span>
+                                        <span class="quick-control-label">Speakers</span>
+                                    </div>
+                                    <div class="quick-control">
+                                        <span class="quick-control-icon">🚪</span>
+                                        <span class="quick-control-label">Garage</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Activity Log -->
+                        <div class="widget">
+                            <div class="widget-header">
+                                <span class="widget-title">Activity</span>
+                                <span class="widget-action">See All</span>
+                            </div>
+                            <div class="widget-body">
+                                <div class="activity-item">
+                                    <div class="activity-icon">🔒</div>
+                                    <div class="activity-content">
+                                        <div class="activity-text"><strong>Front door</strong> was locked</div>
+                                        <div class="activity-time">2 minutes ago</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">💡</div>
+                                    <div class="activity-content">
+                                        <div class="activity-text"><strong>Living room lights</strong> turned on</div>
+                                        <div class="activity-time">15 minutes ago</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">🌡️</div>
+                                    <div class="activity-content">
+                                        <div class="activity-text"><strong>Thermostat</strong> set to 72°F</div>
+                                        <div class="activity-time">1 hour ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 12: Alerts -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">12</span>
+                        <h2 class="section-title">Alerts & Notifications</h2>
+                    </div>
+
+                    <div class="component-card">
+                        <p class="component-label">Alert Types</p>
+                        <div class="alert alert-success">
+                            <span class="alert-icon">✅</span>
+                            <div class="alert-content">
+                                <div class="alert-title">All Doors Secured</div>
+                                <div class="alert-message">All 3 doors are locked and secure for the night.</div>
+                            </div>
+                            <button class="alert-close">×</button>
+                        </div>
+                        <div class="alert alert-warning">
+                            <span class="alert-icon">🔋</span>
+                            <div class="alert-content">
+                                <div class="alert-title">Low Battery Alert</div>
+                                <div class="alert-message">Front door lock battery is at 15%. Consider replacing soon.</div>
+                            </div>
+                            <button class="alert-close">×</button>
+                        </div>
+                        <div class="alert alert-info">
+                            <span class="alert-icon">📦</span>
+                            <div class="alert-content">
+                                <div class="alert-title">Package Delivered</div>
+                                <div class="alert-message">Motion detected at front door. Package delivery confirmed.</div>
+                            </div>
+                            <button class="alert-close">×</button>
+                        </div>
+                        <div class="alert alert-error">
+                            <span class="alert-icon">⚠️</span>
+                            <div class="alert-content">
+                                <div class="alert-title">Device Offline</div>
+                                <div class="alert-message">Kitchen smart speaker has been offline for 2 hours.</div>
+                            </div>
+                            <button class="alert-close">×</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 13: Room Selector -->
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-number">13</span>
+                        <h2 class="section-title">Interactive Room Selector</h2>
+                    </div>
+
+                    <div class="room-selector">
+                        <div class="room-selector-header">
+                            <div class="room-selector-title">Your Home</div>
+                            <div class="room-selector-count">24 devices • 6 rooms</div>
+                        </div>
+
+                        <div class="floor-plan">
+                            <div class="floor-room large active">
+                                <div class="floor-room-header">
+                                    <span class="floor-room-emoji">🛋️</span>
+                                    <span class="floor-room-badge">8</span>
+                                </div>
+                                <div class="floor-room-info">
+                                    <div class="floor-room-name">Living Room</div>
+                                    <div class="floor-room-temp">72°F • 4 lights on</div>
+                                </div>
+                                <div class="floor-room-devices">
+                                    <div class="floor-device-dot on"></div>
+                                    <div class="floor-device-dot on"></div>
+                                    <div class="floor-device-dot on"></div>
+                                    <div class="floor-device-dot on"></div>
+                                    <div class="floor-device-dot off"></div>
+                                </div>
+                            </div>
+
+                            <div class="floor-room">
+                                <div class="floor-room-header">
+                                    <span class="floor-room-emoji">🍳</span>
+                                    <span class="floor-room-badge">6</span>
+                                </div>
+                                <div class="floor-room-info">
+                                    <div class="floor-room-name">Kitchen</div>
+                                    <div class="floor-room-temp">70°F • 1 light on</div>
+                                </div>
+                                <div class="floor-room-devices">
+                                    <div class="floor-device-dot on"></div>
+                                    <div class="floor-device-dot off"></div>
+                                    <div class="floor-device-dot off"></div>
+                                </div>
+                            </div>
+
+                            <div class="floor-room">
+                                <div class="floor-room-header">
+                                    <span class="floor-room-emoji">🛏️</span>
+                                    <span class="floor-room-badge">5</span>
+                                </div>
+                                <div class="floor-room-info">
+                                    <div class="floor-room-name">Master Bedroom</div>
+                                    <div class="floor-room-temp">68°F • All off</div>
+                                </div>
+                                <div class="floor-room-devices">
+                                    <div class="floor-device-dot off"></div>
+                                    <div class="floor-device-dot off"></div>
+                                    <div class="floor-device-dot off"></div>
+                                </div>
+                            </div>
+
+                            <div class="floor-room">
+                                <div class="floor-room-header">
+                                    <span class="floor-room-emoji">🚿</span>
+                                    <span class="floor-room-badge">3</span>
+                                </div>
+                                <div class="floor-room-info">
+                                    <div class="floor-room-name">Bathroom</div>
+                                    <div class="floor-room-temp">74°F • Fan on</div>
+                                </div>
+                                <div class="floor-room-devices">
+                                    <div class="floor-device-dot on"></div>
+                                    <div class="floor-device-dot off"></div>
+                                </div>
+                            </div>
+
+                            <div class="floor-room">
+                                <div class="floor-room-header">
+                                    <span class="floor-room-emoji">🏢</span>
+                                    <span class="floor-room-badge">4</span>
+                                </div>
+                                <div class="floor-room-info">
+                                    <div class="floor-room-name">Home Office</div>
+                                    <div class="floor-room-temp">71°F • 2 lights on</div>
+                                </div>
+                                <div class="floor-room-devices">
+                                    <div class="floor-device-dot on"></div>
+                                    <div class="floor-device-dot on"></div>
+                                    <div class="floor-device-dot off"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>
