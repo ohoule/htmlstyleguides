@@ -1,0 +1,2546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forge v1.0 — PainOnSocial Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            /* Brand — PainOnSocial */
+            --teal: #0891B2;
+            --teal-light: #22D3EE;
+            --teal-dark: #0E7490;
+            --orange: #F97316;
+            --purple: #A855F7;
+
+            /* Industrial Yellow */
+            --yellow: #FACC15;
+            --yellow-dark: #CA8A04;
+            --yellow-glow: rgba(250,204,21,0.12);
+
+            /* Neutral — True Neutral Blacks */
+            --black: #000000;
+            --near-black: #0A0A0A;
+            --neutral-900: #171717;
+            --neutral-800: #262626;
+            --neutral-700: #404040;
+            --neutral-600: #525252;
+            --neutral-500: #737373;
+            --neutral-400: #A3A3A3;
+            --neutral-300: #D4D4D4;
+            --neutral-200: #E5E5E5;
+            --neutral-100: #F5F5F5;
+            --neutral-50: #FAFAFA;
+
+            /* Semantic */
+            --success: #16A34A;
+            --success-bg: rgba(22,163,74,0.1);
+            --warning: #FACC15;
+            --warning-bg: rgba(250,204,21,0.1);
+            --error: #EF4444;
+            --error-bg: rgba(239,68,68,0.1);
+            --info: #0891B2;
+            --info-bg: rgba(8,145,178,0.1);
+
+            /* Typography */
+            --font-display: 'Clash Display', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'Source Code Pro', monospace;
+
+            /* Spacing — 8px base */
+            --sp-1: 4px;
+            --sp-2: 8px;
+            --sp-3: 12px;
+            --sp-4: 16px;
+            --sp-5: 24px;
+            --sp-6: 32px;
+            --sp-7: 48px;
+            --sp-8: 64px;
+            --sp-9: 96px;
+            --sp-10: 128px;
+
+            /* Transitions */
+            --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --duration: 200ms;
+            --duration-md: 300ms;
+        }
+
+        /* ========== BASE ========== */
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--neutral-50);
+            background: var(--black);
+            overflow-x: hidden;
+        }
+        a { color: var(--teal-light); text-decoration: none; transition: color var(--duration) var(--ease); }
+        a:hover { color: var(--teal); }
+        img { max-width: 100%; display: block; }
+
+        /* ========== UTILITY ========== */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--sp-5); }
+        .container-narrow { max-width: 800px; margin: 0 auto; padding: 0 var(--sp-5); }
+
+        /* Visible Grid Background */
+        .grid-bg {
+            background-image:
+                linear-gradient(var(--neutral-800) 1px, transparent 1px),
+                linear-gradient(90deg, var(--neutral-800) 1px, transparent 1px);
+            background-size: 64px 64px;
+        }
+
+        /* Industrial Underline */
+        .forge-underline {
+            text-decoration: none;
+            background-image: linear-gradient(var(--teal), var(--teal));
+            background-size: 100% 4px;
+            background-position: 0 92%;
+            background-repeat: no-repeat;
+            padding-bottom: 4px;
+        }
+
+        /* Oversized Section Number */
+        .section-number {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 80px;
+            line-height: 1;
+            color: var(--neutral-50);
+            opacity: 0.06;
+            position: absolute;
+            top: -10px;
+            left: 0;
+            pointer-events: none;
+            user-select: none;
+            letter-spacing: -2px;
+        }
+
+        /* Section base */
+        .forge-section {
+            position: relative;
+            padding: var(--sp-9) 0;
+            border-bottom: 1px solid var(--neutral-800);
+        }
+        .forge-section:last-child { border-bottom: none; }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--neutral-500);
+            margin-bottom: var(--sp-3);
+            display: block;
+        }
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--neutral-50);
+            margin-bottom: var(--sp-7);
+            letter-spacing: -0.5px;
+        }
+        .section-title .forge-underline {
+            background-image: linear-gradient(var(--teal), var(--teal));
+            background-size: 100% 4px;
+            background-position: 0 92%;
+        }
+
+        /* ========== 01. NAVIGATION ========== */
+        .forge-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--black);
+            border-bottom: 1px solid var(--neutral-800);
+            height: 64px;
+            display: flex;
+            align-items: center;
+        }
+        .forge-nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+        .nav-brand svg { flex-shrink: 0; }
+        .nav-brand-text {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--neutral-50);
+            letter-spacing: -0.3px;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-6);
+            list-style: none;
+        }
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--neutral-400);
+            transition: color var(--duration) var(--ease);
+            letter-spacing: 0.2px;
+        }
+        .nav-links a:hover { color: var(--neutral-50); }
+        .nav-cta {
+            background: var(--teal);
+            color: var(--black) !important;
+            padding: 10px 20px;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+            letter-spacing: 0.5px;
+            border-radius: 0;
+            transition: background var(--duration) var(--ease);
+            text-transform: uppercase;
+        }
+        .nav-cta:hover { background: var(--teal-light); color: var(--black) !important; }
+        .nav-mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--sp-2);
+        }
+        .nav-mobile-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--neutral-400);
+            margin: 5px 0;
+            transition: var(--duration) var(--ease);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-mobile-toggle { display: block; }
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: var(--black);
+                border-bottom: 1px solid var(--neutral-800);
+                padding: var(--sp-5);
+                gap: var(--sp-4);
+            }
+        }
+
+        /* ========== 02. HERO ========== */
+        .forge-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 64px;
+            background: var(--black);
+        }
+        .forge-hero .grid-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.5;
+            background-image:
+                linear-gradient(var(--neutral-800) 1px, transparent 1px),
+                linear-gradient(90deg, var(--neutral-800) 1px, transparent 1px);
+            background-size: 64px 64px;
+            pointer-events: none;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: var(--sp-9) 0;
+        }
+        .hero-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: var(--sp-5);
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+        .hero-eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 32px;
+            height: 2px;
+            background: var(--teal);
+        }
+        .hero-headline {
+            font-family: var(--font-display);
+            font-size: clamp(48px, 7vw, 80px);
+            font-weight: 700;
+            line-height: 1.05;
+            color: var(--neutral-50);
+            letter-spacing: -2px;
+            margin-bottom: var(--sp-6);
+        }
+        .hero-headline .line-break { display: block; }
+        .hero-subhead {
+            font-family: var(--font-body);
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--neutral-500);
+            max-width: 560px;
+            margin-bottom: var(--sp-7);
+        }
+        .hero-actions {
+            display: flex;
+            gap: var(--sp-4);
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-8);
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            background: var(--teal);
+            color: var(--black);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 14px 28px;
+            border: 2px solid var(--teal);
+            border-radius: 0;
+            cursor: pointer;
+            transition: all var(--duration) var(--ease);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-primary:hover {
+            background: var(--teal-light);
+            border-color: var(--teal-light);
+            color: var(--black);
+        }
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            background: transparent;
+            color: var(--neutral-400);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 14px 28px;
+            border: 2px solid var(--neutral-800);
+            border-radius: 0;
+            cursor: pointer;
+            transition: all var(--duration) var(--ease);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-ghost:hover {
+            border-color: var(--yellow);
+            color: var(--yellow);
+        }
+        .hero-metrics {
+            display: flex;
+            gap: var(--sp-7);
+            flex-wrap: wrap;
+        }
+        .hero-metric {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--neutral-500);
+        }
+        .hero-metric strong {
+            color: var(--neutral-50);
+            font-weight: 600;
+        }
+        .hero-watermark {
+            position: absolute;
+            top: 50%;
+            right: -40px;
+            transform: translateY(-50%);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 280px;
+            line-height: 1;
+            color: var(--neutral-50);
+            opacity: 0.025;
+            pointer-events: none;
+            user-select: none;
+            letter-spacing: -12px;
+        }
+
+        /* ========== 03. SOCIAL PROOF ========== */
+        .forge-social-proof {
+            background: var(--near-black);
+        }
+        .badge-row {
+            display: flex;
+            gap: var(--sp-4);
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-7);
+        }
+        .tier-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            padding: 8px 18px;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border-radius: 0;
+            transition: all var(--duration) var(--ease);
+        }
+        .tier-badge--explorer {
+            background: transparent;
+            border: 2px solid var(--neutral-800);
+            color: var(--neutral-400);
+        }
+        .tier-badge--scout {
+            background: var(--teal);
+            border: 2px solid var(--teal);
+            color: var(--black);
+        }
+        .tier-badge--prospector {
+            background: transparent;
+            border: 2px solid var(--yellow-dark);
+            color: var(--yellow);
+        }
+        .pill-row {
+            display: flex;
+            gap: var(--sp-3);
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-7);
+        }
+        .forge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            border-radius: 100px;
+            background: var(--neutral-900);
+            border: 1px solid var(--neutral-800);
+            color: var(--neutral-400);
+        }
+        .forge-pill--teal {
+            background: rgba(8,145,178,0.1);
+            border-color: var(--teal-dark);
+            color: var(--teal-light);
+        }
+        .forge-pill--yellow {
+            background: var(--yellow-glow);
+            border-color: var(--yellow-dark);
+            color: var(--yellow);
+        }
+        .forge-pill--purple {
+            background: rgba(168,85,247,0.1);
+            border-color: rgba(168,85,247,0.3);
+            color: var(--purple);
+        }
+        .forge-pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+            flex-shrink: 0;
+        }
+        .marketing-badges {
+            display: flex;
+            gap: var(--sp-4);
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-7);
+        }
+        .marketing-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            padding: 10px 20px;
+            background: var(--neutral-900);
+            border: 1px solid var(--neutral-800);
+            border-radius: 0;
+            font-family: var(--font-body);
+            font-size: 13px;
+            color: var(--neutral-400);
+        }
+        .marketing-badge svg { flex-shrink: 0; }
+        .trusted-bar {
+            border-top: 1px solid var(--neutral-800);
+            padding-top: var(--sp-6);
+        }
+        .trusted-bar-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--neutral-600);
+            margin-bottom: var(--sp-5);
+        }
+        .trusted-logos {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-7);
+            flex-wrap: wrap;
+        }
+        .trusted-logo {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--neutral-600);
+            letter-spacing: -0.3px;
+            opacity: 0.6;
+        }
+
+        /* ========== 04. FEATURES ========== */
+        .forge-features {
+            background: var(--black);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--sp-5);
+        }
+        @media (max-width: 768px) {
+            .features-grid { grid-template-columns: 1fr; }
+        }
+        .feature-card {
+            background: var(--neutral-900);
+            border: 1px solid var(--neutral-800);
+            border-radius: 0;
+            padding: var(--sp-6);
+            position: relative;
+            transition: all var(--duration) var(--ease);
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 0;
+            background: var(--teal);
+            transition: width var(--duration) var(--ease);
+        }
+        .feature-card:hover::before { width: 4px; }
+        .feature-card:hover { border-color: var(--neutral-700); }
+        .feature-card-number {
+            font-family: var(--font-mono);
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--teal);
+            opacity: 0.15;
+            line-height: 1;
+            margin-bottom: var(--sp-4);
+            letter-spacing: -1px;
+        }
+        .feature-card-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--sp-4);
+            color: var(--teal-light);
+        }
+        .feature-card h3 {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--neutral-50);
+            margin-bottom: var(--sp-3);
+            letter-spacing: -0.3px;
+        }
+        .feature-card p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--neutral-500);
+        }
+
+        /* ========== 05. STATS ========== */
+        .forge-stats {
+            background: var(--near-black);
+            position: relative;
+        }
+        .forge-stats .grid-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.4;
+            background-image:
+                linear-gradient(var(--neutral-800) 1px, transparent 1px),
+                linear-gradient(90deg, var(--neutral-800) 1px, transparent 1px);
+            background-size: 64px 64px;
+            pointer-events: none;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--sp-6);
+            position: relative;
+            z-index: 2;
+        }
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        .stat-item { text-align: center; }
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: clamp(48px, 6vw, 72px);
+            font-weight: 700;
+            line-height: 1;
+            color: var(--neutral-50);
+            letter-spacing: -3px;
+            margin-bottom: var(--sp-2);
+        }
+        .stat-value .stat-accent { color: var(--teal-light); }
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--neutral-500);
+        }
+
+        /* ========== 06. TESTIMONIALS ========== */
+        .forge-testimonials {
+            background: var(--black);
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--sp-5);
+        }
+        @media (max-width: 768px) {
+            .testimonials-grid { grid-template-columns: 1fr; }
+        }
+        .testimonial-card {
+            background: var(--neutral-900);
+            border: 1px solid var(--neutral-800);
+            border-left: 4px solid var(--teal);
+            border-radius: 0;
+            padding: var(--sp-6);
+            position: relative;
+        }
+        .testimonial-quote-mark {
+            font-family: var(--font-display);
+            font-size: 72px;
+            font-weight: 700;
+            color: var(--yellow);
+            opacity: 0.2;
+            line-height: 1;
+            position: absolute;
+            top: 16px;
+            right: 24px;
+            pointer-events: none;
+            user-select: none;
+        }
+        .testimonial-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--neutral-300);
+            margin-bottom: var(--sp-5);
+            position: relative;
+            z-index: 2;
+            font-style: italic;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+        .testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--neutral-800);
+            border: 1px solid var(--neutral-700);
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--teal-light);
+        }
+        .testimonial-name {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--neutral-50);
+        }
+        .testimonial-role {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--neutral-500);
+        }
+
+        /* ========== 07. PRICING ========== */
+        .forge-pricing {
+            background: var(--near-black);
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--sp-5);
+            align-items: start;
+        }
+        @media (max-width: 900px) {
+            .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+        }
+        .pricing-card {
+            background: var(--neutral-900);
+            border: 1px solid var(--neutral-800);
+            border-radius: 0;
+            padding: var(--sp-7) var(--sp-6);
+            position: relative;
+            transition: border-color var(--duration) var(--ease);
+        }
+        .pricing-card:hover { border-color: var(--neutral-700); }
+        .pricing-card--featured {
+            border-color: var(--teal);
+            border-width: 2px;
+        }
+        .pricing-card--featured:hover { border-color: var(--teal-light); }
+        .pricing-popular-badge {
+            position: absolute;
+            top: -1px;
+            right: var(--sp-5);
+            background: var(--yellow);
+            color: var(--black);
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 0;
+        }
+        .pricing-tier {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--neutral-500);
+            margin-bottom: var(--sp-4);
+        }
+        .pricing-amount {
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--neutral-50);
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: var(--sp-2);
+        }
+        .pricing-amount span {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--neutral-500);
+            letter-spacing: 0;
+        }
+        .pricing-desc {
+            font-size: 14px;
+            color: var(--neutral-500);
+            margin-bottom: var(--sp-6);
+            line-height: 1.6;
+        }
+        .pricing-features {
+            list-style: none;
+            margin-bottom: var(--sp-6);
+        }
+        .pricing-features li {
+            font-size: 14px;
+            color: var(--neutral-400);
+            padding: var(--sp-2) 0;
+            border-bottom: 1px solid var(--neutral-800);
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+        .pricing-features li:last-child { border-bottom: none; }
+        .pricing-features li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 0;
+            background: var(--teal);
+            flex-shrink: 0;
+        }
+        .pricing-card--featured .pricing-features li::before {
+            background: var(--teal-light);
+        }
+        .pricing-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            text-align: center;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 0;
+            border: 2px solid var(--neutral-800);
+            background: transparent;
+            color: var(--neutral-400);
+            cursor: pointer;
+            transition: all var(--duration) var(--ease);
+        }
+        .pricing-btn:hover {
+            border-color: var(--yellow);
+            color: var(--yellow);
+        }
+        .pricing-btn--primary {
+            background: var(--teal);
+            border-color: var(--teal);
+            color: var(--black);
+        }
+        .pricing-btn--primary:hover {
+            background: var(--teal-light);
+            border-color: var(--teal-light);
+            color: var(--black);
+        }
+
+        /* ========== 08. FORMS ========== */
+        .forge-forms {
+            background: var(--black);
+        }
+        .forms-demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--sp-7);
+        }
+        @media (max-width: 768px) {
+            .forms-demo-grid { grid-template-columns: 1fr; }
+        }
+        .form-group {
+            margin-bottom: var(--sp-5);
+        }
+        .form-label {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--neutral-400);
+            letter-spacing: 0.3px;
+            margin-bottom: var(--sp-2);
+            text-transform: uppercase;
+        }
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--neutral-50);
+            background: var(--neutral-900);
+            border: 1px solid var(--neutral-800);
+            border-radius: 0;
+            outline: none;
+            transition: border-color var(--duration) var(--ease);
+        }
+        .form-input::placeholder { color: var(--neutral-600); }
+        .form-input:focus { border-color: var(--teal); }
+        .form-input--error { border-color: var(--error); }
+        .form-input--warning { border-color: var(--yellow); }
+        .form-hint {
+            font-size: 12px;
+            color: var(--neutral-500);
+            margin-top: var(--sp-1);
+        }
+        .form-hint--error { color: var(--error); }
+        .form-hint--warning { color: var(--yellow); }
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--neutral-50);
+            background: var(--neutral-900);
+            border: 1px solid var(--neutral-800);
+            border-radius: 0;
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%23737373' stroke-width='1.5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            transition: border-color var(--duration) var(--ease);
+        }
+        .form-select:focus { border-color: var(--teal); }
+        .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--neutral-50);
+            background: var(--neutral-900);
+            border: 1px solid var(--neutral-800);
+            border-radius: 0;
+            outline: none;
+            resize: vertical;
+            min-height: 100px;
+            transition: border-color var(--duration) var(--ease);
+        }
+        .form-textarea:focus { border-color: var(--teal); }
+        /* Toggle */
+        .form-toggle-wrap {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+        .form-toggle {
+            width: 44px;
+            height: 24px;
+            background: var(--neutral-800);
+            border-radius: 100px;
+            position: relative;
+            cursor: pointer;
+            transition: background var(--duration) var(--ease);
+            flex-shrink: 0;
+        }
+        .form-toggle.active { background: var(--teal); }
+        .form-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 18px;
+            height: 18px;
+            background: var(--neutral-50);
+            border-radius: 50%;
+            transition: transform var(--duration) var(--ease);
+        }
+        .form-toggle.active::after { transform: translateX(20px); }
+        .form-toggle-label {
+            font-size: 14px;
+            color: var(--neutral-400);
+        }
+        /* Mini signup */
+        .mini-signup {
+            background: var(--neutral-900);
+            border: 1px solid var(--neutral-800);
+            padding: var(--sp-6);
+            border-radius: 0;
+        }
+        .mini-signup h4 {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--neutral-50);
+            margin-bottom: var(--sp-4);
+        }
+        .mini-signup-row {
+            display: flex;
+            gap: var(--sp-3);
+        }
+        .mini-signup-row .form-input { flex: 1; }
+        @media (max-width: 480px) {
+            .mini-signup-row { flex-direction: column; }
+        }
+
+        /* ========== 09. FOOTER ========== */
+        .forge-footer {
+            background: var(--black);
+            border-top: 1px solid var(--neutral-800);
+            padding: var(--sp-8) 0 var(--sp-6);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--sp-7);
+            margin-bottom: var(--sp-7);
+        }
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .footer-brand-desc {
+            font-size: 14px;
+            color: var(--neutral-500);
+            line-height: 1.7;
+            margin-top: var(--sp-4);
+            max-width: 280px;
+        }
+        .footer-col-title {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--neutral-500);
+            margin-bottom: var(--sp-4);
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li { margin-bottom: var(--sp-3); }
+        .footer-links a {
+            font-size: 14px;
+            color: var(--neutral-400);
+            transition: color var(--duration) var(--ease);
+        }
+        .footer-links a:hover { color: var(--neutral-50); }
+        .footer-bottom {
+            border-top: 1px solid var(--neutral-800);
+            padding-top: var(--sp-5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--sp-4);
+        }
+        .footer-copyright {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--neutral-600);
+        }
+        .footer-legal {
+            display: flex;
+            gap: var(--sp-5);
+        }
+        .footer-legal a {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--neutral-600);
+        }
+        .footer-legal a:hover { color: var(--neutral-400); }
+
+        /* ========== GROUP DIVIDER ========== */
+        .forge-divider-group {
+            padding: var(--sp-9) 0;
+            position: relative;
+            overflow: hidden;
+            border-bottom: none;
+        }
+        .forge-divider-group .divider-line {
+            height: 4px;
+            background: var(--teal);
+            margin-bottom: var(--sp-5);
+        }
+        .forge-divider-group .divider-text {
+            font-family: var(--font-display);
+            font-size: clamp(48px, 8vw, 120px);
+            font-weight: 700;
+            color: var(--neutral-50);
+            opacity: 0.04;
+            letter-spacing: -3px;
+            line-height: 1;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .forge-divider-group .divider-sub {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-top: var(--sp-4);
+        }
+
+        /* ========== 10. COLOR PALETTE ========== */
+        .forge-colors {
+            background: var(--black);
+        }
+        .color-group {
+            margin-bottom: var(--sp-7);
+        }
+        .color-group-title {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--neutral-500);
+            margin-bottom: var(--sp-4);
+        }
+        .color-swatches {
+            display: flex;
+            gap: var(--sp-3);
+            flex-wrap: wrap;
+        }
+        .color-swatch {
+            width: 100px;
+            border-radius: 0;
+            overflow: hidden;
+            border: 1px solid var(--neutral-800);
+        }
+        .color-swatch-fill {
+            height: 64px;
+        }
+        .color-swatch-info {
+            padding: var(--sp-2) var(--sp-3);
+            background: var(--neutral-900);
+        }
+        .color-swatch-name {
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--neutral-300);
+            margin-bottom: 2px;
+        }
+        .color-swatch-hex {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--neutral-500);
+        }
+        .neutral-scale {
+            display: flex;
+            gap: 0;
+            border: 1px solid var(--neutral-800);
+        }
+        .neutral-swatch {
+            flex: 1;
+            min-width: 0;
+        }
+        .neutral-swatch-fill { height: 48px; }
+        .neutral-swatch-info {
+            padding: var(--sp-1) var(--sp-2);
+            background: var(--neutral-900);
+        }
+        .neutral-swatch-label {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--neutral-500);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ========== 11. TYPOGRAPHY ========== */
+        .forge-typography {
+            background: var(--near-black);
+        }
+        .type-specimen {
+            margin-bottom: var(--sp-6);
+            padding-bottom: var(--sp-6);
+            border-bottom: 1px solid var(--neutral-800);
+        }
+        .type-specimen:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .type-meta {
+            display: flex;
+            align-items: baseline;
+            gap: var(--sp-4);
+            margin-bottom: var(--sp-3);
+            flex-wrap: wrap;
+        }
+        .type-meta-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--teal);
+        }
+        .type-meta-spec {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--neutral-600);
+        }
+        .type-display-hero {
+            font-family: var(--font-display);
+            font-size: clamp(40px, 5vw, 64px);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--neutral-50);
+            letter-spacing: -2px;
+        }
+        .type-h1 {
+            font-family: var(--font-display);
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--neutral-50);
+            letter-spacing: -1.5px;
+        }
+        .type-h2 {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--neutral-50);
+            letter-spacing: -0.5px;
+        }
+        .type-h3 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--neutral-50);
+        }
+        .type-h4 {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--neutral-50);
+        }
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--neutral-300);
+        }
+        .type-body-sm {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--neutral-400);
+        }
+        .type-caption {
+            font-family: var(--font-body);
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--neutral-500);
+        }
+        .type-overline {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--neutral-500);
+        }
+        .type-mono {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--teal-light);
+        }
+
+        /* ========== 12. SPACING ========== */
+        .forge-spacing {
+            background: var(--black);
+        }
+        .spacing-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp-4);
+        }
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-4);
+        }
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--neutral-500);
+            width: 80px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .spacing-bar {
+            height: 24px;
+            background: var(--teal);
+            opacity: 0.5;
+            border-radius: 0;
+            transition: opacity var(--duration) var(--ease);
+        }
+        .spacing-bar:hover { opacity: 0.8; }
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--neutral-600);
+            flex-shrink: 0;
+            width: 50px;
+        }
+
+        /* ========== 13. BUTTONS ========== */
+        .forge-buttons {
+            background: var(--near-black);
+        }
+        .btn-row {
+            display: flex;
+            gap: var(--sp-4);
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: var(--sp-5);
+        }
+        .btn-row-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--neutral-500);
+            margin-bottom: var(--sp-3);
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp-2);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 0;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all var(--duration) var(--ease);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+        .btn--primary {
+            background: var(--teal);
+            border-color: var(--teal);
+            color: var(--black);
+        }
+        .btn--primary:hover { background: var(--teal-light); border-color: var(--teal-light); }
+        .btn--primary:active { background: var(--teal-dark); border-color: var(--teal-dark); }
+        .btn--primary:disabled, .btn--primary.disabled {
+            background: var(--neutral-800);
+            border-color: var(--neutral-800);
+            color: var(--neutral-600);
+            cursor: not-allowed;
+        }
+        .btn--secondary {
+            background: var(--neutral-800);
+            border-color: var(--neutral-800);
+            color: var(--neutral-300);
+        }
+        .btn--secondary:hover { background: var(--neutral-700); border-color: var(--neutral-700); color: var(--neutral-50); }
+        .btn--ghost {
+            background: transparent;
+            border-color: var(--neutral-800);
+            color: var(--neutral-400);
+        }
+        .btn--ghost:hover { border-color: var(--yellow); color: var(--yellow); }
+        .btn--yellow {
+            background: var(--yellow);
+            border-color: var(--yellow);
+            color: var(--black);
+        }
+        .btn--yellow:hover { background: #FDE047; border-color: #FDE047; }
+        .btn--text {
+            background: none;
+            border: none;
+            color: var(--teal-light);
+            padding: 12px 4px;
+            text-transform: none;
+            letter-spacing: 0;
+            font-weight: 500;
+        }
+        .btn--text:hover { color: var(--teal); text-decoration: underline; }
+        .btn--sm { padding: 8px 16px; font-size: 12px; }
+        .btn--lg { padding: 16px 32px; font-size: 15px; }
+
+        /* ========== 14. DIVIDERS & DECORATIVE ========== */
+        .forge-dividers {
+            background: var(--black);
+        }
+        .divider-demo {
+            margin-bottom: var(--sp-7);
+        }
+        .divider-demo-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--neutral-500);
+            margin-bottom: var(--sp-4);
+        }
+        .demo-industrial-underline {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--neutral-50);
+            letter-spacing: -0.5px;
+        }
+        .demo-grid-box {
+            width: 100%;
+            height: 160px;
+            background-image:
+                linear-gradient(var(--neutral-800) 1px, transparent 1px),
+                linear-gradient(90deg, var(--neutral-800) 1px, transparent 1px);
+            background-size: 32px 32px;
+            border: 1px solid var(--neutral-800);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .demo-grid-box-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--neutral-600);
+            background: var(--black);
+            padding: 4px 12px;
+        }
+        .demo-watermark-box {
+            width: 100%;
+            height: 160px;
+            background: var(--neutral-900);
+            border: 1px solid var(--neutral-800);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .demo-watermark-num {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 120px;
+            color: var(--neutral-50);
+            opacity: 0.04;
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            letter-spacing: -4px;
+            line-height: 1;
+        }
+        .demo-watermark-content {
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--neutral-500);
+            position: relative;
+            z-index: 2;
+        }
+        .demo-separator-thin { height: 1px; background: var(--neutral-800); }
+        .demo-separator-thick { height: 4px; background: var(--teal); }
+        .demo-separator-dashed { height: 0; border: none; border-top: 1px dashed var(--neutral-700); }
+
+        /* ========== 15. ALERTS ========== */
+        .forge-alerts {
+            background: var(--near-black);
+        }
+        .alerts-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp-4);
+        }
+        .forge-alert {
+            padding: var(--sp-4) var(--sp-5);
+            border: 1px solid var(--neutral-800);
+            border-radius: 0;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--sp-3);
+        }
+        .forge-alert--success {
+            background: var(--success-bg);
+            border-left: 4px solid var(--success);
+        }
+        .forge-alert--warning {
+            background: var(--warning-bg);
+            border-left: 4px solid var(--warning);
+        }
+        .forge-alert--error {
+            background: var(--error-bg);
+            border-left: 4px solid var(--error);
+        }
+        .forge-alert--info {
+            background: var(--info-bg);
+            border-left: 4px solid var(--info);
+        }
+        .forge-alert-icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            margin-top: 1px;
+        }
+        .forge-alert-content { flex: 1; }
+        .forge-alert-title {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--neutral-50);
+            margin-bottom: 2px;
+        }
+        .forge-alert-text {
+            font-size: 13px;
+            color: var(--neutral-400);
+            line-height: 1.5;
+        }
+        .forge-toast {
+            background: var(--neutral-900);
+            border: 1px solid var(--neutral-800);
+            border-radius: 0;
+            padding: var(--sp-4) var(--sp-5);
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+            max-width: 420px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        }
+        .forge-toast-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .forge-toast-text {
+            font-size: 14px;
+            color: var(--neutral-300);
+            flex: 1;
+        }
+        .forge-toast-close {
+            font-family: var(--font-mono);
+            font-size: 16px;
+            color: var(--neutral-600);
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+            line-height: 1;
+            transition: color var(--duration) var(--ease);
+        }
+        .forge-toast-close:hover { color: var(--neutral-400); }
+
+        /* ========== ANIMATIONS ========== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in {
+            opacity: 0;
+            animation: fadeInUp 0.5s var(--ease) forwards;
+        }
+        .animate-in:nth-child(1) { animation-delay: 0ms; }
+        .animate-in:nth-child(2) { animation-delay: 80ms; }
+        .animate-in:nth-child(3) { animation-delay: 160ms; }
+        .animate-in:nth-child(4) { animation-delay: 240ms; }
+
+        /* ========== SCROLL TRIGGER ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================
+     01. NAVIGATION
+     ============================================================ -->
+<nav class="forge-nav">
+    <div class="container">
+        <div class="nav-brand">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.15)" stroke="#22D3EE" stroke-width="1.5"/>
+                <circle cx="14" cy="14" r="3" stroke="#22D3EE" stroke-width="1.5" fill="none"/>
+                <line x1="14" y1="8" x2="14" y2="11" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="14" y1="17" x2="14" y2="20" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="8" y1="14" x2="11" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="17" y1="14" x2="20" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="nav-brand-text">PainOnSocial</span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Proof</a></li>
+            <li><a href="#design-system">System</a></li>
+            <li><a href="#" class="nav-cta">Start Free Trial</a></li>
+        </ul>
+        <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ============================================================
+     02. HERO
+     ============================================================ -->
+<section class="forge-hero forge-section" style="border-bottom: 1px solid var(--neutral-800);">
+    <div class="grid-bg"></div>
+    <div class="hero-watermark">02</div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-eyebrow">Forge v1.0 Design System</div>
+            <h1 class="hero-headline">
+                Stop guessing<span class="line-break"> what to build.</span>
+                <span class="line-break">Start with <span class="forge-underline">validated pain</span>.</span>
+            </h1>
+            <p class="hero-subhead">PainOnSocial scans Reddit discussions with AI to surface real business pain points, score their severity, and generate validated solution ideas. Built from evidence.</p>
+            <div class="hero-actions">
+                <button class="btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 8L8.5 3M13.5 8L8.5 13M13.5 8H2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Start Free Trial
+                </button>
+                <button class="btn-ghost">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><polygon points="6,3 13,8 6,13" fill="currentColor"/></svg>
+                    Watch Demo
+                </button>
+            </div>
+            <div class="hero-metrics">
+                <span class="hero-metric"><strong>2,847</strong> communities tracked</span>
+                <span class="hero-metric"><strong>14.2M</strong> discussions analyzed</span>
+                <span class="hero-metric"><strong>92%</strong> accuracy score</span>
+                <span class="hero-metric"><strong>&lt;3min</strong> avg. first insight</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     03. SOCIAL PROOF / BADGES
+     ============================================================ -->
+<section class="forge-social-proof forge-section" id="social-proof">
+    <div class="container" style="position: relative;">
+        <span class="section-number">03</span>
+        <span class="section-label">// Social Proof</span>
+        <h2 class="section-title">Tier <span class="forge-underline">Badges</span></h2>
+
+        <div class="badge-row">
+            <span class="tier-badge tier-badge--explorer">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.5"/></svg>
+                Explorer
+            </span>
+            <span class="tier-badge tier-badge--scout">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L9 5L13 5.5L10 8.5L10.8 13L7 11L3.2 13L4 8.5L1 5.5L5 5L7 1Z" fill="currentColor"/></svg>
+                Scout
+            </span>
+            <span class="tier-badge tier-badge--prospector">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L13 13H1L7 1Z" fill="currentColor"/></svg>
+                Prospector
+            </span>
+        </div>
+
+        <div class="pill-row">
+            <span class="forge-pill"><span class="forge-pill-dot"></span>Default pill</span>
+            <span class="forge-pill forge-pill--teal"><span class="forge-pill-dot"></span>AI Verified</span>
+            <span class="forge-pill forge-pill--yellow"><span class="forge-pill-dot"></span>High Severity</span>
+            <span class="forge-pill forge-pill--purple"><span class="forge-pill-dot"></span>New Feature</span>
+            <span class="forge-pill"><span class="forge-pill-dot"></span>Beta</span>
+        </div>
+
+        <div class="marketing-badges">
+            <div class="marketing-badge">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1L10 5.5L15 6L11.5 9.5L12.3 14.5L8 12L3.7 14.5L4.5 9.5L1 6L6 5.5L8 1Z" stroke="#FACC15" stroke-width="1.2" fill="none"/></svg>
+                4.9/5 on G2
+            </div>
+            <div class="marketing-badge">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M8 2v12" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/></svg>
+                SOC 2 Compliant
+            </div>
+            <div class="marketing-badge">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="#A855F7" stroke-width="1.2" fill="none"/><path d="M5 8l2 2 4-4" stroke="#A855F7" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                GDPR Ready
+            </div>
+            <div class="marketing-badge">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#16A34A" stroke-width="1.2" fill="none"/><path d="M5.5 8l2 2 3-3.5" stroke="#16A34A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                99.9% Uptime
+            </div>
+        </div>
+
+        <div class="trusted-bar">
+            <div class="trusted-bar-label">Trusted by teams at</div>
+            <div class="trusted-logos">
+                <span class="trusted-logo">Stripe</span>
+                <span class="trusted-logo">Notion</span>
+                <span class="trusted-logo">Linear</span>
+                <span class="trusted-logo">Vercel</span>
+                <span class="trusted-logo">Supabase</span>
+                <span class="trusted-logo">Resend</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     04. FEATURE CARDS
+     ============================================================ -->
+<section class="forge-features forge-section" id="features">
+    <div class="container" style="position: relative;">
+        <span class="section-number">04</span>
+        <span class="section-label">// Core Features</span>
+        <h2 class="section-title">What Forge <span class="forge-underline">delivers</span></h2>
+
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-card-number">01</div>
+                <div class="feature-card-icon">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="#22D3EE" stroke-width="1.5"/><circle cx="14" cy="14" r="4" stroke="#22D3EE" stroke-width="1.5"/><line x1="14" y1="4" x2="14" y2="8" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/><line x1="14" y1="20" x2="14" y2="24" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <h3>Community Discovery</h3>
+                <p>Automatically identify and monitor the most relevant Reddit communities for your market. No manual searching. AI finds where your customers congregate.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-card-number">02</div>
+                <div class="feature-card-icon">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="8" width="20" height="14" stroke="#22D3EE" stroke-width="1.5" rx="0"/><line x1="4" y1="14" x2="24" y2="14" stroke="#22D3EE" stroke-width="1.5"/><line x1="12" y1="8" x2="12" y2="22" stroke="#22D3EE" stroke-width="1.5"/></svg>
+                </div>
+                <h3>Pain Point Analysis</h3>
+                <p>Every pain point is severity-scored, categorized, and ranked. Understand not just what hurts, but how much — backed by real discussion evidence.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-card-number">03</div>
+                <div class="feature-card-icon">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 22L14 6L22 22H6Z" stroke="#22D3EE" stroke-width="1.5" stroke-linejoin="round"/><line x1="14" y1="14" x2="14" y2="18" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="20" r="0.5" fill="#22D3EE"/></svg>
+                </div>
+                <h3>Solution Ideation</h3>
+                <p>AI generates solution hypotheses directly from validated pain points. Product ideas rooted in evidence, not guesswork. Ship what people actually need.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-card-number">04</div>
+                <div class="feature-card-icon">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 8h20M4 14h20M4 20h20" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="2" fill="#22D3EE"/><circle cx="18" cy="14" r="2" fill="#22D3EE"/><circle cx="12" cy="20" r="2" fill="#22D3EE"/></svg>
+                </div>
+                <h3>Evidence Trail</h3>
+                <p>Every insight links back to the original discussions. Full audit trail. Verify any data point with one click. Trust, but verify.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     05. STATS
+     ============================================================ -->
+<section class="forge-stats forge-section">
+    <div class="grid-bg"></div>
+    <div class="container" style="position: relative;">
+        <span class="section-number">05</span>
+        <span class="section-label">// By the Numbers</span>
+        <h2 class="section-title">Raw <span class="forge-underline">evidence</span></h2>
+
+        <div class="stats-grid">
+            <div class="stat-item reveal">
+                <div class="stat-value">14.2<span class="stat-accent">M</span></div>
+                <div class="stat-label">Discussions Analyzed</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-value">2,847</div>
+                <div class="stat-label">Communities Tracked</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-value">92<span class="stat-accent">%</span></div>
+                <div class="stat-label">Accuracy Score</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-value">&lt;3<span class="stat-accent">m</span></div>
+                <div class="stat-label">First Insight</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     06. TESTIMONIALS
+     ============================================================ -->
+<section class="forge-testimonials forge-section" id="testimonials">
+    <div class="container" style="position: relative;">
+        <span class="section-number">06</span>
+        <span class="section-label">// Validated by Users</span>
+        <h2 class="section-title">What builders <span class="forge-underline">say</span></h2>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal">
+                <div class="testimonial-quote-mark">"</div>
+                <p class="testimonial-text">"We stopped running surveys. PainOnSocial gives us raw, unfiltered pain points from the communities we care about. Our last three features shipped because of insights found here. The severity scoring alone saved us from building the wrong thing twice."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MC</div>
+                    <div>
+                        <div class="testimonial-name">Maya Chen</div>
+                        <div class="testimonial-role">Head of Product, DataStack</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="testimonial-quote-mark">"</div>
+                <p class="testimonial-text">"The evidence trail is everything. Every insight links to real discussions. I can show my CEO exactly why we're prioritizing a feature — not with opinions, but with proof from hundreds of users expressing the same pain."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">JK</div>
+                    <div>
+                        <div class="testimonial-name">James Kowalski</div>
+                        <div class="testimonial-role">Founder & CEO, BuildFast</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     07. PRICING
+     ============================================================ -->
+<section class="forge-pricing forge-section" id="pricing">
+    <div class="container" style="position: relative;">
+        <span class="section-number">07</span>
+        <span class="section-label">// Plans</span>
+        <h2 class="section-title">Simple <span class="forge-underline">pricing</span></h2>
+
+        <div class="pricing-grid">
+            <!-- Explorer -->
+            <div class="pricing-card reveal">
+                <div class="pricing-tier">Explorer</div>
+                <div class="pricing-amount">$0<span>/mo</span></div>
+                <p class="pricing-desc">Get started with community discovery and basic pain point scanning.</p>
+                <ul class="pricing-features">
+                    <li>3 communities monitored</li>
+                    <li>50 pain points / month</li>
+                    <li>Basic severity scoring</li>
+                    <li>7-day data retention</li>
+                    <li>Community support</li>
+                </ul>
+                <button class="pricing-btn">Get Started</button>
+            </div>
+            <!-- Scout (Featured) -->
+            <div class="pricing-card pricing-card--featured reveal">
+                <div class="pricing-popular-badge">Most Popular</div>
+                <div class="pricing-tier">Scout</div>
+                <div class="pricing-amount">$49<span>/mo</span></div>
+                <p class="pricing-desc">Full pain analysis with solution ideation and evidence trails.</p>
+                <ul class="pricing-features">
+                    <li>25 communities monitored</li>
+                    <li>Unlimited pain points</li>
+                    <li>Advanced severity scoring</li>
+                    <li>Solution ideation (AI)</li>
+                    <li>Full evidence trails</li>
+                    <li>30-day data retention</li>
+                    <li>Priority support</li>
+                </ul>
+                <button class="pricing-btn pricing-btn--primary">Start Free Trial</button>
+            </div>
+            <!-- Prospector -->
+            <div class="pricing-card reveal">
+                <div class="pricing-tier">Prospector</div>
+                <div class="pricing-amount">$149<span>/mo</span></div>
+                <p class="pricing-desc">Enterprise-grade analysis with API access, team features, and custom integrations.</p>
+                <ul class="pricing-features">
+                    <li>Unlimited communities</li>
+                    <li>Unlimited pain points</li>
+                    <li>Custom severity models</li>
+                    <li>Solution ideation (AI)</li>
+                    <li>API access</li>
+                    <li>Team collaboration</li>
+                    <li>Unlimited data retention</li>
+                    <li>Dedicated support</li>
+                </ul>
+                <button class="pricing-btn">Contact Sales</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     08. FORMS
+     ============================================================ -->
+<section class="forge-forms forge-section" id="forms">
+    <div class="container" style="position: relative;">
+        <span class="section-number">08</span>
+        <span class="section-label">// Form Elements</span>
+        <h2 class="section-title">Inputs & <span class="forge-underline">controls</span></h2>
+
+        <div class="forms-demo-grid">
+            <div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="you@company.com">
+                    <div class="form-hint">We'll never share your email.</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Community URL</label>
+                    <input type="text" class="form-input form-input--warning" placeholder="r/subreddit" value="r/invalid format">
+                    <div class="form-hint form-hint--warning">Please enter a valid subreddit format (r/name).</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input form-input--error" placeholder="Min 8 characters" value="short">
+                    <div class="form-hint form-hint--error">Password must be at least 8 characters.</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Industry</label>
+                    <select class="form-select">
+                        <option>Select your industry...</option>
+                        <option>SaaS / Software</option>
+                        <option>E-commerce</option>
+                        <option>FinTech</option>
+                        <option>HealthTech</option>
+                        <option>EdTech</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-textarea" placeholder="Tell us about your product..."></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="form-toggle-wrap">
+                        <div class="form-toggle active" onclick="this.classList.toggle('active')"></div>
+                        <span class="form-toggle-label">Enable real-time monitoring</span>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: var(--sp-3);">
+                    <div class="form-toggle-wrap">
+                        <div class="form-toggle" onclick="this.classList.toggle('active')"></div>
+                        <span class="form-toggle-label">Weekly email digest</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="mini-signup">
+                    <h4>Start discovering pain points</h4>
+                    <p style="font-size: 14px; color: var(--neutral-500); margin-bottom: var(--sp-4); line-height: 1.6;">Enter your email to start your 14-day free trial. No credit card required.</p>
+                    <div class="mini-signup-row">
+                        <input type="email" class="form-input" placeholder="you@company.com">
+                        <button class="btn-primary" style="white-space: nowrap;">Start Trial</button>
+                    </div>
+                    <p style="font-family: var(--font-mono); font-size: 11px; color: var(--neutral-600); margin-top: var(--sp-3);">Free for 14 days. Cancel anytime.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     09. FOOTER
+     ============================================================ -->
+<footer class="forge-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="nav-brand" style="margin-bottom: var(--sp-3);">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.15)" stroke="#22D3EE" stroke-width="1.5"/>
+                        <circle cx="14" cy="14" r="3" stroke="#22D3EE" stroke-width="1.5" fill="none"/>
+                        <line x1="14" y1="8" x2="14" y2="11" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="14" y1="17" x2="14" y2="20" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="8" y1="14" x2="11" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="17" y1="14" x2="20" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span class="nav-brand-text">PainOnSocial</span>
+                </div>
+                <p class="footer-brand-desc">AI-powered pain point discovery from Reddit discussions. Built from evidence, not assumptions.</p>
+            </div>
+            <div>
+                <div class="footer-col-title">Product</div>
+                <ul class="footer-links">
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">API</a></li>
+                    <li><a href="#">Changelog</a></li>
+                    <li><a href="#">Integrations</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Company</div>
+                <ul class="footer-links">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Resources</div>
+                <ul class="footer-links">
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Status</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="footer-copyright">&copy; 2026 PainOnSocial. Built from evidence.</span>
+            <div class="footer-legal">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Security</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================================
+     GROUP DIVIDER — DESIGN SYSTEM
+     ============================================================ -->
+<div class="forge-divider-group" id="design-system">
+    <div class="container">
+        <div class="divider-line"></div>
+        <div class="divider-text">Design System</div>
+        <div class="divider-sub">Forge v1.0 — Component Reference</div>
+    </div>
+</div>
+
+<!-- ============================================================
+     10. COLOR PALETTE
+     ============================================================ -->
+<section class="forge-colors forge-section" id="colors">
+    <div class="container" style="position: relative;">
+        <span class="section-number">10</span>
+        <span class="section-label">// Color Palette</span>
+        <h2 class="section-title">Brand <span class="forge-underline">colors</span></h2>
+
+        <div class="color-group">
+            <div class="color-group-title">Primary — Teal</div>
+            <div class="color-swatches">
+                <div class="color-swatch">
+                    <div class="color-swatch-fill" style="background: #22D3EE;"></div>
+                    <div class="color-swatch-info"><div class="color-swatch-name">Teal Light</div><div class="color-swatch-hex">#22D3EE</div></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-fill" style="background: #0891B2;"></div>
+                    <div class="color-swatch-info"><div class="color-swatch-name">Teal</div><div class="color-swatch-hex">#0891B2</div></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-fill" style="background: #0E7490;"></div>
+                    <div class="color-swatch-info"><div class="color-swatch-name">Teal Dark</div><div class="color-swatch-hex">#0E7490</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="color-group">
+            <div class="color-group-title">Accents</div>
+            <div class="color-swatches">
+                <div class="color-swatch">
+                    <div class="color-swatch-fill" style="background: #F97316;"></div>
+                    <div class="color-swatch-info"><div class="color-swatch-name">Orange</div><div class="color-swatch-hex">#F97316</div></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-fill" style="background: #A855F7;"></div>
+                    <div class="color-swatch-info"><div class="color-swatch-name">Purple</div><div class="color-swatch-hex">#A855F7</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="color-group">
+            <div class="color-group-title">Industrial Yellow</div>
+            <div class="color-swatches">
+                <div class="color-swatch">
+                    <div class="color-swatch-fill" style="background: #FACC15;"></div>
+                    <div class="color-swatch-info"><div class="color-swatch-name">Yellow</div><div class="color-swatch-hex">#FACC15</div></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-fill" style="background: #CA8A04;"></div>
+                    <div class="color-swatch-info"><div class="color-swatch-name">Yellow Dark</div><div class="color-swatch-hex">#CA8A04</div></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-fill" style="background: rgba(250,204,21,0.12); border: 1px dashed #CA8A04;"></div>
+                    <div class="color-swatch-info"><div class="color-swatch-name">Yellow Glow</div><div class="color-swatch-hex">12% alpha</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="color-group">
+            <div class="color-group-title">Neutral Scale</div>
+            <div class="neutral-scale">
+                <div class="neutral-swatch">
+                    <div class="neutral-swatch-fill" style="background: #000000; height: 48px;"></div>
+                    <div class="neutral-swatch-info"><div class="neutral-swatch-label">#000</div></div>
+                </div>
+                <div class="neutral-swatch">
+                    <div class="neutral-swatch-fill" style="background: #0A0A0A; height: 48px;"></div>
+                    <div class="neutral-swatch-info"><div class="neutral-swatch-label">#0A0A0A</div></div>
+                </div>
+                <div class="neutral-swatch">
+                    <div class="neutral-swatch-fill" style="background: #171717; height: 48px;"></div>
+                    <div class="neutral-swatch-info"><div class="neutral-swatch-label">900</div></div>
+                </div>
+                <div class="neutral-swatch">
+                    <div class="neutral-swatch-fill" style="background: #262626; height: 48px;"></div>
+                    <div class="neutral-swatch-info"><div class="neutral-swatch-label">800</div></div>
+                </div>
+                <div class="neutral-swatch">
+                    <div class="neutral-swatch-fill" style="background: #404040; height: 48px;"></div>
+                    <div class="neutral-swatch-info"><div class="neutral-swatch-label">700</div></div>
+                </div>
+                <div class="neutral-swatch">
+                    <div class="neutral-swatch-fill" style="background: #525252; height: 48px;"></div>
+                    <div class="neutral-swatch-info"><div class="neutral-swatch-label">600</div></div>
+                </div>
+                <div class="neutral-swatch">
+                    <div class="neutral-swatch-fill" style="background: #737373; height: 48px;"></div>
+                    <div class="neutral-swatch-info"><div class="neutral-swatch-label">500</div></div>
+                </div>
+                <div class="neutral-swatch">
+                    <div class="neutral-swatch-fill" style="background: #A3A3A3; height: 48px;"></div>
+                    <div class="neutral-swatch-info"><div class="neutral-swatch-label">400</div></div>
+                </div>
+                <div class="neutral-swatch">
+                    <div class="neutral-swatch-fill" style="background: #D4D4D4; height: 48px;"></div>
+                    <div class="neutral-swatch-info"><div class="neutral-swatch-label">300</div></div>
+                </div>
+                <div class="neutral-swatch">
+                    <div class="neutral-swatch-fill" style="background: #E5E5E5; height: 48px;"></div>
+                    <div class="neutral-swatch-info"><div class="neutral-swatch-label">200</div></div>
+                </div>
+                <div class="neutral-swatch">
+                    <div class="neutral-swatch-fill" style="background: #F5F5F5; height: 48px;"></div>
+                    <div class="neutral-swatch-info"><div class="neutral-swatch-label">100</div></div>
+                </div>
+                <div class="neutral-swatch">
+                    <div class="neutral-swatch-fill" style="background: #FAFAFA; height: 48px;"></div>
+                    <div class="neutral-swatch-info"><div class="neutral-swatch-label">50</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="color-group">
+            <div class="color-group-title">Semantic</div>
+            <div class="color-swatches">
+                <div class="color-swatch">
+                    <div class="color-swatch-fill" style="background: #16A34A;"></div>
+                    <div class="color-swatch-info"><div class="color-swatch-name">Success</div><div class="color-swatch-hex">#16A34A</div></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-fill" style="background: #FACC15;"></div>
+                    <div class="color-swatch-info"><div class="color-swatch-name">Warning</div><div class="color-swatch-hex">#FACC15</div></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-fill" style="background: #EF4444;"></div>
+                    <div class="color-swatch-info"><div class="color-swatch-name">Error</div><div class="color-swatch-hex">#EF4444</div></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-fill" style="background: #0891B2;"></div>
+                    <div class="color-swatch-info"><div class="color-swatch-name">Info</div><div class="color-swatch-hex">#0891B2</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     11. TYPOGRAPHY
+     ============================================================ -->
+<section class="forge-typography forge-section" id="typography">
+    <div class="container" style="position: relative;">
+        <span class="section-number">11</span>
+        <span class="section-label">// Typography</span>
+        <h2 class="section-title">Type <span class="forge-underline">hierarchy</span></h2>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">Display Hero</span>
+                <span class="type-meta-spec">Clash Display / 64px / 700 / -2px tracking</span>
+            </div>
+            <div class="type-display-hero">Built from evidence.</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">H1</span>
+                <span class="type-meta-spec">Clash Display / 40px / 700 / -1.5px tracking</span>
+            </div>
+            <div class="type-h1">Discover validated pain points</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">H2</span>
+                <span class="type-meta-spec">Clash Display / 32px / 600 / -0.5px tracking</span>
+            </div>
+            <div class="type-h2">Every insight links to evidence</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">H3</span>
+                <span class="type-meta-spec">Clash Display / 24px / 600</span>
+            </div>
+            <div class="type-h3">Community Discovery Engine</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">H4</span>
+                <span class="type-meta-spec">Clash Display / 18px / 600</span>
+            </div>
+            <div class="type-h4">Severity scoring methodology</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">Body</span>
+                <span class="type-meta-spec">Inter / 16px / 400 / 1.6 line-height</span>
+            </div>
+            <div class="type-body">PainOnSocial scans thousands of Reddit discussions daily to surface genuine business pain points. Every insight is scored, categorized, and traced back to its source. No guesswork. No assumptions. Just evidence.</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">Body Small</span>
+                <span class="type-meta-spec">Inter / 14px / 400 / 1.6 line-height</span>
+            </div>
+            <div class="type-body-sm">Free for 14 days. No credit card required. Cancel anytime. All data exportable.</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">Caption</span>
+                <span class="type-meta-spec">Inter / 12px / 400 / 1.5 line-height</span>
+            </div>
+            <div class="type-caption">Last updated 2 hours ago by automated scan</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">Overline</span>
+                <span class="type-meta-spec">Source Code Pro / 11px / 600 / 3px tracking / uppercase</span>
+            </div>
+            <div class="type-overline">Section Label</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">Mono</span>
+                <span class="type-meta-spec">Source Code Pro / 14px / 400 / 1.6 line-height</span>
+            </div>
+            <div class="type-mono">severity_score: 8.7 | confidence: 0.94 | sources: 142</div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     12. SPACING
+     ============================================================ -->
+<section class="forge-spacing forge-section" id="spacing">
+    <div class="container" style="position: relative;">
+        <span class="section-number">12</span>
+        <span class="section-label">// Spacing Scale</span>
+        <h2 class="section-title">8px <span class="forge-underline">grid</span></h2>
+
+        <div class="spacing-scale">
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-1</span>
+                <div class="spacing-bar" style="width: 4px;"></div>
+                <span class="spacing-value">4px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-2</span>
+                <div class="spacing-bar" style="width: 8px;"></div>
+                <span class="spacing-value">8px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-3</span>
+                <div class="spacing-bar" style="width: 12px;"></div>
+                <span class="spacing-value">12px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-4</span>
+                <div class="spacing-bar" style="width: 16px;"></div>
+                <span class="spacing-value">16px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-5</span>
+                <div class="spacing-bar" style="width: 24px;"></div>
+                <span class="spacing-value">24px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-6</span>
+                <div class="spacing-bar" style="width: 32px;"></div>
+                <span class="spacing-value">32px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-7</span>
+                <div class="spacing-bar" style="width: 48px;"></div>
+                <span class="spacing-value">48px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-8</span>
+                <div class="spacing-bar" style="width: 64px;"></div>
+                <span class="spacing-value">64px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-9</span>
+                <div class="spacing-bar" style="width: 96px;"></div>
+                <span class="spacing-value">96px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-10</span>
+                <div class="spacing-bar" style="width: 128px;"></div>
+                <span class="spacing-value">128px</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     13. BUTTONS
+     ============================================================ -->
+<section class="forge-buttons forge-section" id="buttons">
+    <div class="container" style="position: relative;">
+        <span class="section-number">13</span>
+        <span class="section-label">// Buttons</span>
+        <h2 class="section-title">Action <span class="forge-underline">elements</span></h2>
+
+        <div class="btn-row-label">Primary</div>
+        <div class="btn-row">
+            <button class="btn btn--primary btn--sm">Small</button>
+            <button class="btn btn--primary">Default</button>
+            <button class="btn btn--primary btn--lg">Large</button>
+            <button class="btn btn--primary disabled" disabled>Disabled</button>
+        </div>
+
+        <div class="btn-row-label">Secondary</div>
+        <div class="btn-row">
+            <button class="btn btn--secondary btn--sm">Small</button>
+            <button class="btn btn--secondary">Default</button>
+            <button class="btn btn--secondary btn--lg">Large</button>
+        </div>
+
+        <div class="btn-row-label">Ghost (yellow hover)</div>
+        <div class="btn-row">
+            <button class="btn btn--ghost btn--sm">Small</button>
+            <button class="btn btn--ghost">Default</button>
+            <button class="btn btn--ghost btn--lg">Large</button>
+        </div>
+
+        <div class="btn-row-label">Yellow Accent</div>
+        <div class="btn-row">
+            <button class="btn btn--yellow btn--sm">Small</button>
+            <button class="btn btn--yellow">Default</button>
+            <button class="btn btn--yellow btn--lg">Large</button>
+        </div>
+
+        <div class="btn-row-label">Text Link</div>
+        <div class="btn-row">
+            <button class="btn btn--text">Learn more</button>
+            <button class="btn btn--text">View documentation</button>
+            <button class="btn btn--text">See all features</button>
+        </div>
+
+        <div class="btn-row-label">With Icons</div>
+        <div class="btn-row">
+            <button class="btn btn--primary">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 8L8.5 3M13.5 8L8.5 13M13.5 8H2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Start Trial
+            </button>
+            <button class="btn btn--ghost">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><polygon points="6,3 13,8 6,13" fill="currentColor"/></svg>
+                Watch Demo
+            </button>
+            <button class="btn btn--secondary">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 12L8 4L14 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Export Data
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     14. DIVIDERS & DECORATIVE
+     ============================================================ -->
+<section class="forge-dividers forge-section" id="dividers">
+    <div class="container" style="position: relative;">
+        <span class="section-number">14</span>
+        <span class="section-label">// Dividers &amp; Decorative</span>
+        <h2 class="section-title">Visual <span class="forge-underline">elements</span></h2>
+
+        <div class="divider-demo">
+            <div class="divider-demo-label">Industrial Underline</div>
+            <div class="demo-industrial-underline">This text has a <span class="forge-underline">bold teal underline</span> on accent words.</div>
+        </div>
+
+        <div class="divider-demo">
+            <div class="divider-demo-label">Visible Grid Background</div>
+            <div class="demo-grid-box">
+                <span class="demo-grid-box-label">64px x 64px grid // 1px #262626 lines</span>
+            </div>
+        </div>
+
+        <div class="divider-demo">
+            <div class="divider-demo-label">Small Grid (32px)</div>
+            <div class="demo-grid-box" style="background-size: 32px 32px; height: 120px;">
+                <span class="demo-grid-box-label">32px x 32px grid // blueprint density</span>
+            </div>
+        </div>
+
+        <div class="divider-demo">
+            <div class="divider-demo-label">Oversized Number Watermark</div>
+            <div class="demo-watermark-box">
+                <span class="demo-watermark-num">07</span>
+                <span class="demo-watermark-content">Content sits above the faded number watermark. Used for section labeling.</span>
+            </div>
+        </div>
+
+        <div class="divider-demo">
+            <div class="divider-demo-label">Thin Separator (1px #262626)</div>
+            <div class="demo-separator-thin"></div>
+        </div>
+
+        <div class="divider-demo" style="margin-top: var(--sp-6);">
+            <div class="divider-demo-label">Thick Teal Bar (4px)</div>
+            <div class="demo-separator-thick"></div>
+        </div>
+
+        <div class="divider-demo" style="margin-top: var(--sp-6);">
+            <div class="divider-demo-label">Dashed Separator</div>
+            <hr class="demo-separator-dashed">
+        </div>
+
+        <div class="divider-demo" style="margin-top: var(--sp-6);">
+            <div class="divider-demo-label">Left Border Accent (4px teal)</div>
+            <div style="border-left: 4px solid var(--teal); padding: var(--sp-4) var(--sp-5); background: var(--neutral-900); border-right: 1px solid var(--neutral-800); border-top: 1px solid var(--neutral-800); border-bottom: 1px solid var(--neutral-800);">
+                <p style="font-size: 14px; color: var(--neutral-400);">A content block with a thick teal left-border accent. Used on testimonials, callouts, and emphasis blocks.</p>
+            </div>
+        </div>
+
+        <div class="divider-demo" style="margin-top: var(--sp-6);">
+            <div class="divider-demo-label">Yellow Warning Accent (4px)</div>
+            <div style="border-left: 4px solid var(--yellow); padding: var(--sp-4) var(--sp-5); background: var(--yellow-glow); border-right: 1px solid var(--neutral-800); border-top: 1px solid var(--neutral-800); border-bottom: 1px solid var(--neutral-800);">
+                <p style="font-size: 14px; color: var(--yellow);">Industrial yellow caution accent. Used for warnings, important callouts, and "pay attention" moments.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     15. ALERTS
+     ============================================================ -->
+<section class="forge-alerts forge-section" id="alerts">
+    <div class="container" style="position: relative;">
+        <span class="section-number">15</span>
+        <span class="section-label">// Alerts &amp; Toasts</span>
+        <h2 class="section-title">System <span class="forge-underline">feedback</span></h2>
+
+        <div class="alerts-grid">
+            <div class="forge-alert forge-alert--success">
+                <svg class="forge-alert-icon" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="8" stroke="#16A34A" stroke-width="1.5"/>
+                    <path d="M6.5 10L9 12.5L13.5 7.5" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="forge-alert-content">
+                    <div class="forge-alert-title">Analysis complete</div>
+                    <div class="forge-alert-text">Successfully analyzed 2,847 discussions from r/SaaS. 142 pain points identified and scored.</div>
+                </div>
+            </div>
+
+            <div class="forge-alert forge-alert--warning">
+                <svg class="forge-alert-icon" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 3L18 17H2L10 3Z" stroke="#FACC15" stroke-width="1.5" stroke-linejoin="round"/>
+                    <line x1="10" y1="8" x2="10" y2="12" stroke="#FACC15" stroke-width="1.5" stroke-linecap="round"/>
+                    <circle cx="10" cy="14.5" r="0.75" fill="#FACC15"/>
+                </svg>
+                <div class="forge-alert-content">
+                    <div class="forge-alert-title">Rate limit approaching</div>
+                    <div class="forge-alert-text">You've used 85% of your monthly API quota. Consider upgrading to Scout for unlimited access.</div>
+                </div>
+            </div>
+
+            <div class="forge-alert forge-alert--error">
+                <svg class="forge-alert-icon" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="8" stroke="#EF4444" stroke-width="1.5"/>
+                    <line x1="7" y1="7" x2="13" y2="13" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="13" y1="7" x2="7" y2="13" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <div class="forge-alert-content">
+                    <div class="forge-alert-title">Connection failed</div>
+                    <div class="forge-alert-text">Unable to reach Reddit API. Check your network connection and try again.</div>
+                </div>
+            </div>
+
+            <div class="forge-alert forge-alert--info">
+                <svg class="forge-alert-icon" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="8" stroke="#0891B2" stroke-width="1.5"/>
+                    <line x1="10" y1="9" x2="10" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                    <circle cx="10" cy="6.5" r="0.75" fill="#0891B2"/>
+                </svg>
+                <div class="forge-alert-content">
+                    <div class="forge-alert-title">Scan scheduled</div>
+                    <div class="forge-alert-text">Your next community scan is scheduled for 6:00 AM UTC. Results will appear in your dashboard.</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: var(--sp-7);">
+            <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--neutral-500); margin-bottom: var(--sp-4);">Toast Notifications</div>
+
+            <div style="display: flex; flex-direction: column; gap: var(--sp-4);">
+                <div class="forge-toast">
+                    <span class="forge-toast-dot" style="background: var(--success);"></span>
+                    <span class="forge-toast-text">Pain point exported to CSV successfully.</span>
+                    <button class="forge-toast-close">x</button>
+                </div>
+
+                <div class="forge-toast">
+                    <span class="forge-toast-dot" style="background: var(--yellow);"></span>
+                    <span class="forge-toast-text">New high-severity pain point detected in r/startups.</span>
+                    <button class="forge-toast-close">x</button>
+                </div>
+
+                <div class="forge-toast">
+                    <span class="forge-toast-dot" style="background: var(--error);"></span>
+                    <span class="forge-toast-text">Failed to save community filter. Please retry.</span>
+                    <button class="forge-toast-close">x</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     FORGE SIGNATURE FOOTER
+     ============================================================ -->
+<div style="padding: var(--sp-8) 0; text-align: center; border-top: 1px solid var(--neutral-800);">
+    <div style="font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--neutral-600); letter-spacing: 2px; text-transform: uppercase;">Forge v1.0</div>
+    <div style="font-family: var(--font-mono); font-size: 11px; color: var(--neutral-700); margin-top: var(--sp-2);">Built from evidence. Designed for builders.</div>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 80);
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (navLinks) navLinks.classList.remove('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>

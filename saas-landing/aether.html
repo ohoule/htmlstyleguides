@@ -1,0 +1,2784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether v1.0 — PainOnSocial Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            /* Brand — PainOnSocial */
+            --teal: #0891B2;
+            --teal-light: #22D3EE;
+            --teal-dark: #0E7490;
+            --orange: #F97316;
+            --purple: #A855F7;
+            --teal-glow: rgba(8,145,178,0.15);
+            --teal-glow-soft: rgba(8,145,178,0.08);
+
+            /* Rose — Secondary Accent */
+            --rose: #F43F5E;
+            --rose-light: #FB7185;
+            --rose-glow: rgba(244,63,94,0.15);
+            --rose-glow-soft: rgba(244,63,94,0.06);
+
+            /* Dark Surfaces */
+            --bg-deepest: #0A0A0F;
+            --bg-dark: #141420;
+            --bg-medium: #1E1E2E;
+            --card-bg: rgba(30,30,46,0.5);
+            --card-bg-solid: #1A1A2A;
+            --card-border: rgba(255,255,255,0.05);
+            --card-border-hover: rgba(34,211,238,0.2);
+
+            /* Text */
+            --text-1: #F0F0F5;
+            --text-2: #8E8EA0;
+            --text-3: #5E5E73;
+            --border: rgba(255,255,255,0.06);
+            --border-subtle: rgba(255,255,255,0.03);
+
+            /* Semantic */
+            --success: #16A34A;
+            --success-bg: rgba(22,163,74,0.1);
+            --success-border: rgba(22,163,74,0.25);
+            --warning: #EAB308;
+            --warning-bg: rgba(234,179,8,0.1);
+            --warning-border: rgba(234,179,8,0.25);
+            --error: #F43F5E;
+            --error-bg: rgba(244,63,94,0.1);
+            --error-border: rgba(244,63,94,0.25);
+            --info: #0891B2;
+            --info-bg: rgba(8,145,178,0.1);
+            --info-border: rgba(8,145,178,0.25);
+
+            /* Typography */
+            --font-display: 'Switzer', system-ui, sans-serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+
+            /* Spacing — generous 8px base */
+            --sp-1: 4px;
+            --sp-2: 8px;
+            --sp-3: 12px;
+            --sp-4: 16px;
+            --sp-5: 24px;
+            --sp-6: 32px;
+            --sp-7: 48px;
+            --sp-8: 64px;
+            --sp-9: 96px;
+            --sp-10: 128px;
+            --sp-11: 160px;
+
+            /* Radius — soft & rounded */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            /* Shadows — floating */
+            --shadow-sm: 0 2px 12px rgba(0,0,0,0.2);
+            --shadow-md: 0 4px 24px rgba(0,0,0,0.25);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.3);
+            --shadow-xl: 0 16px 64px rgba(0,0,0,0.4);
+            --shadow-glow-teal: 0 0 40px rgba(8,145,178,0.15);
+            --shadow-glow-rose: 0 0 40px rgba(244,63,94,0.1);
+
+            /* Transitions */
+            --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --duration: 200ms;
+            --duration-md: 300ms;
+            --duration-slow: 500ms;
+        }
+
+        /* ========== BASE ========== */
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-1);
+            background: var(--bg-deepest);
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: rgba(8,145,178,0.3);
+            color: var(--text-1);
+        }
+
+        a { color: var(--teal-light); text-decoration: none; transition: color var(--duration) var(--ease); }
+        a:hover { color: var(--teal); }
+
+        /* ========== UTILITY ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--sp-7);
+        }
+        .container-sm {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--sp-7);
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: var(--sp-4);
+        }
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-1);
+            line-height: 1.2;
+            margin-bottom: var(--sp-5);
+        }
+        .section-desc {
+            color: var(--text-2);
+            font-size: 17px;
+            line-height: 1.7;
+            max-width: 600px;
+        }
+
+        /* Gradient orb base */
+        .orb-section {
+            position: relative;
+            overflow: hidden;
+        }
+        .orb-section::before,
+        .orb-section::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .orb-section > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Floating card base */
+        .float-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: transform var(--duration-md) var(--ease), box-shadow var(--duration-md) var(--ease), border-color var(--duration-md) var(--ease);
+        }
+        .float-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--card-border-hover);
+        }
+
+        /* ===================================================================
+           01. NAVIGATION BAR
+           =================================================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10,10,15,0.7);
+            backdrop-filter: blur(24px) saturate(1.2);
+            -webkit-backdrop-filter: blur(24px) saturate(1.2);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--sp-7);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+        .nav-logo svg {
+            width: 32px;
+            height: 32px;
+        }
+        .nav-logo span {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--text-1);
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-7);
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-2);
+            transition: color var(--duration) var(--ease);
+            letter-spacing: 0.01em;
+        }
+        .nav-links a:hover {
+            color: var(--text-1);
+        }
+        .nav-cta {
+            background: var(--teal);
+            color: #fff !important;
+            padding: 10px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 14px;
+            transition: all var(--duration) var(--ease);
+            box-shadow: 0 2px 16px rgba(8,145,178,0.25);
+        }
+        .nav-cta:hover {
+            background: var(--teal-dark);
+            box-shadow: 0 4px 24px rgba(8,145,178,0.35);
+            transform: translateY(-1px);
+        }
+        .nav-mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--sp-2);
+        }
+        .nav-mobile-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-2);
+            margin: 6px 0;
+            border-radius: 2px;
+            transition: all var(--duration) var(--ease);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-mobile-toggle { display: block; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: rgba(10,10,15,0.95);
+                backdrop-filter: blur(24px);
+                padding: var(--sp-6);
+                gap: var(--sp-5);
+                border-bottom: 1px solid var(--border);
+            }
+        }
+
+        /* ===================================================================
+           02. HERO
+           =================================================================== */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 180px 0 140px;
+            background: var(--bg-deepest);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -150px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(8,145,178,0.1) 0%, rgba(8,145,178,0.03) 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: orbFloat 12s ease-in-out infinite;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -200px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(244,63,94,0.07) 0%, rgba(244,63,94,0.02) 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: orbFloat 15s ease-in-out infinite reverse;
+        }
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(20px, -15px) scale(1.03); }
+            66% { transform: translate(-10px, 10px) scale(0.97); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--sp-7);
+        }
+
+        .hero-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: var(--sp-6);
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 0.2s forwards;
+        }
+        .hero-eyebrow::before {
+            content: '';
+            width: 32px;
+            height: 1px;
+            background: var(--teal);
+        }
+
+        .hero-headline {
+            font-family: var(--font-display);
+            font-size: clamp(40px, 5.5vw, 72px);
+            font-weight: 700;
+            line-height: 1.08;
+            color: var(--text-1);
+            margin-bottom: var(--sp-8);
+            max-width: 800px;
+            letter-spacing: -0.02em;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 0.4s forwards;
+        }
+        .hero-headline .accent {
+            color: var(--teal-light);
+        }
+
+        .hero-sub {
+            font-size: 19px;
+            color: var(--text-2);
+            line-height: 1.7;
+            max-width: 540px;
+            margin-bottom: var(--sp-9);
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 0.6s forwards;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: var(--sp-5);
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-10);
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 0.8s forwards;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-3);
+            background: var(--teal);
+            color: #fff;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 15px;
+            padding: 16px 36px;
+            border-radius: var(--radius-md);
+            border: none;
+            cursor: pointer;
+            transition: all var(--duration-md) var(--ease);
+            box-shadow: 0 4px 24px rgba(8,145,178,0.3);
+            letter-spacing: 0.01em;
+        }
+        .btn-primary:hover {
+            background: var(--teal-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px rgba(8,145,178,0.4);
+            color: #fff;
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-3);
+            background: transparent;
+            color: var(--text-2);
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 15px;
+            padding: 16px 36px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all var(--duration-md) var(--ease);
+        }
+        .btn-ghost:hover {
+            color: var(--rose-light);
+            border-color: rgba(244,63,94,0.3);
+            background: rgba(244,63,94,0.05);
+            transform: translateY(-2px);
+        }
+
+        .hero-metrics {
+            display: flex;
+            gap: var(--sp-9);
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 1s forwards;
+        }
+        .hero-metric {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp-1);
+        }
+        .hero-metric-value {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-1);
+        }
+        .hero-metric-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-3);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 140px 0 80px; min-height: auto; }
+            .hero-metrics { flex-direction: column; gap: var(--sp-5); }
+            .hero-actions { flex-direction: column; align-items: flex-start; }
+        }
+
+        /* ===================================================================
+           03. SOCIAL PROOF / BADGES
+           =================================================================== */
+        .social-proof {
+            padding: var(--sp-9) 0 var(--sp-10);
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-deepest);
+        }
+        .social-proof::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(8,145,178,0.04) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .badges-row {
+            display: flex;
+            gap: var(--sp-5);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-9);
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            padding: 10px 24px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            transition: all var(--duration) var(--ease);
+        }
+        .badge-outline {
+            border: 1px solid var(--border);
+            color: var(--text-2);
+            background: transparent;
+        }
+        .badge-outline:hover {
+            border-color: rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.02);
+        }
+        .badge-teal {
+            background: rgba(8,145,178,0.12);
+            border: 1px solid rgba(8,145,178,0.25);
+            color: var(--teal-light);
+        }
+        .badge-rose {
+            background: var(--rose-glow);
+            border: 1px solid rgba(244,63,94,0.25);
+            color: var(--rose-light);
+        }
+        .badge-purple {
+            background: rgba(168,85,247,0.12);
+            border: 1px solid rgba(168,85,247,0.25);
+            color: #C084FC;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .badge-dot-teal { background: var(--teal-light); }
+        .badge-dot-rose { background: var(--rose); }
+        .badge-dot-purple { background: var(--purple); }
+
+        .trusted-bar {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .trusted-bar p {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: var(--sp-7);
+        }
+        .trusted-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--sp-9);
+            flex-wrap: wrap;
+        }
+        .trusted-logo {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--text-3);
+            opacity: 0.5;
+            transition: opacity var(--duration) var(--ease);
+        }
+        .trusted-logo:hover {
+            opacity: 0.8;
+        }
+
+        /* ===================================================================
+           04. FEATURE CARDS
+           =================================================================== */
+        .features {
+            padding: var(--sp-10) 0 var(--sp-11);
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-deepest);
+        }
+        .features::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(244,63,94,0.05) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .features::after {
+            content: '';
+            position: absolute;
+            bottom: -120px;
+            left: -80px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(8,145,178,0.06) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: var(--sp-9);
+            position: relative;
+            z-index: 1;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--sp-6);
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card {
+            padding: var(--sp-8);
+            position: relative;
+        }
+        .feature-card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--sp-6);
+            font-size: 24px;
+        }
+        .feature-card-icon.teal {
+            background: rgba(8,145,178,0.12);
+            color: var(--teal-light);
+        }
+        .feature-card-icon.rose {
+            background: var(--rose-glow);
+            color: var(--rose-light);
+        }
+        .feature-card-icon.purple {
+            background: rgba(168,85,247,0.12);
+            color: #C084FC;
+        }
+        .feature-card-icon.orange {
+            background: rgba(249,115,22,0.12);
+            color: #FB923C;
+        }
+
+        .feature-card h3 {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-1);
+            margin-bottom: var(--sp-4);
+        }
+        .feature-card p {
+            color: var(--text-2);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            .features-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===================================================================
+           05. STATS
+           =================================================================== */
+        .stats {
+            padding: var(--sp-10) 0;
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-dark);
+        }
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(8,145,178,0.06) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--sp-7);
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: var(--sp-7) var(--sp-5);
+        }
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--teal-light);
+            line-height: 1;
+            margin-bottom: var(--sp-3);
+            letter-spacing: -0.02em;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-2);
+            line-height: 1.5;
+        }
+        .stat-sub {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            margin-top: var(--sp-2);
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ===================================================================
+           06. TESTIMONIALS
+           =================================================================== */
+        .testimonials {
+            padding: var(--sp-11) 0;
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-deepest);
+        }
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -120px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(244,63,94,0.05) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: var(--sp-9);
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--sp-7);
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-card {
+            padding: var(--sp-8);
+            border-left: 3px solid var(--teal);
+            position: relative;
+        }
+        .testimonial-quote-mark {
+            font-family: var(--font-display);
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--rose);
+            opacity: 0.4;
+            line-height: 1;
+            margin-bottom: var(--sp-3);
+            pointer-events: none;
+        }
+        .testimonial-text {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-1);
+            line-height: 1.7;
+            margin-bottom: var(--sp-7);
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-4);
+        }
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--teal-glow-soft), var(--rose-glow-soft));
+            border: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--teal-light);
+        }
+        .testimonial-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text-1);
+        }
+        .testimonial-role {
+            font-size: 13px;
+            color: var(--text-3);
+        }
+
+        @media (max-width: 768px) {
+            .testimonials-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===================================================================
+           07. PRICING
+           =================================================================== */
+        .pricing {
+            padding: var(--sp-11) 0;
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-dark);
+        }
+        .pricing::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(8,145,178,0.05) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: var(--sp-9);
+            position: relative;
+            z-index: 1;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--sp-6);
+            position: relative;
+            z-index: 1;
+            align-items: start;
+        }
+
+        .pricing-card {
+            padding: var(--sp-8);
+            text-align: center;
+        }
+        .pricing-card.featured {
+            border-color: rgba(8,145,178,0.3);
+            box-shadow: var(--shadow-xl), var(--shadow-glow-teal);
+            transform: scale(1.03);
+        }
+        .pricing-card.featured:hover {
+            transform: scale(1.03) translateY(-4px);
+        }
+
+        .pricing-tier-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: var(--sp-6);
+        }
+        .pricing-card:nth-child(1) .pricing-tier-badge {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-2);
+            border: 1px solid var(--border);
+        }
+        .pricing-card:nth-child(2) .pricing-tier-badge {
+            background: rgba(8,145,178,0.12);
+            color: var(--teal-light);
+            border: 1px solid rgba(8,145,178,0.25);
+        }
+        .pricing-card:nth-child(3) .pricing-tier-badge {
+            background: var(--rose-glow);
+            color: var(--rose-light);
+            border: 1px solid rgba(244,63,94,0.25);
+        }
+
+        .pricing-amount {
+            font-family: var(--font-display);
+            font-size: 52px;
+            font-weight: 700;
+            color: var(--text-1);
+            line-height: 1;
+            margin-bottom: var(--sp-2);
+            letter-spacing: -0.03em;
+        }
+        .pricing-amount span {
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--text-3);
+        }
+        .pricing-desc {
+            font-size: 14px;
+            color: var(--text-3);
+            margin-bottom: var(--sp-7);
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: var(--sp-7);
+        }
+        .pricing-features li {
+            padding: var(--sp-3) 0;
+            font-size: 14px;
+            color: var(--text-2);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--sp-3);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        .pricing-check {
+            color: var(--teal-light);
+            font-weight: 600;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .pricing-card .btn-primary,
+        .pricing-card .btn-ghost {
+            width: 100%;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+            .pricing-card.featured { transform: none; }
+            .pricing-card.featured:hover { transform: translateY(-4px); }
+        }
+
+        /* ===================================================================
+           08. FORMS
+           =================================================================== */
+        .forms-section {
+            padding: var(--sp-11) 0;
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-deepest);
+        }
+        .forms-section::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -120px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(8,145,178,0.05) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .forms-section::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -100px;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(244,63,94,0.04) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .forms-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--sp-9);
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-group {
+            margin-bottom: var(--sp-6);
+        }
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-2);
+            margin-bottom: var(--sp-3);
+            letter-spacing: 0.02em;
+        }
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(20,20,32,0.6);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-1);
+            font-family: var(--font-body);
+            font-size: 15px;
+            transition: all var(--duration-md) var(--ease);
+            outline: none;
+        }
+        .form-input::placeholder {
+            color: var(--text-3);
+        }
+        .form-input:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 4px rgba(8,145,178,0.15), 0 0 24px rgba(8,145,178,0.08);
+        }
+        .form-input.error {
+            border-color: var(--rose);
+            box-shadow: 0 0 0 4px var(--rose-glow);
+        }
+        .form-error-msg {
+            font-size: 12px;
+            color: var(--rose);
+            margin-top: var(--sp-2);
+            display: flex;
+            align-items: center;
+            gap: var(--sp-2);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Toggle */
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--sp-4) 0;
+        }
+        .toggle-label {
+            font-size: 14px;
+            color: var(--text-2);
+        }
+        .toggle {
+            position: relative;
+            width: 48px;
+            height: 26px;
+            cursor: pointer;
+        }
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-track {
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.08);
+            border-radius: var(--radius-full);
+            transition: background var(--duration) var(--ease);
+        }
+        .toggle-track::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: var(--text-2);
+            border-radius: 50%;
+            transition: all var(--duration) var(--ease);
+        }
+        .toggle input:checked + .toggle-track {
+            background: var(--teal);
+        }
+        .toggle input:checked + .toggle-track::after {
+            transform: translateX(22px);
+            background: #fff;
+        }
+
+        /* Signup mini-form */
+        .signup-mini {
+            padding: var(--sp-8);
+            position: relative;
+        }
+        .signup-mini-row {
+            display: flex;
+            gap: var(--sp-3);
+        }
+        .signup-mini-row .form-input {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .forms-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===================================================================
+           09. FOOTER
+           =================================================================== */
+        .footer {
+            padding: var(--sp-10) 0 var(--sp-8);
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--sp-9);
+            margin-bottom: var(--sp-9);
+        }
+        .footer-brand p {
+            color: var(--text-3);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-top: var(--sp-5);
+            max-width: 280px;
+        }
+        .footer-col h4 {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-2);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--sp-5);
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col li {
+            margin-bottom: var(--sp-3);
+        }
+        .footer-col a {
+            font-size: 14px;
+            color: var(--text-3);
+            transition: color var(--duration) var(--ease);
+        }
+        .footer-col a:hover {
+            color: var(--text-1);
+        }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--sp-7);
+            border-top: 1px solid var(--border);
+        }
+        .footer-bottom p {
+            font-size: 13px;
+            color: var(--text-3);
+        }
+        .footer-bottom-links {
+            display: flex;
+            gap: var(--sp-5);
+        }
+        .footer-bottom-links a {
+            font-size: 13px;
+            color: var(--text-3);
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--sp-7); }
+            .footer-bottom { flex-direction: column; gap: var(--sp-4); text-align: center; }
+        }
+
+        /* ===================================================================
+           GROUP DIVIDER
+           =================================================================== */
+        .group-divider {
+            padding: var(--sp-9) 0;
+            text-align: center;
+            position: relative;
+        }
+        .group-divider-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, var(--teal) 30%, var(--rose) 70%, transparent 100%);
+            border-radius: 2px;
+            margin-bottom: var(--sp-7);
+            opacity: 0.5;
+        }
+        .group-divider h2 {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-1);
+        }
+        .group-divider p {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-3);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-top: var(--sp-3);
+        }
+
+        /* ===================================================================
+           10. COLOR PALETTE
+           =================================================================== */
+        .ds-section {
+            padding: var(--sp-10) 0;
+            position: relative;
+        }
+        .ds-section + .ds-section {
+            border-top: 1px solid var(--border);
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--sp-5);
+            margin-bottom: var(--sp-7);
+        }
+        .color-swatch {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+        }
+        .color-swatch-block {
+            height: 80px;
+            display: flex;
+            align-items: flex-end;
+            padding: var(--sp-3);
+        }
+        .color-swatch-info {
+            padding: var(--sp-4);
+        }
+        .color-swatch-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-1);
+            margin-bottom: 2px;
+        }
+        .color-swatch-hex {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+        }
+
+        /* Surface scale */
+        .surface-scale {
+            display: flex;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: var(--sp-7);
+            border: 1px solid var(--card-border);
+        }
+        .surface-step {
+            flex: 1;
+            padding: var(--sp-6) var(--sp-4);
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            gap: var(--sp-2);
+        }
+        .surface-step-label {
+            font-size: 11px;
+            font-family: var(--font-mono);
+            color: var(--text-3);
+        }
+        .surface-step-hex {
+            font-size: 10px;
+            font-family: var(--font-mono);
+            color: var(--text-3);
+            opacity: 0.7;
+        }
+
+        /* Gradient orb demo */
+        .orb-demo {
+            position: relative;
+            height: 200px;
+            border-radius: var(--radius-lg);
+            background: var(--bg-deepest);
+            border: 1px solid var(--card-border);
+            overflow: hidden;
+            margin-top: var(--sp-6);
+        }
+        .orb-demo::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(8,145,178,0.12) 0%, rgba(8,145,178,0.03) 40%, transparent 70%);
+            border-radius: 50%;
+            animation: orbFloat 10s ease-in-out infinite;
+        }
+        .orb-demo::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -5%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(244,63,94,0.08) 0%, rgba(244,63,94,0.02) 40%, transparent 70%);
+            border-radius: 50%;
+            animation: orbFloat 13s ease-in-out infinite reverse;
+        }
+        .orb-demo-label {
+            position: absolute;
+            bottom: var(--sp-5);
+            left: var(--sp-5);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            letter-spacing: 0.08em;
+            z-index: 1;
+        }
+
+        /* ===================================================================
+           11. TYPOGRAPHY
+           =================================================================== */
+        .type-specimen {
+            margin-bottom: var(--sp-7);
+            padding-bottom: var(--sp-7);
+            border-bottom: 1px solid var(--border);
+        }
+        .type-specimen:last-child {
+            border-bottom: none;
+        }
+        .type-meta {
+            display: flex;
+            gap: var(--sp-5);
+            margin-bottom: var(--sp-4);
+            flex-wrap: wrap;
+        }
+        .type-meta span {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            letter-spacing: 0.05em;
+            background: rgba(255,255,255,0.03);
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+        }
+        .type-hero {
+            font-family: var(--font-display);
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.08;
+            color: var(--text-1);
+            letter-spacing: -0.02em;
+        }
+        .type-h1 {
+            font-family: var(--font-display);
+            font-size: 44px;
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--text-1);
+            letter-spacing: -0.02em;
+        }
+        .type-h2 {
+            font-family: var(--font-display);
+            font-size: 36px;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--text-1);
+        }
+        .type-h3 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--text-1);
+        }
+        .type-h4 {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--text-1);
+        }
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-2);
+        }
+        .type-body-sm {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-2);
+        }
+        .type-caption {
+            font-family: var(--font-body);
+            font-size: 12px;
+            color: var(--text-3);
+        }
+        .type-overline {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--teal);
+        }
+        .type-mono {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--teal-light);
+            background: rgba(8,145,178,0.08);
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+        }
+
+        /* ===================================================================
+           12. SPACING
+           =================================================================== */
+        .spacing-demo {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp-5);
+        }
+        .spacing-row {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-5);
+        }
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-3);
+            min-width: 100px;
+            text-align: right;
+        }
+        .spacing-bar {
+            height: 24px;
+            background: linear-gradient(90deg, var(--teal), var(--teal-light));
+            border-radius: var(--radius-sm);
+            opacity: 0.7;
+            transition: opacity var(--duration) var(--ease);
+        }
+        .spacing-bar:hover {
+            opacity: 1;
+        }
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            min-width: 48px;
+        }
+
+        /* ===================================================================
+           13. BUTTONS
+           =================================================================== */
+        .buttons-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp-7);
+        }
+        .button-row {
+            display: flex;
+            gap: var(--sp-5);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .button-row-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            min-width: 120px;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-3);
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(12px);
+            color: var(--text-1);
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 15px;
+            padding: 16px 36px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all var(--duration-md) var(--ease);
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.12);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-rose {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-3);
+            background: var(--rose);
+            color: #fff;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 15px;
+            padding: 16px 36px;
+            border-radius: var(--radius-md);
+            border: none;
+            cursor: pointer;
+            transition: all var(--duration-md) var(--ease);
+            box-shadow: 0 4px 24px rgba(244,63,94,0.25);
+        }
+        .btn-rose:hover {
+            background: #E11D48;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px rgba(244,63,94,0.35);
+        }
+
+        .btn-text {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            background: none;
+            border: none;
+            color: var(--teal-light);
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all var(--duration) var(--ease);
+            padding: 4px 0;
+        }
+        .btn-text:hover {
+            color: var(--teal);
+        }
+        .btn-text::after {
+            content: '\2192';
+            transition: transform var(--duration) var(--ease);
+        }
+        .btn-text:hover::after {
+            transform: translateX(4px);
+        }
+
+        /* Disabled states */
+        .btn-disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* Small buttons */
+        .btn-sm {
+            padding: 10px 20px;
+            font-size: 13px;
+        }
+
+        /* ===================================================================
+           14. DIVIDERS & DECORATIVE
+           =================================================================== */
+        .divider-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp-8);
+        }
+
+        .divider-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp-4);
+        }
+        .divider-item-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            letter-spacing: 0.08em;
+        }
+
+        .divider-solid {
+            height: 1px;
+            background: var(--border);
+        }
+        .divider-gradient {
+            height: 2px;
+            background: linear-gradient(90deg, var(--teal), var(--rose));
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+        .divider-gradient-fade {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--teal), var(--rose), transparent);
+            opacity: 0.4;
+        }
+        .divider-dots {
+            display: flex;
+            gap: var(--sp-3);
+            justify-content: center;
+        }
+        .divider-dots span {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--text-3);
+            opacity: 0.4;
+        }
+
+        /* Blur demo */
+        .blur-demo {
+            position: relative;
+            height: 180px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(8,145,178,0.15), rgba(244,63,94,0.1));
+            border: 1px solid var(--card-border);
+        }
+        .blur-demo-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: var(--sp-6) var(--sp-8);
+            background: rgba(30,30,46,0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--text-1);
+        }
+
+        /* ===================================================================
+           15. ALERTS
+           =================================================================== */
+        .alerts-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp-5);
+        }
+
+        .alert {
+            padding: var(--sp-5) var(--sp-6);
+            border-radius: var(--radius-md);
+            border-left: 3px solid;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--sp-4);
+        }
+        .alert-success {
+            background: var(--success-bg);
+            border-color: var(--success);
+        }
+        .alert-warning {
+            background: var(--warning-bg);
+            border-color: var(--warning);
+        }
+        .alert-error {
+            background: var(--error-bg);
+            border-color: var(--error);
+        }
+        .alert-info {
+            background: var(--info-bg);
+            border-color: var(--info);
+        }
+        .alert-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .alert-content h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-1);
+            margin-bottom: 2px;
+        }
+        .alert-content p {
+            font-size: 13px;
+            color: var(--text-2);
+            line-height: 1.5;
+        }
+
+        /* Toast */
+        .toast-demo {
+            margin-top: var(--sp-7);
+        }
+        .toast {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-4);
+            padding: var(--sp-4) var(--sp-6);
+            background: rgba(30,30,46,0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+        }
+        .toast-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .toast-dot-success { background: var(--success); box-shadow: 0 0 8px rgba(22,163,74,0.4); }
+        .toast-dot-error { background: var(--error); box-shadow: 0 0 8px rgba(244,63,94,0.4); }
+        .toast-text {
+            font-size: 14px;
+            color: var(--text-1);
+        }
+        .toast-dismiss {
+            background: none;
+            border: none;
+            color: var(--text-3);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 2px;
+            margin-left: var(--sp-3);
+            transition: color var(--duration) var(--ease);
+        }
+        .toast-dismiss:hover {
+            color: var(--text-1);
+        }
+
+        /* ===================================================================
+           SCROLL REVEAL ANIMATION
+           =================================================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger delays */
+        .reveal-d1 { transition-delay: 0.1s; }
+        .reveal-d2 { transition-delay: 0.2s; }
+        .reveal-d3 { transition-delay: 0.3s; }
+        .reveal-d4 { transition-delay: 0.4s; }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================================
+         01. NAVIGATION BAR
+         ================================================================ -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.15)" stroke="#22D3EE" stroke-width="1.5"/>
+                    <circle cx="14" cy="14" r="3" stroke="#22D3EE" stroke-width="1.5"/>
+                    <line x1="14" y1="8" x2="14" y2="11" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="14" y1="17" x2="14" y2="20" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="8" y1="14" x2="11" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="17" y1="14" x2="20" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <span>PainOnSocial</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#ds-ref">Design System</a></li>
+                <li><a href="#" class="nav-cta">Start Discovering</a></li>
+            </ul>
+            <button class="nav-mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ================================================================
+         02. HERO
+         ================================================================ -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-eyebrow">Aether v1.0 &mdash; Elevate the signal</div>
+
+            <h1 class="hero-headline">
+                Stop guessing what to build.<br>
+                Start with <span class="accent">validated pain.</span>
+            </h1>
+
+            <p class="hero-sub">
+                PainOnSocial scans thousands of Reddit discussions to surface real, recurring frustrations &mdash; severity-scored and ready for solution ideation. Build what people actually need.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#" class="btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    Start Discovering Pain Points
+                </a>
+                <a href="#" class="btn-ghost">
+                    Watch Demo
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </a>
+            </div>
+
+            <div class="hero-metrics">
+                <div class="hero-metric">
+                    <span class="hero-metric-value">47,000+</span>
+                    <span class="hero-metric-label">Pain points analyzed</span>
+                </div>
+                <div class="hero-metric">
+                    <span class="hero-metric-value">2,300+</span>
+                    <span class="hero-metric-label">Subreddits scanned</span>
+                </div>
+                <div class="hero-metric">
+                    <span class="hero-metric-value">94%</span>
+                    <span class="hero-metric-label">Relevance accuracy</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         03. SOCIAL PROOF / BADGES
+         ================================================================ -->
+    <section class="social-proof">
+        <div class="container">
+            <div class="badges-row reveal">
+                <span class="badge badge-outline">
+                    <span class="badge-dot" style="background:var(--text-3)"></span>
+                    Explorer
+                </span>
+                <span class="badge badge-teal">
+                    <span class="badge-dot badge-dot-teal"></span>
+                    Scout
+                </span>
+                <span class="badge badge-rose">
+                    <span class="badge-dot badge-dot-rose"></span>
+                    Prospector
+                </span>
+                <span class="badge badge-purple">
+                    <span class="badge-dot badge-dot-purple"></span>
+                    Enterprise
+                </span>
+                <span class="badge badge-outline">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    SOC 2 Compliant
+                </span>
+                <span class="badge badge-outline">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    GDPR Ready
+                </span>
+            </div>
+
+            <div class="trusted-bar reveal">
+                <p>Trusted by product teams at</p>
+                <div class="trusted-logos">
+                    <span class="trusted-logo">Stripe</span>
+                    <span class="trusted-logo">Vercel</span>
+                    <span class="trusted-logo">Linear</span>
+                    <span class="trusted-logo">Notion</span>
+                    <span class="trusted-logo">Raycast</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         04. FEATURE CARDS
+         ================================================================ -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="features-header reveal">
+                <div class="section-label">Core Capabilities</div>
+                <h2 class="section-title">From raw signal to actionable insight</h2>
+                <p class="section-desc" style="margin: 0 auto;">Four AI-powered stages that transform community noise into validated opportunities.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="float-card feature-card reveal reveal-d1">
+                    <div class="feature-card-icon teal">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </div>
+                    <h3>Community Discovery</h3>
+                    <p>Automatically identifies and monitors the most relevant subreddits for your market. AI-curated feeds ensure you never miss a signal.</p>
+                </div>
+
+                <div class="float-card feature-card reveal reveal-d2">
+                    <div class="feature-card-icon rose">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <h3>Pain Point Analysis</h3>
+                    <p>NLP models extract, cluster, and severity-score recurring frustrations. See the exact language people use to describe their problems.</p>
+                </div>
+
+                <div class="float-card feature-card reveal reveal-d3">
+                    <div class="feature-card-icon purple">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h3>Solution Ideation</h3>
+                    <p>Generate targeted solution concepts for each validated pain point. Cross-reference with existing market solutions to find gaps.</p>
+                </div>
+
+                <div class="float-card feature-card reveal reveal-d4">
+                    <div class="feature-card-icon orange">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    </div>
+                    <h3>Evidence Trail</h3>
+                    <p>Every insight links back to original discussions. Build conviction with real quotes, thread context, and engagement metrics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         05. STATS
+         ================================================================ -->
+    <section class="stats orb-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item reveal reveal-d1">
+                    <div class="stat-value">47K+</div>
+                    <div class="stat-label">Pain points discovered</div>
+                    <div class="stat-sub">And growing daily</div>
+                </div>
+                <div class="stat-item reveal reveal-d2">
+                    <div class="stat-value">2.3K</div>
+                    <div class="stat-label">Active subreddits</div>
+                    <div class="stat-sub">Continuously monitored</div>
+                </div>
+                <div class="stat-item reveal reveal-d3">
+                    <div class="stat-value">94%</div>
+                    <div class="stat-label">Relevance accuracy</div>
+                    <div class="stat-sub">Human-validated benchmark</div>
+                </div>
+                <div class="stat-item reveal reveal-d4">
+                    <div class="stat-value">3.2x</div>
+                    <div class="stat-label">Faster validation</div>
+                    <div class="stat-sub">vs. manual research</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         06. TESTIMONIALS
+         ================================================================ -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="testimonials-header reveal">
+                <div class="section-label">What teams are saying</div>
+                <h2 class="section-title">From signal to conviction</h2>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="float-card testimonial-card reveal reveal-d1">
+                    <div class="testimonial-quote-mark">&ldquo;</div>
+                    <p class="testimonial-text">PainOnSocial surfaced a recurring CRM frustration we'd completely missed in our user interviews. We pivoted our Q3 roadmap and saw a 40% jump in feature adoption.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MC</div>
+                        <div>
+                            <div class="testimonial-name">Maya Chen</div>
+                            <div class="testimonial-role">Head of Product, Streamline</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="float-card testimonial-card reveal reveal-d2">
+                    <div class="testimonial-quote-mark">&ldquo;</div>
+                    <p class="testimonial-text">We used to spend weeks on customer discovery. Now we validate pain points in hours. The severity scoring alone has transformed how we prioritize our backlog.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">JK</div>
+                        <div>
+                            <div class="testimonial-name">James Kowalski</div>
+                            <div class="testimonial-role">Co-founder, BuildStack</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         07. PRICING
+         ================================================================ -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="pricing-header reveal">
+                <div class="section-label">Simple, transparent pricing</div>
+                <h2 class="section-title">Start free. Scale as you grow.</h2>
+                <p class="section-desc" style="margin: 0 auto;">Every plan includes core discovery. Upgrade for deeper analysis and team features.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Explorer -->
+                <div class="float-card pricing-card reveal reveal-d1">
+                    <div class="pricing-tier-badge">Explorer</div>
+                    <div class="pricing-amount">$0<span>/mo</span></div>
+                    <div class="pricing-desc">For individual explorers</div>
+                    <ul class="pricing-features">
+                        <li><span class="pricing-check">&check;</span> 3 subreddit monitors</li>
+                        <li><span class="pricing-check">&check;</span> Basic pain point detection</li>
+                        <li><span class="pricing-check">&check;</span> Weekly digest emails</li>
+                        <li><span class="pricing-check">&check;</span> Community access</li>
+                    </ul>
+                    <button class="btn-ghost" style="width:100%;justify-content:center;">Get Started Free</button>
+                </div>
+
+                <!-- Scout (featured) -->
+                <div class="float-card pricing-card featured reveal reveal-d2">
+                    <div class="pricing-tier-badge">Scout &mdash; Most Popular</div>
+                    <div class="pricing-amount">$49<span>/mo</span></div>
+                    <div class="pricing-desc">For serious product builders</div>
+                    <ul class="pricing-features">
+                        <li><span class="pricing-check">&check;</span> 25 subreddit monitors</li>
+                        <li><span class="pricing-check">&check;</span> Advanced severity scoring</li>
+                        <li><span class="pricing-check">&check;</span> Solution ideation engine</li>
+                        <li><span class="pricing-check">&check;</span> Evidence trail & exports</li>
+                        <li><span class="pricing-check">&check;</span> Priority support</li>
+                    </ul>
+                    <button class="btn-primary" style="width:100%;justify-content:center;">Start 14-Day Trial</button>
+                </div>
+
+                <!-- Prospector -->
+                <div class="float-card pricing-card reveal reveal-d3">
+                    <div class="pricing-tier-badge">Prospector</div>
+                    <div class="pricing-amount">$149<span>/mo</span></div>
+                    <div class="pricing-desc">For product teams & agencies</div>
+                    <ul class="pricing-features">
+                        <li><span class="pricing-check">&check;</span> Unlimited monitors</li>
+                        <li><span class="pricing-check">&check;</span> Custom AI models</li>
+                        <li><span class="pricing-check">&check;</span> Team collaboration</li>
+                        <li><span class="pricing-check">&check;</span> API access</li>
+                        <li><span class="pricing-check">&check;</span> Dedicated account manager</li>
+                        <li><span class="pricing-check">&check;</span> SSO & audit logs</li>
+                    </ul>
+                    <button class="btn-rose" style="width:100%;justify-content:center;">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         08. FORMS
+         ================================================================ -->
+    <section class="forms-section">
+        <div class="container">
+            <div class="reveal" style="margin-bottom:var(--sp-9);">
+                <div class="section-label">Forms & Inputs</div>
+                <h2 class="section-title">Designed for clarity</h2>
+                <p class="section-desc">Generous padding, soft focus rings, and clear validation states.</p>
+            </div>
+
+            <div class="forms-grid">
+                <!-- Form inputs -->
+                <div class="reveal">
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-input" placeholder="you@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Subreddit URL</label>
+                        <input type="text" class="form-input" placeholder="r/SaaS, r/startups, r/webdev..." value="r/SaaS">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input error" value="short">
+                        <div class="form-error-msg">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                            Password must be at least 8 characters
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-input form-textarea" placeholder="Describe the pain points you're looking for..."></textarea>
+                    </div>
+
+                    <div style="margin-top:var(--sp-5);">
+                        <div class="toggle-row">
+                            <span class="toggle-label">Enable real-time monitoring</span>
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <div class="toggle-track"></div>
+                            </label>
+                        </div>
+                        <div class="toggle-row">
+                            <span class="toggle-label">Weekly severity digest</span>
+                            <label class="toggle">
+                                <input type="checkbox">
+                                <div class="toggle-track"></div>
+                            </label>
+                        </div>
+                        <div class="toggle-row">
+                            <span class="toggle-label">Solution generation (beta)</span>
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <div class="toggle-track"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mini signup -->
+                <div class="reveal reveal-d2">
+                    <div class="float-card signup-mini" style="position:relative;overflow:hidden;">
+                        <div style="position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(8,145,178,0.08) 0%,transparent 60%);border-radius:50%;pointer-events:none;"></div>
+                        <div style="position:absolute;bottom:-30px;left:-30px;width:150px;height:150px;background:radial-gradient(circle,rgba(244,63,94,0.05) 0%,transparent 60%);border-radius:50%;pointer-events:none;"></div>
+
+                        <div style="position:relative;z-index:1;">
+                            <div class="section-label" style="margin-bottom:var(--sp-3);">Early Access</div>
+                            <h3 style="font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--text-1);margin-bottom:var(--sp-3);">Get started in 30 seconds</h3>
+                            <p style="color:var(--text-2);font-size:14px;margin-bottom:var(--sp-6);line-height:1.6;">No credit card required. Start discovering pain points today.</p>
+
+                            <div class="form-group">
+                                <label class="form-label">Work Email</label>
+                                <input type="email" class="form-input" placeholder="you@company.com">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">What market are you exploring?</label>
+                                <input type="text" class="form-input" placeholder="e.g. Project management for agencies">
+                            </div>
+                            <button class="btn-primary" style="width:100%;justify-content:center;margin-top:var(--sp-4);">
+                                Start Discovering
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </button>
+                            <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-3);margin-top:var(--sp-4);text-align:center;letter-spacing:0.03em;">Free forever on Explorer plan. Upgrade anytime.</p>
+                        </div>
+                    </div>
+
+                    <!-- Select / dropdown mock -->
+                    <div style="margin-top:var(--sp-6);">
+                        <div class="form-group">
+                            <label class="form-label">Severity Threshold</label>
+                            <select class="form-input" style="cursor:pointer;appearance:none;background-image:url('data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%238E8EA0%22%20stroke-width%3D%222%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%2F%3E%3C%2Fsvg%3E');background-repeat:no-repeat;background-position:right 16px center;">
+                                <option>High severity only (7+)</option>
+                                <option>Medium and above (4+)</option>
+                                <option>All pain points</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         09. FOOTER
+         ================================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo" style="margin-bottom:var(--sp-4);display:inline-flex;">
+                        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+                            <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.15)" stroke="#22D3EE" stroke-width="1.5"/>
+                            <circle cx="14" cy="14" r="3" stroke="#22D3EE" stroke-width="1.5"/>
+                            <line x1="14" y1="8" x2="14" y2="11" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="14" y1="17" x2="14" y2="20" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="8" y1="14" x2="11" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="17" y1="14" x2="20" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span style="font-family:var(--font-display);font-weight:600;font-size:16px;color:var(--text-1);">PainOnSocial</span>
+                    </a>
+                    <p>AI-powered discovery of validated business pain points from Reddit communities. Build what people actually need.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Changelog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 PainOnSocial. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================================================================
+         GROUP DIVIDER
+         ================================================================ -->
+    <div class="group-divider" id="ds-ref">
+        <div class="container">
+            <div class="group-divider-line"></div>
+            <h2>Design System Reference</h2>
+            <p>Aether v1.0 &mdash; Component Library</p>
+        </div>
+    </div>
+
+    <!-- ================================================================
+         10. COLOR PALETTE
+         ================================================================ -->
+    <section class="ds-section" style="background:var(--bg-deepest);">
+        <div class="container">
+            <div class="reveal">
+                <div class="section-label">10 &mdash; Color Palette</div>
+                <h2 class="section-title">Colors</h2>
+                <p class="section-desc" style="margin-bottom:var(--sp-8);">The Aether palette combines cool teal primaries with warm rose accents on deep purple-tinted dark surfaces.</p>
+            </div>
+
+            <!-- Brand Colors -->
+            <h3 style="font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--text-2);margin-bottom:var(--sp-5);">Brand</h3>
+            <div class="color-grid reveal">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#0891B2;"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Primary Teal</div>
+                        <div class="color-swatch-hex">#0891B2</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#22D3EE;"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Teal Light</div>
+                        <div class="color-swatch-hex">#22D3EE</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#0E7490;"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Teal Dark</div>
+                        <div class="color-swatch-hex">#0E7490</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#F97316;"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Accent Orange</div>
+                        <div class="color-swatch-hex">#F97316</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#A855F7;"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Accent Purple</div>
+                        <div class="color-swatch-hex">#A855F7</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rose Accent -->
+            <h3 style="font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--text-2);margin:var(--sp-7) 0 var(--sp-5);">Rose Accent</h3>
+            <div class="color-grid reveal">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#F43F5E;"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Rose</div>
+                        <div class="color-swatch-hex">#F43F5E</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#FB7185;"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Rose Light</div>
+                        <div class="color-swatch-hex">#FB7185</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:rgba(244,63,94,0.15);border:1px solid rgba(244,63,94,0.2);border-radius:var(--radius-sm) var(--radius-sm) 0 0;"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Rose Glow</div>
+                        <div class="color-swatch-hex">rgba(244,63,94,0.15)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Surface Scale -->
+            <h3 style="font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--text-2);margin:var(--sp-7) 0 var(--sp-5);">Dark Surface Scale</h3>
+            <div class="surface-scale reveal">
+                <div class="surface-step" style="background:#0A0A0F;">
+                    <span class="surface-step-label" style="color:#5E5E73;">Deepest</span>
+                    <span class="surface-step-hex" style="color:#5E5E73;">#0A0A0F</span>
+                </div>
+                <div class="surface-step" style="background:#141420;">
+                    <span class="surface-step-label" style="color:#5E5E73;">Dark</span>
+                    <span class="surface-step-hex" style="color:#5E5E73;">#141420</span>
+                </div>
+                <div class="surface-step" style="background:#1E1E2E;">
+                    <span class="surface-step-label" style="color:#8E8EA0;">Medium</span>
+                    <span class="surface-step-hex" style="color:#5E5E73;">#1E1E2E</span>
+                </div>
+                <div class="surface-step" style="background:rgba(30,30,46,0.8);">
+                    <span class="surface-step-label" style="color:#8E8EA0;">Card</span>
+                    <span class="surface-step-hex" style="color:#5E5E73;">rgba(30,30,46,0.5)</span>
+                </div>
+            </div>
+
+            <!-- Text Scale -->
+            <h3 style="font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--text-2);margin:var(--sp-7) 0 var(--sp-5);">Text</h3>
+            <div class="color-grid reveal">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#F0F0F5;"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Primary Text</div>
+                        <div class="color-swatch-hex">#F0F0F5</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#8E8EA0;"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Secondary Text</div>
+                        <div class="color-swatch-hex">#8E8EA0</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#5E5E73;"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Muted Text</div>
+                        <div class="color-swatch-hex">#5E5E73</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Semantic -->
+            <h3 style="font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--text-2);margin:var(--sp-7) 0 var(--sp-5);">Semantic</h3>
+            <div class="color-grid reveal">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#16A34A;"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Success</div>
+                        <div class="color-swatch-hex">#16A34A</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#EAB308;"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Warning</div>
+                        <div class="color-swatch-hex">#EAB308</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#F43F5E;"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Error</div>
+                        <div class="color-swatch-hex">#F43F5E</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#0891B2;"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Info</div>
+                        <div class="color-swatch-hex">#0891B2</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gradient Orb Demo -->
+            <h3 style="font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--text-2);margin:var(--sp-7) 0 var(--sp-5);">Gradient Orbs</h3>
+            <div class="orb-demo reveal">
+                <span class="orb-demo-label">Teal orb (top-right) + Rose orb (bottom-left) &mdash; atmospheric depth</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         11. TYPOGRAPHY
+         ================================================================ -->
+    <section class="ds-section" style="background:var(--bg-deepest);">
+        <div class="container">
+            <div class="reveal">
+                <div class="section-label">11 &mdash; Typography</div>
+                <h2 class="section-title">Type Scale</h2>
+                <p class="section-desc" style="margin-bottom:var(--sp-8);">Switzer for display, Inter for body, IBM Plex Mono for technical elements.</p>
+            </div>
+
+            <div class="type-specimen reveal">
+                <div class="type-meta">
+                    <span>Switzer / 56px / 700 / -0.02em</span>
+                    <span>Hero Display</span>
+                </div>
+                <div class="type-hero">Elevate the signal</div>
+            </div>
+
+            <div class="type-specimen reveal">
+                <div class="type-meta">
+                    <span>Switzer / 44px / 700 / -0.02em</span>
+                    <span>Heading 1</span>
+                </div>
+                <div class="type-h1">Validated pain points</div>
+            </div>
+
+            <div class="type-specimen reveal">
+                <div class="type-meta">
+                    <span>Switzer / 36px / 600</span>
+                    <span>Heading 2</span>
+                </div>
+                <div class="type-h2">From signal to conviction</div>
+            </div>
+
+            <div class="type-specimen reveal">
+                <div class="type-meta">
+                    <span>Switzer / 24px / 600</span>
+                    <span>Heading 3</span>
+                </div>
+                <div class="type-h3">Community Discovery</div>
+            </div>
+
+            <div class="type-specimen reveal">
+                <div class="type-meta">
+                    <span>Switzer / 18px / 600</span>
+                    <span>Heading 4</span>
+                </div>
+                <div class="type-h4">Pain Point Analysis</div>
+            </div>
+
+            <div class="type-specimen reveal">
+                <div class="type-meta">
+                    <span>Inter / 16px / 400 / 1.7</span>
+                    <span>Body</span>
+                </div>
+                <div class="type-body">PainOnSocial scans thousands of Reddit discussions to surface real, recurring frustrations. Every insight links back to original threads with engagement metrics and severity scores.</div>
+            </div>
+
+            <div class="type-specimen reveal">
+                <div class="type-meta">
+                    <span>Inter / 14px / 400 / 1.6</span>
+                    <span>Body Small</span>
+                </div>
+                <div class="type-body-sm">Evidence trails help you build conviction before committing engineering resources.</div>
+            </div>
+
+            <div class="type-specimen reveal">
+                <div class="type-meta">
+                    <span>Inter / 12px / 400</span>
+                    <span>Caption</span>
+                </div>
+                <div class="type-caption">Last updated 3 hours ago &bull; 47 pain points in cluster</div>
+            </div>
+
+            <div class="type-specimen reveal">
+                <div class="type-meta">
+                    <span>IBM Plex Mono / 11px / 500 / 0.15em / uppercase</span>
+                    <span>Overline</span>
+                </div>
+                <div class="type-overline">Design System Reference</div>
+            </div>
+
+            <div class="type-specimen reveal">
+                <div class="type-meta">
+                    <span>IBM Plex Mono / 14px / 400</span>
+                    <span>Monospace</span>
+                </div>
+                <div><span class="type-mono">severity: 8.4 &nbsp; | &nbsp; cluster_id: "crm-friction-042"</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         12. SPACING
+         ================================================================ -->
+    <section class="ds-section" style="background:var(--bg-deepest);">
+        <div class="container">
+            <div class="reveal">
+                <div class="section-label">12 &mdash; Spacing</div>
+                <h2 class="section-title">Spacing Scale</h2>
+                <p class="section-desc" style="margin-bottom:var(--sp-8);">8px base grid. Aether uses the generous end of the scale &mdash; maximum whitespace for atmospheric breathability.</p>
+            </div>
+
+            <div class="spacing-demo reveal">
+                <div class="spacing-row">
+                    <span class="spacing-label">sp-1</span>
+                    <div class="spacing-bar" style="width:4px;"></div>
+                    <span class="spacing-value">4px</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">sp-2</span>
+                    <div class="spacing-bar" style="width:8px;"></div>
+                    <span class="spacing-value">8px</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">sp-3</span>
+                    <div class="spacing-bar" style="width:12px;"></div>
+                    <span class="spacing-value">12px</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">sp-4</span>
+                    <div class="spacing-bar" style="width:16px;"></div>
+                    <span class="spacing-value">16px</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">sp-5</span>
+                    <div class="spacing-bar" style="width:24px;"></div>
+                    <span class="spacing-value">24px</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">sp-6</span>
+                    <div class="spacing-bar" style="width:32px;"></div>
+                    <span class="spacing-value">32px</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">sp-7</span>
+                    <div class="spacing-bar" style="width:48px;"></div>
+                    <span class="spacing-value">48px</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">sp-8</span>
+                    <div class="spacing-bar" style="width:64px;"></div>
+                    <span class="spacing-value">64px</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">sp-9</span>
+                    <div class="spacing-bar" style="width:96px;"></div>
+                    <span class="spacing-value">96px</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">sp-10</span>
+                    <div class="spacing-bar" style="width:128px;"></div>
+                    <span class="spacing-value">128px</span>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">sp-11</span>
+                    <div class="spacing-bar" style="width:160px;"></div>
+                    <span class="spacing-value">160px</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         13. BUTTONS
+         ================================================================ -->
+    <section class="ds-section" style="background:var(--bg-deepest);">
+        <div class="container">
+            <div class="reveal">
+                <div class="section-label">13 &mdash; Buttons</div>
+                <h2 class="section-title">Button System</h2>
+                <p class="section-desc" style="margin-bottom:var(--sp-8);">Soft radius, floating shadows, dual-accent system. Teal for primary, rose for high-energy actions.</p>
+            </div>
+
+            <div class="buttons-showcase reveal">
+                <div class="button-row">
+                    <span class="button-row-label">Primary</span>
+                    <button class="btn-primary">Start Discovering</button>
+                    <button class="btn-primary btn-sm">Small Primary</button>
+                    <button class="btn-primary btn-disabled">Disabled</button>
+                </div>
+
+                <div class="button-row">
+                    <span class="button-row-label">Secondary</span>
+                    <button class="btn-secondary">View Documentation</button>
+                    <button class="btn-secondary btn-sm">Small</button>
+                    <button class="btn-secondary btn-disabled">Disabled</button>
+                </div>
+
+                <div class="button-row">
+                    <span class="button-row-label">Ghost</span>
+                    <button class="btn-ghost">Watch Demo</button>
+                    <button class="btn-ghost btn-sm">Small Ghost</button>
+                    <button class="btn-ghost btn-disabled">Disabled</button>
+                </div>
+
+                <div class="button-row">
+                    <span class="button-row-label">Rose Accent</span>
+                    <button class="btn-rose">Contact Sales</button>
+                    <button class="btn-rose btn-sm">Upgrade Now</button>
+                </div>
+
+                <div class="button-row">
+                    <span class="button-row-label">Text Link</span>
+                    <button class="btn-text">Learn more</button>
+                    <button class="btn-text">View all features</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         14. DIVIDERS & DECORATIVE
+         ================================================================ -->
+    <section class="ds-section" style="background:var(--bg-deepest);">
+        <div class="container">
+            <div class="reveal">
+                <div class="section-label">14 &mdash; Dividers & Decorative</div>
+                <h2 class="section-title">Atmospheric Elements</h2>
+                <p class="section-desc" style="margin-bottom:var(--sp-8);">Gradient lines, orb effects, blur overlays, and soft separators that create the Aether atmosphere.</p>
+            </div>
+
+            <div class="divider-showcase reveal">
+                <div class="divider-item">
+                    <span class="divider-item-label">Solid border</span>
+                    <div class="divider-solid"></div>
+                </div>
+
+                <div class="divider-item">
+                    <span class="divider-item-label">Teal-to-Rose gradient</span>
+                    <div class="divider-gradient"></div>
+                </div>
+
+                <div class="divider-item">
+                    <span class="divider-item-label">Gradient fade (center)</span>
+                    <div class="divider-gradient-fade"></div>
+                </div>
+
+                <div class="divider-item">
+                    <span class="divider-item-label">Dot separator</span>
+                    <div class="divider-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+
+                <div class="divider-item">
+                    <span class="divider-item-label">Gradient Orb Demo</span>
+                    <div class="orb-demo">
+                        <span class="orb-demo-label">Animated radial-gradient pseudo-elements create atmospheric depth</span>
+                    </div>
+                </div>
+
+                <div class="divider-item">
+                    <span class="divider-item-label">Ethereal Blur Card</span>
+                    <div class="blur-demo">
+                        <div class="blur-demo-card">backdrop-filter: blur(20px)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         15. ALERTS
+         ================================================================ -->
+    <section class="ds-section" style="background:var(--bg-deepest);padding-bottom:var(--sp-11);">
+        <div class="container">
+            <div class="reveal">
+                <div class="section-label">15 &mdash; Alerts & Notifications</div>
+                <h2 class="section-title">Status Communication</h2>
+                <p class="section-desc" style="margin-bottom:var(--sp-8);">Soft dark alerts with colored left borders. Glass-effect toasts for transient feedback.</p>
+            </div>
+
+            <div class="alerts-showcase reveal">
+                <div class="alert alert-success">
+                    <span class="alert-icon" style="color:var(--success);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </span>
+                    <div class="alert-content">
+                        <h4>Analysis Complete</h4>
+                        <p>23 new pain points discovered across 5 subreddits. 4 are high-severity.</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <span class="alert-icon" style="color:var(--warning);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    </span>
+                    <div class="alert-content">
+                        <h4>API Rate Limit Approaching</h4>
+                        <p>You've used 85% of your monthly API quota. Consider upgrading to Prospector.</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-error">
+                    <span class="alert-icon" style="color:var(--error);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                    </span>
+                    <div class="alert-content">
+                        <h4>Monitor Failed</h4>
+                        <p>Unable to access r/startups. The subreddit may be private or temporarily unavailable.</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <span class="alert-icon" style="color:var(--info);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    </span>
+                    <div class="alert-content">
+                        <h4>New Feature: Solution Ideation</h4>
+                        <p>Generate targeted solution concepts for validated pain points. Now available on Scout and above.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toasts -->
+            <div class="toast-demo reveal" style="margin-top:var(--sp-9);">
+                <h3 style="font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--text-2);margin-bottom:var(--sp-5);">Toast Notifications</h3>
+                <div style="display:flex;flex-direction:column;gap:var(--sp-5);">
+                    <div class="toast">
+                        <span class="toast-dot toast-dot-success"></span>
+                        <span class="toast-text">Pain point cluster saved to project</span>
+                        <button class="toast-dismiss">&times;</button>
+                    </div>
+                    <div class="toast">
+                        <span class="toast-dot toast-dot-error"></span>
+                        <span class="toast-text">Export failed. Please try again.</span>
+                        <button class="toast-dismiss">&times;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         FOOTER CREDIT
+         ================================================================ -->
+    <div style="text-align:center;padding:var(--sp-7) 0;background:var(--bg-dark);border-top:1px solid var(--border);">
+        <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-3);letter-spacing:0.1em;">
+            AETHER v1.0 &mdash; PainOnSocial Design System &mdash; "Elevate the signal."
+        </p>
+    </div>
+
+    <!-- ================================================================
+         MINIMAL JS: Scroll reveal + mobile nav
+         ================================================================ -->
+    <script>
+        // Scroll reveal
+        const revealEls = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        revealEls.forEach(el => revealObserver.observe(el));
+
+        // Close mobile nav on link click
+        document.querySelectorAll('.nav-links a').forEach(a => {
+            a.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+            });
+        });
+
+        // Navbar transparency on scroll
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                nav.style.borderBottomColor = 'rgba(255,255,255,0.06)';
+            } else {
+                nav.style.borderBottomColor = 'rgba(255,255,255,0.03)';
+            }
+        });
+    </script>
+</body>
+</html>

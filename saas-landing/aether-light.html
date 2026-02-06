@@ -1,0 +1,2418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aether Light v1.0 — PainOnSocial Design System</title>
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ========================================
+   AETHER LIGHT v1.0 — "Elevate the signal."
+   PainOnSocial Design System
+   ======================================== */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  /* Brand */
+  --teal: #0891B2;
+  --teal-dark: #0E7490;
+  --teal-glow: rgba(8,145,178,0.08);
+  --teal-orb: rgba(8,145,178,0.04);
+  --orange: #F97316;
+  --purple: #A855F7;
+
+  /* Rose Accent */
+  --rose: #F43F5E;
+  --rose-light: #FB7185;
+  --rose-glow: rgba(244,63,94,0.08);
+  --rose-orb: rgba(244,63,94,0.03);
+
+  /* Surfaces */
+  --body: #FAFAFC;
+  --surface-50: #F4F4F8;
+  --surface-100: #EBEBF0;
+  --surface-200: #DDDDE5;
+  --card: #FFFFFF;
+
+  /* Text */
+  --text-primary: #111118;
+  --text-secondary: #4A4A5A;
+  --text-muted: #8E8EA0;
+
+  /* Borders & Shadows */
+  --border: rgba(17,17,24,0.06);
+  --border-medium: rgba(17,17,24,0.10);
+  --shadow-sm: 0 2px 8px rgba(17,17,24,0.04);
+  --shadow-md: 0 8px 40px rgba(17,17,24,0.06);
+  --shadow-lg: 0 16px 64px rgba(17,17,24,0.08);
+  --shadow-xl: 0 24px 80px rgba(17,17,24,0.10);
+  --shadow-hover: 0 20px 60px rgba(17,17,24,0.10);
+
+  /* Semantic */
+  --success: #16A34A;
+  --success-bg: rgba(22,163,74,0.06);
+  --warning: #EAB308;
+  --warning-bg: rgba(234,179,8,0.06);
+  --error: #F43F5E;
+  --error-bg: rgba(244,63,94,0.06);
+  --info: #0891B2;
+  --info-bg: rgba(8,145,178,0.06);
+
+  /* Typography */
+  --font-display: 'Switzer', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 48px;
+  --space-10: 56px;
+  --space-11: 64px;
+  --space-12: 80px;
+  --space-13: 96px;
+  --space-14: 120px;
+  --space-15: 160px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--body);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ---- UTILITY ---- */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-8); }
+.container-sm { max-width: 800px; margin: 0 auto; padding: 0 var(--space-8); }
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.section-number {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  border-radius: var(--radius-sm);
+  background: var(--teal-glow);
+  color: var(--teal);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  margin-right: var(--space-3);
+}
+
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: var(--space-6);
+}
+
+.section-desc {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: var(--space-10);
+}
+
+/* Orb backgrounds */
+.orb-container { position: relative; overflow: hidden; }
+.orb-container::before,
+.orb-container::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.orb-container::before {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, var(--teal-orb) 0%, transparent 70%);
+  top: -200px; right: -100px;
+}
+.orb-container::after {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, var(--rose-orb) 0%, transparent 70%);
+  bottom: -150px; left: -100px;
+}
+
+/* ========================================
+   01. NAVIGATION
+   ======================================== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(250,250,252,0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+.nav-logo svg { flex-shrink: 0; }
+.nav-logo-text {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: -0.02em;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  list-style: none;
+}
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text-primary); }
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 24px;
+  background: var(--teal);
+  color: #fff !important;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px rgba(8,145,178,0.15);
+}
+.nav-cta:hover {
+  background: var(--teal-dark);
+  box-shadow: 0 4px 20px rgba(8,145,178,0.25);
+}
+.nav-mobile-toggle {
+  display: none;
+  background: none; border: none; cursor: pointer; padding: var(--space-2);
+}
+.nav-mobile-toggle span {
+  display: block; width: 20px; height: 2px;
+  background: var(--text-primary); margin: 5px 0;
+  border-radius: 2px; transition: 0.2s;
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-mobile-toggle { display: block; }
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: rgba(250,250,252,0.95);
+    backdrop-filter: blur(24px);
+    padding: var(--space-6) var(--space-8);
+    border-bottom: 1px solid var(--border);
+    gap: var(--space-5);
+  }
+}
+
+/* ========================================
+   02. HERO
+   ======================================== */
+.hero {
+  position: relative;
+  padding: var(--space-15) 0 var(--space-14);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(8,145,178,0.05) 0%, transparent 65%);
+  top: -250px; right: -150px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(244,63,94,0.035) 0%, transparent 65%);
+  bottom: -200px; left: -200px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  background: var(--teal-glow);
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-9);
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--teal);
+  border-radius: 50%;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: var(--text-primary);
+  margin-bottom: var(--space-8);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero h1 .teal { color: var(--teal); }
+.hero-sub {
+  font-size: clamp(17px, 2vw, 20px);
+  color: var(--text-secondary);
+  max-width: 580px;
+  margin: 0 auto var(--space-10);
+  line-height: 1.7;
+}
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  margin-bottom: var(--space-12);
+  flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 14px 32px;
+  background: var(--teal);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s;
+  box-shadow: 0 4px 16px rgba(8,145,178,0.2);
+}
+.btn-primary:hover {
+  background: var(--teal-dark);
+  box-shadow: 0 8px 32px rgba(8,145,178,0.3);
+  transform: translateY(-1px);
+}
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 14px 32px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.btn-ghost:hover {
+  border-color: var(--rose);
+  color: var(--rose);
+  background: var(--rose-glow);
+}
+.hero-metrics {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-10);
+  flex-wrap: wrap;
+}
+.hero-metric {
+  text-align: center;
+}
+.hero-metric-value {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+.hero-metric-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-top: var(--space-1);
+}
+
+/* ========================================
+   03. SOCIAL PROOF / BADGES
+   ======================================== */
+.social-proof {
+  padding: var(--space-12) 0 var(--space-13);
+  text-align: center;
+}
+.badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-10);
+  flex-wrap: wrap;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: all 0.25s;
+}
+.badge-explorer {
+  background: transparent;
+  border: 1.5px solid var(--border-medium);
+  color: var(--text-secondary);
+}
+.badge-explorer:hover { border-color: var(--teal); color: var(--teal); }
+.badge-scout {
+  background: var(--teal);
+  color: #fff;
+  border: 1.5px solid var(--teal);
+}
+.badge-scout:hover { background: var(--teal-dark); }
+.badge-prospector {
+  background: var(--rose-glow);
+  color: var(--rose);
+  border: 1.5px solid rgba(244,63,94,0.15);
+}
+.badge-prospector:hover { background: rgba(244,63,94,0.12); }
+
+.trusted-by {
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-7);
+}
+.trusted-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-10);
+  flex-wrap: wrap;
+}
+.trusted-logo {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-muted);
+  opacity: 0.5;
+  letter-spacing: -0.01em;
+  transition: opacity 0.2s;
+}
+.trusted-logo:hover { opacity: 0.8; }
+
+/* ========================================
+   04. FEATURE CARDS
+   ======================================== */
+.features {
+  position: relative;
+  padding: var(--space-13) 0;
+  overflow: hidden;
+}
+.features::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, var(--teal-orb) 0%, transparent 70%);
+  top: 0; left: -200px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-7);
+  position: relative;
+  z-index: 1;
+}
+.feature-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-9);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+.feature-card:nth-child(2) { transform: translateY(24px); }
+.feature-card:nth-child(2):hover { transform: translateY(20px); }
+.feature-card:nth-child(3) { transform: translateY(-12px); }
+.feature-card:nth-child(3):hover { transform: translateY(-16px); }
+
+.feature-icon {
+  width: 48px; height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-6);
+  font-size: 22px;
+}
+.feature-icon.teal-bg { background: var(--teal-glow); color: var(--teal); }
+.feature-icon.rose-bg { background: var(--rose-glow); color: var(--rose); }
+.feature-icon.purple-bg { background: rgba(168,85,247,0.08); color: var(--purple); }
+.feature-icon.orange-bg { background: rgba(249,115,22,0.08); color: var(--orange); }
+
+.feature-card h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.01em;
+}
+.feature-card p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .features-grid { grid-template-columns: 1fr; }
+  .feature-card:nth-child(2),
+  .feature-card:nth-child(3) { transform: none; }
+  .feature-card:nth-child(2):hover,
+  .feature-card:nth-child(3):hover { transform: translateY(-4px); }
+}
+
+/* ========================================
+   05. STATS
+   ======================================== */
+.stats {
+  position: relative;
+  padding: var(--space-13) 0;
+  background: var(--surface-50);
+  overflow: hidden;
+}
+.stats::before {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, var(--rose-orb) 0%, transparent 70%);
+  top: -150px; right: -100px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-7);
+  position: relative;
+  z-index: 1;
+}
+.stat-item { text-align: center; }
+.stat-value {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: var(--space-3);
+}
+.stat-value .teal { color: var(--teal); }
+.stat-label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-9); }
+}
+
+/* ========================================
+   06. TESTIMONIALS
+   ======================================== */
+.testimonials {
+  padding: var(--space-14) 0 var(--space-13);
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-7);
+}
+.testimonial-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-9);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--teal);
+  position: relative;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.testimonial-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+.testimonial-quote-mark {
+  font-family: Georgia, serif;
+  font-size: 48px;
+  color: var(--rose-light);
+  line-height: 1;
+  margin-bottom: var(--space-4);
+  opacity: 0.6;
+}
+.testimonial-text {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: var(--space-7);
+  font-style: italic;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.testimonial-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal-glow), var(--rose-glow));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--teal);
+}
+.testimonial-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+.testimonial-role {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .testimonials-grid { grid-template-columns: 1fr; }
+}
+
+/* ========================================
+   07. PRICING
+   ======================================== */
+.pricing {
+  position: relative;
+  padding: var(--space-14) 0;
+  overflow: hidden;
+}
+.pricing::before {
+  content: '';
+  position: absolute;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, var(--teal-orb) 0%, transparent 65%);
+  bottom: -200px; left: -200px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-7);
+  position: relative;
+  z-index: 1;
+  align-items: start;
+}
+.pricing-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-9);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+.pricing-card.featured {
+  border-color: var(--teal);
+  border-width: 2px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+.pricing-card.featured::before {
+  content: 'Most Popular';
+  position: absolute;
+  top: -13px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--teal);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 16px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
+}
+.pricing-tier {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+}
+.pricing-price {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: var(--space-2);
+}
+.pricing-price span {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0;
+}
+.pricing-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-7);
+  line-height: 1.6;
+}
+.pricing-features {
+  list-style: none;
+  margin-bottom: var(--space-8);
+}
+.pricing-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
+.pricing-features li:last-child { border-bottom: none; }
+.pricing-features li::before {
+  content: '✓';
+  color: var(--teal);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.pricing-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s;
+  border: none;
+}
+.pricing-btn-primary {
+  background: var(--teal);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(8,145,178,0.2);
+}
+.pricing-btn-primary:hover {
+  background: var(--teal-dark);
+  box-shadow: 0 8px 32px rgba(8,145,178,0.3);
+}
+.pricing-btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-medium);
+}
+.pricing-btn-ghost:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+@media (max-width: 900px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+}
+
+/* ========================================
+   08. FORMS
+   ======================================== */
+.forms-section {
+  position: relative;
+  padding: var(--space-13) 0;
+  background: var(--surface-50);
+  overflow: hidden;
+}
+.forms-section::after {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, var(--teal-orb) 0%, transparent 70%);
+  top: -100px; right: -100px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.forms-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-10);
+  position: relative;
+  z-index: 1;
+}
+.form-group { margin-bottom: var(--space-6); }
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+  letter-spacing: 0.01em;
+}
+.form-input {
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--card);
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-primary);
+  transition: all 0.25s;
+  outline: none;
+}
+.form-input::placeholder { color: var(--text-muted); }
+.form-input:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 4px var(--teal-glow), var(--shadow-sm);
+}
+.form-input.error {
+  border-color: var(--rose);
+  box-shadow: 0 0 0 4px var(--rose-glow);
+}
+.form-error {
+  font-size: 13px;
+  color: var(--rose);
+  margin-top: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+textarea.form-input {
+  resize: vertical;
+  min-height: 120px;
+}
+.form-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: var(--space-1);
+}
+
+/* Toggle */
+.toggle-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+.toggle {
+  position: relative;
+  width: 44px; height: 24px;
+  cursor: pointer;
+}
+.toggle input { display: none; }
+.toggle-track {
+  position: absolute;
+  inset: 0;
+  background: var(--surface-100);
+  border-radius: var(--radius-full);
+  transition: background 0.25s;
+}
+.toggle input:checked + .toggle-track { background: var(--teal); }
+.toggle-thumb {
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 18px; height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s;
+}
+.toggle input:checked ~ .toggle-thumb { transform: translateX(20px); }
+.toggle-label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Mini signup */
+.mini-signup {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-9);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.mini-signup::before {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, var(--rose-orb) 0%, transparent 70%);
+  top: -80px; right: -80px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.mini-signup h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+  color: var(--text-primary);
+  position: relative;
+}
+.mini-signup p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-6);
+  position: relative;
+}
+.mini-signup-row {
+  display: flex;
+  gap: var(--space-3);
+  position: relative;
+}
+.mini-signup-row .form-input { flex: 1; }
+
+@media (max-width: 768px) {
+  .forms-grid { grid-template-columns: 1fr; }
+  .mini-signup-row { flex-direction: column; }
+}
+
+/* ========================================
+   09. FOOTER
+   ======================================== */
+.footer {
+  background: var(--surface-50);
+  padding: var(--space-13) 0 var(--space-9);
+  border-top: 1px solid var(--border);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-10);
+  margin-bottom: var(--space-12);
+}
+.footer-brand-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-top: var(--space-5);
+  max-width: 280px;
+}
+.footer-col-title {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-5);
+}
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: var(--space-3); }
+.footer-links a {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--teal); }
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-7);
+  border-top: 1px solid var(--border);
+}
+.footer-copyright {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.footer-bottom-links {
+  display: flex;
+  gap: var(--space-6);
+}
+.footer-bottom-links a {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-bottom-links a:hover { color: var(--teal); }
+
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; gap: var(--space-4); text-align: center; }
+}
+
+/* ========================================
+   GROUP DIVIDER
+   ======================================== */
+.group-divider {
+  padding: var(--space-12) 0;
+  text-align: center;
+  position: relative;
+}
+.group-divider-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--teal), var(--rose), transparent);
+  border-radius: 2px;
+  margin-bottom: var(--space-7);
+}
+.group-divider-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--body);
+  display: inline-block;
+  padding: 0 var(--space-5);
+}
+
+/* ========================================
+   10. COLOR PALETTE
+   ======================================== */
+.ds-section {
+  padding: var(--space-12) 0;
+}
+.ds-section + .ds-section {
+  border-top: 1px solid var(--border);
+}
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-5);
+}
+.color-swatch {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  transition: all 0.25s;
+}
+.color-swatch:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.color-swatch-preview {
+  height: 80px;
+  width: 100%;
+}
+.color-swatch-info {
+  padding: var(--space-4);
+}
+.color-swatch-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.color-swatch-value {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.orb-demo {
+  position: relative;
+  height: 200px;
+  border-radius: var(--radius-lg);
+  background: var(--body);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin-top: var(--space-7);
+}
+.orb-demo::before {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(8,145,178,0.06) 0%, transparent 70%);
+  top: -100px; right: -50px;
+  border-radius: 50%;
+}
+.orb-demo::after {
+  content: '';
+  position: absolute;
+  width: 250px; height: 250px;
+  background: radial-gradient(circle, rgba(244,63,94,0.04) 0%, transparent 70%);
+  bottom: -80px; left: -30px;
+  border-radius: 50%;
+}
+.orb-demo-label {
+  position: absolute;
+  bottom: var(--space-5);
+  left: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  z-index: 1;
+}
+
+/* ========================================
+   11. TYPOGRAPHY
+   ======================================== */
+.type-specimen { margin-bottom: var(--space-7); }
+.type-specimen-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
+  letter-spacing: 0.05em;
+}
+.type-display-1 {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: var(--text-primary);
+}
+.type-display-2 {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+.type-h1 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+.type-h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+.type-h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+.type-h4 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text-primary);
+}
+.type-body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+.type-body-sm {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+.type-caption {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.type-mono {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--teal);
+  line-height: 1.6;
+}
+.type-overline {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ========================================
+   12. SPACING
+   ======================================== */
+.spacing-scale {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.spacing-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+.spacing-bar-wrapper { width: 300px; flex-shrink: 0; }
+.spacing-bar {
+  height: 24px;
+  background: linear-gradient(90deg, var(--teal-glow), rgba(8,145,178,0.12));
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(8,145,178,0.1);
+}
+.spacing-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+  min-width: 90px;
+}
+.spacing-value {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ========================================
+   13. BUTTONS
+   ======================================== */
+.buttons-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  align-items: center;
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 14px 32px;
+  background: var(--surface-50);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.btn-secondary:hover {
+  background: var(--surface-100);
+  border-color: var(--border-medium);
+}
+.btn-rose {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 14px 32px;
+  background: var(--rose);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s;
+  box-shadow: 0 4px 16px rgba(244,63,94,0.2);
+}
+.btn-rose:hover {
+  background: #E11D48;
+  box-shadow: 0 8px 32px rgba(244,63,94,0.3);
+  transform: translateY(-1px);
+}
+.btn-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 8px 4px;
+  background: none;
+  color: var(--teal);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-text:hover { color: var(--teal-dark); }
+.btn-text::after {
+  content: '→';
+  transition: transform 0.2s;
+}
+.btn-text:hover::after { transform: translateX(4px); }
+
+/* Small buttons */
+.btn-sm { padding: 9px 20px; font-size: 13px; }
+
+/* ========================================
+   14. DIVIDERS
+   ======================================== */
+.divider-demos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+.divider-demo-item {
+  padding: var(--space-6) 0;
+}
+.divider-demo-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+  letter-spacing: 0.05em;
+}
+.divider-solid {
+  height: 1px;
+  background: var(--border);
+}
+.divider-gradient {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--teal), var(--rose), transparent);
+  border-radius: 2px;
+}
+.divider-teal {
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal), transparent);
+  border-radius: 2px;
+}
+.divider-rose {
+  height: 2px;
+  background: linear-gradient(90deg, var(--rose), transparent);
+  border-radius: 2px;
+}
+.divider-dashed {
+  height: 1px;
+  border-top: 1.5px dashed var(--surface-200);
+}
+
+.blur-demo {
+  position: relative;
+  height: 240px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--body);
+  border: 1px solid var(--border);
+}
+.blur-demo-bg {
+  position: absolute;
+  inset: 0;
+}
+.blur-demo-bg::before {
+  content: '';
+  position: absolute;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(8,145,178,0.12) 0%, transparent 70%);
+  top: -40px; right: 40px;
+  border-radius: 50%;
+}
+.blur-demo-bg::after {
+  content: '';
+  position: absolute;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(244,63,94,0.08) 0%, transparent 70%);
+  bottom: -40px; left: 60px;
+  border-radius: 50%;
+}
+.blur-demo-card {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: var(--radius-lg);
+  padding: var(--space-7) var(--space-8);
+  text-align: center;
+  z-index: 1;
+}
+.blur-demo-card h4 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+.blur-demo-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ========================================
+   15. ALERTS
+   ======================================== */
+.alerts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  border-radius: var(--radius-md);
+  border-left: 3px solid;
+}
+.alert-info {
+  background: var(--info-bg);
+  border-color: var(--info);
+}
+.alert-success {
+  background: var(--success-bg);
+  border-color: var(--success);
+}
+.alert-warning {
+  background: var(--warning-bg);
+  border-color: var(--warning);
+}
+.alert-error {
+  background: var(--error-bg);
+  border-color: var(--error);
+}
+.alert-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.alert-content { flex: 1; }
+.alert-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.alert-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.toast {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-7);
+  background: var(--card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  margin-top: var(--space-7);
+}
+.toast-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.toast-dot.success { background: var(--success); }
+.toast-dot.error { background: var(--error); }
+.toast-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.toast-dismiss {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 0 0 var(--space-4);
+  transition: color 0.2s;
+}
+.toast-dismiss:hover { color: var(--text-primary); }
+
+/* ---- Animations ---- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-in {
+  opacity: 0;
+  animation: fadeInUp 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+
+/* Responsive text */
+@media (max-width: 600px) {
+  .container, .container-sm { padding: 0 var(--space-5); }
+  .type-display-1 { font-size: 40px; }
+  .type-display-2 { font-size: 32px; }
+  .spacing-bar-wrapper { width: 160px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     01. NAVIGATION
+     ============================================ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.08)" stroke="#0891B2" stroke-width="1.5"/>
+        <circle cx="14" cy="14" r="3" stroke="#0891B2" stroke-width="1.5" fill="none"/>
+        <line x1="14" y1="8" x2="14" y2="11" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="14" y1="17" x2="14" y2="20" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="8" y1="14" x2="11" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="17" y1="14" x2="20" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span class="nav-logo-text">PainOnSocial</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#design-system">Design System</a></li>
+      <li><a href="#" class="nav-cta">Start Free Trial</a></li>
+    </ul>
+    <button class="nav-mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============================================
+     02. HERO
+     ============================================ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow animate-in">AI-Powered Pain Discovery</div>
+    <h1 class="animate-in delay-1">Discover<br><span class="teal">validated pain</span><br>from real conversations</h1>
+    <p class="hero-sub animate-in delay-2">PainOnSocial analyzes thousands of Reddit discussions to surface genuine business pain points, severity-score them, and generate actionable solution ideas.</p>
+    <div class="hero-ctas animate-in delay-3">
+      <a href="#" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><line x1="8" y1="5" x2="8" y2="8"/><line x1="8" y1="8" x2="10" y2="10"/></svg>
+        Start Discovering Pain
+      </a>
+      <a href="#" class="btn-ghost">Watch Demo</a>
+    </div>
+    <div class="hero-metrics animate-in delay-4">
+      <div class="hero-metric">
+        <div class="hero-metric-value">47K+</div>
+        <div class="hero-metric-label">Pain points found</div>
+      </div>
+      <div class="hero-metric">
+        <div class="hero-metric-value">2.4M</div>
+        <div class="hero-metric-label">Discussions analyzed</div>
+      </div>
+      <div class="hero-metric">
+        <div class="hero-metric-value">89%</div>
+        <div class="hero-metric-label">Validation accuracy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     03. SOCIAL PROOF / BADGES
+     ============================================ -->
+<section class="social-proof">
+  <div class="container">
+    <div class="section-label"><span class="section-number">03</span> Social Proof</div>
+    <div class="badges">
+      <span class="badge badge-explorer">Explorer</span>
+      <span class="badge badge-scout">Scout</span>
+      <span class="badge badge-prospector">Prospector</span>
+    </div>
+    <p class="trusted-by">Trusted by teams at</p>
+    <div class="trusted-logos">
+      <span class="trusted-logo">Stripe</span>
+      <span class="trusted-logo">Notion</span>
+      <span class="trusted-logo">Linear</span>
+      <span class="trusted-logo">Vercel</span>
+      <span class="trusted-logo">Supabase</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     04. FEATURE CARDS
+     ============================================ -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-label"><span class="section-number">04</span> Features</div>
+    <div class="section-heading">Everything you need to<br>find product-market fit</div>
+    <div class="section-desc">From raw Reddit threads to validated opportunities — PainOnSocial handles the entire discovery pipeline.</div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon teal-bg">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3>Pain Discovery</h3>
+        <p>Automatically scan and analyze Reddit discussions across any subreddit to find genuine user frustrations and unmet needs.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon rose-bg">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3>Severity Scoring</h3>
+        <p>AI-powered severity scoring ranks each pain point by frequency, emotional intensity, and willingness to pay for a solution.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon purple-bg">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3>Solution Generation</h3>
+        <p>Get AI-generated solution hypotheses for each validated pain point, complete with competitive analysis and market sizing.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon orange-bg">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Community Intel</h3>
+        <p>Map community sentiment across subreddits, track pain evolution over time, and identify emerging problem spaces before competitors.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     05. STATS
+     ============================================ -->
+<section class="stats">
+  <div class="container">
+    <div class="section-label"><span class="section-number">05</span> By the Numbers</div>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-value">2.4<span class="teal">M</span></div>
+        <div class="stat-label">Reddit threads analyzed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">47<span class="teal">K</span></div>
+        <div class="stat-label">Pain points catalogued</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">89<span class="teal">%</span></div>
+        <div class="stat-label">Validation accuracy</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">3.2<span class="teal">x</span></div>
+        <div class="stat-label">Faster than manual research</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     06. TESTIMONIALS
+     ============================================ -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-label"><span class="section-number">06</span> Testimonials</div>
+    <div class="section-heading">What builders are saying</div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-quote-mark">&ldquo;</div>
+        <p class="testimonial-text">PainOnSocial completely changed how we approach product discovery. We found three validated pain points in our first week that turned into our most successful feature launches.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MC</div>
+          <div>
+            <div class="testimonial-name">Maya Chen</div>
+            <div class="testimonial-role">Head of Product, Arclight</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote-mark">&ldquo;</div>
+        <p class="testimonial-text">The severity scoring is incredibly accurate. We used to spend weeks on customer interviews — now we start with validated pain and go straight to building. The ROI is insane.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JK</div>
+          <div>
+            <div class="testimonial-name">James Kowalski</div>
+            <div class="testimonial-role">Founder & CEO, BuildStack</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     07. PRICING
+     ============================================ -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-label"><span class="section-number">07</span> Pricing</div>
+    <div class="section-heading">Simple, transparent pricing</div>
+    <div class="section-desc">Start free. Scale when you're ready. No surprises.</div>
+    <div class="pricing-grid">
+      <!-- Explorer -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Explorer</div>
+        <div class="pricing-price">$0 <span>/month</span></div>
+        <p class="pricing-desc">Perfect for solo founders testing the waters.</p>
+        <ul class="pricing-features">
+          <li>5 subreddit scans/month</li>
+          <li>50 pain points surfaced</li>
+          <li>Basic severity scoring</li>
+          <li>Community dashboard</li>
+        </ul>
+        <button class="pricing-btn pricing-btn-ghost">Get Started Free</button>
+      </div>
+      <!-- Scout -->
+      <div class="pricing-card featured">
+        <div class="pricing-tier">Scout</div>
+        <div class="pricing-price">$49 <span>/month</span></div>
+        <p class="pricing-desc">For teams serious about product-market fit.</p>
+        <ul class="pricing-features">
+          <li>Unlimited subreddit scans</li>
+          <li>Unlimited pain points</li>
+          <li>Advanced severity + sentiment</li>
+          <li>Solution generation AI</li>
+          <li>Team collaboration</li>
+          <li>Export &amp; API access</li>
+        </ul>
+        <button class="pricing-btn pricing-btn-primary">Start Free Trial</button>
+      </div>
+      <!-- Prospector -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Prospector</div>
+        <div class="pricing-price">$149 <span>/month</span></div>
+        <p class="pricing-desc">Enterprise-grade pain intelligence at scale.</p>
+        <ul class="pricing-features">
+          <li>Everything in Scout</li>
+          <li>Multi-platform scanning</li>
+          <li>Custom AI models</li>
+          <li>Priority support</li>
+          <li>SSO &amp; advanced security</li>
+          <li>Dedicated success manager</li>
+        </ul>
+        <button class="pricing-btn pricing-btn-ghost">Contact Sales</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     08. FORMS
+     ============================================ -->
+<section class="forms-section">
+  <div class="container">
+    <div class="section-label"><span class="section-number">08</span> Forms</div>
+    <div class="section-heading">Form elements</div>
+    <div class="forms-grid">
+      <!-- Left: form fields -->
+      <div>
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input type="email" class="form-input" placeholder="you@company.com">
+          <div class="form-hint">We'll never share your email.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subreddit to scan</label>
+          <input type="text" class="form-input" placeholder="r/SaaS, r/startups...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input error" value="short">
+          <div class="form-error">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#F43F5E" stroke-width="1.5"/><line x1="8" y1="5" x2="8" y2="9" stroke="#F43F5E" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11.5" r="0.75" fill="#F43F5E"/></svg>
+            Password must be at least 8 characters
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea class="form-input" placeholder="Tell us about your product..."></textarea>
+        </div>
+        <div class="toggle-wrapper">
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <div class="toggle-track"></div>
+            <div class="toggle-thumb"></div>
+          </label>
+          <span class="toggle-label">Email notifications</span>
+        </div>
+        <div class="toggle-wrapper">
+          <label class="toggle">
+            <input type="checkbox">
+            <div class="toggle-track"></div>
+            <div class="toggle-thumb"></div>
+          </label>
+          <span class="toggle-label">Weekly digest</span>
+        </div>
+      </div>
+      <!-- Right: mini signup -->
+      <div>
+        <div class="mini-signup">
+          <h3>Start discovering pain today</h3>
+          <p>Join 2,400+ founders using PainOnSocial to find product-market fit faster.</p>
+          <div class="mini-signup-row">
+            <input type="email" class="form-input" placeholder="Enter your email">
+            <button class="btn-primary btn-sm">Get Access</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     09. FOOTER
+     ============================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#" class="nav-logo" style="margin-bottom:8px;display:inline-flex;">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.08)" stroke="#0891B2" stroke-width="1.5"/>
+            <circle cx="14" cy="14" r="3" stroke="#0891B2" stroke-width="1.5" fill="none"/>
+            <line x1="14" y1="8" x2="14" y2="11" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="14" y1="17" x2="14" y2="20" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="8" y1="14" x2="11" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="17" y1="14" x2="20" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span class="nav-logo-text">PainOnSocial</span>
+        </a>
+        <p class="footer-brand-desc">AI-powered pain discovery from real Reddit conversations. Find validated problems. Build what matters.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Product</div>
+        <ul class="footer-links">
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">API</a></li>
+          <li><a href="#">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copyright">&copy; 2026 PainOnSocial. All rights reserved.</div>
+      <div class="footer-bottom-links">
+        <a href="#">Twitter</a>
+        <a href="#">GitHub</a>
+        <a href="#">Discord</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================
+     GROUP DIVIDER
+     ============================================ -->
+<div class="group-divider" id="design-system">
+  <div class="container">
+    <div class="group-divider-line"></div>
+    <div class="group-divider-label">Design System Reference &mdash; Aether Light v1.0</div>
+  </div>
+</div>
+
+<!-- ============================================
+     10. COLOR PALETTE
+     ============================================ -->
+<section class="ds-section">
+  <div class="container">
+    <div class="section-label"><span class="section-number">10</span> Color Palette</div>
+    <div class="section-heading">Colors</div>
+    <div class="section-desc">Cool-tinted surfaces with teal primary and rose secondary. Soft, airy, and atmospheric.</div>
+
+    <p style="font-weight:600;font-size:14px;margin-bottom:var(--space-4);color:var(--text-primary);">Brand</p>
+    <div class="color-grid" style="margin-bottom:var(--space-8);">
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#0891B2;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Primary Teal</div>
+          <div class="color-swatch-value">#0891B2</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#0E7490;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Teal Dark</div>
+          <div class="color-swatch-value">#0E7490</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#F97316;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Accent Orange</div>
+          <div class="color-swatch-value">#F97316</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#A855F7;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Accent Purple</div>
+          <div class="color-swatch-value">#A855F7</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-weight:600;font-size:14px;margin-bottom:var(--space-4);color:var(--text-primary);">Rose Accent</p>
+    <div class="color-grid" style="margin-bottom:var(--space-8);">
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#F43F5E;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Rose</div>
+          <div class="color-swatch-value">#F43F5E</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#FB7185;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Rose Light</div>
+          <div class="color-swatch-value">#FB7185</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:rgba(244,63,94,0.08);border:1px solid rgba(244,63,94,0.15);"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Rose Glow</div>
+          <div class="color-swatch-value">rgba(244,63,94,0.08)</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-weight:600;font-size:14px;margin-bottom:var(--space-4);color:var(--text-primary);">Surface Scale</p>
+    <div class="color-grid" style="margin-bottom:var(--space-8);">
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#FAFAFC;border:1px solid var(--border);"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Body</div>
+          <div class="color-swatch-value">#FAFAFC</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#FFFFFF;border:1px solid var(--border);"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Card</div>
+          <div class="color-swatch-value">#FFFFFF</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#F4F4F8;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Surface 50</div>
+          <div class="color-swatch-value">#F4F4F8</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#EBEBF0;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Surface 100</div>
+          <div class="color-swatch-value">#EBEBF0</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-weight:600;font-size:14px;margin-bottom:var(--space-4);color:var(--text-primary);">Text</p>
+    <div class="color-grid" style="margin-bottom:var(--space-8);">
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#111118;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Primary</div>
+          <div class="color-swatch-value">#111118</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#4A4A5A;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Secondary</div>
+          <div class="color-swatch-value">#4A4A5A</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#8E8EA0;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Muted</div>
+          <div class="color-swatch-value">#8E8EA0</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-weight:600;font-size:14px;margin-bottom:var(--space-4);color:var(--text-primary);">Semantic</p>
+    <div class="color-grid" style="margin-bottom:var(--space-8);">
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#16A34A;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Success</div>
+          <div class="color-swatch-value">#16A34A</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#EAB308;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Warning</div>
+          <div class="color-swatch-value">#EAB308</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#F43F5E;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Error</div>
+          <div class="color-swatch-value">#F43F5E</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-preview" style="background:#0891B2;"></div>
+        <div class="color-swatch-info">
+          <div class="color-swatch-name">Info</div>
+          <div class="color-swatch-value">#0891B2</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-weight:600;font-size:14px;margin-bottom:var(--space-4);color:var(--text-primary);">Gradient Orb Demo</p>
+    <div class="orb-demo">
+      <span class="orb-demo-label">Teal orb (top-right) + Rose orb (bottom-left) on #FAFAFC</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     11. TYPOGRAPHY
+     ============================================ -->
+<section class="ds-section">
+  <div class="container">
+    <div class="section-label"><span class="section-number">11</span> Typography</div>
+    <div class="section-heading">Type scale</div>
+    <div class="section-desc">Switzer for display, Inter for body, IBM Plex Mono for code and labels.</div>
+
+    <div class="type-specimen">
+      <div class="type-specimen-label">Display 1 &mdash; Switzer 700 / 64px / -0.035em</div>
+      <div class="type-display-1">Elevate the signal</div>
+    </div>
+    <div class="type-specimen">
+      <div class="type-specimen-label">Display 2 &mdash; Switzer 700 / 48px / -0.03em</div>
+      <div class="type-display-2">Discover validated pain</div>
+    </div>
+    <div class="type-specimen">
+      <div class="type-specimen-label">H1 &mdash; Switzer 600 / 36px / -0.02em</div>
+      <div class="type-h1">Pain points from real conversations</div>
+    </div>
+    <div class="type-specimen">
+      <div class="type-specimen-label">H2 &mdash; Switzer 600 / 28px / -0.015em</div>
+      <div class="type-h2">Severity scoring powered by AI</div>
+    </div>
+    <div class="type-specimen">
+      <div class="type-specimen-label">H3 &mdash; Switzer 600 / 22px / -0.01em</div>
+      <div class="type-h3">Solution generation at scale</div>
+    </div>
+    <div class="type-specimen">
+      <div class="type-specimen-label">H4 &mdash; Switzer 600 / 18px</div>
+      <div class="type-h4">Community intelligence dashboard</div>
+    </div>
+    <div class="type-specimen">
+      <div class="type-specimen-label">Body &mdash; Inter 400 / 16px / 1.7</div>
+      <div class="type-body">PainOnSocial analyzes thousands of Reddit discussions to surface genuine business pain points, severity-score them, and generate actionable solution ideas. Built for founders and product teams who want to find product-market fit faster.</div>
+    </div>
+    <div class="type-specimen">
+      <div class="type-specimen-label">Body Small &mdash; Inter 400 / 14px / 1.65</div>
+      <div class="type-body-sm">Start with validated problems. Build solutions people actually want. PainOnSocial takes the guesswork out of product discovery.</div>
+    </div>
+    <div class="type-specimen">
+      <div class="type-specimen-label">Caption &mdash; Inter 400 / 12px</div>
+      <div class="type-caption">Last updated 3 minutes ago &middot; 47,291 pain points indexed</div>
+    </div>
+    <div class="type-specimen">
+      <div class="type-specimen-label">Monospace &mdash; IBM Plex Mono 400 / 14px</div>
+      <div class="type-mono">const painPoints = await scanner.analyze('r/SaaS');</div>
+    </div>
+    <div class="type-specimen">
+      <div class="type-specimen-label">Overline &mdash; IBM Plex Mono 500 / 11px / 0.12em</div>
+      <div class="type-overline">Pain Discovery Engine</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     12. SPACING
+     ============================================ -->
+<section class="ds-section">
+  <div class="container">
+    <div class="section-label"><span class="section-number">12</span> Spacing</div>
+    <div class="section-heading">Spacing scale</div>
+    <div class="section-desc">8px base unit. Generous emphasis throughout for the most breathable light theme.</div>
+
+    <div class="spacing-scale">
+      <div class="spacing-row">
+        <div class="spacing-label">--space-1</div>
+        <div class="spacing-bar-wrapper"><div class="spacing-bar" style="width:4px;"></div></div>
+        <div class="spacing-value">4px</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">--space-2</div>
+        <div class="spacing-bar-wrapper"><div class="spacing-bar" style="width:8px;"></div></div>
+        <div class="spacing-value">8px</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">--space-3</div>
+        <div class="spacing-bar-wrapper"><div class="spacing-bar" style="width:12px;"></div></div>
+        <div class="spacing-value">12px</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">--space-4</div>
+        <div class="spacing-bar-wrapper"><div class="spacing-bar" style="width:16px;"></div></div>
+        <div class="spacing-value">16px</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">--space-5</div>
+        <div class="spacing-bar-wrapper"><div class="spacing-bar" style="width:20px;"></div></div>
+        <div class="spacing-value">20px</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">--space-6</div>
+        <div class="spacing-bar-wrapper"><div class="spacing-bar" style="width:24px;"></div></div>
+        <div class="spacing-value">24px</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">--space-7</div>
+        <div class="spacing-bar-wrapper"><div class="spacing-bar" style="width:32px;"></div></div>
+        <div class="spacing-value">32px</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">--space-8</div>
+        <div class="spacing-bar-wrapper"><div class="spacing-bar" style="width:40px;"></div></div>
+        <div class="spacing-value">40px</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">--space-9</div>
+        <div class="spacing-bar-wrapper"><div class="spacing-bar" style="width:48px;"></div></div>
+        <div class="spacing-value">48px</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">--space-10</div>
+        <div class="spacing-bar-wrapper"><div class="spacing-bar" style="width:56px;"></div></div>
+        <div class="spacing-value">56px</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">--space-11</div>
+        <div class="spacing-bar-wrapper"><div class="spacing-bar" style="width:64px;"></div></div>
+        <div class="spacing-value">64px</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">--space-12</div>
+        <div class="spacing-bar-wrapper"><div class="spacing-bar" style="width:80px;"></div></div>
+        <div class="spacing-value">80px</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">--space-13</div>
+        <div class="spacing-bar-wrapper"><div class="spacing-bar" style="width:96px;"></div></div>
+        <div class="spacing-value">96px</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">--space-14</div>
+        <div class="spacing-bar-wrapper"><div class="spacing-bar" style="width:120px;"></div></div>
+        <div class="spacing-value">120px</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">--space-15</div>
+        <div class="spacing-bar-wrapper"><div class="spacing-bar" style="width:160px;"></div></div>
+        <div class="spacing-value">160px</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     13. BUTTONS
+     ============================================ -->
+<section class="ds-section">
+  <div class="container">
+    <div class="section-label"><span class="section-number">13</span> Buttons</div>
+    <div class="section-heading">Button variants</div>
+    <div class="section-desc">Primary teal with white text, secondary cool gray, ghost with rose hover, rose accent, and text links.</div>
+
+    <p style="font-weight:600;font-size:14px;margin-bottom:var(--space-4);color:var(--text-primary);">Default size</p>
+    <div class="buttons-grid" style="margin-bottom:var(--space-8);">
+      <button class="btn-primary">Primary Action</button>
+      <button class="btn-secondary">Secondary</button>
+      <button class="btn-ghost">Ghost Button</button>
+      <button class="btn-rose">Rose Accent</button>
+      <a href="#" class="btn-text">Text Link</a>
+    </div>
+
+    <p style="font-weight:600;font-size:14px;margin-bottom:var(--space-4);color:var(--text-primary);">Small size</p>
+    <div class="buttons-grid" style="margin-bottom:var(--space-8);">
+      <button class="btn-primary btn-sm">Primary Small</button>
+      <button class="btn-secondary btn-sm">Secondary Small</button>
+      <button class="btn-ghost btn-sm">Ghost Small</button>
+      <button class="btn-rose btn-sm">Rose Small</button>
+    </div>
+
+    <p style="font-weight:600;font-size:14px;margin-bottom:var(--space-4);color:var(--text-primary);">With icons</p>
+    <div class="buttons-grid">
+      <button class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><line x1="8" y1="5.5" x2="8" y2="10.5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/></svg>
+        New Scan
+      </button>
+      <button class="btn-ghost">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 8H2M8 2l6 6-6 6"/></svg>
+        Learn More
+      </button>
+      <button class="btn-rose">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 1.5L10 5.5 14.5 6 11.25 9.1 12 13.5 8 11.4 4 13.5 4.75 9.1 1.5 6 6 5.5Z"/></svg>
+        Upgrade
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     14. DIVIDERS
+     ============================================ -->
+<section class="ds-section">
+  <div class="container">
+    <div class="section-label"><span class="section-number">14</span> Dividers &amp; Effects</div>
+    <div class="section-heading">Separators &amp; atmospheric effects</div>
+    <div class="section-desc">Gradient orbs, teal-rose gradient lines, glass blur, and soft separators create the Aether Light atmosphere.</div>
+
+    <div class="divider-demos">
+      <div class="divider-demo-item">
+        <div class="divider-demo-label">Solid — var(--border)</div>
+        <div class="divider-solid"></div>
+      </div>
+      <div class="divider-demo-item">
+        <div class="divider-demo-label">Teal to Rose gradient</div>
+        <div class="divider-gradient"></div>
+      </div>
+      <div class="divider-demo-item">
+        <div class="divider-demo-label">Teal fade</div>
+        <div class="divider-teal"></div>
+      </div>
+      <div class="divider-demo-item">
+        <div class="divider-demo-label">Rose fade</div>
+        <div class="divider-rose"></div>
+      </div>
+      <div class="divider-demo-item">
+        <div class="divider-demo-label">Dashed</div>
+        <div class="divider-dashed"></div>
+      </div>
+    </div>
+
+    <p style="font-weight:600;font-size:14px;margin:var(--space-8) 0 var(--space-4);color:var(--text-primary);">Glass Blur Demo</p>
+    <div class="blur-demo">
+      <div class="blur-demo-bg"></div>
+      <div class="blur-demo-card">
+        <h4>Glass morphism</h4>
+        <p>backdrop-filter: blur(20px) on rgba(255,255,255,0.7)</p>
+      </div>
+    </div>
+
+    <p style="font-weight:600;font-size:14px;margin:var(--space-8) 0 var(--space-4);color:var(--text-primary);">Gradient Orb Demo</p>
+    <div class="orb-demo" style="height:260px;">
+      <span class="orb-demo-label">Atmospheric orbs create depth on the cool-tinted white canvas</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     15. ALERTS
+     ============================================ -->
+<section class="ds-section" style="padding-bottom:var(--space-14);">
+  <div class="container">
+    <div class="section-label"><span class="section-number">15</span> Alerts &amp; Toasts</div>
+    <div class="section-heading">Notifications</div>
+    <div class="section-desc">Soft light alerts with colored left border. Toasts with elevated shadow for transient messages.</div>
+
+    <div class="alerts-grid">
+      <div class="alert alert-info">
+        <span class="alert-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#0891B2" stroke-width="1.5"/><line x1="9" y1="8" x2="9" y2="13" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="5.5" r="0.75" fill="#0891B2"/></svg>
+        </span>
+        <div class="alert-content">
+          <div class="alert-title">New scan available</div>
+          <div class="alert-text">Your scheduled scan of r/SaaS has completed. 127 new pain points discovered.</div>
+        </div>
+      </div>
+      <div class="alert alert-success">
+        <span class="alert-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#16A34A" stroke-width="1.5"/><path d="M6 9l2 2 4-4" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div class="alert-content">
+          <div class="alert-title">Export complete</div>
+          <div class="alert-text">Your pain point report has been exported as CSV. Check your downloads.</div>
+        </div>
+      </div>
+      <div class="alert alert-warning">
+        <span class="alert-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L1.5 16h15L9 2z" stroke="#EAB308" stroke-width="1.5" stroke-linejoin="round"/><line x1="9" y1="7" x2="9" y2="11" stroke="#EAB308" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="13.5" r="0.75" fill="#EAB308"/></svg>
+        </span>
+        <div class="alert-content">
+          <div class="alert-title">Approaching scan limit</div>
+          <div class="alert-text">You've used 4 of 5 monthly scans on your Explorer plan. Upgrade for unlimited access.</div>
+        </div>
+      </div>
+      <div class="alert alert-error">
+        <span class="alert-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#F43F5E" stroke-width="1.5"/><line x1="6.5" y1="6.5" x2="11.5" y2="11.5" stroke="#F43F5E" stroke-width="1.5" stroke-linecap="round"/><line x1="11.5" y1="6.5" x2="6.5" y2="11.5" stroke="#F43F5E" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+        <div class="alert-content">
+          <div class="alert-title">Scan failed</div>
+          <div class="alert-text">Unable to access r/PrivateCommunity. The subreddit may be private or restricted.</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-weight:600;font-size:14px;margin:var(--space-8) 0 var(--space-4);color:var(--text-primary);">Toasts</p>
+    <div style="display:flex;flex-direction:column;gap:var(--space-4);align-items:flex-start;">
+      <div class="toast">
+        <span class="toast-dot success"></span>
+        <span class="toast-text">Pain point saved to collection</span>
+        <button class="toast-dismiss">&times;</button>
+      </div>
+      <div class="toast">
+        <span class="toast-dot error"></span>
+        <span class="toast-text">Failed to connect to Reddit API</span>
+        <button class="toast-dismiss">&times;</button>
+      </div>
+    </div>
+
+    <!-- System credits -->
+    <div style="margin-top:var(--space-14);padding-top:var(--space-9);border-top:1px solid var(--border);text-align:center;">
+      <p style="font-family:var(--font-display);font-size:24px;font-weight:600;color:var(--text-primary);letter-spacing:-0.02em;margin-bottom:var(--space-3);">Aether Light v1.0</p>
+      <p style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:var(--space-4);">Elevate the signal</p>
+      <p style="font-size:14px;color:var(--text-secondary);max-width:480px;margin:0 auto;line-height:1.7;">The light-mode counterpart to Aether. Ethereal, atmospheric, and premium. Built for PainOnSocial.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+// Scroll-triggered fade-in animations
+document.addEventListener('DOMContentLoaded', () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.feature-card, .testimonial-card, .pricing-card, .color-swatch, .alert').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = `opacity 0.6s cubic-bezier(0.23,1,0.32,1) ${i * 0.05}s, transform 0.6s cubic-bezier(0.23,1,0.32,1) ${i * 0.05}s`;
+    observer.observe(el);
+  });
+});
+</script>
+</body>
+</html>

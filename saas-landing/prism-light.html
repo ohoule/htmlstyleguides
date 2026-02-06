@@ -1,0 +1,2274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prism Light v1.0 — PainOnSocial Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            /* Brand */
+            --teal: #0891B2;
+            --teal-dark: #0E7490;
+            --teal-bg: rgba(8,145,178,0.06);
+            --teal-glow: rgba(8,145,178,0.10);
+            --teal-glow-md: rgba(8,145,178,0.18);
+            --orange: #F97316;
+            --purple: #A855F7;
+
+            /* Spectrum */
+            --spectrum: linear-gradient(135deg, #0891B2, #6366F1, #A855F7, #EC4899, #F97316);
+            --spectrum-h: linear-gradient(90deg, #0891B2, #6366F1, #A855F7, #EC4899, #F97316);
+
+            /* Surfaces */
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --card: #FFFFFF;
+
+            /* Text */
+            --text-1: #030712;
+            --text-2: #4B5563;
+            --text-3: #9CA3AF;
+
+            /* Borders & Shadows */
+            --border: rgba(3,7,18,0.08);
+            --border-hover: rgba(3,7,18,0.14);
+            --shadow: 0 4px 24px rgba(3,7,18,0.06);
+            --shadow-md: 0 8px 32px rgba(3,7,18,0.08);
+            --shadow-lg: 0 12px 48px rgba(3,7,18,0.10);
+            --shadow-teal: 0 4px 24px rgba(8,145,178,0.12);
+
+            /* Semantic */
+            --success: #16A34A;
+            --success-bg: rgba(22,163,74,0.06);
+            --success-border: rgba(22,163,74,0.2);
+            --warning: #EAB308;
+            --warning-bg: rgba(234,179,8,0.06);
+            --warning-border: rgba(234,179,8,0.2);
+            --error: #EF4444;
+            --error-bg: rgba(239,68,68,0.06);
+            --error-border: rgba(239,68,68,0.2);
+            --info: #0891B2;
+            --info-bg: rgba(8,145,178,0.06);
+            --info-border: rgba(8,145,178,0.2);
+
+            /* Fonts */
+            --font-display: 'General Sans', system-ui, sans-serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Spacing (8px scale) */
+            --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+            --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+            /* Radius — angular, sharp */
+            --radius-sm: 2px;
+            --radius-md: 4px;
+            --radius-lg: 6px;
+
+            /* Transition */
+            --ease: 180ms ease;
+            --ease-slow: 280ms ease;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-1);
+            background: var(--white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 var(--sp-5); }
+
+        *:focus-visible {
+            outline: 2px solid var(--teal);
+            outline-offset: 2px;
+        }
+
+        /* ——— Spectrum line — the signature element ——— */
+        .spectrum-line {
+            height: 2px;
+            background: var(--spectrum-h);
+            border: none;
+        }
+        .spectrum-line-thin {
+            height: 1px;
+            background: var(--spectrum-h);
+            border: none;
+        }
+
+        /* Gradient text utility */
+        .spectrum-text {
+            background: var(--spectrum);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ——— Section Labels ——— */
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-4);
+            margin-bottom: var(--sp-7);
+            padding-top: var(--sp-9);
+        }
+        .section-label .num {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--teal);
+            background: var(--teal-bg);
+            padding: 2px 10px;
+            border: 1px solid rgba(8,145,178,0.12);
+            flex-shrink: 0;
+        }
+        .section-label .rule {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        .section-label .title {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            flex-shrink: 0;
+        }
+
+        /* ——— Logo ——— */
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .logo-text {
+            font-family: var(--font-display);
+            font-size: 19px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .logo-text .pain, .logo-text .social { color: var(--text-1); }
+        .logo-text .on { color: var(--teal); }
+
+        /* ——— 01. NAVIGATION ——— */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.72);
+            backdrop-filter: blur(24px) saturate(1.2);
+            -webkit-backdrop-filter: blur(24px) saturate(1.2);
+            border-bottom: 1px solid var(--border);
+            transition: box-shadow var(--ease);
+        }
+        .nav.scrolled {
+            box-shadow: var(--shadow);
+        }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 var(--sp-5);
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-6);
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-3);
+            text-decoration: none;
+            transition: color var(--ease);
+            letter-spacing: -0.01em;
+        }
+        .nav-links a:hover { color: var(--text-1); }
+        .btn-nav-cta {
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            background: var(--teal);
+            border: none;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: all var(--ease);
+            text-decoration: none;
+        }
+        .btn-nav-cta:hover {
+            background: var(--teal-dark);
+            box-shadow: var(--shadow-teal);
+        }
+        .nav-mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .nav-mobile-toggle span {
+            display: block;
+            width: 20px;
+            height: 1.5px;
+            background: var(--text-1);
+            margin: 5px 0;
+            transition: var(--ease);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-mobile-toggle { display: block; }
+        }
+
+        /* ——— 02. HERO ——— */
+        .hero {
+            padding: 140px 0 0;
+            position: relative;
+            background: var(--gray-50);
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), 0 100%);
+            padding-bottom: 100px;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 680px;
+        }
+        .hero-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: var(--sp-4);
+        }
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(34px, 5vw, 54px);
+            font-weight: 700;
+            line-height: 1.06;
+            letter-spacing: -0.035em;
+            color: var(--text-1);
+            margin-bottom: var(--sp-5);
+        }
+        .hero .subhead {
+            font-size: 17px;
+            color: var(--text-2);
+            line-height: 1.65;
+            max-width: 520px;
+            margin-bottom: var(--sp-6);
+        }
+        .hero-ctas {
+            display: flex;
+            gap: var(--sp-3);
+            margin-bottom: var(--sp-7);
+            flex-wrap: wrap;
+        }
+        .hero-metrics {
+            display: flex;
+            gap: var(--sp-7);
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-8);
+        }
+        .hero-metric .value {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--teal);
+        }
+        .hero-metric .label {
+            font-size: 11px;
+            color: var(--text-3);
+            letter-spacing: 0.02em;
+        }
+        .hero-prism {
+            position: absolute;
+            top: 50%;
+            right: 6%;
+            transform: translateY(-55%);
+            width: 260px;
+            height: 260px;
+            z-index: 1;
+            opacity: 0.08;
+        }
+        .hero-prism-shape {
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            background: var(--spectrum);
+        }
+
+        @media (max-width: 768px) {
+            .hero-prism { display: none; }
+            .hero { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), 0 100%); }
+        }
+
+        /* ——— Buttons ——— */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            background: var(--teal);
+            border: none;
+            padding: 12px 26px;
+            cursor: pointer;
+            transition: all var(--ease);
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            background: var(--teal-dark);
+            box-shadow: var(--shadow-teal);
+            transform: translateY(-1px);
+        }
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-2);
+            background: transparent;
+            border: 1.5px solid var(--border);
+            padding: 11px 26px;
+            cursor: pointer;
+            transition: all var(--ease);
+            text-decoration: none;
+        }
+        .btn-ghost:hover {
+            border-color: var(--text-1);
+            color: var(--text-1);
+        }
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-1);
+            background: var(--gray-100);
+            border: 1px solid var(--border);
+            padding: 12px 26px;
+            cursor: pointer;
+            transition: all var(--ease);
+            text-decoration: none;
+        }
+        .btn-secondary:hover {
+            background: var(--gray-200);
+        }
+        .btn-spectrum {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-1);
+            background: var(--white);
+            border: 1.5px solid var(--border);
+            padding: 11px 26px;
+            cursor: pointer;
+            transition: all var(--ease);
+            text-decoration: none;
+            position: relative;
+        }
+        .btn-spectrum:hover {
+            border-color: transparent;
+            background: var(--white);
+            box-shadow: 0 0 0 1.5px var(--teal), var(--shadow-teal);
+        }
+        .btn-spectrum::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--spectrum-h);
+            opacity: 0;
+            transition: opacity var(--ease);
+        }
+        .btn-spectrum:hover::after {
+            opacity: 1;
+        }
+        .btn-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--teal);
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: color var(--ease);
+            text-decoration: none;
+        }
+        .btn-text:hover { color: var(--teal-dark); }
+        .btn-text svg { transition: transform var(--ease); }
+        .btn-text:hover svg { transform: translateX(3px); }
+
+        /* ——— 03. SOCIAL PROOF / BADGES ——— */
+        .social-proof {
+            padding: var(--sp-8) 0;
+            background: var(--white);
+        }
+        .social-proof-inner {
+            text-align: center;
+        }
+        .badge-row {
+            display: flex;
+            justify-content: center;
+            gap: var(--sp-3);
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-6);
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 16px;
+            transition: all var(--ease);
+            letter-spacing: 0.01em;
+        }
+        .badge-explorer {
+            color: var(--text-2);
+            border: 1.5px solid var(--border);
+            background: transparent;
+        }
+        .badge-scout {
+            color: #fff;
+            background: var(--teal);
+            border: 1.5px solid var(--teal);
+        }
+        .badge-prospector {
+            color: var(--text-1);
+            background: var(--white);
+            border: 1.5px solid transparent;
+            position: relative;
+        }
+        .badge-prospector::before {
+            content: '';
+            position: absolute;
+            inset: -1.5px;
+            background: var(--spectrum);
+            z-index: -1;
+        }
+        .badge-prospector::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--white);
+            z-index: -1;
+        }
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            padding: 4px 12px;
+            color: var(--text-2);
+            background: var(--gray-50);
+            border: 1px solid var(--border);
+        }
+        .pill-teal {
+            color: var(--teal);
+            background: var(--teal-bg);
+            border-color: rgba(8,145,178,0.12);
+        }
+        .trusted-by {
+            margin-top: var(--sp-6);
+        }
+        .trusted-by p {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: var(--sp-4);
+        }
+        .trusted-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--sp-7);
+            flex-wrap: wrap;
+        }
+        .trusted-logo {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gray-300);
+            letter-spacing: -0.02em;
+        }
+
+        /* ——— 04. FEATURE CARDS ——— */
+        .features {
+            padding: var(--sp-8) 0;
+        }
+        .features-header {
+            text-align: center;
+            max-width: 540px;
+            margin: 0 auto var(--sp-7);
+        }
+        .features-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(26px, 3vw, 36px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: var(--sp-3);
+        }
+        .features-header p {
+            font-size: 15px;
+            color: var(--text-2);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--sp-4);
+        }
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: var(--sp-6);
+            transition: all var(--ease-slow);
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--spectrum-h);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--ease-slow);
+        }
+        .feature-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-hover);
+        }
+        .feature-card:hover::after {
+            transform: scaleX(1);
+        }
+        .feature-card .icon-wrap {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--teal-bg);
+            margin-bottom: var(--sp-4);
+        }
+        .feature-card .icon-wrap svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--teal);
+            fill: none;
+            stroke-width: 1.5;
+        }
+        .feature-card h3 {
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--sp-2);
+        }
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-2);
+            line-height: 1.6;
+        }
+        .feature-card:nth-child(2) { margin-top: var(--sp-6); }
+        .feature-card:nth-child(3) { margin-top: calc(-1 * var(--sp-6)); }
+
+        @media (max-width: 640px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .feature-card:nth-child(2),
+            .feature-card:nth-child(3) { margin-top: 0; }
+        }
+
+        /* ——— 05. STATS ——— */
+        .stats {
+            padding: var(--sp-8) 0;
+            background: var(--gray-50);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--sp-4);
+        }
+        .stat {
+            text-align: center;
+            padding: var(--sp-5);
+        }
+        .stat .value {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            color: var(--text-1);
+            line-height: 1;
+            margin-bottom: var(--sp-2);
+        }
+        .stat .label {
+            font-size: 13px;
+            color: var(--text-3);
+            letter-spacing: 0.01em;
+        }
+        .stat .value .teal { color: var(--teal); }
+
+        @media (max-width: 640px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ——— 06. TESTIMONIALS ——— */
+        .testimonials {
+            padding: var(--sp-8) 0;
+        }
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: var(--sp-7);
+        }
+        .testimonials-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(26px, 3vw, 36px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--sp-4);
+        }
+        .testimonial-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: var(--sp-6);
+            border-left: 3px solid var(--teal);
+            position: relative;
+        }
+        .testimonial-card .quote {
+            font-size: 15px;
+            color: var(--text-2);
+            line-height: 1.7;
+            margin-bottom: var(--sp-5);
+            font-style: italic;
+        }
+        .testimonial-card .quote::before {
+            content: '\201C';
+            font-family: var(--font-display);
+            font-size: 48px;
+            color: var(--teal);
+            opacity: 0.2;
+            line-height: 0;
+            position: relative;
+            top: 16px;
+            margin-right: 4px;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+        .testimonial-avatar {
+            width: 36px;
+            height: 36px;
+            background: var(--teal-bg);
+            border: 1px solid rgba(8,145,178,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--teal);
+        }
+        .testimonial-meta .name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-1);
+        }
+        .testimonial-meta .role {
+            font-size: 12px;
+            color: var(--text-3);
+        }
+
+        @media (max-width: 640px) {
+            .testimonial-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ——— 07. PRICING ——— */
+        .pricing {
+            padding: var(--sp-8) 0;
+            background: var(--gray-50);
+        }
+        .pricing-header {
+            text-align: center;
+            max-width: 480px;
+            margin: 0 auto var(--sp-7);
+        }
+        .pricing-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(26px, 3vw, 36px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: var(--sp-2);
+        }
+        .pricing-header p {
+            font-size: 15px;
+            color: var(--text-2);
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--sp-4);
+            align-items: start;
+        }
+        .pricing-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: var(--sp-6);
+            display: flex;
+            flex-direction: column;
+        }
+        .pricing-card.featured {
+            border-color: var(--teal);
+            border-width: 2px;
+            position: relative;
+        }
+        .pricing-card.featured .featured-label {
+            position: absolute;
+            top: -1px;
+            right: var(--sp-5);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #fff;
+            background: var(--teal);
+            padding: 3px 10px;
+        }
+        .pricing-tier {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: var(--sp-2);
+        }
+        .pricing-desc {
+            font-size: 13px;
+            color: var(--text-3);
+            margin-bottom: var(--sp-5);
+            line-height: 1.5;
+        }
+        .pricing-amount {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: var(--sp-5);
+        }
+        .pricing-amount .currency {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-2);
+        }
+        .pricing-amount .price {
+            font-family: var(--font-display);
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+        .pricing-amount .period {
+            font-size: 13px;
+            color: var(--text-3);
+        }
+        .pricing-features {
+            list-style: none;
+            margin-bottom: var(--sp-6);
+            flex: 1;
+        }
+        .pricing-features li {
+            font-size: 13px;
+            color: var(--text-2);
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pricing-features li::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230891B2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+        }
+
+        /* ——— 08. FORMS ——— */
+        .forms-section {
+            padding: var(--sp-8) 0;
+        }
+        .forms-header {
+            margin-bottom: var(--sp-7);
+        }
+        .forms-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(26px, 3vw, 36px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: var(--sp-2);
+        }
+        .forms-header p {
+            font-size: 15px;
+            color: var(--text-2);
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--sp-7);
+        }
+        .form-group {
+            margin-bottom: var(--sp-4);
+        }
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-1);
+            margin-bottom: var(--sp-2);
+            letter-spacing: -0.01em;
+        }
+        .form-input {
+            width: 100%;
+            font-family: var(--font-body);
+            font-size: 14px;
+            padding: 10px 14px;
+            background: var(--white);
+            border: 1.5px solid var(--border);
+            color: var(--text-1);
+            transition: all var(--ease);
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px var(--teal-glow);
+        }
+        .form-input::placeholder {
+            color: var(--text-3);
+        }
+        .form-input.error {
+            border-color: var(--error);
+            box-shadow: 0 0 0 3px var(--error-bg);
+        }
+        .form-input.success {
+            border-color: var(--success);
+            box-shadow: 0 0 0 3px var(--success-bg);
+        }
+        .form-hint {
+            font-size: 12px;
+            color: var(--text-3);
+            margin-top: var(--sp-1);
+        }
+        .form-hint.error { color: var(--error); }
+        .form-hint.success { color: var(--success); }
+        textarea.form-input {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Toggle */
+        .toggle-wrap {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+        .toggle {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            cursor: pointer;
+        }
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+        .toggle-track {
+            position: absolute;
+            inset: 0;
+            background: var(--gray-200);
+            transition: background var(--ease);
+        }
+        .toggle-track::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 18px;
+            height: 18px;
+            background: white;
+            transition: transform var(--ease);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .toggle input:checked + .toggle-track {
+            background: var(--teal);
+        }
+        .toggle input:checked + .toggle-track::after {
+            transform: translateX(20px);
+        }
+        .toggle-label {
+            font-size: 13px;
+            color: var(--text-2);
+        }
+
+        /* Mini signup */
+        .mini-signup {
+            background: var(--gray-50);
+            border: 1px solid var(--border);
+            padding: var(--sp-6);
+        }
+        .mini-signup h3 {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--sp-3);
+        }
+        .mini-signup p {
+            font-size: 13px;
+            color: var(--text-2);
+            margin-bottom: var(--sp-4);
+        }
+        .mini-signup .input-row {
+            display: flex;
+            gap: var(--sp-2);
+        }
+        .mini-signup .form-input {
+            flex: 1;
+        }
+
+        @media (max-width: 640px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .mini-signup .input-row { flex-direction: column; }
+        }
+
+        /* ——— 09. FOOTER ——— */
+        .footer {
+            background: var(--gray-50);
+            padding: var(--sp-7) 0 var(--sp-6);
+        }
+        .footer-inner {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: var(--sp-7);
+            margin-bottom: var(--sp-7);
+        }
+        .footer-brand p {
+            font-size: 13px;
+            color: var(--text-3);
+            line-height: 1.6;
+            margin-top: var(--sp-3);
+            max-width: 260px;
+        }
+        .footer-col h4 {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-1);
+            margin-bottom: var(--sp-4);
+            letter-spacing: -0.01em;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col li {
+            margin-bottom: var(--sp-2);
+        }
+        .footer-col a {
+            font-size: 13px;
+            color: var(--text-3);
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+        .footer-col a:hover { color: var(--teal); }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--sp-5);
+            border-top: 1px solid var(--border);
+        }
+        .footer-bottom p {
+            font-size: 12px;
+            color: var(--text-3);
+        }
+        .footer-bottom-links {
+            display: flex;
+            gap: var(--sp-4);
+        }
+        .footer-bottom-links a {
+            font-size: 12px;
+            color: var(--text-3);
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+        .footer-bottom-links a:hover { color: var(--text-1); }
+
+        @media (max-width: 768px) {
+            .footer-inner { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .footer-inner { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: var(--sp-3); text-align: center; }
+        }
+
+        /* ——— GROUP DIVIDER ——— */
+        .group-divider {
+            padding: var(--sp-9) 0 var(--sp-5);
+            text-align: center;
+            position: relative;
+        }
+        .group-divider .spectrum-bar {
+            height: 3px;
+            background: var(--spectrum-h);
+            margin-bottom: var(--sp-6);
+        }
+        .group-divider .label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-3);
+        }
+        .group-divider h2 {
+            font-family: var(--font-display);
+            font-size: clamp(22px, 3vw, 32px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--text-1);
+            margin-top: var(--sp-3);
+        }
+
+        /* ——— 10. COLOR PALETTE ——— */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: var(--sp-3);
+        }
+        .color-swatch {
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .color-swatch .swatch {
+            height: 72px;
+        }
+        .color-swatch .info {
+            padding: 10px 12px;
+            background: var(--white);
+        }
+        .color-swatch .info .name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-1);
+            margin-bottom: 2px;
+        }
+        .color-swatch .info .hex {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+        }
+        .spectrum-bar-demo {
+            height: 48px;
+            background: var(--spectrum-h);
+            margin-top: var(--sp-4);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        .spectrum-bar-demo::after {
+            content: 'Spectrum Gradient';
+            position: absolute;
+            bottom: 8px;
+            right: 12px;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: white;
+            opacity: 0.9;
+        }
+
+        /* ——— 11. TYPOGRAPHY ——— */
+        .type-specimen {
+            margin-bottom: var(--sp-5);
+            padding-bottom: var(--sp-5);
+            border-bottom: 1px solid var(--border);
+        }
+        .type-specimen:last-child { border-bottom: none; }
+        .type-specimen .meta {
+            display: flex;
+            gap: var(--sp-4);
+            margin-bottom: var(--sp-2);
+        }
+        .type-specimen .meta span {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--text-3);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* ——— 12. SPACING ——— */
+        .spacing-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp-3);
+        }
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-4);
+        }
+        .spacing-item .token {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--teal);
+            width: 60px;
+            flex-shrink: 0;
+        }
+        .spacing-item .bar {
+            height: 24px;
+            background: var(--teal-bg);
+            border: 1px solid rgba(8,145,178,0.12);
+            position: relative;
+        }
+        .spacing-item .bar::after {
+            content: attr(data-px);
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--teal);
+        }
+
+        /* ——— 13. BUTTONS (ref section) ——— */
+        .button-row {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-4);
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-5);
+        }
+        .button-row-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: var(--sp-2);
+        }
+
+        /* ——— 14. DIVIDERS ——— */
+        .divider-demo {
+            margin-bottom: var(--sp-6);
+        }
+        .divider-demo-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: var(--sp-3);
+        }
+        .clip-path-demo {
+            height: 120px;
+            background: var(--gray-50);
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), 0 100%);
+            position: relative;
+            border: 1px solid var(--border);
+            border-bottom: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .clip-path-demo span {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+        }
+        .gray-separator {
+            height: 1px;
+            background: var(--border);
+        }
+        .gray-separator-md {
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        /* ——— 15. ALERTS ——— */
+        .alert {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--sp-3);
+            padding: var(--sp-4) var(--sp-5);
+            margin-bottom: var(--sp-3);
+            border: 1px solid;
+            border-left-width: 3px;
+            font-size: 14px;
+        }
+        .alert-success {
+            background: var(--success-bg);
+            border-color: var(--success-border);
+            border-left-color: var(--success);
+            color: var(--success);
+        }
+        .alert-warning {
+            background: var(--warning-bg);
+            border-color: var(--warning-border);
+            border-left-color: var(--warning);
+            color: var(--warning);
+        }
+        .alert-error {
+            background: var(--error-bg);
+            border-color: var(--error-border);
+            border-left-color: var(--error);
+            color: var(--error);
+        }
+        .alert-info {
+            background: var(--info-bg);
+            border-color: var(--info-border);
+            border-left-color: var(--info);
+            color: var(--info);
+        }
+        .alert svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .alert .alert-content { flex: 1; }
+        .alert .alert-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+        .alert .alert-desc {
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+        /* Toast */
+        .toast {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-3);
+            background: var(--white);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            padding: var(--sp-3) var(--sp-5);
+            font-size: 13px;
+            color: var(--text-1);
+        }
+        .toast .toast-icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+        .toast .toast-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-3);
+            padding: 2px;
+            transition: color var(--ease);
+        }
+        .toast .toast-close:hover { color: var(--text-1); }
+
+        /* ——— Design system tag ——— */
+        .ds-tag {
+            position: fixed;
+            bottom: var(--sp-5);
+            right: var(--sp-5);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ds-tag::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--teal);
+        }
+
+        /* ——— Animate on scroll ——— */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ——— 01. NAVIGATION ——— -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="#" class="logo">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.1)" stroke="#0891B2" stroke-width="1.5"/>
+                <circle cx="14" cy="14" r="3" stroke="#0891B2" stroke-width="1.5"/>
+                <line x1="14" y1="8" x2="14" y2="11" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="14" y1="17" x2="14" y2="20" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="8" y1="14" x2="11" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="17" y1="14" x2="20" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="logo-text"><span class="pain">Pain</span><span class="on">On</span><span class="social">Social</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#" class="btn-nav-cta">Start Free</a></li>
+        </ul>
+        <button class="nav-mobile-toggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+
+<!-- ——— 02. HERO ——— -->
+<section class="hero">
+    <div class="container" style="position: relative;">
+        <div class="hero-content reveal">
+            <p class="hero-eyebrow">AI-Powered Pain Discovery</p>
+            <h1>Turn Reddit noise into <span class="spectrum-text">validated pain</span> points</h1>
+            <p class="subhead">PainOnSocial scans thousands of Reddit discussions, surfaces real business pain, severity-scores each signal, and generates solution blueprints you can build on.</p>
+            <div class="hero-ctas">
+                <a href="#" class="btn-primary">Start Discovering
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+                <a href="#" class="btn-ghost">See How It Works</a>
+            </div>
+            <div class="hero-metrics">
+                <div class="hero-metric">
+                    <div class="value">2.4M+</div>
+                    <div class="label">discussions analyzed</div>
+                </div>
+                <div class="hero-metric">
+                    <div class="value">18,200</div>
+                    <div class="label">pain points scored</div>
+                </div>
+                <div class="hero-metric">
+                    <div class="value">94%</div>
+                    <div class="label">validation accuracy</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-prism">
+            <div class="hero-prism-shape"></div>
+        </div>
+    </div>
+    <div style="position: absolute; bottom: 0; left: 0; right: 0;">
+        <div class="spectrum-line-thin"></div>
+    </div>
+</section>
+
+
+<!-- ——— 03. SOCIAL PROOF / BADGES ——— -->
+<section class="social-proof" id="social-proof">
+    <div class="container">
+        <div class="section-label">
+            <span class="num">03</span>
+            <span class="rule"></span>
+            <span class="title">Social Proof & Badges</span>
+        </div>
+        <div class="social-proof-inner reveal">
+            <div class="badge-row">
+                <span class="badge badge-explorer">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Explorer
+                </span>
+                <span class="badge badge-scout">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    Scout
+                </span>
+                <span class="badge badge-prospector">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    Prospector
+                </span>
+            </div>
+
+            <div class="badge-row" style="margin-bottom: var(--sp-5);">
+                <span class="pill">r/SaaS</span>
+                <span class="pill">r/startups</span>
+                <span class="pill pill-teal">2,400+ subreddits</span>
+                <span class="pill">r/Entrepreneur</span>
+                <span class="pill">r/smallbusiness</span>
+            </div>
+
+            <div class="trusted-by">
+                <p>Trusted by product teams at</p>
+                <div class="trusted-logos">
+                    <span class="trusted-logo">Basecamp</span>
+                    <span class="trusted-logo">Linear</span>
+                    <span class="trusted-logo">Vercel</span>
+                    <span class="trusted-logo">Notion</span>
+                    <span class="trusted-logo">Figma</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ——— 04. FEATURE CARDS ——— -->
+<section class="features" id="features">
+    <div class="container">
+        <div class="section-label">
+            <span class="num">04</span>
+            <span class="rule"></span>
+            <span class="title">Feature Cards</span>
+        </div>
+        <div class="features-header reveal">
+            <h2>Every pain point, scored and sorted</h2>
+            <p>Four engines working in concert to surface what matters most.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="icon-wrap">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <h3>Discovery Engine</h3>
+                <p>Continuously scans Reddit threads, comments, and nested replies. Identifies recurring frustrations across 2,400+ subreddits with context-aware NLP.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="icon-wrap">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <h3>Severity Scoring</h3>
+                <p>Each pain point is scored 0-100 based on frequency, emotional intensity, upvote ratios, and cross-community recurrence. Focus on what hurts most.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="icon-wrap">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                </div>
+                <h3>Solution Generator</h3>
+                <p>AI generates solution blueprints for each validated pain point. Includes market sizing, competitive analysis, and go-to-market suggestions.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="icon-wrap">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+                </div>
+                <h3>Trend Tracking</h3>
+                <p>Monitor pain points over time. See which problems are growing, which are being solved, and where the gaps remain for new products.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ——— 05. STATS ——— -->
+<section class="stats" id="stats">
+    <div class="container">
+        <div class="section-label">
+            <span class="num">05</span>
+            <span class="rule"></span>
+            <span class="title">Stats</span>
+        </div>
+        <div class="stats-grid reveal">
+            <div class="stat">
+                <div class="value">2.4<span class="teal">M</span></div>
+                <div class="label">Discussions analyzed</div>
+            </div>
+            <div class="stat">
+                <div class="value">18<span class="teal">K</span></div>
+                <div class="label">Pain points scored</div>
+            </div>
+            <div class="stat">
+                <div class="value">94<span class="teal">%</span></div>
+                <div class="label">Validation accuracy</div>
+            </div>
+            <div class="stat">
+                <div class="value"><span class="teal">&lt;</span>3s</div>
+                <div class="label">Average scan time</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ——— 06. TESTIMONIALS ——— -->
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <div class="section-label">
+            <span class="num">06</span>
+            <span class="rule"></span>
+            <span class="title">Testimonials</span>
+        </div>
+        <div class="testimonials-header reveal">
+            <h2>Built on real pain, not assumptions</h2>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card reveal">
+                <p class="quote">We stopped guessing what to build. PainOnSocial surfaced a pain point in r/freelance with a severity score of 89. We shipped a fix in three weeks and hit $4K MRR in month one.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MC</div>
+                    <div class="testimonial-meta">
+                        <div class="name">Maya Chen</div>
+                        <div class="role">Founder, InvoiceKit</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <p class="quote">The severity scoring changed everything. Instead of chasing every complaint, we focus on the 90+ signals. Our product roadmap is now data-driven, not opinion-driven.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">JK</div>
+                    <div class="testimonial-meta">
+                        <div class="name">James Kowalski</div>
+                        <div class="role">PM, ScaleOps</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ——— 07. PRICING ——— -->
+<section class="pricing" id="pricing">
+    <div class="container">
+        <div class="section-label">
+            <span class="num">07</span>
+            <span class="rule"></span>
+            <span class="title">Pricing</span>
+        </div>
+        <div class="pricing-header reveal">
+            <h2>Start free, scale with signal</h2>
+            <p>Every plan includes AI-powered pain discovery. Upgrade for deeper analysis and faster scanning.</p>
+        </div>
+        <div class="pricing-grid">
+            <!-- Explorer -->
+            <div class="pricing-card reveal">
+                <div class="pricing-tier">Explorer</div>
+                <div class="pricing-desc">For solo founders validating an idea.</div>
+                <div class="pricing-amount">
+                    <span class="currency">$</span>
+                    <span class="price">0</span>
+                    <span class="period">/month</span>
+                </div>
+                <ul class="pricing-features">
+                    <li>10 scans per month</li>
+                    <li>3 subreddits tracked</li>
+                    <li>Basic severity scoring</li>
+                    <li>Email summaries</li>
+                </ul>
+                <a href="#" class="btn-ghost" style="width: 100%; justify-content: center;">Get Started</a>
+            </div>
+            <!-- Scout (featured) -->
+            <div class="pricing-card featured reveal">
+                <span class="featured-label">Popular</span>
+                <div class="pricing-tier">Scout</div>
+                <div class="pricing-desc">For teams building product-market fit.</div>
+                <div class="pricing-amount">
+                    <span class="currency">$</span>
+                    <span class="price">49</span>
+                    <span class="period">/month</span>
+                </div>
+                <ul class="pricing-features">
+                    <li>Unlimited scans</li>
+                    <li>50 subreddits tracked</li>
+                    <li>Advanced severity scoring</li>
+                    <li>Solution blueprints</li>
+                    <li>Trend tracking dashboard</li>
+                    <li>CSV & API export</li>
+                </ul>
+                <a href="#" class="btn-primary" style="width: 100%; justify-content: center;">Start Scout Trial</a>
+            </div>
+            <!-- Prospector -->
+            <div class="pricing-card reveal">
+                <div class="pricing-tier">Prospector</div>
+                <div class="pricing-desc">For agencies and research teams at scale.</div>
+                <div class="pricing-amount">
+                    <span class="currency">$</span>
+                    <span class="price">149</span>
+                    <span class="period">/month</span>
+                </div>
+                <ul class="pricing-features">
+                    <li>Everything in Scout</li>
+                    <li>Unlimited subreddits</li>
+                    <li>Custom scoring models</li>
+                    <li>Team collaboration</li>
+                    <li>Priority support</li>
+                    <li>White-label reports</li>
+                </ul>
+                <a href="#" class="btn-secondary" style="width: 100%; justify-content: center;">Contact Sales</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ——— 08. FORMS ——— -->
+<section class="forms-section" id="forms">
+    <div class="container">
+        <div class="section-label">
+            <span class="num">08</span>
+            <span class="rule"></span>
+            <span class="title">Forms</span>
+        </div>
+        <div class="forms-header reveal">
+            <h2>Input components</h2>
+            <p>White fields, teal focus rings, validation states, and toggle controls.</p>
+        </div>
+        <div class="form-grid">
+            <div class="reveal">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="you@company.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" placeholder="Min 8 characters">
+                    <p class="form-hint">Use at least 8 characters with one number.</p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Valid Field</label>
+                    <input type="text" class="form-input success" value="maya@invoicekit.com">
+                    <p class="form-hint success">Looks good.</p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Error Field</label>
+                    <input type="text" class="form-input error" value="not-an-email">
+                    <p class="form-hint error">Please enter a valid email address.</p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-input" placeholder="Describe your use case..."></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="toggle-wrap">
+                        <label class="toggle">
+                            <input type="checkbox" checked>
+                            <span class="toggle-track"></span>
+                        </label>
+                        <span class="toggle-label">Send weekly digest</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="toggle-wrap">
+                        <label class="toggle">
+                            <input type="checkbox">
+                            <span class="toggle-track"></span>
+                        </label>
+                        <span class="toggle-label">Enable dark mode</span>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal">
+                <div class="mini-signup">
+                    <h3>Start scanning Reddit</h3>
+                    <p>Enter your email and get 10 free scans. No credit card required.</p>
+                    <div class="input-row">
+                        <input type="email" class="form-input" placeholder="you@company.com">
+                        <button class="btn-primary">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ——— 09. FOOTER ——— -->
+<footer class="footer" id="footer">
+    <div class="spectrum-line"></div>
+    <div class="container" style="padding-top: var(--sp-7);">
+        <div class="section-label" style="padding-top: 0;">
+            <span class="num">09</span>
+            <span class="rule"></span>
+            <span class="title">Footer</span>
+        </div>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+                        <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.1)" stroke="#0891B2" stroke-width="1.5"/>
+                        <circle cx="14" cy="14" r="3" stroke="#0891B2" stroke-width="1.5"/>
+                        <line x1="14" y1="8" x2="14" y2="11" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="14" y1="17" x2="14" y2="20" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="8" y1="14" x2="11" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="17" y1="14" x2="20" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span class="logo-text"><span class="pain">Pain</span><span class="on">On</span><span class="social">Social</span></span>
+                </a>
+                <p>AI-powered pain discovery from Reddit. Stop guessing, start building what people actually need.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Changelog</a></li>
+                    <li><a href="#">API</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Pain Database</a></li>
+                    <li><a href="#">Community</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Legal</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 PainOnSocial. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Status</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ——— GROUP DIVIDER ——— -->
+<div class="group-divider">
+    <div class="container">
+        <div class="spectrum-bar"></div>
+        <p class="label">Design System Reference</p>
+        <h2>Prism Light v1.0</h2>
+    </div>
+</div>
+
+
+<!-- ——— 10. COLOR PALETTE ——— -->
+<section class="color-section" id="colors">
+    <div class="container">
+        <div class="section-label">
+            <span class="num">10</span>
+            <span class="rule"></span>
+            <span class="title">Color Palette</span>
+        </div>
+        <div class="color-grid reveal">
+            <div class="color-swatch">
+                <div class="swatch" style="background: #0891B2;"></div>
+                <div class="info">
+                    <div class="name">Primary Teal</div>
+                    <div class="hex">#0891B2</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #0E7490;"></div>
+                <div class="info">
+                    <div class="name">Teal Dark</div>
+                    <div class="hex">#0E7490</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #F97316;"></div>
+                <div class="info">
+                    <div class="name">Accent Orange</div>
+                    <div class="hex">#F97316</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #A855F7;"></div>
+                <div class="info">
+                    <div class="name">Accent Purple</div>
+                    <div class="hex">#A855F7</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #030712;"></div>
+                <div class="info">
+                    <div class="name">Gray 950</div>
+                    <div class="hex">#030712</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #4B5563;"></div>
+                <div class="info">
+                    <div class="name">Gray 600</div>
+                    <div class="hex">#4B5563</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #9CA3AF;"></div>
+                <div class="info">
+                    <div class="name">Gray 400</div>
+                    <div class="hex">#9CA3AF</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #F3F4F6;"></div>
+                <div class="info">
+                    <div class="name">Gray 100</div>
+                    <div class="hex">#F3F4F6</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #F9FAFB;"></div>
+                <div class="info">
+                    <div class="name">Gray 50</div>
+                    <div class="hex">#F9FAFB</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #FFFFFF; border-bottom: 1px solid var(--border);"></div>
+                <div class="info">
+                    <div class="name">White</div>
+                    <div class="hex">#FFFFFF</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Semantic Colors -->
+        <h3 style="font-family: var(--font-display); font-size: 16px; font-weight: 600; margin-top: var(--sp-7); margin-bottom: var(--sp-4); letter-spacing: -0.02em;">Semantic</h3>
+        <div class="color-grid reveal" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="color-swatch">
+                <div class="swatch" style="background: #16A34A;"></div>
+                <div class="info">
+                    <div class="name">Success</div>
+                    <div class="hex">#16A34A</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #EAB308;"></div>
+                <div class="info">
+                    <div class="name">Warning</div>
+                    <div class="hex">#EAB308</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #EF4444;"></div>
+                <div class="info">
+                    <div class="name">Error</div>
+                    <div class="hex">#EF4444</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch" style="background: #0891B2;"></div>
+                <div class="info">
+                    <div class="name">Info</div>
+                    <div class="hex">#0891B2</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spectrum gradient bar -->
+        <h3 style="font-family: var(--font-display); font-size: 16px; font-weight: 600; margin-top: var(--sp-7); margin-bottom: var(--sp-4); letter-spacing: -0.02em;">Spectrum Gradient</h3>
+        <div class="spectrum-bar-demo reveal"></div>
+    </div>
+</section>
+
+
+<!-- ——— 11. TYPOGRAPHY ——— -->
+<section class="typography-section" id="typography">
+    <div class="container">
+        <div class="section-label">
+            <span class="num">11</span>
+            <span class="rule"></span>
+            <span class="title">Typography</span>
+        </div>
+
+        <div class="type-specimen reveal">
+            <div class="meta">
+                <span>General Sans / 54px / 700 / -0.035em</span>
+            </div>
+            <h1 style="font-family: var(--font-display); font-size: 54px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.06;">Display Large</h1>
+        </div>
+
+        <div class="type-specimen reveal">
+            <div class="meta">
+                <span>General Sans / 36px / 700 / -0.03em</span>
+            </div>
+            <h2 style="font-family: var(--font-display); font-size: 36px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;">Heading 2</h2>
+        </div>
+
+        <div class="type-specimen reveal">
+            <div class="meta">
+                <span>General Sans / 26px / 600 / -0.02em</span>
+            </div>
+            <h3 style="font-family: var(--font-display); font-size: 26px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2;">Heading 3</h3>
+        </div>
+
+        <div class="type-specimen reveal">
+            <div class="meta">
+                <span>General Sans / 18px / 600 / -0.01em</span>
+            </div>
+            <h4 style="font-family: var(--font-display); font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3;">Heading 4 — Subsection title</h4>
+        </div>
+
+        <div class="type-specimen reveal">
+            <div class="meta">
+                <span>Inter / 17px / 400 / text-2</span>
+            </div>
+            <p style="font-size: 17px; color: var(--text-2); line-height: 1.65; max-width: 640px;">Body large. PainOnSocial scans thousands of Reddit discussions, surfaces real business pain, severity-scores each signal, and generates solution blueprints you can build on.</p>
+        </div>
+
+        <div class="type-specimen reveal">
+            <div class="meta">
+                <span>Inter / 14px / 400 / text-2</span>
+            </div>
+            <p style="font-size: 14px; color: var(--text-2); line-height: 1.6; max-width: 640px;">Body regular. Each pain point is scored 0-100 based on frequency, emotional intensity, upvote ratios, and cross-community recurrence. Focus on what hurts most.</p>
+        </div>
+
+        <div class="type-specimen reveal">
+            <div class="meta">
+                <span>Inter / 13px / 400 / text-3</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text-3); line-height: 1.5;">Caption text. Used for metadata, labels, and supplementary information.</p>
+        </div>
+
+        <div class="type-specimen reveal">
+            <div class="meta">
+                <span>JetBrains Mono / 13px / 500 / teal</span>
+            </div>
+            <p style="font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--teal);">const severity = analyzePain(thread).score; // 0-100</p>
+        </div>
+
+        <div class="type-specimen reveal">
+            <div class="meta">
+                <span>JetBrains Mono / 11px / 500 / 0.1em / uppercase</span>
+            </div>
+            <p style="font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3);">Overline Label</p>
+        </div>
+
+        <div class="type-specimen reveal">
+            <div class="meta">
+                <span>General Sans / Spectrum Gradient Text</span>
+            </div>
+            <h2 style="font-family: var(--font-display); font-size: 36px; font-weight: 700; letter-spacing: -0.03em;" class="spectrum-text">Refract the noise</h2>
+        </div>
+    </div>
+</section>
+
+
+<!-- ——— 12. SPACING ——— -->
+<section class="spacing-section" id="spacing">
+    <div class="container">
+        <div class="section-label">
+            <span class="num">12</span>
+            <span class="rule"></span>
+            <span class="title">Spacing Scale</span>
+        </div>
+        <div class="spacing-scale reveal">
+            <div class="spacing-item">
+                <span class="token">--sp-1</span>
+                <div class="bar" style="width: 4px;" data-px="4px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="token">--sp-2</span>
+                <div class="bar" style="width: 8px;" data-px="8px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="token">--sp-3</span>
+                <div class="bar" style="width: 12px;" data-px="12px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="token">--sp-4</span>
+                <div class="bar" style="width: 16px;" data-px="16px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="token">--sp-5</span>
+                <div class="bar" style="width: 48px;" data-px="24px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="token">--sp-6</span>
+                <div class="bar" style="width: 80px;" data-px="32px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="token">--sp-7</span>
+                <div class="bar" style="width: 140px;" data-px="48px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="token">--sp-8</span>
+                <div class="bar" style="width: 200px;" data-px="64px"></div>
+            </div>
+            <div class="spacing-item">
+                <span class="token">--sp-9</span>
+                <div class="bar" style="width: 300px;" data-px="96px"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ——— 13. BUTTONS ——— -->
+<section class="buttons-section" id="buttons">
+    <div class="container">
+        <div class="section-label">
+            <span class="num">13</span>
+            <span class="rule"></span>
+            <span class="title">Buttons</span>
+        </div>
+
+        <p class="button-row-label">Primary (Teal, White Text)</p>
+        <div class="button-row reveal">
+            <button class="btn-primary">Start Discovering</button>
+            <button class="btn-primary">
+                Get Started
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+        </div>
+
+        <p class="button-row-label">Secondary (Gray)</p>
+        <div class="button-row reveal">
+            <button class="btn-secondary">Contact Sales</button>
+            <button class="btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download Report
+            </button>
+        </div>
+
+        <p class="button-row-label">Ghost (Outline)</p>
+        <div class="button-row reveal">
+            <button class="btn-ghost">See How It Works</button>
+            <button class="btn-ghost">Learn More</button>
+        </div>
+
+        <p class="button-row-label">Spectrum Accent (Spectrum Border on Hover)</p>
+        <div class="button-row reveal">
+            <button class="btn-spectrum">Explore Spectrum</button>
+            <button class="btn-spectrum">View All Pain Points</button>
+        </div>
+
+        <p class="button-row-label">Text Link</p>
+        <div class="button-row reveal">
+            <a href="#" class="btn-text">
+                Read the docs
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="#" class="btn-text">
+                View changelog
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ——— 14. DIVIDERS ——— -->
+<section class="dividers-section" id="dividers">
+    <div class="container">
+        <div class="section-label">
+            <span class="num">14</span>
+            <span class="rule"></span>
+            <span class="title">Dividers</span>
+        </div>
+
+        <div class="divider-demo reveal">
+            <p class="divider-demo-label">Spectrum Line (2px)</p>
+            <div class="spectrum-line"></div>
+        </div>
+
+        <div class="divider-demo reveal">
+            <p class="divider-demo-label">Spectrum Line Thin (1px)</p>
+            <div class="spectrum-line-thin"></div>
+        </div>
+
+        <div class="divider-demo reveal">
+            <p class="divider-demo-label">Gray Separator (border)</p>
+            <div class="gray-separator"></div>
+        </div>
+
+        <div class="divider-demo reveal">
+            <p class="divider-demo-label">Gray Separator Medium (gray-200)</p>
+            <div class="gray-separator-md"></div>
+        </div>
+
+        <div class="divider-demo reveal">
+            <p class="divider-demo-label">Angular Clip-Path</p>
+            <div class="clip-path-demo">
+                <span>clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), 0 100%)</span>
+            </div>
+        </div>
+
+        <div class="divider-demo reveal">
+            <p class="divider-demo-label">Inverted Clip-Path</p>
+            <div class="clip-path-demo" style="clip-path: polygon(0 30px, 100% 0, 100% 100%, 0 100%); background: var(--gray-100);">
+                <span>clip-path: polygon(0 30px, 100% 0, 100% 100%, 0 100%)</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ——— 15. ALERTS ——— -->
+<section class="alerts-section" id="alerts">
+    <div class="container">
+        <div class="section-label">
+            <span class="num">15</span>
+            <span class="rule"></span>
+            <span class="title">Alerts & Toasts</span>
+        </div>
+
+        <div class="reveal">
+            <div class="alert alert-success">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div class="alert-content">
+                    <div class="alert-title">Scan complete</div>
+                    <div class="alert-desc">Found 47 pain points in r/SaaS with severity scores above 70.</div>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <div class="alert-content">
+                    <div class="alert-title">Rate limit approaching</div>
+                    <div class="alert-desc">You have used 8 of 10 scans this month. Upgrade to Scout for unlimited.</div>
+                </div>
+            </div>
+
+            <div class="alert alert-error">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                <div class="alert-content">
+                    <div class="alert-title">Scan failed</div>
+                    <div class="alert-desc">Unable to access r/privatecommunity. This subreddit may be restricted.</div>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <div class="alert-content">
+                    <div class="alert-title">New trend detected</div>
+                    <div class="alert-desc">Pain point "invoice automation for freelancers" has increased 34% in mentions this week.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast -->
+        <h3 style="font-family: var(--font-display); font-size: 16px; font-weight: 600; margin-top: var(--sp-7); margin-bottom: var(--sp-4); letter-spacing: -0.02em;">Toast</h3>
+        <div class="reveal" style="display: flex; flex-direction: column; gap: var(--sp-3); align-items: flex-start;">
+            <div class="toast">
+                <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>Pain point saved to watchlist</span>
+                <button class="toast-close" aria-label="Close">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <div class="toast">
+                <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <span>Report exported as CSV</span>
+                <button class="toast-close" aria-label="Close">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <div style="height: var(--sp-9);"></div>
+    </div>
+</section>
+
+
+<!-- Design System Tag -->
+<div class="ds-tag">Prism Light v1.0</div>
+
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+});
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+
+// Stagger feature cards
+document.querySelectorAll('.feature-card.reveal, .pricing-card.reveal').forEach((card, i) => {
+    card.style.transitionDelay = (i * 80) + 'ms';
+});
+
+// Stagger color swatches
+document.querySelectorAll('.color-swatch').forEach((swatch, i) => {
+    const parent = swatch.closest('.reveal');
+    if (parent) parent.style.transitionDelay = '0ms';
+});
+</script>
+
+</body>
+</html>

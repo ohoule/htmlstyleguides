@@ -1,0 +1,2375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meridian Light v1.0 — PainOnSocial Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            /* ——— Brand ——— */
+            --teal: #0891B2;
+            --teal-dark: #0E7490;
+            --teal-light: #22D3EE;
+            --teal-10: rgba(8,145,178,0.10);
+            --teal-20: rgba(8,145,178,0.20);
+            --orange: #F97316;
+            --orange-bg: rgba(249,115,22,0.06);
+            --purple: #A855F7;
+            --purple-bg: rgba(168,85,247,0.06);
+
+            /* ——— Emerald ——— */
+            --emerald: #059669;
+            --emerald-light: #34D399;
+            --emerald-glow: rgba(5,150,105,0.1);
+            --emerald-20: rgba(5,150,105,0.2);
+            --emerald-bg: rgba(5,150,105,0.06);
+
+            /* ——— Parchment Surfaces ——— */
+            --parchment: #FEFDFB;
+            --parchment-off: #FAF9F7;
+            --parchment-warm: #F5F3EF;
+            --card: #FFFFFF;
+
+            /* ——— Text ——— */
+            --text-1: #1E293B;
+            --text-2: #475569;
+            --text-3: #94A3B8;
+
+            /* ——— Borders & Shadows ——— */
+            --border: rgba(30,41,59,0.08);
+            --border-heavy: rgba(30,41,59,0.14);
+            --shadow: 0 4px 24px rgba(30,41,59,0.06);
+            --shadow-sm: 0 2px 8px rgba(30,41,59,0.04);
+            --shadow-lg: 0 12px 40px rgba(30,41,59,0.09);
+            --shadow-warm: 0 4px 24px rgba(120,100,60,0.08);
+
+            /* ——— Semantic ——— */
+            --success: #059669;
+            --success-bg: rgba(5,150,105,0.06);
+            --success-border: rgba(5,150,105,0.20);
+            --warning: #D97706;
+            --warning-bg: rgba(217,119,6,0.06);
+            --warning-border: rgba(217,119,6,0.20);
+            --error: #EF4444;
+            --error-bg: rgba(239,68,68,0.06);
+            --error-border: rgba(239,68,68,0.20);
+            --info: #0891B2;
+            --info-bg: rgba(8,145,178,0.06);
+            --info-border: rgba(8,145,178,0.20);
+
+            /* ——— Typography ——— */
+            --font-display: 'Instrument Serif', Georgia, serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+            --font-mono: 'DM Mono', 'Courier New', monospace;
+
+            /* ——— Spacing (8px base) ——— */
+            --sp-1: 4px;
+            --sp-2: 8px;
+            --sp-3: 12px;
+            --sp-4: 16px;
+            --sp-5: 24px;
+            --sp-6: 32px;
+            --sp-7: 48px;
+            --sp-8: 64px;
+            --sp-9: 96px;
+
+            /* ——— Radii ——— */
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+
+            /* ——— Motion ——— */
+            --ease: 200ms ease;
+            --ease-slow: 350ms cubic-bezier(0.4,0,0.2,1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-1);
+            background: var(--parchment);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ——— Topographic Contour Background ——— */
+        .bg-contour {
+            background-image:
+                radial-gradient(ellipse 600px 200px at 20% 50%, rgba(30,41,59,0.03) 0%, transparent 70%),
+                radial-gradient(ellipse 400px 150px at 80% 30%, rgba(30,41,59,0.025) 0%, transparent 70%),
+                radial-gradient(ellipse 500px 180px at 50% 80%, rgba(30,41,59,0.02) 0%, transparent 70%),
+                radial-gradient(ellipse 300px 300px at 70% 60%, rgba(8,145,178,0.02) 0%, transparent 70%),
+                radial-gradient(ellipse 350px 120px at 30% 20%, rgba(5,150,105,0.015) 0%, transparent 70%);
+        }
+
+        .bg-contour-dense {
+            background-image:
+                radial-gradient(ellipse 500px 160px at 15% 40%, rgba(30,41,59,0.035) 0%, transparent 60%),
+                radial-gradient(ellipse 450px 140px at 85% 25%, rgba(30,41,59,0.03) 0%, transparent 60%),
+                radial-gradient(ellipse 380px 180px at 45% 75%, rgba(30,41,59,0.025) 0%, transparent 60%),
+                radial-gradient(ellipse 320px 100px at 65% 55%, rgba(8,145,178,0.025) 0%, transparent 65%),
+                radial-gradient(ellipse 280px 90px at 25% 65%, rgba(5,150,105,0.02) 0%, transparent 65%),
+                radial-gradient(ellipse 600px 200px at 55% 35%, rgba(30,41,59,0.015) 0%, transparent 70%);
+        }
+
+        /* ——— Layout ——— */
+        .container { max-width: 1180px; margin: 0 auto; padding: 0 var(--sp-5); }
+        .container-tight { max-width: 960px; margin: 0 auto; padding: 0 var(--sp-5); }
+
+        .section {
+            padding: var(--sp-9) 0;
+            position: relative;
+        }
+
+        /* ——— Focus ——— */
+        *:focus-visible {
+            outline: 2px solid var(--teal);
+            outline-offset: 2px;
+            border-radius: var(--radius-sm);
+        }
+
+        /* ——— Section Labels ——— */
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-4);
+            margin-bottom: var(--sp-7);
+        }
+        .section-label .section-num {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--emerald);
+            letter-spacing: 0.02em;
+            font-weight: 500;
+        }
+        .section-label .section-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        .section-label .section-title {
+            font-family: var(--font-display);
+            font-size: 15px;
+            color: var(--text-3);
+            letter-spacing: 0.04em;
+        }
+
+        /* ——— Instrument Serif Headings ——— */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.15;
+        }
+        h1 { font-size: clamp(40px, 5.5vw, 64px); color: var(--text-1); }
+        h2 { font-size: clamp(28px, 3.5vw, 42px); color: var(--text-1); }
+        h3 { font-size: clamp(20px, 2.5vw, 26px); color: var(--text-1); }
+        h4 {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--text-1);
+        }
+
+        .text-italic { font-style: italic; }
+        .text-emerald { color: var(--emerald); }
+        .text-teal { color: var(--teal); }
+        .text-muted { color: var(--text-3); }
+        .text-secondary { color: var(--text-2); }
+
+        /* ——— Compass Rose SVG ——— */
+        .compass-rose {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+        }
+        .compass-rose-lg {
+            width: 120px;
+            height: 120px;
+        }
+
+        /* ——— Animations ——— */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes compassSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes contourDrift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+        .animate-fade-up {
+            animation: fadeUp 0.7s var(--ease-slow) both;
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s var(--ease-slow) both;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+
+        /* ================================================================
+           §01 — NAVIGATION
+           ================================================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(254,253,251,0.82);
+            backdrop-filter: blur(16px) saturate(1.4);
+            -webkit-backdrop-filter: blur(16px) saturate(1.4);
+            border-bottom: 1px solid var(--border);
+            transition: background var(--ease);
+        }
+        .nav-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 var(--sp-5);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .nav-logo-text {
+            font-family: var(--font-display);
+            font-size: 20px;
+            color: var(--text-1);
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-6);
+            list-style: none;
+        }
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-3);
+            text-decoration: none;
+            transition: color var(--ease);
+            letter-spacing: 0.01em;
+        }
+        .nav-links a:hover { color: var(--text-1); }
+        .nav-cta {
+            background: var(--teal);
+            color: #fff !important;
+            padding: 8px 20px;
+            border-radius: var(--radius-full);
+            font-weight: 600 !important;
+            font-size: 13px !important;
+            transition: background var(--ease), box-shadow var(--ease);
+        }
+        .nav-cta:hover {
+            background: var(--teal-dark) !important;
+            color: #fff !important;
+            box-shadow: 0 4px 16px rgba(8,145,178,0.2);
+        }
+        .nav-mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .nav-mobile-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text-1);
+            margin: 5px 0;
+            border-radius: 2px;
+            transition: var(--ease);
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-mobile-toggle { display: block; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(254,253,251,0.96);
+                backdrop-filter: blur(16px);
+                padding: var(--sp-5);
+                gap: var(--sp-4);
+                border-bottom: 1px solid var(--border);
+            }
+        }
+
+        /* ================================================================
+           §02 — HERO
+           ================================================================ */
+        .hero {
+            padding: 160px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-contour-lines {
+            position: absolute;
+            inset: 0;
+            opacity: 1;
+            pointer-events: none;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-full);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-3);
+            margin-bottom: var(--sp-6);
+            background: var(--card);
+            box-shadow: var(--shadow-sm);
+        }
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--emerald);
+        }
+        .hero h1 {
+            margin-bottom: var(--sp-5);
+            line-height: 1.1;
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--emerald);
+        }
+        .hero-sub {
+            font-size: 18px;
+            color: var(--text-2);
+            line-height: 1.7;
+            max-width: 580px;
+            margin: 0 auto var(--sp-7);
+        }
+        .hero-ctas {
+            display: flex;
+            gap: var(--sp-4);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-7);
+        }
+        .hero-metrics {
+            display: flex;
+            gap: var(--sp-7);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .hero-metric {
+            text-align: center;
+        }
+        .hero-metric .value {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--teal);
+            font-weight: 500;
+            letter-spacing: 0.03em;
+        }
+        .hero-metric .label {
+            font-size: 12px;
+            color: var(--text-3);
+            margin-top: 2px;
+        }
+        .hero-compass {
+            position: absolute;
+            right: 8%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.07;
+            animation: compassSpin 120s linear infinite;
+        }
+        .hero-compass-left {
+            position: absolute;
+            left: 5%;
+            bottom: 15%;
+            opacity: 0.04;
+            transform: rotate(30deg);
+        }
+
+        /* ——— Buttons ——— */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 14px;
+            padding: 12px 28px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            transition: all var(--ease);
+            text-decoration: none;
+            line-height: 1;
+        }
+        .btn-primary {
+            background: var(--teal);
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(8,145,178,0.18);
+        }
+        .btn-primary:hover {
+            background: var(--teal-dark);
+            box-shadow: 0 4px 20px rgba(8,145,178,0.25);
+            transform: translateY(-1px);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-2);
+            border: 1px solid var(--border-heavy);
+            box-shadow: none;
+        }
+        .btn-ghost:hover {
+            border-color: var(--emerald);
+            color: var(--emerald);
+            background: var(--emerald-glow);
+        }
+        .btn-emerald {
+            background: var(--emerald);
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(5,150,105,0.18);
+        }
+        .btn-emerald:hover {
+            background: #047857;
+            box-shadow: 0 4px 20px rgba(5,150,105,0.25);
+            transform: translateY(-1px);
+        }
+        .btn-secondary {
+            background: var(--parchment-warm);
+            color: var(--text-1);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover {
+            background: var(--parchment-off);
+            border-color: var(--border-heavy);
+        }
+        .btn-text {
+            background: none;
+            border: none;
+            color: var(--teal);
+            padding: 0;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color var(--ease);
+            text-decoration: none;
+            font-family: var(--font-body);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-text:hover { color: var(--teal-dark); }
+        .btn-sm {
+            padding: 8px 18px;
+            font-size: 13px;
+        }
+        .btn-lg {
+            padding: 16px 36px;
+            font-size: 16px;
+        }
+
+        /* ================================================================
+           §03 — SOCIAL PROOF
+           ================================================================ */
+        .social-proof {
+            background: var(--parchment-off);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .badges-row {
+            display: flex;
+            gap: var(--sp-4);
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: var(--sp-6);
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 500;
+            transition: var(--ease);
+        }
+        .badge-outline {
+            border: 1px solid var(--border-heavy);
+            color: var(--text-2);
+            background: var(--card);
+        }
+        .badge-teal {
+            background: var(--teal);
+            color: #fff;
+            border: 1px solid var(--teal);
+        }
+        .badge-emerald {
+            background: var(--emerald-glow);
+            color: var(--emerald);
+            border: 1px solid var(--emerald-20);
+        }
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        .pill-teal { background: var(--teal-10); color: var(--teal); }
+        .pill-emerald { background: var(--emerald-glow); color: var(--emerald); }
+        .pill-orange { background: var(--orange-bg); color: var(--orange); }
+        .pill-purple { background: var(--purple-bg); color: var(--purple); }
+        .trusted-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp-7);
+            flex-wrap: wrap;
+        }
+        .trusted-logo {
+            font-family: var(--font-display);
+            font-size: 18px;
+            color: var(--text-3);
+            opacity: 0.5;
+            transition: opacity var(--ease);
+        }
+        .trusted-logo:hover { opacity: 0.8; }
+
+        /* ================================================================
+           §04 — FEATURE CARDS
+           ================================================================ */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--sp-5);
+        }
+        @media (max-width: 768px) {
+            .features-grid { grid-template-columns: 1fr; }
+        }
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+            transition: all var(--ease-slow);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--emerald);
+            opacity: 0;
+            transition: opacity var(--ease-slow);
+        }
+        .feature-card:hover {
+            box-shadow: var(--shadow);
+            border-color: rgba(5,150,105,0.15);
+            transform: translateY(-2px);
+        }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-card:nth-child(2) { margin-top: var(--sp-6); }
+        .feature-card:nth-child(3) { margin-top: calc(-1 * var(--sp-6)); }
+        @media (max-width: 768px) {
+            .feature-card:nth-child(2),
+            .feature-card:nth-child(3) { margin-top: 0; }
+        }
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--sp-4);
+            font-size: 20px;
+        }
+        .feature-icon-teal { background: var(--teal-10); color: var(--teal); }
+        .feature-icon-emerald { background: var(--emerald-glow); color: var(--emerald); }
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: var(--sp-3);
+        }
+        .feature-card p {
+            color: var(--text-2);
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        /* ================================================================
+           §05 — STATS
+           ================================================================ */
+        .stats {
+            background: var(--parchment-off);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--sp-5);
+        }
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        .stat-item {
+            text-align: center;
+            padding: var(--sp-5);
+        }
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 4vw, 52px);
+            color: var(--text-1);
+            line-height: 1;
+            margin-bottom: var(--sp-2);
+        }
+        .stat-value .accent { color: var(--teal); }
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-3);
+            font-weight: 500;
+        }
+        .stat-label-mono {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-3);
+            margin-top: 4px;
+        }
+
+        /* ================================================================
+           §06 — TESTIMONIALS
+           ================================================================ */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--sp-5);
+        }
+        @media (max-width: 768px) {
+            .testimonials-grid { grid-template-columns: 1fr; }
+        }
+        .testimonial-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--teal);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+        .testimonial-quote {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 20px;
+            line-height: 1.5;
+            color: var(--text-1);
+            margin-bottom: var(--sp-5);
+        }
+        .testimonial-quote::before {
+            content: '\201C';
+            font-family: var(--font-display);
+            font-size: 48px;
+            color: var(--teal-10);
+            position: absolute;
+            top: 16px;
+            right: 24px;
+            line-height: 1;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+        .testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: #fff;
+        }
+        .testimonial-avatar-teal { background: var(--teal); }
+        .testimonial-avatar-emerald { background: var(--emerald); }
+        .testimonial-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-1);
+        }
+        .testimonial-role {
+            font-size: 12px;
+            color: var(--text-3);
+        }
+
+        /* ================================================================
+           §07 — PRICING
+           ================================================================ */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--sp-5);
+            align-items: start;
+        }
+        @media (max-width: 900px) {
+            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+        }
+        .pricing-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: all var(--ease-slow);
+        }
+        .pricing-card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-3px);
+        }
+        .pricing-card.featured {
+            border: 2px solid var(--teal);
+            position: relative;
+            box-shadow: var(--shadow), 0 0 0 1px var(--teal-10);
+        }
+        .pricing-card.featured::after {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--teal);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .pricing-tier {
+            font-family: var(--font-display);
+            font-size: 22px;
+            color: var(--text-1);
+            margin-bottom: var(--sp-2);
+        }
+        .pricing-desc {
+            font-size: 13px;
+            color: var(--text-3);
+            margin-bottom: var(--sp-5);
+        }
+        .pricing-price {
+            font-family: var(--font-display);
+            font-size: 44px;
+            color: var(--text-1);
+            margin-bottom: var(--sp-1);
+        }
+        .pricing-price span {
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--text-3);
+            font-weight: 400;
+        }
+        .pricing-period {
+            font-size: 13px;
+            color: var(--text-3);
+            margin-bottom: var(--sp-5);
+        }
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: var(--sp-5);
+        }
+        .pricing-features li {
+            font-size: 14px;
+            color: var(--text-2);
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pricing-features li:last-child { border-bottom: none; }
+        .pricing-features .check {
+            color: var(--emerald);
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        /* ================================================================
+           §08 — FORMS
+           ================================================================ */
+        .form-group {
+            margin-bottom: var(--sp-5);
+        }
+        .form-label {
+            display: block;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text-1);
+            margin-bottom: var(--sp-2);
+            letter-spacing: 0.01em;
+        }
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--card);
+            border: 1px solid var(--border-heavy);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--text-1);
+            transition: border-color var(--ease), box-shadow var(--ease);
+        }
+        .form-input::placeholder { color: var(--text-3); }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px var(--teal-10);
+        }
+        .form-input.error {
+            border-color: var(--error);
+            box-shadow: 0 0 0 3px var(--error-bg);
+        }
+        .form-input.success {
+            border-color: var(--success);
+            box-shadow: 0 0 0 3px var(--success-bg);
+        }
+        .form-hint {
+            font-size: 12px;
+            color: var(--text-3);
+            margin-top: 6px;
+        }
+        .form-hint.error { color: var(--error); }
+        .form-hint.success { color: var(--success); }
+
+        /* Toggle */
+        .toggle-wrap {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+        .toggle {
+            width: 44px;
+            height: 24px;
+            border-radius: 12px;
+            background: var(--parchment-warm);
+            border: 1px solid var(--border-heavy);
+            cursor: pointer;
+            position: relative;
+            transition: var(--ease);
+        }
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--card);
+            top: 2px;
+            left: 2px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+            transition: var(--ease);
+        }
+        .toggle.active {
+            background: var(--teal);
+            border-color: var(--teal);
+        }
+        .toggle.active::after {
+            left: 22px;
+        }
+        .toggle-label {
+            font-size: 14px;
+            color: var(--text-2);
+        }
+
+        .form-signup {
+            background: var(--parchment-off);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+        }
+        .form-row {
+            display: flex;
+            gap: var(--sp-3);
+        }
+        @media (max-width: 520px) {
+            .form-row { flex-direction: column; }
+        }
+
+        /* ================================================================
+           §09 — FOOTER
+           ================================================================ */
+        .footer {
+            background: var(--parchment-warm);
+            border-top: 1px solid var(--border);
+            padding: var(--sp-8) 0 var(--sp-6);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: var(--sp-7);
+            margin-bottom: var(--sp-7);
+        }
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .footer-brand p {
+            font-size: 14px;
+            color: var(--text-3);
+            margin-top: var(--sp-3);
+            max-width: 280px;
+            line-height: 1.6;
+        }
+        .footer-col h4 {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-3);
+            margin-bottom: var(--sp-4);
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col li { margin-bottom: var(--sp-3); }
+        .footer-col a {
+            font-size: 14px;
+            color: var(--text-2);
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+        .footer-col a:hover { color: var(--teal); }
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: var(--sp-5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--sp-4);
+        }
+        .footer-copyright {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-3);
+        }
+        .footer-legal {
+            display: flex;
+            gap: var(--sp-5);
+        }
+        .footer-legal a {
+            font-size: 12px;
+            color: var(--text-3);
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+        .footer-legal a:hover { color: var(--text-2); }
+
+        /* ================================================================
+           GROUP DIVIDER
+           ================================================================ */
+        .group-divider {
+            padding: var(--sp-8) 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp-5);
+            position: relative;
+        }
+        .group-divider::before,
+        .group-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--emerald-20), var(--emerald), var(--emerald-20), transparent);
+        }
+        .group-divider-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--emerald);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            white-space: nowrap;
+        }
+
+        /* ================================================================
+           §10 — COLOR PALETTE
+           ================================================================ */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: var(--sp-4);
+        }
+        .color-swatch {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--card);
+        }
+        .color-swatch-block {
+            height: 72px;
+            position: relative;
+        }
+        .color-swatch-info {
+            padding: var(--sp-3);
+        }
+        .color-swatch-name {
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text-1);
+        }
+        .color-swatch-hex {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            margin-top: 2px;
+        }
+
+        /* ================================================================
+           §11 — TYPOGRAPHY REFERENCE
+           ================================================================ */
+        .type-specimen {
+            margin-bottom: var(--sp-6);
+            padding-bottom: var(--sp-6);
+            border-bottom: 1px solid var(--border);
+        }
+        .type-specimen:last-child { border-bottom: none; }
+        .type-meta {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            margin-bottom: var(--sp-2);
+        }
+
+        /* ================================================================
+           §12 — SPACING
+           ================================================================ */
+        .spacing-row {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-5);
+            margin-bottom: var(--sp-4);
+        }
+        .spacing-bar {
+            height: 20px;
+            background: linear-gradient(135deg, var(--teal-10), var(--emerald-glow));
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+        }
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-3);
+            min-width: 90px;
+            flex-shrink: 0;
+        }
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-2);
+            min-width: 40px;
+            flex-shrink: 0;
+        }
+
+        /* ================================================================
+           §13 — BUTTONS REFERENCE
+           ================================================================ */
+        .button-row {
+            display: flex;
+            gap: var(--sp-4);
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-5);
+        }
+
+        /* ================================================================
+           §14 — DIVIDERS
+           ================================================================ */
+        .divider-demo {
+            margin-bottom: var(--sp-6);
+        }
+        .divider-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            margin-bottom: var(--sp-3);
+        }
+        .divider-line {
+            height: 1px;
+            background: var(--border);
+        }
+        .divider-emerald {
+            height: 2px;
+            background: linear-gradient(90deg, var(--emerald), var(--teal), transparent);
+            border-radius: 1px;
+        }
+        .divider-warm {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-heavy), transparent);
+        }
+        .divider-contour {
+            height: 40px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+        }
+
+        /* ================================================================
+           §15 — ALERTS
+           ================================================================ */
+        .alert {
+            padding: var(--sp-4) var(--sp-5);
+            border-radius: var(--radius-md);
+            border-left: 3px solid;
+            font-size: 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--sp-3);
+            margin-bottom: var(--sp-4);
+        }
+        .alert-success {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .alert-warning {
+            background: var(--warning-bg);
+            border-color: var(--warning);
+            color: var(--warning);
+        }
+        .alert-error {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .alert-info {
+            background: var(--info-bg);
+            border-color: var(--info);
+            color: var(--info);
+        }
+        .alert-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .alert-content {
+            flex: 1;
+        }
+        .alert-title {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .alert-text {
+            opacity: 0.85;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .toast {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-4) var(--sp-5);
+            box-shadow: var(--shadow-warm);
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+            max-width: 380px;
+        }
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .toast-icon-success { background: var(--success-bg); color: var(--success); }
+        .toast-icon-error { background: var(--error-bg); color: var(--error); }
+        .toast-content { flex: 1; }
+        .toast-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-1);
+        }
+        .toast-text {
+            font-size: 12px;
+            color: var(--text-3);
+            margin-top: 2px;
+        }
+        .toast-close {
+            background: none;
+            border: none;
+            color: var(--text-3);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px;
+            transition: color var(--ease);
+        }
+        .toast-close:hover { color: var(--text-1); }
+
+        /* ——— Contour texture overlay for sections ——— */
+        .contour-overlay {
+            position: relative;
+        }
+        .contour-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(ellipse 500px 160px at 10% 30%, rgba(30,41,59,0.025) 0%, transparent 60%),
+                radial-gradient(ellipse 400px 120px at 90% 70%, rgba(30,41,59,0.02) 0%, transparent 60%),
+                radial-gradient(ellipse 350px 100px at 50% 50%, rgba(8,145,178,0.015) 0%, transparent 60%);
+        }
+
+        /* ——— Utility ——— */
+        .text-center { text-align: center; }
+        .mb-2 { margin-bottom: var(--sp-2); }
+        .mb-3 { margin-bottom: var(--sp-3); }
+        .mb-4 { margin-bottom: var(--sp-4); }
+        .mb-5 { margin-bottom: var(--sp-5); }
+        .mb-6 { margin-bottom: var(--sp-6); }
+        .mb-7 { margin-bottom: var(--sp-7); }
+        .mt-4 { margin-top: var(--sp-4); }
+        .mt-6 { margin-top: var(--sp-6); }
+        .mt-7 { margin-top: var(--sp-7); }
+
+        /* ——— Design System Header ——— */
+        .ds-header {
+            padding: var(--sp-9) 0 var(--sp-7);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .ds-header h2 {
+            font-size: clamp(32px, 4vw, 48px);
+            margin-bottom: var(--sp-3);
+        }
+        .ds-header p {
+            color: var(--text-3);
+            font-size: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ——— Responsive tweaks ——— */
+        @media (max-width: 480px) {
+            .section { padding: var(--sp-7) 0; }
+            .hero { padding: 120px 0 60px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ================================================================
+     §01 — NAVIGATION BAR
+     ================================================================ -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.1)" stroke="#0891B2" stroke-width="1.5"/>
+                <circle cx="14" cy="14" r="3" stroke="#0891B2" stroke-width="1.5"/>
+                <line x1="14" y1="8" x2="14" y2="11" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="14" y1="17" x2="14" y2="20" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="8" y1="14" x2="11" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="17" y1="14" x2="20" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="nav-logo-text">PainOnSocial</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#design-system">Design System</a></li>
+            <li><a href="#" class="nav-cta">Start Exploring</a></li>
+        </ul>
+        <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ================================================================
+     §02 — HERO
+     ================================================================ -->
+<section class="hero bg-contour-dense" id="hero">
+    <!-- Contour lines SVG background -->
+    <svg class="hero-contour-lines" viewBox="0 0 1440 700" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 350C200 300 400 380 600 340C800 300 1000 360 1200 320C1400 280 1440 310 1440 310" stroke="rgba(30,41,59,0.04)" stroke-width="1" fill="none"/>
+        <path d="M0 400C180 360 380 420 580 380C780 340 980 400 1180 360C1380 320 1440 350 1440 350" stroke="rgba(30,41,59,0.035)" stroke-width="1" fill="none"/>
+        <path d="M0 450C220 410 420 470 620 430C820 390 1020 450 1220 410C1380 380 1440 400 1440 400" stroke="rgba(30,41,59,0.03)" stroke-width="1" fill="none"/>
+        <path d="M0 280C160 240 360 310 560 270C760 230 960 290 1160 250C1360 210 1440 240 1440 240" stroke="rgba(8,145,178,0.03)" stroke-width="1" fill="none"/>
+        <path d="M0 500C240 470 440 520 640 480C840 440 1040 500 1240 460C1400 430 1440 450 1440 450" stroke="rgba(5,150,105,0.025)" stroke-width="1" fill="none"/>
+        <path d="M0 220C200 190 400 250 600 210C800 170 1000 230 1200 190C1360 160 1440 180 1440 180" stroke="rgba(30,41,59,0.025)" stroke-width="1" fill="none"/>
+        <path d="M0 550C260 520 460 560 660 530C860 500 1060 540 1260 510C1400 490 1440 500 1440 500" stroke="rgba(30,41,59,0.02)" stroke-width="1" fill="none"/>
+    </svg>
+
+    <!-- Compass rose decorative -->
+    <svg class="hero-compass compass-rose-lg" viewBox="0 0 120 120" fill="none" style="width:280px;height:280px;">
+        <circle cx="60" cy="60" r="55" stroke="rgba(8,145,178,0.08)" stroke-width="0.5"/>
+        <circle cx="60" cy="60" r="45" stroke="rgba(5,150,105,0.06)" stroke-width="0.5"/>
+        <circle cx="60" cy="60" r="35" stroke="rgba(8,145,178,0.05)" stroke-width="0.5"/>
+        <circle cx="60" cy="60" r="4" fill="rgba(8,145,178,0.1)"/>
+        <!-- N -->
+        <line x1="60" y1="5" x2="60" y2="25" stroke="rgba(8,145,178,0.12)" stroke-width="1" stroke-linecap="round"/>
+        <!-- S -->
+        <line x1="60" y1="95" x2="60" y2="115" stroke="rgba(5,150,105,0.10)" stroke-width="1" stroke-linecap="round"/>
+        <!-- E -->
+        <line x1="95" y1="60" x2="115" y2="60" stroke="rgba(8,145,178,0.10)" stroke-width="1" stroke-linecap="round"/>
+        <!-- W -->
+        <line x1="5" y1="60" x2="25" y2="60" stroke="rgba(5,150,105,0.08)" stroke-width="1" stroke-linecap="round"/>
+        <!-- NE -->
+        <line x1="84" y1="36" x2="96" y2="24" stroke="rgba(8,145,178,0.06)" stroke-width="0.5" stroke-linecap="round"/>
+        <!-- NW -->
+        <line x1="36" y1="36" x2="24" y2="24" stroke="rgba(8,145,178,0.06)" stroke-width="0.5" stroke-linecap="round"/>
+        <!-- SE -->
+        <line x1="84" y1="84" x2="96" y2="96" stroke="rgba(5,150,105,0.06)" stroke-width="0.5" stroke-linecap="round"/>
+        <!-- SW -->
+        <line x1="36" y1="84" x2="24" y2="96" stroke="rgba(5,150,105,0.06)" stroke-width="0.5" stroke-linecap="round"/>
+        <!-- Diamond points -->
+        <polygon points="60,10 63,25 60,20 57,25" fill="rgba(8,145,178,0.08)"/>
+        <polygon points="60,110 63,95 60,100 57,95" fill="rgba(5,150,105,0.06)"/>
+        <polygon points="110,60 95,63 100,60 95,57" fill="rgba(8,145,178,0.06)"/>
+        <polygon points="10,60 25,63 20,60 25,57" fill="rgba(5,150,105,0.05)"/>
+    </svg>
+
+    <svg class="hero-compass-left" viewBox="0 0 120 120" fill="none" style="width:200px;height:200px;">
+        <circle cx="60" cy="60" r="55" stroke="rgba(30,41,59,0.04)" stroke-width="0.5"/>
+        <circle cx="60" cy="60" r="40" stroke="rgba(30,41,59,0.03)" stroke-width="0.5"/>
+        <line x1="60" y1="5" x2="60" y2="115" stroke="rgba(30,41,59,0.025)" stroke-width="0.5"/>
+        <line x1="5" y1="60" x2="115" y2="60" stroke="rgba(30,41,59,0.025)" stroke-width="0.5"/>
+    </svg>
+
+    <div class="hero-content container animate-fade-up">
+        <div class="hero-badge animate-fade-in delay-1">
+            <span class="dot"></span>
+            <span>Meridian Light v1.0 &mdash; Chart the course</span>
+        </div>
+        <h1 class="animate-fade-up delay-2">
+            Discover<br><em>validated pain</em><br>from real conversations
+        </h1>
+        <p class="hero-sub animate-fade-up delay-3">
+            PainOnSocial scans thousands of Reddit threads to surface the business problems people actually describe, severity-scores them, and generates solution blueprints you can build on.
+        </p>
+        <div class="hero-ctas animate-fade-up delay-4">
+            <a href="#" class="btn btn-primary btn-lg">Start Exploring</a>
+            <a href="#" class="btn btn-ghost btn-lg">View Demo</a>
+        </div>
+        <div class="hero-metrics animate-fade-up delay-5">
+            <div class="hero-metric">
+                <div class="value">47.2K+</div>
+                <div class="label">Pain points mapped</div>
+            </div>
+            <div class="hero-metric">
+                <div class="value">92.4%</div>
+                <div class="label">Validation accuracy</div>
+            </div>
+            <div class="hero-metric">
+                <div class="value">3.8s</div>
+                <div class="label">Avg. analysis time</div>
+            </div>
+            <div class="hero-metric">
+                <div class="value">2,100+</div>
+                <div class="label">Active explorers</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     §03 — SOCIAL PROOF / BADGES
+     ================================================================ -->
+<section class="social-proof section" id="social-proof">
+    <div class="container">
+        <div class="section-label">
+            <span class="section-num">&sect;03</span>
+            <span class="section-line"></span>
+            <span class="section-title">Social Proof</span>
+        </div>
+
+        <div class="text-center mb-6">
+            <h2 class="mb-4">Trusted by explorers worldwide</h2>
+        </div>
+
+        <!-- Tier Badges -->
+        <div class="badges-row mb-6">
+            <span class="badge badge-outline">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M7 3v4l2.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                Explorer
+            </span>
+            <span class="badge badge-teal">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1l2 4 4.5.5-3.25 3 .75 4.5L7 11l-4 2 .75-4.5L.5 5.5 5 5z" fill="currentColor"/></svg>
+                Scout
+            </span>
+            <span class="badge badge-emerald">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L1 7l6 6 6-6-6-6z" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="7" r="2" fill="currentColor"/></svg>
+                Prospector
+            </span>
+        </div>
+
+        <!-- Pills -->
+        <div class="badges-row mb-7">
+            <span class="pill pill-teal">AI-Powered</span>
+            <span class="pill pill-emerald">Validated</span>
+            <span class="pill pill-orange">Real-Time</span>
+            <span class="pill pill-purple">Multi-Source</span>
+        </div>
+
+        <!-- Trusted By -->
+        <p class="text-center mb-5" style="font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.1em;font-weight:600;">Trusted by teams at</p>
+        <div class="trusted-logos">
+            <span class="trusted-logo">Meridian Co.</span>
+            <span class="trusted-logo">Atlas Labs</span>
+            <span class="trusted-logo">Cartograph</span>
+            <span class="trusted-logo">TerraForm</span>
+            <span class="trusted-logo">Waypoint</span>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     §04 — FEATURE CARDS
+     ================================================================ -->
+<section class="section" id="features">
+    <div class="container">
+        <div class="section-label">
+            <span class="section-num">&sect;04</span>
+            <span class="section-line"></span>
+            <span class="section-title">Features</span>
+        </div>
+
+        <div class="text-center mb-7">
+            <h2 class="mb-3">Map the terrain of <em class="text-emerald text-italic">real problems</em></h2>
+            <p class="text-secondary" style="max-width:540px;margin:0 auto;">Four powerful tools to navigate from raw conversations to validated opportunities.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card animate-fade-up delay-1">
+                <div class="feature-icon feature-icon-teal">
+                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.5"/><circle cx="11" cy="11" r="3" stroke="currentColor" stroke-width="1.5"/><line x1="11" y1="2" x2="11" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="17" x2="11" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <h3>Pain Discovery</h3>
+                <p>AI scans thousands of Reddit threads to find recurring pain points people actually describe &mdash; not hypothetical problems, but real frustrations with severity scores.</p>
+            </div>
+            <div class="feature-card animate-fade-up delay-2">
+                <div class="feature-icon feature-icon-emerald">
+                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 13l3-4 3 2 3-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <h3>Severity Scoring</h3>
+                <p>Each pain point receives a severity score based on frequency, emotional intensity, and market willingness to pay &mdash; so you focus on what truly matters.</p>
+            </div>
+            <div class="feature-card animate-fade-up delay-3">
+                <div class="feature-icon feature-icon-teal">
+                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L2 7v8l9 5 9-5V7l-9-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="11" y1="12" x2="11" y2="22" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="7" x2="11" y2="12" stroke="currentColor" stroke-width="1.5"/><line x1="20" y1="7" x2="11" y2="12" stroke="currentColor" stroke-width="1.5"/></svg>
+                </div>
+                <h3>Solution Generation</h3>
+                <p>For every validated pain, PainOnSocial generates solution blueprints, competitive landscapes, and go-to-market angles you can act on immediately.</p>
+            </div>
+            <div class="feature-card animate-fade-up delay-4">
+                <div class="feature-icon feature-icon-emerald">
+                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M11 7v4l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <h3>Trend Mapping</h3>
+                <p>Track how pain points evolve over time with topographic trend maps. See which problems are growing, which are fading, and where the next opportunity sits.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     §05 — STATS
+     ================================================================ -->
+<section class="stats section" id="stats">
+    <div class="container">
+        <div class="section-label">
+            <span class="section-num">&sect;05</span>
+            <span class="section-line"></span>
+            <span class="section-title">By the Numbers</span>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-value">47<span class="accent">,</span>291</div>
+                <div class="stat-label">Pain Points Mapped</div>
+                <div class="stat-label-mono">+12.4% this quarter</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">92<span class="accent">.</span>4%</div>
+                <div class="stat-label">Validation Accuracy</div>
+                <div class="stat-label-mono">human-verified baseline</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">3<span class="accent">.</span>8s</div>
+                <div class="stat-label">Average Analysis</div>
+                <div class="stat-label-mono">per subreddit scan</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">2<span class="accent">,</span>147</div>
+                <div class="stat-label">Active Explorers</div>
+                <div class="stat-label-mono">across 40+ industries</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     §06 — TESTIMONIALS
+     ================================================================ -->
+<section class="section" id="testimonials">
+    <div class="container">
+        <div class="section-label">
+            <span class="section-num">&sect;06</span>
+            <span class="section-line"></span>
+            <span class="section-title">Testimonials</span>
+        </div>
+
+        <div class="text-center mb-7">
+            <h2>What <em class="text-italic text-teal">explorers</em> are saying</h2>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-quote">PainOnSocial completely changed how we validate product ideas. We found three untapped pain points in our first week that became our entire Q3 roadmap.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar testimonial-avatar-teal">MC</div>
+                    <div>
+                        <div class="testimonial-name">Maya Chen</div>
+                        <div class="testimonial-role">VP Product, Meridian Co.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">The severity scoring alone is worth the subscription. Instead of guessing which problems matter most, we have data-backed conviction on every feature decision.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar testimonial-avatar-emerald">JK</div>
+                    <div>
+                        <div class="testimonial-name">James Kowalski</div>
+                        <div class="testimonial-role">Founder, Atlas Labs</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     §07 — PRICING
+     ================================================================ -->
+<section class="section bg-contour" id="pricing" style="background-color: var(--parchment-off);">
+    <div class="container">
+        <div class="section-label">
+            <span class="section-num">&sect;07</span>
+            <span class="section-line"></span>
+            <span class="section-title">Pricing</span>
+        </div>
+
+        <div class="text-center mb-7">
+            <h2 class="mb-3">Choose your <em class="text-italic text-emerald">expedition</em></h2>
+            <p class="text-secondary">All plans include core pain discovery. Scale as you explore further.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Explorer -->
+            <div class="pricing-card">
+                <div class="pricing-tier">Explorer</div>
+                <div class="pricing-desc">For individuals starting out</div>
+                <div class="pricing-price">$0<span>/mo</span></div>
+                <div class="pricing-period">Free forever</div>
+                <ul class="pricing-features">
+                    <li><span class="check">&check;</span> 50 pain point discoveries / mo</li>
+                    <li><span class="check">&check;</span> 3 subreddit scans</li>
+                    <li><span class="check">&check;</span> Basic severity scoring</li>
+                    <li><span class="check">&check;</span> Community access</li>
+                </ul>
+                <a href="#" class="btn btn-ghost" style="width:100%;justify-content:center;">Start Free</a>
+            </div>
+
+            <!-- Scout (featured) -->
+            <div class="pricing-card featured">
+                <div class="pricing-tier">Scout</div>
+                <div class="pricing-desc">For teams validating ideas</div>
+                <div class="pricing-price">$49<span>/mo</span></div>
+                <div class="pricing-period">Billed annually at $468</div>
+                <ul class="pricing-features">
+                    <li><span class="check">&check;</span> Unlimited discoveries</li>
+                    <li><span class="check">&check;</span> 25 subreddit scans</li>
+                    <li><span class="check">&check;</span> Advanced severity scoring</li>
+                    <li><span class="check">&check;</span> Solution generation</li>
+                    <li><span class="check">&check;</span> Trend mapping</li>
+                    <li><span class="check">&check;</span> Priority support</li>
+                </ul>
+                <a href="#" class="btn btn-primary" style="width:100%;justify-content:center;">Start Scouting</a>
+            </div>
+
+            <!-- Prospector -->
+            <div class="pricing-card">
+                <div class="pricing-tier">Prospector</div>
+                <div class="pricing-desc">For organizations at scale</div>
+                <div class="pricing-price">$149<span>/mo</span></div>
+                <div class="pricing-period">Billed annually at $1,428</div>
+                <ul class="pricing-features">
+                    <li><span class="check">&check;</span> Everything in Scout</li>
+                    <li><span class="check">&check;</span> Unlimited subreddit scans</li>
+                    <li><span class="check">&check;</span> Custom API access</li>
+                    <li><span class="check">&check;</span> Team collaboration</li>
+                    <li><span class="check">&check;</span> White-label reports</li>
+                    <li><span class="check">&check;</span> Dedicated account manager</li>
+                </ul>
+                <a href="#" class="btn btn-emerald" style="width:100%;justify-content:center;">Go Prospector</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     §08 — FORMS
+     ================================================================ -->
+<section class="section" id="forms">
+    <div class="container">
+        <div class="section-label">
+            <span class="section-num">&sect;08</span>
+            <span class="section-line"></span>
+            <span class="section-title">Forms</span>
+        </div>
+
+        <div class="text-center mb-7">
+            <h2>Input <em class="text-italic text-teal">Components</em></h2>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-7);">
+            <div>
+                <!-- Standard inputs -->
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="explorer@meridian.co" />
+                    <div class="form-hint">We'll never share your email.</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Subreddit URL</label>
+                    <input type="text" class="form-input success" value="r/startups" />
+                    <div class="form-hint success">Valid subreddit found &mdash; 24.3K active users</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Pain Description</label>
+                    <input type="text" class="form-input error" value="" placeholder="Describe the pain..." />
+                    <div class="form-hint error">Please enter at least 10 characters</div>
+                </div>
+
+                <!-- Toggles -->
+                <div class="form-group">
+                    <label class="form-label mb-3">Preferences</label>
+                    <div class="toggle-wrap mb-3">
+                        <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+                        <span class="toggle-label">Enable real-time scanning</span>
+                    </div>
+                    <div class="toggle-wrap mb-3">
+                        <div class="toggle" onclick="this.classList.toggle('active')"></div>
+                        <span class="toggle-label">Weekly digest emails</span>
+                    </div>
+                    <div class="toggle-wrap">
+                        <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+                        <span class="toggle-label">Severity score alerts</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <!-- Mini signup -->
+                <div class="form-signup">
+                    <h3 class="mb-3">Start your expedition</h3>
+                    <p class="text-secondary mb-5" style="font-size:14px;">Join 2,100+ explorers mapping validated pain points from real conversations.</p>
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" placeholder="Maya Chen" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Work Email</label>
+                        <input type="email" class="form-input" placeholder="maya@meridian.co" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Company</label>
+                        <input type="text" class="form-input" placeholder="Meridian Co." />
+                    </div>
+                    <div class="form-row">
+                        <a href="#" class="btn btn-primary" style="flex:1;justify-content:center;">Create Account</a>
+                        <a href="#" class="btn btn-ghost" style="flex:1;justify-content:center;">Learn More</a>
+                    </div>
+                    <p style="font-size:11px;color:var(--text-3);margin-top:var(--sp-3);text-align:center;">No credit card required &middot; Free plan available</p>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            @media (max-width: 768px) {
+                #forms .container > div[style] {
+                    grid-template-columns: 1fr !important;
+                }
+            }
+        </style>
+    </div>
+</section>
+
+<!-- ================================================================
+     §09 — FOOTER
+     ================================================================ -->
+<footer class="footer" id="footer">
+    <div class="container">
+        <div class="section-label">
+            <span class="section-num">&sect;09</span>
+            <span class="section-line"></span>
+            <span class="section-title">Footer</span>
+        </div>
+
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="nav-logo" style="margin-bottom:4px;">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.1)" stroke="#0891B2" stroke-width="1.5"/>
+                        <circle cx="14" cy="14" r="3" stroke="#0891B2" stroke-width="1.5"/>
+                        <line x1="14" y1="8" x2="14" y2="11" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="14" y1="17" x2="14" y2="20" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="8" y1="14" x2="11" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="17" y1="14" x2="20" y2="14" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span class="nav-logo-text">PainOnSocial</span>
+                </a>
+                <p>AI-powered pain point discovery from real Reddit conversations. Chart your course to validated business opportunities.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#">Pain Discovery</a></li>
+                    <li><a href="#">Severity Scoring</a></li>
+                    <li><a href="#">Solution Generation</a></li>
+                    <li><a href="#">Trend Mapping</a></li>
+                    <li><a href="#">API</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Changelog</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Status</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="footer-copyright">&copy; 2026 PainOnSocial &middot; Meridian Light v1.0</span>
+            <div class="footer-legal">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Cookies</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ================================================================
+     GROUP DIVIDER
+     ================================================================ -->
+<div class="group-divider container">
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="flex-shrink:0;">
+        <circle cx="20" cy="20" r="18" stroke="var(--emerald)" stroke-width="0.75" opacity="0.3"/>
+        <circle cx="20" cy="20" r="12" stroke="var(--teal)" stroke-width="0.75" opacity="0.3"/>
+        <circle cx="20" cy="20" r="2.5" fill="var(--emerald)"/>
+        <line x1="20" y1="2" x2="20" y2="10" stroke="var(--teal)" stroke-width="1" stroke-linecap="round"/>
+        <line x1="20" y1="30" x2="20" y2="38" stroke="var(--emerald)" stroke-width="1" stroke-linecap="round"/>
+        <line x1="2" y1="20" x2="10" y2="20" stroke="var(--emerald)" stroke-width="1" stroke-linecap="round"/>
+        <line x1="30" y1="20" x2="38" y2="20" stroke="var(--teal)" stroke-width="1" stroke-linecap="round"/>
+        <text x="20" y="21.5" text-anchor="middle" font-family="var(--font-mono)" font-size="5" fill="var(--emerald)" opacity="0">N</text>
+    </svg>
+    <span class="group-divider-label">Design System Reference</span>
+</div>
+
+
+<!-- ================================================================
+     §10 — COLOR PALETTE
+     ================================================================ -->
+<section class="section" id="design-system">
+    <div class="container">
+        <div class="section-label">
+            <span class="section-num">&sect;10</span>
+            <span class="section-line"></span>
+            <span class="section-title">Color Palette</span>
+        </div>
+
+        <h3 class="mb-5">Brand Colors</h3>
+        <div class="color-grid mb-7">
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#0891B2;"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Teal (Primary)</div>
+                    <div class="color-swatch-hex">#0891B2</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#0E7490;"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Teal Dark</div>
+                    <div class="color-swatch-hex">#0E7490</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#F97316;"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Accent Orange</div>
+                    <div class="color-swatch-hex">#F97316</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#A855F7;"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Accent Purple</div>
+                    <div class="color-swatch-hex">#A855F7</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mb-5">Emerald Secondary</h3>
+        <div class="color-grid mb-7">
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#059669;"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Emerald</div>
+                    <div class="color-swatch-hex">#059669</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#34D399;"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Emerald Light</div>
+                    <div class="color-swatch-hex">#34D399</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:rgba(5,150,105,0.1);border:1px solid rgba(5,150,105,0.2);"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Emerald Glow</div>
+                    <div class="color-swatch-hex">rgba(5,150,105,0.1)</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mb-5">Warm Parchment Surfaces</h3>
+        <div class="color-grid mb-7">
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#FEFDFB;border:1px solid rgba(30,41,59,0.08);"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Parchment</div>
+                    <div class="color-swatch-hex">#FEFDFB</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#FAF9F7;border:1px solid rgba(30,41,59,0.08);"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Off-Parchment</div>
+                    <div class="color-swatch-hex">#FAF9F7</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#F5F3EF;border:1px solid rgba(30,41,59,0.08);"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Warm Light Gray</div>
+                    <div class="color-swatch-hex">#F5F3EF</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#FFFFFF;border:1px solid rgba(30,41,59,0.08);"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Card White</div>
+                    <div class="color-swatch-hex">#FFFFFF</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mb-5">Text Scale</h3>
+        <div class="color-grid mb-7">
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#1E293B;"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Slate 800</div>
+                    <div class="color-swatch-hex">#1E293B (primary)</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#475569;"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Slate 600</div>
+                    <div class="color-swatch-hex">#475569 (secondary)</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#94A3B8;"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Slate 400</div>
+                    <div class="color-swatch-hex">#94A3B8 (muted)</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mb-5">Semantic</h3>
+        <div class="color-grid">
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#059669;"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Success</div>
+                    <div class="color-swatch-hex">#059669</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#D97706;"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Warning</div>
+                    <div class="color-swatch-hex">#D97706</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#EF4444;"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Error</div>
+                    <div class="color-swatch-hex">#EF4444</div>
+                </div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-swatch-block" style="background:#0891B2;"></div>
+                <div class="color-swatch-info">
+                    <div class="color-swatch-name">Info</div>
+                    <div class="color-swatch-hex">#0891B2</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     §11 — TYPOGRAPHY
+     ================================================================ -->
+<section class="section" style="background:var(--parchment-off);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+        <div class="section-label">
+            <span class="section-num">&sect;11</span>
+            <span class="section-line"></span>
+            <span class="section-title">Typography</span>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">Instrument Serif &middot; Display &middot; 64px</div>
+            <h1 style="font-size:64px;">Chart the course</h1>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">Instrument Serif Italic &middot; Display Accent &middot; 64px</div>
+            <h1 style="font-size:64px;font-style:italic;color:var(--emerald);">validated pain</h1>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">Instrument Serif &middot; H2 &middot; 42px</div>
+            <h2 style="font-size:42px;">Discover real problems</h2>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">Instrument Serif Italic &middot; H2 Accent &middot; 42px</div>
+            <h2 style="font-size:42px;">Map the <em style="color:var(--teal);">terrain</em> of opportunity</h2>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">Instrument Serif &middot; H3 &middot; 26px</div>
+            <h3 style="font-size:26px;">Severity scoring engine</h3>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">Inter &middot; Body &middot; 16px / 1.6</div>
+            <p style="font-size:16px;max-width:640px;color:var(--text-2);">PainOnSocial scans thousands of Reddit threads to surface the business problems people actually describe &mdash; not hypothetical problems, but real frustrations with severity scores.</p>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">Inter &middot; Body Small &middot; 14px / 1.65</div>
+            <p style="font-size:14px;max-width:640px;color:var(--text-2);">Each pain point receives a severity score based on frequency, emotional intensity, and market willingness to pay &mdash; so you focus on what truly matters.</p>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">Inter &middot; Caption &middot; 12px</div>
+            <p style="font-size:12px;color:var(--text-3);">Updated 3 hours ago &middot; 47,291 pain points mapped across 142 subreddits</p>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">DM Mono &middot; Code / Metrics &middot; 13px</div>
+            <p style="font-family:var(--font-mono);font-size:13px;color:var(--teal);">severity_score: 8.7 &middot; frequency: 342 &middot; validated: true</p>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">DM Mono &middot; Section Label &middot; 11px</div>
+            <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.1em;">&sect;11 &mdash; Typography Reference</p>
+        </div>
+
+        <div class="type-specimen" style="border-bottom:none;">
+            <div class="type-meta">Instrument Serif Italic &middot; Pullquote &middot; 24px</div>
+            <blockquote style="font-family:var(--font-display);font-style:italic;font-size:24px;line-height:1.5;color:var(--text-1);border-left:3px solid var(--teal);padding-left:var(--sp-5);max-width:640px;">
+                The severity scoring alone is worth the subscription. We have data-backed conviction on every feature decision.
+            </blockquote>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     §12 — SPACING
+     ================================================================ -->
+<section class="section">
+    <div class="container">
+        <div class="section-label">
+            <span class="section-num">&sect;12</span>
+            <span class="section-line"></span>
+            <span class="section-title">Spacing Scale</span>
+        </div>
+
+        <p class="text-secondary mb-6">8px base grid. All spacing tokens are multiples of 4px.</p>
+
+        <div class="spacing-row">
+            <span class="spacing-label">--sp-1</span>
+            <span class="spacing-value">4px</span>
+            <div class="spacing-bar" style="width:4px;"></div>
+        </div>
+        <div class="spacing-row">
+            <span class="spacing-label">--sp-2</span>
+            <span class="spacing-value">8px</span>
+            <div class="spacing-bar" style="width:8px;"></div>
+        </div>
+        <div class="spacing-row">
+            <span class="spacing-label">--sp-3</span>
+            <span class="spacing-value">12px</span>
+            <div class="spacing-bar" style="width:12px;"></div>
+        </div>
+        <div class="spacing-row">
+            <span class="spacing-label">--sp-4</span>
+            <span class="spacing-value">16px</span>
+            <div class="spacing-bar" style="width:16px;"></div>
+        </div>
+        <div class="spacing-row">
+            <span class="spacing-label">--sp-5</span>
+            <span class="spacing-value">24px</span>
+            <div class="spacing-bar" style="width:24px;"></div>
+        </div>
+        <div class="spacing-row">
+            <span class="spacing-label">--sp-6</span>
+            <span class="spacing-value">32px</span>
+            <div class="spacing-bar" style="width:32px;"></div>
+        </div>
+        <div class="spacing-row">
+            <span class="spacing-label">--sp-7</span>
+            <span class="spacing-value">48px</span>
+            <div class="spacing-bar" style="width:48px;"></div>
+        </div>
+        <div class="spacing-row">
+            <span class="spacing-label">--sp-8</span>
+            <span class="spacing-value">64px</span>
+            <div class="spacing-bar" style="width:64px;"></div>
+        </div>
+        <div class="spacing-row">
+            <span class="spacing-label">--sp-9</span>
+            <span class="spacing-value">96px</span>
+            <div class="spacing-bar" style="width:96px;"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     §13 — BUTTONS
+     ================================================================ -->
+<section class="section" style="background:var(--parchment-off);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+        <div class="section-label">
+            <span class="section-num">&sect;13</span>
+            <span class="section-line"></span>
+            <span class="section-title">Buttons</span>
+        </div>
+
+        <h4 class="mb-4">Primary (Teal, white text)</h4>
+        <div class="button-row">
+            <a href="#" class="btn btn-primary btn-sm">Small</a>
+            <a href="#" class="btn btn-primary">Default</a>
+            <a href="#" class="btn btn-primary btn-lg">Large</a>
+        </div>
+
+        <h4 class="mb-4">Emerald Accent (Emerald bg, white text)</h4>
+        <div class="button-row">
+            <a href="#" class="btn btn-emerald btn-sm">Small</a>
+            <a href="#" class="btn btn-emerald">Default</a>
+            <a href="#" class="btn btn-emerald btn-lg">Large</a>
+        </div>
+
+        <h4 class="mb-4">Secondary (Warm surface)</h4>
+        <div class="button-row">
+            <a href="#" class="btn btn-secondary btn-sm">Small</a>
+            <a href="#" class="btn btn-secondary">Default</a>
+            <a href="#" class="btn btn-secondary btn-lg">Large</a>
+        </div>
+
+        <h4 class="mb-4">Ghost (Outline)</h4>
+        <div class="button-row">
+            <a href="#" class="btn btn-ghost btn-sm">Small</a>
+            <a href="#" class="btn btn-ghost">Default</a>
+            <a href="#" class="btn btn-ghost btn-lg">Large</a>
+        </div>
+
+        <h4 class="mb-4">Text Link</h4>
+        <div class="button-row">
+            <a href="#" class="btn-text">Learn more <span>&rarr;</span></a>
+            <a href="#" class="btn-text" style="color:var(--emerald);">View documentation <span>&rarr;</span></a>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     §14 — DIVIDERS
+     ================================================================ -->
+<section class="section">
+    <div class="container">
+        <div class="section-label">
+            <span class="section-num">&sect;14</span>
+            <span class="section-line"></span>
+            <span class="section-title">Dividers</span>
+        </div>
+
+        <div class="divider-demo">
+            <div class="divider-label">Standard Border</div>
+            <div class="divider-line"></div>
+        </div>
+
+        <div class="divider-demo">
+            <div class="divider-label">Emerald Gradient Bar</div>
+            <div class="divider-emerald"></div>
+        </div>
+
+        <div class="divider-demo">
+            <div class="divider-label">Warm Centered</div>
+            <div class="divider-warm"></div>
+        </div>
+
+        <div class="divider-demo">
+            <div class="divider-label">Contour Texture Panel</div>
+            <div class="divider-contour bg-contour-dense" style="background-color:var(--parchment-off);"></div>
+        </div>
+
+        <div class="divider-demo">
+            <div class="divider-label">Compass Rose Divider</div>
+            <div style="display:flex;align-items:center;gap:var(--sp-4);">
+                <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--teal-20));"></div>
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="14" stroke="var(--teal)" stroke-width="0.5" opacity="0.25"/>
+                    <circle cx="16" cy="16" r="9" stroke="var(--emerald)" stroke-width="0.5" opacity="0.25"/>
+                    <circle cx="16" cy="16" r="2" fill="var(--teal)"/>
+                    <line x1="16" y1="2" x2="16" y2="8" stroke="var(--teal)" stroke-width="0.75" stroke-linecap="round"/>
+                    <line x1="16" y1="24" x2="16" y2="30" stroke="var(--emerald)" stroke-width="0.75" stroke-linecap="round"/>
+                    <line x1="2" y1="16" x2="8" y2="16" stroke="var(--emerald)" stroke-width="0.75" stroke-linecap="round"/>
+                    <line x1="24" y1="16" x2="30" y2="16" stroke="var(--teal)" stroke-width="0.75" stroke-linecap="round"/>
+                </svg>
+                <div style="flex:1;height:1px;background:linear-gradient(90deg,var(--emerald-20),transparent);"></div>
+            </div>
+        </div>
+
+        <div class="divider-demo">
+            <div class="divider-label">Section Label Divider (with coordinate)</div>
+            <div style="display:flex;align-items:center;gap:var(--sp-4);">
+                <span style="font-family:var(--font-mono);font-size:12px;color:var(--emerald);letter-spacing:0.02em;">&sect;14</span>
+                <div style="flex:1;height:1px;background:var(--border);"></div>
+                <span style="font-family:var(--font-display);font-size:13px;color:var(--text-3);">Dividers</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     §15 — ALERTS
+     ================================================================ -->
+<section class="section" style="background:var(--parchment-off);border-top:1px solid var(--border);">
+    <div class="container">
+        <div class="section-label">
+            <span class="section-num">&sect;15</span>
+            <span class="section-line"></span>
+            <span class="section-title">Alerts &amp; Toasts</span>
+        </div>
+
+        <h4 class="mb-5">Inline Alerts</h4>
+
+        <div class="alert alert-success">
+            <span class="alert-icon">&#10003;</span>
+            <div class="alert-content">
+                <div class="alert-title">Scan Complete</div>
+                <div class="alert-text">Successfully analyzed 1,247 threads from r/startups. Found 23 new validated pain points with severity scores above 7.0.</div>
+            </div>
+        </div>
+
+        <div class="alert alert-warning">
+            <span class="alert-icon">&#9888;</span>
+            <div class="alert-content">
+                <div class="alert-title">Rate Limit Approaching</div>
+                <div class="alert-text">You've used 42 of 50 subreddit scans this month on the Explorer plan. Upgrade to Scout for unlimited access.</div>
+            </div>
+        </div>
+
+        <div class="alert alert-error">
+            <span class="alert-icon">&#10007;</span>
+            <div class="alert-content">
+                <div class="alert-title">Scan Failed</div>
+                <div class="alert-text">Unable to access r/private_subreddit. This community may be restricted. Please check permissions and try again.</div>
+            </div>
+        </div>
+
+        <div class="alert alert-info">
+            <span class="alert-icon">&#8505;</span>
+            <div class="alert-content">
+                <div class="alert-title">New Feature Available</div>
+                <div class="alert-text">Trend Mapping is now available on all Scout and Prospector plans. Track how pain points evolve over time.</div>
+            </div>
+        </div>
+
+        <h4 class="mb-5 mt-7">Toast Notifications</h4>
+
+        <div style="display:flex;gap:var(--sp-5);flex-wrap:wrap;">
+            <div class="toast">
+                <div class="toast-icon toast-icon-success">&#10003;</div>
+                <div class="toast-content">
+                    <div class="toast-title">Pain point saved</div>
+                    <div class="toast-text">Added to your "SaaS Onboarding" collection</div>
+                </div>
+                <button class="toast-close">&times;</button>
+            </div>
+
+            <div class="toast">
+                <div class="toast-icon toast-icon-error">&#10007;</div>
+                <div class="toast-content">
+                    <div class="toast-title">Export failed</div>
+                    <div class="toast-text">Unable to generate CSV. Please try again.</div>
+                </div>
+                <button class="toast-close">&times;</button>
+            </div>
+        </div>
+
+        <!-- Final meridian attribution -->
+        <div style="margin-top:var(--sp-9);padding-top:var(--sp-7);border-top:1px solid var(--border);text-align:center;">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="margin-bottom:var(--sp-4);">
+                <circle cx="20" cy="20" r="18" stroke="var(--teal)" stroke-width="0.5" opacity="0.2"/>
+                <circle cx="20" cy="20" r="12" stroke="var(--emerald)" stroke-width="0.5" opacity="0.2"/>
+                <circle cx="20" cy="20" r="2" fill="var(--teal)"/>
+                <line x1="20" y1="2" x2="20" y2="10" stroke="var(--teal)" stroke-width="0.75" stroke-linecap="round"/>
+                <line x1="20" y1="30" x2="20" y2="38" stroke="var(--emerald)" stroke-width="0.75" stroke-linecap="round"/>
+                <line x1="2" y1="20" x2="10" y2="20" stroke="var(--emerald)" stroke-width="0.75" stroke-linecap="round"/>
+                <line x1="30" y1="20" x2="38" y2="20" stroke="var(--teal)" stroke-width="0.75" stroke-linecap="round"/>
+            </svg>
+            <p style="font-family:var(--font-display);font-size:20px;color:var(--text-1);margin-bottom:var(--sp-2);">
+                <em style="color:var(--emerald);">Meridian Light</em> v1.0
+            </p>
+            <p style="font-family:var(--font-mono);font-size:12px;color:var(--text-3);letter-spacing:0.04em;">
+                Chart the course &middot; PainOnSocial Design System
+            </p>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+    }
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.feature-card, .pricing-card, .testimonial-card, .stat-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(16px)';
+        el.style.transition = 'opacity 0.6s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.4,0,0.2,1)';
+        observer.observe(el);
+    });
+
+    // Stagger feature cards
+    document.querySelectorAll('.feature-card').forEach((el, i) => {
+        el.style.transitionDelay = `${i * 0.1}s`;
+    });
+    document.querySelectorAll('.pricing-card').forEach((el, i) => {
+        el.style.transitionDelay = `${i * 0.12}s`;
+    });
+    document.querySelectorAll('.stat-item').forEach((el, i) => {
+        el.style.transitionDelay = `${i * 0.08}s`;
+    });
+</script>
+</body>
+</html>
