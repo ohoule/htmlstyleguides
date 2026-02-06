@@ -3,40 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURORA — Glassmorphism Design System</title>
+    <title>Prism — Glassmorphism Style Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        /* ══════════════════════════════════════════════════════════════════════════
+           PRISM — GLASSMORPHISM STYLE GUIDE
+           Light diffracts through translucent surfaces, creating depth and dimension
+           ══════════════════════════════════════════════════════════════════════════ */
+
         :root {
-            /* Color Palette */
-            --glass-white: rgba(255, 255, 255, 0.25);
-            --glass-white-strong: rgba(255, 255, 255, 0.4);
-            --glass-white-subtle: rgba(255, 255, 255, 0.1);
+            /* Glass Surfaces */
+            --glass-light: rgba(255, 255, 255, 0.25);
+            --glass-medium: rgba(255, 255, 255, 0.15);
+            --glass-dark: rgba(255, 255, 255, 0.08);
             --glass-border: rgba(255, 255, 255, 0.3);
             --glass-shadow: rgba(0, 0, 0, 0.1);
 
-            --aurora-purple: #8B5CF6;
-            --aurora-pink: #EC4899;
-            --aurora-blue: #3B82F6;
-            --aurora-cyan: #06B6D4;
-            --aurora-teal: #14B8A6;
+            /* Aurora Gradient Palette */
+            --aurora-violet: #7B68EE;
+            --aurora-cyan: #00CED1;
+            --aurora-magenta: #FF69B4;
+            --aurora-blue: #4169E1;
+            --aurora-teal: #20B2AA;
 
+            /* Text Colors */
             --text-primary: rgba(255, 255, 255, 0.95);
             --text-secondary: rgba(255, 255, 255, 0.7);
             --text-muted: rgba(255, 255, 255, 0.5);
-            --text-dark: #1E293B;
+            --text-dark: #1a1a2e;
 
-            --success: #10B981;
-            --warning: #F59E0B;
-            --error: #EF4444;
-            --info: #3B82F6;
+            /* Semantic Colors */
+            --success: #4ADE80;
+            --warning: #FBBF24;
+            --error: #F87171;
+            --info: #60A5FA;
 
             /* Typography */
             --font-display: 'Outfit', sans-serif;
             --font-body: 'Sora', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
 
-            /* Spacing */
+            /* Spacing Scale */
             --space-xs: 0.25rem;
             --space-sm: 0.5rem;
             --space-md: 1rem;
@@ -44,13 +53,13 @@
             --space-xl: 2rem;
             --space-2xl: 3rem;
             --space-3xl: 4rem;
+            --space-4xl: 6rem;
 
-            /* Glass Properties */
+            /* Glass Effects */
             --blur-sm: 8px;
             --blur-md: 16px;
             --blur-lg: 24px;
             --blur-xl: 40px;
-
             --radius-sm: 8px;
             --radius-md: 16px;
             --radius-lg: 24px;
@@ -58,579 +67,608 @@
             --radius-full: 9999px;
         }
 
-        * {
+        /* Reset & Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: var(--font-body);
-            color: var(--text-primary);
+            font-size: 16px;
             line-height: 1.6;
+            color: var(--text-primary);
             min-height: 100vh;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            background-attachment: fixed;
             overflow-x: hidden;
         }
 
-        /* Animated Background Orbs */
-        .bg-orbs {
+        /* Aurora Background */
+        .aurora-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
-            z-index: -1;
-            pointer-events: none;
+            z-index: -2;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
         }
 
-        .orb {
-            position: absolute;
+        .aurora-orb {
+            position: fixed;
             border-radius: 50%;
             filter: blur(80px);
             opacity: 0.6;
+            z-index: -1;
             animation: float 20s ease-in-out infinite;
         }
 
-        .orb-1 {
+        .aurora-orb:nth-child(1) {
+            top: -10%;
+            left: 10%;
             width: 600px;
             height: 600px;
-            background: var(--aurora-purple);
-            top: -200px;
-            left: -100px;
+            background: var(--aurora-violet);
             animation-delay: 0s;
         }
 
-        .orb-2 {
+        .aurora-orb:nth-child(2) {
+            top: 40%;
+            right: -10%;
             width: 500px;
             height: 500px;
-            background: var(--aurora-pink);
-            top: 50%;
-            right: -150px;
+            background: var(--aurora-cyan);
             animation-delay: -5s;
         }
 
-        .orb-3 {
-            width: 400px;
-            height: 400px;
-            background: var(--aurora-cyan);
-            bottom: -100px;
+        .aurora-orb:nth-child(3) {
+            bottom: -10%;
             left: 30%;
+            width: 450px;
+            height: 450px;
+            background: var(--aurora-magenta);
             animation-delay: -10s;
         }
 
-        .orb-4 {
-            width: 350px;
-            height: 350px;
+        .aurora-orb:nth-child(4) {
+            top: 20%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
             background: var(--aurora-teal);
-            top: 40%;
-            left: 10%;
             animation-delay: -15s;
         }
 
         @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(50px, -50px) scale(1.1); }
-            50% { transform: translate(-30px, 30px) scale(0.95); }
-            75% { transform: translate(40px, 40px) scale(1.05); }
-        }
-
-        /* Glass Panel Base */
-        .glass {
-            background: var(--glass-white);
-            backdrop-filter: blur(var(--blur-md));
-            -webkit-backdrop-filter: blur(var(--blur-md));
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-lg);
-            box-shadow: 0 8px 32px var(--glass-shadow);
-        }
-
-        .glass-subtle {
-            background: var(--glass-white-subtle);
-            backdrop-filter: blur(var(--blur-sm));
-            -webkit-backdrop-filter: blur(var(--blur-sm));
-        }
-
-        .glass-strong {
-            background: var(--glass-white-strong);
-            backdrop-filter: blur(var(--blur-lg));
-            -webkit-backdrop-filter: blur(var(--blur-lg));
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(30px, -30px) scale(1.05);
+            }
+            50% {
+                transform: translate(-20px, 20px) scale(0.95);
+            }
+            75% {
+                transform: translate(-30px, -10px) scale(1.02);
+            }
         }
 
         /* Navigation */
-        nav {
+        .back-link {
             position: fixed;
             top: var(--space-lg);
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
+            left: var(--space-lg);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
             padding: var(--space-sm) var(--space-md);
-            display: flex;
-            gap: var(--space-xs);
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: calc(100% - var(--space-xl));
-        }
-
-        nav a {
-            padding: var(--space-sm) var(--space-md);
-            font-family: var(--font-display);
-            font-size: 0.8rem;
-            font-weight: 500;
+            background: var(--glass-light);
+            backdrop-filter: blur(var(--blur-md));
+            -webkit-backdrop-filter: blur(var(--blur-md));
+            color: var(--text-primary);
             text-decoration: none;
-            color: var(--text-secondary);
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 0.875rem;
+            letter-spacing: 0.02em;
+            border: 1px solid var(--glass-border);
             border-radius: var(--radius-full);
             transition: all 0.3s ease;
+            z-index: 1000;
         }
 
-        nav a:hover {
-            color: var(--text-primary);
-            background: var(--glass-white);
+        .back-link:hover {
+            background: var(--glass-medium);
+            transform: translateX(-4px);
+            box-shadow: 0 8px 32px var(--glass-shadow);
+        }
+
+        .back-link::before {
+            content: '←';
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+        }
+
+        .back-link:hover::before {
+            transform: translateX(-4px);
         }
 
         /* Header */
         header {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: var(--space-3xl) var(--space-xl);
+            padding: var(--space-4xl) var(--space-xl) var(--space-3xl);
             text-align: center;
-        }
-
-        .logo-container {
-            margin-bottom: var(--space-xl);
+            position: relative;
         }
 
         .logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink), var(--aurora-cyan));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            animation: glow 4s ease-in-out infinite;
-        }
-
-        .logo::before {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink), var(--aurora-cyan));
-            z-index: -1;
-            filter: blur(20px);
-            opacity: 0.6;
-        }
-
-        .logo span {
             font-family: var(--font-display);
-            font-size: 3rem;
+            font-size: clamp(4rem, 12vw, 9rem);
             font-weight: 700;
-            color: white;
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.4); }
-            50% { box-shadow: 0 0 60px rgba(236, 72, 153, 0.6); }
-        }
-
-        h1 {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-            margin-bottom: var(--space-lg);
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--aurora-cyan) 50%, var(--aurora-purple) 100%);
+            letter-spacing: -0.03em;
+            line-height: 0.9;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(
+                135deg,
+                var(--text-primary) 0%,
+                var(--aurora-cyan) 30%,
+                var(--aurora-violet) 60%,
+                var(--aurora-magenta) 100%
+            );
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .tagline {
+            font-family: var(--font-body);
             font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 500px;
             font-weight: 300;
+            color: var(--text-secondary);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
         }
 
-        /* Main Content */
-        main {
+        /* Main Container */
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: var(--space-xl);
+            padding: 0 var(--space-xl);
         }
 
+        /* Glass Panel */
+        .glass-panel {
+            background: var(--glass-light);
+            backdrop-filter: blur(var(--blur-lg));
+            -webkit-backdrop-filter: blur(var(--blur-lg));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            box-shadow:
+                0 8px 32px var(--glass-shadow),
+                inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Section Styling */
         section {
             margin-bottom: var(--space-3xl);
             padding: var(--space-2xl);
+            background: var(--glass-light);
+            backdrop-filter: blur(var(--blur-lg));
+            -webkit-backdrop-filter: blur(var(--blur-lg));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            box-shadow:
+                0 8px 32px var(--glass-shadow),
+                inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
-        h2 {
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+        }
+
+        .section-title {
             font-family: var(--font-display);
-            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-size: 2rem;
             font-weight: 600;
+            letter-spacing: -0.01em;
             margin-bottom: var(--space-xl);
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
+            color: var(--text-primary);
+            position: relative;
+            display: inline-block;
         }
 
-        h2::before {
-            content: attr(data-number);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink));
-            border-radius: var(--radius-md);
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--aurora-cyan), var(--aurora-violet));
+            border-radius: 2px;
         }
 
-        h3 {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-        }
-
-        p {
-            color: var(--text-secondary);
-            margin-bottom: var(--space-lg);
-        }
-
-        /* Section 1: Color Palette */
+        /* ═══════════════════════════════════════════════════════════════════
+           1. COLOR PALETTE
+           ═══════════════════════════════════════════════════════════════════ */
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: var(--space-lg);
         }
 
-        .color-card {
-            padding: var(--space-lg);
-            border-radius: var(--radius-lg);
+        .color-swatch {
+            text-align: center;
+            background: var(--glass-dark);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
             transition: all 0.3s ease;
         }
 
-        .color-card:hover {
+        .color-swatch:hover {
             transform: translateY(-4px);
+            box-shadow: 0 12px 40px var(--glass-shadow);
         }
 
         .color-preview {
-            width: 60px;
-            height: 60px;
-            border-radius: var(--radius-md);
-            margin-bottom: var(--space-md);
+            height: 90px;
             position: relative;
-            overflow: hidden;
         }
 
         .color-preview::after {
             content: '';
             position: absolute;
             inset: 0;
-            border-radius: inherit;
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
+            background: linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 0.2) 0%,
+                transparent 50%
+            );
+        }
+
+        .color-info {
+            padding: var(--space-md);
         }
 
         .color-name {
             font-family: var(--font-display);
-            font-weight: 600;
+            font-size: 0.875rem;
+            font-weight: 500;
             margin-bottom: var(--space-xs);
         }
 
-        .color-value {
-            font-size: 0.85rem;
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
             color: var(--text-muted);
-            font-family: monospace;
         }
 
-        /* Section 2: Typography */
-        .type-scale {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-xl);
-        }
-
+        /* ═══════════════════════════════════════════════════════════════════
+           2. TYPOGRAPHY
+           ═══════════════════════════════════════════════════════════════════ */
         .type-specimen {
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-xl);
+            padding: var(--space-lg);
+            background: var(--glass-dark);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--aurora-cyan);
+            margin-bottom: var(--space-sm);
         }
 
         .type-display {
             font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: 3.5rem;
             font-weight: 700;
+            line-height: 1.1;
             letter-spacing: -0.02em;
-            margin-bottom: var(--space-md);
-            background: linear-gradient(90deg, var(--text-primary), var(--aurora-cyan));
+            background: linear-gradient(135deg, var(--text-primary), var(--aurora-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .type-heading {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: var(--space-md);
         }
 
         .type-body {
             font-family: var(--font-body);
-            font-size: 1rem;
+            font-size: 1.125rem;
+            font-weight: 300;
             line-height: 1.7;
             color: var(--text-secondary);
+            max-width: 60ch;
         }
 
-        .font-label {
-            display: inline-block;
-            padding: var(--space-xs) var(--space-md);
+        .type-mono {
+            font-family: var(--font-mono);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            color: var(--aurora-cyan);
+            background: rgba(0, 0, 0, 0.3);
+            padding: var(--space-md);
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--aurora-violet);
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .type-scale-item {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-lg);
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .type-scale-size {
+            font-family: var(--font-mono);
             font-size: 0.75rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border-radius: var(--radius-full);
-            margin-top: var(--space-md);
+            color: var(--aurora-violet);
+            min-width: 100px;
         }
 
-        /* Section 3: Spacing */
+        /* ═══════════════════════════════════════════════════════════════════
+           3. SPACING SCALE
+           ═══════════════════════════════════════════════════════════════════ */
         .spacing-demo {
             display: flex;
             flex-direction: column;
             gap: var(--space-md);
         }
 
-        .spacing-row {
+        .spacing-item {
             display: flex;
             align-items: center;
             gap: var(--space-lg);
         }
 
         .spacing-label {
-            min-width: 80px;
-            font-family: var(--font-display);
-            font-weight: 500;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            min-width: 120px;
+            color: var(--text-secondary);
         }
 
         .spacing-bar {
-            height: 40px;
-            background: linear-gradient(90deg, var(--aurora-purple), var(--aurora-pink));
-            border-radius: var(--radius-sm);
-            transition: all 0.3s ease;
-        }
-
-        .spacing-bar:hover {
-            filter: brightness(1.2);
-            transform: scaleX(1.02);
+            height: 24px;
+            background: linear-gradient(90deg, var(--aurora-cyan), var(--aurora-violet));
+            border-radius: var(--radius-full);
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 206, 209, 0.3);
         }
 
         .spacing-value {
-            min-width: 80px;
-            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
             color: var(--text-muted);
-            font-family: monospace;
+            margin-left: var(--space-sm);
         }
 
-        /* Section 4: Buttons */
-        .button-showcase {
+        /* ═══════════════════════════════════════════════════════════════════
+           4. BUTTONS
+           ═══════════════════════════════════════════════════════════════════ */
+        .button-grid {
             display: flex;
             flex-wrap: wrap;
             gap: var(--space-lg);
-            align-items: center;
+            align-items: flex-start;
         }
 
         .btn {
             font-family: var(--font-display);
-            font-size: 0.95rem;
+            font-size: 0.9375rem;
             font-weight: 500;
+            letter-spacing: 0.02em;
             padding: var(--space-md) var(--space-xl);
-            border: none;
+            border: 1px solid var(--glass-border);
             border-radius: var(--radius-full);
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-sm);
+            display: inline-block;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 0.2) 0%,
+                transparent 50%
+            );
+            pointer-events: none;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink));
+            background: linear-gradient(135deg, var(--aurora-violet), var(--aurora-blue));
             color: white;
-            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 4px 20px rgba(123, 104, 238, 0.4);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.6);
+            box-shadow: 0 8px 30px rgba(123, 104, 238, 0.5);
         }
 
-        .btn-glass {
-            background: var(--glass-white);
-            backdrop-filter: blur(var(--blur-md));
-            -webkit-backdrop-filter: blur(var(--blur-md));
+        .btn-secondary {
+            background: var(--glass-light);
+            backdrop-filter: blur(var(--blur-sm));
             color: var(--text-primary);
-            border: 1px solid var(--glass-border);
         }
 
-        .btn-glass:hover {
-            background: var(--glass-white-strong);
+        .btn-secondary:hover {
+            background: var(--glass-medium);
             transform: translateY(-2px);
         }
 
-        .btn-outline {
+        .btn-ghost {
             background: transparent;
             color: var(--text-primary);
-            border: 2px solid var(--glass-border);
+            border-color: var(--text-secondary);
         }
 
-        .btn-outline:hover {
-            background: var(--glass-white-subtle);
-            border-color: var(--aurora-cyan);
+        .btn-ghost:hover {
+            background: var(--glass-dark);
+            border-color: var(--text-primary);
         }
 
         .btn-glow {
-            background: transparent;
-            color: var(--aurora-cyan);
-            border: 2px solid var(--aurora-cyan);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-glow::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: inherit;
-            background: var(--aurora-cyan);
-            filter: blur(15px);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-
-        .btn-glow:hover::before {
-            opacity: 0.4;
-        }
-
-        .btn-glow:hover {
-            background: var(--aurora-cyan);
+            background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-teal));
             color: var(--text-dark);
+            font-weight: 600;
+            box-shadow:
+                0 4px 20px rgba(0, 206, 209, 0.4),
+                0 0 40px rgba(0, 206, 209, 0.2);
+            animation: glow-pulse 2s ease-in-out infinite;
         }
 
-        /* Section 5: Forms */
-        .form-demo {
-            max-width: 450px;
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(0, 206, 209, 0.4), 0 0 40px rgba(0, 206, 209, 0.2); }
+            50% { box-shadow: 0 4px 30px rgba(0, 206, 209, 0.6), 0 0 60px rgba(0, 206, 209, 0.3); }
         }
 
+        .btn[disabled] {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           5. FORMS
+           ═══════════════════════════════════════════════════════════════════ */
         .form-group {
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-xl);
         }
 
-        label {
+        .form-label {
             display: block;
             font-family: var(--font-display);
-            font-size: 0.9rem;
+            font-size: 0.875rem;
             font-weight: 500;
+            letter-spacing: 0.02em;
             margin-bottom: var(--space-sm);
             color: var(--text-secondary);
         }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        textarea,
-        select {
+        .form-input {
             width: 100%;
+            max-width: 400px;
             padding: var(--space-md) var(--space-lg);
             font-family: var(--font-body);
             font-size: 1rem;
             color: var(--text-primary);
-            background: var(--glass-white-subtle);
+            background: var(--glass-dark);
             backdrop-filter: blur(var(--blur-sm));
-            -webkit-backdrop-filter: blur(var(--blur-sm));
             border: 1px solid var(--glass-border);
             border-radius: var(--radius-md);
             transition: all 0.3s ease;
         }
 
-        input::placeholder,
-        textarea::placeholder {
+        .form-input:focus {
+            outline: none;
+            border-color: var(--aurora-cyan);
+            box-shadow:
+                0 0 0 4px rgba(0, 206, 209, 0.15),
+                0 8px 32px var(--glass-shadow);
+        }
+
+        .form-input::placeholder {
             color: var(--text-muted);
         }
 
-        input:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--aurora-purple);
-            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
-            background: var(--glass-white);
+        .form-input.error {
+            border-color: var(--error);
+            box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.15);
         }
 
-        textarea {
+        .form-textarea {
             min-height: 120px;
             resize: vertical;
         }
 
-        select {
-            cursor: pointer;
+        .form-select {
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='rgba(255,255,255,0.7)'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='rgba(255,255,255,0.7)' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 16px center;
+            padding-right: 48px;
         }
 
-        .checkbox-wrapper {
+        .form-checkbox {
             display: flex;
             align-items: center;
-            gap: var(--space-md);
+            gap: var(--space-sm);
             cursor: pointer;
+            font-family: var(--font-body);
         }
 
-        .checkbox-custom {
-            width: 24px;
-            height: 24px;
+        .form-checkbox input {
+            appearance: none;
+            width: 22px;
+            height: 22px;
             border: 2px solid var(--glass-border);
             border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            background: var(--glass-white-subtle);
+            background: var(--glass-dark);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
         }
 
-        .checkbox-wrapper:hover .checkbox-custom {
-            border-color: var(--aurora-purple);
-        }
-
-        .checkbox-wrapper input:checked + .checkbox-custom {
-            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink));
+        .form-checkbox input:checked {
+            background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-violet));
             border-color: transparent;
         }
 
-        .checkbox-wrapper input:checked + .checkbox-custom::after {
+        .form-checkbox input:checked::after {
             content: '✓';
-            color: white;
-            font-size: 0.85rem;
-        }
-
-        .checkbox-wrapper input {
             position: absolute;
-            opacity: 0;
-            pointer-events: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 0.875rem;
+            font-weight: bold;
         }
 
-        /* Section 6: Cards */
+        /* ═══════════════════════════════════════════════════════════════════
+           6. CARDS
+           ═══════════════════════════════════════════════════════════════════ */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -638,99 +676,148 @@
         }
 
         .card {
-            padding: var(--space-xl);
+            background: var(--glass-light);
+            backdrop-filter: blur(var(--blur-md));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
             transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.5),
+                transparent
+            );
         }
 
         .card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(123, 104, 238, 0.1);
         }
 
-        .card-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: var(--space-lg);
-            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink));
+        .card-image {
+            height: 160px;
+            background: linear-gradient(135deg, var(--aurora-violet), var(--aurora-cyan));
+            position: relative;
+            overflow: hidden;
         }
 
-        .card h3 {
+        .card-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                circle at 30% 70%,
+                rgba(255, 255, 255, 0.3) 0%,
+                transparent 50%
+            );
+        }
+
+        .card-body {
+            padding: var(--space-lg);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
             margin-bottom: var(--space-sm);
         }
 
-        .card p {
-            font-size: 0.95rem;
-            margin-bottom: 0;
+        .card-text {
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
-        /* Section 7: Data Table */
-        .table-wrapper {
+        .card-footer {
+            padding: var(--space-md) var(--space-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           7. DATA TABLE
+           ═══════════════════════════════════════════════════════════════════ */
+        .table-container {
             overflow-x: auto;
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--glass-border);
         }
 
-        table {
+        .data-table {
             width: 100%;
             border-collapse: collapse;
+            font-family: var(--font-body);
         }
 
-        th {
+        .data-table thead {
+            background: var(--glass-medium);
+        }
+
+        .data-table th {
             font-family: var(--font-display);
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-align: left;
-            padding: var(--space-md) var(--space-lg);
-            background: var(--glass-white-subtle);
-            color: var(--text-secondary);
+            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-        }
-
-        td {
+            font-size: 0.75rem;
             padding: var(--space-md) var(--space-lg);
+            text-align: left;
+            color: var(--text-secondary);
             border-bottom: 1px solid var(--glass-border);
         }
 
-        tr:last-child td {
-            border-bottom: none;
+        .data-table td {
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9375rem;
         }
 
-        tr:hover td {
-            background: var(--glass-white-subtle);
+        .data-table tbody tr {
+            transition: background 0.2s ease;
         }
 
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
+        .data-table tbody tr:hover {
+            background: var(--glass-dark);
+        }
+
+        .table-action {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
             padding: var(--space-xs) var(--space-sm);
-            font-size: 0.8rem;
-            font-weight: 500;
-            border-radius: var(--radius-full);
+            background: var(--glass-dark);
+            color: var(--aurora-cyan);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
         }
 
-        .status-active {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--success);
+        .table-action:hover {
+            background: var(--aurora-cyan);
+            color: var(--text-dark);
         }
 
-        .status-pending {
-            background: rgba(245, 158, 11, 0.2);
-            color: var(--warning);
-        }
-
-        .status-inactive {
-            background: rgba(239, 68, 68, 0.2);
-            color: var(--error);
-        }
-
-        /* Section 8: Badges */
-        .badge-showcase {
+        /* ═══════════════════════════════════════════════════════════════════
+           8. BADGES & TAGS
+           ═══════════════════════════════════════════════════════════════════ */
+        .badge-grid {
             display: flex;
             flex-wrap: wrap;
             gap: var(--space-md);
@@ -738,85 +825,115 @@
         }
 
         .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: var(--space-xs) var(--space-md);
             font-family: var(--font-display);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: var(--space-xs) var(--space-md);
             border-radius: var(--radius-full);
-            transition: all 0.3s ease;
+            display: inline-block;
         }
 
-        .badge:hover {
-            transform: scale(1.05);
-        }
-
-        .badge-purple {
-            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink));
+        .badge-primary {
+            background: linear-gradient(135deg, var(--aurora-violet), var(--aurora-blue));
             color: white;
         }
 
-        .badge-cyan {
-            background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-teal));
-            color: var(--text-dark);
-        }
-
-        .badge-glass {
-            background: var(--glass-white);
-            backdrop-filter: blur(var(--blur-sm));
-            -webkit-backdrop-filter: blur(var(--blur-sm));
+        .badge-secondary {
+            background: var(--glass-light);
+            color: var(--text-primary);
             border: 1px solid var(--glass-border);
         }
 
-        .badge-outline {
-            background: transparent;
-            border: 1px solid var(--aurora-purple);
-            color: var(--aurora-purple);
+        .badge-success {
+            background: rgba(74, 222, 128, 0.2);
+            color: var(--success);
+            border: 1px solid rgba(74, 222, 128, 0.3);
         }
 
-        .badge-success { background: rgba(16, 185, 129, 0.2); color: var(--success); }
-        .badge-warning { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
-        .badge-error { background: rgba(239, 68, 68, 0.2); color: var(--error); }
-        .badge-info { background: rgba(59, 130, 246, 0.2); color: var(--info); }
+        .badge-warning {
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--warning);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
 
-        /* Section 9: Design Principles */
+        .badge-error {
+            background: rgba(248, 113, 113, 0.2);
+            color: var(--error);
+            border: 1px solid rgba(248, 113, 113, 0.3);
+        }
+
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--glass-dark);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .tag-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           9. DESIGN PRINCIPLES
+           ═══════════════════════════════════════════════════════════════════ */
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-xl);
         }
 
         .principle {
-            padding: var(--space-xl);
+            padding: var(--space-lg);
+            background: var(--glass-dark);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
             position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .principle:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px var(--glass-shadow);
         }
 
         .principle-number {
             font-family: var(--font-display);
             font-size: 3rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--aurora-purple), transparent);
+            background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-violet));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            opacity: 0.5;
-            position: absolute;
-            top: var(--space-md);
-            right: var(--space-lg);
-        }
-
-        .principle h3 {
+            line-height: 1;
             margin-bottom: var(--space-sm);
         }
 
-        .principle p {
-            font-size: 0.95rem;
-            margin-bottom: 0;
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
         }
 
-        /* Section 10: Animations */
-        .animation-grid {
+        .principle-text {
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           10. ANIMATIONS & MICRO-INTERACTIONS
+           ═══════════════════════════════════════════════════════════════════ */
+        .animation-demos {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: var(--space-xl);
@@ -825,785 +942,949 @@
         .animation-demo {
             text-align: center;
             padding: var(--space-xl);
+            background: var(--glass-dark);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
         }
 
-        .anim-box {
+        .animation-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            margin-top: var(--space-md);
+            color: var(--text-muted);
+        }
+
+        /* Breathe Animation */
+        .anim-breathe {
             width: 60px;
             height: 60px;
-            margin: 0 auto var(--space-md);
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-pink));
+            background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-violet));
+            border-radius: 50%;
+            margin: 0 auto;
+            animation: breathe 4s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(0, 206, 209, 0.4);
         }
 
-        .anim-float {
-            animation: floatAnim 3s ease-in-out infinite;
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 1; }
         }
 
-        @keyframes floatAnim {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+        /* Orbit Animation */
+        .anim-orbit {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+            position: relative;
         }
 
-        .anim-pulse {
-            animation: pulseAnim 2s ease-in-out infinite;
+        .anim-orbit::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--aurora-violet);
+            border-radius: 50%;
+            opacity: 0.3;
         }
 
-        @keyframes pulseAnim {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
+        .anim-orbit::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--aurora-cyan);
+            border-radius: 50%;
+            top: -6px;
+            left: 50%;
+            margin-left: -6px;
+            animation: orbit 3s linear infinite;
+            box-shadow: 0 0 15px var(--aurora-cyan);
         }
 
-        .anim-glow {
-            animation: glowAnim 2s ease-in-out infinite;
+        @keyframes orbit {
+            from { transform: rotate(0deg) translateY(30px) rotate(0deg); }
+            to { transform: rotate(360deg) translateY(30px) rotate(-360deg); }
         }
 
-        @keyframes glowAnim {
-            0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); }
-            50% { box-shadow: 0 0 40px rgba(236, 72, 153, 0.8); }
-        }
-
+        /* Morph Animation */
         .anim-morph {
-            animation: morphAnim 4s ease-in-out infinite;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--aurora-magenta), var(--aurora-violet));
+            margin: 0 auto;
+            animation: morph 6s ease-in-out infinite;
         }
 
-        @keyframes morphAnim {
-            0%, 100% { border-radius: var(--radius-md); }
-            50% { border-radius: 50%; }
+        @keyframes morph {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            50% { border-radius: 50% 60% 30% 60% / 30% 50% 70% 50%; }
+            75% { border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%; }
         }
 
+        /* Ripple Animation */
+        .anim-ripple {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .anim-ripple::before,
+        .anim-ripple::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid var(--aurora-cyan);
+            border-radius: 50%;
+            animation: ripple 2s ease-out infinite;
+        }
+
+        .anim-ripple::after {
+            animation-delay: 1s;
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* Shimmer Animation */
         .anim-shimmer {
-            background: linear-gradient(90deg, var(--aurora-purple), var(--aurora-pink), var(--aurora-cyan), var(--aurora-purple));
-            background-size: 300% 100%;
-            animation: shimmerAnim 3s linear infinite;
+            width: 80px;
+            height: 40px;
+            background: linear-gradient(
+                90deg,
+                var(--glass-dark) 0%,
+                rgba(255, 255, 255, 0.3) 50%,
+                var(--glass-dark) 100%
+            );
+            background-size: 200% 100%;
+            border-radius: var(--radius-sm);
+            margin: 10px auto;
+            animation: shimmer-move 2s linear infinite;
         }
 
-        @keyframes shimmerAnim {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 300% 50%; }
+        @keyframes shimmer-move {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
-        .anim-rotate {
-            animation: rotateAnim 8s linear infinite;
+        /* Glow Pulse */
+        .anim-glow {
+            width: 60px;
+            height: 60px;
+            background: var(--aurora-violet);
+            border-radius: var(--radius-md);
+            margin: 0 auto;
+            animation: glow 2s ease-in-out infinite;
         }
 
-        @keyframes rotateAnim {
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(123, 104, 238, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(123, 104, 238, 0.8), 0 0 60px rgba(123, 104, 238, 0.4); }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           11. SPECIAL COMPONENT: REFRACTION CARD
+           ═══════════════════════════════════════════════════════════════════ */
+        .refraction-card {
+            position: relative;
+            padding: var(--space-2xl);
+            background: var(--glass-light);
+            backdrop-filter: blur(var(--blur-xl));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .refraction-card:hover {
+            transform: perspective(1000px) rotateX(2deg) rotateY(-2deg);
+            box-shadow:
+                0 25px 80px rgba(0, 0, 0, 0.4),
+                0 0 60px rgba(123, 104, 238, 0.2);
+        }
+
+        /* Rainbow edge effect */
+        .refraction-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                var(--aurora-violet),
+                var(--aurora-cyan),
+                var(--aurora-magenta),
+                var(--aurora-teal),
+                var(--aurora-violet)
+            );
+            background-size: 200% 100%;
+            animation: rainbow-slide 5s linear infinite;
+        }
+
+        @keyframes rainbow-slide {
+            0% { background-position: 0% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Prismatic light effect */
+        .refraction-light {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(123, 104, 238, 0.1) 60deg,
+                rgba(0, 206, 209, 0.1) 120deg,
+                rgba(255, 105, 180, 0.1) 180deg,
+                rgba(32, 178, 170, 0.1) 240deg,
+                rgba(65, 105, 225, 0.1) 300deg,
+                transparent 360deg
+            );
+            animation: refract 10s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes refract {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        /* Section 11: Special Component - Glass Card Stack */
-        .card-stack-container {
-            display: flex;
-            justify-content: center;
-            padding: var(--space-2xl);
-        }
-
-        .card-stack {
+        .refraction-content {
             position: relative;
-            width: 320px;
-            height: 400px;
-            perspective: 1000px;
-        }
-
-        .stack-card {
-            position: absolute;
-            width: 100%;
-            height: 320px;
-            padding: var(--space-xl);
-            transition: all 0.5s ease;
-            cursor: pointer;
-        }
-
-        .stack-card:nth-child(1) {
-            transform: translateY(0) scale(1);
-            z-index: 3;
-        }
-
-        .stack-card:nth-child(2) {
-            transform: translateY(30px) scale(0.95);
-            z-index: 2;
-            opacity: 0.8;
-        }
-
-        .stack-card:nth-child(3) {
-            transform: translateY(60px) scale(0.9);
             z-index: 1;
-            opacity: 0.6;
         }
 
-        .card-stack:hover .stack-card:nth-child(1) {
-            transform: translateY(-20px) scale(1) rotateX(-5deg);
-        }
-
-        .card-stack:hover .stack-card:nth-child(2) {
-            transform: translateY(40px) scale(0.97);
-            opacity: 0.9;
-        }
-
-        .card-stack:hover .stack-card:nth-child(3) {
-            transform: translateY(80px) scale(0.94);
-            opacity: 0.7;
-        }
-
-        .stack-card-content {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stack-card-header {
+        .refraction-header {
             display: flex;
             align-items: center;
-            gap: var(--space-md);
-            margin-bottom: var(--space-lg);
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
         }
 
-        .stack-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-teal));
+        .refraction-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-violet));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 206, 209, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
-        .stack-card-title {
+        .refraction-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.4) 0%,
+                transparent 50%
+            );
+        }
+
+        .refraction-title {
             font-family: var(--font-display);
+            font-size: 2rem;
             font-weight: 600;
+            background: linear-gradient(135deg, var(--text-primary), var(--aurora-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .stack-card-subtitle {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .stack-card-body {
-            flex: 1;
-            font-size: 0.95rem;
+        .refraction-subtitle {
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
             color: var(--text-secondary);
         }
 
-        .stack-card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: var(--space-lg);
-            border-top: 1px solid var(--glass-border);
+        .refraction-description {
+            font-family: var(--font-body);
+            font-size: 1.0625rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: var(--space-xl);
+            max-width: 55ch;
         }
 
-        /* Section 12: Alerts */
-        .alert-stack {
+        .refraction-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: var(--space-lg);
+            background: var(--glass-dark);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-top: var(--space-xs);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           12. ALERTS & MESSAGES
+           ═══════════════════════════════════════════════════════════════════ */
+        .alerts-grid {
             display: flex;
             flex-direction: column;
-            gap: var(--space-md);
+            gap: var(--space-lg);
         }
 
         .alert {
             padding: var(--space-lg);
-            border-radius: var(--radius-lg);
+            background: var(--glass-dark);
+            backdrop-filter: blur(var(--blur-sm));
+            border-radius: var(--radius-md);
             display: flex;
             align-items: flex-start;
             gap: var(--space-md);
-            transition: all 0.3s ease;
-        }
-
-        .alert:hover {
-            transform: translateX(4px);
+            border-left: 3px solid;
+            position: relative;
         }
 
         .alert-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             flex-shrink: 0;
         }
 
-        .alert-info {
-            background: rgba(59, 130, 246, 0.15);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .alert-info .alert-icon {
-            background: var(--info);
-            color: white;
-        }
-
         .alert-success {
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-color: var(--success);
+            background: rgba(74, 222, 128, 0.1);
         }
 
         .alert-success .alert-icon {
-            background: var(--success);
-            color: white;
+            color: var(--success);
         }
 
         .alert-warning {
-            background: rgba(245, 158, 11, 0.15);
-            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-color: var(--warning);
+            background: rgba(251, 191, 36, 0.1);
         }
 
         .alert-warning .alert-icon {
-            background: var(--warning);
-            color: white;
+            color: var(--warning);
         }
 
         .alert-error {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-color: var(--error);
+            background: rgba(248, 113, 113, 0.1);
         }
 
         .alert-error .alert-icon {
-            background: var(--error);
-            color: white;
+            color: var(--error);
         }
 
-        .alert-content h4 {
+        .alert-info {
+            border-color: var(--info);
+            background: rgba(96, 165, 250, 0.1);
+        }
+
+        .alert-info .alert-icon {
+            color: var(--info);
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
             font-family: var(--font-display);
-            font-size: 1rem;
+            font-size: 0.9375rem;
             font-weight: 600;
             margin-bottom: var(--space-xs);
         }
 
-        .alert-content p {
-            font-size: 0.9rem;
-            margin-bottom: 0;
+        .alert-text {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
             color: var(--text-secondary);
+            line-height: 1.5;
         }
 
-        /* Footer */
+        .alert-close {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.25rem;
+            padding: 0;
+            line-height: 1;
+            transition: color 0.2s ease;
+        }
+
+        .alert-close:hover {
+            color: var(--text-primary);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════════════════════════════════ */
         footer {
             text-align: center;
             padding: var(--space-3xl) var(--space-xl);
-            margin-top: var(--space-3xl);
-        }
-
-        .footer-content {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: var(--space-2xl);
-        }
-
-        .footer-logo {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: var(--space-md);
-            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-top: var(--space-4xl);
+            background: var(--glass-dark);
+            backdrop-filter: blur(var(--blur-lg));
+            border-top: 1px solid var(--glass-border);
         }
 
         .footer-text {
-            font-size: 0.9rem;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-sub {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            margin-top: var(--space-sm);
             color: var(--text-muted);
         }
 
-        .footer-dots {
-            display: flex;
-            justify-content: center;
-            gap: var(--space-sm);
-            margin-top: var(--space-lg);
-        }
-
-        .footer-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        .footer-dot:nth-child(1) { background: var(--aurora-purple); }
-        .footer-dot:nth-child(2) { background: var(--aurora-pink); }
-        .footer-dot:nth-child(3) { background: var(--aurora-cyan); }
-        .footer-dot:nth-child(4) { background: var(--aurora-teal); }
-
         /* Responsive */
         @media (max-width: 768px) {
-            nav {
-                position: static;
-                transform: none;
-                margin-bottom: 0;
-                padding: var(--space-md);
+            :root {
+                --space-xl: 1.5rem;
+                --space-2xl: 2rem;
+                --space-3xl: 3rem;
+                --space-4xl: 4rem;
             }
 
-            header {
-                min-height: auto;
-                padding: var(--space-2xl) var(--space-lg);
+            .logo {
+                font-size: 3.5rem;
             }
 
-            section {
-                padding: var(--space-xl);
+            .section-title {
+                font-size: 1.5rem;
             }
 
-            .card-stack-container {
-                padding: var(--space-lg);
+            .type-display {
+                font-size: 2.5rem;
             }
 
-            .card-stack {
-                width: 280px;
+            .refraction-title {
+                font-size: 1.5rem;
+            }
+
+            .refraction-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .back-link {
+                top: var(--space-md);
+                left: var(--space-md);
+                padding: var(--space-xs) var(--space-sm);
+                font-size: 0.8125rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="bg-orbs">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-        <div class="orb orb-4"></div>
-    </div>
+    <div class="aurora-bg"></div>
+    <div class="aurora-orb"></div>
+    <div class="aurora-orb"></div>
+    <div class="aurora-orb"></div>
+    <div class="aurora-orb"></div>
 
-    <!-- Navigation -->
-    <nav class="glass">
-        <a href="#colors">Colors</a>
-        <a href="#typography">Typography</a>
-        <a href="#spacing">Spacing</a>
-        <a href="#buttons">Buttons</a>
-        <a href="#forms">Forms</a>
-        <a href="#cards">Cards</a>
-        <a href="#table">Table</a>
-        <a href="#badges">Badges</a>
-        <a href="#principles">Principles</a>
-        <a href="#animations">Motion</a>
-        <a href="#stack">Stack</a>
-        <a href="#alerts">Alerts</a>
-    </nav>
+    <a href="../index.html" class="back-link">Gallery</a>
 
-    <!-- Header -->
     <header>
-        <div class="logo-container">
-            <div class="logo"><span>A</span></div>
-        </div>
-        <h1>AURORA</h1>
-        <p class="tagline">A glassmorphism design system built on light, transparency, and depth</p>
+        <h1 class="logo">Prism</h1>
+        <p class="tagline">Glassmorphism Style Guide</p>
     </header>
 
-    <main>
-        <!-- Section 1: Color Palette -->
-        <section id="colors" class="glass">
-            <h2 data-number="01">Color Palette</h2>
-            <p>Luminous colors inspired by the aurora borealis, designed to glow against dark backgrounds and complement frosted glass surfaces.</p>
-
+    <main class="container">
+        <!-- 1. Color Palette -->
+        <section id="colors">
+            <h2 class="section-title">Color Palette</h2>
             <div class="color-grid">
-                <div class="color-card glass-subtle">
-                    <div class="color-preview" style="background: var(--aurora-purple);"></div>
-                    <div class="color-name">Aurora Purple</div>
-                    <div class="color-value">#8B5CF6</div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--aurora-violet);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Aurora Violet</div>
+                        <div class="color-hex">#7B68EE</div>
+                    </div>
                 </div>
-                <div class="color-card glass-subtle">
-                    <div class="color-preview" style="background: var(--aurora-pink);"></div>
-                    <div class="color-name">Aurora Pink</div>
-                    <div class="color-value">#EC4899</div>
-                </div>
-                <div class="color-card glass-subtle">
-                    <div class="color-preview" style="background: var(--aurora-blue);"></div>
-                    <div class="color-name">Aurora Blue</div>
-                    <div class="color-value">#3B82F6</div>
-                </div>
-                <div class="color-card glass-subtle">
+                <div class="color-swatch">
                     <div class="color-preview" style="background: var(--aurora-cyan);"></div>
-                    <div class="color-name">Aurora Cyan</div>
-                    <div class="color-value">#06B6D4</div>
+                    <div class="color-info">
+                        <div class="color-name">Aurora Cyan</div>
+                        <div class="color-hex">#00CED1</div>
+                    </div>
                 </div>
-                <div class="color-card glass-subtle">
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--aurora-magenta);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Aurora Magenta</div>
+                        <div class="color-hex">#FF69B4</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--aurora-blue);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Aurora Blue</div>
+                        <div class="color-hex">#4169E1</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
                     <div class="color-preview" style="background: var(--aurora-teal);"></div>
-                    <div class="color-name">Aurora Teal</div>
-                    <div class="color-value">#14B8A6</div>
+                    <div class="color-info">
+                        <div class="color-name">Aurora Teal</div>
+                        <div class="color-hex">#20B2AA</div>
+                    </div>
                 </div>
-                <div class="color-card glass-subtle">
-                    <div class="color-preview" style="background: var(--glass-white);backdrop-filter:blur(8px);"></div>
-                    <div class="color-name">Glass White</div>
-                    <div class="color-value">rgba(255,255,255,0.25)</div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(10px);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Glass Light</div>
+                        <div class="color-hex">rgba 25%</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: rgba(255, 255, 255, 0.08);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Glass Dark</div>
+                        <div class="color-hex">rgba 8%</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: linear-gradient(135deg, #1a1a2e, #16213e);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Deep Space</div>
+                        <div class="color-hex">#1a1a2e</div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 2: Typography -->
-        <section id="typography" class="glass">
-            <h2 data-number="02">Typography</h2>
-            <p>Clean, modern typefaces that maintain legibility on transparent surfaces while adding sophistication.</p>
+        <!-- 2. Typography -->
+        <section id="typography">
+            <h2 class="section-title">Typography</h2>
+
+            <div class="type-specimen">
+                <div class="type-label">Display — Outfit</div>
+                <div class="type-display">Light & Clarity</div>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-label">Body — Sora</div>
+                <p class="type-body">Glassmorphism creates depth through layered transparency. By combining frosted glass effects with subtle borders and shadows, interfaces gain a sense of physical space while maintaining modern aesthetics. The style emphasizes hierarchy through blur intensity and opacity levels.</p>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-label">Monospace — IBM Plex Mono</div>
+                <div class="type-mono">backdrop-filter: blur(24px);</div>
+            </div>
 
             <div class="type-scale">
-                <div class="type-specimen glass-subtle">
-                    <div class="type-display">Outfit Display</div>
-                    <span class="font-label glass">Display — Outfit Bold</span>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">3.5rem / 56px</span>
+                    <span style="font-family: var(--font-display); font-size: 2rem; font-weight: 700;">Display</span>
                 </div>
-
-                <div class="type-specimen glass-subtle">
-                    <div class="type-heading">Headlines with Outfit</div>
-                    <span class="font-label glass">Heading — Outfit Semibold</span>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">2rem / 32px</span>
+                    <span style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 600;">Heading 1</span>
                 </div>
-
-                <div class="type-specimen glass-subtle">
-                    <p class="type-body">Sora provides excellent readability for body text, with its geometric yet friendly letterforms. The slightly rounded terminals add warmth while maintaining a contemporary, professional appearance that pairs beautifully with glass surfaces.</p>
-                    <span class="font-label glass">Body — Sora Regular</span>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">1.25rem / 20px</span>
+                    <span style="font-family: var(--font-display); font-size: 1.125rem; font-weight: 500;">Heading 2</span>
+                </div>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">1.125rem / 18px</span>
+                    <span style="font-family: var(--font-body); font-size: 1.125rem; font-weight: 300;">Body Large</span>
+                </div>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">1rem / 16px</span>
+                    <span style="font-family: var(--font-body); font-size: 1rem;">Body Regular</span>
                 </div>
             </div>
         </section>
 
-        <!-- Section 3: Spacing -->
-        <section id="spacing" class="glass">
-            <h2 data-number="03">Spacing Scale</h2>
-            <p>A harmonious spacing system that creates breathing room and visual hierarchy.</p>
-
+        <!-- 3. Spacing Scale -->
+        <section id="spacing">
+            <h2 class="section-title">Spacing Scale</h2>
             <div class="spacing-demo">
-                <div class="spacing-row">
-                    <span class="spacing-label">XS</span>
-                    <div class="spacing-bar" style="width: 20px;"></div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-xs</div>
+                    <div class="spacing-bar" style="width: 4px;"></div>
                     <span class="spacing-value">0.25rem</span>
                 </div>
-                <div class="spacing-row">
-                    <span class="spacing-label">SM</span>
-                    <div class="spacing-bar" style="width: 40px;"></div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-sm</div>
+                    <div class="spacing-bar" style="width: 8px;"></div>
                     <span class="spacing-value">0.5rem</span>
                 </div>
-                <div class="spacing-row">
-                    <span class="spacing-label">MD</span>
-                    <div class="spacing-bar" style="width: 80px;"></div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-md</div>
+                    <div class="spacing-bar" style="width: 16px;"></div>
                     <span class="spacing-value">1rem</span>
                 </div>
-                <div class="spacing-row">
-                    <span class="spacing-label">LG</span>
-                    <div class="spacing-bar" style="width: 120px;"></div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-lg</div>
+                    <div class="spacing-bar" style="width: 24px;"></div>
                     <span class="spacing-value">1.5rem</span>
                 </div>
-                <div class="spacing-row">
-                    <span class="spacing-label">XL</span>
-                    <div class="spacing-bar" style="width: 160px;"></div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-xl</div>
+                    <div class="spacing-bar" style="width: 32px;"></div>
                     <span class="spacing-value">2rem</span>
                 </div>
-                <div class="spacing-row">
-                    <span class="spacing-label">2XL</span>
-                    <div class="spacing-bar" style="width: 240px;"></div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-2xl</div>
+                    <div class="spacing-bar" style="width: 48px;"></div>
                     <span class="spacing-value">3rem</span>
                 </div>
-                <div class="spacing-row">
-                    <span class="spacing-label">3XL</span>
-                    <div class="spacing-bar" style="width: 320px;"></div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-3xl</div>
+                    <div class="spacing-bar" style="width: 64px;"></div>
                     <span class="spacing-value">4rem</span>
                 </div>
             </div>
         </section>
 
-        <!-- Section 4: Buttons -->
-        <section id="buttons" class="glass">
-            <h2 data-number="04">Buttons</h2>
-            <p>Interactive elements that blend seamlessly with glass aesthetics while providing clear affordances.</p>
-
-            <div class="button-showcase">
-                <button class="btn btn-primary">Primary Action</button>
-                <button class="btn btn-glass">Glass Button</button>
-                <button class="btn btn-outline">Outline</button>
-                <button class="btn btn-glow">Glow Effect</button>
+        <!-- 4. Buttons -->
+        <section id="buttons">
+            <h2 class="section-title">Buttons</h2>
+            <div class="button-grid">
+                <button class="btn btn-primary">Primary</button>
+                <button class="btn btn-secondary">Secondary</button>
+                <button class="btn btn-ghost">Ghost</button>
+                <button class="btn btn-glow">Glow</button>
+                <button class="btn btn-primary" disabled>Disabled</button>
             </div>
         </section>
 
-        <!-- Section 5: Forms -->
-        <section id="forms" class="glass">
-            <h2 data-number="05">Form Elements</h2>
-            <p>Inputs designed to be visible yet unobtrusive, maintaining the glass aesthetic.</p>
+        <!-- 5. Forms -->
+        <section id="forms">
+            <h2 class="section-title">Forms</h2>
 
-            <div class="form-demo">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" placeholder="Enter your name">
-                </div>
+            <div class="form-group">
+                <label class="form-label" for="text-input">Text Input</label>
+                <input type="text" id="text-input" class="form-input" placeholder="Enter text...">
+            </div>
 
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="you@example.com">
-                </div>
+            <div class="form-group">
+                <label class="form-label" for="select-input">Select</label>
+                <select id="select-input" class="form-input form-select">
+                    <option>Choose an option</option>
+                    <option>Light blur</option>
+                    <option>Medium blur</option>
+                    <option>Heavy blur</option>
+                </select>
+            </div>
 
-                <div class="form-group">
-                    <label for="theme">Preferred Theme</label>
-                    <select id="theme">
-                        <option>Aurora Purple</option>
-                        <option>Aurora Cyan</option>
-                        <option>Aurora Pink</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label class="form-label" for="textarea">Textarea</label>
+                <textarea id="textarea" class="form-input form-textarea" placeholder="Write something..."></textarea>
+            </div>
 
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" placeholder="Tell us your thoughts..."></textarea>
-                </div>
+            <div class="form-group">
+                <label class="form-label">Error State</label>
+                <input type="text" class="form-input error" value="Invalid input">
+            </div>
 
-                <div class="form-group">
-                    <label class="checkbox-wrapper">
+            <div class="form-group">
+                <label class="form-label">Checkboxes</label>
+                <div style="display: flex; gap: var(--space-lg); flex-wrap: wrap;">
+                    <label class="form-checkbox">
+                        <input type="checkbox" checked>
+                        <span>Blur enabled</span>
+                    </label>
+                    <label class="form-checkbox">
                         <input type="checkbox">
-                        <span class="checkbox-custom"></span>
-                        <span>Enable glass effects</span>
+                        <span>Border glow</span>
+                    </label>
+                    <label class="form-checkbox">
+                        <input type="checkbox" checked>
+                        <span>Transparency</span>
                     </label>
                 </div>
-
-                <button class="btn btn-primary">Submit Form</button>
             </div>
         </section>
 
-        <!-- Section 6: Cards -->
-        <section id="cards" class="glass">
-            <h2 data-number="06">Cards</h2>
-            <p>Floating content containers with frosted glass backgrounds and subtle depth.</p>
-
+        <!-- 6. Cards -->
+        <section id="cards">
+            <h2 class="section-title">Cards</h2>
             <div class="card-grid">
-                <div class="card glass">
-                    <div class="card-icon">✨</div>
-                    <h3>Transparency</h3>
-                    <p>Glass surfaces reveal depth and create visual connections between layers of content.</p>
-                </div>
+                <article class="card">
+                    <div class="card-image"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">Frosted Glass</h3>
+                        <p class="card-text">The signature blur effect that creates depth and hierarchy in modern interfaces.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge badge-primary">Core</span>
+                        <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Explore</button>
+                    </div>
+                </article>
 
-                <div class="card glass">
-                    <div class="card-icon">🌊</div>
-                    <h3>Fluidity</h3>
-                    <p>Smooth transitions and subtle animations bring interfaces to life organically.</p>
-                </div>
+                <article class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-teal));"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">Light Refraction</h3>
+                        <p class="card-text">Subtle color shifts that mimic how light passes through translucent materials.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge badge-secondary">Effect</span>
+                        <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">View</button>
+                    </div>
+                </article>
 
-                <div class="card glass">
-                    <div class="card-icon">💫</div>
-                    <h3>Luminosity</h3>
-                    <p>Colors glow and blend, creating an ethereal atmosphere across the interface.</p>
-                </div>
+                <article class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--aurora-magenta), var(--aurora-violet));"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">Layered Depth</h3>
+                        <p class="card-text">Multiple glass layers create spatial relationships and visual hierarchy.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge badge-success">Pattern</span>
+                        <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Learn</button>
+                    </div>
+                </article>
             </div>
         </section>
 
-        <!-- Section 7: Data Table -->
-        <section id="table" class="glass">
-            <h2 data-number="07">Data Table</h2>
-            <p>Structured data presentation with glass styling and clear visual hierarchy.</p>
-
-            <div class="table-wrapper glass-subtle">
-                <table>
+        <!-- 7. Data Table -->
+        <section id="table">
+            <h2 class="section-title">Data Table</h2>
+            <div class="table-container">
+                <table class="data-table">
                     <thead>
                         <tr>
-                            <th>Project</th>
-                            <th>Category</th>
-                            <th>Status</th>
-                            <th>Progress</th>
+                            <th>Property</th>
+                            <th>Value</th>
+                            <th>Usage</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Aurora Dashboard</td>
-                            <td>Design System</td>
-                            <td><span class="status-badge status-active">● Active</span></td>
-                            <td>85%</td>
+                            <td>backdrop-filter</td>
+                            <td><code style="color: var(--aurora-cyan);">blur(24px)</code></td>
+                            <td>Primary glass effect</td>
+                            <td><a href="#" class="table-action">Copy</a></td>
                         </tr>
                         <tr>
-                            <td>Glass Components</td>
-                            <td>UI Library</td>
-                            <td><span class="status-badge status-active">● Active</span></td>
-                            <td>92%</td>
+                            <td>background</td>
+                            <td><code style="color: var(--aurora-cyan);">rgba(255,255,255,0.25)</code></td>
+                            <td>Light glass surface</td>
+                            <td><a href="#" class="table-action">Copy</a></td>
                         </tr>
                         <tr>
-                            <td>Animation System</td>
-                            <td>Motion</td>
-                            <td><span class="status-badge status-pending">● Pending</span></td>
-                            <td>45%</td>
+                            <td>border</td>
+                            <td><code style="color: var(--aurora-cyan);">1px solid rgba(255,255,255,0.3)</code></td>
+                            <td>Subtle edge definition</td>
+                            <td><a href="#" class="table-action">Copy</a></td>
                         </tr>
                         <tr>
-                            <td>Dark Mode</td>
-                            <td>Theme</td>
-                            <td><span class="status-badge status-inactive">● Paused</span></td>
-                            <td>20%</td>
+                            <td>box-shadow</td>
+                            <td><code style="color: var(--aurora-cyan);">0 8px 32px rgba(0,0,0,0.1)</code></td>
+                            <td>Depth and elevation</td>
+                            <td><a href="#" class="table-action">Copy</a></td>
+                        </tr>
+                        <tr>
+                            <td>border-radius</td>
+                            <td><code style="color: var(--aurora-cyan);">16px</code></td>
+                            <td>Smooth corners</td>
+                            <td><a href="#" class="table-action">Copy</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Section 8: Badges -->
-        <section id="badges" class="glass">
-            <h2 data-number="08">Badges & Tags</h2>
-            <p>Compact labels that maintain visibility while complementing the glass aesthetic.</p>
-
-            <div class="badge-showcase">
-                <span class="badge badge-purple">Featured</span>
-                <span class="badge badge-cyan">New</span>
-                <span class="badge badge-glass">Glass</span>
-                <span class="badge badge-outline">Outline</span>
+        <!-- 8. Badges & Tags -->
+        <section id="badges">
+            <h2 class="section-title">Badges & Tags</h2>
+            <div class="badge-grid">
+                <span class="badge badge-primary">Primary</span>
+                <span class="badge badge-secondary">Secondary</span>
                 <span class="badge badge-success">Success</span>
                 <span class="badge badge-warning">Warning</span>
                 <span class="badge badge-error">Error</span>
-                <span class="badge badge-info">Info</span>
+            </div>
+
+            <div class="badge-grid" style="margin-top: var(--space-xl);">
+                <span class="tag"><span class="tag-dot" style="background: var(--aurora-violet);"></span>blur</span>
+                <span class="tag"><span class="tag-dot" style="background: var(--aurora-cyan);"></span>transparency</span>
+                <span class="tag"><span class="tag-dot" style="background: var(--aurora-magenta);"></span>frosted</span>
+                <span class="tag"><span class="tag-dot" style="background: var(--aurora-teal);"></span>modern</span>
             </div>
         </section>
 
-        <!-- Section 9: Design Principles -->
-        <section id="principles" class="glass">
-            <h2 data-number="09">Design Principles</h2>
-            <p>The foundational concepts guiding the Aurora design system.</p>
-
+        <!-- 9. Design Principles -->
+        <section id="principles">
+            <h2 class="section-title">Design Principles</h2>
             <div class="principles-grid">
-                <div class="principle glass-subtle">
-                    <span class="principle-number">01</span>
-                    <h3>Depth Through Transparency</h3>
-                    <p>Use blur and opacity to create layers that reveal content beneath, adding dimensional richness.</p>
+                <div class="principle">
+                    <div class="principle-number">01</div>
+                    <h3 class="principle-title">Depth Through Blur</h3>
+                    <p class="principle-text">Use varying blur intensities to create visual layers. Higher blur values push elements back, while sharper elements come forward.</p>
                 </div>
-
-                <div class="principle glass-subtle">
-                    <span class="principle-number">02</span>
-                    <h3>Subtle Illumination</h3>
-                    <p>Let colors glow softly rather than dominate. Light should feel ambient and atmospheric.</p>
+                <div class="principle">
+                    <div class="principle-number">02</div>
+                    <h3 class="principle-title">Subtle Borders</h3>
+                    <p class="principle-text">Semi-transparent borders define edges without harsh lines. They catch light and add dimension to glass surfaces.</p>
                 </div>
-
-                <div class="principle glass-subtle">
-                    <span class="principle-number">03</span>
-                    <h3>Graceful Motion</h3>
-                    <p>Animations should feel natural and fluid, enhancing the sense of physical glass surfaces.</p>
+                <div class="principle">
+                    <div class="principle-number">03</div>
+                    <h3 class="principle-title">Colorful Backgrounds</h3>
+                    <p class="principle-text">Glass effects work best over gradient or colorful backgrounds. The blur reveals underlying colors, creating visual interest.</p>
                 </div>
-
-                <div class="principle glass-subtle">
-                    <span class="principle-number">04</span>
-                    <h3>Accessible Contrast</h3>
-                    <p>Despite transparency, maintain readable text and clear interactive states for all users.</p>
-                </div>
-
-                <div class="principle glass-subtle">
-                    <span class="principle-number">05</span>
-                    <h3>Cohesive Atmosphere</h3>
-                    <p>Every element should feel like it belongs in the same luminous, ethereal space.</p>
-                </div>
-
-                <div class="principle glass-subtle">
-                    <span class="principle-number">06</span>
-                    <h3>Purposeful Restraint</h3>
-                    <p>Use glass effects deliberately. Not everything needs to be transparent to be beautiful.</p>
+                <div class="principle">
+                    <div class="principle-number">04</div>
+                    <h3 class="principle-title">Hierarchy Matters</h3>
+                    <p class="principle-text">Use opacity levels to establish importance. More opaque elements demand attention; more transparent ones recede.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Section 10: Animations -->
-        <section id="animations" class="glass">
-            <h2 data-number="10">Animation Effects</h2>
-            <p>Motion that reinforces the ethereal, floating quality of glass interfaces.</p>
-
-            <div class="animation-grid">
-                <div class="animation-demo glass-subtle">
-                    <div class="anim-box anim-float"></div>
-                    <h3>Float</h3>
-                    <p>Gentle vertical drift</p>
+        <!-- 10. Animations -->
+        <section id="animations">
+            <h2 class="section-title">Animations</h2>
+            <div class="animation-demos">
+                <div class="animation-demo">
+                    <div class="anim-breathe"></div>
+                    <div class="animation-label">Breathe</div>
                 </div>
-
-                <div class="animation-demo glass-subtle">
-                    <div class="anim-box anim-pulse"></div>
-                    <h3>Pulse</h3>
-                    <p>Breathing scale effect</p>
+                <div class="animation-demo">
+                    <div class="anim-orbit"></div>
+                    <div class="animation-label">Orbit</div>
                 </div>
-
-                <div class="animation-demo glass-subtle">
-                    <div class="anim-box anim-glow"></div>
-                    <h3>Glow</h3>
-                    <p>Luminous shadow pulse</p>
+                <div class="animation-demo">
+                    <div class="anim-morph"></div>
+                    <div class="animation-label">Morph</div>
                 </div>
-
-                <div class="animation-demo glass-subtle">
-                    <div class="anim-box anim-morph"></div>
-                    <h3>Morph</h3>
-                    <p>Shape transformation</p>
+                <div class="animation-demo">
+                    <div class="anim-ripple"></div>
+                    <div class="animation-label">Ripple</div>
                 </div>
-
-                <div class="animation-demo glass-subtle">
-                    <div class="anim-box anim-shimmer"></div>
-                    <h3>Shimmer</h3>
-                    <p>Gradient motion</p>
+                <div class="animation-demo">
+                    <div class="anim-shimmer"></div>
+                    <div class="animation-label">Shimmer</div>
                 </div>
-
-                <div class="animation-demo glass-subtle">
-                    <div class="anim-box anim-rotate"></div>
-                    <h3>Rotate</h3>
-                    <p>Continuous spin</p>
+                <div class="animation-demo">
+                    <div class="anim-glow"></div>
+                    <div class="animation-label">Glow</div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 11: Special Component -->
-        <section id="stack" class="glass">
-            <h2 data-number="11">Glass Card Stack</h2>
-            <p>A signature component showcasing depth and interactivity with stacked glass cards.</p>
-
-            <div class="card-stack-container">
-                <div class="card-stack">
-                    <div class="stack-card glass">
-                        <div class="stack-card-content">
-                            <div class="stack-card-header">
-                                <div class="stack-avatar"></div>
-                                <div>
-                                    <div class="stack-card-title">Aurora UI</div>
-                                    <div class="stack-card-subtitle">Design System</div>
-                                </div>
-                            </div>
-                            <div class="stack-card-body">
-                                A comprehensive glassmorphism design system built for modern interfaces that demand elegance and depth.
-                            </div>
-                            <div class="stack-card-footer">
-                                <span class="badge badge-purple">v2.0</span>
-                                <span class="badge badge-glass">Stable</span>
-                            </div>
+        <!-- 11. Special Component: Refraction Card -->
+        <section id="special">
+            <h2 class="section-title">Special Component</h2>
+            <div class="refraction-card">
+                <div class="refraction-light"></div>
+                <div class="refraction-content">
+                    <div class="refraction-header">
+                        <div class="refraction-icon">◇</div>
+                        <div>
+                            <h3 class="refraction-title">Refraction Card</h3>
+                            <p class="refraction-subtitle">Premium glass component with prismatic effects</p>
                         </div>
                     </div>
-                    <div class="stack-card glass"></div>
-                    <div class="stack-card glass"></div>
+                    <p class="refraction-description">
+                        A showcase component that demonstrates advanced glassmorphism techniques. Features a rotating prismatic light effect, rainbow edge gradient, and responsive 3D perspective on hover. Ideal for hero sections, feature highlights, or premium content areas.
+                    </p>
+                    <div class="refraction-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">40px</div>
+                            <div class="stat-label">Blur</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">25%</div>
+                            <div class="stat-label">Opacity</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">32px</div>
+                            <div class="stat-label">Radius</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 12: Alerts -->
-        <section id="alerts" class="glass">
-            <h2 data-number="12">Alert Messages</h2>
-            <p>System notifications styled with translucent backgrounds and clear visual hierarchy.</p>
-
-            <div class="alert-stack">
-                <div class="alert alert-info">
-                    <div class="alert-icon">ℹ</div>
-                    <div class="alert-content">
-                        <h4>Information</h4>
-                        <p>Glass effects work best on colorful or gradient backgrounds for optimal visibility.</p>
-                    </div>
-                </div>
-
+        <!-- 12. Alerts -->
+        <section id="alerts">
+            <h2 class="section-title">Alert Messages</h2>
+            <div class="alerts-grid">
                 <div class="alert alert-success">
-                    <div class="alert-icon">✓</div>
+                    <span class="alert-icon">✓</span>
                     <div class="alert-content">
-                        <h4>Success</h4>
-                        <p>Your glass components have been successfully rendered with backdrop-filter support.</p>
+                        <div class="alert-title">Success</div>
+                        <p class="alert-text">Your glass panel has been rendered with full blur support.</p>
                     </div>
+                    <button class="alert-close">×</button>
                 </div>
 
                 <div class="alert alert-warning">
-                    <div class="alert-icon">⚠</div>
+                    <span class="alert-icon">⚠</span>
                     <div class="alert-content">
-                        <h4>Warning</h4>
-                        <p>Backdrop-filter may impact performance on older devices. Use sparingly.</p>
+                        <div class="alert-title">Warning</div>
+                        <p class="alert-text">Backdrop-filter may impact performance on older devices.</p>
                     </div>
+                    <button class="alert-close">×</button>
                 </div>
 
                 <div class="alert alert-error">
-                    <div class="alert-icon">✕</div>
+                    <span class="alert-icon">✕</span>
                     <div class="alert-content">
-                        <h4>Error</h4>
-                        <p>Unable to apply glass effect. Please check browser compatibility.</p>
+                        <div class="alert-title">Error</div>
+                        <p class="alert-text">Browser does not support backdrop-filter. Fallback applied.</p>
                     </div>
+                    <button class="alert-close">×</button>
+                </div>
+
+                <div class="alert alert-info">
+                    <span class="alert-icon">ℹ</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Info</div>
+                        <p class="alert-text">Use -webkit-backdrop-filter for Safari compatibility.</p>
+                    </div>
+                    <button class="alert-close">×</button>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-content glass">
-            <div class="footer-logo">AURORA</div>
-            <p class="footer-text">A glassmorphism design system — Where light meets interface</p>
-            <div class="footer-dots">
-                <span class="footer-dot"></span>
-                <span class="footer-dot"></span>
-                <span class="footer-dot"></span>
-                <span class="footer-dot"></span>
-            </div>
-        </div>
+        <p class="footer-text">Prism Style Guide</p>
+        <p class="footer-sub">Light through glass • Modern UI aesthetic</p>
     </footer>
 </body>
 </html>

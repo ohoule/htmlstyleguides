@@ -3,249 +3,351 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAUFORM - Bauhaus Style Guide</title>
+    <title>Werkstatt — Bauhaus Style Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        /* ══════════════════════════════════════════════════════════════════════════
+           WERKSTATT — BAUHAUS STYLE GUIDE
+           Form follows function. Less is more. Unity of art and technology.
+           ══════════════════════════════════════════════════════════════════════════ */
+
         :root {
-            /* Bauhaus Color Palette - Primary colors, stark contrast */
+            /* Primary Colors - Pure & Primary */
             --red: #E53935;
             --yellow: #FDD835;
-            --blue: #1E88E5;
-            --black: #212121;
-            --white: #FAFAFA;
-            --gray: #9E9E9E;
-            --light-gray: #F5F5F5;
+            --blue: #1565C0;
+
+            /* Neutrals */
+            --black: #1A1A1A;
+            --dark-gray: #333333;
+            --gray: #757575;
+            --light-gray: #E0E0E0;
+            --off-white: #FAFAFA;
+            --white: #FFFFFF;
 
             /* Typography */
-            --font-display: 'Space Mono', monospace;
-            --font-body: 'DM Sans', sans-serif;
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-body: 'Work Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
 
-            /* Spacing - Based on 8px grid */
-            --space-xs: 4px;
-            --space-sm: 8px;
-            --space-md: 16px;
-            --space-lg: 24px;
-            --space-xl: 32px;
-            --space-2xl: 48px;
-            --space-3xl: 64px;
-            --space-4xl: 96px;
+            /* Spacing - 8px Grid */
+            --space-1: 8px;
+            --space-2: 16px;
+            --space-3: 24px;
+            --space-4: 32px;
+            --space-5: 48px;
+            --space-6: 64px;
+            --space-7: 96px;
+            --space-8: 128px;
 
             /* No border radius - geometric purity */
             --radius: 0;
         }
 
-        * {
+        /* Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: var(--font-body);
-            background: var(--white);
-            color: var(--black);
+            font-size: 16px;
+            font-weight: 400;
             line-height: 1.6;
+            color: var(--black);
+            background: var(--off-white);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: var(--space-xl);
+        /* Navigation */
+        .back-link {
+            position: fixed;
+            top: var(--space-3);
+            left: var(--space-3);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-1) var(--space-2);
+            background: var(--black);
+            color: var(--white);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            transition: background 0.2s ease;
+            z-index: 1000;
+        }
+
+        .back-link:hover {
+            background: var(--red);
+        }
+
+        .back-link::before {
+            content: '←';
         }
 
         /* Header */
         header {
-            padding: var(--space-4xl) var(--space-xl);
+            padding: var(--space-8) var(--space-4) var(--space-6);
+            text-align: left;
             position: relative;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-xl);
-            align-items: center;
+            background: var(--white);
             border-bottom: 4px solid var(--black);
         }
 
-        .header-text h1 {
-            font-family: var(--font-display);
-            font-size: 5rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            line-height: 1;
-            text-transform: uppercase;
+        .header-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: end;
+            gap: var(--space-4);
         }
 
-        .header-text .tagline {
+        .logo {
             font-family: var(--font-display);
-            font-size: 1rem;
-            margin-top: var(--space-lg);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
+            font-size: clamp(5rem, 15vw, 12rem);
+            letter-spacing: 0.05em;
+            line-height: 0.85;
+            color: var(--black);
         }
 
         .header-shapes {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-md);
-            justify-items: center;
+            display: flex;
+            gap: var(--space-2);
+            align-items: flex-end;
         }
 
         .shape-circle {
-            width: 80px;
-            height: 80px;
-            background: var(--yellow);
+            width: 60px;
+            height: 60px;
+            background: var(--red);
             border-radius: 50%;
         }
 
         .shape-square {
-            width: 80px;
-            height: 80px;
-            background: var(--red);
+            width: 60px;
+            height: 60px;
+            background: var(--blue);
         }
 
         .shape-triangle {
             width: 0;
             height: 0;
-            border-left: 45px solid transparent;
-            border-right: 45px solid transparent;
-            border-bottom: 80px solid var(--blue);
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 52px solid var(--yellow);
+        }
+
+        .tagline {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--gray);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-top: var(--space-2);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-4);
         }
 
         /* Section Styling */
         section {
-            margin-bottom: var(--space-3xl);
-            padding: var(--space-xl);
+            margin-bottom: var(--space-6);
+            padding: var(--space-5);
+            background: var(--white);
             border: 2px solid var(--black);
+            position: relative;
         }
 
-        h2 {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: var(--space-xl);
-            padding-bottom: var(--space-md);
-            border-bottom: 2px solid var(--black);
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-        }
-
-        h2::before {
-            content: '';
-            width: 16px;
-            height: 16px;
-            background: var(--red);
-        }
-
-        h3 {
+        section::before {
+            content: attr(data-section);
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--black);
+            color: var(--white);
             font-family: var(--font-display);
             font-size: 0.875rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: var(--space-sm);
+            letter-spacing: 0.2em;
+            padding: var(--space-1) var(--space-2);
         }
 
-        /* Color Palette */
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            letter-spacing: 0.1em;
+            color: var(--black);
+            margin-bottom: var(--space-4);
+            border-bottom: 2px solid var(--black);
+            padding-bottom: var(--space-2);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           1. COLOR PALETTE
+           ═══════════════════════════════════════════════════════════════════ */
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--space-3);
         }
 
         .color-swatch {
-            height: 150px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: var(--space-md);
             border: 2px solid var(--black);
-            margin: -1px;
         }
 
-        .color-swatch span {
+        .color-preview {
+            height: 100px;
+        }
+
+        .color-info {
+            padding: var(--space-2);
+            background: var(--white);
+            border-top: 2px solid var(--black);
+        }
+
+        .color-name {
             font-family: var(--font-display);
-            font-size: 0.75rem;
-            text-transform: uppercase;
+            font-size: 1rem;
             letter-spacing: 0.1em;
         }
 
-        .swatch-light span {
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-top: var(--space-1);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           2. TYPOGRAPHY
+           ═══════════════════════════════════════════════════════════════════ */
+        .type-specimen {
+            margin-bottom: var(--space-4);
+            padding: var(--space-3);
+            border-left: 4px solid var(--black);
+            background: var(--off-white);
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gray);
+            margin-bottom: var(--space-1);
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            letter-spacing: 0.05em;
+            line-height: 1;
             color: var(--black);
         }
 
-        .swatch-dark span {
-            color: var(--white);
-        }
-
-        /* Typography */
-        .type-sample {
-            margin-bottom: var(--space-xl);
-            padding-bottom: var(--space-xl);
-            border-bottom: 1px solid var(--gray);
-        }
-
-        .type-sample:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .display-text {
-            font-family: var(--font-display);
-            font-size: 4rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            line-height: 1.1;
-        }
-
-        .body-text {
+        .type-body {
             font-family: var(--font-body);
-            font-size: 1.125rem;
-            max-width: 600px;
-            line-height: 1.8;
+            font-size: 1.0625rem;
+            line-height: 1.7;
+            color: var(--dark-gray);
+            max-width: 60ch;
         }
 
-        /* Spacing Scale */
+        .type-mono {
+            font-family: var(--font-mono);
+            font-size: 0.9375rem;
+            color: var(--dark-gray);
+            background: var(--black);
+            color: var(--white);
+            padding: var(--space-2);
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .type-scale-item {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-3);
+            padding: var(--space-1) 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .type-scale-size {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--gray);
+            min-width: 100px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           3. SPACING SCALE
+           ═══════════════════════════════════════════════════════════════════ */
         .spacing-demo {
             display: flex;
-            align-items: flex-end;
-            gap: var(--space-sm);
+            flex-direction: column;
+            gap: var(--space-2);
         }
 
-        .spacing-block {
-            background: var(--black);
+        .spacing-item {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: var(--space-3);
         }
 
-        .spacing-block span {
-            font-family: var(--font-display);
-            font-size: 0.625rem;
-            color: var(--white);
-            text-transform: uppercase;
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--dark-gray);
+            min-width: 80px;
         }
 
-        /* Buttons */
+        .spacing-bar {
+            height: 24px;
+            background: var(--black);
+        }
+
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           4. BUTTONS
+           ═══════════════════════════════════════════════════════════════════ */
         .button-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-md);
+            gap: var(--space-3);
+            align-items: flex-start;
         }
 
         .btn {
             font-family: var(--font-display);
-            font-size: 0.875rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: var(--space-md) var(--space-xl);
-            border: 3px solid var(--black);
+            font-size: 1rem;
+            letter-spacing: 0.15em;
+            padding: var(--space-2) var(--space-4);
+            border: 2px solid var(--black);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-primary {
@@ -265,6 +367,7 @@
 
         .btn-secondary:hover {
             background: var(--yellow);
+            border-color: var(--yellow);
         }
 
         .btn-red {
@@ -289,66 +392,117 @@
             border-color: var(--black);
         }
 
-        /* Forms */
-        .form-group {
-            margin-bottom: var(--space-lg);
+        .btn[disabled] {
+            opacity: 0.3;
+            cursor: not-allowed;
         }
 
-        label {
+        /* ═══════════════════════════════════════════════════════════════════
+           5. FORMS
+           ═══════════════════════════════════════════════════════════════════ */
+        .form-group {
+            margin-bottom: var(--space-4);
+        }
+
+        .form-label {
             display: block;
             font-family: var(--font-display);
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: var(--space-sm);
+            font-size: 0.875rem;
+            letter-spacing: 0.15em;
+            color: var(--black);
+            margin-bottom: var(--space-1);
         }
 
-        input[type="text"],
-        input[type="email"],
-        textarea,
-        select {
+        .form-input {
             width: 100%;
             max-width: 400px;
-            padding: var(--space-md);
+            padding: var(--space-2);
             font-family: var(--font-body);
             font-size: 1rem;
-            border: 3px solid var(--black);
+            color: var(--black);
             background: var(--white);
-            transition: all 0.2s ease;
-        }
-
-        input:focus,
-        textarea:focus,
-        select:focus {
+            border: 2px solid var(--black);
             outline: none;
-            background: var(--yellow);
+            transition: border-color 0.2s ease;
         }
 
-        textarea {
+        .form-input:focus {
+            border-color: var(--blue);
+        }
+
+        .form-input::placeholder {
+            color: var(--gray);
+        }
+
+        .form-input.error {
+            border-color: var(--red);
+        }
+
+        .form-textarea {
             min-height: 120px;
             resize: vertical;
         }
 
-        /* Cards */
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%231A1A1A' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            padding-right: 40px;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+            cursor: pointer;
+        }
+
+        .form-checkbox input {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--black);
+            background: var(--white);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .form-checkbox input:checked {
+            background: var(--black);
+        }
+
+        .form-checkbox input:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--white);
+            font-size: 0.875rem;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           6. CARDS
+           ═══════════════════════════════════════════════════════════════════ */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-4);
         }
 
         .card {
             border: 2px solid var(--black);
-            margin: -1px;
-            transition: all 0.2s ease;
+            background: var(--white);
+            transition: transform 0.2s ease;
         }
 
         .card:hover {
-            background: var(--light-gray);
+            transform: translateY(-4px);
         }
 
         .card-image {
-            height: 120px;
+            height: 160px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -356,473 +510,843 @@
         }
 
         .card:nth-child(1) .card-image { background: var(--red); }
-        .card:nth-child(2) .card-image { background: var(--blue); }
-        .card:nth-child(3) .card-image { background: var(--yellow); }
+        .card:nth-child(2) .card-image { background: var(--yellow); }
+        .card:nth-child(3) .card-image { background: var(--blue); }
 
         .card-shape {
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 60px;
         }
 
         .card:nth-child(1) .card-shape {
             background: var(--white);
-        }
-
-        .card:nth-child(2) .card-shape {
-            width: 0;
-            height: 0;
-            border-left: 25px solid transparent;
-            border-right: 25px solid transparent;
-            border-bottom: 40px solid var(--white);
-        }
-
-        .card:nth-child(3) .card-shape {
-            background: var(--black);
             border-radius: 50%;
         }
 
-        .card-content {
-            padding: var(--space-lg);
+        .card:nth-child(2) .card-shape {
+            background: var(--black);
+        }
+
+        .card:nth-child(3) .card-shape {
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 52px solid var(--white);
+        }
+
+        .card-body {
+            padding: var(--space-3);
         }
 
         .card-title {
             font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: var(--space-sm);
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-1);
         }
 
         .card-text {
-            font-size: 0.875rem;
+            font-size: 0.9375rem;
+            color: var(--dark-gray);
             line-height: 1.6;
         }
 
-        /* Data Table */
-        .table-wrapper {
+        .card-footer {
+            padding: var(--space-2) var(--space-3);
+            border-top: 2px solid var(--black);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--off-white);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           7. DATA TABLE
+           ═══════════════════════════════════════════════════════════════════ */
+        .table-container {
+            overflow-x: auto;
             border: 2px solid var(--black);
         }
 
-        table {
+        .data-table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        th {
+        .data-table thead {
             background: var(--black);
             color: var(--white);
+        }
+
+        .data-table th {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            letter-spacing: 0.15em;
+            padding: var(--space-2) var(--space-3);
+            text-align: left;
+        }
+
+        .data-table td {
+            padding: var(--space-2) var(--space-3);
+            border-bottom: 1px solid var(--light-gray);
+            font-size: 0.9375rem;
+        }
+
+        .data-table tbody tr:hover {
+            background: var(--off-white);
+        }
+
+        .table-action {
             font-family: var(--font-display);
             font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
             letter-spacing: 0.1em;
-            padding: var(--space-md);
-            text-align: left;
-            border: 1px solid var(--black);
+            padding: var(--space-1) var(--space-2);
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
         }
 
-        td {
-            padding: var(--space-md);
-            border: 1px solid var(--black);
-            font-size: 0.875rem;
+        .table-action:hover {
+            background: var(--blue);
         }
 
-        tr:nth-child(even) {
-            background: var(--light-gray);
-        }
-
-        /* Badges */
+        /* ═══════════════════════════════════════════════════════════════════
+           8. BADGES & TAGS
+           ═══════════════════════════════════════════════════════════════════ */
         .badge-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-sm);
+            gap: var(--space-2);
+            align-items: center;
         }
 
         .badge {
             font-family: var(--font-display);
-            font-size: 0.625rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: var(--space-xs) var(--space-md);
-            border: 2px solid var(--black);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            padding: var(--space-1) var(--space-2);
+            display: inline-block;
+        }
+
+        .badge-black {
+            background: var(--black);
+            color: var(--white);
         }
 
         .badge-red {
             background: var(--red);
             color: var(--white);
-            border-color: var(--red);
         }
 
         .badge-yellow {
             background: var(--yellow);
             color: var(--black);
-            border-color: var(--yellow);
         }
 
         .badge-blue {
             background: var(--blue);
             color: var(--white);
-            border-color: var(--blue);
         }
 
         .badge-outline {
             background: transparent;
+            border: 2px solid var(--black);
             color: var(--black);
         }
 
-        /* Design Principles */
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: var(--space-1);
+            background: var(--off-white);
+            border: 1px solid var(--light-gray);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           9. DESIGN PRINCIPLES
+           ═══════════════════════════════════════════════════════════════════ */
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-4);
         }
 
         .principle {
-            padding: var(--space-xl);
+            padding: var(--space-3);
             border: 2px solid var(--black);
-            margin: -1px;
-            text-align: center;
         }
 
-        .principle:nth-child(1) { background: var(--red); color: var(--white); }
-        .principle:nth-child(2) { background: var(--yellow); }
-        .principle:nth-child(3) { background: var(--blue); color: var(--white); }
-        .principle:nth-child(4) { background: var(--black); color: var(--white); }
+        .principle-shape {
+            width: 48px;
+            height: 48px;
+            margin-bottom: var(--space-2);
+        }
 
-        .principle-icon {
-            font-size: 2.5rem;
-            margin-bottom: var(--space-md);
+        .principle:nth-child(1) .principle-shape {
+            background: var(--red);
+            border-radius: 50%;
+        }
+
+        .principle:nth-child(2) .principle-shape {
+            background: var(--yellow);
+        }
+
+        .principle:nth-child(3) .principle-shape {
+            width: 0;
+            height: 0;
+            border-left: 24px solid transparent;
+            border-right: 24px solid transparent;
+            border-bottom: 42px solid var(--blue);
+        }
+
+        .principle:nth-child(4) .principle-shape {
+            background: var(--black);
         }
 
         .principle-title {
             font-family: var(--font-display);
-            font-size: 0.875rem;
-            font-weight: 700;
-            text-transform: uppercase;
+            font-size: 1.25rem;
             letter-spacing: 0.1em;
-            margin-bottom: var(--space-sm);
+            margin-bottom: var(--space-1);
         }
 
         .principle-text {
-            font-size: 0.875rem;
+            font-size: 0.9375rem;
+            color: var(--dark-gray);
+            line-height: 1.6;
         }
 
-        /* Animations */
-        .animation-grid {
+        /* ═══════════════════════════════════════════════════════════════════
+           10. ANIMATIONS
+           ═══════════════════════════════════════════════════════════════════ */
+        .animation-demos {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-md);
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-4);
         }
 
         .animation-demo {
-            height: 150px;
+            text-align: center;
+            padding: var(--space-4);
             border: 2px solid var(--black);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
         }
 
-        .rotate-demo {
+        .animation-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: var(--space-2);
+            color: var(--gray);
+        }
+
+        /* Spin Animation */
+        .anim-spin {
             width: 50px;
             height: 50px;
             background: var(--red);
-            animation: rotate 4s linear infinite;
+            margin: 0 auto;
+            animation: spin 3s linear infinite;
         }
 
-        @keyframes rotate {
-            100% { transform: rotate(360deg); }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        .scale-demo {
+        /* Scale Animation */
+        .anim-scale {
             width: 50px;
             height: 50px;
-            background: var(--blue);
-            border-radius: 50%;
+            background: var(--yellow);
+            margin: 0 auto;
             animation: scale 2s ease-in-out infinite;
         }
 
         @keyframes scale {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.5); }
+            50% { transform: scale(1.2); }
         }
 
-        .slide-demo {
-            width: 0;
-            height: 0;
-            border-left: 30px solid transparent;
-            border-right: 30px solid transparent;
-            border-bottom: 50px solid var(--yellow);
-            animation: slide 2s ease-in-out infinite;
+        /* Move Animation */
+        .anim-move {
+            width: 50px;
+            height: 50px;
+            background: var(--blue);
+            margin: 0 auto;
+            animation: move 2s ease-in-out infinite;
         }
 
-        @keyframes slide {
-            0%, 100% { transform: translateX(-40px); }
-            50% { transform: translateX(40px); }
+        @keyframes move {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(20px); }
         }
 
-        /* Special Component: Composition Grid */
-        .composition-grid {
+        /* Fade Animation */
+        .anim-fade {
+            width: 50px;
+            height: 50px;
+            background: var(--black);
+            margin: 0 auto;
+            animation: fade 2s ease-in-out infinite;
+        }
+
+        @keyframes fade {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Color Animation */
+        .anim-color {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto;
+            animation: colorSwitch 3s ease-in-out infinite;
+        }
+
+        @keyframes colorSwitch {
+            0%, 100% { background: var(--red); }
+            33% { background: var(--yellow); }
+            66% { background: var(--blue); }
+        }
+
+        /* Morph Animation */
+        .anim-morph {
+            width: 50px;
+            height: 50px;
+            background: var(--red);
+            margin: 0 auto;
+            animation: morph 4s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0%, 100% { border-radius: 0; }
+            50% { border-radius: 50%; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           11. SPECIAL COMPONENT: COMPOSITION GRID
+           ═══════════════════════════════════════════════════════════════════ */
+        .composition {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            grid-template-rows: repeat(4, 60px);
-            gap: 0;
-            border: 4px solid var(--black);
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 100px);
+            gap: 4px;
+            background: var(--black);
+            padding: 4px;
+            max-width: 500px;
         }
 
         .comp-cell {
-            border: 1px solid var(--black);
-        }
-
-        .comp-red { background: var(--red); }
-        .comp-yellow { background: var(--yellow); }
-        .comp-blue { background: var(--blue); }
-        .comp-black { background: var(--black); }
-        .comp-white { background: var(--white); }
-
-        .comp-cell.span-2 { grid-column: span 2; }
-        .comp-cell.span-3 { grid-column: span 3; }
-        .comp-cell.row-2 { grid-row: span 2; }
-        .comp-cell.row-3 { grid-row: span 3; }
-
-        /* Alerts */
-        .alert {
-            padding: var(--space-md) var(--space-lg);
-            margin-bottom: var(--space-md);
             display: flex;
             align-items: center;
-            gap: var(--space-md);
-            border: 3px solid var(--black);
+            justify-content: center;
         }
 
-        .alert-icon {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 700;
+        .comp-cell:nth-child(1) {
+            grid-column: 1 / 3;
+            grid-row: 1 / 2;
+            background: var(--red);
         }
 
-        .alert-content {
-            font-size: 0.875rem;
-        }
-
-        .alert-info {
-            background: var(--blue);
-            color: var(--white);
-            border-color: var(--blue);
-        }
-
-        .alert-success {
-            background: var(--white);
-            border-left: 8px solid var(--blue);
-        }
-
-        .alert-warning {
+        .comp-cell:nth-child(2) {
+            grid-column: 3 / 4;
+            grid-row: 1 / 3;
             background: var(--yellow);
         }
 
-        .alert-error {
-            background: var(--red);
-            color: var(--white);
-            border-color: var(--red);
+        .comp-cell:nth-child(3) {
+            grid-column: 4 / 5;
+            grid-row: 1 / 2;
+            background: var(--white);
         }
 
-        /* Back Link */
-        .back-link {
-            display: inline-flex;
+        .comp-cell:nth-child(4) {
+            grid-column: 1 / 2;
+            grid-row: 2 / 4;
+            background: var(--blue);
+        }
+
+        .comp-cell:nth-child(5) {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            background: var(--white);
+        }
+
+        .comp-cell:nth-child(6) {
+            grid-column: 4 / 5;
+            grid-row: 2 / 4;
+            background: var(--off-white);
+        }
+
+        .comp-cell:nth-child(7) {
+            grid-column: 2 / 4;
+            grid-row: 3 / 4;
+            background: var(--light-gray);
+        }
+
+        .comp-shape {
+            width: 30px;
+            height: 30px;
+        }
+
+        .comp-cell:nth-child(1) .comp-shape {
+            background: var(--white);
+            border-radius: 50%;
+        }
+
+        .comp-cell:nth-child(2) .comp-shape {
+            background: var(--black);
+        }
+
+        .comp-cell:nth-child(4) .comp-shape {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 26px solid var(--white);
+        }
+
+        .composition-caption {
+            margin-top: var(--space-3);
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           12. ALERTS
+           ═══════════════════════════════════════════════════════════════════ */
+        .alerts-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .alert {
+            padding: var(--space-3);
+            border: 2px solid var(--black);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-2);
+        }
+
+        .alert-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            display: flex;
             align-items: center;
-            gap: var(--space-sm);
-            color: var(--black);
-            text-decoration: none;
+            justify-content: center;
             font-family: var(--font-display);
             font-size: 0.875rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: var(--space-xl);
-            padding: var(--space-sm) 0;
-            border-bottom: 2px solid transparent;
-            transition: border-color 0.2s ease;
         }
 
-        .back-link:hover {
-            border-color: var(--black);
+        .alert-success {
+            border-left: 4px solid var(--black);
+        }
+
+        .alert-success .alert-icon {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .alert-warning {
+            border-left: 4px solid var(--yellow);
+        }
+
+        .alert-warning .alert-icon {
+            background: var(--yellow);
+            color: var(--black);
+        }
+
+        .alert-error {
+            border-left: 4px solid var(--red);
+        }
+
+        .alert-error .alert-icon {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        .alert-info {
+            border-left: 4px solid var(--blue);
+        }
+
+        .alert-info .alert-icon {
+            background: var(--blue);
+            color: var(--white);
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-1);
+        }
+
+        .alert-text {
+            font-size: 0.9375rem;
+            color: var(--dark-gray);
+        }
+
+        .alert-close {
+            background: transparent;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 1.25rem;
+        }
+
+        .alert-close:hover {
+            color: var(--black);
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: var(--space-2xl);
-            border-top: 4px solid var(--black);
+            padding: var(--space-6) var(--space-4);
+            margin-top: var(--space-7);
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .footer-shapes {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-3);
+        }
+
+        .footer-shapes .shape-circle {
+            width: 30px;
+            height: 30px;
+        }
+
+        .footer-shapes .shape-square {
+            width: 30px;
+            height: 30px;
+        }
+
+        .footer-shapes .shape-triangle {
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 26px solid var(--yellow);
+        }
+
+        .footer-text {
             font-family: var(--font-display);
-            font-size: 0.875rem;
-            text-transform: uppercase;
+            font-size: 2rem;
             letter-spacing: 0.2em;
+        }
+
+        .footer-sub {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            margin-top: var(--space-2);
+            color: var(--gray);
+            letter-spacing: 0.15em;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            header {
+            .logo {
+                font-size: 4rem;
+            }
+
+            .header-grid {
                 grid-template-columns: 1fr;
             }
 
-            .header-text h1 {
-                font-size: 3rem;
+            .header-shapes {
+                justify-content: flex-start;
             }
 
-            .color-grid,
-            .card-grid,
-            .animation-grid {
-                grid-template-columns: 1fr;
+            .section-title {
+                font-size: 2rem;
             }
 
-            .principles-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .type-display {
+                font-size: 2.5rem;
+            }
+
+            .composition {
+                grid-template-rows: repeat(3, 80px);
+            }
+
+            .back-link {
+                top: var(--space-2);
+                left: var(--space-2);
+                padding: var(--space-1);
+                font-size: 0.875rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../index.html" class="back-link">← Back to Gallery</a>
+    <a href="../index.html" class="back-link">Gallery</a>
 
-        <header>
-            <div class="header-text">
-                <h1>Bauform</h1>
-                <p class="tagline">Form Follows Function · Bauhaus Design System</p>
+    <header>
+        <div class="header-grid">
+            <div>
+                <h1 class="logo">WERKSTATT</h1>
+                <p class="tagline">Bauhaus Style Guide • 1919-2026</p>
             </div>
             <div class="header-shapes">
                 <div class="shape-circle"></div>
                 <div class="shape-square"></div>
                 <div class="shape-triangle"></div>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <!-- Color Palette -->
-        <section>
-            <h2>Color Palette</h2>
+    <main class="container">
+        <!-- 1. Color Palette -->
+        <section id="colors" data-section="01">
+            <h2 class="section-title">COLOR PALETTE</h2>
             <div class="color-grid">
-                <div class="color-swatch swatch-dark" style="background: var(--red);">
-                    <span>Red · #E53935</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--red);"></div>
+                    <div class="color-info">
+                        <div class="color-name">RED</div>
+                        <div class="color-hex">#E53935</div>
+                    </div>
                 </div>
-                <div class="color-swatch swatch-light" style="background: var(--yellow);">
-                    <span>Yellow · #FDD835</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--yellow);"></div>
+                    <div class="color-info">
+                        <div class="color-name">YELLOW</div>
+                        <div class="color-hex">#FDD835</div>
+                    </div>
                 </div>
-                <div class="color-swatch swatch-dark" style="background: var(--blue);">
-                    <span>Blue · #1E88E5</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--blue);"></div>
+                    <div class="color-info">
+                        <div class="color-name">BLUE</div>
+                        <div class="color-hex">#1565C0</div>
+                    </div>
                 </div>
-                <div class="color-swatch swatch-dark" style="background: var(--black);">
-                    <span>Black · #212121</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--black);"></div>
+                    <div class="color-info">
+                        <div class="color-name">BLACK</div>
+                        <div class="color-hex">#1A1A1A</div>
+                    </div>
                 </div>
-                <div class="color-swatch swatch-light" style="background: var(--white); border-color: var(--black);">
-                    <span>White · #FAFAFA</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--white); border: 1px solid var(--light-gray);"></div>
+                    <div class="color-info">
+                        <div class="color-name">WHITE</div>
+                        <div class="color-hex">#FFFFFF</div>
+                    </div>
                 </div>
-                <div class="color-swatch swatch-light" style="background: var(--gray);">
-                    <span>Gray · #9E9E9E</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--gray);"></div>
+                    <div class="color-info">
+                        <div class="color-name">GRAY</div>
+                        <div class="color-hex">#757575</div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Typography -->
-        <section>
-            <h2>Typography</h2>
-            <div class="type-sample">
-                <h3>Display · Space Mono</h3>
-                <p class="display-text">Less is More</p>
+        <!-- 2. Typography -->
+        <section id="typography" data-section="02">
+            <h2 class="section-title">TYPOGRAPHY</h2>
+
+            <div class="type-specimen">
+                <div class="type-label">Display — Bebas Neue</div>
+                <div class="type-display">FORM FOLLOWS FUNCTION</div>
             </div>
-            <div class="type-sample">
-                <h3>Body · DM Sans</h3>
-                <p class="body-text">The Bauhaus school fundamentally redefined art education and influenced the fields of architecture, graphic design, interior design, industrial design, and typography. Founded in 1919 by Walter Gropius, the school emphasized the connection between craftsmanship and fine arts.</p>
+
+            <div class="type-specimen">
+                <div class="type-label">Body — Work Sans</div>
+                <p class="type-body">The Bauhaus school emerged in 1919 in Weimar, Germany, founded by architect Walter Gropius. It sought to reunite art and craft, embracing modern industrial techniques while maintaining the integrity of artistic vision. Less is more.</p>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-label">Mono — JetBrains Mono</div>
+                <div class="type-mono">const design = art + technology;</div>
+            </div>
+
+            <div class="type-scale">
+                <div class="type-scale-item">
+                    <span class="type-scale-size">4rem / 64px</span>
+                    <span style="font-family: var(--font-display); font-size: 2rem;">DISPLAY</span>
+                </div>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">2.5rem / 40px</span>
+                    <span style="font-family: var(--font-display); font-size: 1.5rem;">HEADING</span>
+                </div>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">1.0625rem / 17px</span>
+                    <span style="font-family: var(--font-body); font-size: 1.0625rem;">Body Text</span>
+                </div>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">0.9375rem / 15px</span>
+                    <span style="font-family: var(--font-mono); font-size: 0.9375rem;">Monospace</span>
+                </div>
             </div>
         </section>
 
-        <!-- Spacing Scale -->
-        <section>
-            <h2>Spacing Scale</h2>
+        <!-- 3. Spacing -->
+        <section id="spacing" data-section="03">
+            <h2 class="section-title">SPACING SCALE</h2>
             <div class="spacing-demo">
-                <div class="spacing-block" style="width: 24px; height: 24px;"><span>4</span></div>
-                <div class="spacing-block" style="width: 32px; height: 32px;"><span>8</span></div>
-                <div class="spacing-block" style="width: 48px; height: 48px;"><span>16</span></div>
-                <div class="spacing-block" style="width: 64px; height: 64px;"><span>24</span></div>
-                <div class="spacing-block" style="width: 80px; height: 80px;"><span>32</span></div>
-                <div class="spacing-block" style="width: 96px; height: 96px;"><span>48</span></div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-1</div>
+                    <div class="spacing-bar" style="width: 8px;"></div>
+                    <span class="spacing-value">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-2</div>
+                    <div class="spacing-bar" style="width: 16px;"></div>
+                    <span class="spacing-value">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-3</div>
+                    <div class="spacing-bar" style="width: 24px;"></div>
+                    <span class="spacing-value">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-4</div>
+                    <div class="spacing-bar" style="width: 32px;"></div>
+                    <span class="spacing-value">32px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-5</div>
+                    <div class="spacing-bar" style="width: 48px;"></div>
+                    <span class="spacing-value">48px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-6</div>
+                    <div class="spacing-bar" style="width: 64px;"></div>
+                    <span class="spacing-value">64px</span>
+                </div>
             </div>
         </section>
 
-        <!-- Buttons -->
-        <section>
-            <h2>Buttons</h2>
+        <!-- 4. Buttons -->
+        <section id="buttons" data-section="04">
+            <h2 class="section-title">BUTTONS</h2>
             <div class="button-grid">
-                <button class="btn btn-primary">Primary</button>
-                <button class="btn btn-secondary">Secondary</button>
-                <button class="btn btn-red">Action</button>
-                <button class="btn btn-blue">Info</button>
+                <button class="btn btn-primary">PRIMARY</button>
+                <button class="btn btn-secondary">SECONDARY</button>
+                <button class="btn btn-red">RED</button>
+                <button class="btn btn-blue">BLUE</button>
+                <button class="btn btn-primary" disabled>DISABLED</button>
             </div>
         </section>
 
-        <!-- Forms -->
-        <section>
-            <h2>Forms</h2>
+        <!-- 5. Forms -->
+        <section id="forms" data-section="05">
+            <h2 class="section-title">FORMS</h2>
+
             <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" placeholder="Enter your name">
+                <label class="form-label">TEXT INPUT</label>
+                <input type="text" class="form-input" placeholder="Enter text...">
             </div>
+
             <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" placeholder="Enter your email">
+                <label class="form-label">SELECT</label>
+                <select class="form-input form-select">
+                    <option>Choose option</option>
+                    <option>Circle</option>
+                    <option>Square</option>
+                    <option>Triangle</option>
+                </select>
             </div>
+
             <div class="form-group">
-                <label>Message</label>
-                <textarea placeholder="Your message here..."></textarea>
+                <label class="form-label">TEXTAREA</label>
+                <textarea class="form-input form-textarea" placeholder="Enter message..."></textarea>
             </div>
-            <button class="btn btn-primary">Submit</button>
+
+            <div class="form-group">
+                <label class="form-label">CHECKBOXES</label>
+                <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+                    <label class="form-checkbox">
+                        <input type="checkbox" checked>
+                        <span>Form</span>
+                    </label>
+                    <label class="form-checkbox">
+                        <input type="checkbox">
+                        <span>Function</span>
+                    </label>
+                    <label class="form-checkbox">
+                        <input type="checkbox" checked>
+                        <span>Unity</span>
+                    </label>
+                </div>
+            </div>
         </section>
 
-        <!-- Cards -->
-        <section>
-            <h2>Cards</h2>
+        <!-- 6. Cards -->
+        <section id="cards" data-section="06">
+            <h2 class="section-title">CARDS</h2>
             <div class="card-grid">
-                <div class="card">
+                <article class="card">
                     <div class="card-image">
                         <div class="card-shape"></div>
                     </div>
-                    <div class="card-content">
-                        <h4 class="card-title">Architecture</h4>
-                        <p class="card-text">Functional forms that serve their purpose with clarity and precision.</p>
+                    <div class="card-body">
+                        <h3 class="card-title">CIRCLE</h3>
+                        <p class="card-text">The circle represents continuous movement, unity, and wholeness in Bauhaus design philosophy.</p>
                     </div>
-                </div>
-                <div class="card">
+                    <div class="card-footer">
+                        <span class="badge badge-red">FORM</span>
+                        <button class="btn btn-primary" style="padding: var(--space-1) var(--space-2); font-size: 0.75rem;">VIEW</button>
+                    </div>
+                </article>
+
+                <article class="card">
                     <div class="card-image">
                         <div class="card-shape"></div>
                     </div>
-                    <div class="card-content">
-                        <h4 class="card-title">Typography</h4>
-                        <p class="card-text">Clean sans-serif letterforms that communicate without ornamentation.</p>
+                    <div class="card-body">
+                        <h3 class="card-title">SQUARE</h3>
+                        <p class="card-text">The square embodies stability, order, and rational structure fundamental to modernist design.</p>
                     </div>
-                </div>
-                <div class="card">
+                    <div class="card-footer">
+                        <span class="badge badge-yellow">STRUCTURE</span>
+                        <button class="btn btn-primary" style="padding: var(--space-1) var(--space-2); font-size: 0.75rem;">VIEW</button>
+                    </div>
+                </article>
+
+                <article class="card">
                     <div class="card-image">
                         <div class="card-shape"></div>
                     </div>
-                    <div class="card-content">
-                        <h4 class="card-title">Industrial</h4>
-                        <p class="card-text">Design that celebrates the marriage of art and craftsmanship.</p>
+                    <div class="card-body">
+                        <h3 class="card-title">TRIANGLE</h3>
+                        <p class="card-text">The triangle represents dynamic energy, direction, and the synthesis of opposing forces.</p>
                     </div>
-                </div>
+                    <div class="card-footer">
+                        <span class="badge badge-blue">ENERGY</span>
+                        <button class="btn btn-primary" style="padding: var(--space-1) var(--space-2); font-size: 0.75rem;">VIEW</button>
+                    </div>
+                </article>
             </div>
         </section>
 
-        <!-- Data Table -->
-        <section>
-            <h2>Data Table</h2>
-            <div class="table-wrapper">
-                <table>
+        <!-- 7. Data Table -->
+        <section id="table" data-section="07">
+            <h2 class="section-title">DATA TABLE</h2>
+            <div class="table-container">
+                <table class="data-table">
                     <thead>
                         <tr>
-                            <th>Master</th>
-                            <th>Workshop</th>
-                            <th>Period</th>
-                            <th>Status</th>
+                            <th>MASTER</th>
+                            <th>WORKSHOP</th>
+                            <th>YEARS</th>
+                            <th>ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -830,132 +1354,174 @@
                             <td>Walter Gropius</td>
                             <td>Architecture</td>
                             <td>1919-1928</td>
-                            <td><span class="badge badge-red">Founder</span></td>
-                        </tr>
-                        <tr>
-                            <td>Paul Klee</td>
-                            <td>Painting</td>
-                            <td>1921-1931</td>
-                            <td><span class="badge badge-blue">Master</span></td>
+                            <td><a href="#" class="table-action">VIEW</a></td>
                         </tr>
                         <tr>
                             <td>Wassily Kandinsky</td>
                             <td>Wall Painting</td>
                             <td>1922-1933</td>
-                            <td><span class="badge badge-yellow">Master</span></td>
+                            <td><a href="#" class="table-action">VIEW</a></td>
+                        </tr>
+                        <tr>
+                            <td>Paul Klee</td>
+                            <td>Stained Glass</td>
+                            <td>1921-1931</td>
+                            <td><a href="#" class="table-action">VIEW</a></td>
+                        </tr>
+                        <tr>
+                            <td>László Moholy-Nagy</td>
+                            <td>Metal</td>
+                            <td>1923-1928</td>
+                            <td><a href="#" class="table-action">VIEW</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Badges -->
-        <section>
-            <h2>Badges & Tags</h2>
+        <!-- 8. Badges & Tags -->
+        <section id="badges" data-section="08">
+            <h2 class="section-title">BADGES & TAGS</h2>
             <div class="badge-grid">
-                <span class="badge badge-red">Urgent</span>
-                <span class="badge badge-yellow">Pending</span>
-                <span class="badge badge-blue">Info</span>
-                <span class="badge badge-outline">Default</span>
+                <span class="badge badge-black">BLACK</span>
+                <span class="badge badge-red">RED</span>
+                <span class="badge badge-yellow">YELLOW</span>
+                <span class="badge badge-blue">BLUE</span>
+                <span class="badge badge-outline">OUTLINE</span>
+            </div>
+
+            <div class="badge-grid" style="margin-top: var(--space-3);">
+                <span class="tag">bauhaus</span>
+                <span class="tag">modernism</span>
+                <span class="tag">1919</span>
+                <span class="tag">form</span>
             </div>
         </section>
 
-        <!-- Design Principles -->
-        <section>
-            <h2>Design Principles</h2>
+        <!-- 9. Design Principles -->
+        <section id="principles" data-section="09">
+            <h2 class="section-title">DESIGN PRINCIPLES</h2>
             <div class="principles-grid">
                 <div class="principle">
-                    <div class="principle-icon">■</div>
-                    <h4 class="principle-title">Function</h4>
-                    <p class="principle-text">Form follows function in every decision</p>
+                    <div class="principle-shape"></div>
+                    <h3 class="principle-title">LESS IS MORE</h3>
+                    <p class="principle-text">Strip away the unnecessary. Every element must serve a purpose.</p>
                 </div>
                 <div class="principle">
-                    <div class="principle-icon">●</div>
-                    <h4 class="principle-title">Unity</h4>
-                    <p class="principle-text">Art and craft working as one</p>
+                    <div class="principle-shape"></div>
+                    <h3 class="principle-title">FORM FOLLOWS FUNCTION</h3>
+                    <p class="principle-text">Design emerges from requirements. Beauty arises from utility.</p>
                 </div>
                 <div class="principle">
-                    <div class="principle-icon">▲</div>
-                    <h4 class="principle-title">Geometry</h4>
-                    <p class="principle-text">Primary shapes create harmony</p>
+                    <div class="principle-shape"></div>
+                    <h3 class="principle-title">UNITY OF ART & CRAFT</h3>
+                    <p class="principle-text">No distinction between fine art and applied art. All creation is unified.</p>
                 </div>
                 <div class="principle">
-                    <div class="principle-icon">◯</div>
-                    <h4 class="principle-title">Simplicity</h4>
-                    <p class="principle-text">Strip away the unnecessary</p>
+                    <div class="principle-shape"></div>
+                    <h3 class="principle-title">TRUTH TO MATERIALS</h3>
+                    <p class="principle-text">Let materials express their true nature. Honest construction.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Animations -->
-        <section>
-            <h2>Animation & Micro-interactions</h2>
-            <div class="animation-grid">
-                <div>
-                    <h3>Rotate</h3>
-                    <div class="animation-demo">
-                        <div class="rotate-demo"></div>
+        <!-- 10. Animations -->
+        <section id="animations" data-section="10">
+            <h2 class="section-title">ANIMATIONS</h2>
+            <div class="animation-demos">
+                <div class="animation-demo">
+                    <div class="anim-spin"></div>
+                    <div class="animation-label">SPIN</div>
+                </div>
+                <div class="animation-demo">
+                    <div class="anim-scale"></div>
+                    <div class="animation-label">SCALE</div>
+                </div>
+                <div class="animation-demo">
+                    <div class="anim-move"></div>
+                    <div class="animation-label">MOVE</div>
+                </div>
+                <div class="animation-demo">
+                    <div class="anim-fade"></div>
+                    <div class="animation-label">FADE</div>
+                </div>
+                <div class="animation-demo">
+                    <div class="anim-color"></div>
+                    <div class="animation-label">COLOR</div>
+                </div>
+                <div class="animation-demo">
+                    <div class="anim-morph"></div>
+                    <div class="animation-label">MORPH</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Special Component -->
+        <section id="special" data-section="11">
+            <h2 class="section-title">SPECIAL COMPONENT</h2>
+            <div class="composition">
+                <div class="comp-cell"><div class="comp-shape"></div></div>
+                <div class="comp-cell"><div class="comp-shape"></div></div>
+                <div class="comp-cell"></div>
+                <div class="comp-cell"><div class="comp-shape"></div></div>
+                <div class="comp-cell"></div>
+                <div class="comp-cell"></div>
+                <div class="comp-cell"></div>
+            </div>
+            <p class="composition-caption">COMPOSITION GRID — Inspired by Piet Mondrian & De Stijl</p>
+        </section>
+
+        <!-- 12. Alerts -->
+        <section id="alerts" data-section="12">
+            <h2 class="section-title">ALERT MESSAGES</h2>
+            <div class="alerts-grid">
+                <div class="alert alert-success">
+                    <span class="alert-icon">✓</span>
+                    <div class="alert-content">
+                        <div class="alert-title">SUCCESS</div>
+                        <p class="alert-text">Form and function achieved. Design complete.</p>
                     </div>
+                    <button class="alert-close">×</button>
                 </div>
-                <div>
-                    <h3>Scale</h3>
-                    <div class="animation-demo">
-                        <div class="scale-demo"></div>
+
+                <div class="alert alert-warning">
+                    <span class="alert-icon">!</span>
+                    <div class="alert-content">
+                        <div class="alert-title">ATTENTION</div>
+                        <p class="alert-text">Consider simplifying. Less is more.</p>
                     </div>
+                    <button class="alert-close">×</button>
                 </div>
-                <div>
-                    <h3>Translate</h3>
-                    <div class="animation-demo">
-                        <div class="slide-demo"></div>
+
+                <div class="alert alert-error">
+                    <span class="alert-icon">×</span>
+                    <div class="alert-content">
+                        <div class="alert-title">ERROR</div>
+                        <p class="alert-text">Unnecessary decoration detected. Remove ornament.</p>
                     </div>
+                    <button class="alert-close">×</button>
+                </div>
+
+                <div class="alert alert-info">
+                    <span class="alert-icon">i</span>
+                    <div class="alert-content">
+                        <div class="alert-title">INFORMATION</div>
+                        <p class="alert-text">The Bauhaus school operated from 1919 to 1933.</p>
+                    </div>
+                    <button class="alert-close">×</button>
                 </div>
             </div>
         </section>
+    </main>
 
-        <!-- Special Component: Composition Grid -->
-        <section>
-            <h2>Special Component: Composition Grid</h2>
-            <p style="margin-bottom: var(--space-lg);">Inspired by Piet Mondrian's neoplasticism and Bauhaus grid systems.</p>
-            <div class="composition-grid">
-                <div class="comp-cell comp-red span-2 row-2"></div>
-                <div class="comp-cell comp-white span-3"></div>
-                <div class="comp-cell comp-yellow row-3"></div>
-                <div class="comp-cell comp-blue span-2"></div>
-                <div class="comp-cell comp-white"></div>
-                <div class="comp-cell comp-black row-2"></div>
-                <div class="comp-cell comp-white span-2"></div>
-                <div class="comp-cell comp-red"></div>
-                <div class="comp-cell comp-white"></div>
-                <div class="comp-cell comp-blue span-2"></div>
-                <div class="comp-cell comp-yellow"></div>
-                <div class="comp-cell comp-white"></div>
-            </div>
-        </section>
-
-        <!-- Alerts -->
-        <section>
-            <h2>Alert Messages</h2>
-            <div class="alert alert-info">
-                <span class="alert-icon">i</span>
-                <span class="alert-content">Information: This is a neutral informational message.</span>
-            </div>
-            <div class="alert alert-success">
-                <span class="alert-icon">✓</span>
-                <span class="alert-content">Success: Your action has been completed successfully.</span>
-            </div>
-            <div class="alert alert-warning">
-                <span class="alert-icon">!</span>
-                <span class="alert-content">Warning: Please review before proceeding.</span>
-            </div>
-            <div class="alert alert-error">
-                <span class="alert-icon">×</span>
-                <span class="alert-content">Error: Something went wrong. Please try again.</span>
-            </div>
-        </section>
-
-        <footer>
-            <p>Bauform Design System · 1919–2024</p>
-        </footer>
-    </div>
+    <footer>
+        <div class="footer-shapes">
+            <div class="shape-circle"></div>
+            <div class="shape-square"></div>
+            <div class="shape-triangle"></div>
+        </div>
+        <p class="footer-text">WERKSTATT</p>
+        <p class="footer-sub">BAUHAUS STYLE GUIDE • FORM FOLLOWS FUNCTION</p>
+    </footer>
 </body>
 </html>

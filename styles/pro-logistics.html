@@ -3,33 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transit — Logistics Design System</title>
+    <title>Route - Logistics Design System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Color Palette - Global Movement */
-            --color-navy: #0A1628;
-            --color-navy-light: #162236;
-            --color-slate: #334155;
-            --color-gray: #64748B;
-            --color-silver: #94A3B8;
-            --color-light: #E2E8F0;
-            --color-white: #F8FAFC;
-            --color-electric: #06B6D4;
-            --color-electric-dark: #0891B2;
-            --color-amber: #F59E0B;
-            --color-lime: #84CC16;
+            /* Core Palette - Deep Navy */
+            --navy-950: #070D14;
+            --navy-900: #0F1C2E;
+            --navy-800: #1A2D45;
+            --navy-700: #263F5C;
+            --navy-600: #345173;
+            --navy-500: #46678F;
+            --navy-400: #6483A8;
+            --navy-300: #8FA6C2;
 
-            /* Semantic Colors */
-            --color-success: #22C55E;
-            --color-warning: #F59E0B;
-            --color-error: #EF4444;
-            --color-info: #06B6D4;
+            /* Primary Accent - Bright Orange */
+            --orange-600: #E55A2B;
+            --orange-500: #FF6B35;
+            --orange-400: #FF8556;
+            --orange-300: #FFA077;
+            --orange-200: #FFBFA3;
+            --orange-100: #FFE0D1;
+            --orange-glow: rgba(255, 107, 53, 0.4);
+
+            /* Secondary - Steel Gray */
+            --steel-700: #374151;
+            --steel-600: #4B5563;
+            --steel-500: #64748B;
+            --steel-400: #94A3B8;
+            --steel-300: #CBD5E1;
+            --steel-200: #E2E8F0;
+            --steel-100: #F1F5F9;
+            --steel-50: #F8FAFC;
+
+            /* Semantic */
+            --success: #22C55E;
+            --success-bg: rgba(34, 197, 94, 0.1);
+            --warning: #F59E0B;
+            --warning-bg: rgba(245, 158, 11, 0.1);
+            --error: #EF4444;
+            --error-bg: rgba(239, 68, 68, 0.1);
+            --info: #3B82F6;
+            --info-bg: rgba(59, 130, 246, 0.1);
 
             /* Typography */
-            --font-display: 'Space Grotesk', sans-serif;
+            --font-display: 'Barlow Condensed', sans-serif;
+            --font-body: 'Barlow', sans-serif;
             --font-mono: 'IBM Plex Mono', monospace;
 
             /* Spacing */
@@ -37,247 +58,268 @@
             --space-2: 0.5rem;
             --space-3: 0.75rem;
             --space-4: 1rem;
-            --space-5: 1.5rem;
-            --space-6: 2rem;
-            --space-7: 3rem;
-            --space-8: 4rem;
-            --space-9: 6rem;
-            --space-10: 8rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
 
-            /* Layout */
-            --max-width: 1200px;
-            --border-radius: 6px;
-            --border-radius-lg: 12px;
-            --transition: 0.2s ease;
+            /* Effects */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.3);
+            --shadow-orange: 0 4px 20px var(--orange-glow);
+
+            --radius-sm: 4px;
+            --radius: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+
+            --transition: 200ms ease;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: var(--font-display);
-            font-weight: 400;
+            font-family: var(--font-body);
+            font-size: 1rem;
             line-height: 1.6;
-            color: var(--color-slate);
-            background-color: var(--color-white);
-            font-size: 16px;
+            color: var(--steel-100);
+            background: var(--navy-950);
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Navigation */
-        .nav {
+        /* Grid pattern background */
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: var(--color-navy);
-            padding: var(--space-4) var(--space-6);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-brand {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-white);
-            text-decoration: none;
-            letter-spacing: -0.02em;
-        }
-
-        .nav-brand span {
-            color: var(--color-electric);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: var(--space-5);
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-size: 0.875rem;
-            color: var(--color-silver);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover {
-            color: var(--color-electric);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: var(--space-10) var(--space-6);
-            padding-top: calc(var(--space-10) + 80px);
-            background: var(--color-navy);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
             bottom: 0;
-            background:
-                linear-gradient(90deg, transparent 49.5%, var(--color-navy-light) 49.5%, var(--color-navy-light) 50.5%, transparent 50.5%),
-                linear-gradient(transparent 49.5%, var(--color-navy-light) 49.5%, var(--color-navy-light) 50.5%, transparent 50.5%);
-            background-size: 60px 60px;
-            opacity: 0.5;
+            background-image:
+                linear-gradient(rgba(255, 107, 53, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 107, 53, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: -1;
         }
 
-        .hero-content {
-            max-width: var(--max-width);
+        .container {
+            max-width: 1280px;
             margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 28, 46, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--navy-700);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-4) 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .logo-mark {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-orange);
+        }
+
+        .logo-mark svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .logo-text {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        nav {
+            display: flex;
+            gap: var(--space-1);
+        }
+
+        nav a {
+            padding: var(--space-2) var(--space-4);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--steel-400);
+            text-decoration: none;
+            border-radius: var(--radius);
+            transition: all var(--transition);
+        }
+
+        nav a:hover {
+            color: white;
+            background: var(--navy-700);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--orange-400);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--orange-300);
+        }
+
+        /* Hero */
+        .hero {
+            padding: var(--space-16) 0;
+            text-align: center;
             position: relative;
-            z-index: 1;
+            border-bottom: 1px solid var(--navy-700);
         }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: var(--space-2);
-            background: var(--color-electric);
-            color: var(--color-navy);
             padding: var(--space-2) var(--space-4);
-            border-radius: var(--border-radius);
+            background: var(--navy-800);
+            border: 1px solid var(--navy-600);
+            border-radius: var(--radius);
+            font-family: var(--font-mono);
             font-size: 0.75rem;
-            font-weight: 600;
+            color: var(--orange-400);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: var(--space-5);
-        }
-
-        .hero-badge::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--color-navy);
-            border-radius: 50%;
-            animation: pulse-dot 2s ease infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            margin-bottom: var(--space-6);
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 7vw, 5rem);
+            font-family: var(--font-display);
+            font-size: 4.5rem;
             font-weight: 700;
-            color: var(--color-white);
-            line-height: 1.1;
-            margin-bottom: var(--space-5);
-            letter-spacing: -0.03em;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin-bottom: var(--space-4);
+            line-height: 1;
         }
 
         .hero h1 span {
-            color: var(--color-electric);
+            color: var(--orange-500);
         }
 
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--color-silver);
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: var(--steel-400);
             max-width: 560px;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: var(--space-8);
-            margin-top: var(--space-7);
-            padding-top: var(--space-6);
-            border-top: 1px solid var(--color-navy-light);
-        }
-
-        .hero-stat {
-            text-align: center;
-        }
-
-        .hero-stat-value {
-            font-family: var(--font-mono);
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--color-electric);
-        }
-
-        .hero-stat-label {
-            font-size: 0.75rem;
-            color: var(--color-silver);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* Main Content */
-        main {
-            max-width: var(--max-width);
             margin: 0 auto;
-            padding: var(--space-9) var(--space-6);
         }
 
+        /* Main */
+        main {
+            padding: var(--space-12) 0;
+        }
+
+        /* Sections */
         section {
-            margin-bottom: var(--space-10);
+            background: var(--navy-900);
+            border: 1px solid var(--navy-700);
+            border-radius: var(--radius-xl);
+            padding: var(--space-10);
+            margin-bottom: var(--space-8);
         }
 
         .section-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
             margin-bottom: var(--space-6);
+            padding-bottom: var(--space-4);
+            border-bottom: 1px solid var(--navy-700);
         }
 
         .section-number {
             font-family: var(--font-mono);
             font-size: 0.875rem;
-            color: var(--color-electric);
-            font-weight: 500;
-            margin-bottom: var(--space-2);
+            font-weight: 600;
+            color: var(--orange-500);
+            background: rgba(255, 107, 53, 0.1);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 107, 53, 0.2);
         }
 
-        h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--color-navy);
-            letter-spacing: -0.02em;
+        section h2 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        section > p {
+            color: var(--steel-400);
+            margin-bottom: var(--space-8);
+            font-size: 1.0625rem;
         }
 
         h3 {
-            font-size: 1.25rem;
+            font-family: var(--font-display);
+            font-size: 0.875rem;
             font-weight: 600;
-            color: var(--color-slate);
+            color: var(--steel-300);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             margin-bottom: var(--space-4);
+            margin-top: var(--space-8);
         }
 
-        p {
-            margin-bottom: var(--space-4);
-            color: var(--color-gray);
-        }
+        h3:first-of-type { margin-top: 0; }
 
-        /* Color Palette */
+        /* Colors */
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: var(--space-4);
         }
 
-        .color-card {
-            background: var(--color-white);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            border: 1px solid var(--color-light);
-            transition: var(--transition);
-        }
-
-        .color-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(10, 22, 40, 0.1);
-        }
-
         .color-swatch {
-            height: 80px;
+            background: var(--navy-800);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .color-preview {
+            height: 64px;
         }
 
         .color-info {
@@ -285,95 +327,83 @@
         }
 
         .color-name {
-            font-size: 0.875rem;
+            font-size: 0.8125rem;
             font-weight: 600;
-            color: var(--color-navy);
+            color: var(--steel-200);
+            margin-bottom: var(--space-1);
         }
 
-        .color-hex {
+        .color-value {
             font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--color-gray);
+            font-size: 0.6875rem;
+            color: var(--steel-500);
         }
 
         /* Typography */
-        .type-specimen {
-            margin-bottom: var(--space-7);
-            padding: var(--space-7);
-            background: var(--color-navy);
-            border-radius: var(--border-radius-lg);
-        }
-
-        .type-display {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: var(--color-white);
-            letter-spacing: -0.03em;
-            margin-bottom: var(--space-3);
-        }
-
-        .type-body {
-            font-family: var(--font-mono);
-            font-size: 1.125rem;
-            color: var(--color-electric);
-        }
-
         .type-scale {
             display: flex;
             flex-direction: column;
-            gap: var(--space-4);
+            gap: var(--space-5);
         }
 
-        .type-row {
-            display: flex;
+        .type-item {
+            display: grid;
+            grid-template-columns: 100px 1fr;
             align-items: baseline;
-            gap: var(--space-5);
-            padding: var(--space-4);
-            background: var(--color-white);
-            border: 1px solid var(--color-light);
-            border-radius: var(--border-radius);
+            gap: var(--space-6);
+            padding-bottom: var(--space-5);
+            border-bottom: 1px solid var(--navy-700);
         }
 
         .type-label {
-            width: 80px;
             font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--color-electric);
-            font-weight: 500;
-            flex-shrink: 0;
+            font-size: 0.6875rem;
+            color: var(--steel-500);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
+        .type-display { font-family: var(--font-display); font-size: 4rem; font-weight: 700; color: white; text-transform: uppercase; line-height: 1; }
+        .type-h1 { font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: white; text-transform: uppercase; }
+        .type-h2 { font-family: var(--font-display); font-size: 1.75rem; font-weight: 600; color: var(--steel-100); text-transform: uppercase; }
+        .type-h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--steel-200); text-transform: uppercase; }
+        .type-body { font-family: var(--font-body); font-size: 1rem; color: var(--steel-300); }
+        .type-mono { font-family: var(--font-mono); font-size: 0.875rem; color: var(--orange-400); }
+
         /* Spacing */
-        .spacing-visual {
+        .spacing-scale {
             display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-5);
-            align-items: flex-end;
-            padding: var(--space-6);
-            background: var(--color-navy);
-            border-radius: var(--border-radius-lg);
+            flex-direction: column;
+            gap: var(--space-3);
         }
 
         .spacing-item {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: var(--space-2);
-        }
-
-        .spacing-box {
-            background: var(--color-electric);
-            border-radius: 2px;
+            gap: var(--space-4);
         }
 
         .spacing-label {
+            min-width: 100px;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: var(--steel-500);
+        }
+
+        .spacing-bar {
+            height: 20px;
+            background: linear-gradient(90deg, var(--orange-500), var(--orange-400));
+            border-radius: var(--radius-sm);
+        }
+
+        .spacing-value {
             font-family: var(--font-mono);
             font-size: 0.75rem;
-            color: var(--color-silver);
+            color: var(--steel-500);
         }
 
         /* Buttons */
-        .button-grid {
+        .button-group {
             display: flex;
             flex-wrap: wrap;
             gap: var(--space-4);
@@ -385,253 +415,156 @@
             align-items: center;
             justify-content: center;
             gap: var(--space-2);
-            padding: var(--space-3) var(--space-5);
             font-family: var(--font-display);
-            font-size: 0.875rem;
             font-weight: 600;
-            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             border: none;
-            border-radius: var(--border-radius);
             cursor: pointer;
-            transition: var(--transition);
+            transition: all var(--transition);
+            text-decoration: none;
         }
 
+        .btn-sm { padding: var(--space-2) var(--space-4); font-size: 0.75rem; border-radius: var(--radius); }
+        .btn-md { padding: var(--space-3) var(--space-6); font-size: 0.8125rem; border-radius: var(--radius-md); }
+        .btn-lg { padding: var(--space-4) var(--space-8); font-size: 0.875rem; border-radius: var(--radius-md); }
+
         .btn-primary {
-            background: var(--color-electric);
-            color: var(--color-navy);
+            background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
+            color: white;
+            box-shadow: var(--shadow-orange);
         }
 
         .btn-primary:hover {
-            background: var(--color-electric-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--orange-glow);
         }
 
-        .btn-dark {
-            background: var(--color-navy);
-            color: var(--color-white);
+        .btn-secondary {
+            background: var(--navy-700);
+            color: var(--steel-200);
+            border: 1px solid var(--navy-600);
         }
 
-        .btn-dark:hover {
-            background: var(--color-navy-light);
+        .btn-secondary:hover {
+            background: var(--navy-600);
         }
 
         .btn-outline {
             background: transparent;
-            color: var(--color-navy);
-            border: 2px solid var(--color-navy);
+            color: var(--orange-400);
+            border: 2px solid var(--orange-500);
         }
 
         .btn-outline:hover {
-            background: var(--color-navy);
-            color: var(--color-white);
+            background: rgba(255, 107, 53, 0.1);
         }
 
         .btn-ghost {
             background: transparent;
-            color: var(--color-gray);
+            color: var(--steel-300);
         }
 
         .btn-ghost:hover {
-            background: var(--color-light);
-            color: var(--color-navy);
-        }
-
-        .btn-sm {
-            padding: var(--space-2) var(--space-4);
-            font-size: 0.8125rem;
-        }
-
-        .btn-lg {
-            padding: var(--space-4) var(--space-7);
-            font-size: 1rem;
+            background: var(--navy-700);
         }
 
         /* Forms */
-        .form-group {
-            margin-bottom: var(--space-5);
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.8125rem;
-            font-weight: 600;
-            color: var(--color-navy);
-            margin-bottom: var(--space-2);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: var(--space-3) var(--space-4);
-            font-family: var(--font-display);
-            font-size: 1rem;
-            border: 2px solid var(--color-light);
-            border-radius: var(--border-radius);
-            background: var(--color-white);
-            color: var(--color-navy);
-            transition: var(--transition);
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--color-electric);
-        }
-
-        .form-input::placeholder {
-            color: var(--color-silver);
-        }
-
-        textarea.form-input {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .form-select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right var(--space-4) center;
-            padding-right: var(--space-8);
-        }
-
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--space-5);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-6);
         }
 
-        /* Shipment Cards */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: var(--space-5);
-        }
-
-        .shipment-card {
-            background: var(--color-white);
-            border: 1px solid var(--color-light);
-            border-radius: var(--border-radius-lg);
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .shipment-card:hover {
-            box-shadow: 0 8px 32px rgba(10, 22, 40, 0.1);
-        }
-
-        .shipment-header {
-            background: var(--color-navy);
-            padding: var(--space-4);
+        .form-group {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: var(--space-2);
         }
 
-        .shipment-id {
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
+        label {
+            font-family: var(--font-display);
+            font-size: 0.8125rem;
             font-weight: 600;
-            color: var(--color-white);
-        }
-
-        .shipment-status {
-            padding: var(--space-1) var(--space-3);
-            font-size: 0.6875rem;
-            font-weight: 600;
+            color: var(--steel-300);
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            border-radius: var(--border-radius);
         }
 
-        .status-transit {
-            background: var(--color-electric);
-            color: var(--color-navy);
+        .input {
+            padding: var(--space-3) var(--space-4);
+            font-size: 1rem;
+            font-family: var(--font-body);
+            border: 1px solid var(--navy-600);
+            border-radius: var(--radius-md);
+            background: var(--navy-800);
+            color: var(--steel-100);
+            transition: all var(--transition);
         }
 
-        .status-delivered {
-            background: var(--color-success);
-            color: var(--color-white);
+        .input:focus {
+            outline: none;
+            border-color: var(--orange-500);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15);
         }
 
-        .status-pending {
-            background: var(--color-amber);
-            color: var(--color-navy);
+        .input::placeholder {
+            color: var(--steel-500);
         }
 
-        .shipment-body {
-            padding: var(--space-5);
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-6);
         }
 
-        .shipment-route {
+        .card {
+            background: var(--navy-800);
+            border: 1px solid var(--navy-600);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            transition: all var(--transition);
+        }
+
+        .card:hover {
+            border-color: var(--orange-500);
+            transform: translateY(-2px);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: var(--radius-md);
             display: flex;
             align-items: center;
-            gap: var(--space-4);
+            justify-content: center;
+            font-size: 1.25rem;
             margin-bottom: var(--space-4);
         }
 
-        .route-point {
-            text-align: center;
-            flex: 1;
-        }
-
-        .route-city {
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
             font-weight: 600;
-            color: var(--color-navy);
-        }
-
-        .route-code {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--color-gray);
-        }
-
-        .route-line {
-            flex: 2;
-            height: 2px;
-            background: var(--color-light);
-            position: relative;
-        }
-
-        .route-line::before {
-            content: '→';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--color-white);
-            padding: 0 var(--space-2);
-            color: var(--color-electric);
-            font-size: 1.25rem;
-        }
-
-        .shipment-details {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-3);
-            padding-top: var(--space-4);
-            border-top: 1px solid var(--color-light);
-        }
-
-        .detail {
-            text-align: center;
-        }
-
-        .detail-value {
-            font-family: var(--font-mono);
-            font-weight: 600;
-            color: var(--color-navy);
-        }
-
-        .detail-label {
-            font-size: 0.6875rem;
-            color: var(--color-gray);
+            color: white;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            margin-bottom: var(--space-2);
+        }
+
+        .card-desc {
+            font-size: 0.9375rem;
+            color: var(--steel-400);
         }
 
         /* Data Table */
-        .table-wrapper {
+        .table-container {
             overflow-x: auto;
-            border: 1px solid var(--color-light);
-            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--navy-600);
+            border-radius: var(--radius-lg);
+            background: var(--navy-800);
         }
 
         table {
@@ -639,31 +572,35 @@
             border-collapse: collapse;
         }
 
+        thead {
+            background: var(--navy-900);
+        }
+
         th {
-            background: var(--color-navy);
-            padding: var(--space-4);
             text-align: left;
+            padding: var(--space-4) var(--space-5);
+            font-family: var(--font-display);
             font-size: 0.75rem;
             font-weight: 600;
-            color: var(--color-silver);
+            color: var(--steel-400);
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--navy-600);
         }
 
         td {
-            padding: var(--space-4);
-            border-bottom: 1px solid var(--color-light);
-            color: var(--color-slate);
+            padding: var(--space-4) var(--space-5);
+            font-size: 0.9375rem;
+            color: var(--steel-300);
+            border-bottom: 1px solid var(--navy-700);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
         }
 
         tr:hover td {
-            background: rgba(6, 182, 212, 0.05);
-        }
-
-        .table-tracking {
-            font-family: var(--font-mono);
-            font-weight: 600;
-            color: var(--color-navy);
+            background: rgba(255, 107, 53, 0.03);
         }
 
         /* Badges */
@@ -671,891 +608,908 @@
             display: flex;
             flex-wrap: wrap;
             gap: var(--space-3);
+            margin-bottom: var(--space-6);
         }
 
         .badge {
-            display: inline-block;
-            padding: var(--space-2) var(--space-3);
-            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-1) var(--space-3);
+            font-family: var(--font-display);
+            font-size: 0.6875rem;
             font-weight: 600;
-            border-radius: var(--border-radius);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: var(--radius);
         }
 
-        .badge-electric {
-            background: var(--color-electric);
-            color: var(--color-navy);
-        }
-
-        .badge-navy {
-            background: var(--color-navy);
-            color: var(--color-white);
-        }
-
-        .badge-amber {
-            background: var(--color-amber);
-            color: var(--color-navy);
-        }
-
-        .badge-lime {
-            background: var(--color-lime);
-            color: var(--color-navy);
-        }
-
-        .badge-outline {
-            background: transparent;
-            border: 1px solid var(--color-gray);
-            color: var(--color-gray);
-        }
+        .badge-orange { background: rgba(255, 107, 53, 0.15); color: var(--orange-400); border: 1px solid rgba(255, 107, 53, 0.3); }
+        .badge-steel { background: var(--navy-700); color: var(--steel-300); border: 1px solid var(--navy-600); }
+        .badge-success { background: var(--success-bg); color: var(--success); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .badge-warning { background: var(--warning-bg); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3); }
+        .badge-error { background: var(--error-bg); color: var(--error); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge-info { background: var(--info-bg); color: var(--info); border: 1px solid rgba(59, 130, 246, 0.3); }
 
         /* Design Principles */
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: var(--space-5);
         }
 
-        .principle-card {
+        .principle {
             padding: var(--space-6);
-            background: var(--color-white);
-            border: 1px solid var(--color-light);
-            border-radius: var(--border-radius-lg);
-            transition: var(--transition);
+            background: var(--navy-800);
+            border-radius: var(--radius-lg);
+            border-left: 3px solid var(--orange-500);
         }
 
-        .principle-card:hover {
-            border-color: var(--color-electric);
-        }
-
-        .principle-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--color-navy);
-            border-radius: var(--border-radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: var(--space-4);
-            font-size: 1.25rem;
-        }
-
-        .principle-title {
-            font-size: 1.125rem;
+        .principle-number {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
             font-weight: 600;
-            color: var(--color-navy);
+            color: var(--orange-400);
             margin-bottom: var(--space-2);
         }
 
-        .principle-text {
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-desc {
             font-size: 0.9375rem;
-            color: var(--color-gray);
-            line-height: 1.6;
+            color: var(--steel-400);
         }
 
         /* Animations */
         .animation-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: var(--space-4);
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-5);
         }
 
         .animation-demo {
             padding: var(--space-6);
-            background: var(--color-navy);
-            border-radius: var(--border-radius-lg);
+            background: var(--navy-800);
+            border-radius: var(--radius-lg);
             text-align: center;
+            border: 1px solid var(--navy-600);
         }
 
-        .animation-box {
-            width: 50px;
-            height: 50px;
-            background: var(--color-electric);
-            margin: 0 auto var(--space-4);
-            border-radius: var(--border-radius);
+        .animation-label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--steel-400);
+            text-transform: uppercase;
+            margin-top: var(--space-4);
         }
 
-        .demo-slide:hover .animation-box {
-            animation: slideX 0.5s ease infinite alternate;
+        .move-box {
+            width: 40px;
+            height: 40px;
+            background: var(--orange-500);
+            border-radius: var(--radius);
+            margin: 0 auto;
+            animation: move-right 2s ease-in-out infinite;
         }
 
-        .demo-flash:hover .animation-box {
-            animation: flash 0.6s ease;
+        @keyframes move-right {
+            0%, 100% { transform: translateX(-20px); }
+            50% { transform: translateX(20px); }
         }
 
-        .demo-zoom:hover .animation-box {
-            animation: zoomIn 0.3s ease forwards;
+        .pulse-dot {
+            width: 16px;
+            height: 16px;
+            background: var(--success);
+            border-radius: 50%;
+            margin: 12px auto;
+            animation: pulse-scale 1.5s ease-in-out infinite;
         }
 
-        .demo-spin:hover .animation-box {
+        @keyframes pulse-scale {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            50% { transform: scale(1.2); box-shadow: 0 0 0 10px transparent; }
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--navy-600);
+            border-top-color: var(--orange-500);
+            border-radius: 50%;
             animation: spin 1s linear infinite;
-        }
-
-        @keyframes slideX {
-            from { transform: translateX(-10px); }
-            to { transform: translateX(10px); }
-        }
-
-        @keyframes flash {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        @keyframes zoomIn {
-            to { transform: scale(1.2); }
+            margin: 0 auto;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        .animation-name {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--color-silver);
+        /* Shipment Tracking Card - Special Component */
+        .tracking-card {
+            background: var(--navy-800);
+            border: 1px solid var(--navy-600);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            max-width: 500px;
         }
 
-        /* Special Component - Tracking Timeline */
-        .tracking-timeline {
-            background: var(--color-white);
-            border: 1px solid var(--color-light);
-            border-radius: var(--border-radius-lg);
+        .tracking-header {
+            background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
+            padding: var(--space-5) var(--space-6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .tracking-number {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .carrier-logo {
+            width: 48px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6875rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        .tracking-body {
             padding: var(--space-6);
         }
 
-        .timeline-header {
+        .tracking-route {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: var(--space-6);
-            padding-bottom: var(--space-4);
-            border-bottom: 1px solid var(--color-light);
-        }
-
-        .timeline-tracking {
-            font-family: var(--font-mono);
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--color-navy);
-        }
-
-        .timeline-eta {
-            font-size: 0.875rem;
-            color: var(--color-gray);
-        }
-
-        .timeline-eta strong {
-            color: var(--color-electric);
-        }
-
-        .timeline-items {
             position: relative;
-            padding-left: var(--space-8);
         }
 
-        .timeline-items::before {
+        .tracking-route::before {
             content: '';
             position: absolute;
-            left: 12px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--color-light);
+            top: 50%;
+            left: 60px;
+            right: 60px;
+            height: 2px;
+            background: var(--navy-600);
+            transform: translateY(-50%);
         }
 
-        .timeline-item {
+        .route-point {
+            text-align: center;
             position: relative;
-            padding-bottom: var(--space-5);
+            z-index: 1;
         }
 
-        .timeline-item:last-child {
-            padding-bottom: 0;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: calc(-1 * var(--space-8) + 4px);
-            width: 18px;
-            height: 18px;
-            background: var(--color-light);
-            border-radius: 50%;
-            border: 3px solid var(--color-white);
-        }
-
-        .timeline-item.active .timeline-dot {
-            background: var(--color-electric);
-            box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.2);
-        }
-
-        .timeline-item.completed .timeline-dot {
-            background: var(--color-success);
-        }
-
-        .timeline-content {
-            padding-top: var(--space-1);
-        }
-
-        .timeline-title {
+        .route-city {
+            font-family: var(--font-display);
+            font-size: 1rem;
             font-weight: 600;
-            color: var(--color-navy);
+            color: white;
+            text-transform: uppercase;
             margin-bottom: var(--space-1);
         }
 
-        .timeline-meta {
+        .route-code {
             font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--steel-500);
+        }
+
+        .route-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--orange-500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: var(--space-3) auto 0;
+            color: white;
+            font-size: 0.875rem;
+        }
+
+        .tracking-progress {
+            margin-bottom: var(--space-6);
+        }
+
+        .progress-label {
+            font-family: var(--font-display);
             font-size: 0.75rem;
-            color: var(--color-gray);
+            font-weight: 600;
+            color: var(--steel-400);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-3);
+        }
+
+        .progress-stages {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: var(--space-2);
+        }
+
+        .progress-stages::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--navy-600);
+            border-radius: 2px;
+        }
+
+        .progress-stages::after {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 0;
+            width: 66%;
+            height: 4px;
+            background: var(--orange-500);
+            border-radius: 2px;
+        }
+
+        .stage {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stage-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--navy-600);
+            border: 3px solid var(--navy-800);
+            margin: 0 auto var(--space-2);
+        }
+
+        .stage-dot.active {
+            background: var(--orange-500);
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.2);
+        }
+
+        .stage-dot.completed {
+            background: var(--success);
+        }
+
+        .stage-name {
+            font-size: 0.6875rem;
+            color: var(--steel-500);
+            white-space: nowrap;
+        }
+
+        .stage-name.active {
+            color: var(--orange-400);
+            font-weight: 600;
+        }
+
+        .tracking-eta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-4);
+            background: var(--navy-900);
+            border-radius: var(--radius-md);
+        }
+
+        .eta-label {
+            font-size: 0.8125rem;
+            color: var(--steel-400);
+        }
+
+        .eta-value {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
         }
 
         /* Alerts */
         .alert {
-            padding: var(--space-4) var(--space-5);
-            margin-bottom: var(--space-4);
-            border-radius: var(--border-radius);
             display: flex;
-            align-items: flex-start;
-            gap: var(--space-3);
-            border-left: 4px solid;
+            gap: var(--space-4);
+            padding: var(--space-5);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-4);
+            border: 1px solid;
         }
 
         .alert-icon {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
+            font-size: 0.75rem;
+            font-weight: 700;
         }
 
-        .alert-content {
-            flex: 1;
-        }
+        .alert-content { flex: 1; }
 
         .alert-title {
+            font-family: var(--font-display);
             font-weight: 600;
-            font-size: 0.9375rem;
+            text-transform: uppercase;
             margin-bottom: var(--space-1);
         }
 
-        .alert-text {
-            font-size: 0.875rem;
-            margin: 0;
+        .alert-description {
+            font-size: 0.9375rem;
+            opacity: 0.85;
         }
 
-        .alert-info {
-            background: rgba(6, 182, 212, 0.1);
-            border-color: var(--color-info);
-        }
+        .alert-success { background: var(--success-bg); border-color: rgba(34, 197, 94, 0.3); color: var(--success); }
+        .alert-success .alert-icon { background: var(--success); color: white; }
 
-        .alert-info .alert-title { color: var(--color-info); }
-        .alert-info .alert-icon { fill: var(--color-info); }
+        .alert-warning { background: var(--warning-bg); border-color: rgba(245, 158, 11, 0.3); color: var(--warning); }
+        .alert-warning .alert-icon { background: var(--warning); color: white; }
 
-        .alert-success {
-            background: rgba(34, 197, 94, 0.1);
-            border-color: var(--color-success);
-        }
+        .alert-error { background: var(--error-bg); border-color: rgba(239, 68, 68, 0.3); color: var(--error); }
+        .alert-error .alert-icon { background: var(--error); color: white; }
 
-        .alert-success .alert-title { color: var(--color-success); }
-        .alert-success .alert-icon { fill: var(--color-success); }
-
-        .alert-warning {
-            background: rgba(245, 158, 11, 0.1);
-            border-color: var(--color-warning);
-        }
-
-        .alert-warning .alert-title { color: var(--color-warning); }
-        .alert-warning .alert-icon { fill: var(--color-warning); }
-
-        .alert-error {
-            background: rgba(239, 68, 68, 0.1);
-            border-color: var(--color-error);
-        }
-
-        .alert-error .alert-title { color: var(--color-error); }
-        .alert-error .alert-icon { fill: var(--color-error); }
+        .alert-info { background: var(--info-bg); border-color: rgba(59, 130, 246, 0.3); color: var(--info); }
+        .alert-info .alert-icon { background: var(--info); color: white; }
 
         /* Footer */
         footer {
-            background: var(--color-navy);
-            padding: var(--space-8) var(--space-6);
-            margin-top: var(--space-10);
+            background: var(--navy-900);
+            border-top: 1px solid var(--navy-700);
+            padding: var(--space-12) var(--space-6);
+            text-align: center;
         }
 
-        .footer-content {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-brand {
-            font-size: 1.25rem;
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--color-white);
-        }
-
-        .footer-brand span {
-            color: var(--color-electric);
+            color: white;
+            text-transform: uppercase;
+            margin-bottom: var(--space-2);
         }
 
         .footer-text {
             font-size: 0.875rem;
-            color: var(--color-silver);
+            color: var(--steel-500);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-stats {
-                flex-wrap: wrap;
-                gap: var(--space-5);
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                gap: var(--space-4);
-                text-align: center;
-            }
+            nav { display: none; }
+            .hero h1 { font-size: 3rem; }
+            section { padding: var(--space-6); }
+            .type-item { grid-template-columns: 1fr; gap: var(--space-2); }
+            .tracking-route { flex-direction: column; gap: var(--space-4); }
+            .tracking-route::before { display: none; }
         }
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <a href="#" class="nav-brand">Trans<span>it</span></a>
-        <ul class="nav-links">
-            <li><a href="#colors">Colors</a></li>
-            <li><a href="#typography">Typography</a></li>
-            <li><a href="#components">Components</a></li>
-            <li><a href="#principles">Principles</a></li>
-        </ul>
-    </nav>
-
-    <header class="hero">
-        <div class="hero-content">
-            <span class="hero-badge">Live Tracking</span>
-            <h1>Trans<span>it</span></h1>
-            <p>A precision-engineered design system for logistics, supply chain, and freight management platforms. Track everything, everywhere.</p>
-
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <div class="hero-stat-value">12.4M</div>
-                    <div class="hero-stat-label">Shipments/Day</div>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <div class="logo-mark">
+                        <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                    </div>
+                    <span class="logo-text">Route</span>
                 </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-value">99.8%</div>
-                    <div class="hero-stat-label">On-Time</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-value">190+</div>
-                    <div class="hero-stat-label">Countries</div>
-                </div>
+                <nav>
+                    <a href="#colors">Colors</a>
+                    <a href="#typography">Type</a>
+                    <a href="#components">Components</a>
+                    <a href="#tracking">Tracking</a>
+                </nav>
+                <a href="../index.html" class="back-link">&larr; Back to Gallery</a>
             </div>
         </div>
     </header>
 
     <main>
-        <!-- 1. Color Palette -->
-        <section id="colors">
-            <div class="section-header">
-                <div class="section-number">01</div>
-                <h2>Color Palette</h2>
+        <div class="container">
+            <div class="hero">
+                <div class="hero-badge">Logistics Design System</div>
+                <h1>Move <span>Faster</span></h1>
+                <p class="hero-subtitle">A design system built for logistics, supply chain, and operations platforms. Efficient, clear, and built for speed.</p>
             </div>
-            <p>High-contrast colors optimized for data-dense interfaces and real-time monitoring.</p>
 
-            <div class="color-grid">
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-navy);"></div>
-                    <div class="color-info">
-                        <div class="color-name">Navy</div>
-                        <div class="color-hex">#0A1628</div>
+            <!-- 01. Color Palette -->
+            <section id="colors">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>Color Palette</h2>
+                </div>
+                <p>Industrial navy foundation with high-visibility orange accents for critical actions and status indicators.</p>
+
+                <h3>Primary - Navy</h3>
+                <div class="color-grid">
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--navy-900);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Navy 900</div>
+                            <div class="color-value">#0F1C2E</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--navy-700);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Navy 700</div>
+                            <div class="color-value">#263F5C</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--navy-500);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Navy 500</div>
+                            <div class="color-value">#46678F</div>
+                        </div>
                     </div>
                 </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-electric);"></div>
-                    <div class="color-info">
-                        <div class="color-name">Electric</div>
-                        <div class="color-hex">#06B6D4</div>
+
+                <h3>Accent - Orange</h3>
+                <div class="color-grid">
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--orange-600);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Orange 600</div>
+                            <div class="color-value">#E55A2B</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--orange-500);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Orange 500</div>
+                            <div class="color-value">#FF6B35</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--orange-300);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Orange 300</div>
+                            <div class="color-value">#FFA077</div>
+                        </div>
                     </div>
                 </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-amber);"></div>
-                    <div class="color-info">
-                        <div class="color-name">Amber</div>
-                        <div class="color-hex">#F59E0B</div>
+
+                <h3>Semantic</h3>
+                <div class="color-grid">
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--success);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Success</div>
+                            <div class="color-value">#22C55E</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--warning);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Warning</div>
+                            <div class="color-value">#F59E0B</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--error);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Error</div>
+                            <div class="color-value">#EF4444</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--info);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Info</div>
+                            <div class="color-value">#3B82F6</div>
+                        </div>
                     </div>
                 </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-lime);"></div>
-                    <div class="color-info">
-                        <div class="color-name">Lime</div>
-                        <div class="color-hex">#84CC16</div>
+            </section>
+
+            <!-- 02. Typography -->
+            <section id="typography">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Typography</h2>
+                </div>
+                <p>Barlow Condensed for bold, space-efficient headlines. Barlow for readable body text. IBM Plex Mono for tracking data.</p>
+
+                <div class="type-scale">
+                    <div class="type-item">
+                        <span class="type-label">Display</span>
+                        <span class="type-display">Track</span>
+                    </div>
+                    <div class="type-item">
+                        <span class="type-label">Heading 1</span>
+                        <span class="type-h1">Shipments</span>
+                    </div>
+                    <div class="type-item">
+                        <span class="type-label">Heading 2</span>
+                        <span class="type-h2">Active Routes</span>
+                    </div>
+                    <div class="type-item">
+                        <span class="type-label">Heading 3</span>
+                        <span class="type-h3">Delivery Status</span>
+                    </div>
+                    <div class="type-item">
+                        <span class="type-label">Body</span>
+                        <span class="type-body">Track shipments in real-time with detailed status updates and estimated delivery windows.</span>
+                    </div>
+                    <div class="type-item">
+                        <span class="type-label">Mono</span>
+                        <span class="type-mono">TRK-2024-0847-US</span>
                     </div>
                 </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-slate);"></div>
-                    <div class="color-info">
-                        <div class="color-name">Slate</div>
-                        <div class="color-hex">#334155</div>
+            </section>
+
+            <!-- 03. Spacing -->
+            <section id="spacing">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>Spacing Scale</h2>
+                </div>
+                <p>A compact 4px grid optimized for dense data displays and dashboard layouts.</p>
+
+                <div class="spacing-scale">
+                    <div class="spacing-item">
+                        <span class="spacing-label">4px</span>
+                        <div class="spacing-bar" style="width: 16px;"></div>
+                        <span class="spacing-value">--space-1</span>
+                    </div>
+                    <div class="spacing-item">
+                        <span class="spacing-label">8px</span>
+                        <div class="spacing-bar" style="width: 32px;"></div>
+                        <span class="spacing-value">--space-2</span>
+                    </div>
+                    <div class="spacing-item">
+                        <span class="spacing-label">16px</span>
+                        <div class="spacing-bar" style="width: 64px;"></div>
+                        <span class="spacing-value">--space-4</span>
+                    </div>
+                    <div class="spacing-item">
+                        <span class="spacing-label">24px</span>
+                        <div class="spacing-bar" style="width: 96px;"></div>
+                        <span class="spacing-value">--space-6</span>
+                    </div>
+                    <div class="spacing-item">
+                        <span class="spacing-label">32px</span>
+                        <div class="spacing-bar" style="width: 128px;"></div>
+                        <span class="spacing-value">--space-8</span>
                     </div>
                 </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-light);"></div>
-                    <div class="color-info">
-                        <div class="color-name">Light</div>
-                        <div class="color-hex">#E2E8F0</div>
+            </section>
+
+            <!-- 04. Buttons -->
+            <section id="buttons">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2>Buttons</h2>
+                </div>
+                <p>High-contrast buttons optimized for quick recognition in operational environments.</p>
+
+                <h3>Variants</h3>
+                <div class="button-group">
+                    <button class="btn btn-md btn-primary">Track Shipment</button>
+                    <button class="btn btn-md btn-secondary">View Details</button>
+                    <button class="btn btn-md btn-outline">Export</button>
+                    <button class="btn btn-md btn-ghost">Cancel</button>
+                </div>
+
+                <h3>Sizes</h3>
+                <div class="button-group">
+                    <button class="btn btn-sm btn-primary">Small</button>
+                    <button class="btn btn-md btn-primary">Medium</button>
+                    <button class="btn btn-lg btn-primary">Large</button>
+                </div>
+            </section>
+
+            <!-- 05. Forms -->
+            <section id="forms">
+                <div class="section-header">
+                    <span class="section-number">05</span>
+                    <h2>Form Elements</h2>
+                </div>
+                <p>Efficient form controls for shipment entry and tracking queries.</p>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Tracking Number</label>
+                        <input type="text" class="input" placeholder="Enter tracking number">
+                    </div>
+                    <div class="form-group">
+                        <label>Origin</label>
+                        <input type="text" class="input" placeholder="City or ZIP code">
+                    </div>
+                    <div class="form-group">
+                        <label>Destination</label>
+                        <input type="text" class="input" placeholder="City or ZIP code">
+                    </div>
+                    <div class="form-group">
+                        <label>Carrier</label>
+                        <select class="input">
+                            <option>Select carrier...</option>
+                            <option>FedEx</option>
+                            <option>UPS</option>
+                            <option>DHL</option>
+                            <option>USPS</option>
+                        </select>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 2. Typography -->
-        <section id="typography">
-            <div class="section-header">
-                <div class="section-number">02</div>
-                <h2>Typography</h2>
-            </div>
+            <!-- 06. Cards -->
+            <section id="cards">
+                <div class="section-header">
+                    <span class="section-number">06</span>
+                    <h2>Cards</h2>
+                </div>
+                <p>Information containers for shipments, routes, and operational metrics.</p>
 
-            <div class="type-specimen">
-                <div class="type-display">Space Grotesk</div>
-                <div class="type-body">IBM Plex Mono — for tracking data</div>
-            </div>
-
-            <div class="type-scale">
-                <div class="type-row">
-                    <span class="type-label">H1</span>
-                    <span style="font-size: 2.5rem; font-weight: 700; color: var(--color-navy);">Global Shipments</span>
-                </div>
-                <div class="type-row">
-                    <span class="type-label">H2</span>
-                    <span style="font-size: 2rem; font-weight: 700; color: var(--color-navy);">Active Routes</span>
-                </div>
-                <div class="type-row">
-                    <span class="type-label">H3</span>
-                    <span style="font-size: 1.25rem; font-weight: 600; color: var(--color-slate);">Delivery Status</span>
-                </div>
-                <div class="type-row">
-                    <span class="type-label">Body</span>
-                    <span style="font-size: 1rem; color: var(--color-gray);">Your shipment is on schedule. Expected delivery by end of business day.</span>
-                </div>
-                <div class="type-row">
-                    <span class="type-label">Mono</span>
-                    <span style="font-family: var(--font-mono); font-size: 1rem; color: var(--color-navy);">TRK-2024-0847291-US</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. Spacing -->
-        <section>
-            <div class="section-header">
-                <div class="section-number">03</div>
-                <h2>Spacing Scale</h2>
-            </div>
-            <p>Consistent spacing for data-dense layouts and dashboard interfaces.</p>
-
-            <div class="spacing-visual">
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 4px; height: 4px;"></div>
-                    <span class="spacing-label">4px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 8px; height: 8px;"></div>
-                    <span class="spacing-label">8px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 16px; height: 16px;"></div>
-                    <span class="spacing-label">16px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 24px; height: 24px;"></div>
-                    <span class="spacing-label">24px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 32px; height: 32px;"></div>
-                    <span class="spacing-label">32px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 48px; height: 48px;"></div>
-                    <span class="spacing-label">48px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 64px; height: 64px;"></div>
-                    <span class="spacing-label">64px</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. Buttons -->
-        <section>
-            <div class="section-header">
-                <div class="section-number">04</div>
-                <h2>Buttons</h2>
-            </div>
-
-            <h3>Primary Actions</h3>
-            <div class="button-grid">
-                <button class="btn btn-primary">Track Shipment</button>
-                <button class="btn btn-dark">Create Order</button>
-                <button class="btn btn-outline">View Details</button>
-                <button class="btn btn-ghost">Cancel</button>
-            </div>
-
-            <h3>Sizes</h3>
-            <div class="button-grid">
-                <button class="btn btn-primary btn-sm">Small</button>
-                <button class="btn btn-primary">Default</button>
-                <button class="btn btn-primary btn-lg">Large</button>
-            </div>
-        </section>
-
-        <!-- 5. Forms -->
-        <section>
-            <div class="section-header">
-                <div class="section-number">05</div>
-                <h2>Forms</h2>
-            </div>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label class="form-label">Tracking Number</label>
-                    <input type="text" class="form-input" placeholder="TRK-0000-0000000-XX">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Reference ID</label>
-                    <input type="text" class="form-input" placeholder="Enter reference">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Origin</label>
-                    <select class="form-input form-select">
-                        <option>Select origin</option>
-                        <option>Los Angeles (LAX)</option>
-                        <option>New York (JFK)</option>
-                        <option>Chicago (ORD)</option>
-                        <option>Miami (MIA)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Destination</label>
-                    <select class="form-input form-select">
-                        <option>Select destination</option>
-                        <option>London (LHR)</option>
-                        <option>Frankfurt (FRA)</option>
-                        <option>Tokyo (NRT)</option>
-                        <option>Singapore (SIN)</option>
-                    </select>
-                </div>
-            </div>
-            <button class="btn btn-primary">Search Shipments</button>
-        </section>
-
-        <!-- 6. Shipment Cards -->
-        <section id="components">
-            <div class="section-header">
-                <div class="section-number">06</div>
-                <h2>Shipment Cards</h2>
-            </div>
-
-            <div class="card-grid">
-                <div class="shipment-card">
-                    <div class="shipment-header">
-                        <span class="shipment-id">TRK-2024-0847291</span>
-                        <span class="shipment-status status-transit">In Transit</span>
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon">&#128666;</div>
+                        <div class="card-title">Active Shipments</div>
+                        <div class="card-desc">Real-time tracking for all in-transit packages with live status updates.</div>
                     </div>
-                    <div class="shipment-body">
-                        <div class="shipment-route">
+                    <div class="card">
+                        <div class="card-icon">&#128205;</div>
+                        <div class="card-title">Route Optimization</div>
+                        <div class="card-desc">AI-powered routing to minimize delivery times and fuel costs.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">&#128200;</div>
+                        <div class="card-title">Analytics</div>
+                        <div class="card-desc">Comprehensive delivery performance metrics and trend analysis.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 07. Data Table -->
+            <section id="table">
+                <div class="section-header">
+                    <span class="section-number">07</span>
+                    <h2>Data Table</h2>
+                </div>
+                <p>Dense, scannable tables for shipment manifests and tracking logs.</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tracking #</th>
+                                <th>Origin</th>
+                                <th>Destination</th>
+                                <th>Status</th>
+                                <th>ETA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-family: var(--font-mono); color: var(--orange-400);">TRK-847291</td>
+                                <td>Los Angeles, CA</td>
+                                <td>New York, NY</td>
+                                <td><span class="badge badge-orange">In Transit</span></td>
+                                <td>Mar 15, 2024</td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: var(--font-mono); color: var(--orange-400);">TRK-847292</td>
+                                <td>Chicago, IL</td>
+                                <td>Miami, FL</td>
+                                <td><span class="badge badge-success">Delivered</span></td>
+                                <td>Mar 12, 2024</td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: var(--font-mono); color: var(--orange-400);">TRK-847293</td>
+                                <td>Seattle, WA</td>
+                                <td>Denver, CO</td>
+                                <td><span class="badge badge-warning">Delayed</span></td>
+                                <td>Mar 16, 2024</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 08. Badges -->
+            <section id="badges">
+                <div class="section-header">
+                    <span class="section-number">08</span>
+                    <h2>Badges & Tags</h2>
+                </div>
+                <p>Status indicators for shipment states and priority levels.</p>
+
+                <h3>Shipment Status</h3>
+                <div class="badge-group">
+                    <span class="badge badge-steel">Pending</span>
+                    <span class="badge badge-info">Picked Up</span>
+                    <span class="badge badge-orange">In Transit</span>
+                    <span class="badge badge-warning">Out for Delivery</span>
+                    <span class="badge badge-success">Delivered</span>
+                    <span class="badge badge-error">Exception</span>
+                </div>
+            </section>
+
+            <!-- 09. Design Principles -->
+            <section id="principles">
+                <div class="section-header">
+                    <span class="section-number">09</span>
+                    <h2>Design Principles</h2>
+                </div>
+                <p>Core values guiding the Route design system.</p>
+
+                <div class="principles-grid">
+                    <div class="principle">
+                        <div class="principle-number">01</div>
+                        <div class="principle-title">Instant Clarity</div>
+                        <div class="principle-desc">Critical information must be visible at a glance. No hunting, no guessing.</div>
+                    </div>
+                    <div class="principle">
+                        <div class="principle-number">02</div>
+                        <div class="principle-title">Operational Speed</div>
+                        <div class="principle-desc">Every interaction should be fast. Minimize clicks, maximize efficiency.</div>
+                    </div>
+                    <div class="principle">
+                        <div class="principle-number">03</div>
+                        <div class="principle-title">Dense but Clear</div>
+                        <div class="principle-desc">Pack information tightly without sacrificing readability or scanability.</div>
+                    </div>
+                    <div class="principle">
+                        <div class="principle-number">04</div>
+                        <div class="principle-title">Status First</div>
+                        <div class="principle-desc">Always lead with current state. What's happening now matters most.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 10. Animations -->
+            <section id="animations">
+                <div class="section-header">
+                    <span class="section-number">10</span>
+                    <h2>Animation & Micro-interactions</h2>
+                </div>
+                <p>Motion that conveys movement, progress, and real-time updates.</p>
+
+                <div class="animation-grid">
+                    <div class="animation-demo">
+                        <div class="move-box"></div>
+                        <div class="animation-label">In Transit</div>
+                    </div>
+                    <div class="animation-demo">
+                        <div class="pulse-dot"></div>
+                        <div class="animation-label">Live Status</div>
+                    </div>
+                    <div class="animation-demo">
+                        <div class="spinner"></div>
+                        <div class="animation-label">Loading</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 11. Shipment Tracking Card -->
+            <section id="tracking">
+                <div class="section-header">
+                    <span class="section-number">11</span>
+                    <h2>Shipment Tracking Card</h2>
+                </div>
+                <p>A comprehensive tracking card showing shipment progress from origin to destination.</p>
+
+                <div class="tracking-card">
+                    <div class="tracking-header">
+                        <div class="tracking-number">TRK-2024-847291-US</div>
+                        <div class="carrier-logo">FEDEX</div>
+                    </div>
+                    <div class="tracking-body">
+                        <div class="tracking-route">
                             <div class="route-point">
                                 <div class="route-city">Los Angeles</div>
                                 <div class="route-code">LAX</div>
+                                <div class="route-icon">&#9650;</div>
                             </div>
-                            <div class="route-line"></div>
-                            <div class="route-point">
-                                <div class="route-city">Tokyo</div>
-                                <div class="route-code">NRT</div>
-                            </div>
-                        </div>
-                        <div class="shipment-details">
-                            <div class="detail">
-                                <div class="detail-value">2.4 kg</div>
-                                <div class="detail-label">Weight</div>
-                            </div>
-                            <div class="detail">
-                                <div class="detail-value">Express</div>
-                                <div class="detail-label">Service</div>
-                            </div>
-                            <div class="detail">
-                                <div class="detail-value">Mar 15</div>
-                                <div class="detail-label">ETA</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="shipment-card">
-                    <div class="shipment-header">
-                        <span class="shipment-id">TRK-2024-0829134</span>
-                        <span class="shipment-status status-delivered">Delivered</span>
-                    </div>
-                    <div class="shipment-body">
-                        <div class="shipment-route">
-                            <div class="route-point">
-                                <div class="route-city">Frankfurt</div>
-                                <div class="route-code">FRA</div>
-                            </div>
-                            <div class="route-line"></div>
                             <div class="route-point">
                                 <div class="route-city">New York</div>
                                 <div class="route-code">JFK</div>
+                                <div class="route-icon">&#9660;</div>
                             </div>
                         </div>
-                        <div class="shipment-details">
-                            <div class="detail">
-                                <div class="detail-value">15.8 kg</div>
-                                <div class="detail-label">Weight</div>
+
+                        <div class="tracking-progress">
+                            <div class="progress-label">Shipment Progress</div>
+                            <div class="progress-stages">
+                                <div class="stage">
+                                    <div class="stage-dot completed"></div>
+                                    <div class="stage-name">Picked Up</div>
+                                </div>
+                                <div class="stage">
+                                    <div class="stage-dot completed"></div>
+                                    <div class="stage-name">In Transit</div>
+                                </div>
+                                <div class="stage">
+                                    <div class="stage-dot active"></div>
+                                    <div class="stage-name active">Out for Delivery</div>
+                                </div>
+                                <div class="stage">
+                                    <div class="stage-dot"></div>
+                                    <div class="stage-name">Delivered</div>
+                                </div>
                             </div>
-                            <div class="detail">
-                                <div class="detail-value">Standard</div>
-                                <div class="detail-label">Service</div>
-                            </div>
-                            <div class="detail">
-                                <div class="detail-value">Mar 10</div>
-                                <div class="detail-label">Delivered</div>
-                            </div>
+                        </div>
+
+                        <div class="tracking-eta">
+                            <span class="eta-label">Estimated Arrival</span>
+                            <span class="eta-value">Today by 5:00 PM</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 7. Data Table -->
-        <section>
-            <div class="section-header">
-                <div class="section-number">07</div>
-                <h2>Data Table</h2>
-            </div>
-
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tracking ID</th>
-                            <th>Route</th>
-                            <th>Status</th>
-                            <th>Service</th>
-                            <th>ETA</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="table-tracking">TRK-2024-0847291</td>
-                            <td>LAX → NRT</td>
-                            <td><span class="badge badge-electric">In Transit</span></td>
-                            <td>Express</td>
-                            <td>Mar 15, 2024</td>
-                        </tr>
-                        <tr>
-                            <td class="table-tracking">TRK-2024-0829134</td>
-                            <td>FRA → JFK</td>
-                            <td><span class="badge badge-lime">Delivered</span></td>
-                            <td>Standard</td>
-                            <td>Mar 10, 2024</td>
-                        </tr>
-                        <tr>
-                            <td class="table-tracking">TRK-2024-0851672</td>
-                            <td>SIN → LHR</td>
-                            <td><span class="badge badge-amber">Pending</span></td>
-                            <td>Economy</td>
-                            <td>Mar 20, 2024</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- 8. Badges -->
-        <section>
-            <div class="section-header">
-                <div class="section-number">08</div>
-                <h2>Badges & Tags</h2>
-            </div>
-
-            <div class="badge-group">
-                <span class="badge badge-electric">In Transit</span>
-                <span class="badge badge-lime">Delivered</span>
-                <span class="badge badge-amber">Pending</span>
-                <span class="badge badge-navy">Express</span>
-                <span class="badge badge-outline">Economy</span>
-            </div>
-        </section>
-
-        <!-- 9. Design Principles -->
-        <section id="principles">
-            <div class="section-header">
-                <div class="section-number">09</div>
-                <h2>Design Principles</h2>
-            </div>
-
-            <div class="principles-grid">
-                <div class="principle-card">
-                    <div class="principle-icon">📍</div>
-                    <h4 class="principle-title">Real-Time First</h4>
-                    <p class="principle-text">Every element is designed for live data. Instant updates, no refresh needed.</p>
+            <!-- 12. Alerts -->
+            <section id="alerts">
+                <div class="section-header">
+                    <span class="section-number">12</span>
+                    <h2>Alert Messages</h2>
                 </div>
-                <div class="principle-card">
-                    <div class="principle-icon">📊</div>
-                    <h4 class="principle-title">Data Dense</h4>
-                    <p class="principle-text">Maximum information per pixel. Optimized for operations centers and dashboards.</p>
-                </div>
-                <div class="principle-card">
-                    <div class="principle-icon">🌐</div>
-                    <h4 class="principle-title">Global Scale</h4>
-                    <p class="principle-text">Designed for international operations with timezone awareness and localization support.</p>
-                </div>
-                <div class="principle-card">
-                    <div class="principle-icon">⚡</div>
-                    <h4 class="principle-title">Instant Clarity</h4>
-                    <p class="principle-text">Critical information is immediately scannable. Status at a glance.</p>
-                </div>
-            </div>
-        </section>
+                <p>Notifications for shipment updates, delays, and system status.</p>
 
-        <!-- 10. Animation -->
-        <section>
-            <div class="section-header">
-                <div class="section-number">10</div>
-                <h2>Animation Effects</h2>
-            </div>
-            <p>Purposeful motion that communicates status and guides attention.</p>
-
-            <div class="animation-grid">
-                <div class="animation-demo demo-slide">
-                    <div class="animation-box"></div>
-                    <div class="animation-name">Slide</div>
-                </div>
-                <div class="animation-demo demo-flash">
-                    <div class="animation-box"></div>
-                    <div class="animation-name">Flash</div>
-                </div>
-                <div class="animation-demo demo-zoom">
-                    <div class="animation-box"></div>
-                    <div class="animation-name">Zoom</div>
-                </div>
-                <div class="animation-demo demo-spin">
-                    <div class="animation-box"></div>
-                    <div class="animation-name">Spin</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 11. Special Component -->
-        <section>
-            <div class="section-header">
-                <div class="section-number">11</div>
-                <h2>Tracking Timeline</h2>
-            </div>
-
-            <div class="tracking-timeline" style="max-width: 500px;">
-                <div class="timeline-header">
-                    <span class="timeline-tracking">TRK-2024-0847291</span>
-                    <span class="timeline-eta">ETA: <strong>Mar 15, 14:30</strong></span>
-                </div>
-                <div class="timeline-items">
-                    <div class="timeline-item completed">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">Package picked up</div>
-                            <div class="timeline-meta">Los Angeles, CA • Mar 12, 09:15</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item completed">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">Departed facility</div>
-                            <div class="timeline-meta">LAX Sort Center • Mar 12, 18:42</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item active">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">In transit</div>
-                            <div class="timeline-meta">Currently over Pacific Ocean</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">Customs clearance</div>
-                            <div class="timeline-meta">Tokyo, Japan • Pending</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">Out for delivery</div>
-                            <div class="timeline-meta">Expected Mar 15</div>
-                        </div>
+                <div class="alert alert-success">
+                    <div class="alert-icon">&#10003;</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Delivered</div>
+                        <div class="alert-description">Package TRK-847291 was delivered and signed for by J. Smith at 2:34 PM.</div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- 12. Alerts -->
-        <section>
-            <div class="section-header">
-                <div class="section-number">12</div>
-                <h2>Alert Messages</h2>
-            </div>
-
-            <div class="alert alert-info">
-                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
-                </svg>
-                <div class="alert-content">
-                    <div class="alert-title">Shipment Update</div>
-                    <p class="alert-text">Your package has cleared customs and is now in the destination country.</p>
+                <div class="alert alert-info">
+                    <div class="alert-icon">i</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Out for Delivery</div>
+                        <div class="alert-description">Your package is on the delivery vehicle and will arrive by end of day.</div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="alert alert-success">
-                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <div class="alert-content">
-                    <div class="alert-title">Delivered</div>
-                    <p class="alert-text">Package delivered and signed for by J. Smith at 14:32 local time.</p>
+                <div class="alert alert-warning">
+                    <div class="alert-icon">!</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Delay Notice</div>
+                        <div class="alert-description">Weather conditions have delayed delivery. New estimated arrival: March 16.</div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="alert alert-warning">
-                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-                </svg>
-                <div class="alert-content">
-                    <div class="alert-title">Customs Delay</div>
-                    <p class="alert-text">Shipment held for additional documentation. Please upload commercial invoice.</p>
+                <div class="alert alert-error">
+                    <div class="alert-icon">&#10006;</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Delivery Exception</div>
+                        <div class="alert-description">Delivery attempted but recipient not available. Package held at local facility.</div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="alert alert-error">
-                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                </svg>
-                <div class="alert-content">
-                    <div class="alert-title">Delivery Exception</div>
-                    <p class="alert-text">Delivery attempted but recipient not available. Will retry tomorrow.</p>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </main>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-brand">Trans<span>it</span></div>
-            <div class="footer-text">Logistics Design System v1.0</div>
+        <div class="container">
+            <div class="footer-logo">Route</div>
+            <p class="footer-text">Logistics Design System - Move Faster</p>
         </div>
     </footer>
 </body>

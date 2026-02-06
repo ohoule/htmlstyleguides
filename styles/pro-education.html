@@ -3,206 +3,1924 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academica Design System - Education</title>
+    <title>Academia Design System - Education & University</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Karla:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-primary: #7C2D12; --color-primary-light: #9A3412; --color-primary-50: #FFF7ED;
-            --color-navy: #1E3A5F; --color-navy-light: #2E5A8A;
-            --color-gray-50: #FAFAF9; --color-gray-100: #F5F5F4; --color-gray-200: #E7E5E4;
-            --color-gray-300: #D6D3D1; --color-gray-400: #A8A29E; --color-gray-500: #78716C;
-            --color-gray-600: #57534E; --color-gray-700: #44403C; --color-gray-800: #292524; --color-gray-900: #1C1917;
-            --color-success: #059669; --color-success-light: #D1FAE5;
-            --color-warning: #D97706; --color-warning-light: #FEF3C7;
-            --color-error: #DC2626; --color-error-light: #FEE2E2;
-            --color-info: #0284C7; --color-info-light: #E0F2FE;
-            --font-serif: 'Merriweather', Georgia, serif;
-            --font-sans: 'Source Sans 3', system-ui, sans-serif;
-            --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem;
-            --text-xl: 1.25rem; --text-2xl: 1.5rem; --text-3xl: 2rem; --text-4xl: 2.5rem;
-            --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
-            --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-12: 3rem; --space-16: 4rem;
-            --shadow: 0 1px 3px rgb(0 0 0 / 0.1); --shadow-md: 0 4px 6px rgb(0 0 0 / 0.1);
-            --radius: 0.375rem; --radius-lg: 0.5rem; --radius-xl: 0.75rem;
-            --transition: 200ms ease;
+            /* Academic Blue */
+            --academic-50: #EFF6FF;
+            --academic-100: #DBEAFE;
+            --academic-200: #BFDBFE;
+            --academic-300: #93C5FD;
+            --academic-400: #60A5FA;
+            --academic-500: #3B82F6;
+            --academic-600: #1D4ED8;
+            --academic-700: #1E3A8A;
+            --academic-800: #1E3057;
+            --academic-900: #172554;
+            --academic-950: #0F172A;
+
+            /* Warm Gold / Mustard */
+            --gold-50: #FFFBEB;
+            --gold-100: #FEF3C7;
+            --gold-200: #FDE68A;
+            --gold-300: #FCD34D;
+            --gold-400: #FBBF24;
+            --gold-500: #D97706;
+            --gold-600: #B45309;
+            --gold-700: #92400E;
+            --gold-800: #78350F;
+
+            /* Rich Cream */
+            --cream-50: #FDFCFA;
+            --cream-100: #FAF8F5;
+            --cream-200: #F5F1EB;
+            --cream-300: #EDE6DB;
+            --cream-400: #DDD2C0;
+            --cream-500: #C7B99A;
+            --cream-600: #A69A7C;
+
+            /* Text Colors */
+            --ink-50: #F8F8F7;
+            --ink-100: #EEEEEC;
+            --ink-200: #D4D4D2;
+            --ink-300: #A3A3A0;
+            --ink-400: #737370;
+            --ink-500: #525250;
+            --ink-600: #3D3D3C;
+            --ink-700: #2C2C2B;
+            --ink-800: #1F1F1E;
+            --ink-900: #141413;
+
+            /* Status Colors */
+            --success-50: #F0FDF4;
+            --success-100: #DCFCE7;
+            --success-500: #22C55E;
+            --success-600: #16A34A;
+            --success-700: #15803D;
+
+            --warning-50: #FFFBEB;
+            --warning-100: #FEF3C7;
+            --warning-500: #F59E0B;
+            --warning-600: #D97706;
+            --warning-700: #B45309;
+
+            --error-50: #FEF2F2;
+            --error-100: #FEE2E2;
+            --error-500: #EF4444;
+            --error-600: #DC2626;
+            --error-700: #B91C1C;
+
+            --info-50: #EFF6FF;
+            --info-100: #DBEAFE;
+            --info-500: #3B82F6;
+            --info-600: #2563EB;
+
+            /* Typography */
+            --font-display: 'Lora', Georgia, serif;
+            --font-body: 'Karla', -apple-system, sans-serif;
+            --font-mono: 'Fira Code', Consolas, monospace;
+
+            /* Spacing Scale */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-20: 5rem;
+            --space-24: 6rem;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(20, 20, 19, 0.04);
+            --shadow: 0 2px 4px rgba(20, 20, 19, 0.06), 0 1px 2px rgba(20, 20, 19, 0.04);
+            --shadow-md: 0 4px 8px rgba(20, 20, 19, 0.08), 0 2px 4px rgba(20, 20, 19, 0.04);
+            --shadow-lg: 0 8px 16px rgba(20, 20, 19, 0.1), 0 4px 8px rgba(20, 20, 19, 0.06);
+            --shadow-gold: 0 4px 16px rgba(217, 119, 6, 0.2);
+
+            /* Border Radius */
+            --radius-sm: 0.25rem;
+            --radius: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+
+            /* Transitions */
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: 150ms var(--ease-out);
+            --transition: 250ms var(--ease-out);
+            --transition-slow: 400ms var(--ease-out);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.6; color: var(--color-gray-900); background: var(--color-gray-50); }
-        header { background: var(--color-primary); color: white; padding: var(--space-4) var(--space-6); }
-        .header-content { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-family: var(--font-serif); font-size: var(--text-xl); font-weight: 700; }
-        nav { display: flex; gap: var(--space-1); }
-        nav a { padding: var(--space-2) var(--space-3); font-size: var(--text-sm); color: rgba(255,255,255,0.9); text-decoration: none; border-radius: var(--radius); transition: all var(--transition); }
-        nav a:hover { color: white; background: rgba(255,255,255,0.1); }
-        main { max-width: 1200px; margin: 0 auto; padding: var(--space-12) var(--space-6); }
-        .hero { text-align: center; margin-bottom: var(--space-16); }
-        .hero h1 { font-family: var(--font-serif); font-size: var(--text-4xl); font-weight: 700; margin-bottom: var(--space-4); }
-        .hero p { font-size: var(--text-lg); color: var(--color-gray-600); max-width: 600px; margin: 0 auto; }
-        section { background: white; border: 1px solid var(--color-gray-200); border-radius: var(--radius-xl); padding: var(--space-8); margin-bottom: var(--space-8); }
-        section h2 { font-family: var(--font-serif); font-size: var(--text-xl); font-weight: 700; margin-bottom: var(--space-2); display: flex; align-items: center; gap: var(--space-3); }
-        .section-number { font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 600; color: var(--color-primary); background: var(--color-primary-50); padding: var(--space-1) var(--space-2); border-radius: var(--radius); }
-        section > p { color: var(--color-gray-600); margin-bottom: var(--space-6); }
-        h3 { font-size: var(--text-base); font-weight: 600; color: var(--color-gray-700); margin: var(--space-6) 0 var(--space-3); }
-        h3:first-of-type { margin-top: 0; }
-        .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--space-4); }
-        .color-swatch { text-align: center; }
-        .color-preview { height: 56px; border-radius: var(--radius-lg); margin-bottom: var(--space-2); border: 1px solid var(--color-gray-200); }
-        .color-name { font-size: var(--text-sm); font-weight: 500; color: var(--color-gray-700); }
-        .color-value { font-size: var(--text-xs); color: var(--color-gray-500); font-family: monospace; }
-        .type-scale { display: flex; flex-direction: column; gap: var(--space-4); }
-        .type-item { display: flex; align-items: baseline; gap: var(--space-6); padding-bottom: var(--space-4); border-bottom: 1px solid var(--color-gray-100); }
-        .type-label { min-width: 80px; font-size: var(--text-sm); color: var(--color-gray-500); }
-        .type-display { font-family: var(--font-serif); font-size: var(--text-4xl); font-weight: 700; }
-        .type-h1 { font-family: var(--font-serif); font-size: var(--text-3xl); font-weight: 700; }
-        .type-body { font-size: var(--text-base); }
-        .button-group { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-6); }
-        .btn { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 600; border-radius: var(--radius); border: none; cursor: pointer; transition: all var(--transition); padding: var(--space-2) var(--space-4); font-size: var(--text-sm); }
-        .btn-primary { background: var(--color-primary); color: white; }
-        .btn-primary:hover { background: var(--color-primary-light); }
-        .btn-navy { background: var(--color-navy); color: white; }
-        .btn-navy:hover { background: var(--color-navy-light); }
-        .btn-secondary { background: white; color: var(--color-gray-700); border: 1px solid var(--color-gray-300); }
-        .btn-secondary:hover { background: var(--color-gray-50); }
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-6); }
-        .form-group { display: flex; flex-direction: column; gap: var(--space-2); }
-        label { font-size: var(--text-sm); font-weight: 500; color: var(--color-gray-700); }
-        .input { padding: var(--space-2) var(--space-3); font-size: var(--text-base); border: 1px solid var(--color-gray-300); border-radius: var(--radius); background: white; transition: all var(--transition); }
-        .input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-50); }
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-6); }
-        .card { background: white; border: 1px solid var(--color-gray-200); border-radius: var(--radius-xl); padding: var(--space-6); transition: all var(--transition); }
-        .card:hover { box-shadow: var(--shadow-md); }
-        .card-title { font-family: var(--font-serif); font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-2); }
-        .card-desc { font-size: var(--text-sm); color: var(--color-gray-600); }
-        .course-card { border-left: 4px solid var(--color-primary); }
-        .stat-card { background: var(--color-navy); color: white; border: none; }
-        .stat-label { font-size: var(--text-sm); color: rgba(255,255,255,0.8); margin-bottom: var(--space-1); }
-        .stat-value { font-family: var(--font-serif); font-size: var(--text-3xl); font-weight: 700; }
-        .table-container { overflow-x: auto; border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); }
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: var(--space-3) var(--space-4); font-size: var(--text-sm); font-weight: 600; color: var(--color-gray-600); background: var(--color-gray-50); border-bottom: 1px solid var(--color-gray-200); }
-        td { padding: var(--space-3) var(--space-4); font-size: var(--text-sm); color: var(--color-gray-700); border-bottom: 1px solid var(--color-gray-100); }
-        tr:last-child td { border-bottom: none; }
-        tr:hover td { background: var(--color-gray-50); }
-        .badge-group { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-        .badge { display: inline-flex; padding: var(--space-1) var(--space-2); font-size: var(--text-xs); font-weight: 500; border-radius: var(--radius); }
-        .badge-success { background: var(--color-success-light); color: var(--color-success); }
-        .badge-warning { background: var(--color-warning-light); color: var(--color-warning); }
-        .badge-error { background: var(--color-error-light); color: var(--color-error); }
-        .badge-info { background: var(--color-info-light); color: var(--color-info); }
-        .badge-primary { background: var(--color-primary-50); color: var(--color-primary); }
-        .principles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-6); }
-        .principle { padding: var(--space-5); background: var(--color-gray-50); border-radius: var(--radius-lg); }
-        .principle-number { font-size: var(--text-sm); font-weight: 600; color: var(--color-primary); margin-bottom: var(--space-2); }
-        .principle-title { font-family: var(--font-serif); font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-2); }
-        .principle-desc { font-size: var(--text-sm); color: var(--color-gray-600); }
-        .alert { display: flex; gap: var(--space-3); padding: var(--space-4); border-radius: var(--radius-lg); margin-bottom: var(--space-3); }
-        .alert-content { flex: 1; }
-        .alert-title { font-weight: 600; margin-bottom: 2px; font-size: var(--text-sm); }
-        .alert-description { font-size: var(--text-sm); opacity: 0.9; }
-        .alert-success { background: var(--color-success-light); color: #065F46; }
-        .alert-info { background: var(--color-info-light); color: #075985; }
-        .alert-warning { background: var(--color-warning-light); color: #92400E; }
-        .alert-error { background: var(--color-error-light); color: #991B1B; }
-        footer { background: var(--color-primary); color: white; padding: var(--space-8) var(--space-6); margin-top: var(--space-16); text-align: center; }
-        .footer-text { font-size: var(--text-sm); color: rgba(255,255,255,0.8); }
-        @media (max-width: 768px) { nav { display: none; } .hero h1 { font-size: var(--text-3xl); } section { padding: var(--space-5); } }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.65;
+            color: var(--ink-800);
+            background: var(--cream-100);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Subtle Paper Texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(ellipse at 30% 20%, rgba(30, 58, 138, 0.02) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(217, 119, 6, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--academic-900) 0%, var(--academic-950) 100%);
+            border-bottom: 3px solid var(--gold-500);
+        }
+
+        .header-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: var(--space-5) var(--space-8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-crest {
+            width: 44px;
+            height: 52px;
+            position: relative;
+        }
+
+        .logo-crest::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--gold-500);
+            clip-path: polygon(50% 0%, 100% 20%, 100% 80%, 50% 100%, 0% 80%, 0% 20%);
+        }
+
+        .logo-crest::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            background: var(--academic-900);
+            clip-path: polygon(50% 0%, 100% 20%, 100% 80%, 50% 100%, 0% 80%, 0% 20%);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-name {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .logo-tagline {
+            font-size: 0.6875rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold-400);
+            font-weight: 500;
+        }
+
+        .back-link {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--academic-200);
+            text-decoration: none;
+            padding: var(--space-2) var(--space-4);
+            border: 1px solid var(--academic-600);
+            border-radius: var(--radius);
+            transition: var(--transition-fast);
+        }
+
+        .back-link:hover {
+            color: white;
+            border-color: var(--gold-500);
+            background: rgba(217, 119, 6, 0.1);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--academic-800);
+            padding: 0 var(--space-8);
+            overflow-x: auto;
+        }
+
+        nav ul {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            list-style: none;
+            gap: 0;
+        }
+
+        nav a {
+            display: block;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--academic-200);
+            text-decoration: none;
+            padding: var(--space-4) var(--space-5);
+            border-bottom: 2px solid transparent;
+            transition: var(--transition-fast);
+        }
+
+        nav a:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        nav a.active {
+            color: var(--gold-400);
+            border-bottom-color: var(--gold-500);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: var(--space-12) var(--space-8);
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: var(--space-16) var(--space-8);
+            margin-bottom: var(--space-12);
+            background: white;
+            border: 1px solid var(--cream-300);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--academic-700), var(--gold-500), var(--academic-700));
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold-600);
+            background: var(--gold-100);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius);
+            margin-bottom: var(--space-5);
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 3.25rem;
+            font-weight: 700;
+            color: var(--academic-900);
+            margin-bottom: var(--space-4);
+            line-height: 1.15;
+        }
+
+        .hero h1 span {
+            color: var(--gold-600);
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 1.1875rem;
+            color: var(--ink-500);
+            max-width: 640px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            border: 1px solid var(--cream-300);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            margin-bottom: var(--space-6);
+            box-shadow: var(--shadow);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+            padding-bottom: var(--space-5);
+            border-bottom: 1px solid var(--cream-200);
+        }
+
+        .section-number {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--academic-700);
+            background: var(--academic-100);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius);
+            min-width: 44px;
+            text-align: center;
+        }
+
+        .section-info h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--academic-900);
+            margin-bottom: var(--space-1);
+        }
+
+        .section-info p {
+            font-size: 0.9375rem;
+            color: var(--ink-500);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--academic-800);
+            margin-bottom: var(--space-3);
+            margin-top: var(--space-6);
+        }
+
+        h3:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Color Palette */
+        .color-groups {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-6);
+        }
+
+        .color-group-title {
+            font-size: 0.6875rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-400);
+            margin-bottom: var(--space-3);
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+            gap: var(--space-3);
+        }
+
+        .color-swatch {
+            background: white;
+            border: 1px solid var(--cream-300);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .color-swatch:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .color-preview {
+            height: 72px;
+        }
+
+        .color-info {
+            padding: var(--space-3);
+        }
+
+        .color-name {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--ink-700);
+            margin-bottom: var(--space-1);
+        }
+
+        .color-value {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--ink-400);
+        }
+
+        /* Typography */
+        .type-specimen {
+            background: var(--cream-100);
+            border: 1px solid var(--cream-300);
+            border-radius: var(--radius-md);
+            padding: var(--space-6);
+        }
+
+        .type-row {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: var(--space-5);
+            align-items: baseline;
+            padding: var(--space-4) 0;
+            border-bottom: 1px solid var(--cream-300);
+        }
+
+        .type-row:last-child {
+            border-bottom: none;
+        }
+
+        .type-meta {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--ink-400);
+            line-height: 1.5;
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--academic-900);
+            line-height: 1.1;
+        }
+
+        .type-h1 {
+            font-family: var(--font-display);
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--academic-900);
+        }
+
+        .type-h2 {
+            font-family: var(--font-display);
+            font-size: 1.625rem;
+            font-weight: 600;
+            color: var(--academic-800);
+        }
+
+        .type-h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--academic-800);
+        }
+
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--ink-700);
+        }
+
+        .type-small {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: var(--ink-500);
+        }
+
+        .font-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-3);
+            margin-top: var(--space-5);
+        }
+
+        .font-card {
+            background: white;
+            border: 1px solid var(--cream-300);
+            border-radius: var(--radius);
+            padding: var(--space-4);
+        }
+
+        .font-card-label {
+            font-size: 0.625rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-300);
+            margin-bottom: var(--space-1);
+        }
+
+        .font-card-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--ink-700);
+        }
+
+        .font-card-name.display { font-family: var(--font-display); }
+        .font-card-name.body { font-family: var(--font-body); }
+        .font-card-name.mono { font-family: var(--font-mono); }
+
+        /* Spacing Scale */
+        .spacing-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--ink-400);
+            min-width: 80px;
+        }
+
+        .spacing-bar {
+            height: 20px;
+            background: linear-gradient(90deg, var(--academic-600), var(--academic-800));
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .spacing-item:hover .spacing-bar {
+            background: linear-gradient(90deg, var(--gold-500), var(--gold-600));
+        }
+
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--ink-300);
+            min-width: 48px;
+        }
+
+        /* Buttons */
+        .button-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+            margin-bottom: var(--space-6);
+        }
+
+        .btn {
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            padding: var(--space-3) var(--space-5);
+            border-radius: var(--radius);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--academic-700) 0%, var(--academic-800) 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(30, 58, 138, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--academic-600) 0%, var(--academic-700) 100%);
+            box-shadow: 0 4px 16px rgba(30, 58, 138, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-600) 100%);
+            color: white;
+            box-shadow: var(--shadow-gold);
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(135deg, var(--gold-400) 0%, var(--gold-500) 100%);
+            box-shadow: 0 6px 20px rgba(217, 119, 6, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--academic-700);
+            border: 2px solid var(--academic-700);
+        }
+
+        .btn-secondary:hover {
+            background: var(--academic-50);
+            border-color: var(--academic-600);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--academic-700);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .btn-ghost:hover {
+            color: var(--gold-600);
+        }
+
+        .btn-lg {
+            padding: var(--space-4) var(--space-6);
+            font-size: 1rem;
+        }
+
+        .btn-sm {
+            padding: var(--space-2) var(--space-4);
+            font-size: 0.8125rem;
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        label {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--ink-700);
+        }
+
+        .label-optional {
+            font-weight: 400;
+            color: var(--ink-400);
+            margin-left: var(--space-1);
+        }
+
+        .input {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            padding: var(--space-3) var(--space-4);
+            border: 1px solid var(--cream-400);
+            border-radius: var(--radius);
+            background: white;
+            color: var(--ink-800);
+            transition: var(--transition-fast);
+        }
+
+        .input:hover {
+            border-color: var(--cream-500);
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: var(--academic-500);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .input::placeholder {
+            color: var(--ink-300);
+        }
+
+        textarea.input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        select.input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23737370' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: var(--space-10);
+        }
+
+        .form-hint {
+            font-size: 0.8125rem;
+            color: var(--ink-400);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--cream-300);
+            border-radius: var(--radius-md);
+            padding: var(--space-5);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .card-course {
+            border-left: 4px solid var(--academic-600);
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--academic-100);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-3);
+        }
+
+        .card-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--academic-700);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--academic-900);
+            margin-bottom: var(--space-2);
+        }
+
+        .card-meta {
+            font-size: 0.8125rem;
+            color: var(--ink-400);
+            margin-bottom: var(--space-2);
+        }
+
+        .card-text {
+            font-size: 0.9375rem;
+            color: var(--ink-600);
+            line-height: 1.6;
+        }
+
+        /* Data Table */
+        .table-container {
+            border: 1px solid var(--cream-300);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: var(--cream-100);
+        }
+
+        th {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--ink-600);
+            text-align: left;
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 2px solid var(--cream-300);
+        }
+
+        td {
+            font-size: 0.9375rem;
+            color: var(--ink-700);
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 1px solid var(--cream-200);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover td {
+            background: var(--cream-50);
+        }
+
+        /* Badges */
+        .badge-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+
+        .badge {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .badge-open {
+            background: var(--success-100);
+            color: var(--success-700);
+        }
+
+        .badge-waitlist {
+            background: var(--warning-100);
+            color: var(--warning-700);
+        }
+
+        .badge-closed {
+            background: var(--error-100);
+            color: var(--error-700);
+        }
+
+        .badge-honors {
+            background: var(--gold-100);
+            color: var(--gold-700);
+        }
+
+        .badge-online {
+            background: var(--info-100);
+            color: var(--info-600);
+        }
+
+        .badge-new {
+            background: var(--academic-100);
+            color: var(--academic-700);
+        }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .principle-card {
+            background: var(--cream-100);
+            border: 1px solid var(--cream-300);
+            border-radius: var(--radius-md);
+            padding: var(--space-5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .principle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--academic-600);
+        }
+
+        .principle-card:hover::before {
+            background: var(--gold-500);
+        }
+
+        .principle-number {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--cream-400);
+            line-height: 1;
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--academic-900);
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-desc {
+            font-size: 0.9375rem;
+            color: var(--ink-600);
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .animation-demo {
+            background: var(--cream-100);
+            border: 1px solid var(--cream-300);
+            border-radius: var(--radius-md);
+            padding: var(--space-5);
+            text-align: center;
+        }
+
+        .animation-preview {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--academic-600), var(--academic-800));
+            border-radius: var(--radius);
+            margin: 0 auto var(--space-3);
+        }
+
+        .demo-hover:hover .animation-preview {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .demo-pulse .animation-preview {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .demo-glow .animation-preview {
+            background: linear-gradient(135deg, var(--gold-500), var(--gold-600));
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 6, 0); }
+            50% { box-shadow: 0 0 20px 4px rgba(217, 119, 6, 0.3); }
+        }
+
+        .demo-spin .animation-preview {
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animation-label {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--ink-600);
+        }
+
+        /* Course Progress Tracker */
+        .progress-tracker {
+            background: var(--cream-50);
+            border: 1px solid var(--cream-300);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .tracker-header {
+            background: var(--academic-800);
+            color: white;
+            padding: var(--space-4) var(--space-5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tracker-title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .tracker-semester {
+            font-size: 0.75rem;
+            color: var(--academic-200);
+        }
+
+        .course-list {
+            padding: var(--space-4);
+        }
+
+        .course-item {
+            background: white;
+            border: 1px solid var(--cream-300);
+            border-radius: var(--radius);
+            padding: var(--space-4);
+            margin-bottom: var(--space-3);
+        }
+
+        .course-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-3);
+        }
+
+        .course-info {
+            flex: 1;
+        }
+
+        .course-code {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--academic-600);
+            margin-bottom: var(--space-1);
+        }
+
+        .course-name {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink-800);
+        }
+
+        .course-instructor {
+            font-size: 0.8125rem;
+            color: var(--ink-400);
+            margin-top: var(--space-1);
+        }
+
+        .course-credits {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gold-600);
+            background: var(--gold-100);
+            padding: var(--space-1) var(--space-2);
+            border-radius: var(--radius-sm);
+        }
+
+        .progress-wrapper {
+            margin-bottom: var(--space-2);
+        }
+
+        .progress-bar-bg {
+            height: 8px;
+            background: var(--cream-300);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s var(--ease-out);
+        }
+
+        .progress-bar.excellent { background: linear-gradient(90deg, var(--success-500), var(--success-600)); }
+        .progress-bar.good { background: linear-gradient(90deg, var(--academic-500), var(--academic-600)); }
+        .progress-bar.in-progress { background: linear-gradient(90deg, var(--gold-400), var(--gold-500)); }
+        .progress-bar.starting { background: linear-gradient(90deg, var(--ink-300), var(--ink-400)); }
+
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+        }
+
+        .progress-percent {
+            font-weight: 600;
+            color: var(--ink-700);
+        }
+
+        .progress-grade {
+            color: var(--ink-400);
+        }
+
+        /* Alerts */
+        .alert-stack {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .alert {
+            display: flex;
+            gap: var(--space-3);
+            padding: var(--space-4) var(--space-5);
+            border-radius: var(--radius-md);
+            border-left: 4px solid;
+        }
+
+        .alert-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            margin-bottom: var(--space-1);
+        }
+
+        .alert-text {
+            font-size: 0.9375rem;
+        }
+
+        .alert-success {
+            background: var(--success-50);
+            border-color: var(--success-500);
+            color: var(--success-700);
+        }
+
+        .alert-warning {
+            background: var(--warning-50);
+            border-color: var(--warning-500);
+            color: var(--warning-700);
+        }
+
+        .alert-error {
+            background: var(--error-50);
+            border-color: var(--error-500);
+            color: var(--error-700);
+        }
+
+        .alert-info {
+            background: var(--info-50);
+            border-color: var(--info-500);
+            color: var(--academic-800);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--academic-900) 0%, var(--academic-950) 100%);
+            color: var(--academic-200);
+            padding: var(--space-10) var(--space-8);
+            margin-top: var(--space-12);
+            text-align: center;
+            border-top: 3px solid var(--gold-500);
+        }
+
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--space-2);
+        }
+
+        .footer-tagline {
+            font-size: 0.875rem;
+            color: var(--academic-300);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                gap: var(--space-3);
+                text-align: center;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            main {
+                padding: var(--space-6) var(--space-4);
+            }
+
+            .hero {
+                padding: var(--space-8) var(--space-4);
+            }
+
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+
+            section {
+                padding: var(--space-5);
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: var(--space-2);
+            }
+        }
+
+        /* Scroll Animations */
+        @media (prefers-reduced-motion: no-preference) {
+            section {
+                animation: fadeInUp 0.5s var(--ease-out) backwards;
+            }
+
+            section:nth-child(1) { animation-delay: 0.05s; }
+            section:nth-child(2) { animation-delay: 0.1s; }
+            section:nth-child(3) { animation-delay: 0.15s; }
+            section:nth-child(4) { animation-delay: 0.2s; }
+            section:nth-child(5) { animation-delay: 0.25s; }
+            section:nth-child(6) { animation-delay: 0.3s; }
+            section:nth-child(7) { animation-delay: 0.35s; }
+            section:nth-child(8) { animation-delay: 0.4s; }
+            section:nth-child(9) { animation-delay: 0.45s; }
+            section:nth-child(10) { animation-delay: 0.5s; }
+            section:nth-child(11) { animation-delay: 0.55s; }
+            section:nth-child(12) { animation-delay: 0.6s; }
+
+            @keyframes fadeInUp {
+                from { opacity: 0; transform: translateY(16px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        }
     </style>
 </head>
 <body>
     <header>
-        <div class="header-content">
-            <div class="logo">Academica</div>
-            <nav>
-                <a href="#colors">Colors</a>
-                <a href="#typography">Typography</a>
-                <a href="#buttons">Buttons</a>
-                <a href="#cards">Cards</a>
-                <a href="#table">Table</a>
-                <a href="#alerts">Alerts</a>
-            </nav>
+        <div class="header-inner">
+            <a href="../index.html" class="logo">
+                <div class="logo-crest" aria-hidden="true"></div>
+                <div class="logo-text">
+                    <span class="logo-name">Academia</span>
+                    <span class="logo-tagline">Design System</span>
+                </div>
+            </a>
+            <a href="../index.html" class="back-link">Back to Gallery</a>
         </div>
     </header>
+
+    <nav aria-label="Main navigation">
+        <ul>
+            <li><a href="#colors" class="active">Colors</a></li>
+            <li><a href="#typography">Typography</a></li>
+            <li><a href="#spacing">Spacing</a></li>
+            <li><a href="#buttons">Buttons</a></li>
+            <li><a href="#forms">Forms</a></li>
+            <li><a href="#cards">Cards</a></li>
+            <li><a href="#table">Data Table</a></li>
+            <li><a href="#badges">Badges</a></li>
+            <li><a href="#principles">Principles</a></li>
+            <li><a href="#animations">Animations</a></li>
+            <li><a href="#progress">Progress</a></li>
+            <li><a href="#alerts">Alerts</a></li>
+        </ul>
+    </nav>
+
     <main>
         <div class="hero">
-            <h1>Academica Design System</h1>
-            <p>A scholarly design system for educational institutions. Built with tradition, credibility, and learning in mind.</p>
+            <div class="hero-badge">Education Design System</div>
+            <h1>Academia <span>Style Guide</span></h1>
+            <p>A scholarly design language for educational institutions. Deep academic blue meets warm gold to inspire knowledge, tradition, and growth.</p>
         </div>
+
+        <!-- 01. Color Palette -->
         <section id="colors">
-            <h2><span class="section-number">01</span> Color Palette</h2>
-            <p>Traditional academic colors conveying knowledge, prestige, and scholarly tradition.</p>
-            <div class="color-grid">
-                <div class="color-swatch"><div class="color-preview" style="background: var(--color-primary);"></div><div class="color-name">Burnt Sienna</div><div class="color-value">#7C2D12</div></div>
-                <div class="color-swatch"><div class="color-preview" style="background: var(--color-navy);"></div><div class="color-name">Academic Navy</div><div class="color-value">#1E3A5F</div></div>
-                <div class="color-swatch"><div class="color-preview" style="background: var(--color-gray-100);"></div><div class="color-name">Parchment</div><div class="color-value">#F5F5F4</div></div>
-                <div class="color-swatch"><div class="color-preview" style="background: var(--color-gray-900);"></div><div class="color-name">Ink Black</div><div class="color-value">#1C1917</div></div>
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <div class="section-info">
+                    <h2>Color Palette</h2>
+                    <p>Traditional academic colors balanced with warm, inspiring accents.</p>
+                </div>
+            </div>
+
+            <div class="color-groups">
+                <div>
+                    <div class="color-group-title">Academic Blue</div>
+                    <div class="color-palette">
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--academic-100);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Academic 100</div>
+                                <div class="color-value">#DBEAFE</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--academic-500);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Academic 500</div>
+                                <div class="color-value">#3B82F6</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--academic-700);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Academic 700</div>
+                                <div class="color-value">#1E3A8A</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--academic-900);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Academic 900</div>
+                                <div class="color-value">#172554</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="color-group-title">Warm Gold / Mustard</div>
+                    <div class="color-palette">
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--gold-100);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Gold 100</div>
+                                <div class="color-value">#FEF3C7</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--gold-400);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Gold 400</div>
+                                <div class="color-value">#FBBF24</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--gold-500);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Gold 500</div>
+                                <div class="color-value">#D97706</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--gold-700);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Gold 700</div>
+                                <div class="color-value">#92400E</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="color-group-title">Rich Cream</div>
+                    <div class="color-palette">
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--cream-100);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Cream 100</div>
+                                <div class="color-value">#FAF8F5</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--cream-300);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Cream 300</div>
+                                <div class="color-value">#EDE6DB</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--cream-500);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Cream 500</div>
+                                <div class="color-value">#C7B99A</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <!-- 02. Typography -->
         <section id="typography">
-            <h2><span class="section-number">02</span> Typography</h2>
-            <p>Merriweather for distinguished headlines, Source Sans for readable body text.</p>
-            <div class="type-scale">
-                <div class="type-item"><span class="type-label">Display</span><span class="type-display">Knowledge</span></div>
-                <div class="type-item"><span class="type-label">H1</span><span class="type-h1">Course Catalog</span></div>
-                <div class="type-item"><span class="type-label">Body</span><span class="type-body">Excellence in education through innovative learning experiences.</span></div>
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <div class="section-info">
+                    <h2>Typography</h2>
+                    <p>Lora for distinguished headings. Karla for approachable body text.</p>
+                </div>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-row">
+                    <div class="type-meta">Display<br>48px / 700</div>
+                    <div class="type-display">Knowledge</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">H1<br>36px / 700</div>
+                    <div class="type-h1">Course Catalog</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">H2<br>26px / 600</div>
+                    <div class="type-h2">Department Programs</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">H3<br>20px / 600</div>
+                    <div class="type-h3">Academic Requirements</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">Body<br>16px / 400</div>
+                    <div class="type-body">Excellence in education through innovative learning experiences and scholarly inquiry.</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">Small<br>14px / 400</div>
+                    <div class="type-small">Prerequisites, course numbers, and credit information.</div>
+                </div>
+            </div>
+
+            <div class="font-cards">
+                <div class="font-card">
+                    <div class="font-card-label">Display Font</div>
+                    <div class="font-card-name display">Lora</div>
+                </div>
+                <div class="font-card">
+                    <div class="font-card-label">Body Font</div>
+                    <div class="font-card-name body">Karla</div>
+                </div>
+                <div class="font-card">
+                    <div class="font-card-label">Monospace</div>
+                    <div class="font-card-name mono">Fira Code</div>
+                </div>
             </div>
         </section>
+
+        <!-- 03. Spacing Scale -->
+        <section id="spacing">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <div class="section-info">
+                    <h2>Spacing Scale</h2>
+                    <p>Consistent spacing for clear visual hierarchy and readability.</p>
+                </div>
+            </div>
+
+            <div class="spacing-scale">
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-1</span>
+                    <div class="spacing-bar" style="width: 4px;"></div>
+                    <span class="spacing-value">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-2</span>
+                    <div class="spacing-bar" style="width: 8px;"></div>
+                    <span class="spacing-value">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-4</span>
+                    <div class="spacing-bar" style="width: 16px;"></div>
+                    <span class="spacing-value">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-6</span>
+                    <div class="spacing-bar" style="width: 24px;"></div>
+                    <span class="spacing-value">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-8</span>
+                    <div class="spacing-bar" style="width: 32px;"></div>
+                    <span class="spacing-value">32px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-12</span>
+                    <div class="spacing-bar" style="width: 48px;"></div>
+                    <span class="spacing-value">48px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-16</span>
+                    <div class="spacing-bar" style="width: 64px;"></div>
+                    <span class="spacing-value">64px</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04. Buttons -->
         <section id="buttons">
-            <h2><span class="section-number">04</span> Buttons</h2>
-            <div class="button-group">
-                <button class="btn btn-primary">Apply Now</button>
-                <button class="btn btn-navy">Explore Programs</button>
-                <button class="btn btn-secondary">Request Info</button>
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <div class="section-info">
+                    <h2>Buttons</h2>
+                    <p>Clear, inviting actions for students and educators.</p>
+                </div>
+            </div>
+
+            <h3>Primary Actions</h3>
+            <div class="button-showcase">
+                <button class="btn btn-primary btn-lg">Apply Now</button>
+                <button class="btn btn-primary">Enroll in Course</button>
+                <button class="btn btn-primary btn-sm">Submit</button>
+            </div>
+
+            <h3>Gold / Feature Actions</h3>
+            <div class="button-showcase">
+                <button class="btn btn-gold btn-lg">Start Application</button>
+                <button class="btn btn-gold">Schedule Tour</button>
+                <button class="btn btn-gold btn-sm">Donate</button>
+            </div>
+
+            <h3>Secondary & Ghost</h3>
+            <div class="button-showcase">
+                <button class="btn btn-secondary">Request Information</button>
+                <button class="btn btn-secondary btn-sm">Cancel</button>
+                <button class="btn btn-ghost">Learn More</button>
             </div>
         </section>
+
+        <!-- 05. Forms -->
+        <section id="forms">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <div class="section-info">
+                    <h2>Forms</h2>
+                    <p>Clear, accessible form elements for applications and registrations.</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="student-name">Student Name</label>
+                    <input type="text" id="student-name" class="input" placeholder="First and Last Name">
+                </div>
+                <div class="form-group">
+                    <label for="student-id">Student ID</label>
+                    <input type="text" id="student-id" class="input" placeholder="e.g., 20240001">
+                </div>
+                <div class="form-group">
+                    <label for="program">Program of Study</label>
+                    <select id="program" class="input">
+                        <option>Select a program</option>
+                        <option>Computer Science</option>
+                        <option>Business Administration</option>
+                        <option>Liberal Arts</option>
+                        <option>Engineering</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address <span class="label-optional">(optional)</span></label>
+                    <input type="email" id="email" class="input" placeholder="student@university.edu">
+                    <span class="form-hint">For course updates and announcements</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06. Cards -->
         <section id="cards">
-            <h2><span class="section-number">06</span> Course Cards</h2>
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <div class="section-info">
+                    <h2>Cards</h2>
+                    <p>Course cards and informational containers.</p>
+                </div>
+            </div>
+
             <div class="card-grid">
-                <div class="card course-card"><div class="card-title">Introduction to Philosophy</div><div class="card-desc">PHIL 101 • 3 Credits • Prof. Williams<br>An exploration of fundamental questions about existence, knowledge, and ethics.</div></div>
-                <div class="card stat-card"><div class="stat-label">Student Enrollment</div><div class="stat-value">12,450</div></div>
-                <div class="card stat-card"><div class="stat-label">Faculty Members</div><div class="stat-value">847</div></div>
+                <div class="card card-course">
+                    <div class="card-meta">PHIL 101 • 3 Credits • Fall 2024</div>
+                    <div class="card-title">Introduction to Philosophy</div>
+                    <div class="card-text">An exploration of fundamental questions about existence, knowledge, and ethics through the works of classical and modern philosophers.</div>
+                </div>
+                <div class="card card-course">
+                    <div class="card-meta">CS 201 • 4 Credits • Fall 2024</div>
+                    <div class="card-title">Data Structures & Algorithms</div>
+                    <div class="card-text">Study of fundamental data structures, algorithm design techniques, and computational complexity analysis.</div>
+                </div>
+                <div class="card card-course">
+                    <div class="card-meta">HIST 305 • 3 Credits • Fall 2024</div>
+                    <div class="card-title">Modern World History</div>
+                    <div class="card-text">Survey of global historical developments from the 18th century to the present, examining political, social, and cultural transformations.</div>
+                </div>
             </div>
         </section>
+
+        <!-- 07. Data Table -->
         <section id="table">
-            <h2><span class="section-number">07</span> Course Schedule</h2>
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <div class="section-info">
+                    <h2>Data Table</h2>
+                    <p>Course schedules and academic information.</p>
+                </div>
+            </div>
+
             <div class="table-container">
                 <table>
-                    <thead><tr><th>Course</th><th>Instructor</th><th>Schedule</th><th>Status</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Instructor</th>
+                            <th>Schedule</th>
+                            <th>Credits</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr><td>PHIL 101 - Intro to Philosophy</td><td>Prof. Williams</td><td>MWF 9:00 AM</td><td><span class="badge badge-success">Open</span></td></tr>
-                        <tr><td>HIST 202 - Modern World History</td><td>Dr. Thompson</td><td>TR 2:00 PM</td><td><span class="badge badge-warning">Waitlist</span></td></tr>
-                        <tr><td>CS 301 - Data Structures</td><td>Prof. Chen</td><td>MWF 1:00 PM</td><td><span class="badge badge-error">Closed</span></td></tr>
+                        <tr>
+                            <td>PHIL 101 - Intro to Philosophy</td>
+                            <td>Prof. Williams</td>
+                            <td>MWF 9:00 AM</td>
+                            <td>3</td>
+                            <td><span class="badge badge-open">Open</span></td>
+                        </tr>
+                        <tr>
+                            <td>CS 201 - Data Structures</td>
+                            <td>Dr. Chen</td>
+                            <td>TR 2:00 PM</td>
+                            <td>4</td>
+                            <td><span class="badge badge-waitlist">Waitlist</span></td>
+                        </tr>
+                        <tr>
+                            <td>HIST 305 - Modern World History</td>
+                            <td>Prof. Thompson</td>
+                            <td>MWF 1:00 PM</td>
+                            <td>3</td>
+                            <td><span class="badge badge-closed">Closed</span></td>
+                        </tr>
+                        <tr>
+                            <td>MATH 251 - Linear Algebra</td>
+                            <td>Dr. Patel</td>
+                            <td>TR 10:00 AM</td>
+                            <td>3</td>
+                            <td><span class="badge badge-open">Open</span></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </section>
+
+        <!-- 08. Badges -->
         <section id="badges">
-            <h2><span class="section-number">08</span> Status Badges</h2>
-            <div class="badge-group">
-                <span class="badge badge-success">Open</span>
-                <span class="badge badge-warning">Waitlist</span>
-                <span class="badge badge-error">Closed</span>
-                <span class="badge badge-primary">Honors</span>
-                <span class="badge badge-info">Online</span>
+            <div class="section-header">
+                <span class="section-number">08</span>
+                <div class="section-info">
+                    <h2>Badges & Tags</h2>
+                    <p>Status indicators for courses and academic programs.</p>
+                </div>
+            </div>
+
+            <h3>Course Status</h3>
+            <div class="badge-showcase">
+                <span class="badge badge-open">Open</span>
+                <span class="badge badge-waitlist">Waitlist</span>
+                <span class="badge badge-closed">Closed</span>
+            </div>
+
+            <h3>Course Tags</h3>
+            <div class="badge-showcase" style="margin-top: var(--space-4);">
+                <span class="badge badge-honors">Honors</span>
+                <span class="badge badge-online">Online</span>
+                <span class="badge badge-new">New Course</span>
             </div>
         </section>
+
+        <!-- 09. Design Principles -->
         <section id="principles">
-            <h2><span class="section-number">09</span> Design Principles</h2>
+            <div class="section-header">
+                <span class="section-number">09</span>
+                <div class="section-info">
+                    <h2>Design Principles</h2>
+                    <p>Core values guiding every design decision.</p>
+                </div>
+            </div>
+
             <div class="principles-grid">
-                <div class="principle"><div class="principle-number">01</div><div class="principle-title">Academic Excellence</div><div class="principle-desc">Design should reflect the institution's commitment to scholarly achievement.</div></div>
-                <div class="principle"><div class="principle-number">02</div><div class="principle-title">Clarity of Information</div><div class="principle-desc">Students need clear access to course info, deadlines, and requirements.</div></div>
-                <div class="principle"><div class="principle-number">03</div><div class="principle-title">Inclusive Access</div><div class="principle-desc">Educational resources must be accessible to students of all abilities.</div></div>
-                <div class="principle"><div class="principle-number">04</div><div class="principle-title">Timeless Tradition</div><div class="principle-desc">Balance modern usability with respect for academic heritage.</div></div>
+                <div class="principle-card">
+                    <div class="principle-number">01</div>
+                    <div class="principle-title">Academic Excellence</div>
+                    <div class="principle-desc">Design reflects the institution's commitment to scholarly achievement and intellectual rigor.</div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">02</div>
+                    <div class="principle-title">Clarity of Information</div>
+                    <div class="principle-desc">Students need clear access to course information, deadlines, and requirements without confusion.</div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">03</div>
+                    <div class="principle-title">Inclusive Access</div>
+                    <div class="principle-desc">Educational resources must be accessible to students of all abilities and backgrounds.</div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">04</div>
+                    <div class="principle-title">Inspiring Growth</div>
+                    <div class="principle-desc">Design should motivate students on their educational journey and celebrate their achievements.</div>
+                </div>
             </div>
         </section>
+
+        <!-- 10. Animations -->
+        <section id="animations">
+            <div class="section-header">
+                <span class="section-number">10</span>
+                <div class="section-info">
+                    <h2>Animation & Micro-interactions</h2>
+                    <p>Subtle motion that enhances learning experiences.</p>
+                </div>
+            </div>
+
+            <div class="animation-grid">
+                <div class="animation-demo demo-hover">
+                    <div class="animation-preview"></div>
+                    <div class="animation-label">Hover Lift</div>
+                </div>
+                <div class="animation-demo demo-pulse">
+                    <div class="animation-preview"></div>
+                    <div class="animation-label">Gentle Pulse</div>
+                </div>
+                <div class="animation-demo demo-glow">
+                    <div class="animation-preview"></div>
+                    <div class="animation-label">Achievement Glow</div>
+                </div>
+                <div class="animation-demo demo-spin">
+                    <div class="animation-preview"></div>
+                    <div class="animation-label">Loading</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Course Progress Tracker -->
+        <section id="progress">
+            <div class="section-header">
+                <span class="section-number">11</span>
+                <div class="section-info">
+                    <h2>Course Progress Tracker</h2>
+                    <p>Track student progress through enrolled courses.</p>
+                </div>
+            </div>
+
+            <div class="progress-tracker">
+                <div class="tracker-header">
+                    <span class="tracker-title">My Courses</span>
+                    <span class="tracker-semester">Fall 2024 Semester</span>
+                </div>
+                <div class="course-list">
+                    <div class="course-item">
+                        <div class="course-header">
+                            <div class="course-info">
+                                <div class="course-code">PHIL 101</div>
+                                <div class="course-name">Introduction to Philosophy</div>
+                                <div class="course-instructor">Prof. Williams</div>
+                            </div>
+                            <div class="course-credits">3 CR</div>
+                        </div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar excellent" style="width: 92%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-stats">
+                            <span class="progress-percent">92% Complete</span>
+                            <span class="progress-grade">Current Grade: A</span>
+                        </div>
+                    </div>
+
+                    <div class="course-item">
+                        <div class="course-header">
+                            <div class="course-info">
+                                <div class="course-code">CS 201</div>
+                                <div class="course-name">Data Structures & Algorithms</div>
+                                <div class="course-instructor">Dr. Chen</div>
+                            </div>
+                            <div class="course-credits">4 CR</div>
+                        </div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar good" style="width: 78%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-stats">
+                            <span class="progress-percent">78% Complete</span>
+                            <span class="progress-grade">Current Grade: B+</span>
+                        </div>
+                    </div>
+
+                    <div class="course-item">
+                        <div class="course-header">
+                            <div class="course-info">
+                                <div class="course-code">HIST 305</div>
+                                <div class="course-name">Modern World History</div>
+                                <div class="course-instructor">Prof. Thompson</div>
+                            </div>
+                            <div class="course-credits">3 CR</div>
+                        </div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar in-progress" style="width: 45%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-stats">
+                            <span class="progress-percent">45% Complete</span>
+                            <span class="progress-grade">Current Grade: B</span>
+                        </div>
+                    </div>
+
+                    <div class="course-item">
+                        <div class="course-header">
+                            <div class="course-info">
+                                <div class="course-code">MATH 251</div>
+                                <div class="course-name">Linear Algebra</div>
+                                <div class="course-instructor">Dr. Patel</div>
+                            </div>
+                            <div class="course-credits">3 CR</div>
+                        </div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar starting" style="width: 15%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-stats">
+                            <span class="progress-percent">15% Complete</span>
+                            <span class="progress-grade">Current Grade: --</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Alerts -->
         <section id="alerts">
-            <h2><span class="section-number">12</span> Alerts</h2>
-            <div class="alert alert-success"><div class="alert-content"><div class="alert-title">Registration Complete</div><div class="alert-description">You have successfully enrolled in PHIL 101 for Fall 2024.</div></div></div>
-            <div class="alert alert-warning"><div class="alert-content"><div class="alert-title">Registration Deadline</div><div class="alert-description">Course registration for Fall 2024 closes in 3 days.</div></div></div>
-            <div class="alert alert-info"><div class="alert-content"><div class="alert-title">New Course Available</div><div class="alert-description">A new section of CS 301 has been added to the schedule.</div></div></div>
+            <div class="section-header">
+                <span class="section-number">12</span>
+                <div class="section-info">
+                    <h2>Alert Messages</h2>
+                    <p>Important notifications for students and educators.</p>
+                </div>
+            </div>
+
+            <div class="alert-stack">
+                <div class="alert alert-success">
+                    <div class="alert-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Registration Complete</div>
+                        <div class="alert-text">You have successfully enrolled in PHIL 101 - Introduction to Philosophy for Fall 2024.</div>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <div class="alert-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Registration Deadline Approaching</div>
+                        <div class="alert-text">Course registration for Fall 2024 closes in 3 days. Complete your schedule to secure your preferred courses.</div>
+                    </div>
+                </div>
+
+                <div class="alert alert-error">
+                    <div class="alert-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Hold on Account</div>
+                        <div class="alert-text">There is a hold on your account that must be resolved before registering for courses. Contact the Registrar's Office.</div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <div class="alert-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">New Course Available</div>
+                        <div class="alert-text">A new section of CS 201 has been added to the Fall 2024 schedule. Check the course catalog for details.</div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
-    <footer><p class="footer-text">Academica Design System v1.0 — Excellence in Educational Design</p></footer>
+
+    <footer>
+        <div class="footer-brand">Academia</div>
+        <div class="footer-tagline">Education Design System v1.0 — Inspiring Excellence</div>
+    </footer>
 </body>
 </html>

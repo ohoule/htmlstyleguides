@@ -3,30 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Athenaeum — A Scholarly Design System, Vol. I</title>
+    <title>CODEX — A Scholarly Design System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inconsolata:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --parchment: #F5F0E6;
-            --cream: #FAF7F0;
-            --antique: #E8DCC4;
-            --coffee: #D4B896;
-            --leather: #8B6914;
-            --mahogany: #4A2C2A;
-            --oxblood: #722F37;
-            --hunter: #2D4A3E;
-            --navy: #1C2841;
-            --ink: #1A1510;
-            --charcoal: #2C2416;
-            --gold: #BFA054;
-            --brass: #A68B4C;
+            /* Dark Academia Palette */
+            --parchment: #F4EFE6;
+            --ivory: #FFFEF7;
+            --antique: #E5DCCF;
+            --coffee: #C9B99A;
+            --tobacco: #8B7355;
+            --mahogany: #5D3A1A;
+            --walnut: #3D2817;
+            --oxblood: #6B2C2C;
+            --forest: #2D3F2F;
+            --navy: #1C2434;
+            --ink: #16140F;
+            --charcoal: #2A251F;
+            --gold: #C4A35A;
+            --brass: #9A7B4F;
 
-            --font-display: 'Cormorant', serif;
-            --font-body: 'EB Garamond', serif;
-            --font-mono: 'Inconsolata', monospace;
+            /* Typography */
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Libre Baskerville', serif;
+            --font-mono: 'Fira Code', monospace;
 
+            /* Spacing */
             --space-1: 4px;
             --space-2: 8px;
             --space-3: 16px;
@@ -36,7 +40,8 @@
             --space-7: 64px;
             --space-8: 96px;
 
-            --transition: 0.3s ease;
+            /* Timing */
+            --transition: 0.35s ease;
         }
 
         * {
@@ -52,20 +57,17 @@
         body {
             font-family: var(--font-body);
             font-size: 17px;
-            line-height: 1.8;
+            line-height: 1.85;
             background: var(--ink);
             color: var(--parchment);
         }
 
-        /* Paper texture */
+        /* Paper texture overlay */
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: 0;
         }
@@ -84,8 +86,8 @@
         }
 
         .nav-toggle {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             background: var(--charcoal);
             border: 1px solid var(--brass);
             cursor: pointer;
@@ -93,7 +95,7 @@
             align-items: center;
             justify-content: center;
             font-family: var(--font-display);
-            font-size: 18px;
+            font-size: 20px;
             font-style: italic;
             color: var(--gold);
             transition: var(--transition);
@@ -105,13 +107,14 @@
 
         .nav-menu {
             position: absolute;
-            top: 52px;
+            top: 56px;
             right: 0;
             background: var(--charcoal);
             border: 1px solid var(--brass);
             padding: var(--space-3);
             display: none;
-            min-width: 180px;
+            min-width: 190px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
         }
 
         .nav-menu.active {
@@ -121,7 +124,7 @@
         .nav-link {
             display: block;
             font-family: var(--font-body);
-            font-size: 14px;
+            font-size: 13px;
             color: var(--coffee);
             text-decoration: none;
             padding: var(--space-2) 0;
@@ -132,10 +135,26 @@
             color: var(--gold);
         }
 
+        .back-link {
+            position: fixed;
+            top: var(--space-5);
+            left: var(--space-5);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--coffee);
+            text-decoration: none;
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--gold);
+        }
+
         /* Sections */
         section {
             padding: var(--space-8) var(--space-5);
-            max-width: 900px;
+            max-width: 920px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
@@ -143,7 +162,7 @@
 
         .section-numeral {
             font-family: var(--font-display);
-            font-size: 14px;
+            font-size: 13px;
             font-style: italic;
             color: var(--brass);
             letter-spacing: 0.2em;
@@ -153,17 +172,17 @@
         /* Typography */
         h1 {
             font-family: var(--font-display);
-            font-size: clamp(48px, 10vw, 80px);
+            font-size: clamp(52px, 12vw, 88px);
             font-weight: 400;
             font-style: italic;
             line-height: 1.1;
             color: var(--parchment);
-            letter-spacing: 0.02em;
+            letter-spacing: 0.01em;
         }
 
         h2 {
             font-family: var(--font-display);
-            font-size: clamp(32px, 6vw, 44px);
+            font-size: clamp(32px, 6vw, 48px);
             font-weight: 400;
             color: var(--parchment);
             margin-bottom: var(--space-4);
@@ -179,7 +198,7 @@
 
         h4 {
             font-family: var(--font-mono);
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.2em;
             color: var(--brass);
@@ -187,12 +206,12 @@
         }
 
         p {
-            max-width: 60ch;
+            max-width: 62ch;
             color: var(--antique);
         }
 
         .lead {
-            font-size: 20px;
+            font-size: 19px;
             font-style: italic;
             color: var(--coffee);
         }
@@ -216,9 +235,9 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(ellipse, rgba(191, 160, 84, 0.05) 0%, transparent 70%);
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(ellipse, rgba(196, 163, 90, 0.04) 0%, transparent 70%);
             pointer-events: none;
         }
 
@@ -228,17 +247,17 @@
         }
 
         .hero-emblem {
-            font-size: 48px;
+            font-size: 56px;
             color: var(--brass);
             margin-bottom: var(--space-4);
-            opacity: 0.6;
+            opacity: 0.55;
         }
 
         .hero-subtitle {
             font-family: var(--font-mono);
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 0.4em;
+            letter-spacing: 0.45em;
             color: var(--brass);
             margin-bottom: var(--space-3);
         }
@@ -249,19 +268,19 @@
 
         .hero-tagline {
             font-family: var(--font-body);
-            font-size: 18px;
+            font-size: 17px;
             font-style: italic;
             color: var(--coffee);
-            max-width: 450px;
+            max-width: 480px;
             margin: 0 auto var(--space-5);
         }
 
         .hero-edition {
             font-family: var(--font-mono);
-            font-size: 11px;
+            font-size: 10px;
             color: var(--brass);
-            letter-spacing: 0.15em;
-            opacity: 0.7;
+            letter-spacing: 0.18em;
+            opacity: 0.65;
         }
 
         /* Ornamental Divider */
@@ -275,19 +294,19 @@
         }
 
         .ornament-line {
-            width: 60px;
+            width: 70px;
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--brass), transparent);
         }
 
         .ornament-symbol {
-            font-size: 18px;
+            font-size: 20px;
         }
 
         /* Color Palette */
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
             gap: var(--space-3);
             margin-top: var(--space-5);
         }
@@ -300,11 +319,16 @@
             aspect-ratio: 1;
             border: 1px solid var(--brass);
             margin-bottom: var(--space-2);
+            transition: var(--transition);
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.03);
         }
 
         .color-name {
             font-family: var(--font-display);
-            font-size: 15px;
+            font-size: 14px;
             font-style: italic;
             color: var(--parchment);
             margin-bottom: var(--space-1);
@@ -312,7 +336,7 @@
 
         .color-hex {
             font-family: var(--font-mono);
-            font-size: 11px;
+            font-size: 10px;
             color: var(--brass);
         }
 
@@ -337,7 +361,7 @@
 
         .type-quote {
             font-family: var(--font-display);
-            font-size: clamp(28px, 5vw, 40px);
+            font-size: clamp(28px, 5vw, 44px);
             font-style: italic;
             font-weight: 400;
             color: var(--parchment);
@@ -357,14 +381,14 @@
 
         .type-attribution {
             font-family: var(--font-mono);
-            font-size: 12px;
+            font-size: 11px;
             color: var(--brass);
             letter-spacing: 0.1em;
         }
 
         .type-body {
             font-family: var(--font-body);
-            font-size: 17px;
+            font-size: 16px;
             color: var(--antique);
             margin-top: var(--space-5);
             padding-top: var(--space-5);
@@ -386,16 +410,16 @@
 
         .font-label {
             font-family: var(--font-mono);
-            font-size: 10px;
+            font-size: 9px;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.22em;
             color: var(--brass);
             margin-bottom: var(--space-1);
         }
 
         .font-name {
             font-family: var(--font-display);
-            font-size: 16px;
+            font-size: 15px;
             font-style: italic;
             color: var(--coffee);
         }
@@ -414,20 +438,20 @@
         }
 
         .spacing-bar {
-            height: 20px;
+            height: 22px;
             background: linear-gradient(90deg, var(--oxblood), var(--mahogany));
         }
 
         .spacing-label {
             font-family: var(--font-mono);
-            font-size: 12px;
+            font-size: 11px;
             color: var(--coffee);
             min-width: 60px;
         }
 
         .spacing-value {
             font-family: var(--font-mono);
-            font-size: 12px;
+            font-size: 11px;
             color: var(--brass);
             min-width: 50px;
         }
@@ -476,14 +500,14 @@
         }
 
         .btn-secondary {
-            background: var(--hunter);
+            background: var(--forest);
             color: var(--parchment);
-            border-color: var(--hunter);
+            border-color: var(--forest);
         }
 
         .btn-secondary:hover {
-            background: #3D5A4E;
-            border-color: #3D5A4E;
+            background: #3D5040;
+            border-color: #3D5040;
         }
 
         .btn-outline {
@@ -508,7 +532,7 @@
 
         .btn-sm {
             padding: var(--space-2) var(--space-3);
-            font-size: 13px;
+            font-size: 12px;
             min-width: 100px;
         }
 
@@ -519,14 +543,14 @@
         }
 
         .btn:disabled {
-            opacity: 0.4;
+            opacity: 0.35;
             cursor: not-allowed;
         }
 
         /* Forms */
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
             gap: var(--space-5);
             margin-top: var(--space-5);
         }
@@ -539,7 +563,7 @@
 
         .form-label {
             font-family: var(--font-display);
-            font-size: 14px;
+            font-size: 13px;
             font-style: italic;
             color: var(--coffee);
         }
@@ -567,7 +591,7 @@
         .form-textarea::placeholder {
             color: var(--brass);
             font-style: italic;
-            opacity: 0.6;
+            opacity: 0.55;
         }
 
         .form-input.error {
@@ -575,14 +599,14 @@
         }
 
         .form-error {
-            font-size: 13px;
+            font-size: 12px;
             font-style: italic;
             color: #C77B7B;
         }
 
         .form-select {
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23BFA054' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23C4A35A' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right var(--space-3) center;
             padding-right: var(--space-6);
@@ -605,7 +629,7 @@
             align-items: center;
             gap: var(--space-2);
             cursor: pointer;
-            font-size: 15px;
+            font-size: 14px;
             color: var(--antique);
         }
 
@@ -632,13 +656,13 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: var(--parchment);
-            font-size: 12px;
+            font-size: 11px;
         }
 
         /* Cards */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
             gap: var(--space-4);
             margin-top: var(--space-5);
         }
@@ -654,7 +678,7 @@
         }
 
         .card-image {
-            height: 150px;
+            height: 160px;
             background: linear-gradient(135deg, var(--mahogany), var(--ink));
             display: flex;
             align-items: center;
@@ -663,8 +687,8 @@
         }
 
         .card-icon {
-            font-size: 40px;
-            opacity: 0.7;
+            font-size: 44px;
+            opacity: 0.65;
         }
 
         .card-body {
@@ -673,7 +697,7 @@
 
         .card-title {
             font-family: var(--font-display);
-            font-size: 20px;
+            font-size: 19px;
             font-style: italic;
             color: var(--parchment);
             margin-bottom: var(--space-2);
@@ -695,7 +719,7 @@
 
         .card-meta {
             font-family: var(--font-mono);
-            font-size: 11px;
+            font-size: 10px;
             color: var(--brass);
         }
 
@@ -718,7 +742,7 @@
 
         .data-table th {
             font-family: var(--font-display);
-            font-size: 13px;
+            font-size: 12px;
             font-style: italic;
             color: var(--parchment);
             padding: var(--space-3) var(--space-4);
@@ -737,7 +761,7 @@
         }
 
         .data-table tbody tr:hover {
-            background: rgba(114, 47, 55, 0.2);
+            background: rgba(107, 44, 44, 0.15);
         }
 
         /* Badges */
@@ -750,7 +774,7 @@
 
         .badge {
             font-family: var(--font-mono);
-            font-size: 10px;
+            font-size: 9px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             padding: var(--space-1) var(--space-3);
@@ -763,10 +787,10 @@
             border-color: var(--oxblood);
         }
 
-        .badge-hunter {
-            background: var(--hunter);
+        .badge-forest {
+            background: var(--forest);
             color: var(--parchment);
-            border-color: var(--hunter);
+            border-color: var(--forest);
         }
 
         .badge-navy {
@@ -782,15 +806,15 @@
         }
 
         .badge-success {
-            background: var(--hunter);
+            background: var(--forest);
             color: var(--parchment);
-            border-color: var(--hunter);
+            border-color: var(--forest);
         }
 
         .badge-warning {
-            background: var(--leather);
+            background: var(--tobacco);
             color: var(--ink);
-            border-color: var(--leather);
+            border-color: var(--tobacco);
         }
 
         .badge-danger {
@@ -802,7 +826,7 @@
         /* Principles */
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
             gap: var(--space-4);
             margin-top: var(--space-5);
         }
@@ -815,7 +839,7 @@
 
         .principle-numeral {
             font-family: var(--font-display);
-            font-size: 13px;
+            font-size: 12px;
             font-style: italic;
             color: var(--brass);
             margin-bottom: var(--space-2);
@@ -823,7 +847,7 @@
 
         .principle-title {
             font-family: var(--font-display);
-            font-size: 18px;
+            font-size: 17px;
             font-style: italic;
             color: var(--parchment);
             margin-bottom: var(--space-2);
@@ -837,7 +861,7 @@
         /* Animations */
         .animation-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: var(--space-3);
             margin-top: var(--space-5);
         }
@@ -847,7 +871,7 @@
             border: 1px solid var(--mahogany);
             padding: var(--space-5);
             text-align: center;
-            min-height: 150px;
+            min-height: 160px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -856,57 +880,57 @@
         }
 
         .anim-book {
-            font-size: 32px;
+            font-size: 36px;
         }
 
         .anim-glow .anim-book {
-            animation: candleGlow 3s ease-in-out infinite;
+            animation: candleGlow 3.5s ease-in-out infinite;
         }
 
         @keyframes candleGlow {
-            0%, 100% { filter: drop-shadow(0 0 5px rgba(191, 160, 84, 0.3)); }
-            50% { filter: drop-shadow(0 0 15px rgba(191, 160, 84, 0.6)); }
+            0%, 100% { filter: drop-shadow(0 0 4px rgba(196, 163, 90, 0.25)); }
+            50% { filter: drop-shadow(0 0 16px rgba(196, 163, 90, 0.55)); }
         }
 
         .anim-float .anim-book {
-            animation: gentleFloat 4s ease-in-out infinite;
+            animation: gentleFloat 4.5s ease-in-out infinite;
         }
 
         @keyframes gentleFloat {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-10px); }
         }
 
         .anim-fade .anim-book {
-            animation: ghostFade 3s ease-in-out infinite;
+            animation: ghostFade 3.5s ease-in-out infinite;
         }
 
         @keyframes ghostFade {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
+            50% { opacity: 0.35; }
         }
 
         .anim-turn .anim-book {
-            animation: pageTurn 2s ease-in-out infinite;
+            animation: pageTurn 2.5s ease-in-out infinite;
         }
 
         @keyframes pageTurn {
             0%, 100% { transform: rotateY(0deg); }
-            50% { transform: rotateY(15deg); }
+            50% { transform: rotateY(18deg); }
         }
 
         .animation-label {
             font-family: var(--font-mono);
-            font-size: 10px;
+            font-size: 9px;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             color: var(--brass);
         }
 
-        /* Book Plate Component */
-        .book-plate {
+        /* Ex Libris Component */
+        .ex-libris {
             margin-top: var(--space-5);
-            max-width: 400px;
+            max-width: 420px;
             background: var(--parchment);
             color: var(--ink);
             padding: var(--space-5);
@@ -915,42 +939,42 @@
             position: relative;
         }
 
-        .book-plate::before {
+        .ex-libris::before {
             content: '';
             position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
             border: 1px solid var(--mahogany);
             pointer-events: none;
         }
 
-        .book-plate-title {
+        .ex-libris-title {
             font-family: var(--font-mono);
-            font-size: 10px;
+            font-size: 9px;
             text-transform: uppercase;
-            letter-spacing: 0.3em;
+            letter-spacing: 0.35em;
             color: var(--mahogany);
             margin-bottom: var(--space-3);
         }
 
-        .book-plate-emblem {
-            font-size: 48px;
+        .ex-libris-emblem {
+            font-size: 52px;
             margin-bottom: var(--space-3);
         }
 
-        .book-plate-text {
+        .ex-libris-text {
             font-family: var(--font-display);
-            font-size: 18px;
+            font-size: 17px;
             font-style: italic;
             color: var(--charcoal);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
-        .book-plate-owner {
+        .ex-libris-owner {
             font-family: var(--font-body);
-            font-size: 14px;
+            font-size: 13px;
             color: var(--mahogany);
             margin-top: var(--space-3);
             padding-top: var(--space-3);
@@ -985,18 +1009,18 @@
 
         .alert-title {
             font-family: var(--font-display);
-            font-size: 15px;
+            font-size: 14px;
             font-style: italic;
             margin-bottom: var(--space-1);
         }
 
         .alert-text {
-            font-size: 14px;
-            opacity: 0.9;
+            font-size: 13px;
+            opacity: 0.88;
         }
 
         .alert-success {
-            border-color: var(--hunter);
+            border-color: var(--forest);
             color: #8FBC8F;
         }
 
@@ -1006,7 +1030,7 @@
         }
 
         .alert-warning {
-            border-color: var(--leather);
+            border-color: var(--tobacco);
             color: var(--coffee);
         }
 
@@ -1026,11 +1050,12 @@
         .footer-ornament {
             color: var(--brass);
             margin-bottom: var(--space-4);
+            letter-spacing: 0.5em;
         }
 
         .footer-brand {
             font-family: var(--font-display);
-            font-size: 28px;
+            font-size: 30px;
             font-style: italic;
             color: var(--parchment);
             margin-bottom: var(--space-2);
@@ -1038,7 +1063,7 @@
 
         .footer-tagline {
             font-family: var(--font-body);
-            font-size: 15px;
+            font-size: 14px;
             font-style: italic;
             color: var(--coffee);
             margin-bottom: var(--space-4);
@@ -1046,7 +1071,7 @@
 
         .footer-copy {
             font-family: var(--font-mono);
-            font-size: 11px;
+            font-size: 10px;
             color: var(--brass);
             letter-spacing: 0.1em;
         }
@@ -1066,6 +1091,11 @@
                 right: var(--space-3);
             }
 
+            .back-link {
+                top: var(--space-3);
+                left: var(--space-3);
+            }
+
             .button-grid {
                 flex-direction: column;
             }
@@ -1073,6 +1103,9 @@
     </style>
 </head>
 <body>
+    <!-- Back Link -->
+    <a href="../index.html" class="back-link">← Back to Gallery</a>
+
     <!-- Navigation -->
     <nav class="nav">
         <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('active')">§</button>
@@ -1087,7 +1120,7 @@
             <a href="#badges" class="nav-link">VIII. Badges</a>
             <a href="#principles" class="nav-link">IX. Principles</a>
             <a href="#animations" class="nav-link">X. Motion</a>
-            <a href="#bookplate" class="nav-link">XI. Book Plate</a>
+            <a href="#exlibris" class="nav-link">XI. Ex Libris</a>
             <a href="#alerts" class="nav-link">XII. Alerts</a>
         </div>
     </nav>
@@ -1095,9 +1128,9 @@
     <!-- Hero -->
     <header class="hero">
         <div class="hero-content">
-            <div class="hero-emblem">📚</div>
+            <div class="hero-emblem">📖</div>
             <p class="hero-subtitle">A Scholarly Design System</p>
-            <h1>The Athenaeum</h1>
+            <h1>Codex</h1>
             <p class="hero-tagline">"For those who find beauty in weathered pages, candlelit studies, and the eternal pursuit of knowledge."</p>
             <p class="hero-edition">Volume I · First Edition</p>
         </div>
@@ -1119,42 +1152,42 @@
             <div class="color-card">
                 <div class="color-swatch" style="background: var(--parchment);"></div>
                 <p class="color-name">Parchment</p>
-                <p class="color-hex">#F5F0E6</p>
+                <p class="color-hex">#F4EFE6</p>
             </div>
             <div class="color-card">
                 <div class="color-swatch" style="background: var(--coffee);"></div>
                 <p class="color-name">Coffee</p>
-                <p class="color-hex">#D4B896</p>
+                <p class="color-hex">#C9B99A</p>
             </div>
             <div class="color-card">
-                <div class="color-swatch" style="background: var(--leather);"></div>
-                <p class="color-name">Leather</p>
-                <p class="color-hex">#8B6914</p>
+                <div class="color-swatch" style="background: var(--tobacco);"></div>
+                <p class="color-name">Tobacco</p>
+                <p class="color-hex">#8B7355</p>
             </div>
             <div class="color-card">
                 <div class="color-swatch" style="background: var(--mahogany);"></div>
                 <p class="color-name">Mahogany</p>
-                <p class="color-hex">#4A2C2A</p>
+                <p class="color-hex">#5D3A1A</p>
             </div>
             <div class="color-card">
                 <div class="color-swatch" style="background: var(--oxblood);"></div>
                 <p class="color-name">Oxblood</p>
-                <p class="color-hex">#722F37</p>
+                <p class="color-hex">#6B2C2C</p>
             </div>
             <div class="color-card">
-                <div class="color-swatch" style="background: var(--hunter);"></div>
-                <p class="color-name">Hunter</p>
-                <p class="color-hex">#2D4A3E</p>
+                <div class="color-swatch" style="background: var(--forest);"></div>
+                <p class="color-name">Forest</p>
+                <p class="color-hex">#2D3F2F</p>
             </div>
             <div class="color-card">
                 <div class="color-swatch" style="background: var(--navy);"></div>
                 <p class="color-name">Navy</p>
-                <p class="color-hex">#1C2841</p>
+                <p class="color-hex">#1C2434</p>
             </div>
             <div class="color-card">
                 <div class="color-swatch" style="background: var(--gold);"></div>
                 <p class="color-name">Gold</p>
-                <p class="color-hex">#BFA054</p>
+                <p class="color-hex">#C4A35A</p>
             </div>
         </div>
     </section>
@@ -1174,15 +1207,15 @@
             <div class="font-info">
                 <div class="font-item">
                     <p class="font-label">Display</p>
-                    <p class="font-name" style="font-family: var(--font-display);">Cormorant</p>
+                    <p class="font-name" style="font-family: var(--font-display);">Playfair Display</p>
                 </div>
                 <div class="font-item">
                     <p class="font-label">Body</p>
-                    <p class="font-name" style="font-family: var(--font-body);">EB Garamond</p>
+                    <p class="font-name" style="font-family: var(--font-body);">Libre Baskerville</p>
                 </div>
                 <div class="font-item">
                     <p class="font-label">Monospace</p>
-                    <p class="font-name" style="font-family: var(--font-mono);">Inconsolata</p>
+                    <p class="font-name" style="font-family: var(--font-mono);">Fira Code</p>
                 </div>
             </div>
         </div>
@@ -1351,7 +1384,7 @@
                 </div>
                 <div class="card-footer">
                     <span class="card-meta">Core Studies</span>
-                    <span class="badge badge-hunter">Essential</span>
+                    <span class="badge badge-forest">Essential</span>
                 </div>
             </article>
 
@@ -1432,7 +1465,7 @@
         <h4>Colours</h4>
         <div class="badge-grid">
             <span class="badge badge-oxblood">Oxblood</span>
-            <span class="badge badge-hunter">Hunter</span>
+            <span class="badge badge-forest">Forest</span>
             <span class="badge badge-navy">Navy</span>
             <span class="badge badge-outline">Outline</span>
         </div>
@@ -1519,17 +1552,17 @@
         </div>
     </section>
 
-    <!-- Book Plate -->
-    <section id="bookplate">
+    <!-- Ex Libris Component -->
+    <section id="exlibris">
         <p class="section-numeral">Chapter XI</p>
-        <h2>Book Plate</h2>
-        <p class="lead">A traditional component — the ex libris that marks ownership and provenance.</p>
+        <h2>Ex Libris</h2>
+        <p class="lead">A traditional component — the bookplate that marks ownership and provenance.</p>
 
-        <div class="book-plate">
-            <p class="book-plate-title">Ex Libris</p>
-            <div class="book-plate-emblem">🦉</div>
-            <p class="book-plate-text">"The reading of all good books is like a conversation with the finest minds of past centuries."</p>
-            <p class="book-plate-owner">— From the Library of <strong>The Athenaeum</strong></p>
+        <div class="ex-libris">
+            <p class="ex-libris-title">Ex Libris</p>
+            <div class="ex-libris-emblem">🦉</div>
+            <p class="ex-libris-text">"The reading of all good books is like a conversation with the finest minds of past centuries."</p>
+            <p class="ex-libris-owner">— From the Library of <strong>Codex</strong></p>
         </div>
     </section>
 
@@ -1577,7 +1610,7 @@
     <!-- Footer -->
     <footer>
         <div class="footer-ornament">❧ ❦ ❧</div>
-        <p class="footer-brand">The Athenaeum</p>
+        <p class="footer-brand">Codex</p>
         <p class="footer-tagline">"In pursuit of wisdom, we find ourselves."</p>
         <p class="footer-copy">A Scholarly Design System · Volume I · First Edition</p>
     </footer>

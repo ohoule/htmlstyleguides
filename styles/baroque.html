@@ -3,40 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opulence - Baroque Style Guide</title>
+    <title>Versailles - Baroque Style Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Infant:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Baroque Color Palette - Rich, dramatic, luxurious */
+            /* Baroque Color Palette - Opulent, dramatic, royal */
             --royal-gold: #D4AF37;
-            --deep-gold: #B8860B;
-            --burgundy: #722F37;
-            --deep-burgundy: #4A0D15;
-            --royal-blue: #1E3A5F;
-            --midnight-blue: #0D1B2A;
+            --antique-gold: #C5A028;
+            --deep-burgundy: #6B1C23;
+            --wine: #722F37;
+            --midnight-blue: #1A1A40;
+            --royal-purple: #4A1259;
             --ivory: #FFFFF0;
             --cream: #FDF5E6;
-            --charcoal: #1A1A1A;
+            --obsidian: #0D0D0D;
             --bronze: #CD7F32;
+            --velvet-red: #8B0000;
+            --pearl: #F5F5F0;
 
             /* Typography */
-            --font-display: 'Playfair Display', serif;
-            --font-body: 'Libre Baskerville', serif;
+            --font-display: 'Cinzel Decorative', serif;
+            --font-body: 'Cormorant Infant', serif;
+            --font-accent: 'Spectral SC', serif;
 
             /* Spacing */
             --space-xs: 4px;
             --space-sm: 8px;
             --space-md: 16px;
             --space-lg: 24px;
-            --space-xl: 32px;
-            --space-2xl: 48px;
-            --space-3xl: 64px;
+            --space-xl: 40px;
+            --space-2xl: 64px;
+            --space-3xl: 96px;
 
             /* Border Radius */
             --radius-sm: 4px;
             --radius-md: 8px;
+            --radius-lg: 16px;
         }
 
         * {
@@ -47,12 +51,13 @@
 
         body {
             font-family: var(--font-body);
-            background: var(--charcoal);
-            color: var(--ivory);
+            background: var(--obsidian);
+            color: var(--cream);
             line-height: 1.8;
+            overflow-x: hidden;
         }
 
-        /* Background pattern */
+        /* Ornate Background Pattern */
         body::before {
             content: '';
             position: fixed;
@@ -60,45 +65,71 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background:
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 40px,
-                    rgba(212, 175, 55, 0.03) 40px,
-                    rgba(212, 175, 55, 0.03) 80px
-                );
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0 Q50 20 40 40 Q30 60 40 80 M0 40 Q20 30 40 40 Q60 50 80 40' stroke='%23D4AF3710' fill='none' stroke-width='1'/%3E%3Ccircle cx='40' cy='40' r='3' fill='%23D4AF3708'/%3E%3C/svg%3E");
             pointer-events: none;
-            z-index: 0;
+            z-index: -1;
+        }
+
+        /* Gold border frame */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid var(--royal-gold);
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.3;
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
             padding: var(--space-xl);
-            position: relative;
-            z-index: 1;
         }
 
-        /* Ornate divider */
-        .ornate-divider {
-            text-align: center;
+        /* Navigation */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
             color: var(--royal-gold);
-            font-size: 1.5rem;
-            margin: var(--space-xl) 0;
-            opacity: 0.7;
+            text-decoration: none;
+            font-family: var(--font-accent);
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            margin-bottom: var(--space-xl);
+            padding: var(--space-sm) var(--space-md);
+            border: 1px solid var(--royal-gold);
+            transition: all 0.4s ease;
         }
 
-        /* Header */
+        .back-link::before {
+            content: '◂';
+            font-size: 0.8em;
+        }
+
+        .back-link:hover {
+            background: var(--royal-gold);
+            color: var(--obsidian);
+        }
+
+        /* Header - Grand Palace */
         header {
             text-align: center;
             padding: var(--space-3xl) var(--space-xl);
-            border: 3px double var(--royal-gold);
             margin-bottom: var(--space-3xl);
+            background: linear-gradient(180deg,
+                rgba(212, 175, 55, 0.1) 0%,
+                transparent 50%,
+                rgba(212, 175, 55, 0.1) 100%);
+            border: 3px double var(--royal-gold);
             position: relative;
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(74, 13, 21, 0.3));
         }
 
+        /* Corner ornaments */
         header::before,
         header::after {
             content: '❧';
@@ -107,38 +138,56 @@
             color: var(--royal-gold);
         }
 
-        header::before { top: var(--space-md); left: var(--space-lg); }
-        header::after { bottom: var(--space-md); right: var(--space-lg); transform: rotate(180deg); }
-
-        .logo {
-            font-family: var(--font-display);
-            font-size: 4rem;
-            font-weight: 400;
-            font-style: italic;
-            color: var(--royal-gold);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            letter-spacing: 0.1em;
+        header::before {
+            top: 15px;
+            left: 20px;
         }
 
-        .tagline {
-            font-family: var(--font-body);
-            font-size: 1.25rem;
-            font-style: italic;
-            color: var(--cream);
-            margin-top: var(--space-md);
+        header::after {
+            bottom: 15px;
+            right: 20px;
+            transform: rotate(180deg);
         }
 
-        .crown {
+        .header-crown {
             font-size: 3rem;
             margin-bottom: var(--space-md);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3) drop-shadow(0 0 10px var(--royal-gold)); }
+        }
+
+        header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 900;
+            color: var(--royal-gold);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 0.2em;
+            margin-bottom: var(--space-md);
+        }
+
+        header p {
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--cream);
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
         }
 
         /* Section Styling */
         section {
             margin-bottom: var(--space-3xl);
-            background: linear-gradient(180deg, rgba(114, 47, 55, 0.1), rgba(26, 26, 26, 0.9));
-            border: 2px solid var(--royal-gold);
-            padding: var(--space-2xl);
+            padding: var(--space-xl);
+            background: linear-gradient(135deg,
+                rgba(26, 26, 64, 0.8),
+                rgba(13, 13, 13, 0.9));
+            border: 1px solid rgba(212, 175, 55, 0.3);
             position: relative;
         }
 
@@ -146,112 +195,215 @@
             content: '';
             position: absolute;
             top: -1px;
-            left: 20%;
-            right: 20%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--royal-gold), transparent);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg,
+                transparent,
+                var(--royal-gold),
+                transparent);
         }
 
         h2 {
             font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 400;
-            font-style: italic;
+            font-size: 1.5rem;
             color: var(--royal-gold);
+            margin-bottom: var(--space-lg);
             text-align: center;
-            margin-bottom: var(--space-xl);
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        h3 {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--cream);
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: var(--space-sm);
         }
 
-        /* Color Palette */
+        h2::before,
+        h2::after {
+            content: ' ✦ ';
+            font-size: 0.8rem;
+        }
+
+        /* Color Palette - Jewel Frames */
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: var(--space-md);
         }
 
         .color-swatch {
-            height: 140px;
+            aspect-ratio: 3/4;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             padding: var(--space-md);
             position: relative;
-            border: 1px solid var(--royal-gold);
+            border: 3px solid var(--royal-gold);
+            transition: all 0.4s ease;
+            cursor: pointer;
         }
 
-        .color-swatch::after {
+        .color-swatch::before {
             content: '';
             position: absolute;
-            top: 8px;
-            left: 8px;
-            right: 8px;
-            height: 20px;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent);
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            pointer-events: none;
         }
 
-        .color-swatch span {
-            font-family: var(--font-display);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            background: var(--charcoal);
-            padding: var(--space-xs) var(--space-sm);
-            color: var(--ivory);
-            border: 1px solid var(--royal-gold);
+        .color-swatch:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);
         }
+
+        .color-name {
+            font-family: var(--font-accent);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .color-value {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+
+        .swatch-gold { background: var(--royal-gold); color: var(--obsidian); }
+        .swatch-antique { background: var(--antique-gold); color: var(--obsidian); }
+        .swatch-burgundy { background: var(--deep-burgundy); color: var(--cream); }
+        .swatch-wine { background: var(--wine); color: var(--cream); }
+        .swatch-midnight { background: var(--midnight-blue); color: var(--cream); }
+        .swatch-purple { background: var(--royal-purple); color: var(--cream); }
+        .swatch-ivory { background: var(--ivory); color: var(--obsidian); }
+        .swatch-bronze { background: var(--bronze); color: var(--obsidian); }
+        .swatch-velvet { background: var(--velvet-red); color: var(--cream); }
+        .swatch-obsidian { background: var(--obsidian); color: var(--cream); border-color: var(--royal-gold); }
 
         /* Typography */
-        .type-sample {
+        .type-specimen {
             margin-bottom: var(--space-xl);
-            text-align: center;
+            padding: var(--space-xl);
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 4px solid var(--royal-gold);
+        }
+
+        .type-specimen h3 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--royal-gold);
+            margin-bottom: var(--space-sm);
+        }
+
+        .type-specimen .font-name {
+            font-family: var(--font-accent);
+            font-size: 0.85rem;
+            color: var(--bronze);
+            letter-spacing: 0.15em;
+            margin-bottom: var(--space-md);
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-lg);
+        }
+
+        .type-label {
+            font-family: var(--font-accent);
+            font-size: 0.7rem;
+            color: var(--royal-gold);
+            letter-spacing: 0.1em;
+            min-width: 70px;
+            text-transform: uppercase;
         }
 
         .display-text {
             font-family: var(--font-display);
-            font-size: 3.5rem;
-            font-weight: 400;
-            font-style: italic;
+            font-size: 2rem;
             color: var(--royal-gold);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .heading-text {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            color: var(--cream);
         }
 
         .body-text {
             font-family: var(--font-body);
             font-size: 1.1rem;
-            max-width: 650px;
-            margin: 0 auto;
             color: var(--cream);
         }
 
-        /* Spacing Scale */
-        .spacing-demo {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-md);
-            justify-content: center;
-            align-items: flex-end;
+        .small-text {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--cream);
+            opacity: 0.8;
         }
 
-        .spacing-block {
-            background: linear-gradient(135deg, var(--burgundy), var(--deep-burgundy));
-            border: 1px solid var(--royal-gold);
+        /* Spacing Scale - Columns */
+        .spacing-visual {
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-xl);
+            align-items: flex-end;
             justify-content: center;
-            color: var(--ivory);
-            font-family: var(--font-display);
+        }
+
+        .spacing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .spacing-column {
+            background: linear-gradient(180deg, var(--royal-gold), var(--antique-gold), var(--bronze));
+            width: 20px;
+            position: relative;
+        }
+
+        .spacing-column::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 8px;
+            background: var(--royal-gold);
+        }
+
+        .spacing-column::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 8px;
+            background: var(--royal-gold);
+        }
+
+        .spacing-label {
+            font-family: var(--font-accent);
             font-size: 0.75rem;
+            color: var(--royal-gold);
+            letter-spacing: 0.1em;
+        }
+
+        .spacing-value {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            color: var(--bronze);
         }
 
         /* Buttons */
@@ -260,163 +412,202 @@
             flex-wrap: wrap;
             gap: var(--space-md);
             justify-content: center;
+            margin-bottom: var(--space-lg);
         }
 
         .btn {
-            font-family: var(--font-display);
-            font-size: 0.9rem;
-            font-style: italic;
-            padding: var(--space-md) var(--space-2xl);
-            border: 2px solid;
+            font-family: var(--font-accent);
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: var(--space-md) var(--space-xl);
+            border: none;
             cursor: pointer;
             transition: all 0.4s ease;
             position: relative;
-            overflow: hidden;
+        }
+
+        .btn::before,
+        .btn::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 2px solid currentColor;
+            transition: all 0.3s ease;
         }
 
         .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
+            top: -5px;
+            left: -5px;
+            border-right: none;
+            border-bottom: none;
         }
 
-        .btn:hover::before {
-            left: 100%;
+        .btn::after {
+            bottom: -5px;
+            right: -5px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .btn:hover::before,
+        .btn:hover::after {
+            width: 20px;
+            height: 20px;
         }
 
         .btn-primary {
-            background: linear-gradient(180deg, var(--royal-gold), var(--deep-gold));
-            color: var(--charcoal);
-            border-color: var(--royal-gold);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            background: linear-gradient(135deg, var(--royal-gold), var(--antique-gold));
+            color: var(--obsidian);
+            border: 2px solid var(--royal-gold);
         }
 
         .btn-primary:hover {
-            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
             transform: translateY(-2px);
         }
 
         .btn-secondary {
-            background: linear-gradient(180deg, var(--burgundy), var(--deep-burgundy));
-            color: var(--ivory);
-            border-color: var(--burgundy);
+            background: transparent;
+            color: var(--royal-gold);
+            border: 2px solid var(--royal-gold);
         }
 
         .btn-secondary:hover {
-            background: linear-gradient(180deg, var(--deep-burgundy), var(--burgundy));
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--royal-gold);
-            border-color: var(--royal-gold);
-        }
-
-        .btn-outline:hover {
             background: var(--royal-gold);
-            color: var(--charcoal);
+            color: var(--obsidian);
+        }
+
+        .btn-burgundy {
+            background: var(--deep-burgundy);
+            color: var(--royal-gold);
+            border: 2px solid var(--wine);
+        }
+
+        .btn-burgundy:hover {
+            background: var(--wine);
+            box-shadow: 0 0 20px rgba(107, 28, 35, 0.5);
+        }
+
+        .btn-royal {
+            background: linear-gradient(135deg, var(--midnight-blue), var(--royal-purple));
+            color: var(--royal-gold);
+            border: 2px solid var(--royal-gold);
+        }
+
+        .btn-royal:hover {
+            box-shadow: 0 0 30px rgba(74, 18, 89, 0.5);
         }
 
         /* Forms */
         .form-group {
             margin-bottom: var(--space-lg);
-            max-width: 450px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
-        label {
+        .form-label {
             display: block;
-            font-family: var(--font-display);
+            font-family: var(--font-accent);
             font-size: 0.8rem;
-            font-style: italic;
             color: var(--royal-gold);
-            text-transform: uppercase;
             letter-spacing: 0.15em;
+            text-transform: uppercase;
             margin-bottom: var(--space-sm);
         }
 
-        input[type="text"],
-        input[type="email"],
-        textarea,
-        select {
+        .form-input {
             width: 100%;
             padding: var(--space-md);
             font-family: var(--font-body);
             font-size: 1rem;
-            border: 1px solid var(--royal-gold);
-            background: rgba(26, 26, 26, 0.8);
-            color: var(--ivory);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--cream);
             transition: all 0.3s ease;
         }
 
-        input::placeholder,
-        textarea::placeholder {
-            color: rgba(255, 255, 240, 0.5);
+        .form-input:focus {
+            outline: none;
+            border-color: var(--royal-gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .form-input::placeholder {
+            color: rgba(253, 245, 230, 0.4);
             font-style: italic;
         }
 
-        input:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--royal-gold);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-        }
-
-        textarea {
+        textarea.form-input {
             min-height: 120px;
             resize: vertical;
         }
 
-        /* Cards */
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23D4AF37' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-md) center;
+            padding-right: var(--space-2xl);
+        }
+
+        .form-checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .form-checkbox {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--royal-gold);
+            cursor: pointer;
+        }
+
+        /* Cards - Gilded Frames */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
+            gap: var(--space-xl);
         }
 
         .card {
-            background: linear-gradient(180deg, rgba(114, 47, 55, 0.2), rgba(26, 26, 26, 0.9));
-            border: 2px solid var(--royal-gold);
-            transition: all 0.4s ease;
+            background: linear-gradient(135deg, rgba(26, 26, 64, 0.9), rgba(13, 13, 13, 0.95));
+            border: 3px solid var(--royal-gold);
             position: relative;
+            transition: all 0.4s ease;
         }
 
         .card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 1px solid var(--royal-gold);
-            margin: 8px;
+            top: 6px;
+            left: 6px;
+            right: 6px;
+            bottom: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
             pointer-events: none;
         }
 
         .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.2);
         }
 
         .card-image {
-            height: 160px;
+            height: 180px;
+            background: linear-gradient(135deg, var(--deep-burgundy), var(--royal-purple), var(--midnight-blue));
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
-            border-bottom: 1px solid var(--royal-gold);
         }
 
-        .card:nth-child(1) .card-image { background: linear-gradient(135deg, var(--burgundy), var(--deep-burgundy)); }
-        .card:nth-child(2) .card-image { background: linear-gradient(135deg, var(--royal-blue), var(--midnight-blue)); }
-        .card:nth-child(3) .card-image { background: linear-gradient(135deg, var(--deep-gold), var(--bronze)); }
+        .card-image::after {
+            content: '♛';
+            font-size: 3rem;
+            color: var(--royal-gold);
+            opacity: 0.5;
+        }
 
         .card-content {
             padding: var(--space-lg);
@@ -424,19 +615,33 @@
 
         .card-title {
             font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-style: italic;
+            font-size: 1.2rem;
             color: var(--royal-gold);
             margin-bottom: var(--space-sm);
+            letter-spacing: 0.1em;
         }
 
         .card-text {
-            font-size: 0.95rem;
+            font-family: var(--font-body);
             color: var(--cream);
+            opacity: 0.85;
+            margin-bottom: var(--space-md);
+            font-style: italic;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-family: var(--font-accent);
+            font-size: 0.75rem;
+            color: var(--bronze);
+            letter-spacing: 0.1em;
         }
 
         /* Data Table */
         .table-wrapper {
+            overflow-x: auto;
             border: 2px solid var(--royal-gold);
         }
 
@@ -445,30 +650,57 @@
             border-collapse: collapse;
         }
 
+        thead {
+            background: linear-gradient(135deg, var(--royal-gold), var(--antique-gold));
+        }
+
         th {
-            background: linear-gradient(180deg, var(--deep-gold), var(--royal-gold));
-            color: var(--charcoal);
-            font-family: var(--font-display);
+            font-family: var(--font-accent);
             font-size: 0.8rem;
-            font-style: italic;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: var(--space-md);
+            color: var(--obsidian);
             text-align: left;
+            padding: var(--space-md);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
         }
 
         td {
             padding: var(--space-md);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            font-family: var(--font-body);
+            color: var(--cream);
         }
 
-        tr:nth-child(even) {
-            background: rgba(212, 175, 55, 0.05);
+        tbody tr {
+            transition: background 0.2s ease;
         }
 
-        tr:hover {
+        tbody tr:hover {
             background: rgba(212, 175, 55, 0.1);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-active {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--royal-gold);
+            font-family: var(--font-accent);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+        }
+
+        .status-pending {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(107, 28, 35, 0.3);
+            color: var(--wine);
+            font-family: var(--font-accent);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
         }
 
         /* Badges */
@@ -480,51 +712,65 @@
         }
 
         .badge {
-            font-family: var(--font-display);
+            font-family: var(--font-accent);
             font-size: 0.7rem;
-            font-style: italic;
-            text-transform: uppercase;
             letter-spacing: 0.1em;
+            text-transform: uppercase;
             padding: var(--space-xs) var(--space-md);
-            border: 1px solid;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .badge-gold {
             background: var(--royal-gold);
-            color: var(--charcoal);
-            border-color: var(--royal-gold);
+            color: var(--obsidian);
         }
 
         .badge-burgundy {
-            background: var(--burgundy);
-            color: var(--ivory);
-            border-color: var(--burgundy);
+            background: var(--deep-burgundy);
+            color: var(--royal-gold);
         }
 
-        .badge-blue {
-            background: var(--royal-blue);
-            color: var(--ivory);
-            border-color: var(--royal-blue);
+        .badge-royal {
+            background: var(--royal-purple);
+            color: var(--royal-gold);
+        }
+
+        .badge-midnight {
+            background: var(--midnight-blue);
+            color: var(--royal-gold);
         }
 
         .badge-outline {
             background: transparent;
+            border: 1px solid var(--royal-gold);
             color: var(--royal-gold);
-            border-color: var(--royal-gold);
+        }
+
+        .badge-bronze {
+            background: var(--bronze);
+            color: var(--obsidian);
         }
 
         /* Design Principles */
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: var(--space-lg);
         }
 
-        .principle {
+        .principle-card {
+            padding: var(--space-lg);
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.3);
             text-align: center;
-            padding: var(--space-xl);
-            border: 1px solid var(--royal-gold);
-            background: rgba(114, 47, 55, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .principle-card:hover {
+            border-color: var(--royal-gold);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
         }
 
         .principle-icon {
@@ -535,166 +781,177 @@
         .principle-title {
             font-family: var(--font-display);
             font-size: 1rem;
-            font-style: italic;
             color: var(--royal-gold);
             margin-bottom: var(--space-sm);
+            letter-spacing: 0.1em;
         }
 
         .principle-text {
-            font-size: 0.9rem;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
             color: var(--cream);
+            opacity: 0.85;
+            font-style: italic;
         }
 
         /* Animations */
-        .animation-grid {
+        .animation-showcase {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: var(--space-lg);
         }
 
         .animation-demo {
-            height: 150px;
-            background: rgba(114, 47, 55, 0.1);
-            border: 1px solid var(--royal-gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            padding: var(--space-lg);
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            text-align: center;
         }
 
-        .glow-demo {
+        .animation-element {
             width: 60px;
             height: 60px;
-            background: var(--royal-gold);
-            border-radius: 50%;
-            animation: baroque-glow 2s ease-in-out infinite;
+            margin: 0 auto var(--space-md);
+            background: linear-gradient(135deg, var(--royal-gold), var(--antique-gold));
+            border: 2px solid var(--royal-gold);
         }
 
-        @keyframes baroque-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
-            50% { box-shadow: 0 0 50px rgba(212, 175, 55, 0.8), 0 0 80px rgba(212, 175, 55, 0.4); }
+        .crown-demo .animation-element {
+            animation: crownFloat 3s ease-in-out infinite;
         }
 
-        .curtain-demo {
-            width: 80px;
-            height: 100px;
-            background: linear-gradient(180deg, var(--burgundy), var(--deep-burgundy));
-            position: relative;
-            animation: curtain-sway 3s ease-in-out infinite;
-            border-top: 4px solid var(--royal-gold);
+        @keyframes crownFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
         }
 
-        .curtain-demo::before,
-        .curtain-demo::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            width: 30%;
-            height: 20px;
-            background: var(--royal-gold);
+        .gild-demo .animation-element {
+            animation: gildShine 2s ease-in-out infinite;
         }
 
-        .curtain-demo::before { left: 10%; border-radius: 0 0 50% 50%; }
-        .curtain-demo::after { right: 10%; border-radius: 0 0 50% 50%; }
-
-        @keyframes curtain-sway {
-            0%, 100% { transform: skewX(0deg); }
-            25% { transform: skewX(2deg); }
-            75% { transform: skewX(-2deg); }
+        @keyframes gildShine {
+            0%, 100% { box-shadow: 0 0 10px var(--royal-gold); }
+            50% { box-shadow: 0 0 40px var(--royal-gold), 0 0 60px rgba(212, 175, 55, 0.5); }
         }
 
-        .scroll-demo {
-            width: 60px;
-            height: 80px;
-            background: var(--cream);
-            position: relative;
-            border-radius: 5px;
-            animation: scroll-unfurl 3s ease-in-out infinite;
+        .curtain-demo .animation-element {
+            background: var(--deep-burgundy);
+            animation: curtainReveal 3s ease-in-out infinite;
         }
 
-        .scroll-demo::before,
-        .scroll-demo::after {
-            content: '';
-            position: absolute;
-            width: 70px;
-            height: 15px;
-            background: linear-gradient(180deg, var(--deep-gold), var(--royal-gold));
-            left: -5px;
-            border-radius: 8px;
+        @keyframes curtainReveal {
+            0%, 100% { transform: scaleX(1); }
+            50% { transform: scaleX(0.8); }
         }
 
-        .scroll-demo::before { top: -5px; }
-        .scroll-demo::after { bottom: -5px; }
-
-        @keyframes scroll-unfurl {
-            0%, 100% { transform: scaleY(1); }
-            50% { transform: scaleY(1.1); }
+        .flourish-demo .animation-element {
+            animation: flourishSpin 4s ease-in-out infinite;
         }
 
-        /* Special Component: Royal Crest */
-        .royal-crest {
-            text-align: center;
+        @keyframes flourishSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .animation-label {
+            font-family: var(--font-accent);
+            font-size: 0.75rem;
+            color: var(--royal-gold);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Special Component - Royal Decree */
+        .royal-decree {
+            background: linear-gradient(135deg, rgba(26, 26, 64, 0.9), rgba(13, 13, 13, 0.95));
+            border: 4px double var(--royal-gold);
             padding: var(--space-2xl);
-            background: linear-gradient(180deg, rgba(114, 47, 55, 0.2), rgba(26, 26, 26, 0.9));
-            border: 3px double var(--royal-gold);
             position: relative;
+            text-align: center;
         }
 
-        .crest-shield {
-            width: 150px;
-            height: 180px;
+        .decree-seal {
+            width: 120px;
+            height: 120px;
             margin: 0 auto var(--space-lg);
-            background: linear-gradient(135deg, var(--burgundy), var(--deep-burgundy));
-            clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%);
+            background: linear-gradient(135deg, var(--royal-gold), var(--antique-gold), var(--bronze));
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            border: 3px solid var(--royal-gold);
+            border: 4px solid var(--royal-gold);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
+            animation: sealGlow 3s ease-in-out infinite;
         }
 
-        .crest-symbol {
-            font-size: 4rem;
-            color: var(--royal-gold);
+        @keyframes sealGlow {
+            0%, 100% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.4); }
+            50% { box-shadow: 0 0 60px rgba(212, 175, 55, 0.6); }
         }
 
-        .crest-ribbon {
-            background: var(--royal-gold);
-            color: var(--charcoal);
-            padding: var(--space-sm) var(--space-xl);
-            font-family: var(--font-display);
-            font-style: italic;
-            font-size: 1rem;
-            display: inline-block;
-            position: relative;
+        .decree-seal::after {
+            content: '♛';
+            font-size: 3rem;
+            color: var(--obsidian);
         }
 
-        .crest-ribbon::before,
-        .crest-ribbon::after {
-            content: '';
+        .decree-ribbon {
             position: absolute;
             top: 50%;
-            width: 30px;
-            height: 100%;
-            background: var(--deep-gold);
-            transform: translateY(-50%);
+            width: 60px;
+            height: 100px;
+            background: linear-gradient(180deg, var(--deep-burgundy), var(--wine));
         }
 
-        .crest-ribbon::before {
-            left: -25px;
-            clip-path: polygon(100% 0, 100% 100%, 0 50%);
+        .ribbon-left {
+            left: -30px;
+            transform: rotate(-15deg);
         }
 
-        .crest-ribbon::after {
-            right: -25px;
-            clip-path: polygon(0 0, 0 100%, 100% 50%);
+        .ribbon-right {
+            right: -30px;
+            transform: rotate(15deg);
         }
 
-        .crest-motto {
-            margin-top: var(--space-lg);
+        .decree-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--royal-gold);
+            letter-spacing: 0.2em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .decree-subtitle {
+            font-family: var(--font-accent);
+            font-size: 0.9rem;
+            color: var(--bronze);
+            letter-spacing: 0.15em;
+            margin-bottom: var(--space-lg);
+        }
+
+        .decree-content {
             font-family: var(--font-body);
+            font-size: 1.1rem;
             font-style: italic;
             color: var(--cream);
+            max-width: 600px;
+            margin: 0 auto var(--space-lg);
+            line-height: 1.9;
+        }
+
+        .decree-signature {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--royal-gold);
+            margin-top: var(--space-lg);
+        }
+
+        .decree-date {
+            font-family: var(--font-accent);
+            font-size: 0.8rem;
+            color: var(--bronze);
+            letter-spacing: 0.1em;
+            margin-top: var(--space-sm);
         }
 
         /* Alerts */
@@ -702,241 +959,361 @@
             padding: var(--space-md) var(--space-lg);
             margin-bottom: var(--space-md);
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: var(--space-md);
-            border: 1px solid;
-            position: relative;
-        }
-
-        .alert::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
+            border: 2px solid;
         }
 
         .alert-icon {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
+            flex-shrink: 0;
         }
 
         .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-accent);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .alert-text {
+            font-family: var(--font-body);
             font-size: 0.95rem;
+            font-style: italic;
         }
-
-        .alert-info {
-            background: rgba(30, 58, 95, 0.2);
-            border-color: var(--royal-blue);
-        }
-
-        .alert-info::before { background: var(--royal-blue); }
 
         .alert-success {
             background: rgba(212, 175, 55, 0.1);
             border-color: var(--royal-gold);
+            color: var(--royal-gold);
         }
 
-        .alert-success::before { background: var(--royal-gold); }
+        .alert-info {
+            background: rgba(26, 26, 64, 0.5);
+            border-color: var(--midnight-blue);
+            color: var(--cream);
+        }
 
         .alert-warning {
             background: rgba(205, 127, 50, 0.1);
             border-color: var(--bronze);
+            color: var(--bronze);
         }
-
-        .alert-warning::before { background: var(--bronze); }
 
         .alert-error {
-            background: rgba(114, 47, 55, 0.2);
-            border-color: var(--burgundy);
-        }
-
-        .alert-error::before { background: var(--burgundy); }
-
-        /* Back Link */
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-sm);
-            color: var(--royal-gold);
-            text-decoration: none;
-            font-family: var(--font-display);
-            font-style: italic;
-            font-size: 0.9rem;
-            margin-bottom: var(--space-xl);
-            transition: color 0.3s ease;
-        }
-
-        .back-link:hover {
-            color: var(--cream);
+            background: rgba(107, 28, 35, 0.2);
+            border-color: var(--deep-burgundy);
+            color: var(--wine);
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: var(--space-2xl);
-            border-top: 2px solid var(--royal-gold);
-            font-family: var(--font-display);
-            font-style: italic;
-            color: var(--royal-gold);
+            margin-top: var(--space-3xl);
+            border: 3px double var(--royal-gold);
+            background: linear-gradient(180deg,
+                rgba(212, 175, 55, 0.1) 0%,
+                transparent 50%,
+                rgba(212, 175, 55, 0.1) 100%);
         }
 
-        footer .ornament {
-            font-size: 1.5rem;
-            margin-bottom: var(--space-md);
+        footer p {
+            font-family: var(--font-display);
+            color: var(--royal-gold);
+            letter-spacing: 0.15em;
+        }
+
+        footer p:first-child {
+            font-size: 1.2rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        footer p:last-child {
+            font-family: var(--font-body);
+            font-style: italic;
+            color: var(--cream);
+            opacity: 0.8;
+            letter-spacing: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--space-md);
+            }
+
+            header {
+                padding: var(--space-2xl) var(--space-md);
+            }
+
+            section {
+                padding: var(--space-lg);
+            }
+
+            .decree-ribbon {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">← Return to Gallery</a>
+        <a href="../index.html" class="back-link">Back to Gallery</a>
 
         <header>
-            <div class="crown">👑</div>
-            <h1 class="logo">Opulence</h1>
-            <p class="tagline">A Baroque Design System of Grand Proportions</p>
+            <div class="header-crown">👑</div>
+            <h1>Versailles</h1>
+            <p>An opulent design system that channels the grandeur of royal courts and the drama of the Baroque masters</p>
         </header>
 
         <!-- Color Palette -->
-        <section>
+        <section id="colors">
             <h2>Color Palette</h2>
             <div class="color-grid">
-                <div class="color-swatch" style="background: linear-gradient(180deg, var(--royal-gold), var(--deep-gold));">
-                    <span>Royal Gold</span>
+                <div class="color-swatch swatch-gold">
+                    <span class="color-name">Royal Gold</span>
+                    <span class="color-value">#D4AF37</span>
                 </div>
-                <div class="color-swatch" style="background: linear-gradient(180deg, var(--burgundy), var(--deep-burgundy));">
-                    <span>Burgundy</span>
+                <div class="color-swatch swatch-antique">
+                    <span class="color-name">Antique Gold</span>
+                    <span class="color-value">#C5A028</span>
                 </div>
-                <div class="color-swatch" style="background: linear-gradient(180deg, var(--royal-blue), var(--midnight-blue));">
-                    <span>Royal Blue</span>
+                <div class="color-swatch swatch-burgundy">
+                    <span class="color-name">Deep Burgundy</span>
+                    <span class="color-value">#6B1C23</span>
                 </div>
-                <div class="color-swatch" style="background: var(--bronze);">
-                    <span>Bronze</span>
+                <div class="color-swatch swatch-wine">
+                    <span class="color-name">Wine</span>
+                    <span class="color-value">#722F37</span>
                 </div>
-                <div class="color-swatch" style="background: var(--ivory);">
-                    <span style="color: var(--charcoal);">Ivory</span>
+                <div class="color-swatch swatch-midnight">
+                    <span class="color-name">Midnight Blue</span>
+                    <span class="color-value">#1A1A40</span>
                 </div>
-                <div class="color-swatch" style="background: var(--charcoal);">
-                    <span>Charcoal</span>
+                <div class="color-swatch swatch-purple">
+                    <span class="color-name">Royal Purple</span>
+                    <span class="color-value">#4A1259</span>
+                </div>
+                <div class="color-swatch swatch-ivory">
+                    <span class="color-name">Ivory</span>
+                    <span class="color-value">#FFFFF0</span>
+                </div>
+                <div class="color-swatch swatch-bronze">
+                    <span class="color-name">Bronze</span>
+                    <span class="color-value">#CD7F32</span>
+                </div>
+                <div class="color-swatch swatch-velvet">
+                    <span class="color-name">Velvet Red</span>
+                    <span class="color-value">#8B0000</span>
+                </div>
+                <div class="color-swatch swatch-obsidian">
+                    <span class="color-name">Obsidian</span>
+                    <span class="color-value">#0D0D0D</span>
                 </div>
             </div>
         </section>
 
         <!-- Typography -->
-        <section>
+        <section id="typography">
             <h2>Typography</h2>
-            <div class="type-sample">
-                <h3>Display — Playfair Display</h3>
-                <p class="display-text">Magnificence</p>
+            <div class="type-specimen">
+                <h3>Cinzel Decorative</h3>
+                <p class="font-name">Display Font — Regal, ornate, commanding</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">Display</span>
+                        <span class="display-text">Royal Majesty</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">Heading</span>
+                        <span class="heading-text">Palace of Dreams</span>
+                    </div>
+                </div>
             </div>
-            <div class="type-sample">
-                <h3>Body — Libre Baskerville</h3>
-                <p class="body-text">The Baroque style emerged in Rome around 1600, characterized by grandeur, drama, and emotional intensity. It sought to evoke feelings of awe through ornate decoration, rich colors, and theatrical effects that celebrated the power and glory of the divine and the monarchical.</p>
+            <div class="type-specimen">
+                <h3 style="font-family: var(--font-body); font-weight: 400; color: var(--cream);">Cormorant Infant</h3>
+                <p class="font-name">Body Font — Elegant, readable, refined</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">Body</span>
+                        <span class="body-text">The grandeur of the court demands nothing less than absolute magnificence in every detail.</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">Small</span>
+                        <span class="small-text">Every ornament serves the glory of the whole.</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Spacing Scale -->
-        <section>
+        <section id="spacing">
             <h2>Spacing Scale</h2>
-            <div class="spacing-demo">
-                <div class="spacing-block" style="width: 28px; height: 28px;">4</div>
-                <div class="spacing-block" style="width: 40px; height: 40px;">8</div>
-                <div class="spacing-block" style="width: 56px; height: 56px;">16</div>
-                <div class="spacing-block" style="width: 72px; height: 72px;">24</div>
-                <div class="spacing-block" style="width: 88px; height: 88px;">32</div>
-                <div class="spacing-block" style="width: 104px; height: 104px;">48</div>
+            <p style="margin-bottom: var(--space-lg); text-align: center; font-style: italic; opacity: 0.8;">Classical proportions inspired by palatial architecture.</p>
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-column" style="height: 30px;"></div>
+                    <span class="spacing-label">XS</span>
+                    <span class="spacing-value">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-column" style="height: 45px;"></div>
+                    <span class="spacing-label">SM</span>
+                    <span class="spacing-value">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-column" style="height: 65px;"></div>
+                    <span class="spacing-label">MD</span>
+                    <span class="spacing-value">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-column" style="height: 85px;"></div>
+                    <span class="spacing-label">LG</span>
+                    <span class="spacing-value">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-column" style="height: 110px;"></div>
+                    <span class="spacing-label">XL</span>
+                    <span class="spacing-value">40px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-column" style="height: 140px;"></div>
+                    <span class="spacing-label">2XL</span>
+                    <span class="spacing-value">64px</span>
+                </div>
             </div>
         </section>
 
         <!-- Buttons -->
-        <section>
+        <section id="buttons">
             <h2>Buttons</h2>
             <div class="button-grid">
-                <button class="btn btn-primary">Proceed</button>
-                <button class="btn btn-secondary">Enquire</button>
-                <button class="btn btn-outline">Learn More</button>
+                <button class="btn btn-primary">Enter Palace</button>
+                <button class="btn btn-secondary">View Gallery</button>
+                <button class="btn btn-burgundy">Royal Chamber</button>
+                <button class="btn btn-royal">Throne Room</button>
+            </div>
+            <div class="button-grid">
+                <button class="btn btn-primary" disabled style="opacity: 0.5; cursor: not-allowed;">Sealed</button>
+                <button class="btn btn-secondary" style="font-size: 0.75rem; padding: var(--space-sm) var(--space-md);">Minor</button>
             </div>
         </section>
 
         <!-- Forms -->
-        <section>
+        <section id="forms">
             <h2>Forms</h2>
-            <div class="form-group">
-                <label>Your Noble Name</label>
-                <input type="text" placeholder="Enter your name">
-            </div>
-            <div class="form-group">
-                <label>Correspondence Address</label>
-                <input type="email" placeholder="your@estate.com">
-            </div>
-            <div class="form-group">
-                <label>Your Petition</label>
-                <textarea placeholder="State your request..."></textarea>
-            </div>
-            <div style="text-align: center;">
-                <button class="btn btn-primary">Submit Petition</button>
-            </div>
+            <form onsubmit="return false;" style="max-width: 500px; margin: 0 auto;">
+                <div class="form-group">
+                    <label class="form-label">Noble Title</label>
+                    <input type="text" class="form-input" placeholder="Your formal address">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">House Affiliation</label>
+                    <select class="form-input form-select">
+                        <option>Select your house</option>
+                        <option>House of Bourbon</option>
+                        <option>House of Habsburg</option>
+                        <option>House of Tudor</option>
+                        <option>House of Medici</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Petition to the Crown</label>
+                    <textarea class="form-input" placeholder="State your request to His Majesty..."></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="form-checkbox-group">
+                        <input type="checkbox" class="form-checkbox" id="oath" checked>
+                        <label for="oath" style="font-style: italic;">I pledge fealty to the Crown</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Petition</button>
+            </form>
         </section>
 
         <!-- Cards -->
-        <section>
+        <section id="cards">
             <h2>Cards</h2>
             <div class="card-grid">
                 <div class="card">
-                    <div class="card-image">🎭</div>
+                    <div class="card-image"></div>
                     <div class="card-content">
-                        <h4 class="card-title">Drama</h4>
-                        <p class="card-text">Theatrical compositions that command attention and stir the soul.</p>
+                        <h3 class="card-title">Hall of Mirrors</h3>
+                        <p class="card-text">Three hundred and fifty-seven mirrors reflect the infinite grandeur of absolute power.</p>
+                        <div class="card-meta">
+                            <span>♛</span>
+                            <span>Grand Gallery</span>
+                        </div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-image">🏛️</div>
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--royal-gold), var(--bronze), var(--antique-gold));"></div>
                     <div class="card-content">
-                        <h4 class="card-title">Architecture</h4>
-                        <p class="card-text">Grand structures adorned with columns, domes, and gilded ornament.</p>
+                        <h3 class="card-title">The Sun King's Chamber</h3>
+                        <p class="card-text">Where dawn itself pays tribute to the radiance of royal magnificence.</p>
+                        <div class="card-meta">
+                            <span>☀</span>
+                            <span>Royal Apartments</span>
+                        </div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-image">🎨</div>
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--wine), var(--velvet-red), var(--deep-burgundy));"></div>
                     <div class="card-content">
-                        <h4 class="card-title">Artistry</h4>
-                        <p class="card-text">Rich pigments and dynamic compositions that celebrate divine glory.</p>
+                        <h3 class="card-title">Throne Room</h3>
+                        <p class="card-text">The seat of power where empires are forged and destinies decided.</p>
+                        <div class="card-meta">
+                            <span>👑</span>
+                            <span>State Rooms</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Data Table -->
-        <section>
+        <section id="table">
             <h2>Data Table</h2>
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th>Master</th>
-                            <th>Medium</th>
-                            <th>Era</th>
+                            <th>Noble House</th>
+                            <th>Territory</th>
+                            <th>Wealth</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Caravaggio</td>
-                            <td>Painting</td>
-                            <td>1593-1610</td>
-                            <td><span class="badge badge-gold">Master</span></td>
+                            <td>House of Bourbon</td>
+                            <td>France</td>
+                            <td>★★★★★</td>
+                            <td><span class="status-active">Reigning</span></td>
                         </tr>
                         <tr>
-                            <td>Bernini</td>
-                            <td>Sculpture</td>
-                            <td>1623-1680</td>
-                            <td><span class="badge badge-burgundy">Virtuoso</span></td>
+                            <td>House of Habsburg</td>
+                            <td>Austria</td>
+                            <td>★★★★★</td>
+                            <td><span class="status-active">Reigning</span></td>
                         </tr>
                         <tr>
-                            <td>Borromini</td>
-                            <td>Architecture</td>
-                            <td>1634-1667</td>
-                            <td><span class="badge badge-blue">Architect</span></td>
+                            <td>House of Stuart</td>
+                            <td>England</td>
+                            <td>★★★★☆</td>
+                            <td><span class="status-pending">Exiled</span></td>
+                        </tr>
+                        <tr>
+                            <td>House of Medici</td>
+                            <td>Florence</td>
+                            <td>★★★★☆</td>
+                            <td><span class="status-pending">Declined</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -944,105 +1321,125 @@
         </section>
 
         <!-- Badges -->
-        <section>
+        <section id="badges">
             <h2>Badges & Tags</h2>
             <div class="badge-grid">
-                <span class="badge badge-gold">Royal</span>
+                <span class="badge badge-gold">♛ Royal</span>
                 <span class="badge badge-burgundy">Noble</span>
-                <span class="badge badge-blue">Imperial</span>
-                <span class="badge badge-outline">Classic</span>
+                <span class="badge badge-royal">Imperial</span>
+                <span class="badge badge-midnight">Archduke</span>
+                <span class="badge badge-bronze">Landed</span>
+                <span class="badge badge-outline">Courtier</span>
             </div>
         </section>
 
         <!-- Design Principles -->
-        <section>
+        <section id="principles">
             <h2>Design Principles</h2>
             <div class="principles-grid">
-                <div class="principle">
-                    <span class="principle-icon">✨</span>
-                    <h4 class="principle-title">Grandeur</h4>
-                    <p class="principle-text">Scale and proportion that inspire awe and reverence</p>
+                <div class="principle-card">
+                    <div class="principle-icon">👑</div>
+                    <h3 class="principle-title">Divine Right</h3>
+                    <p class="principle-text">Design as if ordained by heaven—with absolute confidence and unquestioning grandeur.</p>
                 </div>
-                <div class="principle">
-                    <span class="principle-icon">🎭</span>
-                    <h4 class="principle-title">Drama</h4>
-                    <p class="principle-text">Contrast and tension that evoke powerful emotions</p>
+                <div class="principle-card">
+                    <div class="principle-icon">✨</div>
+                    <h3 class="principle-title">Opulent Excess</h3>
+                    <p class="principle-text">More is more. Every surface deserves gilding, every corner demands ornament.</p>
                 </div>
-                <div class="principle">
-                    <span class="principle-icon">💫</span>
-                    <h4 class="principle-title">Ornamentation</h4>
-                    <p class="principle-text">Rich detail that celebrates craftsmanship</p>
+                <div class="principle-card">
+                    <div class="principle-icon">🎭</div>
+                    <h3 class="principle-title">Dramatic Contrast</h3>
+                    <p class="principle-text">Light against shadow, gold against velvet—tension creates magnificence.</p>
                 </div>
-                <div class="principle">
-                    <span class="principle-icon">👑</span>
-                    <h4 class="principle-title">Majesty</h4>
-                    <p class="principle-text">Regal presence that commands respect</p>
+                <div class="principle-card">
+                    <div class="principle-icon">⚜️</div>
+                    <h3 class="principle-title">Symmetrical Order</h3>
+                    <p class="principle-text">Perfect balance reflects the cosmic order and the stability of the realm.</p>
                 </div>
             </div>
         </section>
 
         <!-- Animations -->
-        <section>
+        <section id="animations">
             <h2>Animation & Micro-interactions</h2>
-            <div class="animation-grid">
-                <div>
-                    <h3>Golden Glow</h3>
-                    <div class="animation-demo">
-                        <div class="glow-demo"></div>
-                    </div>
+            <div class="animation-showcase">
+                <div class="animation-demo crown-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Crown</span>
                 </div>
-                <div>
-                    <h3>Curtain Sway</h3>
-                    <div class="animation-demo">
-                        <div class="curtain-demo"></div>
-                    </div>
+                <div class="animation-demo gild-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Gild</span>
                 </div>
-                <div>
-                    <h3>Scroll Unfurl</h3>
-                    <div class="animation-demo">
-                        <div class="scroll-demo"></div>
-                    </div>
+                <div class="animation-demo curtain-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Curtain</span>
+                </div>
+                <div class="animation-demo flourish-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Flourish</span>
                 </div>
             </div>
         </section>
 
-        <!-- Special Component: Royal Crest -->
-        <section>
-            <h2>Special Component: Royal Crest</h2>
-            <div class="royal-crest">
-                <div class="crest-shield">
-                    <span class="crest-symbol">⚜</span>
-                </div>
-                <div class="crest-ribbon">House of Excellence</div>
-                <p class="crest-motto">"Per aspera ad astra" — Through hardship to the stars</p>
+        <!-- Special Component: Royal Decree -->
+        <section id="special">
+            <h2>Special Component</h2>
+            <p style="margin-bottom: var(--space-lg); text-align: center; font-style: italic; opacity: 0.8;">Royal Decree — An official proclamation component with seal and ribbon.</p>
+            <div class="royal-decree">
+                <div class="decree-ribbon ribbon-left"></div>
+                <div class="decree-ribbon ribbon-right"></div>
+
+                <div class="decree-seal"></div>
+                <h3 class="decree-title">Royal Decree</h3>
+                <p class="decree-subtitle">By Order of the Crown</p>
+                <p class="decree-content">
+                    Let it be known throughout the realm that excellence in design
+                    is hereby proclaimed a virtue of the highest order. All who craft
+                    interfaces shall aspire to magnificence worthy of royal patronage.
+                </p>
+                <div class="decree-signature">Louis XIV</div>
+                <div class="decree-date">Anno Domini MDCLXXXII</div>
             </div>
         </section>
 
         <!-- Alerts -->
-        <section>
+        <section id="alerts">
             <h2>Alert Messages</h2>
+            <div class="alert alert-success">
+                <span class="alert-icon">♛</span>
+                <div class="alert-content">
+                    <div class="alert-title">Royal Favor Granted</div>
+                    <p class="alert-text">His Majesty has looked kindly upon your petition.</p>
+                </div>
+            </div>
             <div class="alert alert-info">
                 <span class="alert-icon">📜</span>
-                <span class="alert-content">A royal proclamation has been issued. Attend to it forthwith.</span>
-            </div>
-            <div class="alert alert-success">
-                <span class="alert-icon">✓</span>
-                <span class="alert-content">Your petition has been received and granted by the court.</span>
+                <div class="alert-content">
+                    <div class="alert-title">Court Announcement</div>
+                    <p class="alert-text">The Grand Ball shall commence at the stroke of midnight.</p>
+                </div>
             </div>
             <div class="alert alert-warning">
-                <span class="alert-icon">⚠</span>
-                <span class="alert-content">The treasury advises caution in these uncertain times.</span>
+                <span class="alert-icon">⚔️</span>
+                <div class="alert-content">
+                    <div class="alert-title">Border Tensions</div>
+                    <p class="alert-text">Diplomatic relations with the neighboring kingdom require attention.</p>
+                </div>
             </div>
             <div class="alert alert-error">
-                <span class="alert-icon">✗</span>
-                <span class="alert-content">Your request has been denied by royal decree.</span>
+                <span class="alert-icon">🗡️</span>
+                <div class="alert-content">
+                    <div class="alert-title">Royal Displeasure</div>
+                    <p class="alert-text">Your actions have drawn the ire of the Crown.</p>
+                </div>
             </div>
         </section>
 
         <footer>
-            <div class="ornament">❧ ❦ ❧</div>
-            <p>Opulence Design System</p>
-            <p>Crafted in the Tradition of the Masters</p>
+            <p>✦ Versailles Design System ✦</p>
+            <p>Where magnificence knows no bounds</p>
         </footer>
     </div>
 </body>

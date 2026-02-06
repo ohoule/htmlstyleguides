@@ -3,209 +3,1898 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Civitas Design System - Government</title>
+    <title>Civitas Design System - Government & Civic Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-primary: #005EA2; --color-primary-dark: #1A4480; --color-primary-darker: #162E51;
-            --color-primary-light: #73B3E7; --color-primary-lighter: #D9E8F6;
-            --color-secondary: #C05600; --color-secondary-light: #FA9441;
-            --color-gray-5: #F0F0F0; --color-gray-10: #E6E6E6; --color-gray-20: #C6C6C6;
-            --color-gray-30: #A9AEB1; --color-gray-50: #71767A; --color-gray-60: #565C65;
-            --color-gray-70: #3D4551; --color-gray-80: #2D2E2F; --color-gray-90: #1B1B1B;
-            --color-success: #00A91C; --color-success-light: #E7F4E4;
-            --color-warning: #FFBE2E; --color-warning-light: #FAF3D1;
-            --color-error: #D54309; --color-error-light: #F4E3DB;
-            --color-info: #00BDE3; --color-info-light: #E7F6F8;
-            --font-sans: 'Public Sans', system-ui, sans-serif;
-            --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem;
-            --text-xl: 1.25rem; --text-2xl: 1.5rem; --text-3xl: 2rem; --text-4xl: 2.5rem;
-            --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
-            --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-12: 3rem; --space-16: 4rem;
-            --radius: 0.25rem; --radius-lg: 0.5rem;
+            /* Patriotic Navy */
+            --navy-50: #EEF2F7;
+            --navy-100: #D4DEE9;
+            --navy-200: #A9BDD4;
+            --navy-300: #7E9CBF;
+            --navy-400: #5379A6;
+            --navy-500: #3A5F8A;
+            --navy-600: #2B4A6E;
+            --navy-700: #1E3A5F;
+            --navy-800: #14294A;
+            --navy-900: #0D1B32;
+            --navy-950: #080F1C;
+
+            /* Civic Red Accents */
+            --red-50: #FEF2F2;
+            --red-100: #FEE2E2;
+            --red-200: #FECACA;
+            --red-300: #FCA5A5;
+            --red-400: #F87171;
+            --red-500: #B91C1C;
+            --red-600: #991B1B;
+            --red-700: #7F1D1D;
+            --red-800: #671717;
+
+            /* Warm Grays */
+            --warm-50: #FAFAF9;
+            --warm-100: #F5F5F4;
+            --warm-200: #E7E5E4;
+            --warm-300: #D6D3D1;
+            --warm-400: #A8A29E;
+            --warm-500: #78716C;
+            --warm-600: #57534E;
+            --warm-700: #44403C;
+            --warm-800: #292524;
+            --warm-900: #1C1917;
+
+            /* Status Colors (WCAG compliant) */
+            --success-50: #ECFDF5;
+            --success-100: #D1FAE5;
+            --success-600: #047857;
+            --success-700: #065F46;
+
+            --warning-50: #FFFBEB;
+            --warning-100: #FEF3C7;
+            --warning-600: #B45309;
+            --warning-700: #92400E;
+
+            --error-50: #FEF2F2;
+            --error-100: #FEE2E2;
+            --error-600: #DC2626;
+            --error-700: #B91C1C;
+
+            --info-50: #EFF6FF;
+            --info-100: #DBEAFE;
+            --info-600: #2563EB;
+            --info-700: #1D4ED8;
+
+            /* Typography */
+            --font-display: 'Merriweather', Georgia, serif;
+            --font-body: 'Source Sans 3', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', Consolas, monospace;
+
+            /* Spacing Scale */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-20: 5rem;
+            --space-24: 6rem;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.05);
+            --shadow: 0 1px 3px rgba(28, 25, 23, 0.08), 0 1px 2px rgba(28, 25, 23, 0.04);
+            --shadow-md: 0 4px 6px rgba(28, 25, 23, 0.08), 0 2px 4px rgba(28, 25, 23, 0.04);
+            --shadow-lg: 0 10px 15px rgba(28, 25, 23, 0.08), 0 4px 6px rgba(28, 25, 23, 0.04);
+
+            /* Border Radius */
+            --radius-sm: 0.125rem;
+            --radius: 0.25rem;
+            --radius-md: 0.375rem;
+            --radius-lg: 0.5rem;
+
+            /* Transitions */
+            --transition-fast: 150ms ease;
             --transition: 200ms ease;
+
+            /* Focus Ring (WCAG compliant) */
+            --focus-ring: 0 0 0 3px rgba(30, 58, 95, 0.4);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.6; color: var(--color-gray-90); background: white; }
-        header { background: var(--color-primary-darker); color: white; padding: var(--space-4) var(--space-6); }
-        .header-content { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-        .logo { display: flex; align-items: center; gap: var(--space-3); font-weight: 700; font-size: var(--text-lg); }
-        .logo-flag { width: 40px; height: 26px; background: linear-gradient(180deg, #BF0A30 0%, #BF0A30 38%, white 38%, white 62%, #002868 62%, #002868 100%); border-radius: 2px; }
-        nav { display: flex; gap: var(--space-1); }
-        nav a { padding: var(--space-2) var(--space-3); font-size: var(--text-sm); color: rgba(255,255,255,0.9); text-decoration: none; border-radius: var(--radius); transition: all var(--transition); }
-        nav a:hover { color: white; background: rgba(255,255,255,0.1); }
-        main { max-width: 1200px; margin: 0 auto; padding: var(--space-12) var(--space-6); }
-        .hero { text-align: center; margin-bottom: var(--space-16); border-bottom: 1px solid var(--color-gray-10); padding-bottom: var(--space-12); }
-        .hero h1 { font-size: var(--text-4xl); font-weight: 700; margin-bottom: var(--space-4); }
-        .hero p { font-size: var(--text-lg); color: var(--color-gray-60); max-width: 700px; margin: 0 auto; }
-        section { background: white; border: 1px solid var(--color-gray-10); border-radius: var(--radius-lg); padding: var(--space-8); margin-bottom: var(--space-8); }
-        section h2 { font-size: var(--text-xl); font-weight: 700; margin-bottom: var(--space-2); display: flex; align-items: center; gap: var(--space-3); }
-        .section-number { font-size: var(--text-sm); font-weight: 600; color: var(--color-primary); background: var(--color-primary-lighter); padding: var(--space-1) var(--space-2); border-radius: var(--radius); }
-        section > p { color: var(--color-gray-60); margin-bottom: var(--space-6); }
-        h3 { font-size: var(--text-base); font-weight: 600; color: var(--color-gray-70); margin: var(--space-6) 0 var(--space-3); }
-        h3:first-of-type { margin-top: 0; }
-        .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--space-4); }
-        .color-swatch { text-align: center; }
-        .color-preview { height: 56px; border-radius: var(--radius); margin-bottom: var(--space-2); border: 1px solid var(--color-gray-10); }
-        .color-name { font-size: var(--text-sm); font-weight: 500; color: var(--color-gray-70); }
-        .color-value { font-size: var(--text-xs); color: var(--color-gray-50); font-family: monospace; }
-        .type-scale { display: flex; flex-direction: column; gap: var(--space-4); }
-        .type-item { display: flex; align-items: baseline; gap: var(--space-6); padding-bottom: var(--space-4); border-bottom: 1px solid var(--color-gray-5); }
-        .type-label { min-width: 80px; font-size: var(--text-sm); color: var(--color-gray-50); }
-        .type-display { font-size: var(--text-4xl); font-weight: 700; }
-        .type-h1 { font-size: var(--text-3xl); font-weight: 700; }
-        .type-body { font-size: var(--text-base); }
-        .button-group { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-6); }
-        .btn { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 600; border-radius: var(--radius); border: none; cursor: pointer; transition: all var(--transition); padding: var(--space-3) var(--space-5); font-size: var(--text-base); }
-        .btn-primary { background: var(--color-primary); color: white; }
-        .btn-primary:hover { background: var(--color-primary-dark); }
-        .btn-secondary { background: white; color: var(--color-primary); border: 2px solid var(--color-primary); }
-        .btn-secondary:hover { background: var(--color-primary-lighter); }
-        .btn-accent { background: var(--color-secondary); color: white; }
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-6); }
-        .form-group { display: flex; flex-direction: column; gap: var(--space-2); }
-        label { font-size: var(--text-base); font-weight: 600; color: var(--color-gray-90); }
-        .input { padding: var(--space-3); font-size: var(--text-base); border: 2px solid var(--color-gray-30); border-radius: var(--radius); background: white; transition: all var(--transition); }
-        .input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 4px var(--color-primary-lighter); }
-        .helper-text { font-size: var(--text-sm); color: var(--color-gray-50); }
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-6); }
-        .card { background: white; border: 1px solid var(--color-gray-10); border-radius: var(--radius-lg); padding: var(--space-6); }
-        .card-title { font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-2); }
-        .card-desc { font-size: var(--text-base); color: var(--color-gray-60); }
-        .service-card { border-top: 4px solid var(--color-primary); }
-        .stat-card { background: var(--color-primary-lighter); border: none; }
-        .stat-label { font-size: var(--text-sm); color: var(--color-gray-60); margin-bottom: var(--space-1); }
-        .stat-value { font-size: var(--text-3xl); font-weight: 700; color: var(--color-primary-dark); }
-        .table-container { overflow-x: auto; border: 1px solid var(--color-gray-10); border-radius: var(--radius); }
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: var(--space-3) var(--space-4); font-size: var(--text-sm); font-weight: 700; color: var(--color-gray-90); background: var(--color-gray-5); border-bottom: 2px solid var(--color-gray-20); }
-        td { padding: var(--space-3) var(--space-4); font-size: var(--text-base); color: var(--color-gray-70); border-bottom: 1px solid var(--color-gray-10); }
-        tr:last-child td { border-bottom: none; }
-        .badge-group { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-        .badge { display: inline-flex; padding: var(--space-1) var(--space-3); font-size: var(--text-sm); font-weight: 600; border-radius: var(--radius); }
-        .badge-success { background: var(--color-success-light); color: #0D4A1E; }
-        .badge-warning { background: var(--color-warning-light); color: #5C410A; }
-        .badge-error { background: var(--color-error-light); color: #6F1B1B; }
-        .badge-info { background: var(--color-info-light); color: #0B4E5C; }
-        .principles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-6); }
-        .principle { padding: var(--space-6); background: var(--color-gray-5); border-radius: var(--radius-lg); }
-        .principle-number { font-size: var(--text-sm); font-weight: 700; color: var(--color-primary); margin-bottom: var(--space-2); }
-        .principle-title { font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-2); }
-        .principle-desc { font-size: var(--text-base); color: var(--color-gray-60); }
-        .alert { display: flex; gap: var(--space-3); padding: var(--space-4); border-radius: var(--radius); margin-bottom: var(--space-3); border-left: 4px solid; }
-        .alert-content { flex: 1; }
-        .alert-title { font-weight: 700; margin-bottom: 2px; }
-        .alert-description { font-size: var(--text-base); }
-        .alert-success { background: var(--color-success-light); border-color: var(--color-success); color: #0D4A1E; }
-        .alert-info { background: var(--color-info-light); border-color: var(--color-info); color: #0B4E5C; }
-        .alert-warning { background: var(--color-warning-light); border-color: var(--color-warning); color: #5C410A; }
-        .alert-error { background: var(--color-error-light); border-color: var(--color-error); color: #6F1B1B; }
-        footer { background: var(--color-primary-darker); color: white; padding: var(--space-8) var(--space-6); margin-top: var(--space-16); text-align: center; }
-        .footer-text { font-size: var(--text-sm); color: rgba(255,255,255,0.8); }
-        @media (max-width: 768px) { nav { display: none; } .hero h1 { font-size: var(--text-3xl); } section { padding: var(--space-5); } }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.625;
+            color: var(--warm-900);
+            background: white;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Skip Link (Accessibility) */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--navy-700);
+            color: white;
+            padding: var(--space-2) var(--space-4);
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 1000;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Official Banner */
+        .official-banner {
+            background: var(--warm-100);
+            border-bottom: 1px solid var(--warm-200);
+            padding: var(--space-2) var(--space-6);
+        }
+
+        .official-banner-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            font-size: 0.8125rem;
+            color: var(--warm-700);
+        }
+
+        .flag-icon {
+            width: 16px;
+            height: 11px;
+            background: linear-gradient(180deg,
+                var(--red-500) 0%, var(--red-500) 30.77%,
+                white 30.77%, white 38.46%,
+                var(--red-500) 38.46%, var(--red-500) 46.15%,
+                white 46.15%, white 53.85%,
+                var(--red-500) 53.85%, var(--red-500) 61.54%,
+                white 61.54%, white 69.23%,
+                var(--red-500) 69.23%, var(--red-500) 100%
+            );
+            position: relative;
+            border-radius: 1px;
+        }
+
+        .flag-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 53.85%;
+            background: var(--navy-700);
+        }
+
+        /* Header */
+        header {
+            background: var(--navy-800);
+            border-bottom: 4px solid var(--red-500);
+        }
+
+        .header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-seal {
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--navy-300);
+        }
+
+        .logo-seal::before {
+            content: '';
+            width: 32px;
+            height: 32px;
+            background: var(--navy-700);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-agency {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+        }
+
+        .logo-tagline {
+            font-size: 0.75rem;
+            color: var(--navy-200);
+            font-weight: 400;
+        }
+
+        .back-link {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--navy-200);
+            text-decoration: none;
+            padding: var(--space-2) var(--space-4);
+            border: 1px solid var(--navy-600);
+            border-radius: var(--radius);
+            transition: var(--transition-fast);
+        }
+
+        .back-link:hover {
+            color: white;
+            border-color: var(--navy-400);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .back-link:focus {
+            outline: none;
+            box-shadow: var(--focus-ring);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--navy-700);
+            padding: 0 var(--space-6);
+        }
+
+        nav ul {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            list-style: none;
+            gap: 0;
+        }
+
+        nav a {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--navy-100);
+            text-decoration: none;
+            padding: var(--space-4) var(--space-5);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition-fast);
+        }
+
+        nav a:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        nav a:focus {
+            outline: none;
+            box-shadow: inset var(--focus-ring);
+        }
+
+        nav a.active {
+            color: white;
+            border-bottom-color: var(--red-500);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: var(--space-12) var(--space-6);
+        }
+
+        /* Hero */
+        .hero {
+            padding: var(--space-12) var(--space-8);
+            margin-bottom: var(--space-12);
+            background: var(--warm-50);
+            border: 1px solid var(--warm-200);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--navy-700);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--navy-600);
+            margin-bottom: var(--space-4);
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--red-500);
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 2.75rem;
+            font-weight: 900;
+            color: var(--navy-900);
+            margin-bottom: var(--space-4);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1875rem;
+            color: var(--warm-600);
+            max-width: 720px;
+            line-height: 1.7;
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            border: 1px solid var(--warm-200);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            margin-bottom: var(--space-6);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+            padding-bottom: var(--space-5);
+            border-bottom: 2px solid var(--warm-100);
+        }
+
+        .section-number {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--navy-600);
+            background: var(--navy-100);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius);
+            min-width: 44px;
+            text-align: center;
+        }
+
+        .section-info h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy-900);
+            margin-bottom: var(--space-1);
+        }
+
+        .section-info p {
+            font-size: 1rem;
+            color: var(--warm-500);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.0625rem;
+            font-weight: 700;
+            color: var(--navy-800);
+            margin-bottom: var(--space-3);
+            margin-top: var(--space-6);
+        }
+
+        h3:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Color Palette */
+        .color-groups {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-6);
+        }
+
+        .color-group-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--warm-500);
+            margin-bottom: var(--space-3);
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: var(--space-3);
+        }
+
+        .color-swatch {
+            background: white;
+            border: 1px solid var(--warm-200);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .color-preview {
+            height: 64px;
+        }
+
+        .color-info {
+            padding: var(--space-2) var(--space-3);
+        }
+
+        .color-name {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--warm-800);
+        }
+
+        .color-value {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--warm-500);
+        }
+
+        .color-wcag {
+            font-size: 0.625rem;
+            font-weight: 600;
+            color: var(--success-600);
+            margin-top: var(--space-1);
+        }
+
+        /* Typography */
+        .type-specimen {
+            background: var(--warm-50);
+            border: 1px solid var(--warm-200);
+            border-radius: var(--radius);
+            padding: var(--space-6);
+        }
+
+        .type-row {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: var(--space-4);
+            align-items: baseline;
+            padding: var(--space-4) 0;
+            border-bottom: 1px solid var(--warm-200);
+        }
+
+        .type-row:last-child {
+            border-bottom: none;
+        }
+
+        .type-meta {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--warm-500);
+            line-height: 1.5;
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--navy-900);
+            line-height: 1.2;
+        }
+
+        .type-h1 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--navy-900);
+        }
+
+        .type-h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy-800);
+        }
+
+        .type-h3 {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--navy-800);
+        }
+
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--warm-700);
+        }
+
+        .type-small {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: var(--warm-600);
+        }
+
+        .font-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-3);
+            margin-top: var(--space-5);
+        }
+
+        .font-card {
+            background: white;
+            border: 1px solid var(--warm-200);
+            border-radius: var(--radius);
+            padding: var(--space-3);
+        }
+
+        .font-card-label {
+            font-size: 0.625rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--warm-400);
+            margin-bottom: var(--space-1);
+        }
+
+        .font-card-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--warm-800);
+        }
+
+        .font-card-name.display { font-family: var(--font-display); }
+        .font-card-name.body { font-family: var(--font-body); }
+        .font-card-name.mono { font-family: var(--font-mono); }
+
+        /* Spacing Scale */
+        .spacing-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--warm-500);
+            min-width: 80px;
+        }
+
+        .spacing-bar {
+            height: 20px;
+            background: var(--navy-600);
+            border-radius: var(--radius-sm);
+        }
+
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--warm-400);
+            min-width: 48px;
+        }
+
+        /* Buttons */
+        .button-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+            margin-bottom: var(--space-6);
+        }
+
+        .btn {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            padding: var(--space-3) var(--space-5);
+            border-radius: var(--radius);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            transition: var(--transition);
+            text-decoration: none;
+            min-height: 44px; /* WCAG touch target */
+        }
+
+        .btn:focus {
+            outline: none;
+            box-shadow: var(--focus-ring);
+        }
+
+        .btn-primary {
+            background: var(--navy-700);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--navy-600);
+        }
+
+        .btn-danger {
+            background: var(--red-600);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: var(--red-500);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--navy-700);
+            border: 2px solid var(--navy-700);
+        }
+
+        .btn-secondary:hover {
+            background: var(--navy-50);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--navy-700);
+            text-decoration: underline;
+            padding: var(--space-2) var(--space-3);
+        }
+
+        .btn-ghost:hover {
+            color: var(--navy-500);
+        }
+
+        .btn-lg {
+            padding: var(--space-4) var(--space-6);
+            font-size: 1.0625rem;
+        }
+
+        .btn-sm {
+            padding: var(--space-2) var(--space-4);
+            font-size: 0.875rem;
+            min-height: 36px;
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--warm-900);
+        }
+
+        .label-required {
+            color: var(--red-600);
+        }
+
+        .input {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            padding: var(--space-3);
+            border: 2px solid var(--warm-400);
+            border-radius: var(--radius);
+            background: white;
+            color: var(--warm-900);
+            transition: var(--transition-fast);
+            min-height: 44px; /* WCAG touch target */
+        }
+
+        .input:hover {
+            border-color: var(--warm-500);
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: var(--navy-600);
+            box-shadow: var(--focus-ring);
+        }
+
+        .input::placeholder {
+            color: var(--warm-400);
+        }
+
+        textarea.input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        select.input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2378716C' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 18px;
+            padding-right: var(--space-10);
+        }
+
+        .form-hint {
+            font-size: 0.875rem;
+            color: var(--warm-500);
+        }
+
+        .form-error {
+            font-size: 0.875rem;
+            color: var(--error-600);
+            font-weight: 500;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--warm-200);
+            border-radius: var(--radius);
+            padding: var(--space-5);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-service {
+            border-top: 4px solid var(--navy-700);
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--navy-100);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-3);
+        }
+
+        .card-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--navy-700);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--navy-900);
+            margin-bottom: var(--space-2);
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: var(--warm-600);
+            line-height: 1.6;
+        }
+
+        /* Data Table */
+        .table-container {
+            border: 1px solid var(--warm-200);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: var(--warm-100);
+        }
+
+        th {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--warm-900);
+            text-align: left;
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 2px solid var(--warm-300);
+        }
+
+        td {
+            font-size: 1rem;
+            color: var(--warm-700);
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 1px solid var(--warm-100);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover td {
+            background: var(--warm-50);
+        }
+
+        /* Badges */
+        .badge-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+
+        .badge {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .badge-success {
+            background: var(--success-100);
+            color: var(--success-700);
+        }
+
+        .badge-warning {
+            background: var(--warning-100);
+            color: var(--warning-700);
+        }
+
+        .badge-error {
+            background: var(--error-100);
+            color: var(--error-700);
+        }
+
+        .badge-info {
+            background: var(--info-100);
+            color: var(--info-700);
+        }
+
+        .badge-neutral {
+            background: var(--warm-200);
+            color: var(--warm-700);
+        }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .principle-card {
+            background: var(--warm-50);
+            border: 1px solid var(--warm-200);
+            border-radius: var(--radius);
+            padding: var(--space-5);
+        }
+
+        .principle-number {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--navy-200);
+            line-height: 1;
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--navy-900);
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-desc {
+            font-size: 1rem;
+            color: var(--warm-600);
+            line-height: 1.6;
+        }
+
+        /* Animations (reduced motion respected) */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .animation-demo {
+            background: var(--warm-50);
+            border: 1px solid var(--warm-200);
+            border-radius: var(--radius);
+            padding: var(--space-4);
+            text-align: center;
+        }
+
+        .animation-preview {
+            width: 48px;
+            height: 48px;
+            background: var(--navy-700);
+            border-radius: var(--radius);
+            margin: 0 auto var(--space-3);
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .demo-focus .animation-preview {
+                transition: box-shadow var(--transition);
+            }
+
+            .demo-focus:hover .animation-preview {
+                box-shadow: var(--focus-ring);
+            }
+
+            .demo-fade .animation-preview {
+                animation: fade 2s ease-in-out infinite;
+            }
+
+            @keyframes fade {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.6; }
+            }
+
+            .demo-slide .animation-preview {
+                animation: slideIn 2s ease-out infinite;
+            }
+
+            @keyframes slideIn {
+                0%, 100% { transform: translateY(8px); opacity: 0; }
+                50% { transform: translateY(0); opacity: 1; }
+            }
+        }
+
+        .animation-label {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--warm-700);
+        }
+
+        /* Service Status Dashboard */
+        .service-dashboard {
+            background: var(--warm-50);
+            border: 1px solid var(--warm-200);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .dashboard-header {
+            background: var(--navy-800);
+            color: white;
+            padding: var(--space-4) var(--space-5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-title {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .dashboard-updated {
+            font-size: 0.75rem;
+            color: var(--navy-200);
+        }
+
+        .service-list {
+            padding: var(--space-4);
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-4);
+            background: white;
+            border: 1px solid var(--warm-200);
+            border-radius: var(--radius);
+            margin-bottom: var(--space-3);
+        }
+
+        .service-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .service-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .service-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--navy-100);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--navy-700);
+        }
+
+        .service-name {
+            font-weight: 600;
+            color: var(--navy-900);
+        }
+
+        .service-desc {
+            font-size: 0.875rem;
+            color: var(--warm-500);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .status-operational .status-dot { background: var(--success-600); }
+        .status-operational { color: var(--success-700); }
+
+        .status-degraded .status-dot { background: var(--warning-600); }
+        .status-degraded { color: var(--warning-700); }
+
+        .status-outage .status-dot { background: var(--error-600); }
+        .status-outage { color: var(--error-700); }
+
+        .status-maintenance .status-dot { background: var(--info-600); }
+        .status-maintenance { color: var(--info-700); }
+
+        /* Alerts */
+        .alert-stack {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .alert {
+            display: flex;
+            gap: var(--space-3);
+            padding: var(--space-4);
+            border-radius: var(--radius);
+            border-left: 4px solid;
+        }
+
+        .alert-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: var(--space-1);
+        }
+
+        .alert-text {
+            font-size: 1rem;
+        }
+
+        .alert-success {
+            background: var(--success-50);
+            border-color: var(--success-600);
+            color: var(--success-700);
+        }
+
+        .alert-warning {
+            background: var(--warning-50);
+            border-color: var(--warning-600);
+            color: var(--warning-700);
+        }
+
+        .alert-error {
+            background: var(--error-50);
+            border-color: var(--error-600);
+            color: var(--error-700);
+        }
+
+        .alert-info {
+            background: var(--info-50);
+            border-color: var(--info-600);
+            color: var(--info-700);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy-900);
+            color: var(--navy-200);
+            padding: var(--space-10) var(--space-6);
+            margin-top: var(--space-12);
+        }
+
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--space-2);
+        }
+
+        .footer-tagline {
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                gap: var(--space-3);
+                text-align: center;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            main {
+                padding: var(--space-6) var(--space-4);
+            }
+
+            .hero {
+                padding: var(--space-6);
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: var(--space-5);
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: var(--space-2);
+            }
+
+            .service-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-3);
+            }
+        }
+
+        /* Scroll Animations (respects reduced motion) */
+        @media (prefers-reduced-motion: no-preference) {
+            section {
+                animation: fadeInUp 0.4s ease-out backwards;
+            }
+
+            section:nth-child(1) { animation-delay: 0.05s; }
+            section:nth-child(2) { animation-delay: 0.1s; }
+            section:nth-child(3) { animation-delay: 0.15s; }
+            section:nth-child(4) { animation-delay: 0.2s; }
+            section:nth-child(5) { animation-delay: 0.25s; }
+            section:nth-child(6) { animation-delay: 0.3s; }
+            section:nth-child(7) { animation-delay: 0.35s; }
+            section:nth-child(8) { animation-delay: 0.4s; }
+            section:nth-child(9) { animation-delay: 0.45s; }
+            section:nth-child(10) { animation-delay: 0.5s; }
+            section:nth-child(11) { animation-delay: 0.55s; }
+            section:nth-child(12) { animation-delay: 0.6s; }
+
+            @keyframes fadeInUp {
+                from { opacity: 0; transform: translateY(12px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="official-banner">
+        <div class="official-banner-inner">
+            <span class="flag-icon" aria-hidden="true"></span>
+            <span>An official design system for government digital services</span>
+        </div>
+    </div>
+
     <header>
-        <div class="header-content">
-            <div class="logo"><div class="logo-flag"></div>Civitas</div>
-            <nav>
-                <a href="#colors">Colors</a>
-                <a href="#typography">Typography</a>
-                <a href="#buttons">Buttons</a>
-                <a href="#forms">Forms</a>
-                <a href="#cards">Cards</a>
-                <a href="#alerts">Alerts</a>
-            </nav>
+        <div class="header-inner">
+            <a href="../index.html" class="logo">
+                <div class="logo-seal" aria-hidden="true"></div>
+                <div class="logo-text">
+                    <span class="logo-agency">Civitas</span>
+                    <span class="logo-tagline">Design System</span>
+                </div>
+            </a>
+            <a href="../index.html" class="back-link">Back to Gallery</a>
         </div>
     </header>
-    <main>
+
+    <nav aria-label="Main navigation">
+        <ul>
+            <li><a href="#colors" class="active">Colors</a></li>
+            <li><a href="#typography">Typography</a></li>
+            <li><a href="#spacing">Spacing</a></li>
+            <li><a href="#buttons">Buttons</a></li>
+            <li><a href="#forms">Forms</a></li>
+            <li><a href="#cards">Cards</a></li>
+            <li><a href="#table">Data Table</a></li>
+            <li><a href="#badges">Badges</a></li>
+            <li><a href="#principles">Principles</a></li>
+            <li><a href="#animations">Animations</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#alerts">Alerts</a></li>
+        </ul>
+    </nav>
+
+    <main id="main-content">
         <div class="hero">
-            <h1>Civitas Design System</h1>
-            <p>A WCAG-compliant design system for government digital services. Built for accessibility, clarity, and public trust.</p>
+            <div class="hero-badge">WCAG 2.1 AA Compliant</div>
+            <h1>Civitas Style Guide</h1>
+            <p>A dignified and accessible design language for government and civic services. Built for transparency, trust, and universal access.</p>
         </div>
+
+        <!-- 01. Color Palette -->
         <section id="colors">
-            <h2><span class="section-number">01</span> Color Palette</h2>
-            <p>USWDS-inspired palette ensuring 4.5:1 contrast ratio for text accessibility.</p>
-            <div class="color-grid">
-                <div class="color-swatch"><div class="color-preview" style="background: var(--color-primary);"></div><div class="color-name">Primary</div><div class="color-value">#005EA2</div></div>
-                <div class="color-swatch"><div class="color-preview" style="background: var(--color-primary-darker);"></div><div class="color-name">Primary Dark</div><div class="color-value">#162E51</div></div>
-                <div class="color-swatch"><div class="color-preview" style="background: var(--color-secondary);"></div><div class="color-name">Secondary</div><div class="color-value">#C05600</div></div>
-                <div class="color-swatch"><div class="color-preview" style="background: var(--color-gray-90);"></div><div class="color-name">Text</div><div class="color-value">#1B1B1B</div></div>
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <div class="section-info">
+                    <h2>Color Palette</h2>
+                    <p>WCAG AA compliant colors ensuring 4.5:1 contrast ratio minimum.</p>
+                </div>
+            </div>
+
+            <div class="color-groups">
+                <div>
+                    <div class="color-group-title">Patriotic Navy</div>
+                    <div class="color-palette">
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--navy-100);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Navy 100</div>
+                                <div class="color-value">#D4DEE9</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--navy-500);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Navy 500</div>
+                                <div class="color-value">#3A5F8A</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--navy-700);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Navy 700</div>
+                                <div class="color-value">#1E3A5F</div>
+                                <div class="color-wcag">AA Pass</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--navy-900);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Navy 900</div>
+                                <div class="color-value">#0D1B32</div>
+                                <div class="color-wcag">AAA Pass</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="color-group-title">Civic Red</div>
+                    <div class="color-palette">
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--red-100);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Red 100</div>
+                                <div class="color-value">#FEE2E2</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--red-500);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Red 500</div>
+                                <div class="color-value">#B91C1C</div>
+                                <div class="color-wcag">AA Pass</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--red-700);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Red 700</div>
+                                <div class="color-value">#7F1D1D</div>
+                                <div class="color-wcag">AAA Pass</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="color-group-title">Warm Grays</div>
+                    <div class="color-palette">
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--warm-100);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Warm 100</div>
+                                <div class="color-value">#F5F5F4</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--warm-500);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Warm 500</div>
+                                <div class="color-value">#78716C</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="color-preview" style="background: var(--warm-900);"></div>
+                            <div class="color-info">
+                                <div class="color-name">Warm 900</div>
+                                <div class="color-value">#1C1917</div>
+                                <div class="color-wcag">AAA Pass</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <!-- 02. Typography -->
         <section id="typography">
-            <h2><span class="section-number">02</span> Typography</h2>
-            <p>Public Sans provides excellent readability for all citizens.</p>
-            <div class="type-scale">
-                <div class="type-item"><span class="type-label">Display</span><span class="type-display">Public Service</span></div>
-                <div class="type-item"><span class="type-label">H1</span><span class="type-h1">Government Services</span></div>
-                <div class="type-item"><span class="type-label">Body</span><span class="type-body">Accessible digital services for all citizens and residents.</span></div>
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <div class="section-info">
+                    <h2>Typography</h2>
+                    <p>Merriweather for authoritative headings. Source Sans 3 for accessible body text.</p>
+                </div>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-row">
+                    <div class="type-meta">Display<br>40px / 900</div>
+                    <div class="type-display">Public Service</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">H1<br>32px / 700</div>
+                    <div class="type-h1">Government Services</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">H2<br>24px / 700</div>
+                    <div class="type-h2">Department Programs</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">H3<br>18px / 700</div>
+                    <div class="type-h3">Application Requirements</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">Body<br>16px / 400</div>
+                    <div class="type-body">Accessible digital services designed to serve all citizens and residents efficiently and equitably.</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">Small<br>14px / 400</div>
+                    <div class="type-small">Supporting information, disclaimers, and additional context.</div>
+                </div>
+            </div>
+
+            <div class="font-cards">
+                <div class="font-card">
+                    <div class="font-card-label">Display Font</div>
+                    <div class="font-card-name display">Merriweather</div>
+                </div>
+                <div class="font-card">
+                    <div class="font-card-label">Body Font</div>
+                    <div class="font-card-name body">Source Sans 3</div>
+                </div>
+                <div class="font-card">
+                    <div class="font-card-label">Monospace</div>
+                    <div class="font-card-name mono">JetBrains Mono</div>
+                </div>
             </div>
         </section>
+
+        <!-- 03. Spacing Scale -->
+        <section id="spacing">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <div class="section-info">
+                    <h2>Spacing Scale</h2>
+                    <p>Consistent spacing for clear visual hierarchy and readability.</p>
+                </div>
+            </div>
+
+            <div class="spacing-scale">
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-1</span>
+                    <div class="spacing-bar" style="width: 4px;"></div>
+                    <span class="spacing-value">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-2</span>
+                    <div class="spacing-bar" style="width: 8px;"></div>
+                    <span class="spacing-value">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-4</span>
+                    <div class="spacing-bar" style="width: 16px;"></div>
+                    <span class="spacing-value">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-6</span>
+                    <div class="spacing-bar" style="width: 24px;"></div>
+                    <span class="spacing-value">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-8</span>
+                    <div class="spacing-bar" style="width: 32px;"></div>
+                    <span class="spacing-value">32px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-12</span>
+                    <div class="spacing-bar" style="width: 48px;"></div>
+                    <span class="spacing-value">48px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-16</span>
+                    <div class="spacing-bar" style="width: 64px;"></div>
+                    <span class="spacing-value">64px</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04. Buttons -->
         <section id="buttons">
-            <h2><span class="section-number">04</span> Buttons</h2>
-            <p>Large touch targets (44px minimum) for accessibility.</p>
-            <div class="button-group">
-                <button class="btn btn-primary">Submit Application</button>
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <div class="section-info">
+                    <h2>Buttons</h2>
+                    <p>Minimum 44px touch targets for accessibility compliance.</p>
+                </div>
+            </div>
+
+            <h3>Primary Actions</h3>
+            <div class="button-showcase">
+                <button class="btn btn-primary btn-lg">Submit Application</button>
+                <button class="btn btn-primary">Continue</button>
+                <button class="btn btn-primary btn-sm">Save</button>
+            </div>
+
+            <h3>Emergency / Danger</h3>
+            <div class="button-showcase">
+                <button class="btn btn-danger btn-lg">Report Emergency</button>
+                <button class="btn btn-danger">Delete Account</button>
+            </div>
+
+            <h3>Secondary & Ghost</h3>
+            <div class="button-showcase">
                 <button class="btn btn-secondary">Learn More</button>
-                <button class="btn btn-accent">Emergency Services</button>
+                <button class="btn btn-secondary btn-sm">Cancel</button>
+                <button class="btn btn-ghost">View Details</button>
             </div>
         </section>
+
+        <!-- 05. Forms -->
         <section id="forms">
-            <h2><span class="section-number">05</span> Form Elements</h2>
-            <p>Clear labels and helper text for accessible forms.</p>
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <div class="section-info">
+                    <h2>Forms</h2>
+                    <p>Clear labels, visible focus states, and helpful validation messages.</p>
+                </div>
+            </div>
+
             <div class="form-grid">
                 <div class="form-group">
-                    <label for="name">Full Legal Name *</label>
-                    <input type="text" id="name" class="input" placeholder="First Middle Last">
-                    <span class="helper-text">As it appears on your government ID</span>
+                    <label for="fullname">Full Legal Name <span class="label-required">*</span></label>
+                    <input type="text" id="fullname" class="input" placeholder="First Middle Last">
+                    <span class="form-hint">As it appears on your government-issued ID</span>
                 </div>
                 <div class="form-group">
-                    <label for="ssn">Social Security Number *</label>
-                    <input type="text" id="ssn" class="input" placeholder="XXX-XX-XXXX">
+                    <label for="service-type">Service Type <span class="label-required">*</span></label>
+                    <select id="service-type" class="input">
+                        <option>Select a service</option>
+                        <option>Benefits Application</option>
+                        <option>License Renewal</option>
+                        <option>Tax Filing</option>
+                        <option>Records Request</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth <span class="label-required">*</span></label>
+                    <input type="date" id="dob" class="input">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="input" placeholder="citizen@example.gov">
+                    <span class="form-hint">We'll use this to send status updates</span>
                 </div>
             </div>
         </section>
+
+        <!-- 06. Cards -->
         <section id="cards">
-            <h2><span class="section-number">06</span> Service Cards</h2>
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <div class="section-info">
+                    <h2>Cards</h2>
+                    <p>Service cards for organizing government programs and information.</p>
+                </div>
+            </div>
+
             <div class="card-grid">
-                <div class="card service-card"><div class="card-title">Apply for Benefits</div><div class="card-desc">Submit applications for social services, healthcare, and financial assistance programs.</div></div>
-                <div class="card stat-card"><div class="stat-label">Applications Processed</div><div class="stat-value">1.2M</div></div>
-                <div class="card stat-card"><div class="stat-label">Avg. Processing Time</div><div class="stat-value">3 Days</div></div>
+                <div class="card card-service">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    </div>
+                    <div class="card-title">Apply for Benefits</div>
+                    <div class="card-text">Submit applications for social services, healthcare coverage, and financial assistance programs available to eligible residents.</div>
+                </div>
+                <div class="card card-service">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
+                    <div class="card-title">Schedule Appointment</div>
+                    <div class="card-text">Book in-person appointments for document processing, interviews, and other services requiring face-to-face interaction.</div>
+                </div>
+                <div class="card card-service">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div class="card-title">Track Status</div>
+                    <div class="card-text">Check the status of your pending applications, requests, and scheduled appointments in real-time.</div>
+                </div>
             </div>
         </section>
+
+        <!-- 07. Data Table -->
         <section id="table">
-            <h2><span class="section-number">07</span> Data Table</h2>
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <div class="section-info">
+                    <h2>Data Table</h2>
+                    <p>Accessible tables with clear headers and status indicators.</p>
+                </div>
+            </div>
+
             <div class="table-container">
                 <table>
-                    <thead><tr><th>Application ID</th><th>Service Type</th><th>Submitted</th><th>Status</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th scope="col">Application ID</th>
+                            <th scope="col">Service Type</th>
+                            <th scope="col">Submitted</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr><td>APP-2024-001847</td><td>SNAP Benefits</td><td>Mar 01, 2024</td><td><span class="badge badge-success">Approved</span></td></tr>
-                        <tr><td>APP-2024-001923</td><td>Medicaid</td><td>Mar 03, 2024</td><td><span class="badge badge-warning">Under Review</span></td></tr>
-                        <tr><td>APP-2024-002104</td><td>Housing Assistance</td><td>Mar 05, 2024</td><td><span class="badge badge-info">Processing</span></td></tr>
+                        <tr>
+                            <td>APP-2024-001847</td>
+                            <td>SNAP Benefits</td>
+                            <td>January 15, 2024</td>
+                            <td><span class="badge badge-success">Approved</span></td>
+                        </tr>
+                        <tr>
+                            <td>APP-2024-002156</td>
+                            <td>Medicaid Enrollment</td>
+                            <td>February 3, 2024</td>
+                            <td><span class="badge badge-warning">Under Review</span></td>
+                        </tr>
+                        <tr>
+                            <td>APP-2024-002489</td>
+                            <td>Housing Assistance</td>
+                            <td>February 20, 2024</td>
+                            <td><span class="badge badge-info">Processing</span></td>
+                        </tr>
+                        <tr>
+                            <td>APP-2024-002701</td>
+                            <td>License Renewal</td>
+                            <td>March 1, 2024</td>
+                            <td><span class="badge badge-error">Action Required</span></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </section>
-        <section id="principles">
-            <h2><span class="section-number">09</span> Design Principles</h2>
-            <div class="principles-grid">
-                <div class="principle"><div class="principle-number">01</div><div class="principle-title">Accessible by Default</div><div class="principle-desc">Every component meets WCAG 2.1 AA standards. Accessibility is not optional.</div></div>
-                <div class="principle"><div class="principle-number">02</div><div class="principle-title">Plain Language</div><div class="principle-desc">Use clear, simple language that all citizens can understand regardless of education level.</div></div>
-                <div class="principle"><div class="principle-number">03</div><div class="principle-title">Mobile-First</div><div class="principle-desc">Many citizens access services on mobile devices. Design for small screens first.</div></div>
-                <div class="principle"><div class="principle-number">04</div><div class="principle-title">Trust & Transparency</div><div class="principle-desc">Be clear about data collection, processing times, and what users can expect.</div></div>
+
+        <!-- 08. Badges -->
+        <section id="badges">
+            <div class="section-header">
+                <span class="section-number">08</span>
+                <div class="section-info">
+                    <h2>Badges & Tags</h2>
+                    <p>Visual status indicators with sufficient color contrast.</p>
+                </div>
+            </div>
+
+            <h3>Application Status</h3>
+            <div class="badge-showcase">
+                <span class="badge badge-success">Approved</span>
+                <span class="badge badge-warning">Under Review</span>
+                <span class="badge badge-info">Processing</span>
+                <span class="badge badge-error">Action Required</span>
+                <span class="badge badge-neutral">Pending</span>
             </div>
         </section>
+
+        <!-- 09. Design Principles -->
+        <section id="principles">
+            <div class="section-header">
+                <span class="section-number">09</span>
+                <div class="section-info">
+                    <h2>Design Principles</h2>
+                    <p>Core values guiding every design decision.</p>
+                </div>
+            </div>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-number">01</div>
+                    <div class="principle-title">Accessible by Default</div>
+                    <div class="principle-desc">Every component meets WCAG 2.1 AA standards. Accessibility is not an afterthought but a fundamental requirement.</div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">02</div>
+                    <div class="principle-title">Plain Language</div>
+                    <div class="principle-desc">Use clear, simple language that all citizens can understand, regardless of education level or native language.</div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">03</div>
+                    <div class="principle-title">Trust & Transparency</div>
+                    <div class="principle-desc">Be clear about data collection, processing times, and what users can expect at every step of their journey.</div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">04</div>
+                    <div class="principle-title">Mobile-First</div>
+                    <div class="principle-desc">Many citizens access services on mobile devices. Design for small screens first, then enhance for larger displays.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Animations -->
+        <section id="animations">
+            <div class="section-header">
+                <span class="section-number">10</span>
+                <div class="section-info">
+                    <h2>Animation & Micro-interactions</h2>
+                    <p>Subtle motion that respects prefers-reduced-motion preferences.</p>
+                </div>
+            </div>
+
+            <div class="animation-grid">
+                <div class="animation-demo demo-focus">
+                    <div class="animation-preview"></div>
+                    <div class="animation-label">Focus Ring</div>
+                </div>
+                <div class="animation-demo demo-fade">
+                    <div class="animation-preview"></div>
+                    <div class="animation-label">Subtle Fade</div>
+                </div>
+                <div class="animation-demo demo-slide">
+                    <div class="animation-preview"></div>
+                    <div class="animation-label">Slide In</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Service Status Dashboard -->
+        <section id="dashboard">
+            <div class="section-header">
+                <span class="section-number">11</span>
+                <div class="section-info">
+                    <h2>Service Status Dashboard</h2>
+                    <p>Real-time service availability for government departments.</p>
+                </div>
+            </div>
+
+            <div class="service-dashboard">
+                <div class="dashboard-header">
+                    <span class="dashboard-title">System Status</span>
+                    <span class="dashboard-updated">Last updated: 2 minutes ago</span>
+                </div>
+                <div class="service-list">
+                    <div class="service-item">
+                        <div class="service-info">
+                            <div class="service-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            </div>
+                            <div>
+                                <div class="service-name">Online Applications Portal</div>
+                                <div class="service-desc">Benefits, licenses, and permit applications</div>
+                            </div>
+                        </div>
+                        <div class="status-indicator status-operational">
+                            <span class="status-dot"></span>
+                            Operational
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-info">
+                            <div class="service-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </div>
+                            <div>
+                                <div class="service-name">Email Notification System</div>
+                                <div class="service-desc">Status updates and confirmations</div>
+                            </div>
+                        </div>
+                        <div class="status-indicator status-operational">
+                            <span class="status-dot"></span>
+                            Operational
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-info">
+                            <div class="service-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                            </div>
+                            <div>
+                                <div class="service-name">Payment Processing</div>
+                                <div class="service-desc">Fee payments and refunds</div>
+                            </div>
+                        </div>
+                        <div class="status-indicator status-degraded">
+                            <span class="status-dot"></span>
+                            Degraded
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-info">
+                            <div class="service-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            </div>
+                            <div>
+                                <div class="service-name">Appointment Scheduling</div>
+                                <div class="service-desc">In-person service bookings</div>
+                            </div>
+                        </div>
+                        <div class="status-indicator status-maintenance">
+                            <span class="status-dot"></span>
+                            Maintenance
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-info">
+                            <div class="service-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                            </div>
+                            <div>
+                                <div class="service-name">Live Chat Support</div>
+                                <div class="service-desc">Real-time assistance</div>
+                            </div>
+                        </div>
+                        <div class="status-indicator status-outage">
+                            <span class="status-dot"></span>
+                            Outage
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Alerts -->
         <section id="alerts">
-            <h2><span class="section-number">12</span> Alerts</h2>
-            <div class="alert alert-success"><div class="alert-content"><div class="alert-title">Application Submitted</div><div class="alert-description">Your application has been received. You will receive a confirmation email within 24 hours.</div></div></div>
-            <div class="alert alert-warning"><div class="alert-content"><div class="alert-title">Documentation Required</div><div class="alert-description">Additional documentation is needed to process your application. Please upload within 10 days.</div></div></div>
-            <div class="alert alert-error"><div class="alert-content"><div class="alert-title">Session Expiring</div><div class="alert-description">Your session will expire in 5 minutes. Please save your progress.</div></div></div>
+            <div class="section-header">
+                <span class="section-number">12</span>
+                <div class="section-info">
+                    <h2>Alert Messages</h2>
+                    <p>Important notifications with clear visual hierarchy and accessible colors.</p>
+                </div>
+            </div>
+
+            <div class="alert-stack">
+                <div class="alert alert-success" role="alert">
+                    <div class="alert-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Application Submitted Successfully</div>
+                        <div class="alert-text">Your application has been received. You will receive a confirmation email within 24 hours with your tracking number.</div>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning" role="alert">
+                    <div class="alert-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Documentation Required</div>
+                        <div class="alert-text">Additional documentation is needed to process your application. Please upload the required documents within 10 business days.</div>
+                    </div>
+                </div>
+
+                <div class="alert alert-error" role="alert">
+                    <div class="alert-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Session Expiring</div>
+                        <div class="alert-text">Your session will expire in 5 minutes due to inactivity. Please save your progress to avoid losing your work.</div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info" role="alert">
+                    <div class="alert-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Scheduled Maintenance</div>
+                        <div class="alert-text">The appointment scheduling system will be unavailable on Sunday, March 10th from 2:00 AM to 6:00 AM EST for scheduled maintenance.</div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
-    <footer><p class="footer-text">Civitas Design System v1.0 — Accessible Digital Services for All</p></footer>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">Civitas</div>
+            <div class="footer-tagline">Government Design System v1.0 — Accessible Services for All</div>
+        </div>
+    </footer>
 </body>
 </html>

@@ -3,59 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEMPHIS MAYHEM - Design System</title>
+    <title>Squiggle — Memphis Design Style Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Space+Grotesk:wght@400;500;700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* ══════════════════════════════════════════════════════════════════════════
+           SQUIGGLE — MEMPHIS DESIGN STYLE GUIDE
+           Celebrating the bold, irreverent spirit of 1980s Italian design movement
+           ══════════════════════════════════════════════════════════════════════════ */
+
         :root {
-            /* Memphis Color Palette */
-            --memphis-yellow: #FFE81F;
-            --memphis-pink: #FF6B9D;
-            --memphis-blue: #00D4FF;
-            --memphis-red: #FF3D3D;
-            --memphis-green: #7FFF00;
-            --memphis-purple: #B967FF;
-            --memphis-orange: #FF9F43;
-            --memphis-black: #1A1A2E;
-            --memphis-white: #FEFEFE;
-            --memphis-gray: #E8E8E8;
+            /* Primary Palette - Bold & Playful */
+            --electric-pink: #FF2E8B;
+            --sunshine-yellow: #FFDE00;
+            --ocean-blue: #0057FF;
+            --mint-green: #00E5A0;
+            --coral-orange: #FF6B35;
+
+            /* Neutral Base */
+            --cream: #FFF8E7;
+            --charcoal: #1A1A2E;
+            --warm-gray: #9D9D9D;
+
+            /* Accent Colors */
+            --lavender: #C8A2FF;
+            --turquoise: #00CED1;
+            --salmon: #FF8C94;
 
             /* Typography */
-            --font-display: 'Rubik Mono One', monospace;
-            --font-heading: 'Archivo Black', sans-serif;
-            --font-body: 'Space Grotesk', sans-serif;
+            --font-display: 'Archivo Black', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'Space Mono', monospace;
 
-            /* Spacing */
-            --space-xs: 0.25rem;
-            --space-sm: 0.5rem;
+            /* Spacing Scale (Golden Ratio inspired) */
+            --space-xs: 0.382rem;
+            --space-sm: 0.618rem;
             --space-md: 1rem;
-            --space-lg: 2rem;
-            --space-xl: 4rem;
-            --space-2xl: 8rem;
+            --space-lg: 1.618rem;
+            --space-xl: 2.618rem;
+            --space-2xl: 4.236rem;
+            --space-3xl: 6.854rem;
 
-            /* Border Radius */
+            /* Geometric Constants */
+            --border-thick: 4px;
+            --border-chunky: 6px;
             --radius-none: 0;
-            --radius-squiggle: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            --radius-blob: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            --radius-pill: 100px;
+            --radius-squiggle: 50% 0 50% 0;
+            --shadow-offset: 6px;
+            --shadow-hard: var(--shadow-offset) var(--shadow-offset) 0 var(--charcoal);
+            --shadow-hard-lg: 10px 10px 0 var(--charcoal);
         }
 
-        * {
+        /* Reset & Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: var(--font-body);
-            background-color: var(--memphis-white);
-            color: var(--memphis-black);
+            font-size: 16px;
             line-height: 1.6;
+            color: var(--charcoal);
+            background-color: var(--cream);
             overflow-x: hidden;
         }
 
-        /* Geometric Background Pattern */
+        /* Memphis Pattern Background */
         body::before {
             content: '';
             position: fixed;
@@ -63,374 +83,396 @@
             left: 0;
             width: 100%;
             height: 100%;
+            background-image:
+                radial-gradient(circle at 10% 20%, var(--electric-pink) 3px, transparent 3px),
+                radial-gradient(circle at 90% 80%, var(--ocean-blue) 5px, transparent 5px),
+                radial-gradient(circle at 30% 70%, var(--sunshine-yellow) 4px, transparent 4px),
+                radial-gradient(circle at 70% 30%, var(--mint-green) 3px, transparent 3px),
+                radial-gradient(circle at 50% 50%, var(--coral-orange) 2px, transparent 2px),
+                linear-gradient(45deg, transparent 48%, var(--lavender) 48%, var(--lavender) 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, var(--turquoise) 48%, var(--turquoise) 52%, transparent 52%);
+            background-size:
+                200px 200px,
+                300px 300px,
+                250px 250px,
+                180px 180px,
+                150px 150px,
+                100px 100px,
+                100px 100px;
+            opacity: 0.12;
             pointer-events: none;
             z-index: -1;
-            background-image:
-                radial-gradient(circle at 10% 20%, var(--memphis-yellow) 2px, transparent 2px),
-                radial-gradient(circle at 90% 80%, var(--memphis-pink) 3px, transparent 3px),
-                radial-gradient(circle at 50% 50%, var(--memphis-blue) 1px, transparent 1px),
-                radial-gradient(circle at 30% 70%, var(--memphis-green) 2px, transparent 2px),
-                radial-gradient(circle at 70% 30%, var(--memphis-purple) 2px, transparent 2px);
-            background-size: 100px 100px, 150px 150px, 80px 80px, 120px 120px, 90px 90px;
-            opacity: 0.4;
         }
 
-        /* Floating Navigation */
-        nav {
+        /* Navigation */
+        .back-link {
             position: fixed;
-            top: var(--space-md);
-            right: var(--space-md);
-            z-index: 1000;
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-xs);
-            max-width: 300px;
-            justify-content: flex-end;
-        }
-
-        nav a {
-            display: inline-block;
-            padding: var(--space-xs) var(--space-sm);
-            font-family: var(--font-body);
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
+            top: var(--space-lg);
+            left: var(--space-lg);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--sunshine-yellow);
+            color: var(--charcoal);
             text-decoration: none;
-            color: var(--memphis-black);
-            background: var(--memphis-yellow);
-            border: 3px solid var(--memphis-black);
-            transition: all 0.2s ease;
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: var(--border-thick) solid var(--charcoal);
+            box-shadow: var(--shadow-hard);
+            transition: all 0.15s ease;
+            z-index: 1000;
         }
 
-        nav a:nth-child(2n) { background: var(--memphis-pink); }
-        nav a:nth-child(3n) { background: var(--memphis-blue); }
-        nav a:nth-child(4n) { background: var(--memphis-green); }
-        nav a:nth-child(5n) { background: var(--memphis-purple); color: var(--memphis-white); }
+        .back-link:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0 var(--charcoal);
+            background: var(--electric-pink);
+            color: white;
+        }
 
-        nav a:hover {
-            transform: rotate(-3deg) scale(1.1);
-            box-shadow: 4px 4px 0 var(--memphis-black);
+        .back-link::before {
+            content: '←';
+            font-size: 1.2em;
         }
 
         /* Header */
         header {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: var(--space-xl);
-            position: relative;
-            background:
-                linear-gradient(135deg, var(--memphis-yellow) 25%, transparent 25%),
-                linear-gradient(225deg, var(--memphis-pink) 25%, transparent 25%),
-                linear-gradient(315deg, var(--memphis-blue) 25%, transparent 25%),
-                linear-gradient(45deg, var(--memphis-green) 25%, transparent 25%);
-            background-size: 60px 60px;
-            background-color: var(--memphis-white);
-        }
-
-        /* Floating Shapes */
-        .shape {
-            position: absolute;
-            z-index: 0;
-        }
-
-        .shape-circle {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--memphis-red);
-            top: 15%;
-            left: 10%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .shape-triangle {
-            width: 0;
-            height: 0;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-            border-bottom: 86px solid var(--memphis-blue);
-            top: 20%;
-            right: 15%;
-            animation: float 8s ease-in-out infinite reverse;
-        }
-
-        .shape-squiggle {
-            width: 120px;
-            height: 30px;
-            background: var(--memphis-purple);
-            border-radius: var(--radius-squiggle);
-            bottom: 25%;
-            left: 8%;
-            animation: wiggle 4s ease-in-out infinite;
-        }
-
-        .shape-zigzag {
-            width: 100px;
-            height: 60px;
-            background: repeating-linear-gradient(
-                90deg,
-                var(--memphis-yellow) 0px,
-                var(--memphis-yellow) 10px,
-                transparent 10px,
-                transparent 20px
-            );
-            bottom: 30%;
-            right: 10%;
-            transform: skewY(-10deg);
-            animation: float 7s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(-5deg); }
-            50% { transform: rotate(5deg); }
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
+            padding: var(--space-3xl) var(--space-xl) var(--space-2xl);
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        h1 {
+        header::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: -5%;
+            width: 200px;
+            height: 200px;
+            background: var(--electric-pink);
+            border-radius: var(--radius-squiggle);
+            transform: rotate(15deg);
+            z-index: -1;
+            animation: wobble 6s ease-in-out infinite;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 10%;
+            right: 5%;
+            width: 150px;
+            height: 150px;
+            background: var(--ocean-blue);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            z-index: -1;
+            animation: wobble 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: rotate(15deg) translateY(0); }
+            50% { transform: rotate(20deg) translateY(-15px); }
+        }
+
+        .logo {
             font-family: var(--font-display);
-            font-size: clamp(3rem, 10vw, 8rem);
-            line-height: 1;
+            font-size: clamp(4rem, 12vw, 10rem);
             text-transform: uppercase;
-            color: var(--memphis-black);
-            text-shadow:
-                8px 8px 0 var(--memphis-yellow),
-                16px 16px 0 var(--memphis-pink),
-                24px 24px 0 var(--memphis-blue);
-            animation: colorShift 3s ease-in-out infinite;
+            letter-spacing: -0.02em;
+            line-height: 0.9;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(90deg,
+                var(--electric-pink) 0%,
+                var(--coral-orange) 25%,
+                var(--sunshine-yellow) 50%,
+                var(--mint-green) 75%,
+                var(--ocean-blue) 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            position: relative;
         }
 
-        @keyframes colorShift {
-            0%, 100% {
-                text-shadow:
-                    8px 8px 0 var(--memphis-yellow),
-                    16px 16px 0 var(--memphis-pink),
-                    24px 24px 0 var(--memphis-blue);
-            }
-            33% {
-                text-shadow:
-                    8px 8px 0 var(--memphis-pink),
-                    16px 16px 0 var(--memphis-blue),
-                    24px 24px 0 var(--memphis-green);
-            }
-            66% {
-                text-shadow:
-                    8px 8px 0 var(--memphis-blue),
-                    16px 16px 0 var(--memphis-green),
-                    24px 24px 0 var(--memphis-yellow);
-            }
+        .logo::after {
+            content: 'Squiggle';
+            position: absolute;
+            left: 6px;
+            top: 6px;
+            z-index: -1;
+            background: none;
+            -webkit-text-fill-color: var(--charcoal);
         }
 
         .tagline {
-            font-family: var(--font-heading);
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            margin-top: var(--space-lg);
-            padding: var(--space-sm) var(--space-lg);
-            background: var(--memphis-black);
-            color: var(--memphis-white);
+            font-family: var(--font-mono);
+            font-size: 1.125rem;
+            color: var(--charcoal);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
             display: inline-block;
-            transform: rotate(-2deg);
+            padding: var(--space-sm) var(--space-lg);
+            background: var(--sunshine-yellow);
+            border: var(--border-thick) solid var(--charcoal);
         }
 
-        /* Main Content */
-        main {
-            max-width: 1400px;
+        /* Main Container */
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: var(--space-xl) var(--space-lg);
+            padding: 0 var(--space-xl);
         }
 
+        /* Section Styling */
         section {
-            margin-bottom: var(--space-2xl);
-            padding: var(--space-xl);
-            background: var(--memphis-white);
-            border: 5px solid var(--memphis-black);
+            margin-bottom: var(--space-3xl);
+            padding: var(--space-2xl);
+            background: white;
+            border: var(--border-chunky) solid var(--charcoal);
+            box-shadow: var(--shadow-hard-lg);
             position: relative;
         }
 
-        section::before {
+        /* Decorative shapes on sections */
+        section:nth-child(odd)::before {
             content: '';
             position: absolute;
-            top: 10px;
-            left: 10px;
-            right: -10px;
-            bottom: -10px;
-            background: var(--memphis-yellow);
-            z-index: -1;
-            border: 3px solid var(--memphis-black);
+            top: -15px;
+            right: 30px;
+            width: 30px;
+            height: 30px;
+            background: var(--electric-pink);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         }
 
-        section:nth-child(2n)::before { background: var(--memphis-pink); }
-        section:nth-child(3n)::before { background: var(--memphis-blue); }
-        section:nth-child(4n)::before { background: var(--memphis-green); }
-        section:nth-child(5n)::before { background: var(--memphis-purple); }
+        section:nth-child(even)::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 40px;
+            width: 24px;
+            height: 24px;
+            background: var(--mint-green);
+            border-radius: 50%;
+        }
 
-        h2 {
+        .section-title {
             font-family: var(--font-display);
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-size: 2.5rem;
             text-transform: uppercase;
-            margin-bottom: var(--space-lg);
+            letter-spacing: 0.02em;
+            margin-bottom: var(--space-xl);
             display: inline-block;
             padding: var(--space-sm) var(--space-md);
-            background: var(--memphis-black);
-            color: var(--memphis-white);
+            background: var(--ocean-blue);
+            color: white;
+            transform: rotate(-2deg);
+            border: var(--border-thick) solid var(--charcoal);
         }
 
-        h3 {
-            font-family: var(--font-heading);
-            font-size: 1.25rem;
-            margin-bottom: var(--space-md);
-            text-transform: uppercase;
+        section:nth-child(3n) .section-title {
+            background: var(--coral-orange);
+            transform: rotate(1deg);
         }
 
-        p {
-            font-size: 1.1rem;
-            margin-bottom: var(--space-md);
+        section:nth-child(3n+1) .section-title {
+            background: var(--electric-pink);
+            transform: rotate(-1deg);
         }
 
-        /* Section 1: Color Palette */
+        /* ═══════════════════════════════════════════════════════════════════
+           1. COLOR PALETTE
+           ═══════════════════════════════════════════════════════════════════ */
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: var(--space-md);
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: var(--space-lg);
         }
 
         .color-swatch {
-            aspect-ratio: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: var(--space-sm);
-            border: 4px solid var(--memphis-black);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
+            text-align: center;
+            border: var(--border-thick) solid var(--charcoal);
+            box-shadow: var(--shadow-hard);
+            background: white;
+            transition: transform 0.2s ease;
         }
 
         .color-swatch:hover {
-            transform: rotate(5deg) scale(1.05);
+            transform: translate(3px, 3px) rotate(2deg);
+            box-shadow: 3px 3px 0 var(--charcoal);
         }
 
-        .color-swatch::before {
+        .color-preview {
+            height: 100px;
+            border-bottom: var(--border-thick) solid var(--charcoal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-preview::after {
             content: '';
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 40%;
-            height: 40%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 5px,
-                rgba(0,0,0,0.1) 5px,
-                rgba(0,0,0,0.1) 10px
-            );
+            bottom: -10px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            background: inherit;
+            filter: brightness(0.8);
+            clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+        }
+
+        .color-info {
+            padding: var(--space-md);
         }
 
         .color-name {
-            font-family: var(--font-heading);
-            font-size: 0.9rem;
-            background: var(--memphis-white);
-            padding: var(--space-xs);
-            border: 2px solid var(--memphis-black);
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-xs);
         }
 
         .color-hex {
-            font-family: var(--font-body);
+            font-family: var(--font-mono);
             font-size: 0.75rem;
-            font-weight: 700;
-            background: var(--memphis-black);
-            color: var(--memphis-white);
-            padding: var(--space-xs);
+            color: var(--warm-gray);
         }
 
-        /* Section 2: Typography */
+        /* ═══════════════════════════════════════════════════════════════════
+           2. TYPOGRAPHY
+           ═══════════════════════════════════════════════════════════════════ */
         .type-specimen {
             margin-bottom: var(--space-xl);
             padding: var(--space-lg);
-            border: 4px dashed var(--memphis-black);
+            border: 3px dashed var(--warm-gray);
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(0,0,0,0.02) 10px,
+                rgba(0,0,0,0.02) 20px
+            );
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--warm-gray);
+            margin-bottom: var(--space-sm);
+            display: inline-block;
+            background: var(--lavender);
+            padding: 0.2em 0.5em;
+            color: var(--charcoal);
         }
 
         .type-display {
             font-family: var(--font-display);
-            font-size: clamp(2rem, 6vw, 4rem);
-            line-height: 1.2;
-            margin-bottom: var(--space-md);
-        }
-
-        .type-heading {
-            font-family: var(--font-heading);
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            line-height: 1.3;
-            margin-bottom: var(--space-md);
+            font-size: 4rem;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
         }
 
         .type-body {
             font-family: var(--font-body);
-            font-size: 1.1rem;
+            font-size: 1.125rem;
+            line-height: 1.7;
+            max-width: 65ch;
         }
 
-        .font-info {
-            display: inline-block;
-            padding: var(--space-xs) var(--space-sm);
-            background: var(--memphis-yellow);
-            border: 2px solid var(--memphis-black);
-            font-weight: 700;
-            font-size: 0.8rem;
-            margin-top: var(--space-sm);
+        .type-mono {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            letter-spacing: 0.02em;
+            background: var(--charcoal);
+            color: var(--mint-green);
+            padding: var(--space-md);
         }
 
-        /* Section 3: Spacing */
-        .spacing-demo {
+        .type-scale {
             display: flex;
             flex-direction: column;
             gap: var(--space-md);
+        }
+
+        .type-scale-item {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 2px dotted var(--warm-gray);
+        }
+
+        .type-scale-size {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--electric-pink);
+            min-width: 80px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           3. SPACING SCALE
+           ═══════════════════════════════════════════════════════════════════ */
+        .spacing-demo {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
         }
 
         .spacing-item {
             display: flex;
             align-items: center;
-            gap: var(--space-md);
-        }
-
-        .spacing-block {
-            height: 40px;
-            background: var(--memphis-pink);
-            border: 3px solid var(--memphis-black);
-            transition: all 0.3s ease;
-        }
-
-        .spacing-block:hover {
-            background: var(--memphis-blue);
-            transform: scaleX(1.1);
+            gap: var(--space-lg);
         }
 
         .spacing-label {
-            font-family: var(--font-heading);
-            font-size: 0.9rem;
-            min-width: 100px;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            min-width: 120px;
+            display: flex;
+            flex-direction: column;
         }
 
-        .spacing-value {
-            font-family: var(--font-body);
-            font-weight: 700;
-            padding: var(--space-xs) var(--space-sm);
-            background: var(--memphis-black);
-            color: var(--memphis-white);
+        .spacing-label span {
+            color: var(--warm-gray);
+            font-size: 0.75rem;
         }
 
-        /* Section 4: Buttons */
+        .spacing-bar {
+            height: 30px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--electric-pink),
+                var(--electric-pink) 10px,
+                var(--sunshine-yellow) 10px,
+                var(--sunshine-yellow) 20px
+            );
+            border: var(--border-thick) solid var(--charcoal);
+            box-shadow: 3px 3px 0 var(--charcoal);
+            position: relative;
+        }
+
+        .spacing-bar::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 8px solid transparent;
+            border-left-color: var(--charcoal);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           4. BUTTONS
+           ═══════════════════════════════════════════════════════════════════ */
         .button-grid {
             display: flex;
             flex-wrap: wrap;
@@ -439,161 +481,186 @@
         }
 
         .btn {
-            font-family: var(--font-heading);
+            font-family: var(--font-display);
             font-size: 1rem;
             text-transform: uppercase;
-            padding: var(--space-md) var(--space-lg);
-            border: 4px solid var(--memphis-black);
+            letter-spacing: 0.05em;
+            padding: var(--space-md) var(--space-xl);
+            border: var(--border-chunky) solid var(--charcoal);
             cursor: pointer;
+            transition: all 0.15s ease;
             position: relative;
-            transition: all 0.2s ease;
             text-decoration: none;
             display: inline-block;
         }
 
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 6px;
-            left: 6px;
-            right: -6px;
-            bottom: -6px;
-            background: var(--memphis-black);
-            z-index: -1;
-            transition: all 0.2s ease;
-        }
-
-        .btn:hover {
-            transform: translate(3px, 3px);
-        }
-
-        .btn:hover::after {
-            transform: translate(-3px, -3px);
-        }
-
         .btn-primary {
-            background: var(--memphis-yellow);
-            color: var(--memphis-black);
+            background: var(--electric-pink);
+            color: white;
+            box-shadow: var(--shadow-hard);
+        }
+
+        .btn-primary:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0 var(--charcoal);
         }
 
         .btn-secondary {
-            background: var(--memphis-pink);
-            color: var(--memphis-black);
+            background: var(--sunshine-yellow);
+            color: var(--charcoal);
+            box-shadow: var(--shadow-hard);
+        }
+
+        .btn-secondary:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0 var(--charcoal);
+            background: var(--coral-orange);
+            color: white;
         }
 
         .btn-tertiary {
-            background: var(--memphis-blue);
-            color: var(--memphis-black);
+            background: white;
+            color: var(--charcoal);
+            box-shadow: var(--shadow-hard);
         }
 
-        .btn-outline {
+        .btn-tertiary:hover {
+            background: var(--mint-green);
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0 var(--charcoal);
+        }
+
+        .btn-ghost {
             background: transparent;
-            color: var(--memphis-black);
+            color: var(--charcoal);
+            border-style: dashed;
+        }
+
+        .btn-ghost:hover {
+            background: var(--lavender);
+            border-style: solid;
         }
 
         .btn-wild {
-            background: linear-gradient(135deg, var(--memphis-yellow), var(--memphis-pink), var(--memphis-blue));
-            color: var(--memphis-black);
-            animation: gradientShift 2s ease infinite;
-            background-size: 200% 200%;
+            background: linear-gradient(135deg, var(--electric-pink), var(--ocean-blue));
+            color: white;
+            box-shadow: var(--shadow-hard-lg);
+            border-radius: var(--radius-squiggle);
+            transform: rotate(-3deg);
         }
 
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        .btn-wild:hover {
+            transform: rotate(3deg) scale(1.05);
+            box-shadow: var(--shadow-hard);
         }
 
-        /* Section 5: Forms */
-        .form-demo {
-            max-width: 500px;
+        .btn[disabled] {
+            background: var(--warm-gray);
+            color: white;
+            cursor: not-allowed;
+            box-shadow: none;
         }
 
+        /* ═══════════════════════════════════════════════════════════════════
+           5. FORMS
+           ═══════════════════════════════════════════════════════════════════ */
         .form-group {
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-xl);
         }
 
-        label {
+        .form-label {
             display: block;
-            font-family: var(--font-heading);
-            font-size: 0.9rem;
+            font-family: var(--font-display);
+            font-size: 0.875rem;
             text-transform: uppercase;
+            letter-spacing: 0.1em;
             margin-bottom: var(--space-sm);
-            padding-left: var(--space-sm);
-            border-left: 4px solid var(--memphis-yellow);
+            padding-left: var(--space-xs);
         }
 
-        input[type="text"],
-        input[type="email"],
-        textarea,
-        select {
+        .form-input {
             width: 100%;
+            max-width: 400px;
             padding: var(--space-md);
             font-family: var(--font-body);
             font-size: 1rem;
-            border: 4px solid var(--memphis-black);
-            background: var(--memphis-white);
+            border: var(--border-thick) solid var(--charcoal);
+            background: white;
+            box-shadow: var(--shadow-hard);
             transition: all 0.2s ease;
         }
 
-        input:focus,
-        textarea:focus,
-        select:focus {
+        .form-input:focus {
             outline: none;
-            box-shadow: 6px 6px 0 var(--memphis-pink);
-            transform: translate(-3px, -3px);
+            box-shadow: 3px 3px 0 var(--charcoal);
+            transform: translate(3px, 3px);
+            border-color: var(--ocean-blue);
         }
 
-        textarea {
-            min-height: 120px;
+        .form-input::placeholder {
+            color: var(--warm-gray);
+            font-style: italic;
+        }
+
+        .form-input.error {
+            border-color: var(--coral-orange);
+            background: #FFF5F2;
+        }
+
+        .form-textarea {
+            min-height: 150px;
             resize: vertical;
         }
 
-        select {
-            cursor: pointer;
+        .form-select {
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%231A1A2E'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%231A1A2E' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 12px center;
+            padding-right: 48px;
         }
 
-        .checkbox-group {
+        .form-checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .form-checkbox {
             display: flex;
             align-items: center;
             gap: var(--space-sm);
             cursor: pointer;
+            font-family: var(--font-body);
         }
 
-        .checkbox-custom {
-            width: 28px;
-            height: 28px;
-            border: 3px solid var(--memphis-black);
-            background: var(--memphis-white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
+        .form-checkbox input {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: var(--border-thick) solid var(--charcoal);
+            background: white;
+            cursor: pointer;
+            position: relative;
         }
 
-        .checkbox-group:hover .checkbox-custom {
-            background: var(--memphis-yellow);
+        .form-checkbox input:checked {
+            background: var(--electric-pink);
         }
 
-        .checkbox-group input:checked + .checkbox-custom {
-            background: var(--memphis-green);
-        }
-
-        .checkbox-group input:checked + .checkbox-custom::after {
+        .form-checkbox input:checked::after {
             content: '✓';
-            font-size: 1.2rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
             font-weight: bold;
         }
 
-        .checkbox-group input {
-            position: absolute;
-            opacity: 0;
-        }
-
-        /* Section 6: Cards */
+        /* ═══════════════════════════════════════════════════════════════════
+           6. CARDS
+           ═══════════════════════════════════════════════════════════════════ */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -601,109 +668,147 @@
         }
 
         .card {
-            background: var(--memphis-white);
-            border: 4px solid var(--memphis-black);
-            padding: var(--space-lg);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            right: -8px;
-            bottom: -8px;
-            z-index: -1;
-            transition: all 0.3s ease;
+            background: white;
+            border: var(--border-chunky) solid var(--charcoal);
+            box-shadow: var(--shadow-hard-lg);
+            overflow: hidden;
+            transition: all 0.2s ease;
         }
 
         .card:hover {
-            transform: translate(-4px, -4px);
+            transform: translate(5px, 5px) rotate(1deg);
+            box-shadow: 5px 5px 0 var(--charcoal);
         }
 
-        .card:hover::before {
-            top: 12px;
-            left: 12px;
+        .card-image {
+            height: 180px;
+            background: linear-gradient(135deg, var(--electric-pink) 25%, var(--ocean-blue) 75%);
+            position: relative;
+            overflow: hidden;
         }
 
-        .card-yellow::before { background: var(--memphis-yellow); }
-        .card-pink::before { background: var(--memphis-pink); }
-        .card-blue::before { background: var(--memphis-blue); }
+        .card-image::before {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 20%;
+            width: 80px;
+            height: 80px;
+            background: var(--sunshine-yellow);
+            border-radius: 50%;
+        }
 
-        .card-icon {
+        .card-image::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
             width: 60px;
             height: 60px;
-            margin-bottom: var(--space-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            border: 3px solid var(--memphis-black);
+            background: var(--mint-green);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
         }
 
-        .card-yellow .card-icon { background: var(--memphis-yellow); }
-        .card-pink .card-icon { background: var(--memphis-pink); border-radius: 50%; }
-        .card-blue .card-icon { background: var(--memphis-blue); border-radius: var(--radius-blob); }
+        .card-body {
+            padding: var(--space-lg);
+        }
 
-        .card h3 {
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            text-transform: uppercase;
             margin-bottom: var(--space-sm);
         }
 
-        .card p {
-            font-size: 1rem;
-            margin-bottom: 0;
+        .card-text {
+            font-family: var(--font-body);
+            color: var(--charcoal);
+            margin-bottom: var(--space-md);
+            line-height: 1.6;
         }
 
-        /* Section 7: Data Table */
+        .card-footer {
+            padding: var(--space-md) var(--space-lg);
+            background: var(--cream);
+            border-top: 3px dashed var(--charcoal);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            padding: 0.25em 0.5em;
+            background: var(--lavender);
+            border: 2px solid var(--charcoal);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           7. DATA TABLE
+           ═══════════════════════════════════════════════════════════════════ */
         .table-container {
             overflow-x: auto;
+            border: var(--border-chunky) solid var(--charcoal);
+            box-shadow: var(--shadow-hard-lg);
         }
 
-        table {
+        .data-table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            border: 4px solid var(--memphis-black);
+            border-collapse: collapse;
+            font-family: var(--font-body);
         }
 
-        th {
-            font-family: var(--font-heading);
-            font-size: 0.9rem;
+        .data-table thead {
+            background: var(--charcoal);
+            color: white;
+        }
+
+        .data-table th {
+            font-family: var(--font-display);
             text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: var(--space-md) var(--space-lg);
             text-align: left;
-            padding: var(--space-md);
-            background: var(--memphis-black);
-            color: var(--memphis-white);
+            font-size: 0.875rem;
         }
 
-        th:nth-child(2n) { background: var(--memphis-pink); color: var(--memphis-black); }
-        th:nth-child(3n) { background: var(--memphis-blue); color: var(--memphis-black); }
-
-        td {
-            padding: var(--space-md);
-            border-bottom: 3px solid var(--memphis-black);
-            border-right: 3px solid var(--memphis-black);
+        .data-table td {
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 2px solid var(--charcoal);
         }
 
-        td:last-child {
-            border-right: none;
+        .data-table tbody tr:nth-child(odd) {
+            background: white;
         }
 
-        tr:last-child td {
-            border-bottom: none;
+        .data-table tbody tr:nth-child(even) {
+            background: var(--cream);
         }
 
-        tr:nth-child(even) {
-            background: var(--memphis-gray);
+        .data-table tbody tr:hover {
+            background: var(--sunshine-yellow);
         }
 
-        tr:hover {
-            background: var(--memphis-yellow);
+        .table-action {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 0.25em 0.5em;
+            background: var(--ocean-blue);
+            color: white;
+            border: 2px solid var(--charcoal);
+            cursor: pointer;
+            text-decoration: none;
         }
 
-        /* Section 8: Badges */
+        .table-action:hover {
+            background: var(--electric-pink);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           8. BADGES & TAGS
+           ═══════════════════════════════════════════════════════════════════ */
         .badge-grid {
             display: flex;
             flex-wrap: wrap;
@@ -712,72 +817,120 @@
         }
 
         .badge {
-            display: inline-block;
-            padding: var(--space-xs) var(--space-md);
-            font-family: var(--font-heading);
+            font-family: var(--font-display);
             font-size: 0.75rem;
             text-transform: uppercase;
-            border: 3px solid var(--memphis-black);
-            transition: all 0.2s ease;
+            letter-spacing: 0.1em;
+            padding: var(--space-sm) var(--space-md);
+            border: 3px solid var(--charcoal);
+            display: inline-block;
         }
 
-        .badge:hover {
-            transform: rotate(-5deg) scale(1.1);
+        .badge-primary {
+            background: var(--electric-pink);
+            color: white;
         }
 
-        .badge-yellow { background: var(--memphis-yellow); }
-        .badge-pink { background: var(--memphis-pink); }
-        .badge-blue { background: var(--memphis-blue); }
-        .badge-green { background: var(--memphis-green); }
-        .badge-purple { background: var(--memphis-purple); color: var(--memphis-white); }
-        .badge-red { background: var(--memphis-red); color: var(--memphis-white); }
-        .badge-orange { background: var(--memphis-orange); }
-
-        .badge-pill {
-            border-radius: var(--radius-pill);
+        .badge-secondary {
+            background: var(--sunshine-yellow);
+            color: var(--charcoal);
         }
 
-        .badge-blob {
-            border-radius: var(--radius-blob);
+        .badge-success {
+            background: var(--mint-green);
+            color: var(--charcoal);
         }
 
-        /* Section 9: Design Principles */
+        .badge-warning {
+            background: var(--coral-orange);
+            color: white;
+        }
+
+        .badge-info {
+            background: var(--ocean-blue);
+            color: white;
+        }
+
+        .badge-funky {
+            background: linear-gradient(45deg, var(--lavender), var(--turquoise));
+            color: var(--charcoal);
+            transform: rotate(-5deg);
+        }
+
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: var(--space-xs) var(--space-sm);
+            background: white;
+            border: 2px dashed var(--charcoal);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .tag-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           9. DESIGN PRINCIPLES
+           ═══════════════════════════════════════════════════════════════════ */
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-lg);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
         }
 
         .principle {
             padding: var(--space-lg);
-            background: var(--memphis-white);
-            border: 4px solid var(--memphis-black);
+            border: var(--border-thick) solid var(--charcoal);
             position: relative;
+            background: white;
         }
 
-        .principle-number {
+        .principle::before {
+            content: attr(data-number);
             position: absolute;
             top: -20px;
-            left: var(--space-md);
+            left: 20px;
             font-family: var(--font-display);
-            font-size: 2.5rem;
-            background: var(--memphis-white);
-            padding: 0 var(--space-sm);
+            font-size: 3rem;
+            color: white;
+            background: var(--charcoal);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--charcoal);
         }
 
-        .principle:nth-child(1) .principle-number { color: var(--memphis-yellow); -webkit-text-stroke: 2px var(--memphis-black); }
-        .principle:nth-child(2) .principle-number { color: var(--memphis-pink); -webkit-text-stroke: 2px var(--memphis-black); }
-        .principle:nth-child(3) .principle-number { color: var(--memphis-blue); -webkit-text-stroke: 2px var(--memphis-black); }
-        .principle:nth-child(4) .principle-number { color: var(--memphis-green); -webkit-text-stroke: 2px var(--memphis-black); }
-        .principle:nth-child(5) .principle-number { color: var(--memphis-purple); -webkit-text-stroke: 2px var(--memphis-black); }
-        .principle:nth-child(6) .principle-number { color: var(--memphis-orange); -webkit-text-stroke: 2px var(--memphis-black); }
+        .principle:nth-child(1)::before { background: var(--electric-pink); }
+        .principle:nth-child(2)::before { background: var(--sunshine-yellow); color: var(--charcoal); }
+        .principle:nth-child(3)::before { background: var(--ocean-blue); }
+        .principle:nth-child(4)::before { background: var(--mint-green); color: var(--charcoal); }
 
-        .principle h3 {
-            margin-top: var(--space-md);
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            margin-top: var(--space-lg);
+            margin-bottom: var(--space-sm);
         }
 
-        /* Section 10: Animations */
-        .animation-showcase {
+        .principle-text {
+            font-family: var(--font-body);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           10. ANIMATIONS & MICRO-INTERACTIONS
+           ═══════════════════════════════════════════════════════════════════ */
+        .animation-demos {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: var(--space-xl);
@@ -785,20 +938,43 @@
 
         .animation-demo {
             text-align: center;
-            padding: var(--space-lg);
-            border: 3px dashed var(--memphis-black);
+            padding: var(--space-xl);
+            border: var(--border-thick) solid var(--charcoal);
+            background: white;
         }
 
-        .anim-box {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto var(--space-md);
-            border: 3px solid var(--memphis-black);
+        .animation-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            margin-top: var(--space-md);
+            color: var(--warm-gray);
         }
 
+        /* Wiggle Animation */
+        .anim-wiggle {
+            width: 60px;
+            height: 60px;
+            background: var(--electric-pink);
+            margin: 0 auto;
+            animation: wiggle 1s ease-in-out infinite;
+            border: 3px solid var(--charcoal);
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        /* Bounce Animation */
         .anim-bounce {
-            background: var(--memphis-yellow);
-            animation: bounce 1s ease infinite;
+            width: 50px;
+            height: 50px;
+            background: var(--sunshine-yellow);
+            border-radius: 50%;
+            margin: 0 auto;
+            animation: bounce 0.8s ease-in-out infinite;
+            border: 3px solid var(--charcoal);
         }
 
         @keyframes bounce {
@@ -806,8 +982,13 @@
             50% { transform: translateY(-20px); }
         }
 
+        /* Spin Animation */
         .anim-spin {
-            background: var(--memphis-pink);
+            width: 60px;
+            height: 60px;
+            background: var(--ocean-blue);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            margin: 0 auto;
             animation: spin 2s linear infinite;
         }
 
@@ -816,9 +997,14 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Pulse Animation */
         .anim-pulse {
-            background: var(--memphis-blue);
+            width: 50px;
+            height: 50px;
+            background: var(--mint-green);
+            margin: 0 auto;
             animation: pulse 1.5s ease-in-out infinite;
+            border: 3px solid var(--charcoal);
         }
 
         @keyframes pulse {
@@ -826,224 +1012,347 @@
             50% { transform: scale(1.2); }
         }
 
+        /* Shake Animation */
         .anim-shake {
-            background: var(--memphis-green);
-            animation: shake 0.5s ease-in-out infinite;
+            width: 60px;
+            height: 60px;
+            background: var(--coral-orange);
+            margin: 0 auto;
+            border: 3px solid var(--charcoal);
+            cursor: pointer;
+        }
+
+        .anim-shake:hover {
+            animation: shake 0.4s ease-in-out;
         }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px) rotate(-5deg); }
-            75% { transform: translateX(10px) rotate(5deg); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
         }
 
-        .anim-morph {
-            background: var(--memphis-purple);
-            animation: morph 3s ease-in-out infinite;
+        /* Color Cycle */
+        .anim-color {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+            animation: colorCycle 3s linear infinite;
+            border: 3px solid var(--charcoal);
         }
 
-        @keyframes morph {
-            0%, 100% { border-radius: 0; }
-            25% { border-radius: 50% 0 50% 0; }
-            50% { border-radius: 50%; }
-            75% { border-radius: 0 50% 0 50%; }
+        @keyframes colorCycle {
+            0% { background: var(--electric-pink); }
+            25% { background: var(--sunshine-yellow); }
+            50% { background: var(--ocean-blue); }
+            75% { background: var(--mint-green); }
+            100% { background: var(--electric-pink); }
         }
 
-        .anim-rainbow {
-            animation: rainbow 2s linear infinite;
-        }
-
-        @keyframes rainbow {
-            0% { background: var(--memphis-red); }
-            16% { background: var(--memphis-orange); }
-            33% { background: var(--memphis-yellow); }
-            50% { background: var(--memphis-green); }
-            66% { background: var(--memphis-blue); }
-            83% { background: var(--memphis-purple); }
-            100% { background: var(--memphis-red); }
-        }
-
-        /* Section 11: Special Component - Memphis Poster */
-        .poster-container {
-            display: flex;
-            justify-content: center;
-            padding: var(--space-lg);
-        }
-
-        .memphis-poster {
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 3/4;
-            background: var(--memphis-white);
-            border: 6px solid var(--memphis-black);
+        /* ═══════════════════════════════════════════════════════════════════
+           11. SPECIAL COMPONENT: SQUIGGLE BOX
+           ═══════════════════════════════════════════════════════════════════ */
+        .squiggle-box {
             position: relative;
+            padding: var(--space-2xl);
+            background: white;
+            border: var(--border-chunky) solid var(--charcoal);
+            box-shadow: var(--shadow-hard-lg);
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: var(--space-xl);
         }
 
-        .poster-shape {
+        /* Animated Squiggle Borders */
+        .squiggle-box::before,
+        .squiggle-box::after {
+            content: '';
             position: absolute;
-        }
-
-        .poster-circle-1 {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: var(--memphis-yellow);
-            border: 4px solid var(--memphis-black);
-            top: -50px;
-            right: -50px;
-        }
-
-        .poster-triangle {
-            width: 0;
-            height: 0;
-            border-left: 80px solid transparent;
-            border-right: 80px solid transparent;
-            border-bottom: 140px solid var(--memphis-pink);
-            bottom: 10%;
-            left: 5%;
-        }
-
-        .poster-squiggle {
-            width: 150px;
-            height: 20px;
             background: repeating-linear-gradient(
                 90deg,
-                var(--memphis-blue) 0px,
-                var(--memphis-blue) 15px,
-                transparent 15px,
-                transparent 30px
+                var(--electric-pink) 0,
+                var(--electric-pink) 20px,
+                var(--sunshine-yellow) 20px,
+                var(--sunshine-yellow) 40px,
+                var(--ocean-blue) 40px,
+                var(--ocean-blue) 60px,
+                var(--mint-green) 60px,
+                var(--mint-green) 80px
             );
-            bottom: 30%;
-            right: 10%;
-            transform: rotate(-20deg);
+            background-size: 160px 100%;
+            animation: squiggleMove 4s linear infinite;
         }
 
-        .poster-dots {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(var(--memphis-black) 20%, transparent 20%);
-            background-size: 15px 15px;
-            top: 60%;
-            left: 10%;
+        .squiggle-box::before {
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 12px;
         }
 
-        .poster-text {
+        .squiggle-box::after {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 12px;
+            animation-direction: reverse;
+        }
+
+        @keyframes squiggleMove {
+            from { background-position: 0 0; }
+            to { background-position: 160px 0; }
+        }
+
+        .squiggle-content {
             position: relative;
             z-index: 1;
-            text-align: center;
         }
 
-        .poster-text h3 {
+        .squiggle-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .squiggle-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--lavender);
+            border: var(--border-thick) solid var(--charcoal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        .squiggle-title {
             font-family: var(--font-display);
-            font-size: clamp(2rem, 6vw, 3rem);
+            font-size: 2.5rem;
             text-transform: uppercase;
-            margin-bottom: var(--space-sm);
-            background: var(--memphis-white);
-            padding: var(--space-sm);
+            background: linear-gradient(45deg, var(--electric-pink), var(--ocean-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .poster-text p {
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            background: var(--memphis-black);
-            color: var(--memphis-white);
-            padding: var(--space-xs) var(--space-md);
-            display: inline-block;
+        .squiggle-description {
+            font-family: var(--font-body);
+            font-size: 1.125rem;
+            line-height: 1.7;
+            margin-bottom: var(--space-xl);
+            max-width: 60ch;
         }
 
-        /* Section 12: Alerts */
-        .alert-stack {
+        .squiggle-shapes {
+            display: flex;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .squiggle-shape {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--charcoal);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .squiggle-shape:nth-child(1) {
+            background: var(--electric-pink);
+            border-radius: 50%;
+        }
+
+        .squiggle-shape:nth-child(2) {
+            background: var(--sunshine-yellow);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .squiggle-shape:nth-child(3) {
+            background: var(--ocean-blue);
+        }
+
+        .squiggle-shape:nth-child(4) {
+            background: var(--mint-green);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+
+        .squiggle-shape:nth-child(5) {
+            background: var(--coral-orange);
+            border-radius: 50% 0 50% 0;
+        }
+
+        .squiggle-shape:hover {
+            transform: scale(1.2) rotate(45deg);
+        }
+
+        /* Floating Shapes */
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .float-shape {
+            position: absolute;
+            opacity: 0.6;
+        }
+
+        .float-shape:nth-child(1) {
+            top: 20%;
+            right: 10%;
+            width: 40px;
+            height: 40px;
+            background: var(--turquoise);
+            animation: float1 6s ease-in-out infinite;
+        }
+
+        .float-shape:nth-child(2) {
+            bottom: 30%;
+            right: 20%;
+            width: 30px;
+            height: 30px;
+            background: var(--salmon);
+            border-radius: 50%;
+            animation: float2 8s ease-in-out infinite;
+        }
+
+        .float-shape:nth-child(3) {
+            top: 40%;
+            left: 5%;
+            width: 25px;
+            height: 25px;
+            background: var(--lavender);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation: float3 7s ease-in-out infinite;
+        }
+
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, 20px) rotate(180deg); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(15px, -25px); }
+        }
+
+        @keyframes float3 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(10px, 15px) rotate(90deg); }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           12. ALERTS & MESSAGES
+           ═══════════════════════════════════════════════════════════════════ */
+        .alerts-grid {
             display: flex;
             flex-direction: column;
-            gap: var(--space-md);
+            gap: var(--space-lg);
         }
 
         .alert {
-            padding: var(--space-md) var(--space-lg);
-            border: 4px solid var(--memphis-black);
+            padding: var(--space-lg);
+            border: var(--border-thick) solid var(--charcoal);
+            box-shadow: var(--shadow-hard);
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: var(--space-md);
             position: relative;
-            transition: all 0.2s ease;
         }
 
-        .alert:hover {
-            transform: translateX(5px);
-        }
-
-        .alert-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .alert::before {
             font-size: 1.5rem;
-            border: 3px solid var(--memphis-black);
             flex-shrink: 0;
         }
 
-        .alert-info {
-            background: var(--memphis-blue);
-        }
-
-        .alert-info .alert-icon {
-            background: var(--memphis-white);
-        }
-
         .alert-success {
-            background: var(--memphis-green);
+            background: linear-gradient(90deg, var(--mint-green) 0%, white 100%);
         }
 
-        .alert-success .alert-icon {
-            background: var(--memphis-white);
-            border-radius: 50%;
+        .alert-success::before {
+            content: '✓';
+            color: var(--charcoal);
         }
 
         .alert-warning {
-            background: var(--memphis-yellow);
+            background: linear-gradient(90deg, var(--sunshine-yellow) 0%, white 100%);
         }
 
-        .alert-warning .alert-icon {
-            background: var(--memphis-white);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            border: none;
+        .alert-warning::before {
+            content: '!';
+            font-family: var(--font-display);
+            color: var(--charcoal);
         }
 
         .alert-error {
-            background: var(--memphis-red);
-            color: var(--memphis-white);
+            background: linear-gradient(90deg, var(--coral-orange) 0%, white 100%);
         }
 
-        .alert-error .alert-icon {
-            background: var(--memphis-white);
-            border-radius: var(--radius-blob);
+        .alert-error::before {
+            content: '✕';
+            color: white;
         }
 
-        .alert-content h4 {
-            font-family: var(--font-heading);
+        .alert-info {
+            background: linear-gradient(90deg, var(--ocean-blue) 0%, white 100%);
+        }
+
+        .alert-info::before {
+            content: 'i';
+            font-family: var(--font-display);
+            color: white;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-display);
             font-size: 1rem;
             text-transform: uppercase;
             margin-bottom: var(--space-xs);
         }
 
-        .alert-content p {
-            margin: 0;
-            font-size: 0.95rem;
+        .alert-text {
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            line-height: 1.5;
         }
 
-        /* Footer */
+        .alert-close {
+            position: absolute;
+            top: var(--space-sm);
+            right: var(--space-sm);
+            background: none;
+            border: 2px solid var(--charcoal);
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            transition: all 0.2s ease;
+        }
+
+        .alert-close:hover {
+            background: var(--charcoal);
+            color: white;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════════════════════════════════ */
         footer {
-            background: var(--memphis-black);
-            color: var(--memphis-white);
-            padding: var(--space-xl);
+            text-align: center;
+            padding: var(--space-2xl);
+            margin-top: var(--space-3xl);
+            background: var(--charcoal);
+            color: white;
             position: relative;
             overflow: hidden;
         }
@@ -1054,528 +1363,521 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 20px;
+            height: 12px;
             background: repeating-linear-gradient(
                 90deg,
-                var(--memphis-yellow) 0px,
-                var(--memphis-yellow) 20%,
-                var(--memphis-pink) 20%,
-                var(--memphis-pink) 40%,
-                var(--memphis-blue) 40%,
-                var(--memphis-blue) 60%,
-                var(--memphis-green) 60%,
-                var(--memphis-green) 80%,
-                var(--memphis-purple) 80%,
-                var(--memphis-purple) 100%
+                var(--electric-pink) 0,
+                var(--electric-pink) 20px,
+                var(--sunshine-yellow) 20px,
+                var(--sunshine-yellow) 40px,
+                var(--ocean-blue) 40px,
+                var(--ocean-blue) 60px,
+                var(--mint-green) 60px,
+                var(--mint-green) 80px
             );
         }
 
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: var(--space-lg);
-        }
-
-        .footer-logo {
+        .footer-text {
             font-family: var(--font-display);
             font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
-        .footer-shapes {
-            display: flex;
-            gap: var(--space-sm);
-        }
-
-        .footer-shape {
-            width: 30px;
-            height: 30px;
-            border: 2px solid var(--memphis-white);
-        }
-
-        .footer-shape:nth-child(1) { background: var(--memphis-yellow); }
-        .footer-shape:nth-child(2) { background: var(--memphis-pink); border-radius: 50%; }
-        .footer-shape:nth-child(3) { background: var(--memphis-blue); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); border: none; }
-
-        .footer-text {
-            font-size: 0.9rem;
-            opacity: 0.8;
+        .footer-sub {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            margin-top: var(--space-sm);
+            color: var(--warm-gray);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            nav {
-                position: static;
-                justify-content: center;
-                max-width: 100%;
-                padding: var(--space-md);
-                background: var(--memphis-white);
-                border-bottom: 4px solid var(--memphis-black);
+            :root {
+                --space-xl: 2rem;
+                --space-2xl: 3rem;
+                --space-3xl: 4rem;
             }
 
-            header {
-                min-height: auto;
-                padding: var(--space-2xl) var(--space-md);
+            .logo {
+                font-size: 3rem;
             }
 
-            section {
-                padding: var(--space-lg);
+            .section-title {
+                font-size: 1.75rem;
             }
 
-            section::before {
-                top: 5px;
-                left: 5px;
-                right: -5px;
-                bottom: -5px;
+            .type-display {
+                font-size: 2.5rem;
             }
 
-            .shape {
-                display: none;
+            .squiggle-title {
+                font-size: 1.75rem;
+            }
+
+            .back-link {
+                top: var(--space-md);
+                left: var(--space-md);
+                padding: var(--space-xs) var(--space-sm);
+                font-size: 0.75rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <a href="#colors">Colors</a>
-        <a href="#typography">Type</a>
-        <a href="#spacing">Space</a>
-        <a href="#buttons">Buttons</a>
-        <a href="#forms">Forms</a>
-        <a href="#cards">Cards</a>
-        <a href="#table">Table</a>
-        <a href="#badges">Badges</a>
-        <a href="#principles">Rules</a>
-        <a href="#animations">Motion</a>
-        <a href="#poster">Poster</a>
-        <a href="#alerts">Alerts</a>
-    </nav>
+    <a href="../index.html" class="back-link">Gallery</a>
 
-    <!-- Header -->
     <header>
-        <div class="shape shape-circle"></div>
-        <div class="shape shape-triangle"></div>
-        <div class="shape shape-squiggle"></div>
-        <div class="shape shape-zigzag"></div>
-
-        <div class="header-content">
-            <h1>Memphis<br>Mayhem</h1>
-            <p class="tagline">Design System v1.0 — Bold. Playful. Radical.</p>
-        </div>
+        <h1 class="logo">Squiggle</h1>
+        <p class="tagline">Memphis Design Style Guide</p>
     </header>
 
-    <main>
-        <!-- Section 1: Color Palette -->
+    <main class="container">
+        <!-- 1. Color Palette -->
         <section id="colors">
-            <h2>01. Color Palette</h2>
-            <p>A bold, unapologetic palette inspired by the Memphis Group. Primary colors collide with neon accents for maximum visual impact.</p>
-
+            <h2 class="section-title">Color Palette</h2>
             <div class="color-grid">
-                <div class="color-swatch" style="background: var(--memphis-yellow);">
-                    <span class="color-name">Electric Yellow</span>
-                    <span class="color-hex">#FFE81F</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--electric-pink);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Electric Pink</div>
+                        <div class="color-hex">#FF2E8B</div>
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: var(--memphis-pink);">
-                    <span class="color-name">Hot Pink</span>
-                    <span class="color-hex">#FF6B9D</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--sunshine-yellow);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Sunshine Yellow</div>
+                        <div class="color-hex">#FFDE00</div>
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: var(--memphis-blue);">
-                    <span class="color-name">Cyber Cyan</span>
-                    <span class="color-hex">#00D4FF</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--ocean-blue);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Ocean Blue</div>
+                        <div class="color-hex">#0057FF</div>
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: var(--memphis-red);">
-                    <span class="color-name">Radical Red</span>
-                    <span class="color-hex">#FF3D3D</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--mint-green);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Mint Green</div>
+                        <div class="color-hex">#00E5A0</div>
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: var(--memphis-green);">
-                    <span class="color-name">Neon Lime</span>
-                    <span class="color-hex">#7FFF00</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--coral-orange);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Coral Orange</div>
+                        <div class="color-hex">#FF6B35</div>
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: var(--memphis-purple);">
-                    <span class="color-name">Cosmic Purple</span>
-                    <span class="color-hex">#B967FF</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--lavender);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Lavender</div>
+                        <div class="color-hex">#C8A2FF</div>
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: var(--memphis-orange);">
-                    <span class="color-name">Sunset Orange</span>
-                    <span class="color-hex">#FF9F43</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--charcoal);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Charcoal</div>
+                        <div class="color-hex">#1A1A2E</div>
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: var(--memphis-black);">
-                    <span class="color-name" style="color: var(--memphis-white);">Void Black</span>
-                    <span class="color-hex">#1A1A2E</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--cream);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Cream</div>
+                        <div class="color-hex">#FFF8E7</div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 2: Typography -->
+        <!-- 2. Typography -->
         <section id="typography">
-            <h2>02. Typography</h2>
-            <p>Bold, expressive typefaces that demand attention. Mix and match for maximum chaos.</p>
+            <h2 class="section-title">Typography</h2>
 
             <div class="type-specimen">
-                <div class="type-display">RUBIK MONO ONE</div>
-                <span class="font-info">Display Font — Rubik Mono One</span>
+                <div class="type-label">Display — Archivo Black</div>
+                <div class="type-display">Bold Shapes!</div>
             </div>
 
             <div class="type-specimen">
-                <div class="type-heading">Archivo Black for Headlines</div>
-                <span class="font-info">Heading Font — Archivo Black</span>
+                <div class="type-label">Body — DM Sans</div>
+                <p class="type-body">Memphis design emerged in Milan in 1981, founded by Ettore Sottsass. The movement rejected the austere minimalism of the time, embracing bold patterns, bright colors, and asymmetrical shapes. This playful rebellion against "good taste" created a visual language that celebrates fun, irreverence, and creative freedom.</p>
             </div>
 
             <div class="type-specimen">
-                <p class="type-body">Space Grotesk brings clarity to body text while maintaining that geometric, contemporary edge. It's readable yet still has personality—perfect for longer passages where you need legibility without sacrificing style.</p>
-                <span class="font-info">Body Font — Space Grotesk</span>
+                <div class="type-label">Monospace — Space Mono</div>
+                <div class="type-mono">const memphis = { founded: 1981, spirit: 'rebellious' };</div>
+            </div>
+
+            <div class="type-scale">
+                <div class="type-scale-item">
+                    <span class="type-scale-size">4rem / 64px</span>
+                    <span style="font-family: var(--font-display); font-size: 2.5rem; text-transform: uppercase;">Display XL</span>
+                </div>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">2.5rem / 40px</span>
+                    <span style="font-family: var(--font-display); font-size: 1.75rem; text-transform: uppercase;">Heading 1</span>
+                </div>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">1.5rem / 24px</span>
+                    <span style="font-family: var(--font-display); font-size: 1.25rem; text-transform: uppercase;">Heading 2</span>
+                </div>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">1.125rem / 18px</span>
+                    <span style="font-family: var(--font-body); font-size: 1.125rem;">Body Large</span>
+                </div>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">1rem / 16px</span>
+                    <span style="font-family: var(--font-body); font-size: 1rem;">Body Regular</span>
+                </div>
             </div>
         </section>
 
-        <!-- Section 3: Spacing -->
+        <!-- 3. Spacing Scale -->
         <section id="spacing">
-            <h2>03. Spacing Scale</h2>
-            <p>Consistent spacing creates rhythm. Our scale doubles with each step for dramatic contrast.</p>
-
+            <h2 class="section-title">Spacing Scale</h2>
             <div class="spacing-demo">
                 <div class="spacing-item">
-                    <span class="spacing-label">XS</span>
-                    <div class="spacing-block" style="width: calc(var(--space-xs) * 20);"></div>
-                    <span class="spacing-value">0.25rem</span>
+                    <div class="spacing-label">--space-xs<span>0.382rem</span></div>
+                    <div class="spacing-bar" style="width: 6px;"></div>
                 </div>
                 <div class="spacing-item">
-                    <span class="spacing-label">SM</span>
-                    <div class="spacing-block" style="width: calc(var(--space-sm) * 20);"></div>
-                    <span class="spacing-value">0.5rem</span>
+                    <div class="spacing-label">--space-sm<span>0.618rem</span></div>
+                    <div class="spacing-bar" style="width: 10px;"></div>
                 </div>
                 <div class="spacing-item">
-                    <span class="spacing-label">MD</span>
-                    <div class="spacing-block" style="width: calc(var(--space-md) * 20);"></div>
-                    <span class="spacing-value">1rem</span>
+                    <div class="spacing-label">--space-md<span>1rem</span></div>
+                    <div class="spacing-bar" style="width: 16px;"></div>
                 </div>
                 <div class="spacing-item">
-                    <span class="spacing-label">LG</span>
-                    <div class="spacing-block" style="width: calc(var(--space-lg) * 20);"></div>
-                    <span class="spacing-value">2rem</span>
+                    <div class="spacing-label">--space-lg<span>1.618rem</span></div>
+                    <div class="spacing-bar" style="width: 26px;"></div>
                 </div>
                 <div class="spacing-item">
-                    <span class="spacing-label">XL</span>
-                    <div class="spacing-block" style="width: calc(var(--space-xl) * 20);"></div>
-                    <span class="spacing-value">4rem</span>
+                    <div class="spacing-label">--space-xl<span>2.618rem</span></div>
+                    <div class="spacing-bar" style="width: 42px;"></div>
                 </div>
                 <div class="spacing-item">
-                    <span class="spacing-label">2XL</span>
-                    <div class="spacing-block" style="width: calc(var(--space-2xl) * 10);"></div>
-                    <span class="spacing-value">8rem</span>
+                    <div class="spacing-label">--space-2xl<span>4.236rem</span></div>
+                    <div class="spacing-bar" style="width: 68px;"></div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-3xl<span>6.854rem</span></div>
+                    <div class="spacing-bar" style="width: 110px;"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 4: Buttons -->
+        <!-- 4. Buttons -->
         <section id="buttons">
-            <h2>04. Buttons</h2>
-            <p>Interactive elements with satisfying depth and playful hover states.</p>
-
+            <h2 class="section-title">Buttons</h2>
             <div class="button-grid">
-                <button class="btn btn-primary">Primary Action</button>
+                <button class="btn btn-primary">Primary</button>
                 <button class="btn btn-secondary">Secondary</button>
                 <button class="btn btn-tertiary">Tertiary</button>
-                <button class="btn btn-outline">Outline</button>
-                <button class="btn btn-wild">Go Wild!</button>
+                <button class="btn btn-ghost">Ghost</button>
+                <button class="btn btn-wild">Wild Style</button>
+                <button class="btn btn-primary" disabled>Disabled</button>
             </div>
         </section>
 
-        <!-- Section 5: Forms -->
+        <!-- 5. Forms -->
         <section id="forms">
-            <h2>05. Form Elements</h2>
-            <p>Inputs that pop off the page with bold borders and playful focus states.</p>
+            <h2 class="section-title">Forms</h2>
 
-            <div class="form-demo">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" placeholder="Enter your radical name">
-                </div>
+            <div class="form-group">
+                <label class="form-label" for="text-input">Text Input</label>
+                <input type="text" id="text-input" class="form-input" placeholder="Type something fun...">
+            </div>
 
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="you@memphis.design">
-                </div>
+            <div class="form-group">
+                <label class="form-label" for="select-input">Select</label>
+                <select id="select-input" class="form-input form-select">
+                    <option>Choose a shape</option>
+                    <option>Circle</option>
+                    <option>Triangle</option>
+                    <option>Squiggle</option>
+                    <option>Diamond</option>
+                </select>
+            </div>
 
-                <div class="form-group">
-                    <label for="shape">Favorite Shape</label>
-                    <select id="shape">
-                        <option>Circle</option>
-                        <option>Triangle</option>
-                        <option>Squiggle</option>
-                        <option>Zigzag</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label class="form-label" for="textarea">Textarea</label>
+                <textarea id="textarea" class="form-input form-textarea" placeholder="Express yourself..."></textarea>
+            </div>
 
-                <div class="form-group">
-                    <label for="message">Your Message</label>
-                    <textarea id="message" placeholder="Tell us something wild..."></textarea>
-                </div>
+            <div class="form-group">
+                <label class="form-label">Error State</label>
+                <input type="text" class="form-input error" value="Something's wrong!">
+            </div>
 
-                <div class="form-group">
-                    <label class="checkbox-group">
+            <div class="form-group">
+                <label class="form-label">Checkboxes</label>
+                <div class="form-checkbox-group">
+                    <label class="form-checkbox">
+                        <input type="checkbox" checked>
+                        <span>Bold Colors</span>
+                    </label>
+                    <label class="form-checkbox">
                         <input type="checkbox">
-                        <span class="checkbox-custom"></span>
-                        <span>I embrace chaos in design</span>
+                        <span>Geometric Shapes</span>
+                    </label>
+                    <label class="form-checkbox">
+                        <input type="checkbox" checked>
+                        <span>Playful Patterns</span>
                     </label>
                 </div>
-
-                <button class="btn btn-primary">Submit Form</button>
             </div>
         </section>
 
-        <!-- Section 6: Cards -->
+        <!-- 6. Cards -->
         <section id="cards">
-            <h2>06. Cards</h2>
-            <p>Content containers with depth, dimension, and personality.</p>
-
+            <h2 class="section-title">Cards</h2>
             <div class="card-grid">
-                <div class="card card-yellow">
-                    <div class="card-icon">★</div>
-                    <h3>Bold Choices</h3>
-                    <p>Every design decision should make a statement. No more playing it safe.</p>
-                </div>
+                <article class="card">
+                    <div class="card-image"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">Ettore Sottsass</h3>
+                        <p class="card-text">The visionary founder of Memphis Group who sparked a design revolution with his bold, unconventional creations.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-tag">Founder</span>
+                        <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Explore</a>
+                    </div>
+                </article>
 
-                <div class="card card-pink">
-                    <div class="card-icon">◆</div>
-                    <h3>Playful Spirit</h3>
-                    <p>Design should be fun. Embrace the joy and let it show in every pixel.</p>
-                </div>
+                <article class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--mint-green) 25%, var(--sunshine-yellow) 75%);"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">Carlton Bookcase</h3>
+                        <p class="card-text">An iconic piece that defies gravity and convention with its totemic, asymmetrical structure.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-tag">Iconic</span>
+                        <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">View</a>
+                    </div>
+                </article>
 
-                <div class="card card-blue">
-                    <div class="card-icon">●</div>
-                    <h3>Pure Energy</h3>
-                    <p>Colors that vibrate, shapes that dance. Maximum impact, always.</p>
-                </div>
+                <article class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--lavender) 25%, var(--coral-orange) 75%);"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">Anti-Design</h3>
+                        <p class="card-text">Breaking rules, defying taste, and celebrating the joy of creative rebellion.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-tag">Philosophy</span>
+                        <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Learn</a>
+                    </div>
+                </article>
             </div>
         </section>
 
-        <!-- Section 7: Data Table -->
+        <!-- 7. Data Table -->
         <section id="table">
-            <h2>07. Data Table</h2>
-            <p>Even data can be bold and beautiful with the Memphis treatment.</p>
-
+            <h2 class="section-title">Data Table</h2>
             <div class="table-container">
-                <table>
+                <table class="data-table">
                     <thead>
                         <tr>
-                            <th>Shape</th>
-                            <th>Color</th>
-                            <th>Vibe</th>
-                            <th>Power Level</th>
+                            <th>Designer</th>
+                            <th>Work</th>
+                            <th>Year</th>
+                            <th>Material</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Circle</td>
-                            <td>Hot Pink</td>
-                            <td>Playful</td>
-                            <td>9000+</td>
+                            <td>Ettore Sottsass</td>
+                            <td>Carlton Bookcase</td>
+                            <td>1981</td>
+                            <td>Wood, Laminate</td>
+                            <td><a href="#" class="table-action">View</a></td>
                         </tr>
                         <tr>
-                            <td>Triangle</td>
-                            <td>Electric Yellow</td>
-                            <td>Dynamic</td>
-                            <td>8500</td>
+                            <td>Michele De Lucchi</td>
+                            <td>First Chair</td>
+                            <td>1983</td>
+                            <td>Metal, Wood</td>
+                            <td><a href="#" class="table-action">View</a></td>
                         </tr>
                         <tr>
-                            <td>Squiggle</td>
-                            <td>Cyber Cyan</td>
-                            <td>Chaotic</td>
-                            <td>∞</td>
+                            <td>Nathalie Du Pasquier</td>
+                            <td>Riviera Table</td>
+                            <td>1981</td>
+                            <td>Laminate</td>
+                            <td><a href="#" class="table-action">View</a></td>
                         </tr>
                         <tr>
-                            <td>Zigzag</td>
-                            <td>Neon Lime</td>
-                            <td>Electric</td>
-                            <td>7777</td>
+                            <td>George Sowden</td>
+                            <td>Oberoi Cabinet</td>
+                            <td>1981</td>
+                            <td>Wood, Plastic</td>
+                            <td><a href="#" class="table-action">View</a></td>
+                        </tr>
+                        <tr>
+                            <td>Martine Bedin</td>
+                            <td>Super Lamp</td>
+                            <td>1981</td>
+                            <td>Metal, Bulbs</td>
+                            <td><a href="#" class="table-action">View</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Section 8: Badges -->
+        <!-- 8. Badges & Tags -->
         <section id="badges">
-            <h2>08. Badges & Tags</h2>
-            <p>Small but mighty labels in every flavor of our palette.</p>
-
+            <h2 class="section-title">Badges & Tags</h2>
             <div class="badge-grid">
-                <span class="badge badge-yellow">New</span>
-                <span class="badge badge-pink">Hot</span>
-                <span class="badge badge-blue">Cool</span>
-                <span class="badge badge-green">Fresh</span>
-                <span class="badge badge-purple">Cosmic</span>
-                <span class="badge badge-red">Fire</span>
-                <span class="badge badge-orange">Warm</span>
-                <span class="badge badge-yellow badge-pill">Pill Shape</span>
-                <span class="badge badge-pink badge-blob">Blob Shape</span>
+                <span class="badge badge-primary">Primary</span>
+                <span class="badge badge-secondary">Secondary</span>
+                <span class="badge badge-success">Success</span>
+                <span class="badge badge-warning">Warning</span>
+                <span class="badge badge-info">Info</span>
+                <span class="badge badge-funky">Funky</span>
+            </div>
+
+            <div class="badge-grid" style="margin-top: var(--space-xl);">
+                <span class="tag"><span class="tag-dot" style="background: var(--electric-pink);"></span>Memphis</span>
+                <span class="tag"><span class="tag-dot" style="background: var(--ocean-blue);"></span>1980s</span>
+                <span class="tag"><span class="tag-dot" style="background: var(--mint-green);"></span>Italian</span>
+                <span class="tag"><span class="tag-dot" style="background: var(--sunshine-yellow);"></span>Postmodern</span>
+                <span class="tag"><span class="tag-dot" style="background: var(--coral-orange);"></span>Radical</span>
             </div>
         </section>
 
-        <!-- Section 9: Design Principles -->
+        <!-- 9. Design Principles -->
         <section id="principles">
-            <h2>09. Design Principles</h2>
-            <p>The rules of radical design.</p>
-
+            <h2 class="section-title">Design Principles</h2>
             <div class="principles-grid">
-                <div class="principle">
-                    <span class="principle-number">01</span>
-                    <h3>Reject Minimalism</h3>
-                    <p>More is more. Layer shapes, colors, and patterns until it feels alive.</p>
+                <div class="principle" data-number="1">
+                    <h3 class="principle-title">Embrace Chaos</h3>
+                    <p class="principle-text">Reject rigid grids and predictable layouts. Let shapes collide, overlap, and dance across the canvas with joyful abandon.</p>
                 </div>
-
-                <div class="principle">
-                    <span class="principle-number">02</span>
-                    <h3>Embrace Contrast</h3>
-                    <p>Put colors that clash next to each other. Make it vibrate.</p>
+                <div class="principle" data-number="2">
+                    <h3 class="principle-title">Color Fearlessly</h3>
+                    <p class="principle-text">Combine colors that "shouldn't" go together. Pink with orange, yellow with blue—there are no wrong answers, only bold choices.</p>
                 </div>
-
-                <div class="principle">
-                    <span class="principle-number">03</span>
-                    <h3>Geometric Chaos</h3>
-                    <p>Circles, triangles, squiggles—throw them all in and let them party.</p>
+                <div class="principle" data-number="3">
+                    <h3 class="principle-title">Play with Scale</h3>
+                    <p class="principle-text">Make the small things big and the big things small. Unexpected proportions create visual tension and delight.</p>
                 </div>
-
-                <div class="principle">
-                    <span class="principle-number">04</span>
-                    <h3>Playful Always</h3>
-                    <p>Design should spark joy. If it doesn't make you smile, add more shapes.</p>
-                </div>
-
-                <div class="principle">
-                    <span class="principle-number">05</span>
-                    <h3>Bold Typography</h3>
-                    <p>Headlines that shout. Text that demands attention. Never whisper.</p>
-                </div>
-
-                <div class="principle">
-                    <span class="principle-number">06</span>
-                    <h3>Break the Grid</h3>
-                    <p>Rules are suggestions. Overlap, rotate, and let elements breathe freely.</p>
+                <div class="principle" data-number="4">
+                    <h3 class="principle-title">Celebrate the Strange</h3>
+                    <p class="principle-text">Good taste is the enemy of creativity. The weird, the awkward, and the unusual deserve a place at the table.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Section 10: Animations -->
+        <!-- 10. Animations -->
         <section id="animations">
-            <h2>10. Animation Effects</h2>
-            <p>Movement brings designs to life. Each animation adds personality.</p>
-
-            <div class="animation-showcase">
+            <h2 class="section-title">Animations</h2>
+            <div class="animation-demos">
                 <div class="animation-demo">
-                    <div class="anim-box anim-bounce"></div>
-                    <h3>Bounce</h3>
-                    <p>Playful vertical movement</p>
+                    <div class="anim-wiggle"></div>
+                    <div class="animation-label">Wiggle</div>
                 </div>
-
                 <div class="animation-demo">
-                    <div class="anim-box anim-spin"></div>
-                    <h3>Spin</h3>
-                    <p>Continuous rotation</p>
+                    <div class="anim-bounce"></div>
+                    <div class="animation-label">Bounce</div>
                 </div>
-
                 <div class="animation-demo">
-                    <div class="anim-box anim-pulse"></div>
-                    <h3>Pulse</h3>
-                    <p>Breathing scale effect</p>
+                    <div class="anim-spin"></div>
+                    <div class="animation-label">Spin</div>
                 </div>
-
                 <div class="animation-demo">
-                    <div class="anim-box anim-shake"></div>
-                    <h3>Shake</h3>
-                    <p>Energetic wobble</p>
+                    <div class="anim-pulse"></div>
+                    <div class="animation-label">Pulse</div>
                 </div>
-
                 <div class="animation-demo">
-                    <div class="anim-box anim-morph"></div>
-                    <h3>Morph</h3>
-                    <p>Shape transformation</p>
+                    <div class="anim-shake"></div>
+                    <div class="animation-label">Shake (hover)</div>
                 </div>
-
                 <div class="animation-demo">
-                    <div class="anim-box anim-rainbow"></div>
-                    <h3>Rainbow</h3>
-                    <p>Color cycling</p>
+                    <div class="anim-color"></div>
+                    <div class="animation-label">Color Cycle</div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 11: Special Component -->
-        <section id="poster">
-            <h2>11. Memphis Poster</h2>
-            <p>A signature component showcasing the Memphis aesthetic in its full glory.</p>
-
-            <div class="poster-container">
-                <div class="memphis-poster">
-                    <div class="poster-shape poster-circle-1"></div>
-                    <div class="poster-shape poster-triangle"></div>
-                    <div class="poster-shape poster-squiggle"></div>
-                    <div class="poster-shape poster-dots"></div>
-
-                    <div class="poster-text">
-                        <h3>Design Is</h3>
-                        <p>A celebration of chaos</p>
+        <!-- 11. Special Component: Squiggle Box -->
+        <section id="special">
+            <h2 class="section-title">Special Component</h2>
+            <div class="squiggle-box">
+                <div class="floating-shapes">
+                    <div class="float-shape"></div>
+                    <div class="float-shape"></div>
+                    <div class="float-shape"></div>
+                </div>
+                <div class="squiggle-content">
+                    <div class="squiggle-header">
+                        <div class="squiggle-icon">~</div>
+                        <h3 class="squiggle-title">Squiggle Box</h3>
+                    </div>
+                    <p class="squiggle-description">
+                        A playful container that embodies the Memphis spirit. Features animated rainbow borders, floating geometric shapes, and interactive elements. Perfect for highlighting important content or creating visual impact.
+                    </p>
+                    <div class="squiggle-shapes">
+                        <div class="squiggle-shape"></div>
+                        <div class="squiggle-shape"></div>
+                        <div class="squiggle-shape"></div>
+                        <div class="squiggle-shape"></div>
+                        <div class="squiggle-shape"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 12: Alerts -->
+        <!-- 12. Alerts -->
         <section id="alerts">
-            <h2>12. Alert Messages</h2>
-            <p>System feedback that's impossible to ignore.</p>
-
-            <div class="alert-stack">
-                <div class="alert alert-info">
-                    <div class="alert-icon">ℹ</div>
-                    <div class="alert-content">
-                        <h4>Information</h4>
-                        <p>Here's something you should know about Memphis design!</p>
-                    </div>
-                </div>
-
+            <h2 class="section-title">Alert Messages</h2>
+            <div class="alerts-grid">
                 <div class="alert alert-success">
-                    <div class="alert-icon">✓</div>
                     <div class="alert-content">
-                        <h4>Success!</h4>
-                        <p>Your design is now 100% more radical. Great job!</p>
+                        <div class="alert-title">Success!</div>
+                        <p class="alert-text">Your design has been saved. Keep experimenting!</p>
                     </div>
+                    <button class="alert-close">×</button>
                 </div>
 
                 <div class="alert alert-warning">
-                    <div class="alert-icon">!</div>
                     <div class="alert-content">
-                        <h4>Warning</h4>
-                        <p>Caution: Design may cause excessive joy and creativity.</p>
+                        <div class="alert-title">Warning</div>
+                        <p class="alert-text">Your color combination might be too conventional. Consider something bolder!</p>
                     </div>
+                    <button class="alert-close">×</button>
                 </div>
 
                 <div class="alert alert-error">
-                    <div class="alert-icon">✕</div>
                     <div class="alert-content">
-                        <h4>Error</h4>
-                        <p>Too much minimalism detected. Please add more shapes immediately.</p>
+                        <div class="alert-title">Error</div>
+                        <p class="alert-text">Too much minimalism detected. Add more shapes immediately.</p>
                     </div>
+                    <button class="alert-close">×</button>
+                </div>
+
+                <div class="alert alert-info">
+                    <div class="alert-content">
+                        <div class="alert-title">Info</div>
+                        <p class="alert-text">Memphis Group disbanded in 1987, but its influence continues to inspire designers today.</p>
+                    </div>
+                    <button class="alert-close">×</button>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-logo">MEMPHIS MAYHEM</div>
-            <div class="footer-shapes">
-                <div class="footer-shape"></div>
-                <div class="footer-shape"></div>
-                <div class="footer-shape"></div>
-            </div>
-            <p class="footer-text">Design System v1.0 — Inspired by the Memphis Group, Milano 1981</p>
-        </div>
+        <p class="footer-text">Squiggle Style Guide</p>
+        <p class="footer-sub">Inspired by Memphis Milano • Est. 1981</p>
     </footer>
 </body>
 </html>

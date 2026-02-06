@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kintsugi - Wabi-Sabi Style Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Wabi-Sabi Color Palette - Imperfect beauty, natural aged materials */
+            --sumi: #1C1C1C;
+            --charcoal: #333333;
+            --stone: #7D7D7D;
+            --clay: #B4A284;
+            --sand: #D4C4A8;
+            --rice-paper: #F5F2E9;
+            --kintsuki-gold: #C9A227;
+            --rust: #8B4513;
+            --moss: #5C6B4D;
+            --indigo: #264653;
+            --persimmon: #C75000;
+            --ash: #A69F8D;
+
+            /* Typography */
+            --font-display: 'Noto Serif JP', serif;
+            --font-body: 'Zen Kaku Gothic New', sans-serif;
+            --font-accent: 'Cormorant Garamond', serif;
+
+            /* Spacing - Ma (negative space) */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 40px;
+            --space-xl: 64px;
+            --space-2xl: 96px;
+            --space-3xl: 128px;
+
+            /* Border Radius - Organic imperfection */
+            --radius-sm: 2px;
+            --radius-md: 4px;
+            --radius-lg: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--rice-paper);
+            color: var(--sumi);
+            line-height: 2;
+            overflow-x: hidden;
+            font-weight: 300;
+        }
+
+        /* Subtle paper texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.015;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+        }
+
+        /* Navigation */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            color: var(--stone);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 0.9rem;
+            margin-bottom: var(--space-xl);
+            transition: color 0.3s ease;
+        }
+
+        .back-link::before {
+            content: '←';
+        }
+
+        .back-link:hover {
+            color: var(--sumi);
+        }
+
+        /* Header - Minimalist introduction */
+        header {
+            text-align: center;
+            padding: var(--space-3xl) var(--space-lg);
+            margin-bottom: var(--space-3xl);
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1px;
+            height: 60%;
+            background: linear-gradient(180deg, transparent, var(--kintsuki-gold), transparent);
+            opacity: 0.5;
+        }
+
+        .kanji {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--stone);
+            opacity: 0.3;
+            margin-bottom: var(--space-md);
+            letter-spacing: 0.5em;
+        }
+
+        header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 400;
+            color: var(--sumi);
+            letter-spacing: 0.3em;
+            margin-bottom: var(--space-md);
+        }
+
+        header p {
+            font-family: var(--font-accent);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--stone);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: var(--space-3xl);
+            padding: var(--space-lg) 0;
+            border-top: 1px solid var(--sand);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--stone);
+            margin-bottom: var(--space-lg);
+            letter-spacing: 0.2em;
+            text-transform: lowercase;
+        }
+
+        /* Color Palette - Natural materials */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: var(--space-sm);
+        }
+
+        .color-swatch {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--space-sm);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* Kintsugi crack effect on hover */
+        .color-swatch::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 30%;
+            width: 40%;
+            height: 1px;
+            background: var(--kintsuki-gold);
+            transform: rotate(25deg);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .color-swatch:hover::before {
+            opacity: 1;
+        }
+
+        .color-swatch:hover {
+            transform: translateY(-4px);
+        }
+
+        .color-name {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+        }
+
+        .color-value {
+            font-family: var(--font-accent);
+            font-size: 0.65rem;
+            opacity: 0.7;
+        }
+
+        .swatch-sumi { background: var(--sumi); color: var(--rice-paper); }
+        .swatch-charcoal { background: var(--charcoal); color: var(--rice-paper); }
+        .swatch-stone { background: var(--stone); color: var(--rice-paper); }
+        .swatch-clay { background: var(--clay); color: var(--sumi); }
+        .swatch-sand { background: var(--sand); color: var(--sumi); }
+        .swatch-rice { background: var(--rice-paper); color: var(--sumi); border: 1px solid var(--sand); }
+        .swatch-gold { background: var(--kintsuki-gold); color: var(--sumi); }
+        .swatch-rust { background: var(--rust); color: var(--rice-paper); }
+        .swatch-moss { background: var(--moss); color: var(--rice-paper); }
+        .swatch-indigo { background: var(--indigo); color: var(--rice-paper); }
+
+        /* Typography */
+        .type-specimen {
+            margin-bottom: var(--space-xl);
+            padding: var(--space-lg);
+            background: white;
+            border-left: 2px solid var(--kintsuki-gold);
+        }
+
+        .type-specimen h3 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 300;
+            color: var(--sumi);
+            margin-bottom: var(--space-xs);
+        }
+
+        .type-specimen .font-name {
+            font-family: var(--font-accent);
+            font-style: italic;
+            font-size: 0.85rem;
+            color: var(--stone);
+            margin-bottom: var(--space-md);
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-lg);
+        }
+
+        .type-label {
+            font-family: var(--font-accent);
+            font-size: 0.75rem;
+            color: var(--clay);
+            min-width: 60px;
+        }
+
+        .display-text { font-family: var(--font-display); font-size: 1.75rem; font-weight: 300; color: var(--sumi); }
+        .heading-text { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; color: var(--charcoal); }
+        .body-text { font-family: var(--font-body); font-size: 1rem; font-weight: 300; color: var(--sumi); }
+        .small-text { font-family: var(--font-body); font-size: 0.875rem; font-weight: 300; color: var(--stone); }
+
+        /* Spacing Scale - Ma visualization */
+        .spacing-visual {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xl);
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .spacing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .spacing-block {
+            background: var(--sand);
+            width: 8px;
+            position: relative;
+        }
+
+        .spacing-block::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 2px;
+            background: var(--sumi);
+        }
+
+        .spacing-label {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            color: var(--stone);
+            letter-spacing: 0.1em;
+        }
+
+        .spacing-value {
+            font-family: var(--font-accent);
+            font-size: 0.75rem;
+            color: var(--clay);
+        }
+
+        /* Buttons - Understated elegance */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .btn {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            padding: var(--space-sm) var(--space-lg);
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .btn-primary {
+            background: var(--sumi);
+            color: var(--rice-paper);
+        }
+
+        .btn-primary:hover {
+            background: var(--charcoal);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--sumi);
+            border: 1px solid var(--sumi);
+        }
+
+        .btn-secondary:hover {
+            background: var(--sumi);
+            color: var(--rice-paper);
+        }
+
+        .btn-gold {
+            background: var(--kintsuki-gold);
+            color: var(--sumi);
+        }
+
+        .btn-gold:hover {
+            opacity: 0.8;
+        }
+
+        .btn-subtle {
+            background: var(--sand);
+            color: var(--sumi);
+        }
+
+        .btn-subtle:hover {
+            background: var(--clay);
+        }
+
+        /* Forms - Clean and minimal */
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--stone);
+            margin-bottom: var(--space-xs);
+            letter-spacing: 0.05em;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-sm);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 300;
+            border: none;
+            border-bottom: 1px solid var(--sand);
+            background: transparent;
+            color: var(--sumi);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-bottom-color: var(--kintsuki-gold);
+        }
+
+        .form-input::placeholder {
+            color: var(--ash);
+        }
+
+        textarea.form-input {
+            min-height: 100px;
+            resize: vertical;
+            border: 1px solid var(--sand);
+            padding: var(--space-sm);
+        }
+
+        textarea.form-input:focus {
+            border-color: var(--kintsuki-gold);
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%237D7D7D' d='M5 7L0 2h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-sm) center;
+            padding-right: var(--space-xl);
+        }
+
+        .form-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--sumi);
+        }
+
+        /* Cards - Contemplative spaces */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .card {
+            background: white;
+            padding: var(--space-lg);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 0;
+            background: var(--kintsuki-gold);
+            transition: height 0.4s ease;
+        }
+
+        .card:hover::before {
+            height: 100%;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+
+        .card-image {
+            height: 120px;
+            background: linear-gradient(135deg, var(--sand), var(--clay), var(--moss));
+            margin-bottom: var(--space-md);
+            position: relative;
+        }
+
+        .card-image::after {
+            content: '';
+            position: absolute;
+            top: 40%;
+            left: 20%;
+            width: 60%;
+            height: 1px;
+            background: var(--kintsuki-gold);
+            transform: rotate(-5deg);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--sumi);
+            margin-bottom: var(--space-xs);
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: var(--stone);
+            margin-bottom: var(--space-md);
+        }
+
+        .card-meta {
+            font-family: var(--font-accent);
+            font-size: 0.8rem;
+            color: var(--clay);
+            font-style: italic;
+        }
+
+        /* Data Table - Simple structure */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 0.8rem;
+            color: var(--stone);
+            text-align: left;
+            padding: var(--space-sm);
+            border-bottom: 1px solid var(--sand);
+            letter-spacing: 0.1em;
+        }
+
+        td {
+            padding: var(--space-sm);
+            border-bottom: 1px solid var(--sand);
+            font-size: 0.95rem;
+            color: var(--sumi);
+        }
+
+        tbody tr:hover {
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .status-active {
+            display: inline-block;
+            padding: 2px 12px;
+            background: var(--moss);
+            color: var(--rice-paper);
+            font-size: 0.8rem;
+        }
+
+        .status-pending {
+            display: inline-block;
+            padding: 2px 12px;
+            background: var(--clay);
+            color: var(--sumi);
+            font-size: 0.8rem;
+        }
+
+        /* Badges - Minimal tags */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .badge {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            padding: 4px var(--space-sm);
+        }
+
+        .badge-sumi { background: var(--sumi); color: var(--rice-paper); }
+        .badge-moss { background: var(--moss); color: var(--rice-paper); }
+        .badge-clay { background: var(--clay); color: var(--sumi); }
+        .badge-gold { background: var(--kintsuki-gold); color: var(--sumi); }
+        .badge-indigo { background: var(--indigo); color: var(--rice-paper); }
+        .badge-outline { background: transparent; border: 1px solid var(--stone); color: var(--stone); }
+
+        /* Design Principles - Philosophy cards */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .principle-card {
+            padding: var(--space-lg);
+            text-align: center;
+            border: 1px solid var(--sand);
+            transition: all 0.3s ease;
+        }
+
+        .principle-card:hover {
+            border-color: var(--kintsuki-gold);
+        }
+
+        .principle-icon {
+            font-size: 2rem;
+            margin-bottom: var(--space-md);
+            opacity: 0.6;
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--sumi);
+            margin-bottom: var(--space-xs);
+            letter-spacing: 0.1em;
+        }
+
+        .principle-text {
+            font-family: var(--font-accent);
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--stone);
+        }
+
+        /* Animations - Gentle movements */
+        .animation-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .animation-demo {
+            padding: var(--space-lg);
+            background: white;
+            text-align: center;
+        }
+
+        .animation-element {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto var(--space-md);
+            background: var(--sand);
+            position: relative;
+        }
+
+        .animation-element::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--kintsuki-gold);
+        }
+
+        .breathe-demo .animation-element {
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        .drift-demo .animation-element {
+            animation: drift 6s ease-in-out infinite;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        .fade-demo .animation-element {
+            animation: gentleFade 3s ease-in-out infinite;
+        }
+
+        @keyframes gentleFade {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .settle-demo .animation-element {
+            animation: settle 4s ease-out infinite;
+        }
+
+        @keyframes settle {
+            0% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
+        }
+
+        .animation-label {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--stone);
+            letter-spacing: 0.05em;
+        }
+
+        /* Special Component - Kintsugi Card */
+        .kintsugi-card {
+            background: white;
+            padding: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Golden repair lines */
+        .kintsugi-card::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 10%;
+            width: 30%;
+            height: 1px;
+            background: var(--kintsuki-gold);
+            transform: rotate(15deg);
+        }
+
+        .kintsugi-card::after {
+            content: '';
+            position: absolute;
+            bottom: 20%;
+            right: 15%;
+            width: 25%;
+            height: 1px;
+            background: var(--kintsuki-gold);
+            transform: rotate(-10deg);
+        }
+
+        .kintsugi-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .kintsugi-symbol {
+            font-size: 3rem;
+            color: var(--stone);
+            opacity: 0.3;
+            margin-bottom: var(--space-md);
+        }
+
+        .kintsugi-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--sumi);
+            letter-spacing: 0.2em;
+        }
+
+        .kintsugi-subtitle {
+            font-family: var(--font-accent);
+            font-style: italic;
+            color: var(--stone);
+            margin-top: var(--space-xs);
+        }
+
+        .kintsugi-content {
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .kintsugi-verse {
+            font-family: var(--font-accent);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--charcoal);
+            line-height: 2.2;
+            margin-bottom: var(--space-lg);
+            padding: var(--space-lg);
+            border-left: 2px solid var(--kintsuki-gold);
+            border-right: 2px solid var(--kintsuki-gold);
+        }
+
+        .kintsugi-values {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+        }
+
+        .kintsugi-value {
+            text-align: center;
+        }
+
+        .kintsugi-value-kanji {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--stone);
+        }
+
+        .kintsugi-value-meaning {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--clay);
+            letter-spacing: 0.1em;
+        }
+
+        /* Alerts - Gentle notifications */
+        .alert {
+            padding: var(--space-md) var(--space-lg);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            border-left: 2px solid;
+        }
+
+        .alert-icon {
+            font-size: 1rem;
+            opacity: 0.6;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 400;
+            margin-bottom: 2px;
+        }
+
+        .alert-text {
+            font-family: var(--font-accent);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        .alert-success {
+            background: rgba(92, 107, 77, 0.08);
+            border-color: var(--moss);
+            color: var(--moss);
+        }
+
+        .alert-info {
+            background: rgba(38, 70, 83, 0.08);
+            border-color: var(--indigo);
+            color: var(--indigo);
+        }
+
+        .alert-warning {
+            background: rgba(201, 162, 39, 0.08);
+            border-color: var(--kintsuki-gold);
+            color: var(--rust);
+        }
+
+        .alert-error {
+            background: rgba(199, 80, 0, 0.08);
+            border-color: var(--persimmon);
+            color: var(--persimmon);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--space-2xl);
+            margin-top: var(--space-3xl);
+            border-top: 1px solid var(--sand);
+        }
+
+        footer p {
+            font-family: var(--font-display);
+            letter-spacing: 0.15em;
+            color: var(--stone);
+        }
+
+        footer p:first-child {
+            font-size: 1rem;
+            margin-bottom: var(--space-xs);
+        }
+
+        footer p:last-child {
+            font-family: var(--font-accent);
+            font-style: italic;
+            color: var(--clay);
+            letter-spacing: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--space-lg);
+            }
+
+            header {
+                padding: var(--space-2xl) var(--space-md);
+            }
+
+            .kintsugi-values {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">return to gallery</a>
+
+        <header>
+            <div class="kanji">侘寂</div>
+            <h1>Kintsugi</h1>
+            <p>A design system that finds beauty in imperfection, simplicity in complexity, and meaning in the spaces between</p>
+        </header>
+
+        <!-- Color Palette -->
+        <section id="colors">
+            <h2>color palette</h2>
+            <div class="color-grid">
+                <div class="color-swatch swatch-sumi">
+                    <span class="color-name">Sumi</span>
+                    <span class="color-value">#1C1C1C</span>
+                </div>
+                <div class="color-swatch swatch-charcoal">
+                    <span class="color-name">Charcoal</span>
+                    <span class="color-value">#333333</span>
+                </div>
+                <div class="color-swatch swatch-stone">
+                    <span class="color-name">Stone</span>
+                    <span class="color-value">#7D7D7D</span>
+                </div>
+                <div class="color-swatch swatch-clay">
+                    <span class="color-name">Clay</span>
+                    <span class="color-value">#B4A284</span>
+                </div>
+                <div class="color-swatch swatch-sand">
+                    <span class="color-name">Sand</span>
+                    <span class="color-value">#D4C4A8</span>
+                </div>
+                <div class="color-swatch swatch-rice">
+                    <span class="color-name">Rice Paper</span>
+                    <span class="color-value">#F5F2E9</span>
+                </div>
+                <div class="color-swatch swatch-gold">
+                    <span class="color-name">Kintsugi</span>
+                    <span class="color-value">#C9A227</span>
+                </div>
+                <div class="color-swatch swatch-rust">
+                    <span class="color-name">Rust</span>
+                    <span class="color-value">#8B4513</span>
+                </div>
+                <div class="color-swatch swatch-moss">
+                    <span class="color-name">Moss</span>
+                    <span class="color-value">#5C6B4D</span>
+                </div>
+                <div class="color-swatch swatch-indigo">
+                    <span class="color-name">Indigo</span>
+                    <span class="color-value">#264653</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section id="typography">
+            <h2>typography</h2>
+            <div class="type-specimen">
+                <h3>Noto Serif JP</h3>
+                <p class="font-name">Display — Graceful, balanced, timeless</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">Display</span>
+                        <span class="display-text">Imperfect Beauty</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">Heading</span>
+                        <span class="heading-text">Finding Stillness</span>
+                    </div>
+                </div>
+            </div>
+            <div class="type-specimen">
+                <h3 style="font-family: var(--font-body); font-weight: 300;">Zen Kaku Gothic New</h3>
+                <p class="font-name">Body — Light, airy, contemplative</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">Body</span>
+                        <span class="body-text">In the cracks of broken things, we discover wholeness.</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">Small</span>
+                        <span class="small-text">Embrace the passage of time with grace.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacing Scale -->
+        <section id="spacing">
+            <h2>spacing (間 ma)</h2>
+            <p style="margin-bottom: var(--space-lg); color: var(--stone); font-style: italic;">The art of meaningful negative space.</p>
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-block" style="height: 32px;"></div>
+                    <span class="spacing-label">xs</span>
+                    <span class="spacing-value">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-block" style="height: 48px;"></div>
+                    <span class="spacing-label">sm</span>
+                    <span class="spacing-value">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-block" style="height: 64px;"></div>
+                    <span class="spacing-label">md</span>
+                    <span class="spacing-value">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-block" style="height: 88px;"></div>
+                    <span class="spacing-label">lg</span>
+                    <span class="spacing-value">40px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-block" style="height: 112px;"></div>
+                    <span class="spacing-label">xl</span>
+                    <span class="spacing-value">64px</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Buttons -->
+        <section id="buttons">
+            <h2>buttons</h2>
+            <div class="button-grid">
+                <button class="btn btn-primary">continue</button>
+                <button class="btn btn-secondary">explore</button>
+                <button class="btn btn-gold">restore</button>
+                <button class="btn btn-subtle">reflect</button>
+            </div>
+        </section>
+
+        <!-- Forms -->
+        <section id="forms">
+            <h2>forms</h2>
+            <form onsubmit="return false;" style="max-width: 400px;">
+                <div class="form-group">
+                    <label class="form-label">your name</label>
+                    <input type="text" class="form-input" placeholder="enter quietly">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">season</label>
+                    <select class="form-input form-select">
+                        <option>choose a season</option>
+                        <option>春 Spring</option>
+                        <option>夏 Summer</option>
+                        <option>秋 Autumn</option>
+                        <option>冬 Winter</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">your thoughts</label>
+                    <textarea class="form-input" placeholder="what moves you..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">submit</button>
+            </form>
+        </section>
+
+        <!-- Cards -->
+        <section id="cards">
+            <h2>cards</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-image"></div>
+                    <h3 class="card-title">The Broken Bowl</h3>
+                    <p class="card-text">Mended with gold, it becomes more beautiful than before its breaking.</p>
+                    <div class="card-meta">ceramic · restored</div>
+                </div>
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--moss), var(--indigo));"></div>
+                    <h3 class="card-title">Moss Garden</h3>
+                    <p class="card-text">Time moves slowly here, measured in the growth of soft green velvet.</p>
+                    <div class="card-meta">garden · kyoto</div>
+                </div>
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--rust), var(--clay));"></div>
+                    <h3 class="card-title">Weathered Wood</h3>
+                    <p class="card-text">Each crack and grain tells the story of seasons passed.</p>
+                    <div class="card-meta">material · aged</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Table -->
+        <section id="table">
+            <h2>data table</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>object</th>
+                            <th>material</th>
+                            <th>age</th>
+                            <th>status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tea Bowl</td>
+                            <td>Raku Ceramic</td>
+                            <td>400 years</td>
+                            <td><span class="status-active">Restored</span></td>
+                        </tr>
+                        <tr>
+                            <td>Lacquer Box</td>
+                            <td>Urushi</td>
+                            <td>150 years</td>
+                            <td><span class="status-active">Preserved</span></td>
+                        </tr>
+                        <tr>
+                            <td>Paper Screen</td>
+                            <td>Washi</td>
+                            <td>80 years</td>
+                            <td><span class="status-pending">Aging</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Badges -->
+        <section id="badges">
+            <h2>badges</h2>
+            <div class="badge-grid">
+                <span class="badge badge-sumi">handmade</span>
+                <span class="badge badge-moss">natural</span>
+                <span class="badge badge-clay">aged</span>
+                <span class="badge badge-gold">restored</span>
+                <span class="badge badge-indigo">traditional</span>
+                <span class="badge badge-outline">simple</span>
+            </div>
+        </section>
+
+        <!-- Design Principles -->
+        <section id="principles">
+            <h2>principles</h2>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-icon">🍂</div>
+                    <h3 class="principle-title">Impermanence</h3>
+                    <p class="principle-text">Nothing lasts, nothing is finished, nothing is perfect.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">🪨</div>
+                    <h3 class="principle-title">Simplicity</h3>
+                    <p class="principle-text">Remove what is unnecessary until only essence remains.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">🌿</div>
+                    <h3 class="principle-title">Naturalness</h3>
+                    <p class="principle-text">Follow the grain of wood, the flow of water, the way of things.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">✨</div>
+                    <h3 class="principle-title">Subtle Grace</h3>
+                    <p class="principle-text">Beauty that whispers rather than shouts.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animations -->
+        <section id="animations">
+            <h2>animations</h2>
+            <div class="animation-showcase">
+                <div class="animation-demo breathe-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">breathe</span>
+                </div>
+                <div class="animation-demo drift-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">drift</span>
+                </div>
+                <div class="animation-demo fade-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">fade</span>
+                </div>
+                <div class="animation-demo settle-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">settle</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Component: Kintsugi Card -->
+        <section id="special">
+            <h2>special component</h2>
+            <p style="margin-bottom: var(--space-lg); color: var(--stone); font-style: italic;">Kintsugi Card — Celebrating beauty born from repair.</p>
+            <div class="kintsugi-card">
+                <div class="kintsugi-header">
+                    <div class="kintsugi-symbol">金継ぎ</div>
+                    <h3 class="kintsugi-title">The Art of Repair</h3>
+                    <p class="kintsugi-subtitle">Golden Joinery</p>
+                </div>
+                <div class="kintsugi-content">
+                    <div class="kintsugi-verse">
+                        "The wound is where the light enters you."<br>
+                        — Rumi
+                    </div>
+                    <div class="kintsugi-values">
+                        <div class="kintsugi-value">
+                            <div class="kintsugi-value-kanji">侘</div>
+                            <div class="kintsugi-value-meaning">wabi</div>
+                        </div>
+                        <div class="kintsugi-value">
+                            <div class="kintsugi-value-kanji">寂</div>
+                            <div class="kintsugi-value-meaning">sabi</div>
+                        </div>
+                        <div class="kintsugi-value">
+                            <div class="kintsugi-value-kanji">間</div>
+                            <div class="kintsugi-value-meaning">ma</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alerts -->
+        <section id="alerts">
+            <h2>alerts</h2>
+            <div class="alert alert-success">
+                <span class="alert-icon">✓</span>
+                <div class="alert-content">
+                    <div class="alert-title">Restoration complete</div>
+                    <p class="alert-text">The piece has been mended with care.</p>
+                </div>
+            </div>
+            <div class="alert alert-info">
+                <span class="alert-icon">○</span>
+                <div class="alert-content">
+                    <div class="alert-title">In progress</div>
+                    <p class="alert-text">The lacquer needs time to cure.</p>
+                </div>
+            </div>
+            <div class="alert alert-warning">
+                <span class="alert-icon">△</span>
+                <div class="alert-content">
+                    <div class="alert-title">Handle with care</div>
+                    <p class="alert-text">This piece requires gentle attention.</p>
+                </div>
+            </div>
+            <div class="alert alert-error">
+                <span class="alert-icon">×</span>
+                <div class="alert-content">
+                    <div class="alert-title">Fragment missing</div>
+                    <p class="alert-text">Some pieces cannot be recovered.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Kintsugi Design System</p>
+            <p>finding beauty in the broken places</p>
+        </footer>
+    </div>
+</body>
+</html>

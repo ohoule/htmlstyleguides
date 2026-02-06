@@ -3,229 +3,1969 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keystone Design System - Real Estate</title>
+    <title>Estately Design System - Luxury Real Estate</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Nunito+Sans:wght@300;400;500;600;700&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-primary: #1F4E46;
-            --color-primary-light: #2D6A5F;
-            --color-primary-50: #F0FDF9;
-            --color-gold: #B8860B;
-            --color-gold-light: #DAA520;
-            --color-gray-50: #FAFAFA;
-            --color-gray-100: #F5F5F5;
-            --color-gray-200: #E5E5E5;
-            --color-gray-300: #D4D4D4;
-            --color-gray-400: #A3A3A3;
-            --color-gray-500: #737373;
-            --color-gray-600: #525252;
-            --color-gray-700: #404040;
-            --color-gray-800: #262626;
-            --color-gray-900: #171717;
-            --color-success: #059669;
-            --color-success-light: #D1FAE5;
-            --color-warning: #D97706;
-            --color-warning-light: #FEF3C7;
-            --color-error: #DC2626;
-            --color-error-light: #FEE2E2;
-            --font-display: 'Playfair Display', serif;
-            --font-sans: 'Source Sans 3', system-ui, sans-serif;
-            --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem;
-            --text-xl: 1.25rem; --text-2xl: 1.5rem; --text-3xl: 2rem; --text-4xl: 2.75rem;
-            --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
-            --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-12: 3rem; --space-16: 4rem;
-            --shadow: 0 1px 3px rgb(0 0 0 / 0.1);
-            --shadow-md: 0 4px 6px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px rgb(0 0 0 / 0.1);
-            --radius: 0.375rem; --radius-lg: 0.5rem; --radius-xl: 0.75rem;
-            --transition: 200ms ease;
+            /* Warm Stone & Sandstone Palette */
+            --stone-50: #FDFCFB;
+            --stone-100: #F7F4F0;
+            --stone-200: #EDE8E1;
+            --stone-300: #DDD5CA;
+            --stone-400: #C4B8A8;
+            --stone-500: #A89B8A;
+            --stone-600: #8B7D6B;
+            --stone-700: #6E614F;
+            --stone-800: #514636;
+            --stone-900: #362E23;
+
+            /* Rich Burgundy */
+            --burgundy-50: #FDF5F5;
+            --burgundy-100: #F9E6E6;
+            --burgundy-200: #F0C5C5;
+            --burgundy-300: #D9898A;
+            --burgundy-400: #B85456;
+            --burgundy-500: #8B2D30;
+            --burgundy-600: #722427;
+            --burgundy-700: #5C1D1F;
+            --burgundy-800: #481719;
+            --burgundy-900: #361113;
+
+            /* Gold Accents */
+            --gold-50: #FFFDF5;
+            --gold-100: #FEF9E7;
+            --gold-200: #FCF0C3;
+            --gold-300: #F6DE84;
+            --gold-400: #E9C556;
+            --gold-500: #D4A847;
+            --gold-600: #B8892F;
+            --gold-700: #946A24;
+            --gold-800: #755320;
+            --gold-900: #5C4119;
+
+            /* Status Colors */
+            --success: #2D6A4F;
+            --success-light: #D8F3DC;
+            --warning: #CC8A00;
+            --warning-light: #FFF4CC;
+            --error: #9B2C2C;
+            --error-light: #FED7D7;
+            --info: #2C5282;
+            --info-light: #BEE3F8;
+
+            /* Typography */
+            --font-display: 'Cormorant', Georgia, serif;
+            --font-body: 'Nunito Sans', -apple-system, sans-serif;
+            --font-mono: 'Inconsolata', Consolas, monospace;
+
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-20: 5rem;
+            --space-24: 6rem;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(54, 46, 35, 0.05);
+            --shadow: 0 2px 8px rgba(54, 46, 35, 0.08);
+            --shadow-md: 0 4px 16px rgba(54, 46, 35, 0.1);
+            --shadow-lg: 0 8px 32px rgba(54, 46, 35, 0.12);
+            --shadow-xl: 0 16px 48px rgba(54, 46, 35, 0.15);
+            --shadow-gold: 0 4px 24px rgba(212, 168, 71, 0.25);
+
+            /* Borders */
+            --radius-sm: 0.25rem;
+            --radius: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+
+            /* Transitions */
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: 150ms var(--ease-out);
+            --transition: 300ms var(--ease-out);
+            --transition-slow: 500ms var(--ease-out);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.6; color: var(--color-gray-900); background: var(--color-gray-50); }
-        header { background: var(--color-primary); color: white; padding: var(--space-4) var(--space-6); }
-        .header-content { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 600; letter-spacing: 0.02em; }
-        nav { display: flex; gap: var(--space-1); }
-        nav a { padding: var(--space-2) var(--space-3); font-size: var(--text-sm); color: rgba(255,255,255,0.8); text-decoration: none; border-radius: var(--radius); transition: all var(--transition); }
-        nav a:hover { color: white; background: rgba(255,255,255,0.1); }
-        main { max-width: 1200px; margin: 0 auto; padding: var(--space-12) var(--space-6); }
-        .hero { text-align: center; margin-bottom: var(--space-16); }
-        .hero h1 { font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 600; margin-bottom: var(--space-4); }
-        .hero p { font-size: var(--text-lg); color: var(--color-gray-600); max-width: 600px; margin: 0 auto; }
-        section { background: white; border: 1px solid var(--color-gray-200); border-radius: var(--radius-xl); padding: var(--space-8); margin-bottom: var(--space-8); }
-        section h2 { font-size: var(--text-xl); font-weight: 600; margin-bottom: var(--space-2); display: flex; align-items: center; gap: var(--space-3); }
-        .section-number { font-size: var(--text-sm); font-weight: 600; color: var(--color-primary); background: var(--color-primary-50); padding: var(--space-1) var(--space-2); border-radius: var(--radius); }
-        section > p { color: var(--color-gray-600); margin-bottom: var(--space-6); }
-        h3 { font-size: var(--text-base); font-weight: 600; color: var(--color-gray-700); margin: var(--space-6) 0 var(--space-3); }
-        h3:first-of-type { margin-top: 0; }
-        .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: var(--space-4); }
-        .color-swatch { text-align: center; }
-        .color-preview { height: 64px; border-radius: var(--radius-lg); margin-bottom: var(--space-2); border: 1px solid var(--color-gray-200); }
-        .color-name { font-size: var(--text-sm); font-weight: 500; color: var(--color-gray-700); }
-        .color-value { font-size: var(--text-xs); color: var(--color-gray-500); font-family: monospace; }
-        .type-scale { display: flex; flex-direction: column; gap: var(--space-4); }
-        .type-item { display: flex; align-items: baseline; gap: var(--space-6); padding-bottom: var(--space-4); border-bottom: 1px solid var(--color-gray-100); }
-        .type-label { min-width: 80px; font-size: var(--text-sm); color: var(--color-gray-500); }
-        .type-display { font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 600; }
-        .type-h1 { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 600; }
-        .type-body { font-size: var(--text-base); }
-        .button-group { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-6); }
-        .btn { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 600; border-radius: var(--radius); border: none; cursor: pointer; transition: all var(--transition); padding: var(--space-2) var(--space-5); font-size: var(--text-sm); }
-        .btn-primary { background: var(--color-primary); color: white; }
-        .btn-primary:hover { background: var(--color-primary-light); }
-        .btn-gold { background: var(--color-gold); color: white; }
-        .btn-gold:hover { background: var(--color-gold-light); }
-        .btn-secondary { background: white; color: var(--color-gray-700); border: 1px solid var(--color-gray-300); }
-        .btn-secondary:hover { background: var(--color-gray-50); }
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-6); }
-        .form-group { display: flex; flex-direction: column; gap: var(--space-2); }
-        label { font-size: var(--text-sm); font-weight: 500; color: var(--color-gray-700); }
-        .input { padding: var(--space-2) var(--space-3); font-size: var(--text-base); border: 1px solid var(--color-gray-300); border-radius: var(--radius); background: white; transition: all var(--transition); }
-        .input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-50); }
-        textarea.input { min-height: 100px; resize: vertical; }
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-6); }
-        .property-card { background: white; border: 1px solid var(--color-gray-200); border-radius: var(--radius-xl); overflow: hidden; transition: all var(--transition); }
-        .property-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
-        .property-image { height: 180px; background: linear-gradient(135deg, var(--color-primary-50), var(--color-gray-100)); display: flex; align-items: center; justify-content: center; color: var(--color-gray-400); font-size: var(--text-sm); }
-        .property-content { padding: var(--space-5); }
-        .property-price { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 600; color: var(--color-primary); margin-bottom: var(--space-1); }
-        .property-address { font-size: var(--text-sm); color: var(--color-gray-600); margin-bottom: var(--space-3); }
-        .property-features { display: flex; gap: var(--space-4); font-size: var(--text-sm); color: var(--color-gray-500); }
-        .stat-card { background: var(--color-primary); color: white; border-radius: var(--radius-xl); padding: var(--space-5); }
-        .stat-label { font-size: var(--text-sm); color: rgba(255,255,255,0.8); margin-bottom: var(--space-1); }
-        .stat-value { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 600; }
-        .table-container { overflow-x: auto; border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); }
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: var(--space-3) var(--space-4); font-size: var(--text-sm); font-weight: 600; color: var(--color-gray-600); background: var(--color-gray-50); border-bottom: 1px solid var(--color-gray-200); }
-        td { padding: var(--space-3) var(--space-4); font-size: var(--text-sm); color: var(--color-gray-700); border-bottom: 1px solid var(--color-gray-100); }
-        tr:last-child td { border-bottom: none; }
-        tr:hover td { background: var(--color-gray-50); }
-        .badge-group { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-        .badge { display: inline-flex; padding: var(--space-1) var(--space-2); font-size: var(--text-xs); font-weight: 500; border-radius: var(--radius); }
-        .badge-success { background: var(--color-success-light); color: var(--color-success); }
-        .badge-warning { background: var(--color-warning-light); color: var(--color-warning); }
-        .badge-error { background: var(--color-error-light); color: var(--color-error); }
-        .badge-primary { background: var(--color-primary-50); color: var(--color-primary); }
-        .badge-gold { background: #FEF3C7; color: var(--color-gold); }
-        .principles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-6); }
-        .principle { padding: var(--space-5); background: var(--color-gray-50); border-radius: var(--radius-lg); }
-        .principle-number { font-size: var(--text-sm); font-weight: 600; color: var(--color-primary); margin-bottom: var(--space-2); }
-        .principle-title { font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-2); }
-        .principle-desc { font-size: var(--text-sm); color: var(--color-gray-600); }
-        .alert { display: flex; gap: var(--space-3); padding: var(--space-4); border-radius: var(--radius-lg); margin-bottom: var(--space-3); }
-        .alert-content { flex: 1; }
-        .alert-title { font-weight: 600; margin-bottom: 2px; font-size: var(--text-sm); }
-        .alert-description { font-size: var(--text-sm); opacity: 0.9; }
-        .alert-success { background: var(--color-success-light); color: #065F46; }
-        .alert-warning { background: var(--color-warning-light); color: #92400E; }
-        .alert-error { background: var(--color-error-light); color: #991B1B; }
-        footer { background: var(--color-primary); color: white; padding: var(--space-8) var(--space-6); margin-top: var(--space-16); text-align: center; }
-        .footer-text { font-size: var(--text-sm); color: rgba(255,255,255,0.8); }
-        @media (max-width: 768px) { nav { display: none; } .hero h1 { font-size: var(--text-3xl); } section { padding: var(--space-5); } }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--stone-800);
+            background: var(--stone-50);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Decorative Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(ellipse at 20% 30%, rgba(212, 168, 71, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(139, 45, 48, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(135deg, var(--stone-900) 0%, var(--stone-800) 100%);
+            border-bottom: 1px solid rgba(212, 168, 71, 0.2);
+            padding: var(--space-4) var(--space-8);
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--gold-400);
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .logo::before {
+            content: '';
+            width: 8px;
+            height: 32px;
+            background: linear-gradient(180deg, var(--gold-400) 0%, var(--burgundy-500) 100%);
+            border-radius: 2px;
+        }
+
+        .back-link {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--stone-400);
+            text-decoration: none;
+            padding: var(--space-2) var(--space-4);
+            border: 1px solid var(--stone-600);
+            border-radius: var(--radius);
+            transition: var(--transition-fast);
+        }
+
+        .back-link:hover {
+            color: var(--gold-400);
+            border-color: var(--gold-500);
+            background: rgba(212, 168, 71, 0.1);
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            gap: var(--space-1);
+            background: var(--stone-800);
+            border-bottom: 1px solid var(--stone-700);
+            padding: 0 var(--space-8);
+            overflow-x: auto;
+        }
+
+        nav a {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--stone-400);
+            text-decoration: none;
+            padding: var(--space-4) var(--space-4);
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition-fast);
+        }
+
+        nav a:hover {
+            color: var(--stone-200);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        nav a.active {
+            color: var(--gold-400);
+            border-bottom-color: var(--gold-500);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-12) var(--space-8);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: var(--space-16) var(--space-8);
+            margin-bottom: var(--space-16);
+            background: linear-gradient(180deg, var(--stone-100) 0%, var(--stone-50) 100%);
+            border-radius: var(--radius-2xl);
+            border: 1px solid var(--stone-200);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--burgundy-500) 0%, var(--gold-500) 50%, var(--burgundy-500) 100%);
+        }
+
+        .hero-label {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold-600);
+            margin-bottom: var(--space-4);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .hero-label::before,
+        .hero-label::after {
+            content: '';
+            width: 32px;
+            height: 1px;
+            background: var(--gold-400);
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--stone-900);
+            margin-bottom: var(--space-6);
+            letter-spacing: -0.01em;
+        }
+
+        .hero h1 span {
+            color: var(--burgundy-500);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: var(--stone-600);
+            max-width: 640px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            border: 1px solid var(--stone-200);
+            border-radius: var(--radius-xl);
+            padding: var(--space-10);
+            margin-bottom: var(--space-8);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: var(--space-10);
+            right: var(--space-10);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-300), transparent);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-5);
+            margin-bottom: var(--space-8);
+            padding-bottom: var(--space-6);
+            border-bottom: 1px solid var(--stone-100);
+        }
+
+        .section-number {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--burgundy-500);
+            background: var(--burgundy-50);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--burgundy-100);
+            min-width: 48px;
+            text-align: center;
+        }
+
+        .section-info h2 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--stone-900);
+            margin-bottom: var(--space-2);
+        }
+
+        .section-info p {
+            font-size: 0.9375rem;
+            color: var(--stone-500);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--stone-800);
+            margin-bottom: var(--space-4);
+            margin-top: var(--space-8);
+        }
+
+        h3:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Color Palette */
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .color-group {
+            margin-bottom: var(--space-8);
+        }
+
+        .color-group-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--stone-500);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--stone-100);
+        }
+
+        .color-swatch {
+            background: white;
+            border: 1px solid var(--stone-200);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .color-swatch:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .color-preview {
+            height: 80px;
+            position: relative;
+        }
+
+        .color-info {
+            padding: var(--space-3) var(--space-4);
+        }
+
+        .color-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--stone-800);
+            margin-bottom: var(--space-1);
+        }
+
+        .color-value {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--stone-500);
+        }
+
+        /* Typography Scale */
+        .type-specimen {
+            background: var(--stone-50);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            margin-bottom: var(--space-6);
+        }
+
+        .type-row {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: var(--space-6);
+            align-items: baseline;
+            padding: var(--space-5) 0;
+            border-bottom: 1px solid var(--stone-200);
+        }
+
+        .type-row:last-child {
+            border-bottom: none;
+        }
+
+        .type-meta {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--stone-500);
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: var(--stone-900);
+            line-height: 1.1;
+        }
+
+        .type-h1 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--stone-900);
+            line-height: 1.2;
+        }
+
+        .type-h2 {
+            font-family: var(--font-display);
+            font-size: 1.875rem;
+            font-weight: 600;
+            color: var(--stone-800);
+        }
+
+        .type-h3 {
+            font-family: var(--font-display);
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: var(--stone-800);
+        }
+
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--stone-700);
+        }
+
+        .type-small {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: var(--stone-600);
+        }
+
+        .font-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin-top: var(--space-6);
+        }
+
+        .font-card {
+            background: white;
+            border: 1px solid var(--stone-200);
+            border-radius: var(--radius);
+            padding: var(--space-4);
+        }
+
+        .font-card-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--stone-400);
+            margin-bottom: var(--space-2);
+        }
+
+        .font-card-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--stone-800);
+        }
+
+        .font-card-name.display {
+            font-family: var(--font-display);
+        }
+
+        .font-card-name.body {
+            font-family: var(--font-body);
+        }
+
+        .font-card-name.mono {
+            font-family: var(--font-mono);
+        }
+
+        /* Spacing Scale */
+        .spacing-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--stone-500);
+            min-width: 80px;
+        }
+
+        .spacing-bar {
+            height: 24px;
+            background: linear-gradient(90deg, var(--gold-300), var(--gold-500));
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .spacing-item:hover .spacing-bar {
+            background: linear-gradient(90deg, var(--burgundy-300), var(--burgundy-500));
+        }
+
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--stone-400);
+            min-width: 60px;
+        }
+
+        /* Buttons */
+        .button-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
+        }
+
+        .btn {
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            padding: var(--space-3) var(--space-6);
+            border-radius: var(--radius);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--burgundy-500) 0%, var(--burgundy-600) 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(139, 45, 48, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--burgundy-600) 0%, var(--burgundy-700) 100%);
+            box-shadow: 0 4px 16px rgba(139, 45, 48, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-600) 100%);
+            color: var(--stone-900);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(135deg, var(--gold-400) 0%, var(--gold-500) 100%);
+            box-shadow: 0 6px 24px rgba(212, 168, 71, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--stone-700);
+            border: 1px solid var(--stone-300);
+        }
+
+        .btn-secondary:hover {
+            background: var(--stone-50);
+            border-color: var(--stone-400);
+            color: var(--stone-800);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--burgundy-500);
+            padding: var(--space-3) var(--space-4);
+        }
+
+        .btn-ghost:hover {
+            background: var(--burgundy-50);
+        }
+
+        .btn-lg {
+            padding: var(--space-4) var(--space-8);
+            font-size: 1rem;
+        }
+
+        .btn-sm {
+            padding: var(--space-2) var(--space-4);
+            font-size: 0.8125rem;
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--stone-700);
+        }
+
+        .label-optional {
+            font-weight: 400;
+            color: var(--stone-400);
+            margin-left: var(--space-1);
+        }
+
+        .input {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            padding: var(--space-3) var(--space-4);
+            border: 1px solid var(--stone-300);
+            border-radius: var(--radius);
+            background: white;
+            color: var(--stone-800);
+            transition: var(--transition-fast);
+        }
+
+        .input:hover {
+            border-color: var(--stone-400);
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: var(--gold-500);
+            box-shadow: 0 0 0 3px rgba(212, 168, 71, 0.15);
+        }
+
+        .input::placeholder {
+            color: var(--stone-400);
+        }
+
+        textarea.input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        select.input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23737373' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: var(--space-10);
+        }
+
+        .form-hint {
+            font-size: 0.8125rem;
+            color: var(--stone-500);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--stone-200);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .card-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--stone-200) 0%, var(--stone-100) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--stone-400);
+            font-size: 0.875rem;
+            position: relative;
+        }
+
+        .card-body {
+            padding: var(--space-5);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--stone-900);
+            margin-bottom: var(--space-2);
+        }
+
+        .card-text {
+            font-size: 0.9375rem;
+            color: var(--stone-600);
+            line-height: 1.6;
+        }
+
+        /* Data Table */
+        .table-container {
+            border: 1px solid var(--stone-200);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--stone-100) 0%, var(--stone-50) 100%);
+        }
+
+        th {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--stone-600);
+            text-align: left;
+            padding: var(--space-4) var(--space-5);
+            border-bottom: 1px solid var(--stone-200);
+        }
+
+        td {
+            font-size: 0.9375rem;
+            color: var(--stone-700);
+            padding: var(--space-4) var(--space-5);
+            border-bottom: 1px solid var(--stone-100);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: var(--stone-50);
+        }
+
+        .table-price {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--stone-900);
+        }
+
+        /* Badges/Tags */
+        .badge-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .badge-active {
+            background: var(--success-light);
+            color: var(--success);
+        }
+
+        .badge-pending {
+            background: var(--warning-light);
+            color: var(--warning);
+        }
+
+        .badge-sold {
+            background: var(--burgundy-100);
+            color: var(--burgundy-600);
+        }
+
+        .badge-featured {
+            background: linear-gradient(135deg, var(--gold-100) 0%, var(--gold-200) 100%);
+            color: var(--gold-700);
+            border: 1px solid var(--gold-300);
+        }
+
+        .badge-new {
+            background: var(--info-light);
+            color: var(--info);
+        }
+
+        .badge-luxury {
+            background: linear-gradient(135deg, var(--stone-800) 0%, var(--stone-900) 100%);
+            color: var(--gold-400);
+        }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .principle-card {
+            background: var(--stone-50);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            border-left: 4px solid var(--gold-500);
+            transition: var(--transition);
+        }
+
+        .principle-card:hover {
+            background: var(--stone-100);
+            border-left-color: var(--burgundy-500);
+        }
+
+        .principle-number {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold-400);
+            line-height: 1;
+            margin-bottom: var(--space-3);
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--stone-900);
+            margin-bottom: var(--space-2);
+        }
+
+        .principle-desc {
+            font-size: 0.9375rem;
+            color: var(--stone-600);
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .animation-demo {
+            background: var(--stone-50);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            text-align: center;
+        }
+
+        .animation-preview {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--burgundy-400), var(--burgundy-600));
+            border-radius: var(--radius);
+            margin: 0 auto var(--space-4);
+        }
+
+        .demo-hover:hover .animation-preview {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .demo-pulse .animation-preview {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        .demo-shimmer .animation-preview {
+            background: linear-gradient(
+                90deg,
+                var(--gold-400) 0%,
+                var(--gold-200) 50%,
+                var(--gold-400) 100%
+            );
+            background-size: 200% 100%;
+            animation: shimmer 2s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .demo-fade .animation-preview {
+            animation: fadeInUp 1.5s ease-out infinite;
+        }
+
+        @keyframes fadeInUp {
+            0%, 100% { opacity: 0; transform: translateY(16px); }
+            50% { opacity: 1; transform: translateY(0); }
+        }
+
+        .animation-label {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--stone-700);
+        }
+
+        /* Special Component: Property Listing Card */
+        .property-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: var(--space-8);
+        }
+
+        .property-card {
+            background: white;
+            border: 1px solid var(--stone-200);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .property-card:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-6px);
+        }
+
+        .property-card.featured {
+            border: 2px solid var(--gold-400);
+        }
+
+        .property-card.featured::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold-400), var(--gold-500), var(--gold-400));
+        }
+
+        .property-image {
+            height: 220px;
+            background: linear-gradient(135deg, var(--stone-200) 0%, var(--stone-300) 50%, var(--stone-200) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .property-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 24 24' fill='none' stroke='%23a89b8a' stroke-width='1'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E") center center no-repeat;
+        }
+
+        .property-status {
+            position: absolute;
+            top: var(--space-4);
+            left: var(--space-4);
+        }
+
+        .property-favorite {
+            position: absolute;
+            top: var(--space-4);
+            right: var(--space-4);
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .property-favorite:hover {
+            background: var(--burgundy-500);
+            color: white;
+        }
+
+        .property-content {
+            padding: var(--space-6);
+        }
+
+        .property-price {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--stone-900);
+            margin-bottom: var(--space-1);
+        }
+
+        .property-address {
+            font-size: 0.9375rem;
+            color: var(--stone-500);
+            margin-bottom: var(--space-4);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .property-features {
+            display: flex;
+            gap: var(--space-6);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--stone-100);
+        }
+
+        .property-feature {
+            text-align: center;
+        }
+
+        .property-feature-value {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--stone-800);
+        }
+
+        .property-feature-label {
+            font-size: 0.75rem;
+            color: var(--stone-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .property-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-4) var(--space-6);
+            background: var(--stone-50);
+            border-top: 1px solid var(--stone-100);
+        }
+
+        .property-agent {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .agent-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--burgundy-200), var(--burgundy-300));
+            border-radius: 50%;
+        }
+
+        .agent-name {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--stone-700);
+        }
+
+        .agent-title {
+            font-size: 0.6875rem;
+            color: var(--stone-500);
+        }
+
+        /* Alerts */
+        .alert-stack {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .alert {
+            display: flex;
+            gap: var(--space-4);
+            padding: var(--space-4) var(--space-5);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid;
+        }
+
+        .alert-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            margin-bottom: var(--space-1);
+        }
+
+        .alert-text {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        .alert-success {
+            background: var(--success-light);
+            border-color: var(--success);
+            color: #1B4332;
+        }
+
+        .alert-warning {
+            background: var(--warning-light);
+            border-color: var(--warning);
+            color: #7C4A03;
+        }
+
+        .alert-error {
+            background: var(--error-light);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .alert-info {
+            background: var(--info-light);
+            border-color: var(--info);
+            color: #1A365D;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--stone-900) 0%, var(--stone-800) 100%);
+            color: var(--stone-300);
+            padding: var(--space-12) var(--space-8);
+            margin-top: var(--space-16);
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold-400);
+            margin-bottom: var(--space-2);
+        }
+
+        .footer-tagline {
+            font-size: 0.9375rem;
+            color: var(--stone-400);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: var(--space-3) var(--space-4);
+            }
+
+            nav {
+                padding: 0 var(--space-4);
+            }
+
+            main {
+                padding: var(--space-8) var(--space-4);
+            }
+
+            .hero {
+                padding: var(--space-10) var(--space-4);
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            section {
+                padding: var(--space-6);
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: var(--space-3);
+            }
+
+            .property-showcase {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animation */
+        @media (prefers-reduced-motion: no-preference) {
+            section {
+                animation: fadeInUp 0.6s var(--ease-out) backwards;
+            }
+
+            section:nth-child(1) { animation-delay: 0.1s; }
+            section:nth-child(2) { animation-delay: 0.15s; }
+            section:nth-child(3) { animation-delay: 0.2s; }
+            section:nth-child(4) { animation-delay: 0.25s; }
+            section:nth-child(5) { animation-delay: 0.3s; }
+            section:nth-child(6) { animation-delay: 0.35s; }
+            section:nth-child(7) { animation-delay: 0.4s; }
+            section:nth-child(8) { animation-delay: 0.45s; }
+            section:nth-child(9) { animation-delay: 0.5s; }
+            section:nth-child(10) { animation-delay: 0.55s; }
+            section:nth-child(11) { animation-delay: 0.6s; }
+            section:nth-child(12) { animation-delay: 0.65s; }
+        }
     </style>
 </head>
 <body>
     <header>
-        <div class="header-content">
-            <div class="logo">Keystone</div>
-            <nav>
-                <a href="#colors">Colors</a>
-                <a href="#typography">Typography</a>
-                <a href="#buttons">Buttons</a>
-                <a href="#cards">Cards</a>
-                <a href="#table">Table</a>
-                <a href="#alerts">Alerts</a>
-            </nav>
+        <div class="header-inner">
+            <a href="../index.html" class="logo">Estately</a>
+            <a href="../index.html" class="back-link">Back to Gallery</a>
         </div>
     </header>
+
+    <nav>
+        <a href="#colors" class="active">Colors</a>
+        <a href="#typography">Typography</a>
+        <a href="#spacing">Spacing</a>
+        <a href="#buttons">Buttons</a>
+        <a href="#forms">Forms</a>
+        <a href="#cards">Cards</a>
+        <a href="#table">Data Table</a>
+        <a href="#badges">Badges</a>
+        <a href="#principles">Principles</a>
+        <a href="#animations">Animations</a>
+        <a href="#property">Property Card</a>
+        <a href="#alerts">Alerts</a>
+    </nav>
+
     <main>
         <div class="hero">
-            <h1>Keystone Design System</h1>
-            <p>An elegant design system for real estate professionals. Built with sophistication, trust, and premium appeal.</p>
+            <div class="hero-label">Design System</div>
+            <h1>Estately <span>Style Guide</span></h1>
+            <p>A sophisticated design language for luxury real estate. Warm stone tones meet rich burgundy and gold accents to convey prestige, trust, and aspiration.</p>
         </div>
+
+        <!-- 01. Color Palette -->
         <section id="colors">
-            <h2><span class="section-number">01</span> Color Palette</h2>
-            <p>Rich forest green conveys stability and growth, accented with gold for luxury positioning.</p>
-            <div class="color-grid">
-                <div class="color-swatch"><div class="color-preview" style="background: var(--color-primary);"></div><div class="color-name">Forest Green</div><div class="color-value">#1F4E46</div></div>
-                <div class="color-swatch"><div class="color-preview" style="background: var(--color-gold);"></div><div class="color-name">Gold</div><div class="color-value">#B8860B</div></div>
-                <div class="color-swatch"><div class="color-preview" style="background: var(--color-gray-100);"></div><div class="color-name">Warm Gray</div><div class="color-value">#F5F5F5</div></div>
-                <div class="color-swatch"><div class="color-preview" style="background: var(--color-gray-900);"></div><div class="color-name">Charcoal</div><div class="color-value">#171717</div></div>
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <div class="section-info">
+                    <h2>Color Palette</h2>
+                    <p>Warm sandstone foundations with burgundy depth and gold luxury accents.</p>
+                </div>
             </div>
-        </section>
-        <section id="typography">
-            <h2><span class="section-number">02</span> Typography</h2>
-            <p>Playfair Display for elegant headlines, Source Sans for professional body text.</p>
-            <div class="type-scale">
-                <div class="type-item"><span class="type-label">Display</span><span class="type-display">Luxury Living</span></div>
-                <div class="type-item"><span class="type-label">H1</span><span class="type-h1">Featured Properties</span></div>
-                <div class="type-item"><span class="type-label">Body</span><span class="type-body">Discover exceptional properties in the most desirable locations.</span></div>
-            </div>
-        </section>
-        <section id="buttons">
-            <h2><span class="section-number">04</span> Buttons</h2>
-            <div class="button-group">
-                <button class="btn btn-primary">Schedule Viewing</button>
-                <button class="btn btn-gold">Premium Listing</button>
-                <button class="btn btn-secondary">View Details</button>
-            </div>
-        </section>
-        <section id="cards">
-            <h2><span class="section-number">06</span> Property Cards</h2>
-            <p>Elegant presentation for property listings and market data.</p>
-            <div class="card-grid">
-                <div class="property-card">
-                    <div class="property-image">Property Image</div>
-                    <div class="property-content">
-                        <div class="property-price">$1,250,000</div>
-                        <div class="property-address">123 Oak Avenue, Beverly Hills, CA 90210</div>
-                        <div class="property-features"><span>4 Beds</span><span>3 Baths</span><span>2,850 sq ft</span></div>
+
+            <div class="color-group">
+                <div class="color-group-title">Stone / Neutrals</div>
+                <div class="color-palette">
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--stone-100);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Stone 100</div>
+                            <div class="color-value">#F7F4F0</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--stone-300);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Stone 300</div>
+                            <div class="color-value">#DDD5CA</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--stone-500);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Stone 500</div>
+                            <div class="color-value">#A89B8A</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--stone-800);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Stone 800</div>
+                            <div class="color-value">#514636</div>
+                        </div>
                     </div>
                 </div>
-                <div class="stat-card"><div class="stat-label">Average Sale Price</div><div class="stat-value">$892K</div></div>
-                <div class="stat-card"><div class="stat-label">Days on Market</div><div class="stat-value">24</div></div>
+            </div>
+
+            <div class="color-group">
+                <div class="color-group-title">Burgundy</div>
+                <div class="color-palette">
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--burgundy-100);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Burgundy 100</div>
+                            <div class="color-value">#F9E6E6</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--burgundy-400);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Burgundy 400</div>
+                            <div class="color-value">#B85456</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--burgundy-500);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Burgundy 500</div>
+                            <div class="color-value">#8B2D30</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--burgundy-700);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Burgundy 700</div>
+                            <div class="color-value">#5C1D1F</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="color-group">
+                <div class="color-group-title">Gold</div>
+                <div class="color-palette">
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--gold-200);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Gold 200</div>
+                            <div class="color-value">#FCF0C3</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--gold-400);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Gold 400</div>
+                            <div class="color-value">#E9C556</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--gold-500);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Gold 500</div>
+                            <div class="color-value">#D4A847</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background: var(--gold-700);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Gold 700</div>
+                            <div class="color-value">#946A24</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <!-- 02. Typography -->
+        <section id="typography">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <div class="section-info">
+                    <h2>Typography</h2>
+                    <p>Cormorant brings classic elegance to headlines. Nunito Sans ensures excellent readability.</p>
+                </div>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-row">
+                    <div class="type-meta">Display<br>56px / 600</div>
+                    <div class="type-display">Luxury Estates</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">H1<br>40px / 600</div>
+                    <div class="type-h1">Featured Properties</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">H2<br>30px / 600</div>
+                    <div class="type-h2">Market Insights</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">H3<br>22px / 600</div>
+                    <div class="type-h3">Neighborhood Guide</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">Body<br>16px / 400</div>
+                    <div class="type-body">Discover exceptional properties in the world's most desirable locations. Our curated collection represents the finest homes available.</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-meta">Small<br>14px / 400</div>
+                    <div class="type-small">Property details, specifications, and location information.</div>
+                </div>
+            </div>
+
+            <div class="font-info">
+                <div class="font-card">
+                    <div class="font-card-label">Display Font</div>
+                    <div class="font-card-name display">Cormorant</div>
+                </div>
+                <div class="font-card">
+                    <div class="font-card-label">Body Font</div>
+                    <div class="font-card-name body">Nunito Sans</div>
+                </div>
+                <div class="font-card">
+                    <div class="font-card-label">Monospace</div>
+                    <div class="font-card-name mono">Inconsolata</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03. Spacing Scale -->
+        <section id="spacing">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <div class="section-info">
+                    <h2>Spacing Scale</h2>
+                    <p>Consistent spacing creates visual harmony and elegant composition.</p>
+                </div>
+            </div>
+
+            <div class="spacing-scale">
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-1</span>
+                    <div class="spacing-bar" style="width: 4px;"></div>
+                    <span class="spacing-value">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-2</span>
+                    <div class="spacing-bar" style="width: 8px;"></div>
+                    <span class="spacing-value">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-4</span>
+                    <div class="spacing-bar" style="width: 16px;"></div>
+                    <span class="spacing-value">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-6</span>
+                    <div class="spacing-bar" style="width: 24px;"></div>
+                    <span class="spacing-value">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-8</span>
+                    <div class="spacing-bar" style="width: 32px;"></div>
+                    <span class="spacing-value">32px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-12</span>
+                    <div class="spacing-bar" style="width: 48px;"></div>
+                    <span class="spacing-value">48px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-16</span>
+                    <div class="spacing-bar" style="width: 64px;"></div>
+                    <span class="spacing-value">64px</span>
+                </div>
+                <div class="spacing-item">
+                    <span class="spacing-label">--space-24</span>
+                    <div class="spacing-bar" style="width: 96px;"></div>
+                    <span class="spacing-value">96px</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04. Buttons -->
+        <section id="buttons">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <div class="section-info">
+                    <h2>Buttons</h2>
+                    <p>Refined interactions with elegant transitions and clear hierarchy.</p>
+                </div>
+            </div>
+
+            <h3>Primary Actions</h3>
+            <div class="button-showcase">
+                <button class="btn btn-primary btn-lg">Schedule Private Viewing</button>
+                <button class="btn btn-primary">Request Information</button>
+                <button class="btn btn-primary btn-sm">Contact Agent</button>
+            </div>
+
+            <h3>Gold / Featured</h3>
+            <div class="button-showcase">
+                <button class="btn btn-gold btn-lg">Premium Listing</button>
+                <button class="btn btn-gold">View Exclusive</button>
+                <button class="btn btn-gold btn-sm">Featured</button>
+            </div>
+
+            <h3>Secondary & Ghost</h3>
+            <div class="button-showcase">
+                <button class="btn btn-secondary">View Details</button>
+                <button class="btn btn-secondary btn-sm">Save Search</button>
+                <button class="btn btn-ghost">Learn More</button>
+            </div>
+        </section>
+
+        <!-- 05. Forms -->
+        <section id="forms">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <div class="section-info">
+                    <h2>Forms</h2>
+                    <p>Clean, accessible form elements for property searches and inquiries.</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" class="input" placeholder="City, neighborhood, or ZIP">
+                </div>
+                <div class="form-group">
+                    <label for="property-type">Property Type</label>
+                    <select id="property-type" class="input">
+                        <option>Any Type</option>
+                        <option>Single Family</option>
+                        <option>Condominium</option>
+                        <option>Townhouse</option>
+                        <option>Penthouse</option>
+                        <option>Estate</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="price-min">Minimum Price</label>
+                    <input type="text" id="price-min" class="input" placeholder="$500,000">
+                </div>
+                <div class="form-group">
+                    <label for="price-max">Maximum Price</label>
+                    <input type="text" id="price-max" class="input" placeholder="$5,000,000">
+                </div>
+                <div class="form-group">
+                    <label for="bedrooms">Bedrooms</label>
+                    <select id="bedrooms" class="input">
+                        <option>Any</option>
+                        <option>2+</option>
+                        <option>3+</option>
+                        <option>4+</option>
+                        <option>5+</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address <span class="label-optional">(optional)</span></label>
+                    <input type="email" id="email" class="input" placeholder="you@example.com">
+                    <span class="form-hint">For property alerts and updates</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06. Cards -->
+        <section id="cards">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <div class="section-info">
+                    <h2>Cards</h2>
+                    <p>Versatile containers for content organization and visual hierarchy.</p>
+                </div>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-image">Property Image</div>
+                    <div class="card-body">
+                        <div class="card-title">Pacific Heights Estate</div>
+                        <div class="card-text">A stunning architectural masterpiece offering panoramic bay views and unparalleled luxury in one of San Francisco's most prestigious neighborhoods.</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">Property Image</div>
+                    <div class="card-body">
+                        <div class="card-title">Central Park Penthouse</div>
+                        <div class="card-text">Experience the pinnacle of Manhattan living with this breathtaking full-floor penthouse overlooking the iconic Central Park.</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">Property Image</div>
+                    <div class="card-body">
+                        <div class="card-title">Malibu Oceanfront</div>
+                        <div class="card-text">An extraordinary beachfront retreat featuring contemporary design and direct access to pristine white sand beaches.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07. Data Table -->
         <section id="table">
-            <h2><span class="section-number">07</span> Listings Table</h2>
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <div class="section-info">
+                    <h2>Data Table</h2>
+                    <p>Structured presentation for property listings and comparative data.</p>
+                </div>
+            </div>
+
             <div class="table-container">
                 <table>
-                    <thead><tr><th>Address</th><th>Type</th><th>Price</th><th>Status</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th>Address</th>
+                            <th>Type</th>
+                            <th>Beds</th>
+                            <th>Baths</th>
+                            <th>Sq Ft</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr><td>123 Oak Avenue</td><td>Single Family</td><td>$1,250,000</td><td><span class="badge badge-success">Active</span></td></tr>
-                        <tr><td>456 Maple Drive</td><td>Condo</td><td>$725,000</td><td><span class="badge badge-warning">Pending</span></td></tr>
-                        <tr><td>789 Pine Street</td><td>Townhouse</td><td>$895,000</td><td><span class="badge badge-gold">Featured</span></td></tr>
+                        <tr>
+                            <td>2847 Pacific Heights Blvd</td>
+                            <td>Single Family</td>
+                            <td>5</td>
+                            <td>4.5</td>
+                            <td>4,850</td>
+                            <td class="table-price">$8,750,000</td>
+                            <td><span class="badge badge-featured">Featured</span></td>
+                        </tr>
+                        <tr>
+                            <td>1200 Park Avenue #42A</td>
+                            <td>Penthouse</td>
+                            <td>4</td>
+                            <td>3.5</td>
+                            <td>3,200</td>
+                            <td class="table-price">$6,500,000</td>
+                            <td><span class="badge badge-active">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td>8834 Malibu Coast Highway</td>
+                            <td>Estate</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8,500</td>
+                            <td class="table-price">$15,200,000</td>
+                            <td><span class="badge badge-pending">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>455 Beacon Hill Drive</td>
+                            <td>Townhouse</td>
+                            <td>3</td>
+                            <td>2.5</td>
+                            <td>2,400</td>
+                            <td class="table-price">$2,850,000</td>
+                            <td><span class="badge badge-sold">Sold</span></td>
+                        </tr>
+                        <tr>
+                            <td>912 Aspen Mountain Road</td>
+                            <td>Chalet</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>5,800</td>
+                            <td class="table-price">$9,400,000</td>
+                            <td><span class="badge badge-new">New</span></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </section>
+
+        <!-- 08. Badges/Tags -->
         <section id="badges">
-            <h2><span class="section-number">08</span> Status Badges</h2>
-            <div class="badge-group">
-                <span class="badge badge-success">Active</span>
-                <span class="badge badge-warning">Pending</span>
-                <span class="badge badge-error">Sold</span>
-                <span class="badge badge-gold">Featured</span>
-                <span class="badge badge-primary">New</span>
+            <div class="section-header">
+                <span class="section-number">08</span>
+                <div class="section-info">
+                    <h2>Badges & Tags</h2>
+                    <p>Visual indicators for property status, features, and categorization.</p>
+                </div>
+            </div>
+
+            <h3>Status Badges</h3>
+            <div class="badge-showcase">
+                <span class="badge badge-active">Active</span>
+                <span class="badge badge-pending">Pending</span>
+                <span class="badge badge-sold">Sold</span>
+                <span class="badge badge-new">New Listing</span>
+                <span class="badge badge-featured">Featured</span>
+                <span class="badge badge-luxury">Luxury</span>
+            </div>
+
+            <h3>Feature Tags</h3>
+            <div class="badge-showcase" style="margin-top: var(--space-4);">
+                <span class="badge" style="background: var(--stone-100); color: var(--stone-700);">Pool</span>
+                <span class="badge" style="background: var(--stone-100); color: var(--stone-700);">Ocean View</span>
+                <span class="badge" style="background: var(--stone-100); color: var(--stone-700);">Wine Cellar</span>
+                <span class="badge" style="background: var(--stone-100); color: var(--stone-700);">Smart Home</span>
+                <span class="badge" style="background: var(--stone-100); color: var(--stone-700);">Guest House</span>
             </div>
         </section>
+
+        <!-- 09. Design Principles -->
         <section id="principles">
-            <h2><span class="section-number">09</span> Design Principles</h2>
+            <div class="section-header">
+                <span class="section-number">09</span>
+                <div class="section-info">
+                    <h2>Design Principles</h2>
+                    <p>Core values guiding every design decision.</p>
+                </div>
+            </div>
+
             <div class="principles-grid">
-                <div class="principle"><div class="principle-number">01</div><div class="principle-title">Premium Appeal</div><div class="principle-desc">Every element should reflect the quality and value of the properties we represent.</div></div>
-                <div class="principle"><div class="principle-number">02</div><div class="principle-title">Trust & Stability</div><div class="principle-desc">Design choices should inspire confidence in major financial decisions.</div></div>
-                <div class="principle"><div class="principle-number">03</div><div class="principle-title">Visual Hierarchy</div><div class="principle-desc">Property details and pricing should be immediately scannable.</div></div>
-                <div class="principle"><div class="principle-number">04</div><div class="principle-title">Elegant Simplicity</div><div class="principle-desc">Let the properties shine through clean, uncluttered presentation.</div></div>
+                <div class="principle-card">
+                    <div class="principle-number">01</div>
+                    <div class="principle-title">Prestigious Elegance</div>
+                    <div class="principle-desc">Every element reflects the quality and exclusivity of the properties we represent. Sophistication is in the details.</div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">02</div>
+                    <div class="principle-title">Trust & Confidence</div>
+                    <div class="principle-desc">Design choices inspire trust in significant financial decisions. Stability and reliability in every interaction.</div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">03</div>
+                    <div class="principle-title">Aspirational Vision</div>
+                    <div class="principle-desc">We don't just sell properties; we present possibilities. Imagery and content spark dreams of a better life.</div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">04</div>
+                    <div class="principle-title">Curated Simplicity</div>
+                    <div class="principle-desc">Let the properties shine through clean, uncluttered presentation. Remove noise; elevate what matters.</div>
+                </div>
             </div>
         </section>
+
+        <!-- 10. Animation/Micro-interactions -->
+        <section id="animations">
+            <div class="section-header">
+                <span class="section-number">10</span>
+                <div class="section-info">
+                    <h2>Animation & Micro-interactions</h2>
+                    <p>Subtle motion that enhances the experience without overwhelming.</p>
+                </div>
+            </div>
+
+            <div class="animation-grid">
+                <div class="animation-demo demo-hover">
+                    <div class="animation-preview"></div>
+                    <div class="animation-label">Hover Lift</div>
+                </div>
+                <div class="animation-demo demo-pulse">
+                    <div class="animation-preview"></div>
+                    <div class="animation-label">Gentle Pulse</div>
+                </div>
+                <div class="animation-demo demo-shimmer">
+                    <div class="animation-preview"></div>
+                    <div class="animation-label">Gold Shimmer</div>
+                </div>
+                <div class="animation-demo demo-fade">
+                    <div class="animation-preview"></div>
+                    <div class="animation-label">Fade In Up</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Special Component: Property Listing Card -->
+        <section id="property">
+            <div class="section-header">
+                <span class="section-number">11</span>
+                <div class="section-info">
+                    <h2>Property Listing Card</h2>
+                    <p>The signature component showcasing properties with elegance and clarity.</p>
+                </div>
+            </div>
+
+            <div class="property-showcase">
+                <div class="property-card featured">
+                    <div class="property-image">
+                        <span class="property-status">
+                            <span class="badge badge-featured">Featured</span>
+                        </span>
+                        <span class="property-favorite">♡</span>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price">$12,500,000</div>
+                        <div class="property-address">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            742 Oceanview Terrace, Malibu, CA 90265
+                        </div>
+                        <div class="property-features">
+                            <div class="property-feature">
+                                <div class="property-feature-value">5</div>
+                                <div class="property-feature-label">Beds</div>
+                            </div>
+                            <div class="property-feature">
+                                <div class="property-feature-value">6</div>
+                                <div class="property-feature-label">Baths</div>
+                            </div>
+                            <div class="property-feature">
+                                <div class="property-feature-value">7,850</div>
+                                <div class="property-feature-label">Sq Ft</div>
+                            </div>
+                            <div class="property-feature">
+                                <div class="property-feature-value">1.2</div>
+                                <div class="property-feature-label">Acres</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-footer">
+                        <div class="property-agent">
+                            <div class="agent-avatar"></div>
+                            <div>
+                                <div class="agent-name">Victoria Sterling</div>
+                                <div class="agent-title">Luxury Specialist</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-sm">Schedule Tour</button>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="property-image">
+                        <span class="property-status">
+                            <span class="badge badge-active">Active</span>
+                        </span>
+                        <span class="property-favorite">♡</span>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price">$4,250,000</div>
+                        <div class="property-address">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            1847 Beacon Hill Drive, Boston, MA 02108
+                        </div>
+                        <div class="property-features">
+                            <div class="property-feature">
+                                <div class="property-feature-value">4</div>
+                                <div class="property-feature-label">Beds</div>
+                            </div>
+                            <div class="property-feature">
+                                <div class="property-feature-value">3.5</div>
+                                <div class="property-feature-label">Baths</div>
+                            </div>
+                            <div class="property-feature">
+                                <div class="property-feature-value">3,400</div>
+                                <div class="property-feature-label">Sq Ft</div>
+                            </div>
+                            <div class="property-feature">
+                                <div class="property-feature-value">0.3</div>
+                                <div class="property-feature-label">Acres</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-footer">
+                        <div class="property-agent">
+                            <div class="agent-avatar"></div>
+                            <div>
+                                <div class="agent-name">James Hartford</div>
+                                <div class="agent-title">Senior Agent</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-sm">Schedule Tour</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Alert Messages -->
         <section id="alerts">
-            <h2><span class="section-number">12</span> Alerts</h2>
-            <div class="alert alert-success"><div class="alert-content"><div class="alert-title">Offer Accepted</div><div class="alert-description">Congratulations! Your offer on 123 Oak Avenue has been accepted.</div></div></div>
-            <div class="alert alert-warning"><div class="alert-content"><div class="alert-title">Price Reduction</div><div class="alert-description">456 Maple Drive has been reduced by $25,000.</div></div></div>
+            <div class="section-header">
+                <span class="section-number">12</span>
+                <div class="section-info">
+                    <h2>Alert Messages</h2>
+                    <p>Contextual notifications for important updates and feedback.</p>
+                </div>
+            </div>
+
+            <div class="alert-stack">
+                <div class="alert alert-success">
+                    <div class="alert-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Offer Accepted</div>
+                        <div class="alert-text">Congratulations! Your offer on 742 Oceanview Terrace has been accepted. Your agent will be in touch shortly.</div>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <div class="alert-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Price Reduction</div>
+                        <div class="alert-text">1847 Beacon Hill Drive has been reduced by $150,000. This property now falls within your saved search criteria.</div>
+                    </div>
+                </div>
+
+                <div class="alert alert-error">
+                    <div class="alert-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Viewing Cancelled</div>
+                        <div class="alert-text">The scheduled viewing for 455 Marina Boulevard has been cancelled by the seller. Please contact your agent to reschedule.</div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <div class="alert-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">New Listing Alert</div>
+                        <div class="alert-text">A new property matching your saved search "Malibu Oceanfront $10M+" has just been listed.</div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
-    <footer><p class="footer-text">Keystone Design System v1.0 — Elevating Real Estate Experiences</p></footer>
+
+    <footer>
+        <div class="footer-brand">Estately</div>
+        <div class="footer-tagline">Luxury Real Estate Design System v1.0</div>
+    </footer>
 </body>
 </html>

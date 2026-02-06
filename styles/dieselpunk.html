@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ironclad - Dieselpunk Style Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Barlow:wght@400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Dieselpunk Color Palette - Industrial, oil-stained, mechanical */
+            --rust: #B7410E;
+            --iron: #4A4A4A;
+            --steel: #71797E;
+            --oil-black: #1A1A1A;
+            --brass: #B5A642;
+            --copper: #B87333;
+            --smoke: #848884;
+            --cream: #F5F5DC;
+            --warning-amber: #FFBF00;
+            --diesel-blue: #2C3E50;
+            --rivet-silver: #C0C0C0;
+            --aged-paper: #E8DCC4;
+
+            /* Typography */
+            --font-display: 'Teko', sans-serif;
+            --font-body: 'Barlow', sans-serif;
+            --font-mono: 'Share Tech Mono', monospace;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 40px;
+            --space-2xl: 64px;
+            --space-3xl: 96px;
+
+            /* Border Radius */
+            --radius-sm: 2px;
+            --radius-md: 4px;
+            --radius-lg: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--oil-black);
+            color: var(--cream);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Industrial Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(181, 166, 66, 0.03) 40px,
+                    rgba(181, 166, 66, 0.03) 41px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(181, 166, 66, 0.03) 40px,
+                    rgba(181, 166, 66, 0.03) 41px
+                );
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Riveted border */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background:
+                linear-gradient(90deg, var(--iron) 0%, var(--steel) 50%, var(--iron) 100%),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 30px,
+                    var(--rivet-silver) 30px,
+                    var(--rivet-silver) 38px,
+                    transparent 38px
+                );
+            background-blend-mode: overlay;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+        }
+
+        /* Navigation */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--brass);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-xl);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--iron);
+            border: 2px solid var(--brass);
+            transition: all 0.2s ease;
+        }
+
+        .back-link::before {
+            content: '◄';
+            font-size: 0.8em;
+        }
+
+        .back-link:hover {
+            background: var(--brass);
+            color: var(--oil-black);
+        }
+
+        /* Header - Industrial Nameplate */
+        header {
+            text-align: center;
+            padding: var(--space-3xl) var(--space-xl);
+            margin-bottom: var(--space-3xl);
+            background: linear-gradient(180deg, var(--iron), var(--steel), var(--iron));
+            border: 4px solid var(--brass);
+            position: relative;
+        }
+
+        /* Rivet corners */
+        header::before,
+        header::after {
+            content: '●';
+            position: absolute;
+            font-size: 1.5rem;
+            color: var(--rivet-silver);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        header::before {
+            top: 15px;
+            left: 15px;
+        }
+
+        header::after {
+            top: 15px;
+            right: 15px;
+        }
+
+        .header-bolts {
+            position: absolute;
+            font-size: 1.5rem;
+            color: var(--rivet-silver);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .bolt-bl { bottom: 15px; left: 15px; }
+        .bolt-br { bottom: 15px; right: 15px; }
+
+        .header-emblem {
+            font-size: 3rem;
+            margin-bottom: var(--space-md);
+        }
+
+        header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            color: var(--cream);
+            text-shadow: 3px 3px 0 var(--oil-black);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-sm);
+        }
+
+        header p {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: var(--smoke);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: var(--space-3xl);
+            padding: var(--space-xl);
+            background: linear-gradient(135deg, var(--iron), var(--steel));
+            border: 3px solid var(--brass);
+            position: relative;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--brass) 0px,
+                var(--brass) 4px,
+                transparent 4px,
+                transparent 8px
+            );
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--brass);
+            margin-bottom: var(--space-lg);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        h2::before {
+            content: '⚙';
+            font-size: 1.2em;
+        }
+
+        /* Color Palette - Metal Plates */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: var(--space-sm);
+        }
+
+        .color-swatch {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--space-sm);
+            border: 3px solid var(--rivet-silver);
+            position: relative;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .color-swatch::before {
+            content: '●';
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            font-size: 0.6rem;
+            color: var(--rivet-silver);
+        }
+
+        .color-swatch:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .color-value {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+        }
+
+        .swatch-rust { background: var(--rust); color: var(--cream); }
+        .swatch-iron { background: var(--iron); color: var(--cream); }
+        .swatch-steel { background: var(--steel); color: var(--cream); }
+        .swatch-oil { background: var(--oil-black); color: var(--cream); border-color: var(--brass); }
+        .swatch-brass { background: var(--brass); color: var(--oil-black); }
+        .swatch-copper { background: var(--copper); color: var(--cream); }
+        .swatch-smoke { background: var(--smoke); color: var(--oil-black); }
+        .swatch-cream { background: var(--cream); color: var(--oil-black); }
+        .swatch-amber { background: var(--warning-amber); color: var(--oil-black); }
+        .swatch-blue { background: var(--diesel-blue); color: var(--cream); }
+
+        /* Typography */
+        .type-specimen {
+            margin-bottom: var(--space-xl);
+            padding: var(--space-lg);
+            background: var(--oil-black);
+            border-left: 4px solid var(--rust);
+        }
+
+        .type-specimen h3 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--brass);
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .type-specimen .font-name {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--copper);
+            margin-bottom: var(--space-md);
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-lg);
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--warning-amber);
+            min-width: 60px;
+            text-transform: uppercase;
+        }
+
+        .display-text {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--cream);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .heading-text {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--brass);
+            text-transform: uppercase;
+        }
+
+        .body-text {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--cream);
+        }
+
+        .small-text {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: var(--smoke);
+        }
+
+        /* Spacing Scale - Gauges */
+        .spacing-visual {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xl);
+            align-items: flex-end;
+        }
+
+        .spacing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .spacing-gauge {
+            background: var(--oil-black);
+            border: 3px solid var(--brass);
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spacing-gauge::after {
+            content: '';
+            position: absolute;
+            width: 30%;
+            height: 3px;
+            background: var(--rust);
+            transform-origin: left center;
+            animation: gaugeSwing 3s ease-in-out infinite;
+        }
+
+        @keyframes gaugeSwing {
+            0%, 100% { transform: rotate(-30deg); }
+            50% { transform: rotate(30deg); }
+        }
+
+        .spacing-label {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            color: var(--brass);
+            text-transform: uppercase;
+        }
+
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--smoke);
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .btn {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .btn::before,
+        .btn::after {
+            content: '●';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.5rem;
+            color: var(--rivet-silver);
+        }
+
+        .btn::before { left: 8px; }
+        .btn::after { right: 8px; }
+
+        .btn-primary {
+            background: linear-gradient(180deg, var(--brass), var(--copper));
+            color: var(--oil-black);
+            border: 3px solid var(--oil-black);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(181, 166, 66, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--iron);
+            color: var(--cream);
+            border: 3px solid var(--brass);
+        }
+
+        .btn-secondary:hover {
+            background: var(--brass);
+            color: var(--oil-black);
+        }
+
+        .btn-danger {
+            background: var(--rust);
+            color: var(--cream);
+            border: 3px solid var(--warning-amber);
+        }
+
+        .btn-danger:hover {
+            background: var(--warning-amber);
+            color: var(--oil-black);
+        }
+
+        .btn-dark {
+            background: var(--diesel-blue);
+            color: var(--cream);
+            border: 3px solid var(--steel);
+        }
+
+        .btn-dark:hover {
+            border-color: var(--brass);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--brass);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-md);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            border: 3px solid var(--steel);
+            background: var(--oil-black);
+            color: var(--cream);
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--brass);
+            box-shadow: 0 0 0 3px rgba(181, 166, 66, 0.2);
+        }
+
+        .form-input::placeholder {
+            color: var(--smoke);
+        }
+
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23B5A642' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-md) center;
+            padding-right: var(--space-2xl);
+        }
+
+        .form-checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .form-checkbox {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--brass);
+            cursor: pointer;
+        }
+
+        /* Cards - Metal Panels */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .card {
+            background: var(--oil-black);
+            border: 3px solid var(--steel);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .card::before {
+            content: '● ● ●';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            font-size: 0.5rem;
+            color: var(--rivet-silver);
+            letter-spacing: 4px;
+        }
+
+        .card:hover {
+            border-color: var(--brass);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .card-image {
+            height: 140px;
+            background: linear-gradient(135deg, var(--rust), var(--diesel-blue), var(--iron));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 3px solid var(--steel);
+        }
+
+        .card-image::after {
+            content: '⚙';
+            font-size: 3rem;
+            color: var(--brass);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .card-content {
+            padding: var(--space-lg);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--brass);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .card-text {
+            color: var(--smoke);
+            margin-bottom: var(--space-md);
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--copper);
+        }
+
+        /* Data Table */
+        .table-wrapper {
+            overflow-x: auto;
+            border: 3px solid var(--brass);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(180deg, var(--brass), var(--copper));
+        }
+
+        th {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--oil-black);
+            text-align: left;
+            padding: var(--space-md);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        td {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--steel);
+            color: var(--cream);
+        }
+
+        tbody tr {
+            background: var(--oil-black);
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: var(--diesel-blue);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-active {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--brass);
+            color: var(--oil-black);
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .status-pending {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--warning-amber);
+            color: var(--oil-black);
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        /* Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .badge {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: var(--space-xs) var(--space-md);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge-brass { background: var(--brass); color: var(--oil-black); }
+        .badge-rust { background: var(--rust); color: var(--cream); }
+        .badge-steel { background: var(--steel); color: var(--cream); }
+        .badge-copper { background: var(--copper); color: var(--cream); }
+        .badge-amber { background: var(--warning-amber); color: var(--oil-black); }
+        .badge-outline { background: transparent; border: 2px solid var(--brass); color: var(--brass); }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .principle-card {
+            padding: var(--space-lg);
+            background: var(--oil-black);
+            border: 2px solid var(--steel);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .principle-card:hover {
+            border-color: var(--brass);
+        }
+
+        .principle-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--brass);
+            text-transform: uppercase;
+            margin-bottom: var(--space-sm);
+        }
+
+        .principle-text {
+            font-size: 0.95rem;
+            color: var(--smoke);
+        }
+
+        /* Animations */
+        .animation-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .animation-demo {
+            padding: var(--space-lg);
+            background: var(--oil-black);
+            border: 2px solid var(--steel);
+            text-align: center;
+        }
+
+        .animation-element {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto var(--space-md);
+            background: var(--brass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .gear-demo .animation-element {
+            border-radius: 50%;
+            animation: rotate 3s linear infinite;
+        }
+
+        .piston-demo .animation-element {
+            animation: piston 1s ease-in-out infinite;
+        }
+
+        @keyframes piston {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .pressure-demo .animation-element {
+            animation: pressure 2s ease-in-out infinite;
+        }
+
+        @keyframes pressure {
+            0%, 100% { transform: scale(1); background: var(--brass); }
+            50% { transform: scale(1.1); background: var(--rust); }
+        }
+
+        .steam-demo .animation-element {
+            animation: steam 1.5s ease-out infinite;
+        }
+
+        @keyframes steam {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+
+        .animation-label {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            color: var(--brass);
+            text-transform: uppercase;
+        }
+
+        /* Special Component - Control Panel */
+        .control-panel {
+            background: linear-gradient(180deg, var(--iron), var(--steel), var(--iron));
+            border: 4px solid var(--brass);
+            padding: var(--space-xl);
+            position: relative;
+        }
+
+        .control-panel::before {
+            content: '● ● ● ●';
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-size: 0.6rem;
+            color: var(--rivet-silver);
+            letter-spacing: 8px;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 2px solid var(--brass);
+        }
+
+        .panel-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cream);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .panel-status {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--brass);
+        }
+
+        .status-light {
+            width: 12px;
+            height: 12px;
+            background: var(--rust);
+            border-radius: 50%;
+            animation: blink 1s ease-in-out infinite;
+        }
+
+        .status-light.active {
+            background: #00FF00;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .gauges-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .gauge {
+            text-align: center;
+        }
+
+        .gauge-display {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-sm);
+            background: var(--oil-black);
+            border: 3px solid var(--brass);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .gauge-value {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--warning-amber);
+        }
+
+        .gauge-label {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            color: var(--smoke);
+            text-transform: uppercase;
+        }
+
+        .lever-row {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+        }
+
+        .lever {
+            width: 40px;
+            height: 100px;
+            background: var(--oil-black);
+            border: 3px solid var(--brass);
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .lever-handle {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(180deg, var(--brass), var(--copper));
+            border-radius: 50%;
+            transition: top 0.3s ease;
+        }
+
+        .lever:hover .lever-handle {
+            top: 60px;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-md) var(--space-lg);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            border: 3px solid;
+        }
+
+        .alert-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .alert-text {
+            font-size: 0.95rem;
+        }
+
+        .alert-success {
+            background: rgba(181, 166, 66, 0.1);
+            border-color: var(--brass);
+            color: var(--brass);
+        }
+
+        .alert-info {
+            background: rgba(44, 62, 80, 0.3);
+            border-color: var(--diesel-blue);
+            color: var(--smoke);
+        }
+
+        .alert-warning {
+            background: rgba(255, 191, 0, 0.1);
+            border-color: var(--warning-amber);
+            color: var(--warning-amber);
+        }
+
+        .alert-error {
+            background: rgba(183, 65, 14, 0.1);
+            border-color: var(--rust);
+            color: var(--rust);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--space-2xl);
+            margin-top: var(--space-3xl);
+            background: linear-gradient(180deg, var(--iron), var(--steel), var(--iron));
+            border: 4px solid var(--brass);
+        }
+
+        footer p {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        footer p:first-child {
+            font-size: 1.2rem;
+            color: var(--brass);
+            margin-bottom: var(--space-sm);
+        }
+
+        footer p:last-child {
+            color: var(--smoke);
+            font-family: var(--font-body);
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--space-md);
+            }
+
+            header {
+                padding: var(--space-2xl) var(--space-md);
+            }
+
+            section {
+                padding: var(--space-lg);
+            }
+
+            .gauges-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .lever-row {
+                gap: var(--space-lg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">Back to Gallery</a>
+
+        <header>
+            <span class="header-bolts bolt-bl">●</span>
+            <span class="header-bolts bolt-br">●</span>
+            <div class="header-emblem">⚙️</div>
+            <h1>Ironclad</h1>
+            <p>A rugged design system forged in the fires of industry, built for interfaces that demand power and precision</p>
+        </header>
+
+        <!-- Color Palette -->
+        <section id="colors">
+            <h2>Color Palette</h2>
+            <div class="color-grid">
+                <div class="color-swatch swatch-rust">
+                    <span class="color-name">Rust</span>
+                    <span class="color-value">#B7410E</span>
+                </div>
+                <div class="color-swatch swatch-iron">
+                    <span class="color-name">Iron</span>
+                    <span class="color-value">#4A4A4A</span>
+                </div>
+                <div class="color-swatch swatch-steel">
+                    <span class="color-name">Steel</span>
+                    <span class="color-value">#71797E</span>
+                </div>
+                <div class="color-swatch swatch-oil">
+                    <span class="color-name">Oil Black</span>
+                    <span class="color-value">#1A1A1A</span>
+                </div>
+                <div class="color-swatch swatch-brass">
+                    <span class="color-name">Brass</span>
+                    <span class="color-value">#B5A642</span>
+                </div>
+                <div class="color-swatch swatch-copper">
+                    <span class="color-name">Copper</span>
+                    <span class="color-value">#B87333</span>
+                </div>
+                <div class="color-swatch swatch-smoke">
+                    <span class="color-name">Smoke</span>
+                    <span class="color-value">#848884</span>
+                </div>
+                <div class="color-swatch swatch-cream">
+                    <span class="color-name">Cream</span>
+                    <span class="color-value">#F5F5DC</span>
+                </div>
+                <div class="color-swatch swatch-amber">
+                    <span class="color-name">Amber</span>
+                    <span class="color-value">#FFBF00</span>
+                </div>
+                <div class="color-swatch swatch-blue">
+                    <span class="color-name">Diesel Blue</span>
+                    <span class="color-value">#2C3E50</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section id="typography">
+            <h2>Typography</h2>
+            <div class="type-specimen">
+                <h3>Teko</h3>
+                <p class="font-name">Display Font — Industrial, condensed, powerful</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">Display</span>
+                        <span class="display-text">Heavy Industry</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">Heading</span>
+                        <span class="heading-text">Manufacturing Division</span>
+                    </div>
+                </div>
+            </div>
+            <div class="type-specimen">
+                <h3 style="font-family: var(--font-body); font-weight: 400; color: var(--cream); text-transform: none;">Barlow</h3>
+                <p class="font-name">Body Font — Clear, functional, reliable</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">Body</span>
+                        <span class="body-text">Built to withstand the harshest conditions and the test of time.</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">Small</span>
+                        <span class="small-text">Precision engineering for demanding applications.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacing Scale -->
+        <section id="spacing">
+            <h2>Spacing Scale</h2>
+            <p style="margin-bottom: var(--space-lg); color: var(--smoke);">Calibrated spacing for industrial precision.</p>
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-gauge" style="width: 40px; height: 40px;"></div>
+                    <span class="spacing-label">XS</span>
+                    <span class="spacing-value">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-gauge" style="width: 50px; height: 50px;"></div>
+                    <span class="spacing-label">SM</span>
+                    <span class="spacing-value">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-gauge" style="width: 60px; height: 60px;"></div>
+                    <span class="spacing-label">MD</span>
+                    <span class="spacing-value">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-gauge" style="width: 72px; height: 72px;"></div>
+                    <span class="spacing-label">LG</span>
+                    <span class="spacing-value">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-gauge" style="width: 86px; height: 86px;"></div>
+                    <span class="spacing-label">XL</span>
+                    <span class="spacing-value">40px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-gauge" style="width: 100px; height: 100px;"></div>
+                    <span class="spacing-label">2XL</span>
+                    <span class="spacing-value">64px</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Buttons -->
+        <section id="buttons">
+            <h2>Buttons</h2>
+            <div class="button-grid">
+                <button class="btn btn-primary">Engage</button>
+                <button class="btn btn-secondary">Configure</button>
+                <button class="btn btn-danger">Emergency Stop</button>
+                <button class="btn btn-dark">Standby</button>
+            </div>
+            <div class="button-grid">
+                <button class="btn btn-primary" disabled style="opacity: 0.5; cursor: not-allowed;">Locked</button>
+                <button class="btn btn-secondary" style="font-size: 0.85rem; padding: var(--space-sm) var(--space-md);">Mini</button>
+            </div>
+        </section>
+
+        <!-- Forms -->
+        <section id="forms">
+            <h2>Forms</h2>
+            <form onsubmit="return false;" style="max-width: 500px;">
+                <div class="form-group">
+                    <label class="form-label">Operator ID</label>
+                    <input type="text" class="form-input" placeholder="Enter operator identification">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Machine Type</label>
+                    <select class="form-input form-select">
+                        <option>Select machine class</option>
+                        <option>Heavy Lifter</option>
+                        <option>Precision Mill</option>
+                        <option>Steam Engine</option>
+                        <option>Diesel Generator</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Work Order</label>
+                    <textarea class="form-input" placeholder="Describe the work order details..."></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="form-checkbox-group">
+                        <input type="checkbox" class="form-checkbox" id="safety" checked>
+                        <label for="safety" style="color: var(--smoke);">Safety protocols acknowledged</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Order</button>
+            </form>
+        </section>
+
+        <!-- Cards -->
+        <section id="cards">
+            <h2>Cards</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-image"></div>
+                    <div class="card-content">
+                        <h3 class="card-title">Steam Turbine</h3>
+                        <p class="card-text">High-efficiency rotary engine converting thermal energy into mechanical work.</p>
+                        <div class="card-meta">
+                            <span>⚙</span>
+                            <span>5000 HP • Active</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--brass), var(--copper), var(--rust));"></div>
+                    <div class="card-content">
+                        <h3 class="card-title">Hydraulic Press</h3>
+                        <p class="card-text">Industrial forging equipment for heavy metal fabrication and forming.</p>
+                        <div class="card-meta">
+                            <span>⚙</span>
+                            <span>2000 Tons • Standby</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--steel), var(--smoke), var(--iron));"></div>
+                    <div class="card-content">
+                        <h3 class="card-title">Diesel Locomotive</h3>
+                        <p class="card-text">Heavy-duty transport for industrial cargo across the factory floor.</p>
+                        <div class="card-meta">
+                            <span>⚙</span>
+                            <span>3000 HP • In Transit</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Table -->
+        <section id="table">
+            <h2>Data Table</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Machine</th>
+                            <th>Department</th>
+                            <th>Output</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Unit A-7 Boiler</td>
+                            <td>Power Plant</td>
+                            <td>850 kW</td>
+                            <td><span class="status-active">Online</span></td>
+                        </tr>
+                        <tr>
+                            <td>Crane #12</td>
+                            <td>Loading Bay</td>
+                            <td>50 Tons</td>
+                            <td><span class="status-active">Online</span></td>
+                        </tr>
+                        <tr>
+                            <td>Mill B-3</td>
+                            <td>Machining</td>
+                            <td>Variable</td>
+                            <td><span class="status-pending">Maintenance</span></td>
+                        </tr>
+                        <tr>
+                            <td>Compressor C-1</td>
+                            <td>Pneumatics</td>
+                            <td>500 CFM</td>
+                            <td><span class="status-pending">Warming Up</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Badges -->
+        <section id="badges">
+            <h2>Badges & Tags</h2>
+            <div class="badge-grid">
+                <span class="badge badge-brass">⚙ Operational</span>
+                <span class="badge badge-rust">⚠ Critical</span>
+                <span class="badge badge-steel">● Standby</span>
+                <span class="badge badge-copper">★ Premium</span>
+                <span class="badge badge-amber">⚡ High Power</span>
+                <span class="badge badge-outline">New</span>
+            </div>
+        </section>
+
+        <!-- Design Principles -->
+        <section id="principles">
+            <h2>Design Principles</h2>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-icon">🔩</div>
+                    <h3 class="principle-title">Riveted Strength</h3>
+                    <p class="principle-text">Every element should feel solid, substantial, and built to last generations.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">⚙️</div>
+                    <h3 class="principle-title">Mechanical Clarity</h3>
+                    <p class="principle-text">Function is visible. Users should see how things work at a glance.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">🔥</div>
+                    <h3 class="principle-title">Industrial Warmth</h3>
+                    <p class="principle-text">Brass and copper tones add warmth to the cold precision of steel.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">📊</div>
+                    <h3 class="principle-title">Gauge Readability</h3>
+                    <p class="principle-text">Information displays clearly, even in demanding conditions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animations -->
+        <section id="animations">
+            <h2>Animation & Micro-interactions</h2>
+            <div class="animation-showcase">
+                <div class="animation-demo gear-demo">
+                    <div class="animation-element">⚙</div>
+                    <span class="animation-label">Gear</span>
+                </div>
+                <div class="animation-demo piston-demo">
+                    <div class="animation-element">▌</div>
+                    <span class="animation-label">Piston</span>
+                </div>
+                <div class="animation-demo pressure-demo">
+                    <div class="animation-element">◉</div>
+                    <span class="animation-label">Pressure</span>
+                </div>
+                <div class="animation-demo steam-demo">
+                    <div class="animation-element">☁</div>
+                    <span class="animation-label">Steam</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Component: Control Panel -->
+        <section id="special">
+            <h2>Special Component</h2>
+            <p style="margin-bottom: var(--space-lg); color: var(--smoke);">Control Panel — Industrial dashboard with gauges and lever controls.</p>
+            <div class="control-panel">
+                <div class="panel-header">
+                    <div class="panel-title">Main Control Console</div>
+                    <div class="panel-status">
+                        <div class="status-light active"></div>
+                        <span>SYSTEM ONLINE</span>
+                    </div>
+                </div>
+
+                <div class="gauges-row">
+                    <div class="gauge">
+                        <div class="gauge-display">
+                            <span class="gauge-value">87%</span>
+                        </div>
+                        <span class="gauge-label">Pressure</span>
+                    </div>
+                    <div class="gauge">
+                        <div class="gauge-display">
+                            <span class="gauge-value">342°</span>
+                        </div>
+                        <span class="gauge-label">Temp</span>
+                    </div>
+                    <div class="gauge">
+                        <div class="gauge-display">
+                            <span class="gauge-value">1847</span>
+                        </div>
+                        <span class="gauge-label">RPM</span>
+                    </div>
+                    <div class="gauge">
+                        <div class="gauge-display">
+                            <span class="gauge-value">92%</span>
+                        </div>
+                        <span class="gauge-label">Load</span>
+                    </div>
+                </div>
+
+                <div class="lever-row">
+                    <div class="lever">
+                        <div class="lever-handle"></div>
+                    </div>
+                    <div class="lever">
+                        <div class="lever-handle"></div>
+                    </div>
+                    <div class="lever">
+                        <div class="lever-handle"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alerts -->
+        <section id="alerts">
+            <h2>Alert Messages</h2>
+            <div class="alert alert-success">
+                <span class="alert-icon">✓</span>
+                <div class="alert-content">
+                    <div class="alert-title">System Operational</div>
+                    <p class="alert-text">All machinery running within normal parameters.</p>
+                </div>
+            </div>
+            <div class="alert alert-info">
+                <span class="alert-icon">ℹ</span>
+                <div class="alert-content">
+                    <div class="alert-title">Scheduled Maintenance</div>
+                    <p class="alert-text">Unit B-7 will undergo routine inspection at 0600 hours.</p>
+                </div>
+            </div>
+            <div class="alert alert-warning">
+                <span class="alert-icon">⚠</span>
+                <div class="alert-content">
+                    <div class="alert-title">Pressure Warning</div>
+                    <p class="alert-text">Boiler pressure approaching upper threshold. Monitor closely.</p>
+                </div>
+            </div>
+            <div class="alert alert-error">
+                <span class="alert-icon">✕</span>
+                <div class="alert-content">
+                    <div class="alert-title">Emergency Shutdown</div>
+                    <p class="alert-text">Critical fault detected in cooling system. Immediate action required.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>⚙ Ironclad Design System ⚙</p>
+            <p>Forged for the modern industrial age</p>
+        </footer>
+    </div>
+</body>
+</html>

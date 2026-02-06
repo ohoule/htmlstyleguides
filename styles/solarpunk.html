@@ -3,44 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verdant - Solarpunk Style Guide</title>
+    <title>Thrive - Solarpunk Style Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Nunito:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Solarpunk Color Palette - Nature meets technology */
-            --leaf-green: #2D5A27;
-            --bright-green: #4CAF50;
-            --mint: #A8E6CF;
-            --solar-gold: #FFD54F;
-            --warm-amber: #FF8F00;
-            --sky-blue: #81D4FA;
-            --terracotta: #D4715E;
-            --cream: #FFF8E7;
-            --bark-brown: #5D4037;
-            --deep-forest: #1B3D1B;
-            --white: #FFFFFF;
+            /* Solarpunk Color Palette - Regenerative future meets lush nature */
+            --chlorophyll: #22C55E;
+            --deep-canopy: #166534;
+            --morning-sun: #FCD34D;
+            --golden-hour: #F59E0B;
+            --sky-blue: #38BDF8;
+            --terracotta: #EA580C;
+            --moss: #84CC16;
+            --petal-pink: #F472B6;
+            --rich-soil: #78350F;
+            --cream: #FEFCE8;
+            --bark: #44403C;
+            --morning-mist: #F0FDF4;
 
             /* Typography */
-            --font-display: 'Fraunces', serif;
-            --font-body: 'Outfit', sans-serif;
+            --font-display: 'Bricolage Grotesque', sans-serif;
+            --font-body: 'Nunito', sans-serif;
+            --font-mono: 'Fira Code', monospace;
 
-            /* Spacing */
-            --space-xs: 4px;
+            /* Spacing - Fibonacci-inspired */
+            --space-xs: 5px;
             --space-sm: 8px;
-            --space-md: 16px;
-            --space-lg: 24px;
-            --space-xl: 32px;
-            --space-2xl: 48px;
-            --space-3xl: 64px;
+            --space-md: 13px;
+            --space-lg: 21px;
+            --space-xl: 34px;
+            --space-2xl: 55px;
+            --space-3xl: 89px;
 
-            /* Border Radius - Organic shapes */
+            /* Border Radius - Organic */
             --radius-sm: 8px;
             --radius-md: 16px;
             --radius-lg: 24px;
-            --radius-xl: 32px;
-            --radius-organic: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            --radius-xl: 40px;
+            --radius-organic: 60% 40% 30% 70% / 60% 30% 70% 40%;
         }
 
         * {
@@ -51,10 +53,41 @@
 
         body {
             font-family: var(--font-body);
-            background: linear-gradient(180deg, var(--cream) 0%, var(--mint) 100%);
-            min-height: 100vh;
-            color: var(--deep-forest);
-            line-height: 1.6;
+            background: var(--morning-mist);
+            color: var(--bark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Decorative Background Pattern - Living Grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 80%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(251, 191, 36, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Growing vine decoration */
+        body::after {
+            content: '';
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg,
+                var(--chlorophyll) 0%,
+                var(--deep-canopy) 50%,
+                var(--moss) 100%);
+            z-index: 100;
         }
 
         .container {
@@ -63,94 +96,147 @@
             padding: var(--space-xl);
         }
 
-        /* Header */
+        /* Navigation */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--deep-canopy);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: var(--space-xl);
+            padding: var(--space-sm) var(--space-md);
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: var(--radius-xl);
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: var(--chlorophyll);
+            color: white;
+            transform: translateX(-4px);
+        }
+
+        .back-link::before {
+            content: '←';
+            font-size: 1.2em;
+        }
+
+        /* Header - Solar Canopy */
         header {
             text-align: center;
             padding: var(--space-3xl) var(--space-xl);
+            margin-bottom: var(--space-3xl);
+            background: linear-gradient(135deg,
+                var(--deep-canopy) 0%,
+                var(--chlorophyll) 50%,
+                var(--moss) 100%);
+            border-radius: var(--radius-xl);
             position: relative;
+            overflow: hidden;
         }
 
-        .logo {
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--morning-sun) 0%, transparent 70%);
+            opacity: 0.6;
+            animation: sunPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes sunPulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        header::after {
+            content: '🌱';
+            position: absolute;
+            bottom: 20px;
+            left: 30px;
+            font-size: 2rem;
+            animation: grow 3s ease-in-out infinite;
+        }
+
+        @keyframes grow {
+            0%, 100% { transform: scale(1) rotate(-5deg); }
+            50% { transform: scale(1.2) rotate(5deg); }
+        }
+
+        header h1 {
             font-family: var(--font-display);
-            font-size: 4rem;
-            font-weight: 600;
-            color: var(--leaf-green);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
             margin-bottom: var(--space-md);
             position: relative;
-            display: inline-block;
+            z-index: 1;
         }
 
-        .logo::after {
-            content: '☀';
-            position: absolute;
-            top: -10px;
-            right: -40px;
-            font-size: 1.5rem;
-            color: var(--solar-gold);
-            animation: sun-rotate 10s linear infinite;
-        }
-
-        @keyframes sun-rotate {
-            100% { transform: rotate(360deg); }
-        }
-
-        .tagline {
-            font-family: var(--font-body);
-            font-size: 1.25rem;
-            color: var(--bright-green);
-            font-weight: 400;
-        }
-
-        /* Decorative leaf border */
-        .leaf-border {
-            display: flex;
-            justify-content: center;
-            gap: var(--space-sm);
-            margin: var(--space-xl) 0;
-            opacity: 0.6;
-        }
-
-        .leaf {
-            font-size: 1.5rem;
-            color: var(--bright-green);
+        header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         /* Section Styling */
         section {
             margin-bottom: var(--space-3xl);
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: var(--radius-lg);
             padding: var(--space-xl);
-            border: 2px solid rgba(45, 90, 39, 0.2);
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(22, 101, 52, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.1);
+            position: relative;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg,
+                var(--chlorophyll),
+                var(--morning-sun),
+                var(--sky-blue));
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
         }
 
         h2 {
             font-family: var(--font-display);
             font-size: 1.75rem;
-            font-weight: 600;
-            color: var(--leaf-green);
+            color: var(--deep-canopy);
             margin-bottom: var(--space-lg);
             display: flex;
             align-items: center;
-            gap: var(--space-md);
+            gap: var(--space-sm);
         }
 
         h2::before {
-            content: '🌿';
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--chlorophyll);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        h3 {
-            font-family: var(--font-body);
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--bark-brown);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: var(--space-sm);
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
         }
 
-        /* Color Palette */
+        /* Color Palette - Seed Pods */
         .color-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -158,162 +244,291 @@
         }
 
         .color-swatch {
-            height: 120px;
-            border-radius: var(--radius-lg);
+            aspect-ratio: 1;
+            border-radius: var(--radius-organic);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             padding: var(--space-md);
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
         }
 
         .color-swatch:hover {
-            transform: translateY(-4px);
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
         }
 
-        .color-swatch span {
-            font-size: 0.75rem;
-            font-weight: 500;
-            background: var(--white);
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--radius-sm);
-            color: var(--deep-forest);
+        .color-swatch::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
         }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .color-value {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .swatch-chlorophyll { background: var(--chlorophyll); color: white; }
+        .swatch-canopy { background: var(--deep-canopy); color: white; }
+        .swatch-sun { background: var(--morning-sun); color: var(--bark); }
+        .swatch-golden { background: var(--golden-hour); color: white; }
+        .swatch-sky { background: var(--sky-blue); color: white; }
+        .swatch-terracotta { background: var(--terracotta); color: white; }
+        .swatch-moss { background: var(--moss); color: var(--bark); }
+        .swatch-petal { background: var(--petal-pink); color: white; }
+        .swatch-soil { background: var(--rich-soil); color: white; }
+        .swatch-bark { background: var(--bark); color: white; }
 
         /* Typography */
-        .type-sample {
+        .type-specimen {
             margin-bottom: var(--space-xl);
+            padding: var(--space-lg);
+            background: var(--cream);
+            border-radius: var(--radius-md);
         }
 
-        .display-text {
+        .type-specimen h3 {
             font-family: var(--font-display);
-            font-size: 3rem;
-            font-weight: 600;
-            color: var(--leaf-green);
-            line-height: 1.2;
+            font-size: 2.5rem;
+            color: var(--deep-canopy);
+            margin-bottom: var(--space-sm);
         }
 
-        .body-text {
-            font-family: var(--font-body);
-            font-size: 1.1rem;
-            max-width: 600px;
-            color: var(--deep-forest);
+        .type-specimen .font-name {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--chlorophyll);
+            margin-bottom: var(--space-md);
         }
 
-        /* Spacing Scale */
-        .spacing-demo {
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-md);
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--golden-hour);
+            min-width: 60px;
+        }
+
+        .display-text { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--deep-canopy); }
+        .heading-text { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--bark); }
+        .body-text { font-family: var(--font-body); font-size: 1rem; color: var(--bark); }
+        .small-text { font-family: var(--font-body); font-size: 0.875rem; color: var(--bark); opacity: 0.8; }
+
+        /* Spacing Scale - Growth Rings */
+        .spacing-visual {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-md);
+            gap: var(--space-lg);
             align-items: flex-end;
         }
 
-        .spacing-block {
-            background: linear-gradient(135deg, var(--bright-green), var(--leaf-green));
-            border-radius: var(--radius-sm);
+        .spacing-item {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-weight: 500;
-            font-size: 0.75rem;
-        }
-
-        /* Buttons */
-        .button-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-md);
-        }
-
-        .btn {
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: var(--space-md) var(--space-xl);
-            border: none;
-            border-radius: var(--radius-xl);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
+            flex-direction: column;
             align-items: center;
             gap: var(--space-sm);
         }
 
+        .spacing-ring {
+            background: linear-gradient(135deg, var(--chlorophyll), var(--moss));
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .spacing-ring::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40%;
+            height: 40%;
+            background: var(--cream);
+            border-radius: 50%;
+        }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--deep-canopy);
+        }
+
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--golden-hour);
+        }
+
+        /* Buttons - Organic Shapes */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .btn {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-xl);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
         .btn-primary {
-            background: linear-gradient(135deg, var(--bright-green), var(--leaf-green));
-            color: var(--white);
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            background: linear-gradient(135deg, var(--chlorophyll), var(--deep-canopy));
+            color: white;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
         }
 
         .btn-secondary {
-            background: var(--solar-gold);
-            color: var(--deep-forest);
-            box-shadow: 0 4px 15px rgba(255, 213, 79, 0.3);
+            background: var(--cream);
+            color: var(--deep-canopy);
+            border: 2px solid var(--chlorophyll);
         }
 
         .btn-secondary:hover {
-            background: var(--warm-amber);
-            transform: translateY(-2px);
+            background: var(--chlorophyll);
+            color: white;
+            transform: translateY(-3px);
         }
 
-        .btn-outline {
-            background: transparent;
-            color: var(--leaf-green);
-            border: 2px solid var(--bright-green);
+        .btn-solar {
+            background: linear-gradient(135deg, var(--morning-sun), var(--golden-hour));
+            color: var(--bark);
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
         }
 
-        .btn-outline:hover {
-            background: var(--mint);
+        .btn-solar:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.5);
         }
 
-        /* Forms */
+        .btn-earth {
+            background: var(--rich-soil);
+            color: var(--cream);
+        }
+
+        .btn-earth:hover {
+            background: var(--bark);
+            transform: translateY(-3px);
+        }
+
+        /* Forms - Garden Beds */
         .form-group {
             margin-bottom: var(--space-lg);
         }
 
-        label {
+        .form-label {
             display: block;
-            font-weight: 500;
-            color: var(--leaf-green);
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--deep-canopy);
             margin-bottom: var(--space-sm);
         }
 
-        input[type="text"],
-        input[type="email"],
-        textarea,
-        select {
+        .form-input {
             width: 100%;
-            max-width: 400px;
             padding: var(--space-md);
             font-family: var(--font-body);
             font-size: 1rem;
-            border: 2px solid var(--mint);
+            border: 2px solid rgba(34, 197, 94, 0.2);
             border-radius: var(--radius-md);
-            background: var(--white);
+            background: var(--cream);
+            color: var(--bark);
             transition: all 0.3s ease;
         }
 
-        input:focus,
-        textarea:focus,
-        select:focus {
+        .form-input:focus {
             outline: none;
-            border-color: var(--bright-green);
-            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+            border-color: var(--chlorophyll);
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1);
+            background: white;
         }
 
-        textarea {
+        .form-input::placeholder {
+            color: rgba(68, 64, 60, 0.5);
+        }
+
+        textarea.form-input {
             min-height: 120px;
             resize: vertical;
         }
 
-        /* Cards */
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2322C55E' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-md) center;
+            padding-right: var(--space-2xl);
+        }
+
+        .form-checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .form-checkbox {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--chlorophyll);
+            cursor: pointer;
+        }
+
+        /* Cards - Greenhouse Panels */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -321,36 +536,44 @@
         }
 
         .card {
-            background: var(--white);
+            background: white;
             border-radius: var(--radius-lg);
             overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(34, 197, 94, 0.15);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
         }
 
         .card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 50px rgba(22, 101, 52, 0.15);
         }
 
         .card-image {
             height: 160px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
+            background: linear-gradient(135deg, var(--chlorophyll), var(--moss), var(--sky-blue));
+            position: relative;
+            overflow: hidden;
         }
 
-        .card:nth-child(1) .card-image {
-            background: linear-gradient(135deg, var(--mint), var(--bright-green));
+        .card-image::before {
+            content: '☀️';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
+            animation: sunPulse 3s ease-in-out infinite;
         }
 
-        .card:nth-child(2) .card-image {
-            background: linear-gradient(135deg, var(--solar-gold), var(--warm-amber));
-        }
-
-        .card:nth-child(3) .card-image {
-            background: linear-gradient(135deg, var(--sky-blue), var(--mint));
+        .card-image::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: white;
+            border-radius: 50% 50% 0 0;
         }
 
         .card-content {
@@ -360,47 +583,100 @@
         .card-title {
             font-family: var(--font-display);
             font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--leaf-green);
+            color: var(--deep-canopy);
             margin-bottom: var(--space-sm);
         }
 
         .card-text {
-            font-size: 0.9rem;
-            color: var(--bark-brown);
+            color: var(--bark);
+            opacity: 0.8;
+            margin-bottom: var(--space-md);
         }
 
-        /* Data Table */
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--golden-hour);
+        }
+
+        /* Data Table - Resource Grid */
         .table-wrapper {
             overflow-x: auto;
-            border-radius: var(--radius-lg);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(34, 197, 94, 0.2);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            background: var(--white);
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--deep-canopy), var(--chlorophyll));
         }
 
         th {
-            background: var(--leaf-green);
-            color: var(--white);
+            font-family: var(--font-display);
             font-weight: 600;
-            padding: var(--space-md);
+            color: white;
             text-align: left;
+            padding: var(--space-md);
+            font-size: 0.9rem;
         }
 
         td {
             padding: var(--space-md);
-            border-bottom: 1px solid var(--mint);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.1);
+            color: var(--bark);
         }
 
-        tr:hover {
-            background: rgba(168, 230, 207, 0.3);
+        tbody tr {
+            transition: background 0.2s ease;
         }
 
-        /* Badges */
+        tbody tr:hover {
+            background: var(--cream);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-active {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--chlorophyll);
+            border-radius: var(--radius-xl);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-active::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--chlorophyll);
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .status-pending {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--golden-hour);
+            border-radius: var(--radius-xl);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Badges - Seed Labels */
         .badge-grid {
             display: flex;
             flex-wrap: wrap;
@@ -408,405 +684,657 @@
         }
 
         .badge {
-            font-size: 0.75rem;
-            font-weight: 500;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
             padding: var(--space-xs) var(--space-md);
             border-radius: var(--radius-xl);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .badge-green {
-            background: var(--mint);
-            color: var(--leaf-green);
+        .badge-growth {
+            background: var(--chlorophyll);
+            color: white;
         }
 
-        .badge-gold {
-            background: var(--solar-gold);
-            color: var(--bark-brown);
+        .badge-solar {
+            background: var(--morning-sun);
+            color: var(--bark);
         }
 
-        .badge-blue {
+        .badge-water {
             background: var(--sky-blue);
-            color: var(--deep-forest);
+            color: white;
         }
 
-        .badge-terracotta {
-            background: var(--terracotta);
-            color: var(--white);
+        .badge-earth {
+            background: var(--rich-soil);
+            color: var(--cream);
         }
 
-        /* Design Principles */
+        .badge-bloom {
+            background: var(--petal-pink);
+            color: white;
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 2px solid var(--chlorophyll);
+            color: var(--chlorophyll);
+        }
+
+        /* Design Principles - Living Guidelines */
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: var(--space-lg);
         }
 
-        .principle {
-            text-align: center;
-            padding: var(--space-xl);
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            transition: transform 0.3s ease;
+        .principle-card {
+            padding: var(--space-lg);
+            background: linear-gradient(135deg, var(--cream), white);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--chlorophyll);
+            transition: all 0.3s ease;
         }
 
-        .principle:hover {
-            transform: translateY(-4px);
+        .principle-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.1);
         }
 
         .principle-icon {
-            font-size: 3rem;
-            margin-bottom: var(--space-md);
+            font-size: 2rem;
+            margin-bottom: var(--space-sm);
         }
 
         .principle-title {
             font-family: var(--font-display);
             font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--leaf-green);
+            color: var(--deep-canopy);
             margin-bottom: var(--space-sm);
         }
 
         .principle-text {
             font-size: 0.9rem;
-            color: var(--bark-brown);
+            color: var(--bark);
+            opacity: 0.8;
         }
 
-        /* Animations */
-        .animation-grid {
+        /* Animations Section */
+        .animation-showcase {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: var(--space-lg);
         }
 
         .animation-demo {
-            height: 150px;
-            background: var(--white);
-            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            background: var(--cream);
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+
+        .animation-element {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto var(--space-md);
+            background: linear-gradient(135deg, var(--chlorophyll), var(--moss));
+            border-radius: var(--radius-organic);
+        }
+
+        .grow-demo .animation-element {
+            animation: growPlant 2s ease-in-out infinite;
+        }
+
+        @keyframes growPlant {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.3); }
+        }
+
+        .sway-demo .animation-element {
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .bloom-demo .animation-element {
+            background: linear-gradient(135deg, var(--petal-pink), var(--morning-sun));
+            animation: bloom 2s ease-in-out infinite;
+        }
+
+        @keyframes bloom {
+            0%, 100% { transform: scale(1); border-radius: var(--radius-organic); }
+            50% { transform: scale(1.2); border-radius: 50%; }
+        }
+
+        .photosynthesis-demo .animation-element {
+            animation: photosynthesize 4s ease-in-out infinite;
+        }
+
+        @keyframes photosynthesize {
+            0% { background: var(--deep-canopy); }
+            50% { background: var(--chlorophyll); box-shadow: 0 0 30px rgba(34, 197, 94, 0.5); }
+            100% { background: var(--deep-canopy); }
+        }
+
+        .animation-label {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--deep-canopy);
+        }
+
+        /* Special Component - Ecosystem Card */
+        .ecosystem-card {
+            background: linear-gradient(135deg, var(--deep-canopy), var(--chlorophyll));
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .ecosystem-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--morning-sun) 0%, transparent 70%);
+            opacity: 0.5;
+            animation: sunPulse 4s ease-in-out infinite;
+        }
+
+        .ecosystem-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-lg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .ecosystem-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .ecosystem-status {
+            background: rgba(255,255,255,0.2);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-xl);
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            gap: 6px;
         }
 
-        .grow-demo {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--bright-green), var(--leaf-green));
-            border-radius: var(--radius-organic);
-            animation: grow 3s ease-in-out infinite;
-        }
-
-        @keyframes grow {
-            0%, 100% { transform: scale(0.8); }
-            50% { transform: scale(1.2); }
-        }
-
-        .sun-demo {
-            width: 60px;
-            height: 60px;
-            background: var(--solar-gold);
-            border-radius: 50%;
-            box-shadow: 0 0 30px rgba(255, 213, 79, 0.5);
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 213, 79, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(255, 213, 79, 0.7); }
-        }
-
-        .wave-demo {
-            width: 100px;
-            height: 20px;
-            background: linear-gradient(90deg, var(--sky-blue), var(--mint));
-            border-radius: var(--radius-xl);
-            animation: wave 2s ease-in-out infinite;
-        }
-
-        @keyframes wave {
-            0%, 100% { transform: scaleX(0.8) translateX(-10px); }
-            50% { transform: scaleX(1.2) translateX(10px); }
-        }
-
-        /* Special Component: Energy Dashboard */
-        .energy-dashboard {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .energy-stat {
-            text-align: center;
-            padding: var(--space-lg);
-            background: linear-gradient(135deg, rgba(168, 230, 207, 0.3), rgba(129, 212, 250, 0.3));
-            border-radius: var(--radius-md);
-        }
-
-        .stat-icon {
-            font-size: 2.5rem;
-            margin-bottom: var(--space-sm);
-        }
-
-        .stat-value {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--leaf-green);
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--bark-brown);
-        }
-
-        .stat-bar {
+        .ecosystem-status::before {
+            content: '';
+            width: 8px;
             height: 8px;
-            background: var(--mint);
-            border-radius: var(--radius-xl);
-            margin-top: var(--space-md);
+            background: var(--morning-sun);
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .ecosystem-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .metric-item {
+            text-align: center;
+            padding: var(--space-md);
+            background: rgba(255,255,255,0.1);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(10px);
+        }
+
+        .metric-value {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--morning-sun);
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        .ecosystem-visual {
+            height: 120px;
+            background: rgba(255,255,255,0.1);
+            border-radius: var(--radius-md);
+            position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            padding: var(--space-md);
+            gap: var(--space-sm);
         }
 
-        .stat-progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--bright-green), var(--solar-gold));
-            border-radius: var(--radius-xl);
-            animation: progress-fill 2s ease-out forwards;
+        .growth-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--moss), var(--chlorophyll), var(--morning-sun));
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            animation: growBar 2s ease-out forwards;
+            transform-origin: bottom;
         }
 
-        @keyframes progress-fill {
-            from { width: 0; }
+        .growth-bar:nth-child(1) { animation-delay: 0.1s; height: 60%; }
+        .growth-bar:nth-child(2) { animation-delay: 0.2s; height: 80%; }
+        .growth-bar:nth-child(3) { animation-delay: 0.3s; height: 70%; }
+        .growth-bar:nth-child(4) { animation-delay: 0.4s; height: 90%; }
+        .growth-bar:nth-child(5) { animation-delay: 0.5s; height: 75%; }
+        .growth-bar:nth-child(6) { animation-delay: 0.6s; height: 95%; }
+        .growth-bar:nth-child(7) { animation-delay: 0.7s; height: 85%; }
+
+        @keyframes growBar {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
         }
 
-        /* Alerts */
+        /* Floating particles */
+        .ecosystem-card .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--morning-sun);
+            border-radius: 50%;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { top: 20%; left: 30%; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 40%; left: 60%; animation-delay: 1s; }
+        .particle:nth-child(3) { top: 60%; left: 20%; animation-delay: 2s; }
+        .particle:nth-child(4) { top: 30%; left: 80%; animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Alerts - Ecosystem Notifications */
         .alert {
             padding: var(--space-md) var(--space-lg);
             border-radius: var(--radius-md);
             margin-bottom: var(--space-md);
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: var(--space-md);
-            border-left: 4px solid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .alert::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
         }
 
         .alert-icon {
             font-size: 1.5rem;
+            flex-shrink: 0;
         }
 
-        .alert-info {
-            background: rgba(129, 212, 250, 0.2);
-            border-color: var(--sky-blue);
+        .alert-content {
+            flex: 1;
         }
 
-        .alert-success {
-            background: rgba(168, 230, 207, 0.3);
-            border-color: var(--bright-green);
+        .alert-title {
+            font-family: var(--font-display);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .alert-growth {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--deep-canopy);
+        }
+
+        .alert-growth::before {
+            background: var(--chlorophyll);
+        }
+
+        .alert-solar {
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--rich-soil);
+        }
+
+        .alert-solar::before {
+            background: var(--golden-hour);
+        }
+
+        .alert-water {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--bark);
+        }
+
+        .alert-water::before {
+            background: var(--sky-blue);
         }
 
         .alert-warning {
-            background: rgba(255, 213, 79, 0.2);
-            border-color: var(--solar-gold);
+            background: rgba(234, 88, 12, 0.1);
+            color: var(--terracotta);
         }
 
-        .alert-error {
-            background: rgba(212, 113, 94, 0.2);
-            border-color: var(--terracotta);
-        }
-
-        /* Back Link */
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-sm);
-            color: var(--leaf-green);
-            text-decoration: none;
-            font-weight: 500;
-            margin-bottom: var(--space-xl);
-            transition: color 0.3s ease;
-        }
-
-        .back-link:hover {
-            color: var(--bright-green);
+        .alert-warning::before {
+            background: var(--terracotta);
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: var(--space-2xl);
-            color: var(--leaf-green);
+            margin-top: var(--space-3xl);
+            background: linear-gradient(135deg, var(--deep-canopy), var(--chlorophyll));
+            border-radius: var(--radius-xl);
+            color: white;
         }
 
         footer p {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-sm);
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        footer p:first-child {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--space-md);
+            }
+
+            header {
+                padding: var(--space-2xl) var(--space-md);
+            }
+
+            section {
+                padding: var(--space-lg);
+            }
+
+            .ecosystem-metrics {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">← Back to Gallery</a>
+        <a href="../index.html" class="back-link">Back to Gallery</a>
 
         <header>
-            <h1 class="logo">Verdant</h1>
-            <p class="tagline">Design for a Sustainable Tomorrow</p>
-            <div class="leaf-border">
-                <span class="leaf">🌱</span>
-                <span class="leaf">🌿</span>
-                <span class="leaf">☀️</span>
-                <span class="leaf">🌿</span>
-                <span class="leaf">🌱</span>
-            </div>
+            <h1>Thrive</h1>
+            <p>A regenerative design system for building sustainable, nature-integrated interfaces that bloom with optimism</p>
         </header>
 
         <!-- Color Palette -->
-        <section>
+        <section id="colors">
             <h2>Color Palette</h2>
             <div class="color-grid">
-                <div class="color-swatch" style="background: var(--leaf-green);">
-                    <span>Leaf Green</span>
+                <div class="color-swatch swatch-chlorophyll">
+                    <span class="color-name">Chlorophyll</span>
+                    <span class="color-value">#22C55E</span>
                 </div>
-                <div class="color-swatch" style="background: var(--bright-green);">
-                    <span>Bright Green</span>
+                <div class="color-swatch swatch-canopy">
+                    <span class="color-name">Deep Canopy</span>
+                    <span class="color-value">#166534</span>
                 </div>
-                <div class="color-swatch" style="background: var(--mint);">
-                    <span>Mint</span>
+                <div class="color-swatch swatch-sun">
+                    <span class="color-name">Morning Sun</span>
+                    <span class="color-value">#FCD34D</span>
                 </div>
-                <div class="color-swatch" style="background: var(--solar-gold);">
-                    <span>Solar Gold</span>
+                <div class="color-swatch swatch-golden">
+                    <span class="color-name">Golden Hour</span>
+                    <span class="color-value">#F59E0B</span>
                 </div>
-                <div class="color-swatch" style="background: var(--warm-amber);">
-                    <span>Warm Amber</span>
+                <div class="color-swatch swatch-sky">
+                    <span class="color-name">Sky Blue</span>
+                    <span class="color-value">#38BDF8</span>
                 </div>
-                <div class="color-swatch" style="background: var(--sky-blue);">
-                    <span>Sky Blue</span>
+                <div class="color-swatch swatch-terracotta">
+                    <span class="color-name">Terracotta</span>
+                    <span class="color-value">#EA580C</span>
                 </div>
-                <div class="color-swatch" style="background: var(--terracotta);">
-                    <span>Terracotta</span>
+                <div class="color-swatch swatch-moss">
+                    <span class="color-name">Moss</span>
+                    <span class="color-value">#84CC16</span>
                 </div>
-                <div class="color-swatch" style="background: var(--bark-brown);">
-                    <span>Bark Brown</span>
+                <div class="color-swatch swatch-petal">
+                    <span class="color-name">Petal Pink</span>
+                    <span class="color-value">#F472B6</span>
+                </div>
+                <div class="color-swatch swatch-soil">
+                    <span class="color-name">Rich Soil</span>
+                    <span class="color-value">#78350F</span>
+                </div>
+                <div class="color-swatch swatch-bark">
+                    <span class="color-name">Bark</span>
+                    <span class="color-value">#44403C</span>
                 </div>
             </div>
         </section>
 
         <!-- Typography -->
-        <section>
+        <section id="typography">
             <h2>Typography</h2>
-            <div class="type-sample">
-                <h3>Display Font - Fraunces</h3>
-                <p class="display-text">Growing a Better Future</p>
+            <div class="type-specimen">
+                <h3>Bricolage Grotesque</h3>
+                <p class="font-name">Display Font — Bold, friendly, forward-thinking</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">Display</span>
+                        <span class="display-text">Sustainable Futures</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">Heading</span>
+                        <span class="heading-text">Growing Together</span>
+                    </div>
+                </div>
             </div>
-            <div class="type-sample">
-                <h3>Body Font - Outfit</h3>
-                <p class="body-text">Solarpunk envisions a sustainable civilization in harmony with nature, powered by renewable energy and built on principles of cooperation and regeneration. It's optimistic sci-fi for the climate generation—imagining what we can build together.</p>
+            <div class="type-specimen">
+                <h3 style="font-family: var(--font-body); font-weight: 400;">Nunito</h3>
+                <p class="font-name">Body Font — Warm, approachable, legible</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">Body</span>
+                        <span class="body-text">Building regenerative systems that work with nature, not against it.</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">Small</span>
+                        <span class="small-text">Every action contributes to the ecosystem.</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Spacing Scale -->
-        <section>
+        <section id="spacing">
             <h2>Spacing Scale</h2>
-            <div class="spacing-demo">
-                <div class="spacing-block" style="width: 28px; height: 28px;">4</div>
-                <div class="spacing-block" style="width: 40px; height: 40px;">8</div>
-                <div class="spacing-block" style="width: 56px; height: 56px;">16</div>
-                <div class="spacing-block" style="width: 72px; height: 72px;">24</div>
-                <div class="spacing-block" style="width: 88px; height: 88px;">32</div>
-                <div class="spacing-block" style="width: 104px; height: 104px;">48</div>
+            <p style="margin-bottom: var(--space-lg); opacity: 0.8;">Fibonacci-inspired spacing for organic rhythm and natural proportions.</p>
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-ring" style="width: 21px; height: 21px;"></div>
+                    <span class="spacing-label">XS</span>
+                    <span class="spacing-value">5px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-ring" style="width: 32px; height: 32px;"></div>
+                    <span class="spacing-label">SM</span>
+                    <span class="spacing-value">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-ring" style="width: 45px; height: 45px;"></div>
+                    <span class="spacing-label">MD</span>
+                    <span class="spacing-value">13px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-ring" style="width: 60px; height: 60px;"></div>
+                    <span class="spacing-label">LG</span>
+                    <span class="spacing-value">21px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-ring" style="width: 78px; height: 78px;"></div>
+                    <span class="spacing-label">XL</span>
+                    <span class="spacing-value">34px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-ring" style="width: 98px; height: 98px;"></div>
+                    <span class="spacing-label">2XL</span>
+                    <span class="spacing-value">55px</span>
+                </div>
             </div>
         </section>
 
         <!-- Buttons -->
-        <section>
+        <section id="buttons">
             <h2>Buttons</h2>
             <div class="button-grid">
-                <button class="btn btn-primary">🌱 Plant Seeds</button>
-                <button class="btn btn-secondary">☀️ Solar Power</button>
-                <button class="btn btn-outline">Learn More</button>
+                <button class="btn btn-primary">🌱 Start Growing</button>
+                <button class="btn btn-secondary">Learn More</button>
+                <button class="btn btn-solar">☀️ Solar Power</button>
+                <button class="btn btn-earth">Plant Seeds</button>
+            </div>
+            <div class="button-grid">
+                <button class="btn btn-primary" disabled style="opacity: 0.5; cursor: not-allowed;">Dormant</button>
+                <button class="btn btn-secondary" style="font-size: 0.85rem; padding: var(--space-sm) var(--space-md);">Small Action</button>
             </div>
         </section>
 
         <!-- Forms -->
-        <section>
+        <section id="forms">
             <h2>Forms</h2>
-            <div class="form-group">
-                <label>Your Name</label>
-                <input type="text" placeholder="Enter your name">
-            </div>
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" placeholder="you@example.com">
-            </div>
-            <div class="form-group">
-                <label>Your Ideas</label>
-                <textarea placeholder="Share your vision for a sustainable future..."></textarea>
-            </div>
-            <button class="btn btn-primary">Submit</button>
+            <form onsubmit="return false;" style="max-width: 500px;">
+                <div class="form-group">
+                    <label class="form-label">Garden Name</label>
+                    <input type="text" class="form-input" placeholder="Enter your garden name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Growing Zone</label>
+                    <select class="form-input form-select">
+                        <option>Select your zone</option>
+                        <option>Tropical</option>
+                        <option>Temperate</option>
+                        <option>Mediterranean</option>
+                        <option>Continental</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Project Vision</label>
+                    <textarea class="form-input" placeholder="Describe your sustainable future..."></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="form-checkbox-group">
+                        <input type="checkbox" class="form-checkbox" id="consent" checked>
+                        <label for="consent">I commit to regenerative practices</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">🌻 Begin Journey</button>
+            </form>
         </section>
 
         <!-- Cards -->
-        <section>
+        <section id="cards">
             <h2>Cards</h2>
             <div class="card-grid">
                 <div class="card">
-                    <div class="card-image">🌳</div>
+                    <div class="card-image"></div>
                     <div class="card-content">
-                        <h4 class="card-title">Urban Forests</h4>
-                        <p class="card-text">Vertical gardens and tree-covered buildings that produce oxygen and food for city dwellers.</p>
+                        <h3 class="card-title">Vertical Gardens</h3>
+                        <p class="card-text">Transform urban walls into thriving ecosystems that purify air and grow food.</p>
+                        <div class="card-meta">
+                            <span>🌿 12 species</span>
+                            <span>•</span>
+                            <span>+340% biodiversity</span>
+                        </div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-image">⚡</div>
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--morning-sun), var(--golden-hour), var(--terracotta));"></div>
                     <div class="card-content">
-                        <h4 class="card-title">Clean Energy</h4>
-                        <p class="card-text">Solar panels, wind turbines, and community microgrids powering sustainable communities.</p>
+                        <h3 class="card-title">Solar Integration</h3>
+                        <p class="card-text">Harness clean energy while creating habitat for native pollinators.</p>
+                        <div class="card-meta">
+                            <span>☀️ 15kW capacity</span>
+                            <span>•</span>
+                            <span>100% renewable</span>
+                        </div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-image">💧</div>
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--sky-blue), var(--chlorophyll), var(--moss));"></div>
                     <div class="card-content">
-                        <h4 class="card-title">Water Systems</h4>
-                        <p class="card-text">Rainwater harvesting and natural filtration systems that work with nature, not against it.</p>
+                        <h3 class="card-title">Water Cycles</h3>
+                        <p class="card-text">Closed-loop systems that capture, filter, and reuse every precious drop.</p>
+                        <div class="card-meta">
+                            <span>💧 Zero waste</span>
+                            <span>•</span>
+                            <span>95% efficiency</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Data Table -->
-        <section>
+        <section id="table">
             <h2>Data Table</h2>
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th>Resource</th>
-                            <th>Production</th>
-                            <th>Consumption</th>
+                            <th>Project</th>
+                            <th>Location</th>
+                            <th>Impact Score</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Solar Energy</td>
-                            <td>450 kWh</td>
-                            <td>320 kWh</td>
-                            <td><span class="badge badge-green">Surplus</span></td>
+                            <td>Urban Forest Initiative</td>
+                            <td>Portland, OR</td>
+                            <td>92/100</td>
+                            <td><span class="status-active">Thriving</span></td>
                         </tr>
                         <tr>
-                            <td>Rainwater</td>
-                            <td>2,400 L</td>
-                            <td>1,800 L</td>
-                            <td><span class="badge badge-blue">Optimal</span></td>
+                            <td>Rooftop Farm Network</td>
+                            <td>Brooklyn, NY</td>
+                            <td>87/100</td>
+                            <td><span class="status-active">Thriving</span></td>
                         </tr>
                         <tr>
-                            <td>Compost</td>
-                            <td>85 kg</td>
-                            <td>90 kg</td>
-                            <td><span class="badge badge-gold">Balanced</span></td>
+                            <td>Pollinator Highway</td>
+                            <td>Austin, TX</td>
+                            <td>78/100</td>
+                            <td><span class="status-pending">Growing</span></td>
+                        </tr>
+                        <tr>
+                            <td>Rewilding Corridor</td>
+                            <td>Denver, CO</td>
+                            <td>71/100</td>
+                            <td><span class="status-pending">Seeding</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -814,130 +1342,149 @@
         </section>
 
         <!-- Badges -->
-        <section>
+        <section id="badges">
             <h2>Badges & Tags</h2>
             <div class="badge-grid">
-                <span class="badge badge-green">Renewable</span>
-                <span class="badge badge-gold">Solar Powered</span>
-                <span class="badge badge-blue">Water Positive</span>
-                <span class="badge badge-terracotta">Community</span>
+                <span class="badge badge-growth">🌱 Growing</span>
+                <span class="badge badge-solar">☀️ Solar Powered</span>
+                <span class="badge badge-water">💧 Water Positive</span>
+                <span class="badge badge-earth">🌍 Carbon Negative</span>
+                <span class="badge badge-bloom">🌸 Pollinator Friendly</span>
+                <span class="badge badge-outline">Organic</span>
             </div>
         </section>
 
         <!-- Design Principles -->
-        <section>
+        <section id="principles">
             <h2>Design Principles</h2>
             <div class="principles-grid">
-                <div class="principle">
-                    <span class="principle-icon">🌱</span>
-                    <h4 class="principle-title">Regenerative</h4>
-                    <p class="principle-text">Design that gives back more than it takes from the environment</p>
+                <div class="principle-card">
+                    <div class="principle-icon">🌿</div>
+                    <h3 class="principle-title">Regenerative First</h3>
+                    <p class="principle-text">Every design choice should contribute more than it takes, creating systems that heal and restore.</p>
                 </div>
-                <div class="principle">
-                    <span class="principle-icon">☀️</span>
-                    <h4 class="principle-title">Optimistic</h4>
-                    <p class="principle-text">Bright, hopeful aesthetics that inspire positive action</p>
+                <div class="principle-card">
+                    <div class="principle-icon">☀️</div>
+                    <h3 class="principle-title">Optimistic Vision</h3>
+                    <p class="principle-text">Solarpunk is hopeful. Design should inspire action and demonstrate that better futures are possible.</p>
                 </div>
-                <div class="principle">
-                    <span class="principle-icon">🤝</span>
-                    <h4 class="principle-title">Community</h4>
-                    <p class="principle-text">Systems designed for collective benefit and cooperation</p>
+                <div class="principle-card">
+                    <div class="principle-icon">🌀</div>
+                    <h3 class="principle-title">Circular Systems</h3>
+                    <p class="principle-text">No waste, only nutrients. Design closed loops where outputs become inputs.</p>
                 </div>
-                <div class="principle">
-                    <span class="principle-icon">🔄</span>
-                    <h4 class="principle-title">Circular</h4>
-                    <p class="principle-text">Zero waste through thoughtful lifecycle design</p>
+                <div class="principle-card">
+                    <div class="principle-icon">🤝</div>
+                    <h3 class="principle-title">Community Centered</h3>
+                    <p class="principle-text">Technology serves people and ecosystems. Design for collective flourishing, not extraction.</p>
                 </div>
             </div>
         </section>
 
         <!-- Animations -->
-        <section>
+        <section id="animations">
             <h2>Animation & Micro-interactions</h2>
-            <div class="animation-grid">
-                <div>
-                    <h3>Organic Growth</h3>
-                    <div class="animation-demo">
-                        <div class="grow-demo"></div>
-                    </div>
+            <div class="animation-showcase">
+                <div class="animation-demo grow-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Grow</span>
                 </div>
-                <div>
-                    <h3>Solar Glow</h3>
-                    <div class="animation-demo">
-                        <div class="sun-demo"></div>
-                    </div>
+                <div class="animation-demo sway-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Sway</span>
                 </div>
-                <div>
-                    <h3>Water Flow</h3>
-                    <div class="animation-demo">
-                        <div class="wave-demo"></div>
-                    </div>
+                <div class="animation-demo bloom-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Bloom</span>
+                </div>
+                <div class="animation-demo photosynthesis-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Photosynthesize</span>
                 </div>
             </div>
         </section>
 
-        <!-- Special Component: Energy Dashboard -->
-        <section>
-            <h2>Special Component: Energy Dashboard</h2>
-            <div class="energy-dashboard">
-                <div class="energy-stat">
-                    <span class="stat-icon">☀️</span>
-                    <div class="stat-value">87%</div>
-                    <div class="stat-label">Solar Collection</div>
-                    <div class="stat-bar">
-                        <div class="stat-progress" style="width: 87%;"></div>
+        <!-- Special Component: Ecosystem Dashboard -->
+        <section id="special">
+            <h2>Special Component</h2>
+            <p style="margin-bottom: var(--space-lg); opacity: 0.8;">Ecosystem Dashboard — Track the health and growth of regenerative systems in real-time.</p>
+            <div class="ecosystem-card">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+
+                <div class="ecosystem-header">
+                    <div>
+                        <div class="ecosystem-title">Community Garden Network</div>
+                        <p style="opacity: 0.8; margin-top: 4px;">Portland Metro Area • Est. 2024</p>
+                    </div>
+                    <div class="ecosystem-status">Flourishing</div>
+                </div>
+
+                <div class="ecosystem-metrics">
+                    <div class="metric-item">
+                        <div class="metric-value">2,847</div>
+                        <div class="metric-label">Trees Planted</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">156</div>
+                        <div class="metric-label">Species Restored</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">89%</div>
+                        <div class="metric-label">Water Efficiency</div>
                     </div>
                 </div>
-                <div class="energy-stat">
-                    <span class="stat-icon">💧</span>
-                    <div class="stat-value">72%</div>
-                    <div class="stat-label">Water Reserve</div>
-                    <div class="stat-bar">
-                        <div class="stat-progress" style="width: 72%;"></div>
-                    </div>
-                </div>
-                <div class="energy-stat">
-                    <span class="stat-icon">🌿</span>
-                    <div class="stat-value">94%</div>
-                    <div class="stat-label">Air Quality</div>
-                    <div class="stat-bar">
-                        <div class="stat-progress" style="width: 94%;"></div>
-                    </div>
-                </div>
-                <div class="energy-stat">
-                    <span class="stat-icon">♻️</span>
-                    <div class="stat-value">98%</div>
-                    <div class="stat-label">Waste Recycled</div>
-                    <div class="stat-bar">
-                        <div class="stat-progress" style="width: 98%;"></div>
-                    </div>
+
+                <div class="ecosystem-visual">
+                    <div class="growth-bar"></div>
+                    <div class="growth-bar"></div>
+                    <div class="growth-bar"></div>
+                    <div class="growth-bar"></div>
+                    <div class="growth-bar"></div>
+                    <div class="growth-bar"></div>
+                    <div class="growth-bar"></div>
                 </div>
             </div>
         </section>
 
         <!-- Alerts -->
-        <section>
+        <section id="alerts">
             <h2>Alert Messages</h2>
-            <div class="alert alert-info">
-                <span class="alert-icon">💧</span>
-                <span>Rainwater collection system is at optimal capacity.</span>
+            <div class="alert alert-growth">
+                <span class="alert-icon">🌱</span>
+                <div class="alert-content">
+                    <div class="alert-title">Growth Milestone Reached!</div>
+                    <p>Your ecosystem has achieved 150% of its biodiversity target.</p>
+                </div>
             </div>
-            <div class="alert alert-success">
+            <div class="alert alert-solar">
                 <span class="alert-icon">☀️</span>
-                <span>Solar panels are generating surplus energy for the grid.</span>
+                <div class="alert-content">
+                    <div class="alert-title">Peak Solar Production</div>
+                    <p>Optimal conditions detected. Energy surplus available for community grid.</p>
+                </div>
+            </div>
+            <div class="alert alert-water">
+                <span class="alert-icon">💧</span>
+                <div class="alert-content">
+                    <div class="alert-title">Rain Harvest Complete</div>
+                    <p>Cisterns at 94% capacity. Greywater system operating efficiently.</p>
+                </div>
             </div>
             <div class="alert alert-warning">
-                <span class="alert-icon">🌱</span>
-                <span>Garden irrigation scheduled for evening to conserve water.</span>
-            </div>
-            <div class="alert alert-error">
-                <span class="alert-icon">🔧</span>
-                <span>Wind turbine maintenance required within 48 hours.</span>
+                <span class="alert-icon">🌡️</span>
+                <div class="alert-content">
+                    <div class="alert-title">Heat Advisory Active</div>
+                    <p>Automated shade systems deployed. Irrigation schedule adjusted.</p>
+                </div>
             </div>
         </section>
 
         <footer>
-            <p>🌍 Built for Future Generations 🌿</p>
+            <p>Thrive Design System</p>
+            <p>Growing sustainable interfaces for regenerative futures 🌻</p>
         </footer>
     </div>
 </body>

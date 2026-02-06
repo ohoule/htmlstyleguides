@@ -3,1150 +3,1525 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meadowbrook — Cottagecore Design System</title>
+    <title>Bramble — Cottagecore Style Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Quicksand:wght@400;500;600&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* ══════════════════════════════════════════════════════════════════════════
+           BRAMBLE — COTTAGECORE STYLE GUIDE
+           A gentle embrace of pastoral simplicity and handmade warmth
+           ══════════════════════════════════════════════════════════════════════════ */
+
         :root {
-            --color-cream: #FDF8F3;
-            --color-linen: #F5EDE4;
-            --color-parchment: #E8DDD0;
-            --color-sage: #8BA888;
-            --color-sage-dark: #6B8B69;
-            --color-rose: #D4A5A5;
-            --color-rose-dark: #C08B8B;
-            --color-lavender: #B8A9C9;
-            --color-honey: #D4A853;
-            --color-bark: #5D4E37;
-            --color-earth: #8B7355;
-            --color-text: #4A3F35;
+            /* Earthy Palette */
+            --cream: #FDF8F0;
+            --linen: #F5EBE0;
+            --parchment: #E8DED0;
+            --straw: #D4C9B0;
+            --bark: #6B5B4F;
+            --earth: #4A3F35;
 
-            --color-success: #6B8B69;
-            --color-warning: #D4A853;
-            --color-error: #C08B8B;
-            --color-info: #8BA888;
+            /* Nature Accents */
+            --sage: #8B9F82;
+            --sage-dark: #6B8060;
+            --rose: #C9A9A6;
+            --rose-dark: #B08B87;
+            --lavender: #A69BB5;
+            --honey: #D4A85A;
+            --berry: #8B4B5C;
 
-            --font-display: 'Cormorant Infant', serif;
-            --font-body: 'Nunito', sans-serif;
+            /* Typography */
+            --font-display: 'Lora', serif;
+            --font-body: 'Quicksand', sans-serif;
+            --font-handwritten: 'Caveat', cursive;
 
-            --space-1: 0.25rem;
-            --space-2: 0.5rem;
-            --space-3: 0.75rem;
-            --space-4: 1rem;
-            --space-5: 1.5rem;
-            --space-6: 2rem;
-            --space-7: 3rem;
-            --space-8: 4rem;
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            --space-4xl: 6rem;
 
-            --border-radius: 8px;
-            --border-radius-lg: 16px;
-            --transition: 0.3s ease;
+            /* Borders */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
         }
 
-        * {
+        /* Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: var(--font-body);
-            background: var(--color-cream);
-            color: var(--color-text);
+            font-size: 16px;
             line-height: 1.7;
+            color: var(--earth);
+            background: var(--cream);
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 var(--space-6);
+        /* Floral Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5c2 0 3 2 3 4s-1 4-3 4-3-2-3-4 1-4 3-4zm0 47c2 0 3 2 3 4s-1 4-3 4-3-2-3-4 1-4 3-4zm25-22c0 2-2 3-4 3s-4-1-4-3 2-3 4-3 4 1 4 3zM9 30c0 2-2 3-4 3s-4-1-4-3 2-3 4-3 4 1 4 3z' fill='%238B9F82' fill-opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
         }
 
         /* Navigation */
-        .nav {
-            background: var(--color-cream);
-            padding: var(--space-5) var(--space-6);
-            border-bottom: 1px solid var(--color-parchment);
+        .back-link {
+            position: fixed;
+            top: var(--space-lg);
+            left: var(--space-lg);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--linen);
+            color: var(--bark);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid var(--straw);
+            border-radius: var(--radius-xl);
+            transition: all 0.3s ease;
+            z-index: 1000;
         }
 
-        .nav-inner {
+        .back-link:hover {
+            background: var(--sage);
+            color: var(--cream);
+            border-color: var(--sage);
+        }
+
+        .back-link::before {
+            content: '←';
+        }
+
+        /* Header */
+        header {
+            padding: var(--space-4xl) var(--space-xl) var(--space-3xl);
+            text-align: center;
+            position: relative;
+        }
+
+        .logo {
+            font-family: var(--font-handwritten);
+            font-size: clamp(4rem, 12vw, 8rem);
+            font-weight: 400;
+            color: var(--bark);
+            line-height: 1;
+            margin-bottom: var(--space-md);
+        }
+
+        .tagline {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-style: italic;
+            color: var(--sage-dark);
+            letter-spacing: 0.05em;
+        }
+
+        .tagline::before,
+        .tagline::after {
+            content: '~';
+            margin: 0 var(--space-sm);
+            opacity: 0.5;
+        }
+
+        /* Container */
+        .container {
             max-width: 1100px;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 0 var(--space-xl);
         }
 
-        .nav-brand {
+        /* Section Styling */
+        section {
+            margin-bottom: var(--space-3xl);
+            padding: var(--space-2xl);
+            background: white;
+            border: 1px solid var(--parchment);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 20px rgba(74, 63, 53, 0.05);
+            position: relative;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 30px;
+            width: 20px;
+            height: 20px;
+            background: var(--sage);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        section::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 55px;
+            width: 12px;
+            height: 12px;
+            background: var(--rose);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        .section-title {
             font-family: var(--font-display);
             font-size: 1.75rem;
             font-weight: 500;
-            color: var(--color-bark);
-            text-decoration: none;
-            font-style: italic;
+            color: var(--bark);
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-md);
+            border-bottom: 2px dashed var(--parchment);
         }
 
-        .nav-links {
-            display: flex;
-            gap: var(--space-5);
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-size: 0.9375rem;
-            color: var(--color-earth);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover {
-            color: var(--color-sage-dark);
-        }
-
-        /* Hero */
-        .hero {
-            padding: var(--space-8) 0;
-            text-align: center;
-            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-linen) 100%);
-            border-bottom: 1px solid var(--color-parchment);
-        }
-
-        .hero-wreath {
-            font-size: 3rem;
-            margin-bottom: var(--space-4);
-        }
-
-        .hero h1 {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 400;
-            font-style: italic;
-            color: var(--color-bark);
-            margin-bottom: var(--space-4);
-        }
-
-        .hero p {
-            font-size: 1.125rem;
-            color: var(--color-earth);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* Sections */
-        section {
-            padding: var(--space-8) 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: var(--space-6);
-        }
-
-        .section-ornament {
-            color: var(--color-sage);
-            font-size: 1.5rem;
-            margin-bottom: var(--space-3);
-        }
-
-        h2 {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 500;
-            color: var(--color-bark);
-            font-style: italic;
-        }
-
-        h3 {
-            font-family: var(--font-display);
-            font-size: 1.375rem;
-            font-weight: 500;
-            color: var(--color-earth);
-            margin-bottom: var(--space-4);
-        }
-
-        p {
-            margin-bottom: var(--space-4);
-        }
-
-        /* Colors */
+        /* ═══════════════════════════════════════════════════════════════════
+           1. COLOR PALETTE
+           ═══════════════════════════════════════════════════════════════════ */
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: var(--space-5);
-        }
-
-        .color-card {
-            text-align: center;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: var(--space-lg);
         }
 
         .color-swatch {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin: 0 auto var(--space-3);
-            border: 3px solid var(--color-cream);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            background: var(--linen);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .color-swatch:hover {
+            transform: translateY(-4px);
+        }
+
+        .color-preview {
+            height: 80px;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+        }
+
+        .color-info {
+            padding: var(--space-md);
         }
 
         .color-name {
             font-family: var(--font-display);
-            font-size: 1rem;
+            font-size: 0.875rem;
             font-weight: 500;
-            color: var(--color-bark);
-            font-style: italic;
+            margin-bottom: var(--space-xs);
         }
 
         .color-hex {
+            font-family: var(--font-body);
             font-size: 0.75rem;
-            color: var(--color-earth);
+            color: var(--bark);
+            opacity: 0.7;
         }
 
-        /* Typography */
-        .type-showcase {
-            background: var(--color-linen);
-            border-radius: var(--border-radius-lg);
-            padding: var(--space-7);
-            text-align: center;
-            margin-bottom: var(--space-6);
+        /* ═══════════════════════════════════════════════════════════════════
+           2. TYPOGRAPHY
+           ═══════════════════════════════════════════════════════════════════ */
+        .type-specimen {
+            margin-bottom: var(--space-xl);
+            padding: var(--space-lg);
+            background: var(--linen);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--sage);
+        }
+
+        .type-label {
+            font-family: var(--font-handwritten);
+            font-size: 1.25rem;
+            color: var(--sage-dark);
+            margin-bottom: var(--space-sm);
         }
 
         .type-display {
             font-family: var(--font-display);
-            font-size: 3.5rem;
-            font-weight: 400;
-            font-style: italic;
-            color: var(--color-bark);
-            margin-bottom: var(--space-3);
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--bark);
+            line-height: 1.2;
         }
 
         .type-body {
-            font-size: 1.25rem;
-            color: var(--color-earth);
+            font-family: var(--font-body);
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            color: var(--earth);
+            max-width: 60ch;
+        }
+
+        .type-handwritten {
+            font-family: var(--font-handwritten);
+            font-size: 1.75rem;
+            color: var(--berry);
+            line-height: 1.4;
         }
 
         .type-scale {
             display: flex;
             flex-direction: column;
-            gap: var(--space-4);
+            gap: var(--space-md);
         }
 
-        .type-row {
+        .type-scale-item {
             display: flex;
             align-items: baseline;
-            gap: var(--space-5);
-            padding: var(--space-4);
-            background: var(--color-linen);
-            border-radius: var(--border-radius);
+            gap: var(--space-lg);
+            padding: var(--space-sm) 0;
+            border-bottom: 1px dashed var(--parchment);
         }
 
-        .type-label {
-            width: 80px;
+        .type-scale-size {
+            font-family: var(--font-body);
             font-size: 0.75rem;
-            color: var(--color-sage-dark);
-            text-transform: lowercase;
-            font-style: italic;
+            color: var(--sage-dark);
+            min-width: 100px;
         }
 
-        /* Spacing */
-        .spacing-visual {
+        /* ═══════════════════════════════════════════════════════════════════
+           3. SPACING SCALE
+           ═══════════════════════════════════════════════════════════════════ */
+        .spacing-demo {
             display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-5);
-            align-items: flex-end;
-            justify-content: center;
-            padding: var(--space-6);
-            background: var(--color-linen);
-            border-radius: var(--border-radius-lg);
+            flex-direction: column;
+            gap: var(--space-md);
         }
 
         .spacing-item {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: var(--space-2);
-        }
-
-        .spacing-box {
-            background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-rose) 100%);
-            border-radius: 50%;
+            gap: var(--space-lg);
         }
 
         .spacing-label {
-            font-size: 0.75rem;
-            color: var(--color-earth);
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: var(--bark);
+            min-width: 100px;
         }
 
-        /* Buttons */
-        .button-row {
+        .spacing-bar {
+            height: 20px;
+            background: linear-gradient(90deg, var(--sage), var(--sage-dark));
+            border-radius: var(--radius-xl);
+        }
+
+        .spacing-value {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: var(--bark);
+            opacity: 0.6;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           4. BUTTONS
+           ═══════════════════════════════════════════════════════════════════ */
+        .button-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-4);
-            justify-content: center;
-            margin-bottom: var(--space-6);
+            gap: var(--space-lg);
+            align-items: flex-start;
         }
 
         .btn {
             font-family: var(--font-body);
             font-size: 0.9375rem;
             font-weight: 500;
-            padding: var(--space-3) var(--space-6);
-            border-radius: 50px;
-            border: none;
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-xl);
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            border: 2px solid transparent;
         }
 
         .btn-primary {
-            background: var(--color-sage);
+            background: var(--sage);
             color: white;
+            border-color: var(--sage);
         }
 
         .btn-primary:hover {
-            background: var(--color-sage-dark);
+            background: var(--sage-dark);
+            border-color: var(--sage-dark);
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(107, 139, 105, 0.3);
         }
 
         .btn-secondary {
-            background: var(--color-rose);
+            background: var(--rose);
             color: white;
+            border-color: var(--rose);
         }
 
         .btn-secondary:hover {
-            background: var(--color-rose-dark);
+            background: var(--rose-dark);
+            border-color: var(--rose-dark);
         }
 
         .btn-outline {
             background: transparent;
-            color: var(--color-sage-dark);
-            border: 2px solid var(--color-sage);
+            color: var(--bark);
+            border-color: var(--straw);
         }
 
         .btn-outline:hover {
-            background: var(--color-sage);
-            color: white;
+            background: var(--linen);
+            border-color: var(--bark);
         }
 
-        .btn-ghost {
-            background: transparent;
-            color: var(--color-earth);
+        .btn-honey {
+            background: var(--honey);
+            color: var(--earth);
+            border-color: var(--honey);
         }
 
-        .btn-ghost:hover {
-            background: var(--color-linen);
+        .btn-honey:hover {
+            filter: brightness(0.95);
         }
 
-        /* Forms */
-        .form-card {
-            background: var(--color-linen);
-            border-radius: var(--border-radius-lg);
-            padding: var(--space-6);
-            max-width: 500px;
-            margin: 0 auto;
+        .btn[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
+        /* ═══════════════════════════════════════════════════════════════════
+           5. FORMS
+           ═══════════════════════════════════════════════════════════════════ */
         .form-group {
-            margin-bottom: var(--space-5);
+            margin-bottom: var(--space-xl);
         }
 
         .form-label {
             display: block;
             font-family: var(--font-display);
-            font-size: 1rem;
-            font-style: italic;
-            color: var(--color-bark);
-            margin-bottom: var(--space-2);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--bark);
+            margin-bottom: var(--space-sm);
         }
 
         .form-input {
             width: 100%;
-            padding: var(--space-3) var(--space-4);
+            max-width: 400px;
+            padding: var(--space-md) var(--space-lg);
             font-family: var(--font-body);
             font-size: 1rem;
-            background: var(--color-cream);
-            border: 1px solid var(--color-parchment);
-            border-radius: var(--border-radius);
-            color: var(--color-text);
-            transition: var(--transition);
+            color: var(--earth);
+            background: var(--linen);
+            border: 1px solid var(--straw);
+            border-radius: var(--radius-md);
+            outline: none;
+            transition: all 0.3s ease;
         }
 
         .form-input:focus {
-            outline: none;
-            border-color: var(--color-sage);
-            box-shadow: 0 0 0 3px rgba(139, 168, 136, 0.2);
+            border-color: var(--sage);
+            box-shadow: 0 0 0 3px rgba(139, 159, 130, 0.2);
         }
 
         .form-input::placeholder {
-            color: var(--color-earth);
-            opacity: 0.6;
+            color: var(--bark);
+            opacity: 0.5;
         }
 
-        /* Cards */
+        .form-input.error {
+            border-color: var(--berry);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%236B5B4F' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 48px;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            cursor: pointer;
+        }
+
+        .form-checkbox input {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--straw);
+            border-radius: var(--radius-sm);
+            background: var(--linen);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .form-checkbox input:checked {
+            background: var(--sage);
+            border-color: var(--sage);
+        }
+
+        .form-checkbox input:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 0.75rem;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           6. CARDS
+           ═══════════════════════════════════════════════════════════════════ */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-5);
+            gap: var(--space-xl);
         }
 
         .card {
-            background: var(--color-linen);
-            border-radius: var(--border-radius-lg);
+            background: white;
+            border: 1px solid var(--parchment);
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 30px rgba(74, 63, 53, 0.1);
         }
 
         .card-image {
             height: 160px;
-            background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-lavender) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
+            background: linear-gradient(135deg, var(--sage) 0%, var(--lavender) 100%);
+            position: relative;
+        }
+
+        .card-image::after {
+            content: '❀';
+            position: absolute;
+            bottom: var(--space-md);
+            right: var(--space-md);
+            font-size: 2rem;
+            opacity: 0.6;
         }
 
         .card-body {
-            padding: var(--space-5);
+            padding: var(--space-lg);
         }
 
         .card-title {
             font-family: var(--font-display);
-            font-size: 1.375rem;
+            font-size: 1.25rem;
             font-weight: 500;
-            font-style: italic;
-            color: var(--color-bark);
-            margin-bottom: var(--space-2);
+            color: var(--bark);
+            margin-bottom: var(--space-sm);
         }
 
         .card-text {
             font-size: 0.9375rem;
-            color: var(--color-earth);
-            margin-bottom: var(--space-4);
+            color: var(--earth);
+            line-height: 1.6;
         }
 
         .card-footer {
-            padding: var(--space-4) var(--space-5);
-            background: var(--color-parchment);
+            padding: var(--space-md) var(--space-lg);
+            border-top: 1px dashed var(--parchment);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .card-link {
-            font-family: var(--font-display);
-            font-style: italic;
-            color: var(--color-sage-dark);
-            text-decoration: none;
+        /* ═══════════════════════════════════════════════════════════════════
+           7. DATA TABLE
+           ═══════════════════════════════════════════════════════════════════ */
+        .table-container {
+            overflow-x: auto;
+            border: 1px solid var(--parchment);
+            border-radius: var(--radius-md);
         }
 
-        .card-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Table */
-        .table-wrapper {
-            background: var(--color-linen);
-            border-radius: var(--border-radius-lg);
-            overflow: hidden;
-        }
-
-        table {
+        .data-table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        th {
-            background: var(--color-sage);
-            color: white;
-            padding: var(--space-4);
-            text-align: left;
+        .data-table thead {
+            background: var(--linen);
+        }
+
+        .data-table th {
             font-family: var(--font-display);
             font-weight: 500;
-            font-style: italic;
+            font-size: 0.875rem;
+            padding: var(--space-md) var(--space-lg);
+            text-align: left;
+            color: var(--bark);
+            border-bottom: 1px solid var(--parchment);
         }
 
-        td {
-            padding: var(--space-4);
-            border-bottom: 1px solid var(--color-parchment);
+        .data-table td {
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--parchment);
+            font-size: 0.9375rem;
         }
 
-        tr:hover td {
-            background: var(--color-cream);
+        .data-table tbody tr:hover {
+            background: rgba(139, 159, 130, 0.05);
         }
 
-        /* Badges */
-        .badge-group {
+        .table-action {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--sage);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .table-action:hover {
+            background: var(--sage-dark);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           8. BADGES & TAGS
+           ═══════════════════════════════════════════════════════════════════ */
+        .badge-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-3);
-            justify-content: center;
+            gap: var(--space-md);
+            align-items: center;
         }
 
         .badge {
-            font-size: 0.8125rem;
-            padding: var(--space-2) var(--space-4);
-            border-radius: 50px;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-xl);
+            display: inline-block;
         }
 
         .badge-sage {
-            background: var(--color-sage);
-            color: white;
+            background: rgba(139, 159, 130, 0.2);
+            color: var(--sage-dark);
         }
 
         .badge-rose {
-            background: var(--color-rose);
-            color: white;
-        }
-
-        .badge-lavender {
-            background: var(--color-lavender);
-            color: white;
+            background: rgba(201, 169, 166, 0.3);
+            color: var(--rose-dark);
         }
 
         .badge-honey {
-            background: var(--color-honey);
-            color: var(--color-bark);
+            background: rgba(212, 168, 90, 0.2);
+            color: var(--bark);
         }
 
-        .badge-outline {
-            background: transparent;
-            border: 1px solid var(--color-earth);
-            color: var(--color-earth);
+        .badge-lavender {
+            background: rgba(166, 155, 181, 0.2);
+            color: var(--bark);
         }
 
-        /* Principles */
+        .badge-berry {
+            background: rgba(139, 75, 92, 0.15);
+            color: var(--berry);
+        }
+
+        .tag {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--linen);
+            border: 1px dashed var(--straw);
+            border-radius: var(--radius-sm);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           9. DESIGN PRINCIPLES
+           ═══════════════════════════════════════════════════════════════════ */
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: var(--space-5);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
         }
 
         .principle {
-            text-align: center;
-            padding: var(--space-6);
-            background: var(--color-linen);
-            border-radius: var(--border-radius-lg);
+            padding: var(--space-lg);
+            background: var(--linen);
+            border-radius: var(--radius-md);
+            position: relative;
         }
 
         .principle-icon {
-            font-size: 2.5rem;
-            margin-bottom: var(--space-4);
+            font-size: 2rem;
+            margin-bottom: var(--space-md);
         }
+
+        .principle:nth-child(1) .principle-icon::before { content: '🌿'; }
+        .principle:nth-child(2) .principle-icon::before { content: '🍯'; }
+        .principle:nth-child(3) .principle-icon::before { content: '🌸'; }
+        .principle:nth-child(4) .principle-icon::before { content: '🧺'; }
 
         .principle-title {
             font-family: var(--font-display);
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             font-weight: 500;
-            font-style: italic;
-            color: var(--color-bark);
-            margin-bottom: var(--space-2);
+            color: var(--bark);
+            margin-bottom: var(--space-sm);
         }
 
         .principle-text {
             font-size: 0.9375rem;
-            color: var(--color-earth);
+            color: var(--earth);
+            line-height: 1.6;
         }
 
-        /* Animations */
-        .animation-grid {
+        /* ═══════════════════════════════════════════════════════════════════
+           10. ANIMATIONS
+           ═══════════════════════════════════════════════════════════════════ */
+        .animation-demos {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: var(--space-4);
+            gap: var(--space-xl);
         }
 
         .animation-demo {
-            padding: var(--space-5);
-            background: var(--color-linen);
-            border-radius: var(--border-radius-lg);
             text-align: center;
+            padding: var(--space-xl);
+            background: var(--linen);
+            border-radius: var(--radius-md);
         }
 
-        .animation-box {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-rose) 100%);
-            border-radius: 50%;
-            margin: 0 auto var(--space-3);
+        .animation-label {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            margin-top: var(--space-md);
+            color: var(--bark);
         }
 
-        .demo-bloom:hover .animation-box {
-            animation: bloom 0.6s ease forwards;
+        /* Sway Animation */
+        .anim-sway {
+            font-size: 3rem;
+            animation: sway 3s ease-in-out infinite;
         }
 
-        .demo-sway:hover .animation-box {
-            animation: sway 1s ease-in-out infinite;
-        }
-
-        .demo-float:hover .animation-box {
-            animation: float 2s ease-in-out infinite;
-        }
-
-        .demo-glow:hover .animation-box {
-            animation: gentleGlow 1s ease infinite;
-        }
-
-        @keyframes bloom {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1.1); }
-        }
+        .anim-sway::before { content: '🌾'; }
 
         @keyframes sway {
             0%, 100% { transform: rotate(-5deg); }
             50% { transform: rotate(5deg); }
         }
 
-        @keyframes float {
+        /* Float Animation */
+        .anim-float {
+            font-size: 2.5rem;
+            animation: floatUp 4s ease-in-out infinite;
+        }
+
+        .anim-float::before { content: '🦋'; }
+
+        @keyframes floatUp {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
 
-        @keyframes gentleGlow {
-            0%, 100% { box-shadow: 0 0 10px rgba(139, 168, 136, 0.3); }
-            50% { box-shadow: 0 0 20px rgba(139, 168, 136, 0.6); }
+        /* Bloom Animation */
+        .anim-bloom {
+            font-size: 2.5rem;
+            animation: bloom 3s ease-in-out infinite;
         }
 
-        .animation-name {
-            font-family: var(--font-display);
-            font-size: 0.875rem;
-            font-style: italic;
-            color: var(--color-earth);
+        .anim-bloom::before { content: '🌸'; }
+
+        @keyframes bloom {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
         }
 
-        /* Recipe Card */
-        .recipe-card {
-            background: var(--color-linen);
-            border-radius: var(--border-radius-lg);
-            overflow: hidden;
-            max-width: 500px;
+        /* Fade Animation */
+        .anim-fade {
+            width: 60px;
+            height: 60px;
+            background: var(--sage);
+            border-radius: 50%;
             margin: 0 auto;
+            animation: fade 2s ease-in-out infinite;
+        }
+
+        @keyframes fade {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Gentle Spin */
+        .anim-spin {
+            font-size: 2.5rem;
+            animation: gentleSpin 8s linear infinite;
+        }
+
+        .anim-spin::before { content: '🌻'; }
+
+        @keyframes gentleSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Bounce */
+        .anim-bounce {
+            font-size: 2.5rem;
+            animation: gentleBounce 2s ease-in-out infinite;
+        }
+
+        .anim-bounce::before { content: '🐝'; }
+
+        @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           11. SPECIAL COMPONENT: RECIPE CARD
+           ═══════════════════════════════════════════════════════════════════ */
+        .recipe-card {
+            background: white;
+            border: 1px solid var(--parchment);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            max-width: 600px;
         }
 
         .recipe-header {
-            background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-lavender) 100%);
-            padding: var(--space-6);
-            text-align: center;
+            background: linear-gradient(135deg, var(--sage) 0%, var(--sage-dark) 100%);
+            padding: var(--space-xl);
             color: white;
+            position: relative;
+        }
+
+        .recipe-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 10px solid var(--sage-dark);
         }
 
         .recipe-title {
-            font-family: var(--font-display);
-            font-size: 1.75rem;
-            font-weight: 500;
-            font-style: italic;
-            margin-bottom: var(--space-2);
+            font-family: var(--font-handwritten);
+            font-size: 2.5rem;
+            margin-bottom: var(--space-xs);
         }
 
-        .recipe-meta {
-            font-size: 0.875rem;
+        .recipe-subtitle {
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
             opacity: 0.9;
         }
 
         .recipe-body {
-            padding: var(--space-6);
+            padding: var(--space-xl);
         }
 
-        .recipe-section {
-            margin-bottom: var(--space-5);
+        .recipe-meta {
+            display: flex;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-lg);
+            border-bottom: 1px dashed var(--parchment);
+        }
+
+        .recipe-meta-item {
+            text-align: center;
+        }
+
+        .recipe-meta-value {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--bark);
+        }
+
+        .recipe-meta-label {
+            font-size: 0.75rem;
+            color: var(--bark);
+            opacity: 0.7;
         }
 
         .recipe-section-title {
             font-family: var(--font-display);
             font-size: 1.125rem;
-            font-style: italic;
-            color: var(--color-bark);
-            margin-bottom: var(--space-3);
-            padding-bottom: var(--space-2);
-            border-bottom: 1px solid var(--color-parchment);
+            font-weight: 500;
+            color: var(--sage-dark);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
         }
 
-        .recipe-list {
+        .recipe-ingredients {
             list-style: none;
+            margin-bottom: var(--space-xl);
         }
 
-        .recipe-list li {
-            padding: var(--space-2) 0;
-            padding-left: var(--space-5);
+        .recipe-ingredients li {
+            padding: var(--space-sm) 0;
+            border-bottom: 1px dotted var(--parchment);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .recipe-ingredients li::before {
+            content: '•';
+            color: var(--sage);
+        }
+
+        .recipe-steps {
+            list-style: none;
+            counter-reset: steps;
+        }
+
+        .recipe-steps li {
+            padding: var(--space-md) 0;
+            padding-left: var(--space-xl);
             position: relative;
+            counter-increment: steps;
         }
 
-        .recipe-list li::before {
-            content: '🌿';
+        .recipe-steps li::before {
+            content: counter(steps);
             position: absolute;
             left: 0;
+            top: var(--space-md);
+            width: 24px;
+            height: 24px;
+            background: var(--sage);
+            color: white;
+            border-radius: 50%;
             font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Alerts */
+        /* ═══════════════════════════════════════════════════════════════════
+           12. ALERTS
+           ═══════════════════════════════════════════════════════════════════ */
+        .alerts-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
         .alert {
-            padding: var(--space-4) var(--space-5);
-            border-radius: var(--border-radius);
-            margin-bottom: var(--space-4);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
             display: flex;
             align-items: flex-start;
-            gap: var(--space-3);
+            gap: var(--space-md);
+            border-left: 4px solid;
         }
 
         .alert-icon {
             font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .alert-success {
+            background: rgba(139, 159, 130, 0.1);
+            border-color: var(--sage);
+        }
+
+        .alert-warning {
+            background: rgba(212, 168, 90, 0.1);
+            border-color: var(--honey);
+        }
+
+        .alert-error {
+            background: rgba(139, 75, 92, 0.1);
+            border-color: var(--berry);
+        }
+
+        .alert-info {
+            background: rgba(166, 155, 181, 0.1);
+            border-color: var(--lavender);
+        }
+
+        .alert-content {
+            flex: 1;
         }
 
         .alert-title {
             font-family: var(--font-display);
+            font-size: 0.9375rem;
             font-weight: 500;
-            font-style: italic;
-            margin-bottom: var(--space-1);
+            color: var(--bark);
+            margin-bottom: var(--space-xs);
         }
 
         .alert-text {
-            font-size: 0.9375rem;
-            margin: 0;
+            font-size: 0.875rem;
+            color: var(--earth);
         }
 
-        .alert-info {
-            background: rgba(139, 168, 136, 0.15);
-            border: 1px solid var(--color-sage);
+        .alert-close {
+            background: transparent;
+            border: none;
+            color: var(--bark);
+            cursor: pointer;
+            font-size: 1.25rem;
+            opacity: 0.5;
+            transition: opacity 0.2s ease;
         }
-        .alert-info .alert-title { color: var(--color-sage-dark); }
 
-        .alert-success {
-            background: rgba(107, 139, 105, 0.15);
-            border: 1px solid var(--color-sage-dark);
+        .alert-close:hover {
+            opacity: 1;
         }
-        .alert-success .alert-title { color: var(--color-sage-dark); }
-
-        .alert-warning {
-            background: rgba(212, 168, 83, 0.15);
-            border: 1px solid var(--color-honey);
-        }
-        .alert-warning .alert-title { color: var(--color-honey); }
-
-        .alert-error {
-            background: rgba(192, 139, 139, 0.15);
-            border: 1px solid var(--color-rose-dark);
-        }
-        .alert-error .alert-title { color: var(--color-rose-dark); }
 
         /* Footer */
         footer {
-            background: var(--color-linen);
-            padding: var(--space-7) 0;
             text-align: center;
-            border-top: 1px solid var(--color-parchment);
-        }
-
-        .footer-ornament {
-            font-size: 1.5rem;
-            margin-bottom: var(--space-3);
-        }
-
-        .footer-brand {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-style: italic;
-            color: var(--color-bark);
+            padding: var(--space-3xl) var(--space-xl);
+            margin-top: var(--space-4xl);
+            background: var(--linen);
         }
 
         .footer-text {
-            font-size: 0.875rem;
-            color: var(--color-earth);
-            margin-top: var(--space-2);
+            font-family: var(--font-handwritten);
+            font-size: 2rem;
+            color: var(--bark);
         }
 
+        .footer-sub {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            margin-top: var(--space-sm);
+            color: var(--bark);
+            opacity: 0.7;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 2.5rem; }
+            .logo {
+                font-size: 4rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .recipe-meta {
+                flex-wrap: wrap;
+            }
+
+            .back-link {
+                top: var(--space-md);
+                left: var(--space-md);
+                padding: var(--space-xs) var(--space-sm);
+                font-size: 0.8125rem;
+            }
         }
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <div class="nav-inner">
-            <a href="#" class="nav-brand">Meadowbrook</a>
-            <ul class="nav-links">
-                <li><a href="#colors">Colors</a></li>
-                <li><a href="#typography">Typography</a></li>
-                <li><a href="#components">Components</a></li>
-            </ul>
-        </div>
-    </nav>
+    <a href="../index.html" class="back-link">Gallery</a>
 
-    <header class="hero">
-        <div class="container">
-            <div class="hero-wreath">🌸</div>
-            <h1>Meadowbrook</h1>
-            <p>A gentle design system inspired by country living, handmade crafts, and the simple beauty of nature.</p>
-        </div>
+    <header>
+        <h1 class="logo">Bramble</h1>
+        <p class="tagline">Cottagecore Style Guide</p>
     </header>
 
-    <div class="container">
-        <!-- Colors -->
+    <main class="container">
+        <!-- 1. Color Palette -->
         <section id="colors">
-            <div class="section-header">
-                <div class="section-ornament">✿</div>
-                <h2>Color Palette</h2>
-            </div>
-            <p style="text-align: center; max-width: 500px; margin: 0 auto var(--space-6);">Soft, natural hues gathered from meadows, gardens, and cozy cottage interiors.</p>
+            <h2 class="section-title">Color Palette</h2>
             <div class="color-grid">
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-sage);"></div>
-                    <div class="color-name">Sage</div>
-                    <div class="color-hex">#8BA888</div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--sage);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Sage</div>
+                        <div class="color-hex">#8B9F82</div>
+                    </div>
                 </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-rose);"></div>
-                    <div class="color-name">Rose</div>
-                    <div class="color-hex">#D4A5A5</div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--rose);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Rose</div>
+                        <div class="color-hex">#C9A9A6</div>
+                    </div>
                 </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-lavender);"></div>
-                    <div class="color-name">Lavender</div>
-                    <div class="color-hex">#B8A9C9</div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--lavender);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Lavender</div>
+                        <div class="color-hex">#A69BB5</div>
+                    </div>
                 </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-honey);"></div>
-                    <div class="color-name">Honey</div>
-                    <div class="color-hex">#D4A853</div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--honey);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Honey</div>
+                        <div class="color-hex">#D4A85A</div>
+                    </div>
                 </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-linen);"></div>
-                    <div class="color-name">Linen</div>
-                    <div class="color-hex">#F5EDE4</div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--berry);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Berry</div>
+                        <div class="color-hex">#8B4B5C</div>
+                    </div>
                 </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-bark);"></div>
-                    <div class="color-name">Bark</div>
-                    <div class="color-hex">#5D4E37</div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--cream);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Cream</div>
+                        <div class="color-hex">#FDF8F0</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--linen);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Linen</div>
+                        <div class="color-hex">#F5EBE0</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--bark);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Bark</div>
+                        <div class="color-hex">#6B5B4F</div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Typography -->
+        <!-- 2. Typography -->
         <section id="typography">
-            <div class="section-header">
-                <div class="section-ornament">❀</div>
-                <h2>Typography</h2>
+            <h2 class="section-title">Typography</h2>
+
+            <div class="type-specimen">
+                <div class="type-label">Display — Lora</div>
+                <div class="type-display">Gentle Living</div>
             </div>
-            <div class="type-showcase">
-                <div class="type-display">Cormorant Infant</div>
-                <div class="type-body">Nunito — friendly and warm</div>
+
+            <div class="type-specimen">
+                <div class="type-label">Body — Quicksand</div>
+                <p class="type-body">In a cozy cottage nestled among wildflowers, life moves at its own gentle pace. Here, we find joy in simple pleasures: fresh bread cooling on the windowsill, herbs drying in bundles, and the soft warmth of afternoon light filtering through lace curtains.</p>
             </div>
+
+            <div class="type-specimen">
+                <div class="type-label">Handwritten — Caveat</div>
+                <p class="type-handwritten">with love from the garden...</p>
+            </div>
+
             <div class="type-scale">
-                <div class="type-row">
-                    <span class="type-label">display</span>
-                    <span style="font-family: var(--font-display); font-size: 2rem; font-style: italic; color: var(--color-bark);">A Quiet Morning</span>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">2.5rem / 40px</span>
+                    <span style="font-family: var(--font-display); font-size: 1.75rem; font-weight: 500;">Display</span>
                 </div>
-                <div class="type-row">
-                    <span class="type-label">heading</span>
-                    <span style="font-family: var(--font-display); font-size: 1.5rem; font-style: italic; color: var(--color-bark);">From the Garden</span>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">1.75rem / 28px</span>
+                    <span style="font-family: var(--font-handwritten); font-size: 1.5rem;">Handwritten</span>
                 </div>
-                <div class="type-row">
-                    <span class="type-label">body</span>
-                    <span style="font-family: var(--font-body); font-size: 1rem; color: var(--color-text);">The kettle whistles softly as morning light spills through lace curtains.</span>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">1.25rem / 20px</span>
+                    <span style="font-family: var(--font-display); font-size: 1.125rem;">Heading</span>
                 </div>
-            </div>
-        </section>
-
-        <!-- Spacing -->
-        <section>
-            <div class="section-header">
-                <div class="section-ornament">✾</div>
-                <h2>Spacing Scale</h2>
-            </div>
-            <div class="spacing-visual">
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 8px; height: 8px;"></div>
-                    <span class="spacing-label">8px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 16px; height: 16px;"></div>
-                    <span class="spacing-label">16px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 24px; height: 24px;"></div>
-                    <span class="spacing-label">24px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 32px; height: 32px;"></div>
-                    <span class="spacing-label">32px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 48px; height: 48px;"></div>
-                    <span class="spacing-label">48px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 64px; height: 64px;"></div>
-                    <span class="spacing-label">64px</span>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">1.0625rem / 17px</span>
+                    <span style="font-family: var(--font-body); font-size: 1.0625rem;">Body</span>
                 </div>
             </div>
         </section>
 
-        <!-- Buttons -->
-        <section>
-            <div class="section-header">
-                <div class="section-ornament">❁</div>
-                <h2>Buttons</h2>
-            </div>
-            <div class="button-row">
-                <button class="btn btn-primary">Gather Herbs</button>
-                <button class="btn btn-secondary">Bake Bread</button>
-                <button class="btn btn-outline">Read More</button>
-                <button class="btn btn-ghost">Cancel</button>
+        <!-- 3. Spacing -->
+        <section id="spacing">
+            <h2 class="section-title">Spacing Scale</h2>
+            <div class="spacing-demo">
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-xs</div>
+                    <div class="spacing-bar" style="width: 4px;"></div>
+                    <span class="spacing-value">0.25rem</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-sm</div>
+                    <div class="spacing-bar" style="width: 8px;"></div>
+                    <span class="spacing-value">0.5rem</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-md</div>
+                    <div class="spacing-bar" style="width: 16px;"></div>
+                    <span class="spacing-value">1rem</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-lg</div>
+                    <div class="spacing-bar" style="width: 24px;"></div>
+                    <span class="spacing-value">1.5rem</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-xl</div>
+                    <div class="spacing-bar" style="width: 32px;"></div>
+                    <span class="spacing-value">2rem</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-2xl</div>
+                    <div class="spacing-bar" style="width: 48px;"></div>
+                    <span class="spacing-value">3rem</span>
+                </div>
             </div>
         </section>
 
-        <!-- Forms -->
-        <section>
-            <div class="section-header">
-                <div class="section-ornament">✿</div>
-                <h2>Forms</h2>
-            </div>
-            <div class="form-card">
-                <div class="form-group">
-                    <label class="form-label">Your Name</label>
-                    <input type="text" class="form-input" placeholder="Enter your name...">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Message</label>
-                    <textarea class="form-input" rows="4" placeholder="Share your thoughts..."></textarea>
-                </div>
-                <button class="btn btn-primary" style="width: 100%;">Send with Love</button>
+        <!-- 4. Buttons -->
+        <section id="buttons">
+            <h2 class="section-title">Buttons</h2>
+            <div class="button-grid">
+                <button class="btn btn-primary">Primary</button>
+                <button class="btn btn-secondary">Secondary</button>
+                <button class="btn btn-outline">Outline</button>
+                <button class="btn btn-honey">Honey</button>
+                <button class="btn btn-primary" disabled>Disabled</button>
             </div>
         </section>
 
-        <!-- Cards -->
-        <section id="components">
-            <div class="section-header">
-                <div class="section-ornament">❀</div>
-                <h2>Cards</h2>
+        <!-- 5. Forms -->
+        <section id="forms">
+            <h2 class="section-title">Forms</h2>
+
+            <div class="form-group">
+                <label class="form-label">Text Input</label>
+                <input type="text" class="form-input" placeholder="Enter your name...">
             </div>
+
+            <div class="form-group">
+                <label class="form-label">Select</label>
+                <select class="form-input form-select">
+                    <option>Choose a flower</option>
+                    <option>Lavender</option>
+                    <option>Rose</option>
+                    <option>Chamomile</option>
+                    <option>Wildflower</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Textarea</label>
+                <textarea class="form-input form-textarea" placeholder="Write your thoughts..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Checkboxes</label>
+                <div style="display: flex; gap: var(--space-lg); flex-wrap: wrap;">
+                    <label class="form-checkbox">
+                        <input type="checkbox" checked>
+                        <span>Fresh herbs</span>
+                    </label>
+                    <label class="form-checkbox">
+                        <input type="checkbox">
+                        <span>Wildflowers</span>
+                    </label>
+                    <label class="form-checkbox">
+                        <input type="checkbox" checked>
+                        <span>Garden vegetables</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Cards -->
+        <section id="cards">
+            <h2 class="section-title">Cards</h2>
             <div class="card-grid">
-                <div class="card">
-                    <div class="card-image">🌻</div>
+                <article class="card">
+                    <div class="card-image"></div>
                     <div class="card-body">
-                        <h4 class="card-title">Sunflower Seeds</h4>
-                        <p class="card-text">Plant in late spring for beautiful golden blooms by summer's end.</p>
+                        <h3 class="card-title">Herb Garden</h3>
+                        <p class="card-text">A collection of fragrant herbs for cooking, crafting, and creating natural remedies.</p>
                     </div>
                     <div class="card-footer">
-                        <span class="badge badge-sage">Garden</span>
-                        <a href="#" class="card-link">Learn more →</a>
+                        <span class="badge badge-sage">Growing</span>
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Explore</button>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">🍯</div>
+                </article>
+
+                <article class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--rose), var(--lavender));"></div>
                     <div class="card-body">
-                        <h4 class="card-title">Wildflower Honey</h4>
-                        <p class="card-text">Collected from local meadows, perfect for tea and fresh biscuits.</p>
-                    </div>
-                    <div class="card-footer">
-                        <span class="badge badge-honey">Pantry</span>
-                        <a href="#" class="card-link">Learn more →</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">🧺</div>
-                    <div class="card-body">
-                        <h4 class="card-title">Linen Napkins</h4>
-                        <p class="card-text">Hand-embroidered with delicate floral patterns from vintage patterns.</p>
+                        <h3 class="card-title">Pressed Flowers</h3>
+                        <p class="card-text">Delicate blooms preserved between pages, ready for cards and crafts.</p>
                     </div>
                     <div class="card-footer">
                         <span class="badge badge-rose">Handmade</span>
-                        <a href="#" class="card-link">Learn more →</a>
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">View</button>
                     </div>
-                </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--honey), var(--straw));"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">Honey Harvest</h3>
+                        <p class="card-text">Sweet golden honey from local bees, perfect for tea and baking.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge badge-honey">Seasonal</span>
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Learn</button>
+                    </div>
+                </article>
             </div>
         </section>
 
-        <!-- Table -->
-        <section>
-            <div class="section-header">
-                <div class="section-ornament">✾</div>
-                <h2>Data Table</h2>
-            </div>
-            <div class="table-wrapper">
-                <table>
+        <!-- 7. Data Table -->
+        <section id="table">
+            <h2 class="section-title">Data Table</h2>
+            <div class="table-container">
+                <table class="data-table">
                     <thead>
                         <tr>
-                            <th>Herb</th>
+                            <th>Plant</th>
                             <th>Season</th>
-                            <th>Uses</th>
-                            <th>Status</th>
+                            <th>Care</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Lavender</td>
                             <td>Summer</td>
-                            <td>Tea, sachets, baking</td>
-                            <td><span class="badge badge-sage">In bloom</span></td>
+                            <td>Low water, full sun</td>
+                            <td><a href="#" class="table-action">Details</a></td>
                         </tr>
                         <tr>
                             <td>Rosemary</td>
                             <td>Year-round</td>
-                            <td>Cooking, oils</td>
-                            <td><span class="badge badge-sage">Ready</span></td>
+                            <td>Moderate water</td>
+                            <td><a href="#" class="table-action">Details</a></td>
                         </tr>
                         <tr>
                             <td>Chamomile</td>
-                            <td>Spring</td>
-                            <td>Tea, skincare</td>
-                            <td><span class="badge badge-honey">Drying</span></td>
+                            <td>Spring-Summer</td>
+                            <td>Regular water</td>
+                            <td><a href="#" class="table-action">Details</a></td>
+                        </tr>
+                        <tr>
+                            <td>Mint</td>
+                            <td>Spring-Fall</td>
+                            <td>Keep moist</td>
+                            <td><a href="#" class="table-action">Details</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Badges -->
-        <section>
-            <div class="section-header">
-                <div class="section-ornament">❁</div>
-                <h2>Badges</h2>
+        <!-- 8. Badges & Tags -->
+        <section id="badges">
+            <h2 class="section-title">Badges & Tags</h2>
+            <div class="badge-grid">
+                <span class="badge badge-sage">Sage</span>
+                <span class="badge badge-rose">Rose</span>
+                <span class="badge badge-honey">Honey</span>
+                <span class="badge badge-lavender">Lavender</span>
+                <span class="badge badge-berry">Berry</span>
             </div>
-            <div class="badge-group">
-                <span class="badge badge-sage">Garden Fresh</span>
-                <span class="badge badge-rose">Handmade</span>
-                <span class="badge badge-lavender">Organic</span>
-                <span class="badge badge-honey">Seasonal</span>
-                <span class="badge badge-outline">Coming Soon</span>
+
+            <div class="badge-grid" style="margin-top: var(--space-xl);">
+                <span class="tag">homemade</span>
+                <span class="tag">organic</span>
+                <span class="tag">seasonal</span>
+                <span class="tag">heirloom</span>
             </div>
         </section>
 
-        <!-- Principles -->
-        <section>
-            <div class="section-header">
-                <div class="section-ornament">✿</div>
-                <h2>Design Principles</h2>
-            </div>
+        <!-- 9. Design Principles -->
+        <section id="principles">
+            <h2 class="section-title">Design Principles</h2>
             <div class="principles-grid">
                 <div class="principle">
-                    <div class="principle-icon">🌿</div>
-                    <h4 class="principle-title">Natural</h4>
-                    <p class="principle-text">Colors and textures drawn from the natural world.</p>
+                    <div class="principle-icon"></div>
+                    <h3 class="principle-title">Natural Textures</h3>
+                    <p class="principle-text">Embrace linen, parchment, and organic patterns that evoke handmade warmth.</p>
                 </div>
                 <div class="principle">
-                    <div class="principle-icon">🧵</div>
-                    <h4 class="principle-title">Handcrafted</h4>
-                    <p class="principle-text">Every detail feels personal and made with care.</p>
+                    <div class="principle-icon"></div>
+                    <h3 class="principle-title">Warm Neutrals</h3>
+                    <p class="principle-text">Build on cream, linen, and straw tones that feel like sunlit afternoons.</p>
                 </div>
                 <div class="principle">
-                    <div class="principle-icon">☕</div>
-                    <h4 class="principle-title">Cozy</h4>
-                    <p class="principle-text">Warm, inviting spaces that feel like home.</p>
+                    <div class="principle-icon"></div>
+                    <h3 class="principle-title">Soft Accents</h3>
+                    <p class="principle-text">Add gentle touches of sage, rose, and lavender inspired by cottage gardens.</p>
                 </div>
                 <div class="principle">
-                    <div class="principle-icon">🕊️</div>
-                    <h4 class="principle-title">Gentle</h4>
-                    <p class="principle-text">Soft edges and calming interactions throughout.</p>
+                    <div class="principle-icon"></div>
+                    <h3 class="principle-title">Gentle Curves</h3>
+                    <p class="principle-text">Rounded corners and flowing shapes create a welcoming, cozy atmosphere.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Animations -->
-        <section>
-            <div class="section-header">
-                <div class="section-ornament">❀</div>
-                <h2>Animations</h2>
-            </div>
-            <div class="animation-grid">
-                <div class="animation-demo demo-bloom">
-                    <div class="animation-box"></div>
-                    <div class="animation-name">Bloom</div>
+        <!-- 10. Animations -->
+        <section id="animations">
+            <h2 class="section-title">Animations</h2>
+            <div class="animation-demos">
+                <div class="animation-demo">
+                    <div class="anim-sway"></div>
+                    <div class="animation-label">Sway</div>
                 </div>
-                <div class="animation-demo demo-sway">
-                    <div class="animation-box"></div>
-                    <div class="animation-name">Sway</div>
+                <div class="animation-demo">
+                    <div class="anim-float"></div>
+                    <div class="animation-label">Float</div>
                 </div>
-                <div class="animation-demo demo-float">
-                    <div class="animation-box"></div>
-                    <div class="animation-name">Float</div>
+                <div class="animation-demo">
+                    <div class="anim-bloom"></div>
+                    <div class="animation-label">Bloom</div>
                 </div>
-                <div class="animation-demo demo-glow">
-                    <div class="animation-box"></div>
-                    <div class="animation-name">Glow</div>
+                <div class="animation-demo">
+                    <div class="anim-fade"></div>
+                    <div class="animation-label">Fade</div>
+                </div>
+                <div class="animation-demo">
+                    <div class="anim-spin"></div>
+                    <div class="animation-label">Spin</div>
+                </div>
+                <div class="animation-demo">
+                    <div class="anim-bounce"></div>
+                    <div class="animation-label">Bounce</div>
                 </div>
             </div>
         </section>
 
-        <!-- Recipe Card -->
-        <section>
-            <div class="section-header">
-                <div class="section-ornament">✾</div>
-                <h2>Recipe Card</h2>
-            </div>
+        <!-- 11. Special Component -->
+        <section id="special">
+            <h2 class="section-title">Special Component</h2>
             <div class="recipe-card">
                 <div class="recipe-header">
-                    <h3 class="recipe-title">Lavender Shortbread</h3>
-                    <div class="recipe-meta">Prep: 15 min · Bake: 20 min · Makes 24</div>
+                    <h3 class="recipe-title">Lavender Honey Scones</h3>
+                    <p class="recipe-subtitle">A cottagecore classic for afternoon tea</p>
                 </div>
                 <div class="recipe-body">
-                    <div class="recipe-section">
-                        <h4 class="recipe-section-title">Ingredients</h4>
-                        <ul class="recipe-list">
-                            <li>1 cup butter, softened</li>
-                            <li>1/2 cup powdered sugar</li>
-                            <li>2 cups all-purpose flour</li>
-                            <li>2 tbsp dried culinary lavender</li>
-                        </ul>
+                    <div class="recipe-meta">
+                        <div class="recipe-meta-item">
+                            <div class="recipe-meta-value">15 min</div>
+                            <div class="recipe-meta-label">Prep</div>
+                        </div>
+                        <div class="recipe-meta-item">
+                            <div class="recipe-meta-value">20 min</div>
+                            <div class="recipe-meta-label">Bake</div>
+                        </div>
+                        <div class="recipe-meta-item">
+                            <div class="recipe-meta-value">8</div>
+                            <div class="recipe-meta-label">Scones</div>
+                        </div>
                     </div>
-                    <div class="recipe-section">
-                        <h4 class="recipe-section-title">Instructions</h4>
-                        <ul class="recipe-list">
-                            <li>Cream butter and sugar until fluffy</li>
-                            <li>Fold in flour and lavender</li>
-                            <li>Chill, slice, and bake at 325°F</li>
-                        </ul>
-                    </div>
+
+                    <h4 class="recipe-section-title">Ingredients</h4>
+                    <ul class="recipe-ingredients">
+                        <li>2 cups all-purpose flour</li>
+                        <li>3 tbsp honey</li>
+                        <li>1 tbsp dried lavender</li>
+                        <li>1/2 cup cold butter</li>
+                        <li>3/4 cup cream</li>
+                    </ul>
+
+                    <h4 class="recipe-section-title">Instructions</h4>
+                    <ol class="recipe-steps">
+                        <li>Mix flour and lavender in a large bowl</li>
+                        <li>Cut in cold butter until crumbly</li>
+                        <li>Add honey and cream, mix gently</li>
+                        <li>Bake at 400°F until golden</li>
+                    </ol>
                 </div>
             </div>
         </section>
 
-        <!-- Alerts -->
-        <section>
-            <div class="section-header">
-                <div class="section-ornament">❁</div>
-                <h2>Alert Messages</h2>
-            </div>
-            <div class="alert alert-info">
-                <span class="alert-icon">🌱</span>
-                <div>
-                    <div class="alert-title">Planting Season</div>
-                    <p class="alert-text">The soil is warm enough to begin planting your spring garden.</p>
+        <!-- 12. Alerts -->
+        <section id="alerts">
+            <h2 class="section-title">Alert Messages</h2>
+            <div class="alerts-grid">
+                <div class="alert alert-success">
+                    <span class="alert-icon">🌿</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Successfully Saved</div>
+                        <p class="alert-text">Your recipe has been added to the collection.</p>
+                    </div>
+                    <button class="alert-close">×</button>
                 </div>
-            </div>
-            <div class="alert alert-success">
-                <span class="alert-icon">✓</span>
-                <div>
-                    <div class="alert-title">Order Complete</div>
-                    <p class="alert-text">Your handmade goods are being wrapped with care.</p>
+
+                <div class="alert alert-warning">
+                    <span class="alert-icon">🍂</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Seasonal Reminder</div>
+                        <p class="alert-text">Time to harvest the late summer herbs before frost.</p>
+                    </div>
+                    <button class="alert-close">×</button>
                 </div>
-            </div>
-            <div class="alert alert-warning">
-                <span class="alert-icon">🌧️</span>
-                <div>
-                    <div class="alert-title">Weather Advisory</div>
-                    <p class="alert-text">Light rain expected. Perfect for the garden!</p>
+
+                <div class="alert alert-error">
+                    <span class="alert-icon">🥀</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Oh Dear</div>
+                        <p class="alert-text">Something went awry. Please try again.</p>
+                    </div>
+                    <button class="alert-close">×</button>
                 </div>
-            </div>
-            <div class="alert alert-error">
-                <span class="alert-icon">🥀</span>
-                <div>
-                    <div class="alert-title">Out of Stock</div>
-                    <p class="alert-text">This item is currently unavailable. Check back next harvest.</p>
+
+                <div class="alert alert-info">
+                    <span class="alert-icon">🦋</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Did You Know?</div>
+                        <p class="alert-text">Lavender attracts butterflies and bees to your garden.</p>
+                    </div>
+                    <button class="alert-close">×</button>
                 </div>
             </div>
         </section>
-    </div>
+    </main>
 
     <footer>
-        <div class="footer-ornament">🌸 ✿ 🌸</div>
-        <div class="footer-brand">Meadowbrook</div>
-        <div class="footer-text">A Cottagecore Design System</div>
+        <p class="footer-text">Made with love at Bramble Cottage</p>
+        <p class="footer-sub">Simple living, gentle days</p>
     </footer>
 </body>
 </html>

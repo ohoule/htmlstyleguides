@@ -3,2028 +3,1559 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Gilded Standard — Design System v1.9.2.7</title>
+    <title>Gatsby — Art Deco Design System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Poiret+One&family=Josefin+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Josefin+Sans:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold-primary: #D4AF37;
+            /* Color Palette - Luxurious Art Deco */
+            --gold: #D4AF37;
             --gold-light: #E8C872;
             --gold-dark: #A67C00;
-            --gold-shimmer: linear-gradient(135deg, #D4AF37 0%, #F4E4A1 25%, #D4AF37 50%, #A67C00 75%, #D4AF37 100%);
-            --black-deep: #0A0A0A;
+            --gold-shimmer: linear-gradient(135deg, #D4AF37 0%, #F4E4A1 30%, #D4AF37 50%, #A67C00 70%, #D4AF37 100%);
+            --black: #0D0D0D;
             --black-soft: #1A1A1A;
-            --black-charcoal: #2A2A2A;
-            --cream-primary: #F5F0E1;
-            --cream-light: #FAF8F0;
-            --cream-dark: #E8DFC8;
+            --charcoal: #2A2A2A;
+            --cream: #FDF8E8;
+            --cream-dark: #F0E6D0;
+            --ivory: #FFFFF0;
             --burgundy: #722F37;
-            --emerald: #2D5A4A;
-            --navy: #1E3A5F;
+            --emerald: #046A38;
 
+            /* Semantic Colors */
+            --color-success: #046A38;
+            --color-warning: #D4AF37;
+            --color-error: #722F37;
+            --color-info: #1E3A5F;
+
+            /* Typography */
             --font-display: 'Poiret One', cursive;
-            --font-heading: 'Playfair Display', serif;
             --font-body: 'Josefin Sans', sans-serif;
+            --font-mono: 'Source Code Pro', monospace;
 
-            --space-xs: 0.25rem;
-            --space-sm: 0.5rem;
-            --space-md: 1rem;
-            --space-lg: 1.5rem;
-            --space-xl: 2rem;
-            --space-2xl: 3rem;
-            --space-3xl: 4rem;
-            --space-4xl: 6rem;
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.5rem;
+            --space-6: 2rem;
+            --space-7: 3rem;
+            --space-8: 4rem;
+            --space-9: 6rem;
+            --space-10: 8rem;
 
-            --border-thin: 1px;
-            --border-medium: 2px;
-            --border-thick: 4px;
-
-            --radius-sm: 2px;
-            --radius-md: 4px;
-            --radius-lg: 8px;
-
-            --shadow-soft: 0 4px 20px rgba(212, 175, 55, 0.15);
-            --shadow-elevated: 0 8px 40px rgba(0, 0, 0, 0.3), 0 0 60px rgba(212, 175, 55, 0.1);
-
-            --transition-fast: 0.2s ease;
-            --transition-medium: 0.4s ease;
-            --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Layout */
+            --max-width: 1200px;
+            --border-radius: 0;
+            --transition: 0.3s ease;
         }
 
-        *, *::before, *::after {
-            box-sizing: border-box;
+        * {
             margin: 0;
             padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
+            box-sizing: border-box;
         }
 
         body {
             font-family: var(--font-body);
-            font-weight: 300;
-            background-color: var(--black-deep);
-            color: var(--cream-primary);
+            font-weight: 400;
             line-height: 1.7;
+            color: var(--charcoal);
+            background-color: var(--cream);
             font-size: 16px;
-            overflow-x: hidden;
         }
 
-        /* Decorative Background Pattern */
-        body::before {
-            content: '';
+        /* Geometric Patterns */
+        .deco-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='none' stroke='%23D4AF37' stroke-width='0.5' opacity='0.3'/%3E%3C/svg%3E");
+        }
+
+        /* Navigation */
+        .nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background-image:
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 40px,
-                    rgba(212, 175, 55, 0.02) 40px,
-                    rgba(212, 175, 55, 0.02) 80px
-                ),
-                repeating-linear-gradient(
-                    -45deg,
-                    transparent,
-                    transparent 40px,
-                    rgba(212, 175, 55, 0.02) 40px,
-                    rgba(212, 175, 55, 0.02) 80px
-                );
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* Floating Navigation */
-        .floating-nav {
-            position: fixed;
-            right: var(--space-lg);
-            top: 50%;
-            transform: translateY(-50%);
+            background: var(--black);
+            padding: var(--space-4) var(--space-6);
             z-index: 1000;
             display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--gold);
         }
 
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--black-charcoal);
-            border: var(--border-thin) solid var(--gold-primary);
-            cursor: pointer;
-            transition: var(--transition-fast);
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-        }
-
-        .nav-dot:hover,
-        .nav-dot.active {
-            background: var(--gold-primary);
-            transform: scale(1.3);
-        }
-
-        .nav-dot::after {
-            content: attr(data-label);
+        .nav::after {
+            content: '';
             position: absolute;
-            right: 24px;
-            top: 50%;
-            transform: translateY(-50%);
-            white-space: nowrap;
-            font-family: var(--font-body);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--gold-primary);
-            opacity: 0;
-            transition: var(--transition-fast);
-            pointer-events: none;
+            bottom: -6px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gold);
+            opacity: 0.5;
         }
 
-        .nav-dot:hover::after {
-            opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-            .floating-nav {
-                display: none;
-            }
-        }
-
-        /* Section Styling */
-        section {
-            padding: var(--space-4xl) var(--space-xl);
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        section::before {
-            content: attr(data-section);
-            position: absolute;
-            top: var(--space-xl);
-            left: var(--space-xl);
+        .nav-brand {
             font-family: var(--font-display);
-            font-size: 0.875rem;
-            color: var(--gold-dark);
+            font-size: 2rem;
+            color: var(--gold);
+            text-decoration: none;
             letter-spacing: 0.3em;
             text-transform: uppercase;
         }
 
-        /* Art Deco Dividers */
-        .deco-divider {
+        .nav-links {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-md);
-            margin: var(--space-2xl) 0;
+            gap: var(--space-6);
+            list-style: none;
         }
 
-        .deco-divider::before,
-        .deco-divider::after {
-            content: '';
-            flex: 1;
-            height: var(--border-thin);
-            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-        }
-
-        .deco-divider .diamond {
-            width: 16px;
-            height: 16px;
-            background: var(--gold-primary);
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-        }
-
-        /* Typography */
-        h1 {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 400;
-            letter-spacing: 0.15em;
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 0.8125rem;
+            color: var(--cream);
+            text-decoration: none;
             text-transform: uppercase;
-            background: var(--gold-shimmer);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmer 3s linear infinite;
-        }
-
-        @keyframes shimmer {
-            to {
-                background-position: 200% center;
-            }
-        }
-
-        h2 {
-            font-family: var(--font-heading);
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 500;
-            color: var(--gold-primary);
-            margin-bottom: var(--space-lg);
+            letter-spacing: 0.15em;
+            font-weight: 300;
+            transition: var(--transition);
             position: relative;
-            display: inline-block;
         }
 
-        h2::after {
+        .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: -4px;
             left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--gold-primary);
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: var(--transition);
         }
 
-        h3 {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--cream-primary);
-            margin-bottom: var(--space-md);
+        .nav-links a:hover {
+            color: var(--gold);
         }
 
-        h4 {
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .back-link {
             font-family: var(--font-body);
-            font-size: 1.125rem;
-            font-weight: 600;
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 0.15em;
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
             color: var(--gold-light);
-            margin-bottom: var(--space-sm);
-        }
-
-        p {
-            max-width: 65ch;
-            margin-bottom: var(--space-md);
-        }
-
-        .lead {
-            font-size: 1.25rem;
-            font-weight: 300;
-            color: var(--cream-dark);
-        }
-
-        .caption {
-            font-size: 0.875rem;
-            color: var(--gold-dark);
-            letter-spacing: 0.05em;
         }
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            padding: var(--space-10) var(--space-6);
+            padding-top: calc(var(--space-10) + 100px);
+            background: var(--black);
             position: relative;
-            padding: var(--space-4xl);
             overflow: hidden;
+            text-align: center;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 800px;
-            height: 800px;
-            transform: translate(-50%, -50%);
-            background:
-                repeating-conic-gradient(
-                    from 0deg,
-                    transparent 0deg 10deg,
-                    rgba(212, 175, 55, 0.03) 10deg 20deg
-                );
-            border-radius: 50%;
-            animation: rotate 60s linear infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0L100 50L50 100L0 50Z' fill='none' stroke='%23D4AF37' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E");
+            background-size: 100px 100px;
         }
 
-        @keyframes rotate {
-            to {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
+        /* Sunburst decoration */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, transparent 30%, var(--black) 70%),
+                        repeating-conic-gradient(from 0deg, var(--gold) 0deg 2deg, transparent 2deg 10deg);
+            opacity: 0.05;
         }
 
         .hero-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
             position: relative;
             z-index: 1;
         }
 
         .hero-ornament {
             width: 200px;
-            height: 60px;
-            margin: var(--space-xl) auto;
+            height: 2px;
+            background: var(--gold-shimmer);
+            margin: 0 auto var(--space-6);
             position: relative;
         }
 
-        .hero-ornament::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-        }
-
+        .hero-ornament::before,
         .hero-ornament::after {
-            content: '';
+            content: '◆';
             position: absolute;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 30px;
-            height: 30px;
-            background: var(--gold-primary);
-            clip-path: polygon(
-                50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%,
-                50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
-            );
+            transform: translateY(-50%);
+            color: var(--gold);
+            font-size: 0.75rem;
         }
 
-        .version {
-            font-family: var(--font-body);
-            font-size: 0.875rem;
+        .hero-ornament::before { left: -20px; }
+        .hero-ornament::after { right: -20px; }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 12vw, 8rem);
+            color: var(--gold);
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            color: var(--gold-dark);
-            margin-top: var(--space-lg);
+            margin-bottom: var(--space-4);
+            text-shadow: 0 0 60px rgba(212, 175, 55, 0.3);
         }
 
         .hero-subtitle {
-            font-family: var(--font-heading);
-            font-size: 1.25rem;
-            font-style: italic;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--cream);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-bottom: var(--space-7);
+        }
+
+        .hero p {
+            font-size: 1.125rem;
             color: var(--cream-dark);
-            margin-top: var(--space-md);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.9;
         }
 
-        /* Corner Ornaments */
-        .corner-ornament {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            border: var(--border-medium) solid var(--gold-primary);
+        /* Main Content */
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--space-9) var(--space-6);
         }
 
-        .corner-ornament.top-left {
-            top: var(--space-xl);
-            left: var(--space-xl);
-            border-right: none;
-            border-bottom: none;
+        section {
+            margin-bottom: var(--space-10);
         }
 
-        .corner-ornament.top-right {
-            top: var(--space-xl);
-            right: var(--space-xl);
-            border-left: none;
-            border-bottom: none;
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-7);
         }
 
-        .corner-ornament.bottom-left {
-            bottom: var(--space-xl);
-            left: var(--space-xl);
-            border-right: none;
-            border-top: none;
+        .section-number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--gold);
+            display: block;
+            margin-bottom: var(--space-2);
         }
 
-        .corner-ornament.bottom-right {
-            bottom: var(--space-xl);
-            right: var(--space-xl);
-            border-left: none;
-            border-top: none;
+        h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--black);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
         }
 
-        /* Color Palette Section */
+        h2::before,
+        h2::after {
+            content: '—';
+            color: var(--gold);
+            margin: 0 var(--space-4);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--charcoal);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-4);
+        }
+
+        p {
+            margin-bottom: var(--space-4);
+            color: var(--charcoal);
+        }
+
+        /* Color Palette */
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-lg);
-            margin-top: var(--space-xl);
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-5);
         }
 
         .color-card {
-            background: var(--black-soft);
-            border: var(--border-thin) solid var(--gold-dark);
-            overflow: hidden;
-            transition: var(--transition-medium);
+            background: var(--ivory);
+            border: 2px solid var(--gold);
+            position: relative;
+            transition: var(--transition);
         }
 
-        .color-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-elevated);
-            border-color: var(--gold-primary);
+        .color-card::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            border: 1px solid var(--gold);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .color-card:hover::before {
+            opacity: 0.5;
         }
 
         .color-swatch {
             height: 120px;
-            position: relative;
-        }
-
-        .color-swatch::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 40px;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.4));
         }
 
         .color-info {
-            padding: var(--space-md);
+            padding: var(--space-4);
+            text-align: center;
+            border-top: 1px solid var(--gold);
         }
 
         .color-name {
-            font-family: var(--font-heading);
+            font-family: var(--font-display);
             font-size: 1.125rem;
-            color: var(--cream-primary);
-            margin-bottom: var(--space-xs);
+            color: var(--black);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-1);
         }
 
         .color-hex {
-            font-family: var(--font-body);
-            font-size: 0.875rem;
-            color: var(--gold-dark);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--charcoal);
+            letter-spacing: 0.05em;
         }
 
-        /* Typography Section */
+        /* Typography */
         .type-specimen {
-            background: var(--black-soft);
-            border: var(--border-thin) solid var(--gold-dark);
-            padding: var(--space-2xl);
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-7);
+            padding: var(--space-8);
+            background: var(--black);
+            border: 3px solid var(--gold);
+            text-align: center;
+            position: relative;
+        }
+
+        .type-specimen::before,
+        .type-specimen::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--gold);
+        }
+
+        .type-specimen::before {
+            top: var(--space-4);
+            left: var(--space-4);
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .type-specimen::after {
+            bottom: var(--space-4);
+            right: var(--space-4);
+            border-left: none;
+            border-top: none;
         }
 
         .type-display {
             font-family: var(--font-display);
-            font-size: clamp(3rem, 6vw, 5rem);
-            color: var(--gold-primary);
-            letter-spacing: 0.1em;
-            line-height: 1.2;
-        }
-
-        .type-heading {
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            color: var(--cream-primary);
-            margin: var(--space-lg) 0;
+            font-size: 5rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-4);
         }
 
         .type-body {
             font-family: var(--font-body);
-            font-size: 1rem;
-            color: var(--cream-dark);
-            max-width: 60ch;
-        }
-
-        .font-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-xl);
-            margin-top: var(--space-2xl);
-            padding-top: var(--space-xl);
-            border-top: var(--border-thin) solid var(--gold-dark);
-        }
-
-        .font-item {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .font-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--gold-dark);
-            margin-bottom: var(--space-sm);
-        }
-
-        .font-name {
             font-size: 1.25rem;
-            color: var(--gold-primary);
+            color: var(--cream);
+            font-weight: 300;
+            letter-spacing: 0.1em;
         }
 
-        /* Spacing Scale */
-        .spacing-scale {
+        .type-scale {
             display: flex;
             flex-direction: column;
-            gap: var(--space-md);
-            margin-top: var(--space-xl);
+            gap: var(--space-4);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-5);
+            padding: var(--space-4) var(--space-5);
+            background: var(--ivory);
+            border-left: 3px solid var(--gold);
+        }
+
+        .type-label {
+            width: 100px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--gold-dark);
+            letter-spacing: 0.1em;
+            flex-shrink: 0;
+        }
+
+        /* Spacing */
+        .spacing-visual {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-6);
+            align-items: flex-end;
+            padding: var(--space-6);
+            background: var(--black);
+            border: 2px solid var(--gold);
         }
 
         .spacing-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: var(--space-lg);
+            gap: var(--space-2);
         }
 
-        .spacing-visual {
-            height: 40px;
-            background: linear-gradient(90deg, var(--gold-primary), var(--gold-dark));
-            position: relative;
-        }
-
-        .spacing-visual::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: var(--cream-primary);
+        .spacing-box {
+            background: var(--gold-shimmer);
         }
 
         .spacing-label {
-            min-width: 100px;
-            font-family: var(--font-body);
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--gold-light);
-        }
-
-        .spacing-value {
-            font-family: var(--font-body);
-            font-size: 0.875rem;
-            color: var(--cream-dark);
-            min-width: 80px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--cream);
         }
 
         /* Buttons */
         .button-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-lg);
-            margin-top: var(--space-xl);
-        }
-
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-md);
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
         }
 
         .btn {
-            font-family: var(--font-body);
-            font-size: 0.875rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            padding: var(--space-md) var(--space-xl);
-            border: var(--border-medium) solid transparent;
-            cursor: pointer;
-            transition: var(--transition-fast);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: var(--space-sm);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: var(--transition-medium);
-        }
-
-        .btn:hover::before {
-            left: 100%;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-6);
+            font-family: var(--font-body);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
         }
 
         .btn-primary {
-            background: var(--gold-primary);
-            color: var(--black-deep);
-            border-color: var(--gold-primary);
+            background: var(--gold);
+            color: var(--black);
+            border: 2px solid var(--gold);
         }
 
         .btn-primary:hover {
-            background: var(--gold-light);
-            border-color: var(--gold-light);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+            background: var(--black);
+            color: var(--gold);
         }
 
         .btn-secondary {
-            background: transparent;
-            color: var(--gold-primary);
-            border-color: var(--gold-primary);
+            background: var(--black);
+            color: var(--gold);
+            border: 2px solid var(--gold);
         }
 
         .btn-secondary:hover {
-            background: var(--gold-primary);
-            color: var(--black-deep);
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--black);
+            border: 2px solid var(--black);
+        }
+
+        .btn-outline:hover {
+            background: var(--black);
+            color: var(--gold);
         }
 
         .btn-ghost {
             background: transparent;
-            color: var(--cream-primary);
-            border-color: var(--cream-dark);
+            color: var(--charcoal);
+            border: 2px solid transparent;
         }
 
         .btn-ghost:hover {
-            border-color: var(--gold-primary);
-            color: var(--gold-primary);
-        }
-
-        .btn-danger {
-            background: var(--burgundy);
-            color: var(--cream-primary);
-            border-color: var(--burgundy);
-        }
-
-        .btn-danger:hover {
-            background: #8B3A42;
-            border-color: #8B3A42;
+            color: var(--gold);
         }
 
         .btn-sm {
-            padding: var(--space-sm) var(--space-md);
+            padding: var(--space-2) var(--space-4);
             font-size: 0.75rem;
         }
 
         .btn-lg {
-            padding: var(--space-lg) var(--space-2xl);
-            font-size: 1rem;
-        }
-
-        .btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none !important;
-            box-shadow: none !important;
-        }
-
-        .btn:disabled::before {
-            display: none;
+            padding: var(--space-4) var(--space-8);
+            font-size: 0.875rem;
         }
 
         /* Forms */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-xl);
-            margin-top: var(--space-xl);
-        }
-
         .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
+            margin-bottom: var(--space-5);
         }
 
         .form-label {
+            display: block;
             font-family: var(--font-body);
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: var(--gold-primary);
+            color: var(--charcoal);
+            margin-bottom: var(--space-2);
         }
 
-        .form-input,
-        .form-select,
-        .form-textarea {
+        .form-input {
+            width: 100%;
+            padding: var(--space-3) var(--space-4);
             font-family: var(--font-body);
             font-size: 1rem;
-            padding: var(--space-md);
-            background: var(--black-soft);
-            border: var(--border-thin) solid var(--gold-dark);
-            color: var(--cream-primary);
-            transition: var(--transition-fast);
+            border: 2px solid var(--charcoal);
+            background: var(--ivory);
+            color: var(--black);
+            transition: var(--transition);
         }
 
-        .form-input:focus,
-        .form-select:focus,
-        .form-textarea:focus {
+        .form-input:focus {
             outline: none;
-            border-color: var(--gold-primary);
+            border-color: var(--gold);
             box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
         }
 
-        .form-input::placeholder,
-        .form-textarea::placeholder {
-            color: var(--gold-dark);
-            opacity: 0.6;
+        .form-input::placeholder {
+            color: var(--charcoal);
+            opacity: 0.5;
         }
 
-        .form-input.error {
-            border-color: var(--burgundy);
-        }
-
-        .form-error {
-            font-size: 0.75rem;
-            color: #E57373;
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
         }
 
         .form-select {
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23D4AF37' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right var(--space-md) center;
-            padding-right: var(--space-2xl);
+            background-position: right var(--space-4) center;
+            padding-right: var(--space-8);
         }
 
-        .form-textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .checkbox-group,
-        .radio-group {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-        }
-
-        .checkbox-label,
-        .radio-label {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            cursor: pointer;
-            font-size: 0.9375rem;
-        }
-
-        .checkbox-input,
-        .radio-input {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: var(--border-medium) solid var(--gold-dark);
-            background: var(--black-soft);
-            cursor: pointer;
-            transition: var(--transition-fast);
-            position: relative;
-        }
-
-        .radio-input {
-            border-radius: 50%;
-        }
-
-        .checkbox-input:checked,
-        .radio-input:checked {
-            background: var(--gold-primary);
-            border-color: var(--gold-primary);
-        }
-
-        .checkbox-input:checked::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--black-deep);
-            font-size: 0.875rem;
-            font-weight: 700;
-        }
-
-        .radio-input:checked::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 8px;
-            height: 8px;
-            background: var(--black-deep);
-            border-radius: 50%;
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-5);
         }
 
         /* Cards */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: var(--space-xl);
-            margin-top: var(--space-xl);
+            gap: var(--space-6);
         }
 
-        .card {
-            background: var(--black-soft);
-            border: var(--border-thin) solid var(--gold-dark);
-            overflow: hidden;
-            transition: var(--transition-medium);
+        .deco-card {
+            background: var(--ivory);
+            border: 2px solid var(--gold);
             position: relative;
+            transition: var(--transition);
         }
 
-        .card::before {
+        .deco-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gold-shimmer);
-            background-size: 200% auto;
-            animation: shimmer 3s linear infinite;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid var(--gold);
+            pointer-events: none;
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-elevated);
-            border-color: var(--gold-primary);
+        .deco-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 40px rgba(212, 175, 55, 0.1);
         }
 
-        .card-image {
-            height: 200px;
-            background: linear-gradient(135deg, var(--black-charcoal), var(--black-deep));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-image::before {
-            content: '';
-            position: absolute;
-            width: 150%;
-            height: 150%;
-            background:
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 10px,
-                    rgba(212, 175, 55, 0.05) 10px,
-                    rgba(212, 175, 55, 0.05) 20px
-                );
-            animation: movePattern 20s linear infinite;
-        }
-
-        @keyframes movePattern {
-            to {
-                transform: translate(40px, 40px);
-            }
-        }
-
-        .card-image-icon {
-            font-size: 3rem;
-            color: var(--gold-primary);
-            position: relative;
-            z-index: 1;
-        }
-
-        .card-body {
-            padding: var(--space-xl);
+        .card-header {
+            background: var(--black);
+            padding: var(--space-4) var(--space-5);
+            border-bottom: 2px solid var(--gold);
+            text-align: center;
         }
 
         .card-title {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            color: var(--cream-primary);
-            margin-bottom: var(--space-sm);
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .card-body {
+            padding: var(--space-5);
         }
 
         .card-text {
             font-size: 0.9375rem;
-            color: var(--cream-dark);
-            margin-bottom: var(--space-lg);
-        }
-
-        .card-footer {
-            padding: var(--space-md) var(--space-xl);
-            border-top: var(--border-thin) solid var(--gold-dark);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Geometric Card Variant */
-        .card-geometric {
-            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
-        }
-
-        .card-geometric::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 28px;
-            height: 28px;
-            background: var(--gold-primary);
-            clip-path: polygon(100% 0, 0 100%, 100% 100%);
-        }
-
-        /* Bordered Card Variant */
-        .card-bordered {
-            border-width: var(--border-thick);
-            border-image: linear-gradient(135deg, var(--gold-primary), var(--gold-dark), var(--gold-primary)) 1;
+            color: var(--charcoal);
+            line-height: 1.8;
         }
 
         /* Data Table */
-        .table-container {
+        .table-wrapper {
             overflow-x: auto;
-            margin-top: var(--space-xl);
-            border: var(--border-thin) solid var(--gold-dark);
+            border: 2px solid var(--gold);
         }
 
-        .data-table {
+        table {
             width: 100%;
             border-collapse: collapse;
+        }
+
+        th {
+            background: var(--black);
+            padding: var(--space-4);
+            text-align: left;
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        td {
+            padding: var(--space-4);
+            border-bottom: 1px solid var(--cream-dark);
+            color: var(--charcoal);
             font-size: 0.9375rem;
         }
 
-        .data-table thead {
-            background: linear-gradient(90deg, var(--gold-dark), var(--gold-primary), var(--gold-dark));
-        }
-
-        .data-table th {
-            font-family: var(--font-body);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--black-deep);
-            padding: var(--space-md) var(--space-lg);
-            text-align: left;
-        }
-
-        .data-table td {
-            padding: var(--space-md) var(--space-lg);
-            border-bottom: var(--border-thin) solid var(--black-charcoal);
-            color: var(--cream-primary);
-        }
-
-        .data-table tbody tr {
-            background: var(--black-soft);
-            transition: var(--transition-fast);
-        }
-
-        .data-table tbody tr:hover {
-            background: var(--black-charcoal);
-        }
-
-        .data-table tbody tr:hover td {
-            color: var(--gold-light);
+        tr:hover td {
+            background: rgba(212, 175, 55, 0.05);
         }
 
         /* Badges */
-        .badge-grid {
+        .badge-group {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-md);
-            margin-top: var(--space-xl);
+            gap: var(--space-3);
         }
 
         .badge {
+            display: inline-block;
+            padding: var(--space-2) var(--space-4);
             font-family: var(--font-body);
-            font-size: 0.75rem;
+            font-size: 0.6875rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            padding: var(--space-xs) var(--space-md);
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
+            border: 1px solid;
         }
 
-        .badge-filled {
-            background: var(--gold-primary);
-            color: var(--black-deep);
+        .badge-gold {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+        }
+
+        .badge-black {
+            background: var(--black);
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .badge-emerald {
+            background: var(--emerald);
+            color: var(--cream);
+            border-color: var(--emerald);
+        }
+
+        .badge-burgundy {
+            background: var(--burgundy);
+            color: var(--cream);
+            border-color: var(--burgundy);
         }
 
         .badge-outline {
             background: transparent;
-            border: var(--border-thin) solid var(--gold-primary);
-            color: var(--gold-primary);
-        }
-
-        .badge-success {
-            background: var(--emerald);
-            color: var(--cream-primary);
-        }
-
-        .badge-success.badge-outline {
-            background: transparent;
-            border-color: var(--emerald);
-            color: var(--emerald);
-        }
-
-        .badge-warning {
-            background: var(--gold-dark);
-            color: var(--black-deep);
-        }
-
-        .badge-danger {
-            background: var(--burgundy);
-            color: var(--cream-primary);
-        }
-
-        .badge-info {
-            background: var(--navy);
-            color: var(--cream-primary);
-        }
-
-        .badge-diamond {
-            clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
-            padding: var(--space-sm) var(--space-lg);
+            color: var(--charcoal);
+            border-color: var(--charcoal);
         }
 
         /* Design Principles */
         .principles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-xl);
-            margin-top: var(--space-xl);
+            gap: var(--space-5);
         }
 
-        .principle {
-            padding: var(--space-xl);
-            background: var(--black-soft);
-            border-left: var(--border-thick) solid var(--gold-primary);
+        .principle-card {
+            padding: var(--space-6);
+            background: var(--ivory);
+            border: 2px solid var(--gold);
+            text-align: center;
             position: relative;
         }
 
-        .principle::before {
-            content: attr(data-number);
+        .principle-card::before {
+            content: '';
             position: absolute;
-            top: var(--space-md);
-            right: var(--space-md);
-            font-family: var(--font-display);
-            font-size: 3rem;
-            color: var(--gold-dark);
-            opacity: 0.3;
-            line-height: 1;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .principle-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto var(--space-4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            transform: rotate(45deg);
+        }
+
+        .principle-icon span {
+            transform: rotate(-45deg);
         }
 
         .principle-title {
-            font-family: var(--font-heading);
+            font-family: var(--font-display);
             font-size: 1.25rem;
-            color: var(--gold-primary);
-            margin-bottom: var(--space-sm);
+            color: var(--black);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-3);
         }
 
         .principle-text {
             font-size: 0.9375rem;
-            color: var(--cream-dark);
+            color: var(--charcoal);
+            line-height: 1.7;
         }
 
-        /* Animation Showcase */
+        /* Animations */
         .animation-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-xl);
-            margin-top: var(--space-xl);
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-4);
         }
 
         .animation-demo {
-            background: var(--black-soft);
-            border: var(--border-thin) solid var(--gold-dark);
-            padding: var(--space-xl);
+            padding: var(--space-6);
+            background: var(--black);
+            border: 2px solid var(--gold);
             text-align: center;
-            min-height: 200px;
+        }
+
+        .animation-box {
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            margin: 0 auto var(--space-4);
+            transform: rotate(45deg);
+        }
+
+        .demo-shimmer:hover .animation-box {
+            animation: shimmer 1.5s ease infinite;
+        }
+
+        .demo-fan:hover .animation-box {
+            animation: fan 0.8s ease forwards;
+        }
+
+        .demo-glow:hover .animation-box {
+            animation: glow 0.6s ease infinite alternate;
+        }
+
+        .demo-rotate:hover .animation-box {
+            animation: rotate-deco 1s ease infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background: var(--gold); }
+            50% { background: var(--gold-light); }
+        }
+
+        @keyframes fan {
+            0% { transform: rotate(45deg) scale(1); }
+            100% { transform: rotate(225deg) scale(1.2); }
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px var(--gold); }
+            to { box-shadow: 0 0 30px var(--gold), 0 0 50px var(--gold-dark); }
+        }
+
+        @keyframes rotate-deco {
+            from { transform: rotate(45deg); }
+            to { transform: rotate(405deg); }
+        }
+
+        .animation-name {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Special Component - Art Deco Card */
+        .gatsby-card {
+            max-width: 420px;
+            background: var(--ivory);
+            border: 3px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gatsby-card::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border: 1px solid var(--gold);
+            pointer-events: none;
+        }
+
+        .gatsby-sunburst {
+            height: 180px;
+            background: var(--black);
+            position: relative;
+            overflow: hidden;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: var(--space-md);
         }
 
-        .anim-element {
-            width: 60px;
-            height: 60px;
-            background: var(--gold-primary);
-        }
-
-        .anim-shimmer {
-            background: var(--gold-shimmer);
-            background-size: 200% auto;
-            animation: shimmer 2s linear infinite;
-        }
-
-        .anim-pulse {
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 0.8;
-            }
-        }
-
-        .anim-rotate {
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            animation: spin 4s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .anim-float {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
-        }
-
-        .animation-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--gold-dark);
-        }
-
-        /* Telegram Component */
-        .telegram {
-            background: var(--cream-primary);
-            color: var(--black-deep);
-            padding: var(--space-2xl);
-            margin-top: var(--space-xl);
-            position: relative;
-            max-width: 600px;
-            box-shadow: var(--shadow-elevated);
-        }
-
-        .telegram::before {
-            content: 'TELEGRAM';
+        .gatsby-sunburst::before {
+            content: '';
             position: absolute;
-            top: -12px;
-            left: var(--space-xl);
-            background: var(--gold-primary);
-            color: var(--black-deep);
-            font-family: var(--font-body);
-            font-size: 0.75rem;
-            font-weight: 700;
+            width: 300px;
+            height: 300px;
+            background: repeating-conic-gradient(
+                from 0deg,
+                var(--gold) 0deg 5deg,
+                transparent 5deg 15deg
+            );
+            opacity: 0.15;
+            animation: sunburst-rotate 60s linear infinite;
+        }
+
+        @keyframes sunburst-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .gatsby-sunburst::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: var(--black);
+            border: 3px solid var(--gold);
+            transform: rotate(45deg);
+        }
+
+        .gatsby-sunburst-center {
+            position: relative;
+            z-index: 1;
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--gold);
+            text-shadow: 0 0 30px var(--gold);
+        }
+
+        .gatsby-content {
+            padding: var(--space-6);
+            text-align: center;
+            border-top: 2px solid var(--gold);
+        }
+
+        .gatsby-title {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            color: var(--black);
             letter-spacing: 0.2em;
-            padding: var(--space-xs) var(--space-md);
+            text-transform: uppercase;
+            margin-bottom: var(--space-3);
         }
 
-        .telegram-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: var(--border-medium) dashed var(--black-charcoal);
-            padding-bottom: var(--space-md);
-            margin-bottom: var(--space-lg);
+        .gatsby-subtitle {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: var(--charcoal);
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-4);
         }
 
-        .telegram-logo {
+        .gatsby-divider {
+            width: 80px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto var(--space-4);
+            position: relative;
+        }
+
+        .gatsby-divider::before,
+        .gatsby-divider::after {
+            content: '◆';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            font-size: 0.5rem;
+        }
+
+        .gatsby-divider::before { left: -12px; }
+        .gatsby-divider::after { right: -12px; }
+
+        .gatsby-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-4);
+            padding: var(--space-4);
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid var(--gold);
+        }
+
+        .gatsby-detail-item {
+            text-align: center;
+        }
+
+        .gatsby-detail-value {
             font-family: var(--font-display);
             font-size: 1.5rem;
             color: var(--gold-dark);
         }
 
-        .telegram-date {
+        .gatsby-detail-label {
             font-family: var(--font-body);
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .telegram-body {
-            font-family: 'Courier New', monospace;
-            font-size: 1rem;
-            line-height: 1.8;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .telegram-stop {
-            color: var(--gold-dark);
-            font-weight: 700;
-        }
-
-        .telegram-footer {
-            margin-top: var(--space-lg);
-            padding-top: var(--space-md);
-            border-top: var(--border-medium) dashed var(--black-charcoal);
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
+            font-size: 0.625rem;
+            color: var(--charcoal);
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
 
         /* Alerts */
-        .alert-grid {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-lg);
-            margin-top: var(--space-xl);
-        }
-
         .alert {
-            padding: var(--space-lg);
-            border-left: var(--border-thick) solid;
+            padding: var(--space-4) var(--space-5);
+            margin-bottom: var(--space-4);
             display: flex;
             align-items: flex-start;
-            gap: var(--space-md);
+            gap: var(--space-4);
+            border: 2px solid;
             position: relative;
-            overflow: hidden;
         }
 
         .alert::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            opacity: 0.1;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 1px solid;
+            opacity: 0.3;
         }
 
         .alert-icon {
-            font-size: 1.25rem;
+            width: 20px;
+            height: 20px;
             flex-shrink: 0;
         }
 
         .alert-content {
-            position: relative;
-            z-index: 1;
+            flex: 1;
         }
 
         .alert-title {
-            font-weight: 600;
-            margin-bottom: var(--space-xs);
-            text-transform: uppercase;
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: 1rem;
             letter-spacing: 0.1em;
-            font-size: 0.875rem;
+            text-transform: uppercase;
+            margin-bottom: var(--space-1);
         }
 
         .alert-text {
-            font-size: 0.9375rem;
-            opacity: 0.9;
-        }
-
-        .alert-success {
-            background: rgba(45, 90, 74, 0.2);
-            border-color: var(--emerald);
-            color: #8BC6A8;
+            font-size: 0.875rem;
+            margin: 0;
+            line-height: 1.6;
         }
 
         .alert-info {
-            background: rgba(30, 58, 95, 0.2);
-            border-color: var(--navy);
-            color: #7BA3C9;
+            background: rgba(30, 58, 95, 0.1);
+            border-color: var(--color-info);
         }
+        .alert-info::before { border-color: var(--color-info); }
+        .alert-info .alert-title { color: var(--color-info); }
+
+        .alert-success {
+            background: rgba(4, 106, 56, 0.1);
+            border-color: var(--color-success);
+        }
+        .alert-success::before { border-color: var(--color-success); }
+        .alert-success .alert-title { color: var(--color-success); }
 
         .alert-warning {
-            background: rgba(212, 175, 55, 0.2);
-            border-color: var(--gold-primary);
-            color: var(--gold-light);
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--color-warning);
         }
+        .alert-warning::before { border-color: var(--color-warning); }
+        .alert-warning .alert-title { color: var(--color-warning); }
 
         .alert-error {
-            background: rgba(114, 47, 55, 0.2);
-            border-color: var(--burgundy);
-            color: #D4898F;
+            background: rgba(114, 47, 55, 0.1);
+            border-color: var(--color-error);
         }
+        .alert-error::before { border-color: var(--color-error); }
+        .alert-error .alert-title { color: var(--color-error); }
 
         /* Footer */
         footer {
-            background: var(--black-soft);
-            padding: var(--space-4xl) var(--space-xl);
-            margin-top: var(--space-4xl);
-            position: relative;
-            overflow: hidden;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gold-shimmer);
-            background-size: 200% auto;
-            animation: shimmer 3s linear infinite;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
+            background: var(--black);
+            padding: var(--space-8) var(--space-6);
+            margin-top: var(--space-10);
+            border-top: 3px solid var(--gold);
             text-align: center;
         }
 
         .footer-ornament {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: var(--space-md);
-            margin-bottom: var(--space-xl);
-        }
-
-        .footer-ornament .line {
             width: 100px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-        }
-
-        .footer-ornament .sunburst {
-            width: 40px;
-            height: 40px;
-            background: var(--gold-primary);
-            clip-path: polygon(
-                50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%,
-                50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
-            );
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto var(--space-5);
         }
 
         .footer-brand {
             font-family: var(--font-display);
             font-size: 2rem;
-            color: var(--gold-primary);
-            letter-spacing: 0.1em;
-            margin-bottom: var(--space-md);
+            color: var(--gold);
+            letter-spacing: 0.3em;
+            margin-bottom: var(--space-2);
         }
 
-        .footer-tagline {
-            font-family: var(--font-heading);
-            font-style: italic;
-            color: var(--cream-dark);
-            margin-bottom: var(--space-xl);
-        }
-
-        .footer-copyright {
+        .footer-text {
+            font-family: var(--font-body);
             font-size: 0.875rem;
-            color: var(--gold-dark);
+            color: var(--cream);
             letter-spacing: 0.1em;
         }
 
-        /* Responsive Adjustments */
+        /* Responsive */
         @media (max-width: 768px) {
-            section {
-                padding: var(--space-2xl) var(--space-md);
-            }
-
-            section::before {
-                position: static;
-                display: block;
-                margin-bottom: var(--space-lg);
-            }
-
-            .hero {
-                padding: var(--space-2xl);
-            }
-
-            .corner-ornament {
-                width: 40px;
-                height: 40px;
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .button-grid {
-                flex-direction: column;
-            }
-
-            .data-table {
-                font-size: 0.875rem;
-            }
-
-            .data-table th,
-            .data-table td {
-                padding: var(--space-sm) var(--space-md);
-            }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 3rem; letter-spacing: 0.15em; }
+            .type-display { font-size: 3rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .gatsby-details { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Floating Navigation -->
-    <nav class="floating-nav">
-        <a href="#hero" class="nav-dot active" data-label="Home"></a>
-        <a href="#colors" class="nav-dot" data-label="Colors"></a>
-        <a href="#typography" class="nav-dot" data-label="Type"></a>
-        <a href="#spacing" class="nav-dot" data-label="Spacing"></a>
-        <a href="#buttons" class="nav-dot" data-label="Buttons"></a>
-        <a href="#forms" class="nav-dot" data-label="Forms"></a>
-        <a href="#cards" class="nav-dot" data-label="Cards"></a>
-        <a href="#tables" class="nav-dot" data-label="Tables"></a>
-        <a href="#badges" class="nav-dot" data-label="Badges"></a>
-        <a href="#principles" class="nav-dot" data-label="Principles"></a>
-        <a href="#animations" class="nav-dot" data-label="Motion"></a>
-        <a href="#telegram" class="nav-dot" data-label="Telegram"></a>
-        <a href="#alerts" class="nav-dot" data-label="Alerts"></a>
+    <nav class="nav">
+        <a href="../index.html" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10 12L6 8l4-4"/>
+            </svg>
+            Return
+        </a>
+        <a href="#" class="nav-brand">Gatsby</a>
+        <ul class="nav-links">
+            <li><a href="#colors">Colors</a></li>
+            <li><a href="#typography">Typography</a></li>
+            <li><a href="#components">Components</a></li>
+            <li><a href="#principles">Principles</a></li>
+        </ul>
     </nav>
 
-    <!-- Hero Section -->
-    <header id="hero" class="hero">
-        <div class="corner-ornament top-left"></div>
-        <div class="corner-ornament top-right"></div>
-        <div class="corner-ornament bottom-left"></div>
-        <div class="corner-ornament bottom-right"></div>
-
+    <header class="hero">
         <div class="hero-content">
-            <h1>The Gilded Standard</h1>
             <div class="hero-ornament"></div>
-            <p class="hero-subtitle">A Design System of Timeless Elegance</p>
-            <span class="version">Version 1.9.2.7</span>
+            <h1>Gatsby</h1>
+            <p class="hero-subtitle">Art Deco Design System</p>
+            <p>A luxurious design system inspired by the roaring twenties. Geometric elegance, golden opulence, and timeless sophistication.</p>
         </div>
     </header>
 
-    <!-- Color Palette -->
-    <section id="colors" data-section="01 — Colors">
-        <h2>Color Palette</h2>
-        <p class="lead">A luxurious palette inspired by the golden age of glamour, where opulence meets sophistication.</p>
+    <main>
+        <!-- 1. Color Palette -->
+        <section id="colors">
+            <div class="section-header">
+                <span class="section-number">I</span>
+                <h2>Color Palette</h2>
+            </div>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto var(--space-6);">Rich golds, deep blacks, and warm creams create an atmosphere of refined luxury.</p>
 
-        <div class="color-grid">
-            <div class="color-card">
-                <div class="color-swatch" style="background: #D4AF37;"></div>
-                <div class="color-info">
-                    <div class="color-name">Gold Primary</div>
-                    <div class="color-hex">#D4AF37</div>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--gold);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Gold</div>
+                        <div class="color-hex">#D4AF37</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--black);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Black</div>
+                        <div class="color-hex">#0D0D0D</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--cream);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Cream</div>
+                        <div class="color-hex">#FDF8E8</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--burgundy);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Burgundy</div>
+                        <div class="color-hex">#722F37</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--emerald);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Emerald</div>
+                        <div class="color-hex">#046A38</div>
+                    </div>
                 </div>
             </div>
-            <div class="color-card">
-                <div class="color-swatch" style="background: #E8C872;"></div>
-                <div class="color-info">
-                    <div class="color-name">Gold Light</div>
-                    <div class="color-hex">#E8C872</div>
+        </section>
+
+        <!-- 2. Typography -->
+        <section id="typography">
+            <div class="section-header">
+                <span class="section-number">II</span>
+                <h2>Typography</h2>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-display">Poiret One</div>
+                <div class="type-body">Josefin Sans for elegant body text</div>
+            </div>
+
+            <div class="type-scale">
+                <div class="type-row">
+                    <span class="type-label">DISPLAY</span>
+                    <span style="font-family: var(--font-display); font-size: 2.5rem; color: var(--black); letter-spacing: 0.15em;">THE GREAT GATSBY</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">HEADING</span>
+                    <span style="font-family: var(--font-display); font-size: 1.75rem; color: var(--black); letter-spacing: 0.1em;">Chapter One</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">SUBHEAD</span>
+                    <span style="font-family: var(--font-body); font-size: 1.25rem; color: var(--charcoal); font-weight: 500; letter-spacing: 0.05em;">The Roaring Twenties</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">BODY</span>
+                    <span style="font-family: var(--font-body); font-size: 1rem; color: var(--charcoal);">In my younger and more vulnerable years my father gave me some advice.</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">MONO</span>
+                    <span style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--gold-dark);">$1,927.00 — MCMXXVII</span>
                 </div>
             </div>
-            <div class="color-card">
-                <div class="color-swatch" style="background: #A67C00;"></div>
-                <div class="color-info">
-                    <div class="color-name">Gold Dark</div>
-                    <div class="color-hex">#A67C00</div>
+        </section>
+
+        <!-- 3. Spacing -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">III</span>
+                <h2>Spacing Scale</h2>
+            </div>
+
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 4px; height: 4px;"></div>
+                    <span class="spacing-label">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 8px; height: 8px;"></div>
+                    <span class="spacing-label">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 16px; height: 16px;"></div>
+                    <span class="spacing-label">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 24px; height: 24px;"></div>
+                    <span class="spacing-label">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 32px; height: 32px;"></div>
+                    <span class="spacing-label">32px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 48px; height: 48px;"></div>
+                    <span class="spacing-label">48px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 64px; height: 64px;"></div>
+                    <span class="spacing-label">64px</span>
                 </div>
             </div>
-            <div class="color-card">
-                <div class="color-swatch" style="background: #0A0A0A;"></div>
-                <div class="color-info">
-                    <div class="color-name">Black Deep</div>
-                    <div class="color-hex">#0A0A0A</div>
-                </div>
-            </div>
-            <div class="color-card">
-                <div class="color-swatch" style="background: #F5F0E1;"></div>
-                <div class="color-info">
-                    <div class="color-name">Cream Primary</div>
-                    <div class="color-hex">#F5F0E1</div>
-                </div>
-            </div>
-            <div class="color-card">
-                <div class="color-swatch" style="background: #722F37;"></div>
-                <div class="color-info">
-                    <div class="color-name">Burgundy</div>
-                    <div class="color-hex">#722F37</div>
-                </div>
-            </div>
-            <div class="color-card">
-                <div class="color-swatch" style="background: #2D5A4A;"></div>
-                <div class="color-info">
-                    <div class="color-name">Emerald</div>
-                    <div class="color-hex">#2D5A4A</div>
-                </div>
-            </div>
-            <div class="color-card">
-                <div class="color-swatch" style="background: #1E3A5F;"></div>
-                <div class="color-info">
-                    <div class="color-name">Navy</div>
-                    <div class="color-hex">#1E3A5F</div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <div class="deco-divider"><span class="diamond"></span></div>
-
-    <!-- Typography -->
-    <section id="typography" data-section="02 — Typography">
-        <h2>Typography</h2>
-        <p class="lead">Three carefully curated typefaces that embody the geometric precision and dramatic flair of the era.</p>
-
-        <div class="type-specimen">
-            <div class="type-display">POIRET ONE</div>
-            <div class="type-heading">Playfair Display</div>
-            <p class="type-body">Josefin Sans brings a contemporary geometric sensibility to body text, ensuring readability while maintaining the Art Deco aesthetic. Its clean lines and balanced proportions make it perfect for longer passages.</p>
-
-            <div class="font-details">
-                <div class="font-item">
-                    <div class="font-label">Display</div>
-                    <div class="font-name" style="font-family: var(--font-display);">Poiret One</div>
-                </div>
-                <div class="font-item">
-                    <div class="font-label">Headings</div>
-                    <div class="font-name" style="font-family: var(--font-heading);">Playfair Display</div>
-                </div>
-                <div class="font-item">
-                    <div class="font-label">Body</div>
-                    <div class="font-name" style="font-family: var(--font-body);">Josefin Sans</div>
-                </div>
-            </div>
-        </div>
-
-        <h3>Type Scale</h3>
-        <div style="margin-top: var(--space-lg);">
-            <p style="font-size: 3rem; font-family: var(--font-display); color: var(--gold-primary); margin-bottom: var(--space-sm);">Display — 3rem</p>
-            <p style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: var(--space-sm);">Heading 1 — 2.5rem</p>
-            <p style="font-size: 2rem; font-family: var(--font-heading); margin-bottom: var(--space-sm);">Heading 2 — 2rem</p>
-            <p style="font-size: 1.5rem; font-family: var(--font-heading); margin-bottom: var(--space-sm);">Heading 3 — 1.5rem</p>
-            <p style="font-size: 1.25rem; margin-bottom: var(--space-sm);">Lead Text — 1.25rem</p>
-            <p style="font-size: 1rem; margin-bottom: var(--space-sm);">Body Text — 1rem</p>
-            <p style="font-size: 0.875rem; color: var(--gold-dark);">Caption — 0.875rem</p>
-        </div>
-    </section>
-
-    <div class="deco-divider"><span class="diamond"></span></div>
-
-    <!-- Spacing -->
-    <section id="spacing" data-section="03 — Spacing">
-        <h2>Spacing Scale</h2>
-        <p class="lead">A harmonious spacing system built on a 4px base unit, creating rhythm and balance throughout.</p>
-
-        <div class="spacing-scale">
-            <div class="spacing-item">
-                <span class="spacing-label">XS</span>
-                <div class="spacing-visual" style="width: 16px;"></div>
-                <span class="spacing-value">0.25rem / 4px</span>
-            </div>
-            <div class="spacing-item">
-                <span class="spacing-label">SM</span>
-                <div class="spacing-visual" style="width: 32px;"></div>
-                <span class="spacing-value">0.5rem / 8px</span>
-            </div>
-            <div class="spacing-item">
-                <span class="spacing-label">MD</span>
-                <div class="spacing-visual" style="width: 64px;"></div>
-                <span class="spacing-value">1rem / 16px</span>
-            </div>
-            <div class="spacing-item">
-                <span class="spacing-label">LG</span>
-                <div class="spacing-visual" style="width: 96px;"></div>
-                <span class="spacing-value">1.5rem / 24px</span>
-            </div>
-            <div class="spacing-item">
-                <span class="spacing-label">XL</span>
-                <div class="spacing-visual" style="width: 128px;"></div>
-                <span class="spacing-value">2rem / 32px</span>
-            </div>
-            <div class="spacing-item">
-                <span class="spacing-label">2XL</span>
-                <div class="spacing-visual" style="width: 192px;"></div>
-                <span class="spacing-value">3rem / 48px</span>
-            </div>
-            <div class="spacing-item">
-                <span class="spacing-label">3XL</span>
-                <div class="spacing-visual" style="width: 256px;"></div>
-                <span class="spacing-value">4rem / 64px</span>
-            </div>
-        </div>
-    </section>
-
-    <div class="deco-divider"><span class="diamond"></span></div>
-
-    <!-- Buttons -->
-    <section id="buttons" data-section="04 — Buttons">
-        <h2>Buttons</h2>
-        <p class="lead">Commanding call-to-actions with geometric precision and luxurious hover states.</p>
-
-        <div class="button-grid">
-            <div class="button-group">
-                <h4>Variants</h4>
-                <button class="btn btn-primary">Primary</button>
-                <button class="btn btn-secondary">Secondary</button>
-                <button class="btn btn-ghost">Ghost</button>
-                <button class="btn btn-danger">Danger</button>
+        <!-- 4. Buttons -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">IV</span>
+                <h2>Buttons</h2>
             </div>
 
-            <div class="button-group">
-                <h4>Sizes</h4>
+            <h3>Primary Actions</h3>
+            <div class="button-grid">
+                <button class="btn btn-primary">Enter Party</button>
+                <button class="btn btn-secondary">View Gallery</button>
+                <button class="btn btn-outline">Learn More</button>
+                <button class="btn btn-ghost">Dismiss</button>
+            </div>
+
+            <h3>Sizes</h3>
+            <div class="button-grid">
                 <button class="btn btn-primary btn-sm">Small</button>
-                <button class="btn btn-primary">Medium</button>
+                <button class="btn btn-primary">Default</button>
                 <button class="btn btn-primary btn-lg">Large</button>
             </div>
+        </section>
 
-            <div class="button-group">
-                <h4>States</h4>
-                <button class="btn btn-primary">Default</button>
-                <button class="btn btn-primary" disabled>Disabled</button>
-            </div>
-        </div>
-    </section>
-
-    <div class="deco-divider"><span class="diamond"></span></div>
-
-    <!-- Forms -->
-    <section id="forms" data-section="05 — Forms">
-        <h2>Forms</h2>
-        <p class="lead">Elegant input components that invite interaction with refined styling and golden accents.</p>
-
-        <div class="form-grid">
-            <div class="form-group">
-                <label class="form-label">Full Name</label>
-                <input type="text" class="form-input" placeholder="Enter your name">
+        <!-- 5. Forms -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">V</span>
+                <h2>Forms</h2>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Email Address</label>
-                <input type="email" class="form-input" placeholder="your@email.com">
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">With Error</label>
-                <input type="text" class="form-input error" value="Invalid input">
-                <span class="form-error">⚠ This field contains an error</span>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Select Option</label>
-                <select class="form-select">
-                    <option>Choose an era</option>
-                    <option>The Roaring Twenties</option>
-                    <option>The Jazz Age</option>
-                    <option>The Golden Era</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Message</label>
-                <textarea class="form-textarea" placeholder="Share your thoughts..."></textarea>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Preferences</label>
-                <div class="checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" class="checkbox-input" checked>
-                        <span>Receive newsletter</span>
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" class="checkbox-input">
-                        <span>Accept terms</span>
-                    </label>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Guest Name</label>
+                    <input type="text" class="form-input" placeholder="Jay Gatsby">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Invitation Code</label>
+                    <input type="text" class="form-input" placeholder="MCMXXIII">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Event Type</label>
+                    <select class="form-input form-select">
+                        <option>Select an event</option>
+                        <option>Garden Party</option>
+                        <option>Ballroom Gala</option>
+                        <option>Private Soirée</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Number of Guests</label>
+                    <select class="form-input form-select">
+                        <option>Select number</option>
+                        <option>1 Guest</option>
+                        <option>2 Guests</option>
+                        <option>Party of 4</option>
+                    </select>
                 </div>
             </div>
+            <button class="btn btn-primary">Submit RSVP</button>
+        </section>
 
-            <div class="form-group">
-                <label class="form-label">Membership</label>
-                <div class="radio-group">
-                    <label class="radio-label">
-                        <input type="radio" name="membership" class="radio-input" checked>
-                        <span>Gold Member</span>
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="membership" class="radio-input">
-                        <span>Platinum Member</span>
-                    </label>
+        <!-- 6. Cards -->
+        <section id="components">
+            <div class="section-header">
+                <span class="section-number">VI</span>
+                <h2>Cards</h2>
+            </div>
+
+            <div class="card-grid">
+                <div class="deco-card">
+                    <div class="card-header">
+                        <div class="card-title">The Plaza</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">An evening of unparalleled elegance awaits at our signature venue. Crystal chandeliers illuminate the grandeur of a bygone era.</p>
+                    </div>
+                </div>
+                <div class="deco-card">
+                    <div class="card-header">
+                        <div class="card-title">The Speakeasy</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Behind unmarked doors lies a world of jazz, fine spirits, and whispered conversations. Password required.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div class="deco-divider"><span class="diamond"></span></div>
+        <!-- 7. Data Table -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">VII</span>
+                <h2>Data Table</h2>
+            </div>
 
-    <!-- Cards -->
-    <section id="cards" data-section="06 — Cards">
-        <h2>Cards</h2>
-        <p class="lead">Sophisticated containers that frame content with architectural elegance.</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Venue</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Summer Gala</td>
+                            <td>West Egg Estate</td>
+                            <td>June 15, 1922</td>
+                            <td><span class="badge badge-gold">Confirmed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jazz Night</td>
+                            <td>The Cotton Club</td>
+                            <td>June 22, 1922</td>
+                            <td><span class="badge badge-emerald">Available</span></td>
+                        </tr>
+                        <tr>
+                            <td>Masquerade Ball</td>
+                            <td>The Plaza Hotel</td>
+                            <td>July 4, 1922</td>
+                            <td><span class="badge badge-burgundy">Sold Out</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-        <div class="card-grid">
-            <article class="card">
-                <div class="card-image">
-                    <span class="card-image-icon">◆</span>
+        <!-- 8. Badges -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">VIII</span>
+                <h2>Badges & Tags</h2>
+            </div>
+
+            <div class="badge-group">
+                <span class="badge badge-gold">VIP</span>
+                <span class="badge badge-black">Exclusive</span>
+                <span class="badge badge-emerald">Available</span>
+                <span class="badge badge-burgundy">Sold Out</span>
+                <span class="badge badge-outline">Pending</span>
+            </div>
+        </section>
+
+        <!-- 9. Design Principles -->
+        <section id="principles">
+            <div class="section-header">
+                <span class="section-number">IX</span>
+                <h2>Design Principles</h2>
+            </div>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-icon"><span>◆</span></div>
+                    <h4 class="principle-title">Symmetry</h4>
+                    <p class="principle-text">Balance and geometric precision create visual harmony and timeless elegance.</p>
                 </div>
-                <div class="card-body">
-                    <h3 class="card-title">The Grand Ballroom</h3>
-                    <p class="card-text">Experience the magnificence of our signature venue, where crystal chandeliers illuminate evenings of unparalleled elegance.</p>
-                    <button class="btn btn-secondary btn-sm">Discover More</button>
+                <div class="principle-card">
+                    <div class="principle-icon"><span>✦</span></div>
+                    <h4 class="principle-title">Opulence</h4>
+                    <p class="principle-text">Rich materials, gold accents, and luxurious details convey sophistication.</p>
                 </div>
-                <div class="card-footer">
-                    <span class="caption">Est. 1927</span>
-                    <span class="badge badge-filled">Featured</span>
+                <div class="principle-card">
+                    <div class="principle-icon"><span>▲</span></div>
+                    <h4 class="principle-title">Geometry</h4>
+                    <p class="principle-text">Bold geometric patterns and angular forms define the Art Deco aesthetic.</p>
                 </div>
-            </article>
-
-            <article class="card card-geometric">
-                <div class="card-image">
-                    <span class="card-image-icon">✦</span>
+                <div class="principle-card">
+                    <div class="principle-icon"><span>☀</span></div>
+                    <h4 class="principle-title">Radiance</h4>
+                    <p class="principle-text">Sunburst motifs and radiating patterns capture optimistic energy.</p>
                 </div>
-                <div class="card-body">
-                    <h3 class="card-title">Champagne Lounge</h3>
-                    <p class="card-text">Indulge in the finest vintages within an atmosphere of intimate sophistication and Art Deco grandeur.</p>
-                    <button class="btn btn-secondary btn-sm">Reserve Now</button>
+            </div>
+        </section>
+
+        <!-- 10. Animations -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">X</span>
+                <h2>Animations</h2>
+            </div>
+
+            <div class="animation-grid">
+                <div class="animation-demo demo-shimmer">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Shimmer</div>
                 </div>
-                <div class="card-footer">
-                    <span class="caption">Members Only</span>
-                    <span class="badge badge-outline">Exclusive</span>
+                <div class="animation-demo demo-fan">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Fan</div>
                 </div>
-            </article>
-
-            <article class="card card-bordered">
-                <div class="card-image">
-                    <span class="card-image-icon">❖</span>
+                <div class="animation-demo demo-glow">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Glow</div>
                 </div>
-                <div class="card-body">
-                    <h3 class="card-title">Jazz Orchestra</h3>
-                    <p class="card-text">Let the melodies of our resident ensemble transport you to an era of swing, sophistication, and pure musical artistry.</p>
-                    <button class="btn btn-secondary btn-sm">View Schedule</button>
+                <div class="animation-demo demo-rotate">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">Rotate</div>
                 </div>
-                <div class="card-footer">
-                    <span class="caption">Nightly 8PM</span>
-                    <span class="badge badge-filled badge-diamond">Live</span>
+            </div>
+        </section>
+
+        <!-- 11. Special Component - Art Deco Card -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">XI</span>
+                <h2>Art Deco Card</h2>
+            </div>
+
+            <div class="gatsby-card">
+                <div class="gatsby-sunburst">
+                    <span class="gatsby-sunburst-center">1922</span>
                 </div>
-            </article>
-        </div>
-    </section>
-
-    <div class="deco-divider"><span class="diamond"></span></div>
-
-    <!-- Data Table -->
-    <section id="tables" data-section="07 — Tables">
-        <h2>Data Table</h2>
-        <p class="lead">Structured information presented with the precision and clarity of the finest ledgers.</p>
-
-        <div class="table-container">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Event</th>
-                        <th>Venue</th>
-                        <th>Date</th>
-                        <th>Tickets</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>The Gatsby Gala</td>
-                        <td>Grand Ballroom</td>
-                        <td>December 31, 1927</td>
-                        <td>$150</td>
-                        <td><span class="badge badge-success">Available</span></td>
-                    </tr>
-                    <tr>
-                        <td>Jazz Under Stars</td>
-                        <td>Rooftop Terrace</td>
-                        <td>January 15, 1928</td>
-                        <td>$75</td>
-                        <td><span class="badge badge-warning">Limited</span></td>
-                    </tr>
-                    <tr>
-                        <td>Speakeasy Night</td>
-                        <td>The Velvet Room</td>
-                        <td>January 22, 1928</td>
-                        <td>$100</td>
-                        <td><span class="badge badge-danger">Sold Out</span></td>
-                    </tr>
-                    <tr>
-                        <td>Charleston Competition</td>
-                        <td>Dance Hall</td>
-                        <td>February 1, 1928</td>
-                        <td>$50</td>
-                        <td><span class="badge badge-info">Coming Soon</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <div class="deco-divider"><span class="diamond"></span></div>
-
-    <!-- Badges -->
-    <section id="badges" data-section="08 — Badges">
-        <h2>Badges & Tags</h2>
-        <p class="lead">Distinctive status indicators with geometric flair for categorization and emphasis.</p>
-
-        <h4>Filled Variants</h4>
-        <div class="badge-grid">
-            <span class="badge badge-filled">Default</span>
-            <span class="badge badge-success">Success</span>
-            <span class="badge badge-warning">Warning</span>
-            <span class="badge badge-danger">Danger</span>
-            <span class="badge badge-info">Info</span>
-        </div>
-
-        <h4 style="margin-top: var(--space-xl);">Outline Variants</h4>
-        <div class="badge-grid">
-            <span class="badge badge-outline">Default</span>
-            <span class="badge badge-outline badge-success">Success</span>
-            <span class="badge badge-outline" style="border-color: var(--gold-dark); color: var(--gold-dark);">Warning</span>
-            <span class="badge badge-outline" style="border-color: var(--burgundy); color: var(--burgundy);">Danger</span>
-            <span class="badge badge-outline" style="border-color: var(--navy); color: var(--navy);">Info</span>
-        </div>
-
-        <h4 style="margin-top: var(--space-xl);">Geometric Shapes</h4>
-        <div class="badge-grid">
-            <span class="badge badge-filled badge-diamond">Diamond</span>
-            <span class="badge badge-success badge-diamond">Premium</span>
-            <span class="badge badge-warning badge-diamond">VIP</span>
-        </div>
-    </section>
-
-    <div class="deco-divider"><span class="diamond"></span></div>
-
-    <!-- Design Principles -->
-    <section id="principles" data-section="09 — Principles">
-        <h2>Design Principles</h2>
-        <p class="lead">The philosophical foundation upon which The Gilded Standard is built.</p>
-
-        <div class="principles-grid">
-            <div class="principle" data-number="I">
-                <h3 class="principle-title">Geometric Precision</h3>
-                <p class="principle-text">Every element adheres to strict geometric forms—chevrons, sunbursts, and angular symmetry create visual harmony.</p>
-            </div>
-
-            <div class="principle" data-number="II">
-                <h3 class="principle-title">Opulent Restraint</h3>
-                <p class="principle-text">Luxury is expressed through quality, not excess. Gold accents are used purposefully, never gratuitously.</p>
-            </div>
-
-            <div class="principle" data-number="III">
-                <h3 class="principle-title">Dramatic Contrast</h3>
-                <p class="principle-text">Bold black depths meet luminous gold heights. Light and shadow dance together in purposeful tension.</p>
-            </div>
-
-            <div class="principle" data-number="IV">
-                <h3 class="principle-title">Typographic Hierarchy</h3>
-                <p class="principle-text">Display, heading, and body fonts each serve distinct roles, creating clear visual pathways through content.</p>
-            </div>
-
-            <div class="principle" data-number="V">
-                <h3 class="principle-title">Timeless Elegance</h3>
-                <p class="principle-text">Trends fade; true style endures. Every choice is made to transcend the moment and remain perpetually refined.</p>
-            </div>
-
-            <div class="principle" data-number="VI">
-                <h3 class="principle-title">Intentional Animation</h3>
-                <p class="principle-text">Motion serves purpose—guiding attention, confirming actions, and adding polish without distraction.</p>
-            </div>
-        </div>
-    </section>
-
-    <div class="deco-divider"><span class="diamond"></span></div>
-
-    <!-- Animations -->
-    <section id="animations" data-section="10 — Animation">
-        <h2>Animation Effects</h2>
-        <p class="lead">Subtle motion that adds life and polish to the user experience.</p>
-
-        <div class="animation-grid">
-            <div class="animation-demo">
-                <div class="anim-element anim-shimmer"></div>
-                <span class="animation-label">Shimmer</span>
-            </div>
-
-            <div class="animation-demo">
-                <div class="anim-element anim-pulse"></div>
-                <span class="animation-label">Pulse</span>
-            </div>
-
-            <div class="animation-demo">
-                <div class="anim-element anim-rotate"></div>
-                <span class="animation-label">Rotate</span>
-            </div>
-
-            <div class="animation-demo">
-                <div class="anim-element anim-float"></div>
-                <span class="animation-label">Float</span>
-            </div>
-        </div>
-    </section>
-
-    <div class="deco-divider"><span class="diamond"></span></div>
-
-    <!-- Telegram Component -->
-    <section id="telegram" data-section="11 — Special">
-        <h2>Telegram</h2>
-        <p class="lead">A vintage announcement component for urgent or important communications.</p>
-
-        <div class="telegram">
-            <div class="telegram-header">
-                <span class="telegram-logo">◆ WESTERN UNION ◆</span>
-                <span class="telegram-date">Dec 31, 1927</span>
-            </div>
-            <div class="telegram-body">
-                ATTENTION ALL DISTINGUISHED GUESTS <span class="telegram-stop">STOP</span><br><br>
-                YOU ARE CORDIALLY INVITED TO THE GRANDEST CELEBRATION OF THE DECADE <span class="telegram-stop">STOP</span><br><br>
-                THE GILDED STANDARD NEW YEARS GALA AWAITS <span class="telegram-stop">STOP</span><br><br>
-                FORMAL ATTIRE REQUIRED <span class="telegram-stop">STOP</span><br><br>
-                SINCERELY THE MANAGEMENT
-            </div>
-            <div class="telegram-footer">
-                <span>REF: GS-1927-NYE</span>
-                <span>PRIORITY: URGENT</span>
-            </div>
-        </div>
-    </section>
-
-    <div class="deco-divider"><span class="diamond"></span></div>
-
-    <!-- Alerts -->
-    <section id="alerts" data-section="12 — Alerts">
-        <h2>Alert Messages</h2>
-        <p class="lead">Informative notifications styled with Art Deco sensibility for every occasion.</p>
-
-        <div class="alert-grid">
-            <div class="alert alert-success">
-                <span class="alert-icon">✓</span>
-                <div class="alert-content">
-                    <div class="alert-title">Reservation Confirmed</div>
-                    <p class="alert-text">Your table at The Grand Ballroom has been secured for the evening of December 31st.</p>
+                <div class="gatsby-content">
+                    <h3 class="gatsby-title">Midsummer Ball</h3>
+                    <p class="gatsby-subtitle">West Egg Estate • June 21st</p>
+                    <div class="gatsby-divider"></div>
+                    <div class="gatsby-details">
+                        <div class="gatsby-detail-item">
+                            <div class="gatsby-detail-value">500</div>
+                            <div class="gatsby-detail-label">Guests</div>
+                        </div>
+                        <div class="gatsby-detail-item">
+                            <div class="gatsby-detail-value">9PM</div>
+                            <div class="gatsby-detail-label">Doors Open</div>
+                        </div>
+                        <div class="gatsby-detail-item">
+                            <div class="gatsby-detail-value">$50</div>
+                            <div class="gatsby-detail-label">Entry</div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- 12. Alerts -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">XII</span>
+                <h2>Alert Messages</h2>
             </div>
 
             <div class="alert alert-info">
-                <span class="alert-icon">ℹ</span>
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
                 <div class="alert-content">
-                    <div class="alert-title">Dress Code Reminder</div>
-                    <p class="alert-text">Please note that formal evening attire is required for all guests attending the gala.</p>
+                    <div class="alert-title">Invitation Received</div>
+                    <p class="alert-text">Your invitation to the summer gala has been confirmed. Formal attire required.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Reservation Complete</div>
+                    <p class="alert-text">Your table at The Plaza has been reserved. A car will collect you at 8pm.</p>
                 </div>
             </div>
 
             <div class="alert alert-warning">
-                <span class="alert-icon">⚠</span>
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
                 <div class="alert-content">
                     <div class="alert-title">Limited Availability</div>
-                    <p class="alert-text">Only a few remaining tickets for the Jazz Under Stars event. Reserve yours before they vanish.</p>
+                    <p class="alert-text">Only a few seats remain for this exclusive event. Reserve promptly.</p>
                 </div>
             </div>
 
             <div class="alert alert-error">
-                <span class="alert-icon">✕</span>
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
                 <div class="alert-content">
-                    <div class="alert-title">Event Postponed</div>
-                    <p class="alert-text">We regret to inform you that the Charleston Competition has been rescheduled due to unforeseen circumstances.</p>
+                    <div class="alert-title">Event Cancelled</div>
+                    <p class="alert-text">Due to unforeseen circumstances, the masquerade has been postponed.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-ornament">
-                <span class="line"></span>
-                <span class="sunburst"></span>
-                <span class="line"></span>
-            </div>
-            <div class="footer-brand">The Gilded Standard</div>
-            <p class="footer-tagline">"Where Every Detail Speaks of Excellence"</p>
-            <p class="footer-copyright">© MCMXXVII · Design System v1.9.2.7</p>
-        </div>
+        <div class="footer-ornament"></div>
+        <div class="footer-brand">Gatsby</div>
+        <div class="footer-text">Art Deco Design System — MCMXXII</div>
     </footer>
-
-    <script>
-        // Floating Nav Active State
-        const sections = document.querySelectorAll('section, header');
-        const navDots = document.querySelectorAll('.nav-dot');
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '-40% 0px -40% 0px',
-            threshold: 0
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.id;
-                    navDots.forEach(dot => {
-                        dot.classList.remove('active');
-                        if (dot.getAttribute('href') === `#${id}`) {
-                            dot.classList.add('active');
-                        }
-                    });
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => observer.observe(section));
-
-        // Smooth scroll for nav dots
-        navDots.forEach(dot => {
-            dot.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector(dot.getAttribute('href'));
-                target.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
 </body>
 </html>

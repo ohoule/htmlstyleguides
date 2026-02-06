@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ａｅｓｔｈｅｔｉｃ．ｓｙｓ — Digital Dreams v2.0</title>
+    <title>ｖａｐｏｒ — Aesthetic Design System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Questrial&display=swap" rel="stylesheet">
     <style>
         :root {
             --pink-hot: #FF6AD5;
@@ -14,43 +14,35 @@
             --pink-deep: #C44BAD;
             --cyan: #00FFFF;
             --cyan-soft: #7FEFEF;
-            --cyan-deep: #00B4B4;
             --purple: #9B59B6;
             --purple-deep: #6C3483;
-            --purple-soft: #BB8FCE;
-            --orange-sunset: #FF8C42;
-            --yellow-sun: #FFE66D;
+            --orange: #FF8C42;
+            --yellow: #FFE66D;
             --blue-night: #1A1A2E;
             --blue-dark: #16213E;
             --blue-mid: #0F3460;
             --black: #0D0D1A;
             --white: #FFFFFF;
 
-            --gradient-sunset: linear-gradient(180deg, #FF6AD5 0%, #FF8C42 25%, #FFE66D 50%, #FF8C42 75%, #C44BAD 100%);
+            --gradient-sunset: linear-gradient(180deg, #FF6AD5 0%, #FF8C42 30%, #FFE66D 60%, #FF8C42 80%, #C44BAD 100%);
             --gradient-cyber: linear-gradient(135deg, #FF6AD5 0%, #00FFFF 100%);
-            --gradient-night: linear-gradient(180deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
-            --gradient-neon: linear-gradient(90deg, #FF6AD5, #00FFFF, #FF6AD5);
+            --gradient-night: linear-gradient(180deg, #0D0D1A 0%, #1A1A2E 30%, #16213E 60%, #0F3460 100%);
 
-            --glow-pink: 0 0 10px #FF6AD5, 0 0 20px #FF6AD5, 0 0 40px #FF6AD5;
-            --glow-cyan: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 40px #00FFFF;
-            --glow-purple: 0 0 10px #9B59B6, 0 0 20px #9B59B6;
+            --glow-pink: 0 0 10px #FF6AD5, 0 0 30px #FF6AD5, 0 0 50px #FF6AD5;
+            --glow-cyan: 0 0 10px #00FFFF, 0 0 30px #00FFFF, 0 0 50px #00FFFF;
 
             --font-pixel: 'Press Start 2P', cursive;
             --font-terminal: 'VT323', monospace;
-            --font-display: 'Orbitron', sans-serif;
+            --font-body: 'Questrial', sans-serif;
 
-            --space-xs: 4px;
-            --space-sm: 8px;
-            --space-md: 16px;
-            --space-lg: 24px;
-            --space-xl: 32px;
-            --space-2xl: 48px;
-            --space-3xl: 64px;
-            --space-4xl: 96px;
-
-            --border-thin: 1px;
-            --border-medium: 2px;
-            --border-thick: 3px;
+            --space-4: 4px;
+            --space-8: 8px;
+            --space-16: 16px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --space-48: 48px;
+            --space-64: 64px;
+            --space-96: 96px;
         }
 
         * {
@@ -59,1122 +51,812 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: var(--font-terminal);
-            font-size: 18px;
+            font-family: var(--font-body);
+            font-weight: 400;
             line-height: 1.6;
-            background: var(--black);
             color: var(--white);
-            overflow-x: hidden;
+            background: var(--gradient-night);
+            background-attachment: fixed;
+            font-size: 16px;
+            min-height: 100vh;
         }
 
-        /* Scanlines overlay */
+        /* Scanline overlay */
         body::before {
             content: '';
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
+            width: 100%;
+            height: 100%;
             background: repeating-linear-gradient(
                 0deg,
-                transparent,
-                transparent 2px,
-                rgba(0, 0, 0, 0.1) 2px,
-                rgba(0, 0, 0, 0.1) 4px
+                rgba(0, 0, 0, 0.1) 0px,
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
             );
             pointer-events: none;
-            z-index: 9999;
-        }
-
-        /* CRT flicker */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 106, 213, 0.02);
-            pointer-events: none;
-            z-index: 9998;
-            animation: flicker 0.1s infinite;
-        }
-
-        @keyframes flicker {
-            0%, 100% { opacity: 0.02; }
-            50% { opacity: 0.04; }
-        }
-
-        ::selection {
-            background: var(--pink-hot);
-            color: var(--black);
+            z-index: 1000;
         }
 
         /* Navigation */
         .nav {
             position: fixed;
-            top: var(--space-lg);
-            right: var(--space-lg);
-            z-index: 1000;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(13, 13, 26, 0.9);
+            backdrop-filter: blur(10px);
+            padding: var(--space-16) var(--space-32);
+            z-index: 999;
             display: flex;
-            flex-direction: column;
-            gap: var(--space-xs);
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--pink-hot);
+            box-shadow: var(--glow-pink);
         }
 
-        .nav-link {
+        .nav-brand {
             font-family: var(--font-pixel);
-            font-size: 8px;
+            font-size: 0.875rem;
             color: var(--cyan);
             text-decoration: none;
-            padding: var(--space-sm) var(--space-md);
-            background: rgba(0, 0, 0, 0.8);
-            border: var(--border-thin) solid var(--cyan);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
+            text-shadow: var(--glow-cyan);
+            animation: flicker 3s infinite;
         }
 
-        .nav-link:hover {
-            background: var(--cyan);
-            color: var(--black);
-            box-shadow: var(--glow-cyan);
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            92% { opacity: 1; }
+            93% { opacity: 0.8; }
+            94% { opacity: 1; }
+            96% { opacity: 0.9; }
+            97% { opacity: 1; }
         }
 
-        @media (max-width: 768px) {
-            .nav {
-                display: none;
-            }
+        .nav-links {
+            display: flex;
+            gap: var(--space-32);
+            list-style: none;
         }
 
-        /* Sections */
-        section {
-            padding: var(--space-4xl) var(--space-xl);
-            position: relative;
-            border-bottom: var(--border-thin) solid var(--purple-deep);
+        .nav-links a {
+            font-family: var(--font-terminal);
+            font-size: 1.25rem;
+            color: var(--pink-soft);
+            text-decoration: none;
+            transition: all 0.2s;
         }
 
-        section::before {
-            content: attr(data-section);
-            position: absolute;
-            top: var(--space-xl);
-            left: var(--space-xl);
-            font-family: var(--font-pixel);
-            font-size: 10px;
-            color: var(--pink-hot);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            text-shadow: var(--glow-pink);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Typography */
-        h1 {
-            font-family: var(--font-display);
-            font-size: clamp(32px, 10vw, 80px);
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            background: var(--gradient-cyber);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: none;
-            filter: drop-shadow(0 0 20px rgba(255, 106, 213, 0.5));
-        }
-
-        h2 {
-            font-family: var(--font-display);
-            font-size: clamp(24px, 5vw, 40px);
-            font-weight: 700;
+        .nav-links a:hover {
             color: var(--cyan);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: var(--space-lg);
             text-shadow: var(--glow-cyan);
         }
 
-        h3 {
-            font-family: var(--font-display);
-            font-size: 20px;
-            font-weight: 600;
+        .back-link {
+            font-family: var(--font-terminal);
+            font-size: 1.25rem;
             color: var(--pink-hot);
-            margin-bottom: var(--space-md);
-        }
-
-        h4 {
-            font-family: var(--font-pixel);
-            font-size: 10px;
-            color: var(--purple-soft);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: var(--space-md);
-        }
-
-        p {
-            max-width: 60ch;
-            margin-bottom: var(--space-md);
-            color: var(--cyan-soft);
-        }
-
-        .lead {
-            font-size: 22px;
-            color: var(--pink-soft);
-        }
-
-        .japanese {
-            font-size: 0.8em;
-            color: var(--purple-soft);
-            margin-left: var(--space-sm);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
         }
 
         /* Hero */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: var(--space-96) var(--space-32);
+            padding-top: calc(var(--space-96) + 80px);
             text-align: center;
             position: relative;
             overflow: hidden;
-            background: var(--gradient-night);
         }
 
-        /* Grid floor */
         .hero::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: -50%;
-            right: -50%;
-            height: 50%;
-            background:
-                linear-gradient(to bottom, transparent 0%, var(--purple-deep) 100%),
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 60px,
-                    var(--pink-hot) 60px,
-                    var(--pink-hot) 61px
-                ),
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 60px,
-                    var(--pink-hot) 60px,
-                    var(--pink-hot) 61px
-                );
-            transform: perspective(500px) rotateX(60deg);
-            transform-origin: center top;
-            animation: gridMove 20s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { background-position: 0 0, 0 0, 0 0; }
-            100% { background-position: 0 0, 0 60px, 60px 0; }
-        }
-
-        /* Sun */
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
-            height: 300px;
-            background: var(--gradient-sunset);
-            border-radius: 50%;
-            filter: blur(2px);
-            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
-            box-shadow: 0 0 100px rgba(255, 106, 213, 0.5);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-        }
-
-        .hero-subtitle {
-            font-family: var(--font-terminal);
-            font-size: 24px;
-            color: var(--cyan);
-            margin-bottom: var(--space-md);
-            animation: glitchText 3s infinite;
-        }
-
-        @keyframes glitchText {
-            0%, 90%, 100% { transform: translate(0); opacity: 1; }
-            91% { transform: translate(-2px, 1px); opacity: 0.8; }
-            92% { transform: translate(2px, -1px); opacity: 0.9; }
-            93% { transform: translate(-1px, 2px); opacity: 0.7; }
-        }
-
-        .hero-version {
-            font-family: var(--font-pixel);
-            font-size: 10px;
-            color: var(--pink-hot);
-            margin-top: var(--space-lg);
-            padding: var(--space-sm) var(--space-md);
-            border: var(--border-thin) solid var(--pink-hot);
-            display: inline-block;
-            text-shadow: var(--glow-pink);
-        }
-
-        .hero-japanese {
-            font-size: 48px;
-            color: var(--purple-soft);
-            margin-top: var(--space-xl);
-            opacity: 0.6;
-        }
-
-        /* Color Palette */
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: var(--space-md);
-            margin-top: var(--space-xl);
-        }
-
-        .color-card {
-            background: rgba(0, 0, 0, 0.5);
-            border: var(--border-thin) solid var(--purple);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .color-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--glow-purple);
-        }
-
-        .color-swatch {
-            height: 100px;
-            position: relative;
-        }
-
-        .color-swatch::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 30px;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+            height: 200px;
+            background: var(--gradient-sunset);
+            clip-path: polygon(0 100%, 100% 100%, 100% 0, 50% 60%, 0 0);
+            opacity: 0.3;
+        }
+
+        /* Grid floor effect */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -50%;
+            right: -50%;
+            height: 300px;
+            background:
+                linear-gradient(90deg, transparent 49%, var(--pink-hot) 49%, var(--pink-hot) 51%, transparent 51%),
+                linear-gradient(0deg, transparent 49%, var(--pink-hot) 49%, var(--pink-hot) 51%, transparent 51%);
+            background-size: 60px 40px;
+            transform: perspective(500px) rotateX(60deg);
+            opacity: 0.2;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: var(--font-pixel);
+            font-size: clamp(2rem, 6vw, 4rem);
+            color: var(--pink-hot);
+            text-shadow: var(--glow-pink);
+            margin-bottom: var(--space-24);
+            animation: glow-pulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow-pulse {
+            from { text-shadow: 0 0 10px #FF6AD5, 0 0 20px #FF6AD5; }
+            to { text-shadow: 0 0 20px #FF6AD5, 0 0 40px #FF6AD5, 0 0 60px #FF6AD5; }
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-terminal);
+            font-size: 2rem;
+            color: var(--cyan);
+            text-shadow: var(--glow-cyan);
+            margin-bottom: var(--space-32);
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--pink-soft);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-64) var(--space-32);
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            margin-bottom: var(--space-96);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-48);
+        }
+
+        .section-number {
+            font-family: var(--font-pixel);
+            font-size: 0.75rem;
+            color: var(--cyan);
+            display: block;
+            margin-bottom: var(--space-8);
+            text-shadow: var(--glow-cyan);
+        }
+
+        h2 {
+            font-family: var(--font-pixel);
+            font-size: 1.25rem;
+            color: var(--pink-hot);
+            text-shadow: var(--glow-pink);
+        }
+
+        h3 {
+            font-family: var(--font-terminal);
+            font-size: 1.75rem;
+            color: var(--cyan);
+            margin-bottom: var(--space-24);
+        }
+
+        p {
+            margin-bottom: var(--space-16);
+            color: var(--pink-soft);
+        }
+
+        /* Colors */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-24);
+        }
+
+        .color-card {
+            background: rgba(26, 26, 46, 0.8);
+            border: 2px solid var(--pink-hot);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .color-card:hover {
+            box-shadow: var(--glow-pink);
+            transform: translateY(-4px);
+        }
+
+        .color-swatch {
+            height: 100px;
         }
 
         .color-info {
-            padding: var(--space-md);
+            padding: var(--space-16);
+            text-align: center;
         }
 
         .color-name {
-            font-family: var(--font-display);
-            font-size: 14px;
+            font-family: var(--font-terminal);
+            font-size: 1.25rem;
             color: var(--white);
-            margin-bottom: var(--space-xs);
+            margin-bottom: var(--space-4);
         }
 
         .color-hex {
-            font-family: var(--font-terminal);
-            font-size: 16px;
+            font-family: var(--font-pixel);
+            font-size: 0.5rem;
             color: var(--cyan);
         }
 
-        /* Typography Specimen */
+        /* Typography */
         .type-specimen {
-            background: linear-gradient(135deg, rgba(155, 89, 182, 0.2), rgba(0, 255, 255, 0.1));
-            border: var(--border-thin) solid var(--purple);
-            padding: var(--space-2xl);
-            margin-top: var(--space-xl);
+            margin-bottom: var(--space-48);
+            padding: var(--space-48);
+            background: rgba(26, 26, 46, 0.8);
+            border: 2px solid var(--cyan);
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: var(--glow-cyan);
         }
 
         .type-display {
-            font-family: var(--font-display);
-            font-size: clamp(36px, 8vw, 64px);
-            font-weight: 900;
-            background: var(--gradient-cyber);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: var(--space-lg);
-        }
-
-        .type-pixel {
             font-family: var(--font-pixel);
-            font-size: 16px;
+            font-size: 2rem;
             color: var(--pink-hot);
             text-shadow: var(--glow-pink);
-            margin-bottom: var(--space-lg);
-            line-height: 2;
+            margin-bottom: var(--space-16);
         }
 
-        .type-terminal {
+        .type-body {
             font-family: var(--font-terminal);
-            font-size: 24px;
+            font-size: 2rem;
             color: var(--cyan);
-            margin-bottom: var(--space-lg);
         }
 
-        .font-info {
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-16);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-24);
+            padding: var(--space-16) var(--space-24);
+            background: rgba(26, 26, 46, 0.8);
+            border: 1px solid var(--purple);
+            border-radius: 4px;
+        }
+
+        .type-label {
+            width: 100px;
+            font-family: var(--font-pixel);
+            font-size: 0.5rem;
+            color: var(--cyan);
+            flex-shrink: 0;
+        }
+
+        /* Spacing */
+        .spacing-visual {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-xl);
-            margin-top: var(--space-xl);
-            padding-top: var(--space-xl);
-            border-top: var(--border-thin) solid var(--purple-deep);
-        }
-
-        .font-item {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .font-label {
-            font-family: var(--font-pixel);
-            font-size: 8px;
-            color: var(--purple-soft);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: var(--space-sm);
-        }
-
-        .font-name {
-            font-size: 18px;
-            color: var(--pink-hot);
-        }
-
-        /* Spacing Scale */
-        .spacing-scale {
-            margin-top: var(--space-xl);
+            gap: var(--space-32);
+            align-items: flex-end;
+            padding: var(--space-48);
+            background: rgba(26, 26, 46, 0.8);
+            border: 2px solid var(--pink-hot);
+            border-radius: 8px;
         }
 
         .spacing-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: var(--space-lg);
-            margin-bottom: var(--space-md);
+            gap: var(--space-8);
         }
 
-        .spacing-bar {
-            height: 32px;
+        .spacing-box {
             background: var(--gradient-cyber);
-            position: relative;
+            border-radius: 4px;
             box-shadow: var(--glow-pink);
-        }
-
-        .spacing-bar::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--cyan);
-            box-shadow: var(--glow-cyan);
         }
 
         .spacing-label {
             font-family: var(--font-pixel);
-            font-size: 10px;
+            font-size: 0.5rem;
             color: var(--cyan);
-            min-width: 80px;
-        }
-
-        .spacing-value {
-            font-family: var(--font-terminal);
-            font-size: 18px;
-            color: var(--purple-soft);
-            min-width: 80px;
         }
 
         /* Buttons */
         .button-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-xl);
-            margin-top: var(--space-xl);
-        }
-
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-md);
+            gap: var(--space-16);
+            margin-bottom: var(--space-48);
         }
 
         .btn {
-            font-family: var(--font-pixel);
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: var(--space-md) var(--space-xl);
-            border: var(--border-medium) solid;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: var(--space-sm);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .btn:hover::before {
-            left: 100%;
+            padding: var(--space-16) var(--space-32);
+            font-family: var(--font-pixel);
+            font-size: 0.625rem;
+            text-decoration: none;
+            border: 2px solid;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
         .btn-primary {
+            background: var(--pink-hot);
+            color: var(--black);
+            border-color: var(--pink-hot);
+            box-shadow: var(--glow-pink);
+        }
+
+        .btn-primary:hover {
+            background: var(--cyan);
+            border-color: var(--cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .btn-secondary {
+            background: var(--cyan);
+            color: var(--black);
+            border-color: var(--cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .btn-secondary:hover {
+            background: var(--pink-hot);
+            border-color: var(--pink-hot);
+            box-shadow: var(--glow-pink);
+        }
+
+        .btn-outline {
             background: transparent;
             color: var(--pink-hot);
             border-color: var(--pink-hot);
         }
 
-        .btn-primary:hover {
+        .btn-outline:hover {
             background: var(--pink-hot);
             color: var(--black);
             box-shadow: var(--glow-pink);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--cyan);
-            border-color: var(--cyan);
-        }
-
-        .btn-secondary:hover {
-            background: var(--cyan);
-            color: var(--black);
-            box-shadow: var(--glow-cyan);
-        }
-
-        .btn-gradient {
-            background: var(--gradient-cyber);
-            color: var(--black);
-            border: none;
-            padding: calc(var(--space-md) + 2px) calc(var(--space-xl) + 2px);
-        }
-
-        .btn-gradient:hover {
-            box-shadow: var(--glow-pink), var(--glow-cyan);
-            transform: scale(1.05);
-        }
-
         .btn-ghost {
-            background: rgba(255, 106, 213, 0.1);
-            color: var(--purple-soft);
-            border-color: var(--purple);
-            border-style: dashed;
+            background: transparent;
+            color: var(--pink-soft);
+            border-color: transparent;
         }
 
         .btn-ghost:hover {
-            background: var(--purple);
-            color: var(--white);
-            border-style: solid;
+            color: var(--cyan);
+            text-shadow: var(--glow-cyan);
         }
 
-        .btn-sm {
-            padding: var(--space-sm) var(--space-md);
-            font-size: 8px;
-        }
-
-        .btn-lg {
-            padding: var(--space-lg) var(--space-2xl);
-            font-size: 12px;
-        }
-
-        .btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
+        .btn-sm { padding: var(--space-8) var(--space-16); font-size: 0.5rem; }
+        .btn-lg { padding: var(--space-24) var(--space-48); font-size: 0.75rem; }
 
         /* Forms */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-xl);
-            margin-top: var(--space-xl);
-        }
-
         .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
+            margin-bottom: var(--space-24);
         }
 
         .form-label {
+            display: block;
             font-family: var(--font-pixel);
-            font-size: 10px;
-            color: var(--pink-hot);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .form-input,
-        .form-select,
-        .form-textarea {
-            font-family: var(--font-terminal);
-            font-size: 18px;
-            padding: var(--space-md);
-            background: rgba(0, 0, 0, 0.7);
-            border: var(--border-medium) solid var(--purple);
+            font-size: 0.5rem;
             color: var(--cyan);
-            transition: all 0.3s ease;
+            margin-bottom: var(--space-8);
+            text-shadow: var(--glow-cyan);
         }
 
-        .form-input:focus,
-        .form-select:focus,
-        .form-textarea:focus {
+        .form-input {
+            width: 100%;
+            padding: var(--space-16);
+            font-family: var(--font-terminal);
+            font-size: 1.25rem;
+            border: 2px solid var(--purple);
+            border-radius: 4px;
+            background: rgba(26, 26, 46, 0.8);
+            color: var(--white);
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
             outline: none;
-            border-color: var(--cyan);
-            box-shadow: var(--glow-cyan);
-        }
-
-        .form-input::placeholder,
-        .form-textarea::placeholder {
-            color: var(--purple-soft);
-            opacity: 0.6;
-        }
-
-        .form-input.error {
             border-color: var(--pink-hot);
             box-shadow: var(--glow-pink);
         }
 
-        .form-error {
-            font-family: var(--font-pixel);
-            font-size: 8px;
-            color: var(--pink-hot);
-            text-transform: uppercase;
+        .form-input::placeholder {
+            color: var(--purple);
         }
 
-        .form-select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300FFFF' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right var(--space-md) center;
-            padding-right: var(--space-2xl);
-            cursor: pointer;
-        }
-
-        .form-textarea {
+        textarea.form-input {
             min-height: 120px;
             resize: vertical;
         }
 
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-        }
-
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            cursor: pointer;
-            font-size: 16px;
-            color: var(--cyan-soft);
-        }
-
-        .checkbox-input {
+        .form-select {
             appearance: none;
-            width: 20px;
-            height: 20px;
-            border: var(--border-medium) solid var(--purple);
-            background: transparent;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.3s ease;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23FF6AD5' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-16) center;
+            padding-right: var(--space-48);
         }
 
-        .checkbox-input:checked {
-            background: var(--pink-hot);
-            border-color: var(--pink-hot);
-            box-shadow: var(--glow-pink);
-        }
-
-        .checkbox-input:checked::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--black);
-            font-size: 14px;
-            font-weight: bold;
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-24);
         }
 
         /* Cards */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-xl);
-            margin-top: var(--space-xl);
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: var(--space-24);
         }
 
-        .card {
-            background: linear-gradient(135deg, rgba(155, 89, 182, 0.2), rgba(0, 0, 0, 0.8));
-            border: var(--border-thin) solid var(--purple);
+        .vapor-card {
+            background: rgba(26, 26, 46, 0.8);
+            border: 2px solid var(--purple);
+            border-radius: 8px;
             overflow: hidden;
-            transition: all 0.3s ease;
-            position: relative;
+            transition: all 0.3s;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-cyber);
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(255, 106, 213, 0.2), var(--glow-purple);
-        }
-
-        .card-image {
-            height: 160px;
-            background: var(--gradient-sunset);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 4px,
-                rgba(0, 0, 0, 0.1) 4px,
-                rgba(0, 0, 0, 0.1) 8px
-            );
-        }
-
-        .card-icon {
-            font-size: 48px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .card-body {
-            padding: var(--space-xl);
-        }
-
-        .card-title {
-            font-family: var(--font-display);
-            font-size: 18px;
-            color: var(--pink-hot);
-            margin-bottom: var(--space-sm);
-        }
-
-        .card-text {
-            font-size: 16px;
-            color: var(--cyan-soft);
-            margin-bottom: var(--space-md);
-        }
-
-        .card-footer {
-            padding: var(--space-md) var(--space-xl);
-            border-top: var(--border-thin) solid var(--purple-deep);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .card-meta {
-            font-family: var(--font-pixel);
-            font-size: 8px;
-            color: var(--purple-soft);
-        }
-
-        /* Glitch Card */
-        .card-glitch {
-            animation: cardGlitch 5s infinite;
-        }
-
-        @keyframes cardGlitch {
-            0%, 95%, 100% { transform: translate(0); }
-            96% { transform: translate(-2px, 1px); }
-            97% { transform: translate(2px, -1px); }
-            98% { transform: translate(-1px, -1px); }
-        }
-
-        /* Data Table */
-        .table-container {
-            overflow-x: auto;
-            margin-top: var(--space-xl);
-            border: var(--border-thin) solid var(--purple);
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: var(--font-terminal);
-            font-size: 16px;
-        }
-
-        .data-table thead {
-            background: linear-gradient(90deg, var(--purple-deep), var(--pink-deep));
-        }
-
-        .data-table th {
-            font-family: var(--font-pixel);
-            font-size: 10px;
-            padding: var(--space-md) var(--space-lg);
-            text-align: left;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--white);
-        }
-
-        .data-table td {
-            padding: var(--space-md) var(--space-lg);
-            border-bottom: var(--border-thin) solid var(--purple-deep);
-            color: var(--cyan);
-        }
-
-        .data-table tbody tr {
-            transition: all 0.3s ease;
-        }
-
-        .data-table tbody tr:hover {
-            background: rgba(255, 106, 213, 0.1);
-        }
-
-        .data-table tbody tr:hover td {
-            color: var(--pink-hot);
-            text-shadow: var(--glow-pink);
-        }
-
-        /* Badges */
-        .badge-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-md);
-            margin-top: var(--space-md);
-        }
-
-        .badge {
-            font-family: var(--font-pixel);
-            font-size: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: var(--space-sm) var(--space-md);
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-            transition: all 0.3s ease;
-        }
-
-        .badge-neon {
-            background: transparent;
-            color: var(--pink-hot);
-            border: var(--border-thin) solid var(--pink-hot);
-            text-shadow: var(--glow-pink);
-        }
-
-        .badge-neon:hover {
-            background: var(--pink-hot);
-            color: var(--black);
+        .vapor-card:hover {
+            border-color: var(--pink-hot);
             box-shadow: var(--glow-pink);
         }
 
-        .badge-cyan {
-            background: transparent;
+        .card-header {
+            background: linear-gradient(90deg, var(--pink-deep), var(--purple-deep));
+            padding: var(--space-16);
+        }
+
+        .card-title {
+            font-family: var(--font-terminal);
+            font-size: 1.5rem;
             color: var(--cyan);
-            border: var(--border-thin) solid var(--cyan);
+        }
+
+        .card-body {
+            padding: var(--space-24);
+        }
+
+        .card-text {
+            font-size: 0.9375rem;
+            color: var(--pink-soft);
+        }
+
+        /* Table */
+        .table-wrapper {
+            border: 2px solid var(--pink-hot);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--glow-pink);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: linear-gradient(90deg, var(--pink-deep), var(--purple-deep));
+            padding: var(--space-16);
+            text-align: left;
+            font-family: var(--font-pixel);
+            font-size: 0.5rem;
+            color: var(--cyan);
             text-shadow: var(--glow-cyan);
         }
 
-        .badge-filled {
-            background: var(--gradient-cyber);
+        td {
+            padding: var(--space-16);
+            border-bottom: 1px solid var(--purple);
+            font-family: var(--font-terminal);
+            font-size: 1.125rem;
+            color: var(--pink-soft);
+            background: rgba(26, 26, 46, 0.8);
+        }
+
+        tr:hover td {
+            background: rgba(255, 106, 213, 0.1);
+        }
+
+        /* Badges */
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-16);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: var(--space-8) var(--space-16);
+            font-family: var(--font-pixel);
+            font-size: 0.5rem;
+            border-radius: 4px;
+            border: 2px solid;
+        }
+
+        .badge-pink {
+            background: var(--pink-hot);
             color: var(--black);
-            border: none;
+            border-color: var(--pink-hot);
+            box-shadow: 0 0 10px var(--pink-hot);
         }
 
-        .badge-success {
-            color: #00FF88;
-            border-color: #00FF88;
-            text-shadow: 0 0 10px #00FF88;
+        .badge-cyan {
+            background: var(--cyan);
+            color: var(--black);
+            border-color: var(--cyan);
+            box-shadow: 0 0 10px var(--cyan);
         }
 
-        .badge-warning {
-            color: var(--yellow-sun);
-            border-color: var(--yellow-sun);
-            text-shadow: 0 0 10px var(--yellow-sun);
+        .badge-purple {
+            background: var(--purple);
+            color: var(--white);
+            border-color: var(--purple);
         }
 
-        .badge-danger {
-            color: #FF4444;
-            border-color: #FF4444;
-            text-shadow: 0 0 10px #FF4444;
+        .badge-orange {
+            background: var(--orange);
+            color: var(--black);
+            border-color: var(--orange);
+        }
+
+        .badge-outline {
+            background: transparent;
+            color: var(--pink-soft);
+            border-color: var(--pink-soft);
         }
 
         /* Principles */
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
-            margin-top: var(--space-xl);
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-24);
         }
 
-        .principle {
-            padding: var(--space-xl);
-            background: linear-gradient(135deg, rgba(255, 106, 213, 0.1), transparent);
-            border-left: var(--border-thick) solid var(--pink-hot);
-            position: relative;
+        .principle-card {
+            padding: var(--space-32);
+            background: rgba(26, 26, 46, 0.8);
+            border: 2px solid var(--purple);
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
         }
 
-        .principle::before {
-            content: attr(data-number);
-            position: absolute;
-            top: var(--space-md);
-            right: var(--space-md);
-            font-family: var(--font-display);
-            font-size: 48px;
-            font-weight: 900;
-            color: var(--purple-deep);
-            opacity: 0.3;
+        .principle-card:hover {
+            border-color: var(--cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .principle-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-16);
         }
 
         .principle-title {
-            font-family: var(--font-display);
-            font-size: 16px;
-            color: var(--cyan);
-            margin-bottom: var(--space-sm);
+            font-family: var(--font-pixel);
+            font-size: 0.625rem;
+            color: var(--pink-hot);
+            margin-bottom: var(--space-8);
+            text-shadow: var(--glow-pink);
         }
 
         .principle-text {
-            font-size: 16px;
-            color: var(--purple-soft);
+            font-size: 0.875rem;
+            color: var(--pink-soft);
         }
 
         /* Animations */
         .animation-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: var(--space-lg);
-            margin-top: var(--space-xl);
+            gap: var(--space-24);
         }
 
         .animation-demo {
-            background: rgba(0, 0, 0, 0.5);
-            border: var(--border-thin) solid var(--purple);
-            padding: var(--space-xl);
+            padding: var(--space-32);
+            background: rgba(26, 26, 46, 0.8);
+            border: 2px solid var(--purple);
+            border-radius: 8px;
             text-align: center;
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-md);
         }
 
-        .anim-box {
+        .animation-box {
             width: 50px;
             height: 50px;
             background: var(--gradient-cyber);
+            margin: 0 auto var(--space-16);
+            border-radius: 4px;
         }
 
-        .anim-glow .anim-box {
-            animation: glowPulse 2s ease-in-out infinite;
+        .demo-neon:hover .animation-box {
+            animation: neon-flash 0.5s ease infinite;
         }
 
-        @keyframes glowPulse {
-            0%, 100% { box-shadow: var(--glow-pink); }
-            50% { box-shadow: var(--glow-cyan); }
+        .demo-glitch:hover .animation-box {
+            animation: glitch-move 0.3s steps(2) infinite;
         }
 
-        .anim-glitch .anim-box {
-            animation: boxGlitch 0.5s steps(2) infinite;
+        .demo-float:hover .animation-box {
+            animation: float-up 1s ease infinite;
         }
 
-        @keyframes boxGlitch {
-            0%, 100% { transform: translate(0); background: var(--pink-hot); }
-            25% { transform: translate(-3px, 2px); background: var(--cyan); }
-            50% { transform: translate(3px, -2px); background: var(--purple); }
-            75% { transform: translate(-2px, -3px); background: var(--pink-hot); }
+        .demo-spin:hover .animation-box {
+            animation: spin-glow 1s linear infinite;
         }
 
-        .anim-float .anim-box {
-            animation: float 3s ease-in-out infinite;
+        @keyframes neon-flash {
+            0%, 100% { box-shadow: 0 0 10px var(--pink-hot), 0 0 30px var(--pink-hot); }
+            50% { box-shadow: 0 0 20px var(--cyan), 0 0 50px var(--cyan); }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(5deg); }
+        @keyframes glitch-move {
+            0% { transform: translate(0); filter: hue-rotate(0deg); }
+            50% { transform: translate(-5px, 5px); filter: hue-rotate(90deg); }
+            100% { transform: translate(5px, -5px); filter: hue-rotate(180deg); }
         }
 
-        .anim-scan .anim-box {
-            position: relative;
+        @keyframes float-up {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes spin-glow {
+            from { transform: rotate(0deg); box-shadow: 0 0 20px var(--pink-hot); }
+            to { transform: rotate(360deg); box-shadow: 0 0 20px var(--cyan); }
+        }
+
+        .animation-name {
+            font-family: var(--font-pixel);
+            font-size: 0.5rem;
+            color: var(--cyan);
+        }
+
+        /* Special: Retro Window Card */
+        .retro-window {
+            max-width: 450px;
+            background: linear-gradient(180deg, #C0C0C0 0%, #808080 100%);
+            border: 3px outset #FFFFFF;
+            border-radius: 0;
             overflow: hidden;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
         }
 
-        .anim-scan .anim-box::after {
-            content: '';
-            position: absolute;
-            top: -100%;
-            left: 0;
-            right: 0;
-            height: 50%;
-            background: linear-gradient(transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: scanline 2s linear infinite;
-        }
-
-        @keyframes scanline {
-            0% { top: -50%; }
-            100% { top: 150%; }
-        }
-
-        .animation-label {
-            font-family: var(--font-pixel);
-            font-size: 8px;
-            color: var(--purple-soft);
-            text-transform: uppercase;
-        }
-
-        /* Windows Dialog */
-        .windows-dialog {
-            max-width: 500px;
-            margin-top: var(--space-xl);
-            background: #C0C0C0;
-            border: 3px solid;
-            border-color: #FFFFFF #808080 #808080 #FFFFFF;
-            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
-            font-family: var(--font-pixel);
-        }
-
-        .windows-titlebar {
-            background: linear-gradient(90deg, #000080, #1084D0);
-            color: white;
-            padding: 4px 8px;
+        .retro-titlebar {
+            background: linear-gradient(90deg, var(--pink-deep), var(--purple-deep), var(--blue-mid));
+            padding: var(--space-4) var(--space-8);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 10px;
         }
 
-        .windows-buttons {
+        .retro-title {
+            font-family: var(--font-pixel);
+            font-size: 0.5rem;
+            color: var(--white);
+            text-shadow: 1px 1px 0 var(--black);
+        }
+
+        .retro-buttons {
             display: flex;
-            gap: 2px;
+            gap: var(--space-4);
         }
 
-        .windows-btn {
-            width: 20px;
-            height: 20px;
+        .retro-btn {
+            width: 16px;
+            height: 14px;
             background: #C0C0C0;
-            border: 2px solid;
-            border-color: #FFFFFF #808080 #808080 #FFFFFF;
-            font-size: 10px;
+            border: 2px outset #FFFFFF;
+            font-size: 0.5rem;
+            line-height: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .retro-btn:active {
+            border-style: inset;
+        }
+
+        .retro-content {
+            padding: var(--space-16);
+            background: var(--gradient-sunset);
+            min-height: 200px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
+            position: relative;
         }
 
-        .windows-btn:active {
-            border-color: #808080 #FFFFFF #FFFFFF #808080;
+        .retro-content::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background:
+                linear-gradient(90deg, transparent 49%, rgba(0,0,0,0.2) 49%, rgba(0,0,0,0.2) 51%, transparent 51%),
+                linear-gradient(0deg, transparent 49%, rgba(0,0,0,0.2) 49%, rgba(0,0,0,0.2) 51%, transparent 51%);
+            background-size: 30px 20px;
+            transform: perspective(200px) rotateX(60deg);
         }
 
-        .windows-body {
-            padding: 16px;
-            color: #000000;
+        .retro-icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-16);
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.5));
         }
 
-        .windows-icon {
-            font-size: 32px;
-            margin-right: 16px;
-            float: left;
-        }
-
-        .windows-text {
-            font-size: 10px;
-            line-height: 1.8;
-            margin-bottom: 16px;
-        }
-
-        .windows-footer {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            padding-top: 16px;
-            clear: both;
-        }
-
-        .windows-action {
+        .retro-message {
             font-family: var(--font-pixel);
-            font-size: 10px;
-            padding: 6px 24px;
-            background: #C0C0C0;
-            border: 2px solid;
-            border-color: #FFFFFF #808080 #808080 #FFFFFF;
-            cursor: pointer;
+            font-size: 0.625rem;
+            color: var(--white);
+            text-shadow: 2px 2px 0 var(--black);
+            text-align: center;
         }
 
-        .windows-action:active {
-            border-color: #808080 #FFFFFF #FFFFFF #808080;
+        .retro-footer {
+            background: #C0C0C0;
+            padding: var(--space-8) var(--space-16);
+            border-top: 2px inset #FFFFFF;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .retro-status {
+            font-family: var(--font-pixel);
+            font-size: 0.375rem;
+            color: var(--black);
         }
 
         /* Alerts */
-        .alert-grid {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-lg);
-            margin-top: var(--space-xl);
-        }
-
         .alert {
-            padding: var(--space-lg);
-            border: var(--border-medium) solid;
+            padding: var(--space-24);
+            margin-bottom: var(--space-24);
             display: flex;
             align-items: flex-start;
-            gap: var(--space-md);
-            position: relative;
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .alert::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: 4px;
+            gap: var(--space-16);
+            border: 2px solid;
+            border-radius: 8px;
+            background: rgba(26, 26, 46, 0.8);
         }
 
         .alert-icon {
-            font-size: 24px;
+            width: 24px;
+            height: 24px;
             flex-shrink: 0;
         }
 
@@ -1184,173 +866,109 @@
 
         .alert-title {
             font-family: var(--font-pixel);
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: var(--space-xs);
+            font-size: 0.5rem;
+            margin-bottom: var(--space-8);
         }
 
         .alert-text {
-            font-size: 16px;
-            opacity: 0.9;
-        }
-
-        .alert-success {
-            border-color: #00FF88;
-            color: #00FF88;
-        }
-
-        .alert-success::before {
-            background: #00FF88;
-            box-shadow: 0 0 20px #00FF88;
+            font-family: var(--font-terminal);
+            font-size: 1.125rem;
+            margin: 0;
         }
 
         .alert-info {
             border-color: var(--cyan);
-            color: var(--cyan);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
         }
+        .alert-info .alert-title { color: var(--cyan); text-shadow: var(--glow-cyan); }
+        .alert-info .alert-text { color: var(--cyan-soft); }
 
-        .alert-info::before {
-            background: var(--cyan);
-            box-shadow: var(--glow-cyan);
+        .alert-success {
+            border-color: #00FF00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
         }
+        .alert-success .alert-title { color: #00FF00; }
+        .alert-success .alert-text { color: #7FFF7F; }
 
         .alert-warning {
-            border-color: var(--yellow-sun);
-            color: var(--yellow-sun);
+            border-color: var(--orange);
+            box-shadow: 0 0 15px rgba(255, 140, 66, 0.3);
         }
-
-        .alert-warning::before {
-            background: var(--yellow-sun);
-            box-shadow: 0 0 20px var(--yellow-sun);
-        }
+        .alert-warning .alert-title { color: var(--orange); }
+        .alert-warning .alert-text { color: var(--yellow); }
 
         .alert-error {
             border-color: var(--pink-hot);
-            color: var(--pink-hot);
-        }
-
-        .alert-error::before {
-            background: var(--pink-hot);
             box-shadow: var(--glow-pink);
         }
+        .alert-error .alert-title { color: var(--pink-hot); text-shadow: var(--glow-pink); }
+        .alert-error .alert-text { color: var(--pink-soft); }
 
         /* Footer */
         footer {
-            background: var(--gradient-night);
-            padding: var(--space-4xl) var(--space-xl);
+            background: rgba(13, 13, 26, 0.95);
+            padding: var(--space-48) var(--space-32);
+            margin-top: var(--space-96);
+            border-top: 2px solid var(--pink-hot);
             text-align: center;
             position: relative;
-            overflow: hidden;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-neon);
-            background-size: 200% 100%;
-            animation: gradientMove 3s linear infinite;
-        }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
+            z-index: 1;
         }
 
         .footer-brand {
-            font-family: var(--font-display);
-            font-size: 24px;
-            background: var(--gradient-cyber);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: var(--space-md);
-        }
-
-        .footer-tagline {
-            font-family: var(--font-terminal);
-            font-size: 18px;
-            color: var(--purple-soft);
-            margin-bottom: var(--space-lg);
-        }
-
-        .footer-japanese {
-            font-size: 32px;
-            color: var(--pink-hot);
-            opacity: 0.5;
-            margin-bottom: var(--space-xl);
-        }
-
-        .footer-copy {
             font-family: var(--font-pixel);
-            font-size: 8px;
-            color: var(--purple-soft);
-            letter-spacing: 0.1em;
+            font-size: 1rem;
+            color: var(--cyan);
+            text-shadow: var(--glow-cyan);
+            margin-bottom: var(--space-8);
+        }
+
+        .footer-text {
+            font-family: var(--font-terminal);
+            font-size: 1.25rem;
+            color: var(--pink-soft);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            section {
-                padding: var(--space-3xl) var(--space-md);
-            }
-
-            section::before {
-                position: static;
-                display: block;
-                margin-bottom: var(--space-lg);
-            }
-
-            .hero::after {
-                width: 200px;
-                height: 200px;
-            }
-
-            .button-grid {
-                flex-direction: column;
-            }
-
-            .windows-dialog {
-                margin: var(--space-xl) var(--space-sm);
-            }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 1.5rem; }
+            .form-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="nav">
-        <a href="#colors" class="nav-link">Colors</a>
-        <a href="#type" class="nav-link">Type</a>
-        <a href="#spacing" class="nav-link">Space</a>
-        <a href="#buttons" class="nav-link">Buttons</a>
-        <a href="#forms" class="nav-link">Forms</a>
-        <a href="#cards" class="nav-link">Cards</a>
-        <a href="#tables" class="nav-link">Tables</a>
-        <a href="#badges" class="nav-link">Badges</a>
-        <a href="#principles" class="nav-link">理念</a>
-        <a href="#animations" class="nav-link">Motion</a>
-        <a href="#dialog" class="nav-link">Dialog</a>
-        <a href="#alerts" class="nav-link">Alerts</a>
+        <a href="../index.html" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10 12L6 8l4-4"/>
+            </svg>
+            ＢＡＣＫ
+        </a>
+        <a href="#" class="nav-brand">ｖａｐｏｒ</a>
+        <ul class="nav-links">
+            <li><a href="#colors">COLORS</a></li>
+            <li><a href="#typography">TYPE</a></li>
+            <li><a href="#components">COMPONENTS</a></li>
+            <li><a href="#principles">PRINCIPLES</a></li>
+        </ul>
     </nav>
 
-    <!-- Hero -->
     <header class="hero">
-        <div class="container hero-content">
-            <p class="hero-subtitle">デジタルドリームス // Digital Dreams</p>
-            <h1>ａｅｓｔｈｅｔｉｃ</h1>
-            <span class="hero-version">System v2.0 // 1995-∞</span>
-            <p class="hero-japanese">永遠の夢</p>
+        <div class="hero-content">
+            <h1>ｖａｐｏｒｗａｖｅ</h1>
+            <p class="hero-subtitle">ＡＥＳＴＨＥＴＩＣ ＤＥＳＩＧＮ ＳＹＳＴＥＭ</p>
+            <p>Nostalgic digital dreams from a future that never was. Pink sunsets, cyan grids, and endless summer vibes.</p>
         </div>
     </header>
 
-    <!-- Colors -->
-    <section id="colors" data-section="01 // Colors">
-        <div class="container">
-            <h2>Color Palette <span class="japanese">カラー</span></h2>
-            <p class="lead">Neon dreams and sunset memories. The colors of a digital paradise that never was.</p>
+    <main>
+        <!-- 01. Colors -->
+        <section id="colors">
+            <div class="section-header">
+                <span class="section-number">０１</span>
+                <h2>ＣＯＬＯＲ ＰＡＬＥＴＴＥ</h2>
+            </div>
 
             <div class="color-grid">
                 <div class="color-card">
@@ -1363,503 +981,392 @@
                 <div class="color-card">
                     <div class="color-swatch" style="background: var(--cyan);"></div>
                     <div class="color-info">
-                        <div class="color-name">Cyber Cyan</div>
+                        <div class="color-name">Cyan</div>
                         <div class="color-hex">#00FFFF</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-swatch" style="background: var(--purple);"></div>
                     <div class="color-info">
-                        <div class="color-name">Vapor Purple</div>
+                        <div class="color-name">Purple</div>
                         <div class="color-hex">#9B59B6</div>
                     </div>
                 </div>
                 <div class="color-card">
-                    <div class="color-swatch" style="background: var(--orange-sunset);"></div>
+                    <div class="color-swatch" style="background: var(--orange);"></div>
                     <div class="color-info">
-                        <div class="color-name">Sunset Orange</div>
+                        <div class="color-name">Sunset</div>
                         <div class="color-hex">#FF8C42</div>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--yellow-sun);"></div>
-                    <div class="color-info">
-                        <div class="color-name">Sun Yellow</div>
-                        <div class="color-hex">#FFE66D</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-swatch" style="background: var(--blue-night);"></div>
                     <div class="color-info">
-                        <div class="color-name">Night Blue</div>
+                        <div class="color-name">Night</div>
                         <div class="color-hex">#1A1A2E</div>
                     </div>
                 </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--gradient-cyber);"></div>
-                    <div class="color-info">
-                        <div class="color-name">Cyber Gradient</div>
-                        <div class="color-hex">Pink → Cyan</div>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--gradient-sunset);"></div>
-                    <div class="color-info">
-                        <div class="color-name">Sunset Gradient</div>
-                        <div class="color-hex">Multi-stop</div>
-                    </div>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Typography -->
-    <section id="type" data-section="02 // Typography">
-        <div class="container">
-            <h2>Typography <span class="japanese">タイポグラフィ</span></h2>
-            <p class="lead">Fonts from the future that never arrived. Digital nostalgia in every character.</p>
+        <!-- 02. Typography -->
+        <section id="typography">
+            <div class="section-header">
+                <span class="section-number">０２</span>
+                <h2>ＴＹＰＯＧＲＡＰＨＹ</h2>
+            </div>
 
             <div class="type-specimen">
-                <p class="type-display">DIGITAL PARADISE</p>
-                <p class="type-pixel">THE FUTURE IS NOW // 未来は今</p>
-                <p class="type-terminal">Welcome to the aesthetic dimension where dreams become reality and reality becomes dreams.</p>
+                <div class="type-display">PRESS START 2P</div>
+                <div class="type-body">VT323 for terminal vibes</div>
+            </div>
 
-                <div class="font-info">
-                    <div class="font-item">
-                        <p class="font-label">Display</p>
-                        <p class="font-name" style="font-family: var(--font-display);">Orbitron</p>
-                    </div>
-                    <div class="font-item">
-                        <p class="font-label">Pixel</p>
-                        <p class="font-name" style="font-family: var(--font-pixel);">Press Start 2P</p>
-                    </div>
-                    <div class="font-item">
-                        <p class="font-label">Terminal</p>
-                        <p class="font-name" style="font-family: var(--font-terminal);">VT323</p>
-                    </div>
+            <div class="type-scale">
+                <div class="type-row">
+                    <span class="type-label">DISPLAY</span>
+                    <span style="font-family: var(--font-pixel); font-size: 1.25rem; color: var(--pink-hot); text-shadow: var(--glow-pink);">ＤＩＧＩＴＡＬ ＤＲＥＡＭＳ</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">HEADING</span>
+                    <span style="font-family: var(--font-terminal); font-size: 2rem; color: var(--cyan);">System Online</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">BODY</span>
+                    <span style="font-family: var(--font-body); font-size: 1rem; color: var(--pink-soft);">Lost in the neon glow of forgotten shopping malls and dial-up connections.</span>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Spacing -->
-    <section id="spacing" data-section="03 // Spacing">
-        <div class="container">
-            <h2>Spacing Scale <span class="japanese">間隔</span></h2>
-            <p class="lead">Measured distances in the digital void. Every pixel counts.</p>
+        <!-- 03. Spacing -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">０３</span>
+                <h2>ＳＰＡＣＩＮＧ</h2>
+            </div>
 
-            <div class="spacing-scale">
+            <div class="spacing-visual">
                 <div class="spacing-item">
-                    <span class="spacing-label">XS</span>
-                    <div class="spacing-bar" style="width: 4px;"></div>
-                    <span class="spacing-value">4px</span>
+                    <div class="spacing-box" style="width: 4px; height: 4px;"></div>
+                    <span class="spacing-label">4px</span>
                 </div>
                 <div class="spacing-item">
-                    <span class="spacing-label">SM</span>
-                    <div class="spacing-bar" style="width: 8px;"></div>
-                    <span class="spacing-value">8px</span>
+                    <div class="spacing-box" style="width: 8px; height: 8px;"></div>
+                    <span class="spacing-label">8px</span>
                 </div>
                 <div class="spacing-item">
-                    <span class="spacing-label">MD</span>
-                    <div class="spacing-bar" style="width: 16px;"></div>
-                    <span class="spacing-value">16px</span>
+                    <div class="spacing-box" style="width: 16px; height: 16px;"></div>
+                    <span class="spacing-label">16px</span>
                 </div>
                 <div class="spacing-item">
-                    <span class="spacing-label">LG</span>
-                    <div class="spacing-bar" style="width: 24px;"></div>
-                    <span class="spacing-value">24px</span>
+                    <div class="spacing-box" style="width: 24px; height: 24px;"></div>
+                    <span class="spacing-label">24px</span>
                 </div>
                 <div class="spacing-item">
-                    <span class="spacing-label">XL</span>
-                    <div class="spacing-bar" style="width: 32px;"></div>
-                    <span class="spacing-value">32px</span>
+                    <div class="spacing-box" style="width: 32px; height: 32px;"></div>
+                    <span class="spacing-label">32px</span>
                 </div>
                 <div class="spacing-item">
-                    <span class="spacing-label">2XL</span>
-                    <div class="spacing-bar" style="width: 48px;"></div>
-                    <span class="spacing-value">48px</span>
+                    <div class="spacing-box" style="width: 48px; height: 48px;"></div>
+                    <span class="spacing-label">48px</span>
                 </div>
                 <div class="spacing-item">
-                    <span class="spacing-label">3XL</span>
-                    <div class="spacing-bar" style="width: 64px;"></div>
-                    <span class="spacing-value">64px</span>
+                    <div class="spacing-box" style="width: 64px; height: 64px;"></div>
+                    <span class="spacing-label">64px</span>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Buttons -->
-    <section id="buttons" data-section="04 // Buttons">
-        <div class="container">
-            <h2>Buttons <span class="japanese">ボタン</span></h2>
-            <p class="lead">Click to enter the digital realm. Neon-lit pathways to interaction.</p>
+        <!-- 04. Buttons -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">０４</span>
+                <h2>ＢＵＴＴＯＮＳ</h2>
+            </div>
 
+            <h3>Primary Actions</h3>
             <div class="button-grid">
-                <div class="button-group">
-                    <h4>Variants</h4>
-                    <button class="btn btn-primary">Primary</button>
-                    <button class="btn btn-secondary">Secondary</button>
-                    <button class="btn btn-gradient">Gradient</button>
-                    <button class="btn btn-ghost">Ghost</button>
-                </div>
-
-                <div class="button-group">
-                    <h4>Sizes</h4>
-                    <button class="btn btn-primary btn-sm">Small</button>
-                    <button class="btn btn-primary">Default</button>
-                    <button class="btn btn-primary btn-lg">Large</button>
-                </div>
-
-                <div class="button-group">
-                    <h4>States</h4>
-                    <button class="btn btn-primary">Default</button>
-                    <button class="btn btn-primary" disabled>Disabled</button>
-                </div>
+                <button class="btn btn-primary">START</button>
+                <button class="btn btn-secondary">CONNECT</button>
+                <button class="btn btn-outline">BROWSE</button>
+                <button class="btn btn-ghost">EXIT</button>
             </div>
-        </div>
-    </section>
 
-    <!-- Forms -->
-    <section id="forms" data-section="05 // Forms">
-        <div class="container">
-            <h2>Forms <span class="japanese">フォーム</span></h2>
-            <p class="lead">Data entry portals to the virtual world. Type your dreams into existence.</p>
+            <h3>Sizes</h3>
+            <div class="button-grid">
+                <button class="btn btn-primary btn-sm">SMALL</button>
+                <button class="btn btn-primary">DEFAULT</button>
+                <button class="btn btn-primary btn-lg">LARGE</button>
+            </div>
+        </section>
+
+        <!-- 05. Forms -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">０５</span>
+                <h2>ＦＯＲＭＳ</h2>
+            </div>
 
             <div class="form-grid">
                 <div class="form-group">
-                    <label class="form-label">Username</label>
-                    <input type="text" class="form-input" placeholder="Enter handle...">
+                    <label class="form-label">USERNAME</label>
+                    <input type="text" class="form-input" placeholder="cyber_dreamer_95">
                 </div>
-
                 <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-input" placeholder="user@cyberspace.net">
+                    <label class="form-label">PASSWORD</label>
+                    <input type="password" class="form-input" placeholder="••••••••">
                 </div>
-
                 <div class="form-group">
-                    <label class="form-label">Error State</label>
-                    <input type="text" class="form-input error" value="Invalid data">
-                    <span class="form-error">ERROR: CONNECTION_REFUSED</span>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Select Realm</label>
-                    <select class="form-select">
-                        <option>Choose dimension...</option>
-                        <option>デジタル // Digital</option>
-                        <option>夢 // Dream</option>
-                        <option>永遠 // Eternal</option>
+                    <label class="form-label">AESTHETIC</label>
+                    <select class="form-input form-select">
+                        <option>Select vibe</option>
+                        <option>Sunset Mall</option>
+                        <option>Neon City</option>
+                        <option>Digital Plaza</option>
                     </select>
                 </div>
-
                 <div class="form-group">
-                    <label class="form-label">Message</label>
-                    <textarea class="form-textarea" placeholder="Transmit your thoughts..."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Options</label>
-                    <div class="checkbox-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" class="checkbox-input" checked>
-                            <span>Remember me forever</span>
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" class="checkbox-input">
-                            <span>Subscribe to dreams</span>
-                        </label>
-                    </div>
+                    <label class="form-label">ERA</label>
+                    <select class="form-input form-select">
+                        <option>Select era</option>
+                        <option>Early 90s</option>
+                        <option>Late 90s</option>
+                        <option>Y2K</option>
+                    </select>
                 </div>
             </div>
-        </div>
-    </section>
+            <button class="btn btn-primary">ＣＯＮＮＥＣＴ</button>
+        </section>
 
-    <!-- Cards -->
-    <section id="cards" data-section="06 // Cards">
-        <div class="container">
-            <h2>Cards <span class="japanese">カード</span></h2>
-            <p class="lead">Windows into parallel dimensions. Each one a portal to somewhere else.</p>
+        <!-- 06. Cards -->
+        <section id="components">
+            <div class="section-header">
+                <span class="section-number">０６</span>
+                <h2>ＣＡＲＤＳ</h2>
+            </div>
 
             <div class="card-grid">
-                <article class="card">
-                    <div class="card-image">
-                        <span class="card-icon">🗿</span>
+                <div class="vapor-card">
+                    <div class="card-header">
+                        <div class="card-title">Digital Plaza</div>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Classical Dreams</h3>
-                        <p class="card-text">Ancient aesthetics meet digital futures. The marble statues dream of electric sheep.</p>
-                        <button class="btn btn-secondary btn-sm">Explore</button>
+                        <p class="card-text">Wander through endless corridors of forgotten retail dreams. The fountain still plays its melody.</p>
                     </div>
-                    <div class="card-footer">
-                        <span class="card-meta">∞ BC - ∞ AD</span>
-                        <span class="badge badge-neon">ETERNAL</span>
-                    </div>
-                </article>
-
-                <article class="card card-glitch">
-                    <div class="card-image" style="background: var(--gradient-cyber);">
-                        <span class="card-icon">🌴</span>
+                </div>
+                <div class="vapor-card">
+                    <div class="card-header">
+                        <div class="card-title">Sunset Drive</div>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Palm Paradise</h3>
-                        <p class="card-text">Synthetic sunsets over digital beaches. The palm trees sway to lo-fi beats.</p>
-                        <button class="btn btn-secondary btn-sm">Visit</button>
+                        <p class="card-text">Palm trees silhouetted against pink and orange skies. The radio plays smooth jazz into infinity.</p>
                     </div>
-                    <div class="card-footer">
-                        <span class="card-meta">1995 FOREVER</span>
-                        <span class="badge badge-cyan">GLITCH</span>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <div class="card-image" style="background: linear-gradient(135deg, #1A1A2E, #0F3460);">
-                        <span class="card-icon">🌃</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Night City</h3>
-                        <p class="card-text">Neon lights reflect on rain-soaked streets. The city never sleeps, it only dreams.</p>
-                        <button class="btn btn-secondary btn-sm">Enter</button>
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-meta">2AM ALWAYS</span>
-                        <span class="badge badge-filled">NEW</span>
-                    </div>
-                </article>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Data Table -->
-    <section id="tables" data-section="07 // Tables">
-        <div class="container">
-            <h2>Data Table <span class="japanese">データ</span></h2>
-            <p class="lead">Digital records from the mainframe. Every row a memory stored forever.</p>
+        <!-- 07. Table -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">０７</span>
+                <h2>ＤＡＴＡ ＴＡＢＬＥ</h2>
+            </div>
 
-            <div class="table-container">
-                <table class="data-table">
+            <div class="table-wrapper">
+                <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Memory</th>
-                            <th>Location</th>
-                            <th>Time</th>
-                            <th>Status</th>
+                            <th>TRACK</th>
+                            <th>ARTIST</th>
+                            <th>YEAR</th>
+                            <th>VIBE</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>0x001</td>
-                            <td>First Sunrise</td>
-                            <td>Digital Beach</td>
-                            <td>∞:00</td>
-                            <td><span class="badge badge-success">SAVED</span></td>
+                            <td>Macintosh Plus</td>
+                            <td>リサフランク420</td>
+                            <td>2011</td>
+                            <td><span class="badge badge-pink">CLASSIC</span></td>
                         </tr>
                         <tr>
-                            <td>0x002</td>
-                            <td>Neon Lights</td>
-                            <td>Night City</td>
-                            <td>02:30</td>
-                            <td><span class="badge badge-neon">ACTIVE</span></td>
+                            <td>Resonance</td>
+                            <td>HOME</td>
+                            <td>2014</td>
+                            <td><span class="badge badge-cyan">CHILL</span></td>
                         </tr>
                         <tr>
-                            <td>0x003</td>
-                            <td>Lost Signal</td>
-                            <td>The Void</td>
-                            <td>??:??</td>
-                            <td><span class="badge badge-warning">CORRUPT</span></td>
-                        </tr>
-                        <tr>
-                            <td>0x004</td>
-                            <td>Marble Dream</td>
-                            <td>Classical Realm</td>
-                            <td>-∞:00</td>
-                            <td><span class="badge badge-cyan">ETERNAL</span></td>
+                            <td>A Real Hero</td>
+                            <td>College & Electric Youth</td>
+                            <td>2010</td>
+                            <td><span class="badge badge-purple">DRIVE</span></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Badges -->
-    <section id="badges" data-section="08 // Badges">
-        <div class="container">
-            <h2>Badges <span class="japanese">バッジ</span></h2>
-            <p class="lead">Glowing indicators of status. Digital medals for the virtual soul.</p>
-
-            <h4>Neon Style</h4>
-            <div class="badge-grid">
-                <span class="badge badge-neon">AESTHETIC</span>
-                <span class="badge badge-cyan">DIGITAL</span>
-                <span class="badge badge-filled">GRADIENT</span>
+        <!-- 08. Badges -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">０８</span>
+                <h2>ＢＡＤＧＥＳ</h2>
             </div>
 
-            <h4 style="margin-top: var(--space-xl);">Status</h4>
-            <div class="badge-grid">
-                <span class="badge badge-success">SUCCESS</span>
-                <span class="badge badge-warning">WARNING</span>
-                <span class="badge badge-danger">ERROR</span>
+            <div class="badge-group">
+                <span class="badge badge-pink">AESTHETIC</span>
+                <span class="badge badge-cyan">CHILL</span>
+                <span class="badge badge-purple">RETRO</span>
+                <span class="badge badge-orange">SUNSET</span>
+                <span class="badge badge-outline">CLASSIC</span>
             </div>
+        </section>
 
-            <h4 style="margin-top: var(--space-xl);">Japanese</h4>
-            <div class="badge-grid">
-                <span class="badge badge-neon">美的</span>
-                <span class="badge badge-cyan">夢</span>
-                <span class="badge badge-filled">永遠</span>
+        <!-- 09. Principles -->
+        <section id="principles">
+            <div class="section-header">
+                <span class="section-number">０９</span>
+                <h2>ＰＲＩＮＣＩＰＬＥＳ</h2>
             </div>
-        </div>
-    </section>
-
-    <!-- Principles -->
-    <section id="principles" data-section="09 // 理念">
-        <div class="container">
-            <h2>Design Principles <span class="japanese">理念</span></h2>
-            <p class="lead">The philosophy behind the aesthetic. Rules for dreaming in digital.</p>
 
             <div class="principles-grid">
-                <div class="principle" data-number="01">
-                    <h3 class="principle-title">Nostalgic Future</h3>
-                    <p class="principle-text">Design for a tomorrow that feels like yesterday. The future was better when we imagined it.</p>
+                <div class="principle-card">
+                    <div class="principle-icon">🌴</div>
+                    <h4 class="principle-title">NOSTALGIA</h4>
+                    <p class="principle-text">Longing for a future that never arrived. Digital memories of analog dreams.</p>
                 </div>
-
-                <div class="principle" data-number="02">
-                    <h3 class="principle-title">Neon Dreams</h3>
-                    <p class="principle-text">Let light be your guide. Glow effects create depth and dimension in the digital void.</p>
+                <div class="principle-card">
+                    <div class="principle-icon">💿</div>
+                    <h4 class="principle-title">RETRO-FUTURE</h4>
+                    <p class="principle-text">90s tech optimism meets eternal sunset. The promise of the information age.</p>
                 </div>
-
-                <div class="principle" data-number="03">
-                    <h3 class="principle-title">Glitch Embrace</h3>
-                    <p class="principle-text">Imperfection is beauty. Errors and artifacts are features, not bugs.</p>
+                <div class="principle-card">
+                    <div class="principle-icon">🌅</div>
+                    <h4 class="principle-title">DREAMLIKE</h4>
+                    <p class="principle-text">Soft edges, neon glows, and the haze of half-remembered summers.</p>
                 </div>
-
-                <div class="principle" data-number="04">
-                    <h3 class="principle-title">Cultural Fusion</h3>
-                    <p class="principle-text">East meets West in the digital realm. 美学 and aesthetics are one.</p>
-                </div>
-
-                <div class="principle" data-number="05">
-                    <h3 class="principle-title">Infinite Loop</h3>
-                    <p class="principle-text">Time is circular. The 90s never ended, they just became eternal.</p>
-                </div>
-
-                <div class="principle" data-number="06">
-                    <h3 class="principle-title">Dreamy Reality</h3>
-                    <p class="principle-text">Blur the line between real and virtual. Everything is a dream within a dream.</p>
+                <div class="principle-card">
+                    <div class="principle-icon">🛒</div>
+                    <h4 class="principle-title">CONSUMER</h4>
+                    <p class="principle-text">Empty malls, elevator music, and the beauty of forgotten commercial spaces.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Animations -->
-    <section id="animations" data-section="10 // Motion">
-        <div class="container">
-            <h2>Animations <span class="japanese">動き</span></h2>
-            <p class="lead">Movement in the digital realm. Every transition a journey through cyberspace.</p>
+        <!-- 10. Animations -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">１０</span>
+                <h2>ＡＮＩＭＡＴＩＯＮＳ</h2>
+            </div>
 
             <div class="animation-grid">
-                <div class="animation-demo anim-glow">
-                    <div class="anim-box"></div>
-                    <span class="animation-label">Glow Pulse</span>
+                <div class="animation-demo demo-neon">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">NEON</div>
                 </div>
-
-                <div class="animation-demo anim-glitch">
-                    <div class="anim-box"></div>
-                    <span class="animation-label">Glitch</span>
+                <div class="animation-demo demo-glitch">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">GLITCH</div>
                 </div>
-
-                <div class="animation-demo anim-float">
-                    <div class="anim-box"></div>
-                    <span class="animation-label">Float</span>
+                <div class="animation-demo demo-float">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">FLOAT</div>
                 </div>
-
-                <div class="animation-demo anim-scan">
-                    <div class="anim-box"></div>
-                    <span class="animation-label">Scanline</span>
+                <div class="animation-demo demo-spin">
+                    <div class="animation-box"></div>
+                    <div class="animation-name">SPIN</div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Windows Dialog -->
-    <section id="dialog" data-section="11 // Special">
-        <div class="container">
-            <h2>Windows Dialog <span class="japanese">ダイアログ</span></h2>
-            <p class="lead">A relic from the golden age. When interfaces had soul.</p>
+        <!-- 11. Special: Retro Window -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">１１</span>
+                <h2>ＲＥＴＲＯ ＷＩＮＤＯＷ</h2>
+            </div>
 
-            <div class="windows-dialog">
-                <div class="windows-titlebar">
-                    <span>aesthetic.exe</span>
-                    <div class="windows-buttons">
-                        <button class="windows-btn">_</button>
-                        <button class="windows-btn">□</button>
-                        <button class="windows-btn">×</button>
+            <div class="retro-window">
+                <div class="retro-titlebar">
+                    <span class="retro-title">aesthetic.exe</span>
+                    <div class="retro-buttons">
+                        <div class="retro-btn">_</div>
+                        <div class="retro-btn">□</div>
+                        <div class="retro-btn">×</div>
                     </div>
                 </div>
-                <div class="windows-body">
-                    <span class="windows-icon">💾</span>
-                    <p class="windows-text">
-                        Welcome to the AESTHETIC SYSTEM v2.0<br><br>
-                        You have entered a realm where digital dreams become reality and
-                        the boundaries of time dissolve into infinite loops of nostalgia.<br><br>
-                        Do you wish to continue into the void?
-                    </p>
-                    <div class="windows-footer">
-                        <button class="windows-action">YES 続ける</button>
-                        <button class="windows-action">NO 戻る</button>
+                <div class="retro-content">
+                    <div class="retro-icon">🌴</div>
+                    <div class="retro-message">
+                        WELCOME TO THE<br>
+                        ＡＥＳＴＨＥＴＩＣ ＺＯＮＥ<br>
+                        <br>
+                        IT'S ALL SO BEAUTIFUL
                     </div>
+                </div>
+                <div class="retro-footer">
+                    <span class="retro-status">CONNECTED: 28.8 KBPS</span>
+                    <span class="retro-status">MEM: 640K</span>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Alerts -->
-    <section id="alerts" data-section="12 // Alerts">
-        <div class="container">
-            <h2>Alerts <span class="japanese">警告</span></h2>
-            <p class="lead">System messages from the digital void. Notifications from another dimension.</p>
+        <!-- 12. Alerts -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">１２</span>
+                <h2>ＡＬＥＲＴＳ</h2>
+            </div>
 
-            <div class="alert-grid">
-                <div class="alert alert-success">
-                    <span class="alert-icon">✓</span>
-                    <div class="alert-content">
-                        <div class="alert-title">CONNECTION ESTABLISHED</div>
-                        <p class="alert-text">You have successfully connected to the aesthetic dimension. Welcome home.</p>
-                    </div>
-                </div>
-
-                <div class="alert alert-info">
-                    <span class="alert-icon">ℹ</span>
-                    <div class="alert-content">
-                        <div class="alert-title">SYSTEM NOTICE // お知らせ</div>
-                        <p class="alert-text">The digital sunset will begin at 永遠:00. Please adjust your perception accordingly.</p>
-                    </div>
-                </div>
-
-                <div class="alert alert-warning">
-                    <span class="alert-icon">⚠</span>
-                    <div class="alert-content">
-                        <div class="alert-title">NOSTALGIA OVERLOAD</div>
-                        <p class="alert-text">Warning: You may experience feelings of longing for a time that never existed.</p>
-                    </div>
-                </div>
-
-                <div class="alert alert-error">
-                    <span class="alert-icon">✕</span>
-                    <div class="alert-content">
-                        <div class="alert-title">REALITY BREACH // 現実エラー</div>
-                        <p class="alert-text">Error: Unable to distinguish between dreams and reality. This is normal.</p>
-                    </div>
+            <div class="alert alert-info">
+                <svg class="alert-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">ＩＮＦＯ</div>
+                    <p class="alert-text">New aesthetic detected in sector 7. Scanning for vibes...</p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
+            <div class="alert alert-success">
+                <svg class="alert-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M9 12l2 2 4-4"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">ＳＵＣＣＥＳＳ</div>
+                    <p class="alert-text">Connection established. Welcome to the digital plaza.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <svg class="alert-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 9v4M12 17h.01" stroke="currentColor" stroke-width="2"/>
+                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" fill="none" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">ＷＡＲＮＩＮＧ</div>
+                    <p class="alert-text">Nostalgia levels critical. Take a moment to appreciate the present.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-error">
+                <svg class="alert-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M15 9l-6 6M9 9l6 6"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">ＥＲＲＯＲ</div>
+                    <p class="alert-text">Reality check failed. Please remain in the aesthetic zone.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <footer>
-        <div class="footer-brand">ａｅｓｔｈｅｔｉｃ．ｓｙｓ</div>
-        <p class="footer-tagline">Digital Dreams Never Die // デジタルドリームは永遠に</p>
-        <p class="footer-japanese">永遠の美学</p>
-        <p class="footer-copy">© 1995-∞ // ALL RIGHTS EXIST IN THE VOID // v2.0</p>
+        <div class="footer-brand">ｖａｐｏｒ</div>
+        <div class="footer-text">ＡＥＳＴＨＥＴＩＣ ＤＥＳＩＧＮ ＳＹＳＴＥＭ — ２０２４</div>
     </footer>
 </body>
 </html>

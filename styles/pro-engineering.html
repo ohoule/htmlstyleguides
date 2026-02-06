@@ -6,31 +6,32 @@
     <title>Construct — Engineering Design System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Overpass+Mono:wght@400;500;600;700&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Color Palette - Technical Precision */
-            --color-black: #0D0D0D;
-            --color-carbon: #1A1A1A;
-            --color-graphite: #2D2D2D;
-            --color-steel: #525252;
-            --color-aluminum: #A3A3A3;
-            --color-silver: #D4D4D4;
-            --color-white: #FAFAFA;
+            /* Color Palette - Blueprint Technical */
+            --color-slate-dark: #1E2A38;
+            --color-slate: #2D3E50;
+            --color-slate-mid: #3D5166;
+            --color-slate-light: #5A7086;
+            --color-silver: #94A3B8;
+            --color-pearl: #E2E8F0;
+            --color-white: #F8FAFC;
             --color-electric-blue: #0EA5E9;
-            --color-electric-blue-dark: #0284C7;
-            --color-neon-green: #22C55E;
-            --color-amber: #F59E0B;
+            --color-electric-bright: #38BDF8;
+            --color-safety-yellow: #FACC15;
+            --color-safety-amber: #F59E0B;
 
             /* Semantic Colors */
             --color-success: #22C55E;
-            --color-warning: #F59E0B;
+            --color-warning: #FACC15;
             --color-error: #EF4444;
             --color-info: #0EA5E9;
 
             /* Typography */
-            --font-mono: 'Space Mono', monospace;
-            --font-body: 'Inter', sans-serif;
+            --font-display: 'Archivo', sans-serif;
+            --font-body: 'Lexend', sans-serif;
+            --font-mono: 'Overpass Mono', monospace;
 
             /* Spacing - 4px Base Unit */
             --space-1: 0.25rem;
@@ -47,6 +48,7 @@
             /* Layout */
             --max-width: 1200px;
             --border-radius: 4px;
+            --border-radius-lg: 8px;
             --transition: 0.15s ease;
         }
 
@@ -60,8 +62,8 @@
             font-family: var(--font-body);
             font-weight: 400;
             line-height: 1.6;
-            color: var(--color-graphite);
-            background-color: var(--color-white);
+            color: var(--color-pearl);
+            background-color: var(--color-slate-dark);
             font-size: 16px;
         }
 
@@ -71,41 +73,44 @@
             top: 0;
             left: 0;
             right: 0;
-            background: var(--color-black);
+            background: var(--color-slate-dark);
             padding: var(--space-3) var(--space-6);
             z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--color-graphite);
+            border-bottom: 2px solid var(--color-electric-blue);
         }
 
         .nav-brand {
-            font-family: var(--font-mono);
+            font-family: var(--font-display);
             font-size: 1.25rem;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--color-white);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: var(--space-2);
+            gap: var(--space-3);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
-        .nav-brand::before {
-            content: '>';
-            color: var(--color-electric-blue);
+        .nav-brand svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--color-electric-blue);
         }
 
         .nav-links {
             display: flex;
-            gap: var(--space-5);
+            gap: var(--space-6);
             list-style: none;
         }
 
         .nav-links a {
             font-family: var(--font-mono);
             font-size: 0.75rem;
-            color: var(--color-aluminum);
+            color: var(--color-silver);
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -116,11 +121,28 @@
             color: var(--color-electric-blue);
         }
 
+        .back-link {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-electric-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .back-link:hover {
+            color: var(--color-electric-bright);
+        }
+
         /* Hero Section */
         .hero {
             padding: var(--space-10) var(--space-6);
             padding-top: calc(var(--space-10) + 60px);
-            background: var(--color-black);
+            background: var(--color-slate-dark);
             position: relative;
             overflow: hidden;
         }
@@ -133,9 +155,19 @@
             right: 0;
             bottom: 0;
             background-image:
-                linear-gradient(rgba(14, 165, 233, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(14, 165, 233, 0.03) 1px, transparent 1px);
-            background-size: 24px 24px;
+                linear-gradient(rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 60px;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 60%);
         }
 
         .hero-content {
@@ -145,44 +177,44 @@
             z-index: 1;
         }
 
-        .hero-terminal {
+        .hero-tag {
             font-family: var(--font-mono);
             font-size: 0.75rem;
-            color: var(--color-aluminum);
+            color: var(--color-safety-yellow);
             margin-bottom: var(--space-4);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
         }
 
-        .hero-terminal span {
-            color: var(--color-electric-blue);
+        .hero-tag::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--color-safety-yellow);
+            border-radius: 2px;
         }
 
         .hero h1 {
-            font-family: var(--font-mono);
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 800;
             color: var(--color-white);
-            line-height: 1.2;
+            line-height: 1.1;
             margin-bottom: var(--space-5);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
         }
 
-        .hero h1 .cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1em;
-            background: var(--color-electric-blue);
-            margin-left: 4px;
-            animation: blink 1s step-end infinite;
-        }
-
-        @keyframes blink {
-            50% { opacity: 0; }
+        .hero h1 span {
+            color: var(--color-electric-blue);
         }
 
         .hero p {
             font-size: 1.125rem;
-            color: var(--color-aluminum);
+            color: var(--color-silver);
             max-width: 600px;
-            font-family: var(--font-body);
+            font-weight: 300;
         }
 
         .hero-stats {
@@ -190,7 +222,7 @@
             gap: var(--space-8);
             margin-top: var(--space-7);
             padding-top: var(--space-6);
-            border-top: 1px solid var(--color-graphite);
+            border-top: 1px solid var(--color-slate-mid);
         }
 
         .stat {
@@ -198,14 +230,14 @@
         }
 
         .stat-value {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: var(--color-electric-blue);
         }
 
         .stat-label {
             font-size: 0.6875rem;
-            color: var(--color-aluminum);
+            color: var(--color-silver);
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
@@ -230,43 +262,48 @@
 
         .section-number {
             font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--color-electric-blue);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--color-slate-dark);
+            background: var(--color-electric-blue);
             padding: var(--space-1) var(--space-3);
-            background: rgba(14, 165, 233, 0.1);
             border-radius: var(--border-radius);
         }
 
         h2 {
-            font-family: var(--font-mono);
-            font-size: 1.5rem;
+            font-family: var(--font-display);
+            font-size: 1.75rem;
             font-weight: 700;
-            color: var(--color-black);
+            color: var(--color-white);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
         }
 
         h3 {
-            font-family: var(--font-mono);
+            font-family: var(--font-display);
             font-size: 1rem;
-            font-weight: 700;
-            color: var(--color-graphite);
+            font-weight: 600;
+            color: var(--color-pearl);
             margin-bottom: var(--space-4);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         p {
             margin-bottom: var(--space-4);
-            color: var(--color-steel);
+            color: var(--color-silver);
         }
 
         /* Color Palette */
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: var(--space-3);
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-4);
         }
 
         .color-card {
-            background: var(--color-white);
-            border: 1px solid var(--color-silver);
+            background: var(--color-slate);
+            border: 1px solid var(--color-slate-mid);
             border-radius: var(--border-radius);
             overflow: hidden;
             transition: var(--transition);
@@ -277,48 +314,51 @@
         }
 
         .color-swatch {
-            height: 60px;
+            height: 80px;
         }
 
         .color-info {
             padding: var(--space-3);
-            background: var(--color-black);
         }
 
         .color-name {
             font-family: var(--font-mono);
             font-size: 0.75rem;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--color-white);
+            text-transform: uppercase;
+            margin-bottom: var(--space-1);
         }
 
         .color-hex {
             font-family: var(--font-mono);
             font-size: 0.6875rem;
-            color: var(--color-aluminum);
+            color: var(--color-silver);
         }
 
         /* Typography */
         .type-specimen {
             margin-bottom: var(--space-7);
             padding: var(--space-6);
-            background: var(--color-black);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--color-graphite);
+            background: var(--color-slate);
+            border-radius: var(--border-radius-lg);
+            border-left: 4px solid var(--color-electric-blue);
         }
 
         .type-display {
-            font-family: var(--font-mono);
-            font-size: 3rem;
-            font-weight: 700;
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 800;
             color: var(--color-white);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
             margin-bottom: var(--space-3);
         }
 
         .type-body {
-            font-family: var(--font-body);
-            font-size: 1.125rem;
-            color: var(--color-aluminum);
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--color-electric-blue);
         }
 
         .type-scale {
@@ -331,9 +371,9 @@
             display: flex;
             align-items: center;
             gap: var(--space-4);
-            padding: var(--space-3);
-            background: var(--color-white);
-            border: 1px solid var(--color-silver);
+            padding: var(--space-3) var(--space-4);
+            background: var(--color-slate);
+            border: 1px solid var(--color-slate-mid);
             border-radius: var(--border-radius);
         }
 
@@ -341,19 +381,22 @@
             width: 80px;
             font-family: var(--font-mono);
             font-size: 0.6875rem;
-            color: var(--color-electric-blue);
+            color: var(--color-safety-yellow);
+            font-weight: 600;
             flex-shrink: 0;
+            text-transform: uppercase;
         }
 
         /* Spacing */
         .spacing-visual {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-4);
+            gap: var(--space-5);
             align-items: flex-end;
-            padding: var(--space-5);
-            background: var(--color-black);
-            border-radius: var(--border-radius);
+            padding: var(--space-6);
+            background: var(--color-slate);
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--color-slate-mid);
         }
 
         .spacing-item {
@@ -364,14 +407,14 @@
         }
 
         .spacing-box {
-            background: var(--color-electric-blue);
+            background: linear-gradient(135deg, var(--color-electric-blue) 0%, var(--color-electric-bright) 100%);
             border-radius: 2px;
         }
 
         .spacing-label {
             font-family: var(--font-mono);
             font-size: 0.6875rem;
-            color: var(--color-aluminum);
+            color: var(--color-silver);
         }
 
         /* Buttons */
@@ -388,10 +431,12 @@
             justify-content: center;
             gap: var(--space-2);
             padding: var(--space-3) var(--space-5);
-            font-family: var(--font-mono);
+            font-family: var(--font-display);
             font-size: 0.8125rem;
             font-weight: 700;
             text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             border: 2px solid transparent;
             border-radius: var(--border-radius);
             cursor: pointer;
@@ -400,45 +445,46 @@
 
         .btn-primary {
             background: var(--color-electric-blue);
-            color: var(--color-white);
+            color: var(--color-slate-dark);
             border-color: var(--color-electric-blue);
         }
 
         .btn-primary:hover {
-            background: var(--color-electric-blue-dark);
-            border-color: var(--color-electric-blue-dark);
+            background: var(--color-electric-bright);
+            border-color: var(--color-electric-bright);
         }
 
         .btn-secondary {
-            background: var(--color-black);
-            color: var(--color-white);
-            border-color: var(--color-black);
+            background: var(--color-safety-yellow);
+            color: var(--color-slate-dark);
+            border-color: var(--color-safety-yellow);
         }
 
         .btn-secondary:hover {
-            background: var(--color-graphite);
+            background: var(--color-safety-amber);
+            border-color: var(--color-safety-amber);
         }
 
         .btn-outline {
             background: transparent;
-            color: var(--color-black);
-            border-color: var(--color-black);
+            color: var(--color-electric-blue);
+            border-color: var(--color-electric-blue);
         }
 
         .btn-outline:hover {
-            background: var(--color-black);
-            color: var(--color-white);
+            background: var(--color-electric-blue);
+            color: var(--color-slate-dark);
         }
 
         .btn-ghost {
             background: transparent;
-            color: var(--color-steel);
+            color: var(--color-silver);
             border-color: transparent;
         }
 
         .btn-ghost:hover {
-            background: var(--color-silver);
-            color: var(--color-black);
+            background: var(--color-slate);
+            color: var(--color-white);
         }
 
         .btn-sm {
@@ -460,10 +506,10 @@
             display: block;
             font-family: var(--font-mono);
             font-size: 0.6875rem;
-            font-weight: 700;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: var(--color-graphite);
+            color: var(--color-electric-blue);
             margin-bottom: var(--space-2);
         }
 
@@ -472,31 +518,31 @@
             padding: var(--space-3);
             font-family: var(--font-mono);
             font-size: 0.875rem;
-            border: 2px solid var(--color-silver);
+            border: 2px solid var(--color-slate-mid);
             border-radius: var(--border-radius);
-            background: var(--color-white);
-            color: var(--color-black);
+            background: var(--color-slate);
+            color: var(--color-white);
             transition: var(--transition);
         }
 
         .form-input:focus {
             outline: none;
             border-color: var(--color-electric-blue);
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
         }
 
         .form-input::placeholder {
-            color: var(--color-aluminum);
+            color: var(--color-slate-light);
         }
 
         textarea.form-input {
             min-height: 120px;
             resize: vertical;
-            font-family: var(--font-mono);
         }
 
         .form-select {
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23525252' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230EA5E9' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right var(--space-3) center;
             padding-right: var(--space-7);
@@ -511,75 +557,80 @@
         /* Project Cards */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: var(--space-4);
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: var(--space-5);
         }
 
         .project-card {
-            background: var(--color-white);
-            border: 1px solid var(--color-silver);
-            border-radius: var(--border-radius);
+            background: var(--color-slate);
+            border: 1px solid var(--color-slate-mid);
+            border-radius: var(--border-radius-lg);
             overflow: hidden;
             transition: var(--transition);
         }
 
         .project-card:hover {
             border-color: var(--color-electric-blue);
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.15);
         }
 
         .project-header {
-            background: var(--color-black);
+            background: var(--color-slate-dark);
             padding: var(--space-4);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid var(--color-slate-mid);
         }
 
         .project-id {
             font-family: var(--font-mono);
             font-size: 0.75rem;
             color: var(--color-electric-blue);
+            font-weight: 600;
         }
 
         .project-status {
             font-family: var(--font-mono);
-            padding: var(--space-1) var(--space-2);
+            padding: var(--space-1) var(--space-3);
             font-size: 0.625rem;
             font-weight: 700;
             text-transform: uppercase;
-            border-radius: 2px;
+            letter-spacing: 0.05em;
+            border-radius: var(--border-radius);
         }
 
         .status-active {
-            background: var(--color-neon-green);
-            color: var(--color-black);
+            background: var(--color-success);
+            color: var(--color-slate-dark);
         }
 
         .status-review {
-            background: var(--color-amber);
-            color: var(--color-black);
+            background: var(--color-safety-yellow);
+            color: var(--color-slate-dark);
         }
 
         .status-complete {
             background: var(--color-electric-blue);
-            color: var(--color-white);
+            color: var(--color-slate-dark);
         }
 
         .project-body {
-            padding: var(--space-4);
+            padding: var(--space-5);
         }
 
         .project-title {
-            font-family: var(--font-mono);
-            font-size: 1rem;
+            font-family: var(--font-display);
+            font-size: 1.125rem;
             font-weight: 700;
-            color: var(--color-black);
+            color: var(--color-white);
             margin-bottom: var(--space-2);
+            text-transform: uppercase;
         }
 
         .project-description {
             font-size: 0.875rem;
-            color: var(--color-steel);
+            color: var(--color-silver);
             margin-bottom: var(--space-4);
         }
 
@@ -588,7 +639,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: var(--space-3);
             padding-top: var(--space-4);
-            border-top: 1px solid var(--color-silver);
+            border-top: 1px solid var(--color-slate-mid);
         }
 
         .meta-item {
@@ -597,15 +648,15 @@
 
         .meta-value {
             font-family: var(--font-mono);
-            font-size: 0.875rem;
+            font-size: 1rem;
             font-weight: 700;
-            color: var(--color-black);
+            color: var(--color-electric-blue);
         }
 
         .meta-label {
             font-family: var(--font-mono);
             font-size: 0.5625rem;
-            color: var(--color-aluminum);
+            color: var(--color-silver);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
@@ -613,8 +664,8 @@
         /* Data Table */
         .table-wrapper {
             overflow-x: auto;
-            border: 1px solid var(--color-silver);
-            border-radius: var(--border-radius);
+            border: 1px solid var(--color-slate-mid);
+            border-radius: var(--border-radius-lg);
         }
 
         table {
@@ -623,23 +674,24 @@
         }
 
         th {
-            background: var(--color-black);
-            padding: var(--space-3);
+            background: var(--color-slate-dark);
+            padding: var(--space-3) var(--space-4);
             text-align: left;
             font-family: var(--font-mono);
             font-size: 0.625rem;
             font-weight: 700;
-            color: var(--color-aluminum);
+            color: var(--color-electric-blue);
             text-transform: uppercase;
             letter-spacing: 0.1em;
+            border-bottom: 2px solid var(--color-electric-blue);
         }
 
         td {
-            padding: var(--space-3);
-            border-bottom: 1px solid var(--color-silver);
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 1px solid var(--color-slate-mid);
             font-family: var(--font-mono);
             font-size: 0.8125rem;
-            color: var(--color-graphite);
+            color: var(--color-pearl);
         }
 
         tr:hover td {
@@ -647,52 +699,54 @@
         }
 
         .table-id {
-            color: var(--color-electric-blue);
-            font-weight: 700;
+            color: var(--color-safety-yellow);
+            font-weight: 600;
         }
 
         /* Badges */
         .badge-group {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-2);
+            gap: var(--space-3);
         }
 
         .badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
             padding: var(--space-1) var(--space-3);
             font-family: var(--font-mono);
             font-size: 0.625rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            border-radius: 2px;
+            border-radius: var(--border-radius);
         }
 
         .badge-blue {
             background: var(--color-electric-blue);
-            color: var(--color-white);
+            color: var(--color-slate-dark);
+        }
+
+        .badge-yellow {
+            background: var(--color-safety-yellow);
+            color: var(--color-slate-dark);
         }
 
         .badge-green {
-            background: var(--color-neon-green);
-            color: var(--color-black);
+            background: var(--color-success);
+            color: var(--color-slate-dark);
         }
 
-        .badge-amber {
-            background: var(--color-amber);
-            color: var(--color-black);
-        }
-
-        .badge-black {
-            background: var(--color-black);
+        .badge-slate {
+            background: var(--color-slate-mid);
             color: var(--color-white);
         }
 
         .badge-outline {
             background: transparent;
-            border: 1px solid var(--color-steel);
-            color: var(--color-steel);
+            border: 1px solid var(--color-silver);
+            color: var(--color-silver);
         }
 
         /* Design Principles */
@@ -704,21 +758,34 @@
 
         .principle-card {
             padding: var(--space-5);
-            background: var(--color-black);
-            border-radius: var(--border-radius);
+            background: var(--color-slate);
+            border: 1px solid var(--color-slate-mid);
+            border-radius: var(--border-radius-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .principle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--color-electric-blue);
         }
 
         .principle-number {
             font-family: var(--font-mono);
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: var(--color-electric-blue);
+            color: var(--color-slate-mid);
             margin-bottom: var(--space-3);
         }
 
         .principle-title {
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
+            font-family: var(--font-display);
+            font-size: 1rem;
             font-weight: 700;
             color: var(--color-white);
             text-transform: uppercase;
@@ -727,64 +794,65 @@
 
         .principle-text {
             font-size: 0.875rem;
-            color: var(--color-aluminum);
-            line-height: 1.6;
+            color: var(--color-silver);
+            line-height: 1.7;
         }
 
         /* Animations */
         .animation-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: var(--space-3);
+            gap: var(--space-4);
         }
 
         .animation-demo {
             padding: var(--space-5);
-            background: var(--color-black);
-            border-radius: var(--border-radius);
+            background: var(--color-slate);
+            border: 1px solid var(--color-slate-mid);
+            border-radius: var(--border-radius-lg);
             text-align: center;
         }
 
         .animation-box {
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
             background: var(--color-electric-blue);
             margin: 0 auto var(--space-3);
-            border-radius: 2px;
+            border-radius: var(--border-radius);
         }
 
         .demo-scan:hover .animation-box {
-            animation: scan 0.6s ease infinite;
+            animation: scan 0.8s ease infinite;
         }
 
-        .demo-build:hover .animation-box {
-            animation: build 0.5s ease forwards;
+        .demo-construct:hover .animation-box {
+            animation: construct 0.6s ease forwards;
         }
 
         .demo-pulse:hover .animation-box {
             animation: pulse 0.8s ease infinite;
         }
 
-        .demo-load:hover .animation-box {
-            animation: load 1s linear infinite;
+        .demo-rotate:hover .animation-box {
+            animation: rotate 1s linear infinite;
         }
 
         @keyframes scan {
             0%, 100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4); }
-            50% { box-shadow: 0 0 0 10px rgba(14, 165, 233, 0); }
+            50% { box-shadow: 0 0 0 15px rgba(14, 165, 233, 0); }
         }
 
-        @keyframes build {
-            from { transform: scaleY(0); transform-origin: bottom; }
-            to { transform: scaleY(1); transform-origin: bottom; }
+        @keyframes construct {
+            0% { transform: scaleY(0); transform-origin: bottom; }
+            100% { transform: scaleY(1); transform-origin: bottom; }
         }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            50% { opacity: 0.4; }
         }
 
-        @keyframes load {
+        @keyframes rotate {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
@@ -792,74 +860,209 @@
         .animation-name {
             font-family: var(--font-mono);
             font-size: 0.6875rem;
-            color: var(--color-aluminum);
+            color: var(--color-silver);
             text-transform: uppercase;
         }
 
-        /* Special Component - Code Block */
-        .code-block {
-            background: var(--color-black);
-            border-radius: var(--border-radius);
+        /* Special Component - Technical Specification Card */
+        .spec-card {
+            background: var(--color-slate);
+            border: 1px solid var(--color-slate-mid);
+            border-radius: var(--border-radius-lg);
             overflow: hidden;
+            max-width: 480px;
         }
 
-        .code-header {
-            background: var(--color-carbon);
-            padding: var(--space-3) var(--space-4);
+        .spec-header {
+            background: var(--color-slate-dark);
+            padding: var(--space-4) var(--space-5);
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--color-graphite);
+            align-items: flex-start;
+            border-bottom: 2px solid var(--color-electric-blue);
         }
 
-        .code-filename {
+        .spec-part-info h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--color-white);
+            text-transform: uppercase;
+            margin: 0 0 var(--space-1) 0;
+        }
+
+        .spec-part-number {
             font-family: var(--font-mono);
             font-size: 0.75rem;
-            color: var(--color-aluminum);
+            color: var(--color-electric-blue);
+            font-weight: 600;
         }
 
-        .code-dots {
+        .spec-certifications {
             display: flex;
             gap: var(--space-2);
         }
 
-        .code-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-
-        .dot-red { background: #EF4444; }
-        .dot-yellow { background: #F59E0B; }
-        .dot-green { background: #22C55E; }
-
-        .code-body {
-            padding: var(--space-4);
+        .cert-badge {
+            background: var(--color-safety-yellow);
+            color: var(--color-slate-dark);
+            padding: var(--space-1) var(--space-2);
             font-family: var(--font-mono);
-            font-size: 0.8125rem;
-            line-height: 1.8;
-            overflow-x: auto;
+            font-size: 0.5625rem;
+            font-weight: 700;
+            border-radius: 2px;
         }
 
-        .code-line {
+        .spec-schematic {
+            background: var(--color-slate-dark);
+            padding: var(--space-5);
+            position: relative;
+            height: 160px;
             display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spec-schematic::before {
+            content: '';
+            position: absolute;
+            inset: var(--space-4);
+            background-image:
+                linear-gradient(rgba(14, 165, 233, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(14, 165, 233, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .schematic-placeholder {
+            width: 120px;
+            height: 80px;
+            border: 2px dashed var(--color-electric-blue);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .schematic-placeholder svg {
+            width: 40px;
+            height: 40px;
+            stroke: var(--color-electric-blue);
+            opacity: 0.5;
+        }
+
+        .spec-body {
+            padding: var(--space-5);
+        }
+
+        .spec-dimensions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: var(--space-4);
+            margin-bottom: var(--space-5);
+            padding-bottom: var(--space-5);
+            border-bottom: 1px solid var(--color-slate-mid);
         }
 
-        .line-number {
-            color: var(--color-steel);
-            user-select: none;
-            min-width: 24px;
+        .spec-dim-item {
+            text-align: center;
         }
 
-        .code-content {
+        .spec-dim-label {
+            font-family: var(--font-mono);
+            font-size: 0.5625rem;
             color: var(--color-silver);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-1);
         }
 
-        .code-keyword { color: var(--color-electric-blue); }
-        .code-string { color: var(--color-neon-green); }
-        .code-comment { color: var(--color-steel); font-style: italic; }
-        .code-function { color: var(--color-amber); }
+        .spec-dim-value {
+            font-family: var(--font-mono);
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+
+        .spec-dim-unit {
+            font-size: 0.75rem;
+            color: var(--color-silver);
+            font-weight: 400;
+        }
+
+        .spec-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-4);
+            margin-bottom: var(--space-5);
+        }
+
+        .spec-detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-1);
+        }
+
+        .spec-detail-label {
+            font-family: var(--font-mono);
+            font-size: 0.5625rem;
+            color: var(--color-silver);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .spec-detail-value {
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            color: var(--color-white);
+            font-weight: 500;
+        }
+
+        .spec-tolerance {
+            background: var(--color-slate-dark);
+            padding: var(--space-4);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .spec-tolerance-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-1);
+        }
+
+        .spec-tolerance-label {
+            font-family: var(--font-mono);
+            font-size: 0.5625rem;
+            color: var(--color-silver);
+            text-transform: uppercase;
+        }
+
+        .spec-tolerance-value {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-safety-yellow);
+        }
+
+        .spec-tolerance-rating {
+            display: flex;
+            gap: var(--space-1);
+        }
+
+        .rating-bar {
+            width: 8px;
+            height: 32px;
+            background: var(--color-slate-mid);
+            border-radius: 2px;
+        }
+
+        .rating-bar.active {
+            background: var(--color-electric-blue);
+        }
 
         /* Alerts */
         .alert {
@@ -869,13 +1072,13 @@
             display: flex;
             align-items: flex-start;
             gap: var(--space-3);
-            border-left: 3px solid;
-            font-family: var(--font-mono);
+            border-left: 4px solid;
+            font-family: var(--font-body);
         }
 
         .alert-icon {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             flex-shrink: 0;
         }
 
@@ -884,16 +1087,17 @@
         }
 
         .alert-title {
+            font-family: var(--font-display);
             font-weight: 700;
-            font-size: 0.8125rem;
+            font-size: 0.875rem;
             margin-bottom: var(--space-1);
             text-transform: uppercase;
         }
 
         .alert-text {
-            font-family: var(--font-body);
             font-size: 0.875rem;
             margin: 0;
+            color: var(--color-silver);
         }
 
         .alert-info {
@@ -913,7 +1117,7 @@
         .alert-success .alert-icon { fill: var(--color-success); }
 
         .alert-warning {
-            background: rgba(245, 158, 11, 0.1);
+            background: rgba(250, 204, 21, 0.1);
             border-color: var(--color-warning);
         }
 
@@ -930,10 +1134,10 @@
 
         /* Footer */
         footer {
-            background: var(--color-black);
+            background: var(--color-slate-dark);
             padding: var(--space-7) var(--space-6);
             margin-top: var(--space-10);
-            border-top: 1px solid var(--color-graphite);
+            border-top: 2px solid var(--color-electric-blue);
         }
 
         .footer-content {
@@ -945,21 +1149,18 @@
         }
 
         .footer-brand {
-            font-family: var(--font-mono);
-            font-size: 1rem;
-            font-weight: 700;
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 800;
             color: var(--color-white);
-        }
-
-        .footer-brand::before {
-            content: '> ';
-            color: var(--color-electric-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         .footer-text {
             font-family: var(--font-mono);
             font-size: 0.75rem;
-            color: var(--color-aluminum);
+            color: var(--color-silver);
         }
 
         /* Responsive */
@@ -969,7 +1170,7 @@
             }
 
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
             .hero-stats {
@@ -978,6 +1179,15 @@
             }
 
             .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .spec-dimensions {
+                grid-template-columns: 1fr;
+                gap: var(--space-3);
+            }
+
+            .spec-details {
                 grid-template-columns: 1fr;
             }
 
@@ -991,7 +1201,19 @@
 </head>
 <body>
     <nav class="nav">
-        <a href="#" class="nav-brand">construct</a>
+        <a href="../index.html" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10 12L6 8l4-4"/>
+            </svg>
+            Back
+        </a>
+        <a href="#" class="nav-brand">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M3 9h18M9 21V9"/>
+            </svg>
+            Construct
+        </a>
         <ul class="nav-links">
             <li><a href="#colors">Colors</a></li>
             <li><a href="#typography">Typography</a></li>
@@ -1002,9 +1224,9 @@
 
     <header class="hero">
         <div class="hero-content">
-            <div class="hero-terminal">$ <span>init</span> design-system --version 1.0</div>
-            <h1>construct<span class="cursor"></span></h1>
-            <p>A technical design system built for engineering teams, developer tools, and technical documentation. Where precision meets productivity.</p>
+            <div class="hero-tag">Engineering Design System v2.0</div>
+            <h1>Construct <span>DS</span></h1>
+            <p>A precision-engineered design system for technical applications, engineering documentation, and industrial interfaces. Built for clarity under pressure.</p>
 
             <div class="hero-stats">
                 <div class="stat">
@@ -1016,8 +1238,8 @@
                     <div class="stat-label">WCAG</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-value">0</div>
-                    <div class="stat-label">Dependencies</div>
+                    <div class="stat-value">ISO</div>
+                    <div class="stat-label">Compliant</div>
                 </div>
             </div>
         </div>
@@ -1028,51 +1250,51 @@
         <section id="colors">
             <div class="section-header">
                 <span class="section-number">01</span>
-                <h2>color_palette</h2>
+                <h2>Color Palette</h2>
             </div>
-            <p>A monochromatic base with high-visibility accents for technical interfaces.</p>
+            <p>A technical palette combining deep slate blues with electric accents and safety-standard yellow for critical elements.</p>
 
             <div class="color-grid">
                 <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-black);"></div>
+                    <div class="color-swatch" style="background: var(--color-slate-dark);"></div>
                     <div class="color-info">
-                        <div class="color-name">black</div>
-                        <div class="color-hex">#0D0D0D</div>
+                        <div class="color-name">Slate Dark</div>
+                        <div class="color-hex">#1E2A38</div>
                     </div>
                 </div>
                 <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-carbon);"></div>
+                    <div class="color-swatch" style="background: var(--color-slate);"></div>
                     <div class="color-info">
-                        <div class="color-name">carbon</div>
-                        <div class="color-hex">#1A1A1A</div>
+                        <div class="color-name">Slate</div>
+                        <div class="color-hex">#2D3E50</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-swatch" style="background: var(--color-electric-blue);"></div>
                     <div class="color-info">
-                        <div class="color-name">electric</div>
+                        <div class="color-name">Electric Blue</div>
                         <div class="color-hex">#0EA5E9</div>
                     </div>
                 </div>
                 <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-neon-green);"></div>
+                    <div class="color-swatch" style="background: var(--color-safety-yellow);"></div>
                     <div class="color-info">
-                        <div class="color-name">neon</div>
-                        <div class="color-hex">#22C55E</div>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-amber);"></div>
-                    <div class="color-info">
-                        <div class="color-name">amber</div>
-                        <div class="color-hex">#F59E0B</div>
+                        <div class="color-name">Safety Yellow</div>
+                        <div class="color-hex">#FACC15</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-swatch" style="background: var(--color-silver);"></div>
                     <div class="color-info">
-                        <div class="color-name">silver</div>
-                        <div class="color-hex">#D4D4D4</div>
+                        <div class="color-name">Silver</div>
+                        <div class="color-hex">#94A3B8</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--color-pearl);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Pearl</div>
+                        <div class="color-hex">#E2E8F0</div>
                     </div>
                 </div>
             </div>
@@ -1082,34 +1304,34 @@
         <section id="typography">
             <div class="section-header">
                 <span class="section-number">02</span>
-                <h2>typography</h2>
+                <h2>Typography</h2>
             </div>
 
             <div class="type-specimen">
-                <div class="type-display">Space Mono</div>
-                <div class="type-body">Inter — for readable body text</div>
+                <div class="type-display">Archivo Black</div>
+                <div class="type-body">Overpass Mono — precision data display</div>
             </div>
 
             <div class="type-scale">
                 <div class="type-row">
                     <span class="type-label">H1</span>
-                    <span style="font-family: var(--font-mono); font-size: 2rem; font-weight: 700; color: var(--color-black);">PROJECT_INIT</span>
+                    <span style="font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--color-white); text-transform: uppercase;">SYSTEM STATUS</span>
                 </div>
                 <div class="type-row">
                     <span class="type-label">H2</span>
-                    <span style="font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--color-black);">module_config</span>
+                    <span style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--color-white); text-transform: uppercase;">Component Specs</span>
                 </div>
                 <div class="type-row">
                     <span class="type-label">H3</span>
-                    <span style="font-family: var(--font-mono); font-size: 1rem; font-weight: 700; color: var(--color-graphite);">function_name()</span>
+                    <span style="font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--color-pearl); text-transform: uppercase;">Module Config</span>
                 </div>
                 <div class="type-row">
-                    <span class="type-label">BODY</span>
-                    <span style="font-family: var(--font-body); font-size: 1rem; color: var(--color-steel);">Build completed successfully in 2.4 seconds with zero errors.</span>
+                    <span class="type-label">Body</span>
+                    <span style="font-family: var(--font-body); font-size: 1rem; color: var(--color-silver);">Precision-machined to ±0.05mm tolerance with ISO 9001 certification.</span>
                 </div>
                 <div class="type-row">
-                    <span class="type-label">CODE</span>
-                    <span style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--color-electric-blue);">const config = require('./config.js');</span>
+                    <span class="type-label">Mono</span>
+                    <span style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--color-electric-blue);">PART-2847-A | REV 3.2</span>
                 </div>
             </div>
         </section>
@@ -1118,9 +1340,9 @@
         <section>
             <div class="section-header">
                 <span class="section-number">03</span>
-                <h2>spacing_scale</h2>
+                <h2>Spacing Scale</h2>
             </div>
-            <p>A 4px base unit grid for pixel-perfect alignment.</p>
+            <p>A rigid 4px grid system ensuring mathematical precision across all technical interfaces.</p>
 
             <div class="spacing-visual">
                 <div class="spacing-item">
@@ -1158,18 +1380,18 @@
         <section>
             <div class="section-header">
                 <span class="section-number">04</span>
-                <h2>buttons</h2>
+                <h2>Buttons</h2>
             </div>
 
-            <h3>// primary_actions</h3>
+            <h3>Primary Actions</h3>
             <div class="button-grid">
                 <button class="btn btn-primary">Deploy</button>
-                <button class="btn btn-secondary">Build</button>
+                <button class="btn btn-secondary">Override</button>
                 <button class="btn btn-outline">Configure</button>
                 <button class="btn btn-ghost">Cancel</button>
             </div>
 
-            <h3>// sizes</h3>
+            <h3>Sizes</h3>
             <div class="button-grid">
                 <button class="btn btn-primary btn-sm">Small</button>
                 <button class="btn btn-primary">Default</button>
@@ -1181,43 +1403,46 @@
         <section>
             <div class="section-header">
                 <span class="section-number">05</span>
-                <h2>forms</h2>
+                <h2>Forms</h2>
             </div>
 
             <div class="form-grid">
                 <div class="form-group">
-                    <label class="form-label">project_name</label>
-                    <input type="text" class="form-input" placeholder="my-project">
+                    <label class="form-label">Part Number</label>
+                    <input type="text" class="form-input" placeholder="PART-0000-X">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">version</label>
-                    <input type="text" class="form-input" placeholder="1.0.0">
+                    <label class="form-label">Revision</label>
+                    <input type="text" class="form-input" placeholder="REV 1.0">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">environment</label>
+                    <label class="form-label">Material Type</label>
                     <select class="form-input form-select">
-                        <option>development</option>
-                        <option>staging</option>
-                        <option>production</option>
+                        <option>Select material</option>
+                        <option>Aluminum 6061-T6</option>
+                        <option>Stainless Steel 304</option>
+                        <option>Carbon Steel</option>
+                        <option>Titanium Grade 5</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">build_target</label>
+                    <label class="form-label">Tolerance Class</label>
                     <select class="form-input form-select">
-                        <option>web</option>
-                        <option>mobile</option>
-                        <option>desktop</option>
+                        <option>Select class</option>
+                        <option>Standard (±0.5mm)</option>
+                        <option>Precision (±0.1mm)</option>
+                        <option>High Precision (±0.05mm)</option>
                     </select>
                 </div>
             </div>
-            <button class="btn btn-primary">Initialize Project</button>
+            <button class="btn btn-primary">Submit Specification</button>
         </section>
 
         <!-- 6. Project Cards -->
         <section id="components">
             <div class="section-header">
                 <span class="section-number">06</span>
-                <h2>project_cards</h2>
+                <h2>Project Cards</h2>
             </div>
 
             <div class="card-grid">
@@ -1227,20 +1452,20 @@
                         <span class="project-status status-active">Active</span>
                     </div>
                     <div class="project-body">
-                        <h4 class="project-title">API Gateway v2.0</h4>
-                        <p class="project-description">High-performance API gateway with rate limiting, caching, and real-time analytics.</p>
+                        <h4 class="project-title">Hydraulic Assembly</h4>
+                        <p class="project-description">High-pressure hydraulic manifold system with integrated sensors and failsafe valves.</p>
                         <div class="project-meta">
                             <div class="meta-item">
-                                <div class="meta-value">247</div>
-                                <div class="meta-label">Commits</div>
+                                <div class="meta-value">127</div>
+                                <div class="meta-label">Parts</div>
                             </div>
                             <div class="meta-item">
-                                <div class="meta-value">12</div>
-                                <div class="meta-label">Open PRs</div>
+                                <div class="meta-value">14</div>
+                                <div class="meta-label">Revisions</div>
                             </div>
                             <div class="meta-item">
-                                <div class="meta-value">98%</div>
-                                <div class="meta-label">Coverage</div>
+                                <div class="meta-value">98.2%</div>
+                                <div class="meta-label">Yield</div>
                             </div>
                         </div>
                     </div>
@@ -1251,44 +1476,20 @@
                         <span class="project-status status-review">Review</span>
                     </div>
                     <div class="project-body">
-                        <h4 class="project-title">Auth Service Refactor</h4>
-                        <p class="project-description">OAuth 2.0 implementation with PKCE flow and multi-factor authentication support.</p>
+                        <h4 class="project-title">Gearbox Module</h4>
+                        <p class="project-description">Precision planetary gearbox with hardened steel gears and ceramic bearings.</p>
                         <div class="project-meta">
                             <div class="meta-item">
                                 <div class="meta-value">89</div>
-                                <div class="meta-label">Commits</div>
+                                <div class="meta-label">Parts</div>
                             </div>
                             <div class="meta-item">
-                                <div class="meta-value">3</div>
-                                <div class="meta-label">Open PRs</div>
+                                <div class="meta-value">7</div>
+                                <div class="meta-label">Revisions</div>
                             </div>
                             <div class="meta-item">
-                                <div class="meta-value">94%</div>
-                                <div class="meta-label">Coverage</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-header">
-                        <span class="project-id">PRJ-2024-0756</span>
-                        <span class="project-status status-complete">Complete</span>
-                    </div>
-                    <div class="project-body">
-                        <h4 class="project-title">Data Pipeline Migration</h4>
-                        <p class="project-description">Migrated legacy ETL processes to modern streaming architecture with Kafka.</p>
-                        <div class="project-meta">
-                            <div class="meta-item">
-                                <div class="meta-value">412</div>
-                                <div class="meta-label">Commits</div>
-                            </div>
-                            <div class="meta-item">
-                                <div class="meta-value">0</div>
-                                <div class="meta-label">Open PRs</div>
-                            </div>
-                            <div class="meta-item">
-                                <div class="meta-value">99%</div>
-                                <div class="meta-label">Coverage</div>
+                                <div class="meta-value">99.1%</div>
+                                <div class="meta-label">Yield</div>
                             </div>
                         </div>
                     </div>
@@ -1300,48 +1501,41 @@
         <section>
             <div class="section-header">
                 <span class="section-number">07</span>
-                <h2>data_table</h2>
+                <h2>Data Table</h2>
             </div>
 
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th>Build ID</th>
-                            <th>Branch</th>
+                            <th>Part ID</th>
+                            <th>Description</th>
+                            <th>Material</th>
                             <th>Status</th>
-                            <th>Duration</th>
-                            <th>Timestamp</th>
+                            <th>Tolerance</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="table-id">#2847</td>
-                            <td>main</td>
-                            <td><span class="badge badge-green">passed</span></td>
-                            <td>2m 34s</td>
-                            <td>2024-03-15 14:32</td>
+                            <td class="table-id">PART-2847-A</td>
+                            <td>Drive Shaft Assembly</td>
+                            <td>Steel 4140</td>
+                            <td><span class="badge badge-green">Approved</span></td>
+                            <td>±0.05mm</td>
                         </tr>
                         <tr>
-                            <td class="table-id">#2846</td>
-                            <td>feature/auth</td>
-                            <td><span class="badge badge-amber">pending</span></td>
-                            <td>--</td>
-                            <td>2024-03-15 14:28</td>
+                            <td class="table-id">PART-2848-B</td>
+                            <td>Bearing Housing</td>
+                            <td>Aluminum 7075</td>
+                            <td><span class="badge badge-yellow">Review</span></td>
+                            <td>±0.10mm</td>
                         </tr>
                         <tr>
-                            <td class="table-id">#2845</td>
-                            <td>fix/memory-leak</td>
-                            <td><span class="badge badge-green">passed</span></td>
-                            <td>1m 48s</td>
-                            <td>2024-03-15 14:15</td>
-                        </tr>
-                        <tr>
-                            <td class="table-id">#2844</td>
-                            <td>develop</td>
-                            <td><span class="badge badge-outline">skipped</span></td>
-                            <td>--</td>
-                            <td>2024-03-15 14:02</td>
+                            <td class="table-id">PART-2849-C</td>
+                            <td>Seal Retainer</td>
+                            <td>Brass C360</td>
+                            <td><span class="badge badge-blue">Testing</span></td>
+                            <td>±0.08mm</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1352,15 +1546,15 @@
         <section>
             <div class="section-header">
                 <span class="section-number">08</span>
-                <h2>badges</h2>
+                <h2>Badges & Tags</h2>
             </div>
 
             <div class="badge-group">
-                <span class="badge badge-blue">deployed</span>
-                <span class="badge badge-green">passed</span>
-                <span class="badge badge-amber">pending</span>
-                <span class="badge badge-black">archived</span>
-                <span class="badge badge-outline">skipped</span>
+                <span class="badge badge-blue">Active</span>
+                <span class="badge badge-yellow">Critical</span>
+                <span class="badge badge-green">Approved</span>
+                <span class="badge badge-slate">Archived</span>
+                <span class="badge badge-outline">Pending</span>
             </div>
         </section>
 
@@ -1368,29 +1562,29 @@
         <section id="principles">
             <div class="section-header">
                 <span class="section-number">09</span>
-                <h2>design_principles</h2>
+                <h2>Design Principles</h2>
             </div>
 
             <div class="principles-grid">
                 <div class="principle-card">
                     <div class="principle-number">01</div>
                     <h4 class="principle-title">Precision</h4>
-                    <p class="principle-text">Every pixel matters. 4px grid ensures mathematical consistency across all interfaces.</p>
+                    <p class="principle-text">Every element adheres to a strict 4px grid. Mathematical consistency ensures reliability.</p>
                 </div>
                 <div class="principle-card">
                     <div class="principle-number">02</div>
-                    <h4 class="principle-title">Performance</h4>
-                    <p class="principle-text">Zero dependencies, minimal footprint. Built for speed-critical applications.</p>
+                    <h4 class="principle-title">Clarity</h4>
+                    <p class="principle-text">Technical data must be instantly readable. No ambiguity, no interpretation required.</p>
                 </div>
                 <div class="principle-card">
                     <div class="principle-number">03</div>
-                    <h4 class="principle-title">Clarity</h4>
-                    <p class="principle-text">Complex data made readable. Information hierarchy guides the eye naturally.</p>
+                    <h4 class="principle-title">Safety</h4>
+                    <p class="principle-text">Critical information follows OSHA color standards. Yellow warns, red alerts.</p>
                 </div>
                 <div class="principle-card">
                     <div class="principle-number">04</div>
-                    <h4 class="principle-title">Consistency</h4>
-                    <p class="principle-text">Predictable patterns reduce cognitive load. Same action, same result, everywhere.</p>
+                    <h4 class="principle-title">Durability</h4>
+                    <p class="principle-text">Built for 24/7 industrial environments. High contrast, fatigue-resistant interfaces.</p>
                 </div>
             </div>
         </section>
@@ -1399,70 +1593,107 @@
         <section>
             <div class="section-header">
                 <span class="section-number">10</span>
-                <h2>animations</h2>
+                <h2>Animations</h2>
             </div>
-            <p>Functional motion that communicates state changes without distraction.</p>
+            <p>Functional motion that communicates system state without distraction.</p>
 
             <div class="animation-grid">
                 <div class="animation-demo demo-scan">
                     <div class="animation-box"></div>
-                    <div class="animation-name">scan</div>
+                    <div class="animation-name">Scan</div>
                 </div>
-                <div class="animation-demo demo-build">
+                <div class="animation-demo demo-construct">
                     <div class="animation-box"></div>
-                    <div class="animation-name">build</div>
+                    <div class="animation-name">Build</div>
                 </div>
                 <div class="animation-demo demo-pulse">
                     <div class="animation-box"></div>
-                    <div class="animation-name">pulse</div>
+                    <div class="animation-name">Pulse</div>
                 </div>
-                <div class="animation-demo demo-load">
+                <div class="animation-demo demo-rotate">
                     <div class="animation-box"></div>
-                    <div class="animation-name">load</div>
+                    <div class="animation-name">Rotate</div>
                 </div>
             </div>
         </section>
 
-        <!-- 11. Special Component -->
+        <!-- 11. Special Component - Technical Specification Card -->
         <section>
             <div class="section-header">
                 <span class="section-number">11</span>
-                <h2>code_block</h2>
+                <h2>Technical Specification Card</h2>
             </div>
 
-            <div class="code-block" style="max-width: 600px;">
-                <div class="code-header">
-                    <span class="code-filename">config.js</span>
-                    <div class="code-dots">
-                        <span class="code-dot dot-red"></span>
-                        <span class="code-dot dot-yellow"></span>
-                        <span class="code-dot dot-green"></span>
+            <div class="spec-card">
+                <div class="spec-header">
+                    <div class="spec-part-info">
+                        <h3>Drive Shaft Assembly</h3>
+                        <div class="spec-part-number">PART-2847-A | REV 3.2</div>
+                    </div>
+                    <div class="spec-certifications">
+                        <span class="cert-badge">ISO 9001</span>
+                        <span class="cert-badge">CE</span>
                     </div>
                 </div>
-                <div class="code-body">
-                    <div class="code-line">
-                        <span class="line-number">1</span>
-                        <span class="code-content"><span class="code-comment">// Construct Design System Config</span></span>
+
+                <div class="spec-schematic">
+                    <div class="schematic-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M3 9h18"/>
+                            <path d="M9 21V9"/>
+                            <circle cx="15" cy="15" r="3"/>
+                        </svg>
                     </div>
-                    <div class="code-line">
-                        <span class="line-number">2</span>
-                        <span class="code-content"><span class="code-keyword">const</span> config = {</span>
+                </div>
+
+                <div class="spec-body">
+                    <div class="spec-dimensions">
+                        <div class="spec-dim-item">
+                            <div class="spec-dim-label">Length</div>
+                            <div class="spec-dim-value">245<span class="spec-dim-unit">mm</span></div>
+                        </div>
+                        <div class="spec-dim-item">
+                            <div class="spec-dim-label">Width</div>
+                            <div class="spec-dim-value">48<span class="spec-dim-unit">mm</span></div>
+                        </div>
+                        <div class="spec-dim-item">
+                            <div class="spec-dim-label">Height</div>
+                            <div class="spec-dim-value">48<span class="spec-dim-unit">mm</span></div>
+                        </div>
                     </div>
-                    <div class="code-line">
-                        <span class="line-number">3</span>
-                        <span class="code-content">  theme: <span class="code-string">'dark'</span>,</span>
+
+                    <div class="spec-details">
+                        <div class="spec-detail-item">
+                            <span class="spec-detail-label">Material</span>
+                            <span class="spec-detail-value">Steel 4140 Heat Treated</span>
+                        </div>
+                        <div class="spec-detail-item">
+                            <span class="spec-detail-label">Weight</span>
+                            <span class="spec-detail-value">2.47 kg</span>
+                        </div>
+                        <div class="spec-detail-item">
+                            <span class="spec-detail-label">Surface Finish</span>
+                            <span class="spec-detail-value">Ra 0.8 μm</span>
+                        </div>
+                        <div class="spec-detail-item">
+                            <span class="spec-detail-label">Hardness</span>
+                            <span class="spec-detail-value">58-62 HRC</span>
+                        </div>
                     </div>
-                    <div class="code-line">
-                        <span class="line-number">4</span>
-                        <span class="code-content">  baseUnit: <span class="code-function">4</span>,</span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">5</span>
-                        <span class="code-content">  animations: <span class="code-keyword">true</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">6</span>
-                        <span class="code-content">};</span>
+
+                    <div class="spec-tolerance">
+                        <div class="spec-tolerance-info">
+                            <span class="spec-tolerance-label">Tolerance Class</span>
+                            <span class="spec-tolerance-value">±0.05mm</span>
+                        </div>
+                        <div class="spec-tolerance-rating">
+                            <div class="rating-bar active"></div>
+                            <div class="rating-bar active"></div>
+                            <div class="rating-bar active"></div>
+                            <div class="rating-bar active"></div>
+                            <div class="rating-bar"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1472,7 +1703,7 @@
         <section>
             <div class="section-header">
                 <span class="section-number">12</span>
-                <h2>alerts</h2>
+                <h2>Alert Messages</h2>
             </div>
 
             <div class="alert alert-info">
@@ -1480,8 +1711,8 @@
                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
                 </svg>
                 <div class="alert-content">
-                    <div class="alert-title">Build Started</div>
-                    <p class="alert-text">Pipeline #2847 has been triggered on branch main.</p>
+                    <div class="alert-title">Revision Update</div>
+                    <p class="alert-text">Part PART-2847-A has been updated to revision 3.2. Review changes before production.</p>
                 </div>
             </div>
 
@@ -1490,8 +1721,8 @@
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                 </svg>
                 <div class="alert-content">
-                    <div class="alert-title">Deploy Complete</div>
-                    <p class="alert-text">v2.4.1 successfully deployed to production environment.</p>
+                    <div class="alert-title">QC Passed</div>
+                    <p class="alert-text">Batch #4847 passed all quality control inspections. Cleared for assembly.</p>
                 </div>
             </div>
 
@@ -1500,8 +1731,8 @@
                     <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                 </svg>
                 <div class="alert-content">
-                    <div class="alert-title">Deprecation Notice</div>
-                    <p class="alert-text">API v1 will be deprecated on 2024-06-01. Please migrate to v2.</p>
+                    <div class="alert-title">Tolerance Warning</div>
+                    <p class="alert-text">Component approaching tolerance limits. Recommend tool recalibration.</p>
                 </div>
             </div>
 
@@ -1510,8 +1741,8 @@
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
                 </svg>
                 <div class="alert-content">
-                    <div class="alert-title">Build Failed</div>
-                    <p class="alert-text">Test suite failed with 3 errors. Check logs for details.</p>
+                    <div class="alert-title">Production Halt</div>
+                    <p class="alert-text">Critical dimension out of spec on Line 3. Immediate inspection required.</p>
                 </div>
             </div>
         </section>
@@ -1519,8 +1750,8 @@
 
     <footer>
         <div class="footer-content">
-            <div class="footer-brand">construct</div>
-            <div class="footer-text">Engineering Design System v1.0</div>
+            <div class="footer-brand">Construct</div>
+            <div class="footer-text">Engineering Design System v2.0</div>
         </div>
     </footer>
 </body>

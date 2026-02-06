@@ -3,91 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meridian Design System - Corporate</title>
+    <title>Meridian — Enterprise Design System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Color Tokens */
-            --color-primary-50: #EFF6FF;
-            --color-primary-100: #DBEAFE;
-            --color-primary-200: #BFDBFE;
-            --color-primary-300: #93C5FD;
-            --color-primary-400: #60A5FA;
-            --color-primary-500: #3B82F6;
-            --color-primary-600: #2563EB;
-            --color-primary-700: #1D4ED8;
-            --color-primary-800: #1E40AF;
-            --color-primary-900: #1E3A8A;
+            /* Meridian Blue - A sophisticated, trustworthy blue */
+            --meridian-50: #EEF4FF;
+            --meridian-100: #D9E5FF;
+            --meridian-200: #BCD0FF;
+            --meridian-300: #8EB1FF;
+            --meridian-400: #5985FF;
+            --meridian-500: #3461FF;
+            --meridian-600: #2563EB;
+            --meridian-700: #1847C2;
+            --meridian-800: #183A9E;
+            --meridian-900: #19337D;
+            --meridian-950: #0F1D4A;
 
-            --color-gray-50: #F9FAFB;
-            --color-gray-100: #F3F4F6;
-            --color-gray-200: #E5E7EB;
-            --color-gray-300: #D1D5DB;
-            --color-gray-400: #9CA3AF;
-            --color-gray-500: #6B7280;
-            --color-gray-600: #4B5563;
-            --color-gray-700: #374151;
-            --color-gray-800: #1F2937;
-            --color-gray-900: #111827;
+            /* Slate - Sophisticated neutrals with blue undertone */
+            --slate-50: #F8FAFC;
+            --slate-100: #F1F5F9;
+            --slate-200: #E2E8F0;
+            --slate-300: #CBD5E1;
+            --slate-400: #94A3B8;
+            --slate-500: #64748B;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --slate-800: #1E293B;
+            --slate-900: #0F172A;
 
-            --color-success: #059669;
-            --color-success-light: #D1FAE5;
-            --color-warning: #D97706;
-            --color-warning-light: #FEF3C7;
-            --color-error: #DC2626;
-            --color-error-light: #FEE2E2;
-            --color-info: #0284C7;
-            --color-info-light: #E0F2FE;
+            /* Semantic */
+            --success: #059669;
+            --success-light: #D1FAE5;
+            --warning: #D97706;
+            --warning-light: #FEF3C7;
+            --error: #DC2626;
+            --error-light: #FEE2E2;
+            --info: #0284C7;
+            --info-light: #E0F2FE;
 
             /* Typography */
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-serif: 'Source Serif 4', Georgia, serif;
+            --font-display: 'Fraunces', serif;
+            --font-sans: 'IBM Plex Sans', -apple-system, sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
 
-            --text-xs: 0.75rem;
-            --text-sm: 0.875rem;
-            --text-base: 1rem;
-            --text-lg: 1.125rem;
-            --text-xl: 1.25rem;
-            --text-2xl: 1.5rem;
-            --text-3xl: 1.875rem;
-            --text-4xl: 2.25rem;
+            /* Spacing - 8pt grid */
+            --sp-1: 0.25rem;  /* 4px */
+            --sp-2: 0.5rem;   /* 8px */
+            --sp-3: 0.75rem;  /* 12px */
+            --sp-4: 1rem;     /* 16px */
+            --sp-5: 1.25rem;  /* 20px */
+            --sp-6: 1.5rem;   /* 24px */
+            --sp-8: 2rem;     /* 32px */
+            --sp-10: 2.5rem;  /* 40px */
+            --sp-12: 3rem;    /* 48px */
+            --sp-16: 4rem;    /* 64px */
+            --sp-20: 5rem;    /* 80px */
+            --sp-24: 6rem;    /* 96px */
 
-            /* Spacing */
-            --space-1: 0.25rem;
-            --space-2: 0.5rem;
-            --space-3: 0.75rem;
-            --space-4: 1rem;
-            --space-5: 1.25rem;
-            --space-6: 1.5rem;
-            --space-8: 2rem;
-            --space-10: 2.5rem;
-            --space-12: 3rem;
-            --space-16: 4rem;
-            --space-20: 5rem;
-            --space-24: 6rem;
+            /* Radii */
+            --radius-sm: 4px;
+            --radius: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
 
             /* Shadows */
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-
-            /* Border Radius */
-            --radius-sm: 0.25rem;
-            --radius: 0.375rem;
-            --radius-md: 0.5rem;
-            --radius-lg: 0.75rem;
-            --radius-full: 9999px;
-
-            /* Transitions */
-            --transition-fast: 150ms ease;
-            --transition-base: 200ms ease;
-            --transition-slow: 300ms ease;
+            --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+            --shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+            --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -1px rgba(15, 23, 42, 0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.04);
+            --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
         }
 
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -95,485 +86,617 @@
 
         body {
             font-family: var(--font-sans);
-            font-size: var(--text-base);
+            font-size: 16px;
             line-height: 1.6;
-            color: var(--color-gray-900);
-            background: var(--color-gray-50);
+            color: var(--slate-800);
+            background: var(--slate-50);
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Header */
+        /* Sophisticated geometric background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(90deg, var(--slate-100) 1px, transparent 1px),
+                linear-gradient(var(--slate-100) 1px, transparent 1px);
+            background-size: 64px 64px;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--sp-6);
+        }
+
+        /* Header with subtle blue accent line */
         header {
             background: white;
-            border-bottom: 1px solid var(--color-gray-200);
-            padding: var(--space-4) var(--space-6);
+            border-bottom: 1px solid var(--slate-200);
             position: sticky;
             top: 0;
             z-index: 100;
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.95);
         }
 
-        .header-content {
-            max-width: 1280px;
-            margin: 0 auto;
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--meridian-600), var(--meridian-400));
+        }
+
+        .header-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: var(--sp-4) 0;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: var(--space-3);
+            gap: var(--sp-3);
         }
 
         .logo-mark {
-            width: 32px;
-            height: 32px;
-            background: var(--color-primary-600);
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--meridian-600), var(--meridian-700));
             border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .logo-mark::after {
+            content: '';
+            width: 14px;
+            height: 14px;
+            border: 2px solid white;
+            border-radius: 2px;
+            transform: rotate(45deg);
         }
 
         .logo-text {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
             font-weight: 700;
-            font-size: var(--text-lg);
-            color: var(--color-gray-900);
+            color: var(--slate-900);
+            letter-spacing: -0.02em;
         }
 
-        .logo-version {
-            font-size: var(--text-xs);
-            color: var(--color-gray-500);
-            background: var(--color-gray-100);
-            padding: var(--space-1) var(--space-2);
-            border-radius: var(--radius-full);
-            margin-left: var(--space-2);
-        }
-
-        nav {
-            display: flex;
-            gap: var(--space-1);
-        }
-
-        nav a {
-            padding: var(--space-2) var(--space-3);
-            font-size: var(--text-sm);
+        .version-badge {
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
             font-weight: 500;
-            color: var(--color-gray-600);
+            background: var(--meridian-50);
+            color: var(--meridian-700);
+            padding: var(--sp-1) var(--sp-2);
+            border-radius: var(--radius-sm);
+            letter-spacing: 0.05em;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--slate-500);
             text-decoration: none;
-            border-radius: var(--radius);
-            transition: all var(--transition-fast);
+            transition: color 0.15s;
         }
 
-        nav a:hover {
-            color: var(--color-gray-900);
-            background: var(--color-gray-100);
+        .back-link:hover {
+            color: var(--meridian-600);
         }
 
-        /* Main Content */
-        main {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: var(--space-12) var(--space-6);
+        .back-link::before {
+            content: '←';
         }
 
+        /* Hero section */
         .hero {
+            padding: var(--sp-20) 0;
             text-align: center;
-            margin-bottom: var(--space-16);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-overline {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--meridian-600);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: var(--sp-4);
         }
 
         .hero h1 {
-            font-size: var(--text-4xl);
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
-            color: var(--color-gray-900);
-            margin-bottom: var(--space-4);
+            color: var(--slate-900);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: var(--sp-6);
         }
 
-        .hero p {
-            font-size: var(--text-lg);
-            color: var(--color-gray-600);
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--meridian-600), var(--meridian-500));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--slate-600);
             max-width: 600px;
             margin: 0 auto;
+            line-height: 1.7;
         }
 
+        /* Section styling */
         section {
             background: white;
-            border: 1px solid var(--color-gray-200);
+            border: 1px solid var(--slate-200);
             border-radius: var(--radius-lg);
-            padding: var(--space-8);
-            margin-bottom: var(--space-8);
+            padding: var(--sp-10);
+            margin-bottom: var(--sp-8);
+            box-shadow: var(--shadow-sm);
         }
 
-        section h2 {
-            font-size: var(--text-xl);
-            font-weight: 600;
-            color: var(--color-gray-900);
-            margin-bottom: var(--space-2);
+        .section-header {
             display: flex;
-            align-items: center;
-            gap: var(--space-3);
+            align-items: flex-start;
+            gap: var(--sp-4);
+            margin-bottom: var(--sp-8);
+            padding-bottom: var(--sp-6);
+            border-bottom: 1px solid var(--slate-100);
         }
 
-        section h2 .section-number {
-            font-size: var(--text-sm);
-            font-weight: 600;
-            color: var(--color-primary-600);
-            background: var(--color-primary-50);
-            padding: var(--space-1) var(--space-2);
+        .section-number {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--meridian-600);
+            background: var(--meridian-50);
+            padding: var(--sp-1) var(--sp-3);
             border-radius: var(--radius);
+            flex-shrink: 0;
         }
 
-        section > p {
-            color: var(--color-gray-600);
-            margin-bottom: var(--space-6);
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--slate-900);
+            letter-spacing: -0.02em;
+            margin-bottom: var(--sp-2);
+        }
+
+        .section-description {
+            font-size: 0.9375rem;
+            color: var(--slate-500);
         }
 
         h3 {
-            font-size: var(--text-base);
+            font-size: 0.8125rem;
             font-weight: 600;
-            color: var(--color-gray-700);
-            margin-bottom: var(--space-3);
-            margin-top: var(--space-6);
+            color: var(--slate-700);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin: var(--sp-8) 0 var(--sp-4);
         }
 
         h3:first-of-type {
             margin-top: 0;
         }
 
-        /* Section 1: Colors */
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: var(--space-4);
-        }
-
-        .color-swatch {
-            text-align: center;
-        }
-
-        .color-preview {
-            height: 64px;
-            border-radius: var(--radius);
-            margin-bottom: var(--space-2);
-            border: 1px solid var(--color-gray-200);
-        }
-
-        .color-name {
-            font-size: var(--text-sm);
-            font-weight: 500;
-            color: var(--color-gray-700);
-        }
-
-        .color-value {
-            font-size: var(--text-xs);
-            color: var(--color-gray-500);
-            font-family: monospace;
-        }
-
-        .color-row {
+        /* Color Palette */
+        .color-scale {
             display: flex;
-            border-radius: var(--radius);
+            border-radius: var(--radius-md);
             overflow: hidden;
-            margin-bottom: var(--space-4);
+            margin-bottom: var(--sp-6);
+            box-shadow: var(--shadow);
         }
 
-        .color-row > div {
+        .color-scale > div {
             flex: 1;
-            height: 48px;
+            height: 56px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: var(--sp-2);
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            font-weight: 500;
+            transition: transform 0.15s;
         }
 
-        /* Section 2: Typography */
-        .type-scale {
+        .color-scale > div:hover {
+            transform: scaleY(1.1);
+            transform-origin: bottom;
+        }
+
+        .semantic-colors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--sp-4);
+        }
+
+        .semantic-swatch {
+            padding: var(--sp-4);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--slate-200);
+        }
+
+        .semantic-preview {
+            width: 100%;
+            height: 48px;
+            border-radius: var(--radius);
+            margin-bottom: var(--sp-3);
+        }
+
+        .semantic-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--slate-700);
+        }
+
+        .semantic-value {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--slate-500);
+        }
+
+        /* Typography */
+        .type-specimen {
             display: flex;
             flex-direction: column;
-            gap: var(--space-4);
+            gap: var(--sp-1);
+            padding: var(--sp-6) 0;
+            border-bottom: 1px solid var(--slate-100);
         }
 
-        .type-item {
+        .type-specimen:last-child {
+            border-bottom: none;
+        }
+
+        .type-meta {
             display: flex;
             align-items: baseline;
-            gap: var(--space-6);
-            padding-bottom: var(--space-4);
-            border-bottom: 1px solid var(--color-gray-100);
+            gap: var(--sp-4);
+            margin-bottom: var(--sp-2);
         }
 
-        .type-label {
-            min-width: 100px;
-            font-size: var(--text-sm);
-            color: var(--color-gray-500);
+        .type-name {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--meridian-600);
+            background: var(--meridian-50);
+            padding: var(--sp-1) var(--sp-2);
+            border-radius: var(--radius-sm);
         }
 
-        .type-display { font-size: var(--text-4xl); font-weight: 700; }
-        .type-h1 { font-size: var(--text-3xl); font-weight: 700; }
-        .type-h2 { font-size: var(--text-2xl); font-weight: 600; }
-        .type-h3 { font-size: var(--text-xl); font-weight: 600; }
-        .type-h4 { font-size: var(--text-lg); font-weight: 600; }
-        .type-body { font-size: var(--text-base); }
-        .type-small { font-size: var(--text-sm); color: var(--color-gray-600); }
+        .type-specs {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--slate-400);
+        }
 
-        /* Section 3: Spacing */
-        .spacing-scale {
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .type-h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+        .type-h2 { font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; }
+        .type-h3 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
+        .type-h4 { font-size: 1.25rem; font-weight: 600; line-height: 1.4; }
+        .type-body { font-size: 1rem; line-height: 1.6; color: var(--slate-700); }
+        .type-small { font-size: 0.875rem; line-height: 1.5; color: var(--slate-600); }
+        .type-caption { font-size: 0.75rem; line-height: 1.5; color: var(--slate-500); }
+
+        /* Spacing Scale */
+        .spacing-visual {
             display: flex;
             flex-direction: column;
-            gap: var(--space-3);
+            gap: var(--sp-3);
         }
 
-        .spacing-item {
+        .spacing-row {
             display: flex;
             align-items: center;
-            gap: var(--space-4);
+            gap: var(--sp-4);
         }
 
         .spacing-label {
-            min-width: 80px;
-            font-size: var(--text-sm);
-            font-family: monospace;
-            color: var(--color-gray-600);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--slate-600);
+            width: 80px;
+            flex-shrink: 0;
         }
 
         .spacing-bar {
-            height: 24px;
-            background: var(--color-primary-100);
+            height: 32px;
+            background: linear-gradient(135deg, var(--meridian-100), var(--meridian-200));
             border-radius: var(--radius-sm);
-            border: 1px solid var(--color-primary-200);
+            border: 1px solid var(--meridian-300);
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: var(--sp-3);
         }
 
-        .spacing-value {
-            font-size: var(--text-sm);
-            color: var(--color-gray-500);
+        .spacing-bar span {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--meridian-700);
+            font-weight: 500;
         }
 
-        /* Section 4: Buttons */
-        .button-group {
+        /* Buttons */
+        .button-showcase {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-3);
-            margin-bottom: var(--space-6);
+            gap: var(--sp-3);
+            margin-bottom: var(--sp-6);
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: var(--space-2);
+            gap: var(--sp-2);
             font-family: var(--font-sans);
             font-weight: 500;
             border-radius: var(--radius);
-            border: 1px solid transparent;
+            border: none;
             cursor: pointer;
-            transition: all var(--transition-fast);
+            transition: all 0.15s ease;
             text-decoration: none;
         }
 
         .btn:focus-visible {
-            outline: 2px solid var(--color-primary-500);
+            outline: 2px solid var(--meridian-500);
             outline-offset: 2px;
         }
 
-        .btn-sm { padding: var(--space-2) var(--space-3); font-size: var(--text-sm); }
-        .btn-md { padding: var(--space-2) var(--space-4); font-size: var(--text-sm); }
-        .btn-lg { padding: var(--space-3) var(--space-6); font-size: var(--text-base); }
+        .btn-sm { padding: 6px 12px; font-size: 0.8125rem; }
+        .btn-md { padding: 10px 18px; font-size: 0.875rem; }
+        .btn-lg { padding: 14px 24px; font-size: 0.9375rem; }
 
         .btn-primary {
-            background: var(--color-primary-600);
+            background: linear-gradient(180deg, var(--meridian-500), var(--meridian-600));
             color: white;
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
-        .btn-primary:hover { background: var(--color-primary-700); }
-        .btn-primary:disabled { background: var(--color-gray-300); cursor: not-allowed; }
+
+        .btn-primary:hover {
+            background: linear-gradient(180deg, var(--meridian-600), var(--meridian-700));
+            box-shadow: 0 2px 4px rgba(15, 23, 42, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
 
         .btn-secondary {
             background: white;
-            color: var(--color-gray-700);
-            border-color: var(--color-gray-300);
+            color: var(--slate-700);
+            border: 1px solid var(--slate-300);
+            box-shadow: var(--shadow-sm);
         }
-        .btn-secondary:hover { background: var(--color-gray-50); border-color: var(--color-gray-400); }
+
+        .btn-secondary:hover {
+            background: var(--slate-50);
+            border-color: var(--slate-400);
+        }
 
         .btn-ghost {
             background: transparent;
-            color: var(--color-gray-600);
+            color: var(--slate-600);
         }
-        .btn-ghost:hover { background: var(--color-gray-100); color: var(--color-gray-900); }
+
+        .btn-ghost:hover {
+            background: var(--slate-100);
+            color: var(--slate-900);
+        }
 
         .btn-danger {
-            background: var(--color-error);
+            background: linear-gradient(180deg, var(--error), #B91C1C);
             color: white;
         }
-        .btn-danger:hover { background: #B91C1C; }
 
-        /* Section 5: Forms */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-6);
+        .btn-danger:hover {
+            background: linear-gradient(180deg, #B91C1C, #991B1B);
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-2);
-        }
-
-        label {
-            font-size: var(--text-sm);
-            font-weight: 500;
-            color: var(--color-gray-700);
-        }
-
-        .input {
-            padding: var(--space-2) var(--space-3);
-            font-size: var(--text-base);
-            font-family: var(--font-sans);
-            border: 1px solid var(--color-gray-300);
-            border-radius: var(--radius);
-            background: white;
-            transition: all var(--transition-fast);
-        }
-
-        .input:focus {
-            outline: none;
-            border-color: var(--color-primary-500);
-            box-shadow: 0 0 0 3px var(--color-primary-100);
-        }
-
-        .input:disabled {
-            background: var(--color-gray-100);
-            color: var(--color-gray-500);
+        .btn:disabled {
+            opacity: 0.5;
             cursor: not-allowed;
         }
 
-        .input-error {
-            border-color: var(--color-error);
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--sp-6);
         }
 
-        .input-error:focus {
-            box-shadow: 0 0 0 3px var(--color-error-light);
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp-2);
         }
 
-        .helper-text {
-            font-size: var(--text-sm);
-            color: var(--color-gray-500);
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--slate-700);
         }
 
-        .error-text {
-            font-size: var(--text-sm);
-            color: var(--color-error);
+        .form-input {
+            padding: 10px 14px;
+            font-family: var(--font-sans);
+            font-size: 0.9375rem;
+            color: var(--slate-900);
+            background: white;
+            border: 1px solid var(--slate-300);
+            border-radius: var(--radius);
+            transition: all 0.15s;
         }
 
-        textarea.input {
+        .form-input::placeholder {
+            color: var(--slate-400);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--meridian-500);
+            box-shadow: 0 0 0 3px var(--meridian-100);
+        }
+
+        .form-input.is-error {
+            border-color: var(--error);
+        }
+
+        .form-input.is-error:focus {
+            box-shadow: 0 0 0 3px var(--error-light);
+        }
+
+        .form-input:disabled {
+            background: var(--slate-100);
+            color: var(--slate-500);
+            cursor: not-allowed;
+        }
+
+        .form-hint {
+            font-size: 0.8125rem;
+            color: var(--slate-500);
+        }
+
+        .form-error {
+            font-size: 0.8125rem;
+            color: var(--error);
+        }
+
+        textarea.form-input {
             min-height: 100px;
             resize: vertical;
         }
 
-        select.input {
-            cursor: pointer;
-        }
-
-        .checkbox-group, .radio-group {
-            display: flex;
-            align-items: center;
-            gap: var(--space-2);
-            cursor: pointer;
-        }
-
-        .checkbox, .radio {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--color-primary-600);
-        }
-
-        .toggle {
-            position: relative;
-            width: 44px;
-            height: 24px;
-            background: var(--color-gray-300);
-            border-radius: var(--radius-full);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-        }
-
-        .toggle.active {
-            background: var(--color-primary-600);
-        }
-
-        .toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            transition: all var(--transition-fast);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .toggle.active::after {
-            left: 22px;
-        }
-
-        /* Section 6: Cards */
+        /* Cards */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-6);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--sp-6);
         }
 
         .card {
             background: white;
-            border: 1px solid var(--color-gray-200);
+            border: 1px solid var(--slate-200);
             border-radius: var(--radius-md);
-            padding: var(--space-6);
-            transition: all var(--transition-fast);
+            padding: var(--sp-6);
+            transition: all 0.2s;
         }
 
         .card:hover {
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--slate-300);
         }
 
-        .card-header {
-            margin-bottom: var(--space-4);
+        .card-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            font-weight: 500;
+            color: var(--meridian-600);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--sp-2);
         }
 
         .card-title {
-            font-size: var(--text-lg);
+            font-size: 1.125rem;
             font-weight: 600;
-            color: var(--color-gray-900);
+            color: var(--slate-900);
+            margin-bottom: var(--sp-2);
         }
 
-        .card-subtitle {
-            font-size: var(--text-sm);
-            color: var(--color-gray-500);
+        .card-description {
+            font-size: 0.875rem;
+            color: var(--slate-600);
+            line-height: 1.6;
         }
 
+        /* Stat Card */
         .stat-card {
-            background: white;
-            border: 1px solid var(--color-gray-200);
-            border-radius: var(--radius-md);
-            padding: var(--space-5);
+            background: linear-gradient(135deg, var(--slate-800), var(--slate-900));
+            border: none;
+            color: white;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
         }
 
         .stat-label {
-            font-size: var(--text-sm);
-            color: var(--color-gray-500);
-            margin-bottom: var(--space-1);
+            font-size: 0.8125rem;
+            color: var(--slate-400);
+            margin-bottom: var(--sp-1);
         }
 
         .stat-value {
-            font-size: var(--text-3xl);
+            font-family: var(--font-display);
+            font-size: 2.5rem;
             font-weight: 700;
-            color: var(--color-gray-900);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: var(--sp-2);
         }
 
         .stat-change {
-            font-size: var(--text-sm);
-            margin-top: var(--space-2);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-1);
+            font-size: 0.8125rem;
+            font-weight: 500;
         }
 
-        .stat-change.positive { color: var(--color-success); }
-        .stat-change.negative { color: var(--color-error); }
+        .stat-change.positive { color: #34D399; }
+        .stat-change.negative { color: #F87171; }
 
-        /* Section 7: Table */
-        .table-container {
+        /* Data Table */
+        .table-wrapper {
             overflow-x: auto;
-            border: 1px solid var(--color-gray-200);
+            border: 1px solid var(--slate-200);
             border-radius: var(--radius-md);
         }
 
@@ -584,208 +707,255 @@
 
         th {
             text-align: left;
-            padding: var(--space-3) var(--space-4);
-            font-size: var(--text-sm);
+            padding: var(--sp-3) var(--sp-4);
+            font-size: 0.75rem;
             font-weight: 600;
-            color: var(--color-gray-600);
-            background: var(--color-gray-50);
-            border-bottom: 1px solid var(--color-gray-200);
+            color: var(--slate-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--slate-50);
+            border-bottom: 1px solid var(--slate-200);
         }
 
         td {
-            padding: var(--space-3) var(--space-4);
-            font-size: var(--text-sm);
-            color: var(--color-gray-700);
-            border-bottom: 1px solid var(--color-gray-100);
+            padding: var(--sp-4);
+            font-size: 0.875rem;
+            color: var(--slate-700);
+            border-bottom: 1px solid var(--slate-100);
         }
 
-        tr:last-child td {
+        tbody tr:last-child td {
             border-bottom: none;
         }
 
-        tr:hover td {
-            background: var(--color-gray-50);
+        tbody tr:hover {
+            background: var(--slate-50);
         }
 
-        /* Section 8: Badges */
-        .badge-group {
+        /* Badges */
+        .badge-row {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-2);
-            margin-bottom: var(--space-4);
+            gap: var(--sp-2);
+            margin-bottom: var(--sp-4);
         }
 
         .badge {
             display: inline-flex;
             align-items: center;
-            padding: var(--space-1) var(--space-2);
-            font-size: var(--text-xs);
+            gap: var(--sp-1);
+            padding: 4px 10px;
+            font-size: 0.75rem;
             font-weight: 500;
-            border-radius: var(--radius-full);
+            border-radius: var(--radius-sm);
         }
 
-        .badge-success { background: var(--color-success-light); color: var(--color-success); }
-        .badge-warning { background: var(--color-warning-light); color: var(--color-warning); }
-        .badge-error { background: var(--color-error-light); color: var(--color-error); }
-        .badge-info { background: var(--color-info-light); color: var(--color-info); }
-        .badge-neutral { background: var(--color-gray-100); color: var(--color-gray-600); }
+        .badge-success { background: var(--success-light); color: var(--success); }
+        .badge-warning { background: var(--warning-light); color: var(--warning); }
+        .badge-error { background: var(--error-light); color: var(--error); }
+        .badge-info { background: var(--info-light); color: var(--info); }
+        .badge-neutral { background: var(--slate-100); color: var(--slate-600); }
+        .badge-primary { background: var(--meridian-100); color: var(--meridian-700); }
 
-        .badge-outline {
-            background: transparent;
-            border: 1px solid currentColor;
-        }
-
-        /* Section 9: Principles */
+        /* Design Principles */
         .principles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-6);
+            gap: var(--sp-6);
         }
 
-        .principle {
-            padding: var(--space-5);
-            background: var(--color-gray-50);
+        .principle-card {
+            padding: var(--sp-6);
+            background: var(--slate-50);
             border-radius: var(--radius-md);
+            border-left: 3px solid var(--meridian-500);
         }
 
         .principle-number {
-            font-size: var(--text-sm);
-            font-weight: 600;
-            color: var(--color-primary-600);
-            margin-bottom: var(--space-2);
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            font-weight: 500;
+            color: var(--meridian-600);
+            margin-bottom: var(--sp-3);
         }
 
         .principle-title {
-            font-size: var(--text-lg);
+            font-size: 1.125rem;
             font-weight: 600;
-            color: var(--color-gray-900);
-            margin-bottom: var(--space-2);
+            color: var(--slate-900);
+            margin-bottom: var(--sp-2);
         }
 
         .principle-desc {
-            font-size: var(--text-sm);
-            color: var(--color-gray-600);
+            font-size: 0.875rem;
+            color: var(--slate-600);
+            line-height: 1.6;
         }
 
-        /* Section 10: Micro-interactions */
-        .interaction-grid {
+        /* Animations */
+        .animation-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-4);
+            gap: var(--sp-4);
         }
 
-        .interaction-demo {
-            padding: var(--space-6);
-            background: var(--color-gray-50);
+        .animation-demo {
+            background: var(--slate-50);
             border-radius: var(--radius-md);
-            text-align: center;
+            padding: var(--sp-8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--sp-4);
         }
 
-        .hover-lift {
+        .animation-label {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--slate-600);
+        }
+
+        .hover-lift-demo {
             background: white;
-            padding: var(--space-4);
+            padding: var(--sp-4) var(--sp-6);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            transition: all var(--transition-base);
+            font-weight: 500;
+            color: var(--slate-700);
             cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .hover-lift:hover {
-            transform: translateY(-2px);
+        .hover-lift-demo:hover {
+            transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
         }
 
-        .focus-ring:focus-visible {
-            outline: 2px solid var(--color-primary-500);
-            outline-offset: 2px;
-        }
-
         .loading-spinner {
-            width: 24px;
-            height: 24px;
-            border: 2px solid var(--color-gray-200);
-            border-top-color: var(--color-primary-600);
+            width: 28px;
+            height: 28px;
+            border: 3px solid var(--slate-200);
+            border-top-color: var(--meridian-600);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
+            animation: spin 0.8s linear infinite;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        /* Section 11: Tabs */
-        .tabs {
-            border-bottom: 1px solid var(--color-gray-200);
+        .progress-bar {
+            width: 120px;
+            height: 6px;
+            background: var(--slate-200);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--meridian-500), var(--meridian-400));
+            border-radius: 3px;
+            animation: progress 2s ease-in-out infinite;
+        }
+
+        @keyframes progress {
+            0% { width: 0; }
+            50% { width: 80%; }
+            100% { width: 100%; }
+        }
+
+        /* KPI Dashboard Widget */
+        .kpi-dashboard {
+            background: linear-gradient(135deg, var(--slate-900), var(--meridian-950));
+            border-radius: var(--radius-lg);
+            padding: var(--sp-8);
+            color: white;
+        }
+
+        .kpi-header {
             display: flex;
-            gap: var(--space-1);
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--sp-6);
+            padding-bottom: var(--sp-4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .tab {
-            padding: var(--space-3) var(--space-4);
-            font-size: var(--text-sm);
-            font-weight: 500;
-            color: var(--color-gray-600);
-            background: none;
-            border: none;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            margin-bottom: -1px;
-            transition: all var(--transition-fast);
+        .kpi-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
         }
 
-        .tab:hover {
-            color: var(--color-gray-900);
+        .kpi-period {
+            font-size: 0.8125rem;
+            color: var(--slate-400);
         }
 
-        .tab.active {
-            color: var(--color-primary-600);
-            border-bottom-color: var(--color-primary-600);
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--sp-6);
         }
 
-        .tab-content {
-            padding: var(--space-6) 0;
+        .kpi-item {
+            position: relative;
         }
 
-        .breadcrumb {
+        .kpi-item::after {
+            content: '';
+            position: absolute;
+            right: calc(var(--sp-3) * -1);
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .kpi-item:last-child::after {
+            display: none;
+        }
+
+        .kpi-label {
+            font-size: 0.75rem;
+            color: var(--slate-400);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--sp-2);
+        }
+
+        .kpi-value {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--sp-1);
+        }
+
+        .kpi-trend {
+            font-size: 0.8125rem;
             display: flex;
             align-items: center;
-            gap: var(--space-2);
-            font-size: var(--text-sm);
-            margin-bottom: var(--space-4);
+            gap: var(--sp-1);
         }
 
-        .breadcrumb a {
-            color: var(--color-gray-500);
-            text-decoration: none;
-        }
+        .kpi-trend.up { color: #34D399; }
+        .kpi-trend.down { color: #F87171; }
 
-        .breadcrumb a:hover {
-            color: var(--color-primary-600);
-        }
-
-        .breadcrumb-separator {
-            color: var(--color-gray-300);
-        }
-
-        .breadcrumb-current {
-            color: var(--color-gray-700);
-            font-weight: 500;
-        }
-
-        /* Section 12: Alerts */
+        /* Alerts */
         .alert {
             display: flex;
-            gap: var(--space-3);
-            padding: var(--space-4);
+            gap: var(--sp-3);
+            padding: var(--sp-4);
             border-radius: var(--radius-md);
-            margin-bottom: var(--space-3);
+            margin-bottom: var(--sp-4);
         }
 
         .alert-icon {
-            flex-shrink: 0;
             width: 20px;
             height: 20px;
+            flex-shrink: 0;
         }
 
         .alert-content {
@@ -794,398 +964,331 @@
 
         .alert-title {
             font-weight: 600;
-            margin-bottom: var(--space-1);
+            margin-bottom: var(--sp-1);
         }
 
         .alert-description {
-            font-size: var(--text-sm);
+            font-size: 0.875rem;
+            opacity: 0.9;
         }
 
-        .alert-dismiss {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: inherit;
-            opacity: 0.6;
-            transition: opacity var(--transition-fast);
-        }
-
-        .alert-dismiss:hover {
-            opacity: 1;
-        }
-
-        .alert-success {
-            background: var(--color-success-light);
-            color: var(--color-success);
-        }
-
-        .alert-info {
-            background: var(--color-info-light);
-            color: var(--color-info);
-        }
-
-        .alert-warning {
-            background: var(--color-warning-light);
-            color: var(--color-warning);
-        }
-
-        .alert-error {
-            background: var(--color-error-light);
-            color: var(--color-error);
-        }
-
-        .toast {
-            display: flex;
-            align-items: center;
-            gap: var(--space-3);
-            padding: var(--space-3) var(--space-4);
-            background: var(--color-gray-900);
-            color: white;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-lg);
-            max-width: 360px;
-        }
-
-        .toast-success { background: var(--color-success); }
-        .toast-error { background: var(--color-error); }
+        .alert-success { background: var(--success-light); color: #065F46; }
+        .alert-info { background: var(--info-light); color: #075985; }
+        .alert-warning { background: var(--warning-light); color: #92400E; }
+        .alert-error { background: var(--error-light); color: #991B1B; }
 
         /* Footer */
         footer {
-            border-top: 1px solid var(--color-gray-200);
-            padding: var(--space-8) var(--space-6);
-            margin-top: var(--space-16);
             text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1280px;
-            margin: 0 auto;
+            padding: var(--sp-12) 0;
+            border-top: 1px solid var(--slate-200);
+            margin-top: var(--sp-16);
         }
 
         .footer-text {
-            font-size: var(--text-sm);
-            color: var(--color-gray-500);
+            font-size: 0.875rem;
+            color: var(--slate-500);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            header { padding: var(--space-3) var(--space-4); }
-            nav { display: none; }
-            main { padding: var(--space-6) var(--space-4); }
-            section { padding: var(--space-5); }
-            .hero h1 { font-size: var(--text-3xl); }
+            section { padding: var(--sp-6); }
+            .hero { padding: var(--sp-12) 0; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .kpi-item::after { display: none; }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="header-content">
-            <div class="logo">
-                <div class="logo-mark"></div>
-                <span class="logo-text">Meridian</span>
-                <span class="logo-version">v1.0</span>
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <div class="logo-mark"></div>
+                    <span class="logo-text">Meridian</span>
+                    <span class="version-badge">v2.0</span>
+                </div>
+                <a href="../index.html" class="back-link">Back to Gallery</a>
             </div>
-            <nav>
-                <a href="#colors">Colors</a>
-                <a href="#typography">Typography</a>
-                <a href="#spacing">Spacing</a>
-                <a href="#buttons">Buttons</a>
-                <a href="#forms">Forms</a>
-                <a href="#cards">Cards</a>
-                <a href="#table">Table</a>
-                <a href="#badges">Badges</a>
-                <a href="#principles">Principles</a>
-                <a href="#interactions">Interactions</a>
-                <a href="#components">Components</a>
-                <a href="#alerts">Alerts</a>
-            </nav>
         </div>
     </header>
 
-    <main>
+    <main class="container">
         <div class="hero">
-            <h1>Meridian Design System</h1>
-            <p>A professional, enterprise-grade design system built for clarity, consistency, and scale. Designed for corporate applications that demand trust and usability.</p>
+            <p class="hero-overline">Enterprise Design System</p>
+            <h1>Build with <span>Precision</span></h1>
+            <p class="hero-description">A sophisticated, scalable design system engineered for enterprise applications that demand clarity, consistency, and professional credibility.</p>
         </div>
 
-        <!-- Section 1: Colors -->
-        <section id="colors">
-            <h2><span class="section-number">01</span> Color Palette</h2>
-            <p>A restrained, professional palette with strong primary blue, comprehensive neutrals, and semantic status colors.</p>
-
-            <h3>Primary Blue</h3>
-            <div class="color-row">
-                <div style="background: var(--color-primary-50);"></div>
-                <div style="background: var(--color-primary-100);"></div>
-                <div style="background: var(--color-primary-200);"></div>
-                <div style="background: var(--color-primary-300);"></div>
-                <div style="background: var(--color-primary-400);"></div>
-                <div style="background: var(--color-primary-500);"></div>
-                <div style="background: var(--color-primary-600);"></div>
-                <div style="background: var(--color-primary-700);"></div>
-                <div style="background: var(--color-primary-800);"></div>
-                <div style="background: var(--color-primary-900);"></div>
+        <!-- 01: Color Palette -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <div>
+                    <h2 class="section-title">Color Palette</h2>
+                    <p class="section-description">A restrained, trustworthy palette anchored by Meridian Blue with sophisticated slate neutrals.</p>
+                </div>
             </div>
 
-            <h3>Neutral Gray</h3>
-            <div class="color-row">
-                <div style="background: var(--color-gray-50);"></div>
-                <div style="background: var(--color-gray-100);"></div>
-                <div style="background: var(--color-gray-200);"></div>
-                <div style="background: var(--color-gray-300);"></div>
-                <div style="background: var(--color-gray-400);"></div>
-                <div style="background: var(--color-gray-500);"></div>
-                <div style="background: var(--color-gray-600);"></div>
-                <div style="background: var(--color-gray-700);"></div>
-                <div style="background: var(--color-gray-800);"></div>
-                <div style="background: var(--color-gray-900);"></div>
+            <h3>Meridian Blue</h3>
+            <div class="color-scale">
+                <div style="background: var(--meridian-50); color: var(--meridian-900);">50</div>
+                <div style="background: var(--meridian-100); color: var(--meridian-900);">100</div>
+                <div style="background: var(--meridian-200); color: var(--meridian-900);">200</div>
+                <div style="background: var(--meridian-300); color: var(--meridian-900);">300</div>
+                <div style="background: var(--meridian-400); color: white;">400</div>
+                <div style="background: var(--meridian-500); color: white;">500</div>
+                <div style="background: var(--meridian-600); color: white;">600</div>
+                <div style="background: var(--meridian-700); color: white;">700</div>
+                <div style="background: var(--meridian-800); color: white;">800</div>
+                <div style="background: var(--meridian-900); color: white;">900</div>
+            </div>
+
+            <h3>Slate Neutrals</h3>
+            <div class="color-scale">
+                <div style="background: var(--slate-50); color: var(--slate-900);">50</div>
+                <div style="background: var(--slate-100); color: var(--slate-900);">100</div>
+                <div style="background: var(--slate-200); color: var(--slate-900);">200</div>
+                <div style="background: var(--slate-300); color: var(--slate-900);">300</div>
+                <div style="background: var(--slate-400); color: white;">400</div>
+                <div style="background: var(--slate-500); color: white;">500</div>
+                <div style="background: var(--slate-600); color: white;">600</div>
+                <div style="background: var(--slate-700); color: white;">700</div>
+                <div style="background: var(--slate-800); color: white;">800</div>
+                <div style="background: var(--slate-900); color: white;">900</div>
             </div>
 
             <h3>Semantic Colors</h3>
-            <div class="color-grid">
-                <div class="color-swatch">
-                    <div class="color-preview" style="background: var(--color-success);"></div>
-                    <div class="color-name">Success</div>
-                    <div class="color-value">#059669</div>
+            <div class="semantic-colors">
+                <div class="semantic-swatch">
+                    <div class="semantic-preview" style="background: var(--success);"></div>
+                    <div class="semantic-label">Success</div>
+                    <div class="semantic-value">#059669</div>
                 </div>
-                <div class="color-swatch">
-                    <div class="color-preview" style="background: var(--color-warning);"></div>
-                    <div class="color-name">Warning</div>
-                    <div class="color-value">#D97706</div>
+                <div class="semantic-swatch">
+                    <div class="semantic-preview" style="background: var(--warning);"></div>
+                    <div class="semantic-label">Warning</div>
+                    <div class="semantic-value">#D97706</div>
                 </div>
-                <div class="color-swatch">
-                    <div class="color-preview" style="background: var(--color-error);"></div>
-                    <div class="color-name">Error</div>
-                    <div class="color-value">#DC2626</div>
+                <div class="semantic-swatch">
+                    <div class="semantic-preview" style="background: var(--error);"></div>
+                    <div class="semantic-label">Error</div>
+                    <div class="semantic-value">#DC2626</div>
                 </div>
-                <div class="color-swatch">
-                    <div class="color-preview" style="background: var(--color-info);"></div>
-                    <div class="color-name">Info</div>
-                    <div class="color-value">#0284C7</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 2: Typography -->
-        <section id="typography">
-            <h2><span class="section-number">02</span> Typography</h2>
-            <p>Inter for UI elements with exceptional readability. Source Serif 4 available for editorial content.</p>
-
-            <div class="type-scale">
-                <div class="type-item">
-                    <span class="type-label">Display</span>
-                    <span class="type-display">The quick brown fox</span>
-                </div>
-                <div class="type-item">
-                    <span class="type-label">Heading 1</span>
-                    <span class="type-h1">The quick brown fox</span>
-                </div>
-                <div class="type-item">
-                    <span class="type-label">Heading 2</span>
-                    <span class="type-h2">The quick brown fox</span>
-                </div>
-                <div class="type-item">
-                    <span class="type-label">Heading 3</span>
-                    <span class="type-h3">The quick brown fox</span>
-                </div>
-                <div class="type-item">
-                    <span class="type-label">Heading 4</span>
-                    <span class="type-h4">The quick brown fox</span>
-                </div>
-                <div class="type-item">
-                    <span class="type-label">Body</span>
-                    <span class="type-body">The quick brown fox jumps over the lazy dog.</span>
-                </div>
-                <div class="type-item">
-                    <span class="type-label">Small</span>
-                    <span class="type-small">The quick brown fox jumps over the lazy dog.</span>
+                <div class="semantic-swatch">
+                    <div class="semantic-preview" style="background: var(--info);"></div>
+                    <div class="semantic-label">Info</div>
+                    <div class="semantic-value">#0284C7</div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 3: Spacing -->
-        <section id="spacing">
-            <h2><span class="section-number">03</span> Spacing Scale</h2>
-            <p>A 4px base unit system providing consistent spatial rhythm throughout the interface.</p>
+        <!-- 02: Typography -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <div>
+                    <h2 class="section-title">Typography</h2>
+                    <p class="section-description">IBM Plex Sans for clarity, Fraunces for elegance, and IBM Plex Mono for technical precision.</p>
+                </div>
+            </div>
 
-            <div class="spacing-scale">
-                <div class="spacing-item">
-                    <span class="spacing-label">--space-1</span>
-                    <div class="spacing-bar" style="width: 16px;"></div>
-                    <span class="spacing-value">4px</span>
+            <div class="type-specimen">
+                <div class="type-meta">
+                    <span class="type-name">Display</span>
+                    <span class="type-specs">Fraunces 700 · 56px · -3% tracking</span>
                 </div>
-                <div class="spacing-item">
-                    <span class="spacing-label">--space-2</span>
-                    <div class="spacing-bar" style="width: 32px;"></div>
-                    <span class="spacing-value">8px</span>
+                <span class="type-display">Enterprise Excellence</span>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-meta">
+                    <span class="type-name">Heading 1</span>
+                    <span class="type-specs">IBM Plex Sans 700 · 40px</span>
                 </div>
-                <div class="spacing-item">
-                    <span class="spacing-label">--space-3</span>
-                    <div class="spacing-bar" style="width: 48px;"></div>
-                    <span class="spacing-value">12px</span>
+                <span class="type-h1">Strategic Alignment</span>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-meta">
+                    <span class="type-name">Heading 2</span>
+                    <span class="type-specs">IBM Plex Sans 600 · 32px</span>
                 </div>
-                <div class="spacing-item">
-                    <span class="spacing-label">--space-4</span>
-                    <div class="spacing-bar" style="width: 64px;"></div>
-                    <span class="spacing-value">16px</span>
+                <span class="type-h2">Operational Efficiency</span>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-meta">
+                    <span class="type-name">Heading 3</span>
+                    <span class="type-specs">IBM Plex Sans 600 · 24px</span>
                 </div>
-                <div class="spacing-item">
-                    <span class="spacing-label">--space-6</span>
-                    <div class="spacing-bar" style="width: 96px;"></div>
-                    <span class="spacing-value">24px</span>
+                <span class="type-h3">Team Performance</span>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-meta">
+                    <span class="type-name">Body</span>
+                    <span class="type-specs">IBM Plex Sans 400 · 16px · 1.6 line-height</span>
                 </div>
-                <div class="spacing-item">
-                    <span class="spacing-label">--space-8</span>
-                    <div class="spacing-bar" style="width: 128px;"></div>
-                    <span class="spacing-value">32px</span>
+                <span class="type-body">Clear communication drives business success. Every interface element should support understanding and enable confident decision-making.</span>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-meta">
+                    <span class="type-name">Caption</span>
+                    <span class="type-specs">IBM Plex Sans 400 · 12px</span>
                 </div>
-                <div class="spacing-item">
-                    <span class="spacing-label">--space-12</span>
-                    <div class="spacing-bar" style="width: 192px;"></div>
-                    <span class="spacing-value">48px</span>
+                <span class="type-caption">Last updated 3 hours ago · Synced across 12 regions</span>
+            </div>
+        </section>
+
+        <!-- 03: Spacing Scale -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <div>
+                    <h2 class="section-title">Spacing Scale</h2>
+                    <p class="section-description">An 8-point grid system ensuring consistent rhythm and visual harmony throughout the interface.</p>
                 </div>
-                <div class="spacing-item">
-                    <span class="spacing-label">--space-16</span>
-                    <div class="spacing-bar" style="width: 256px;"></div>
-                    <span class="spacing-value">64px</span>
+            </div>
+
+            <div class="spacing-visual">
+                <div class="spacing-row">
+                    <span class="spacing-label">--sp-2</span>
+                    <div class="spacing-bar" style="width: 40px;"><span>8px</span></div>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">--sp-4</span>
+                    <div class="spacing-bar" style="width: 80px;"><span>16px</span></div>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">--sp-6</span>
+                    <div class="spacing-bar" style="width: 120px;"><span>24px</span></div>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">--sp-8</span>
+                    <div class="spacing-bar" style="width: 160px;"><span>32px</span></div>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">--sp-12</span>
+                    <div class="spacing-bar" style="width: 240px;"><span>48px</span></div>
+                </div>
+                <div class="spacing-row">
+                    <span class="spacing-label">--sp-16</span>
+                    <div class="spacing-bar" style="width: 320px;"><span>64px</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 4: Buttons -->
-        <section id="buttons">
-            <h2><span class="section-number">04</span> Buttons</h2>
-            <p>Clear, accessible buttons with consistent sizing and predictable states.</p>
+        <!-- 04: Buttons -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <div>
+                    <h2 class="section-title">Buttons</h2>
+                    <p class="section-description">Clear, accessible buttons with consistent sizing and predictable interaction states.</p>
+                </div>
+            </div>
 
             <h3>Variants</h3>
-            <div class="button-group">
-                <button class="btn btn-md btn-primary">Primary</button>
+            <div class="button-showcase">
+                <button class="btn btn-md btn-primary">Primary Action</button>
                 <button class="btn btn-md btn-secondary">Secondary</button>
                 <button class="btn btn-md btn-ghost">Ghost</button>
                 <button class="btn btn-md btn-danger">Danger</button>
             </div>
 
             <h3>Sizes</h3>
-            <div class="button-group">
+            <div class="button-showcase">
                 <button class="btn btn-sm btn-primary">Small</button>
                 <button class="btn btn-md btn-primary">Medium</button>
                 <button class="btn btn-lg btn-primary">Large</button>
             </div>
 
             <h3>States</h3>
-            <div class="button-group">
+            <div class="button-showcase">
                 <button class="btn btn-md btn-primary">Default</button>
                 <button class="btn btn-md btn-primary" disabled>Disabled</button>
-                <button class="btn btn-md btn-secondary">
-                    <span class="loading-spinner" style="width: 16px; height: 16px; border-width: 2px;"></span>
-                    Loading
-                </button>
             </div>
         </section>
 
-        <!-- Section 5: Forms -->
-        <section id="forms">
-            <h2><span class="section-number">05</span> Form Elements</h2>
-            <p>Accessible form controls with clear states and helpful feedback.</p>
+        <!-- 05: Forms -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <div>
+                    <h2 class="section-title">Form Elements</h2>
+                    <p class="section-description">Accessible form controls with clear validation states and helpful feedback.</p>
+                </div>
+            </div>
 
             <div class="form-grid">
-                <div class="form-group">
-                    <label for="input-default">Full Name</label>
-                    <input type="text" id="input-default" class="input" placeholder="Enter your full name">
-                    <span class="helper-text">As it appears on your ID</span>
+                <div class="form-field">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" placeholder="Enter your full name">
+                    <span class="form-hint">As it appears on your ID</span>
                 </div>
-
-                <div class="form-group">
-                    <label for="input-error">Email Address</label>
-                    <input type="email" id="input-error" class="input input-error" value="invalid-email">
-                    <span class="error-text">Please enter a valid email address</span>
+                <div class="form-field">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input is-error" value="invalid-email">
+                    <span class="form-error">Please enter a valid email address</span>
                 </div>
-
-                <div class="form-group">
-                    <label for="input-disabled">Department</label>
-                    <input type="text" id="input-disabled" class="input" value="Engineering" disabled>
-                </div>
-
-                <div class="form-group">
-                    <label for="select">Role</label>
-                    <select id="select" class="input">
-                        <option>Select a role...</option>
-                        <option>Administrator</option>
-                        <option>Manager</option>
-                        <option>Employee</option>
+                <div class="form-field">
+                    <label class="form-label">Department</label>
+                    <select class="form-input">
+                        <option>Select department...</option>
+                        <option>Engineering</option>
+                        <option>Marketing</option>
+                        <option>Finance</option>
                     </select>
                 </div>
-
-                <div class="form-group">
-                    <label for="textarea">Notes</label>
-                    <textarea id="textarea" class="input" placeholder="Additional information..."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>Preferences</label>
-                    <label class="checkbox-group">
-                        <input type="checkbox" class="checkbox" checked>
-                        <span>Receive email notifications</span>
-                    </label>
-                    <label class="checkbox-group">
-                        <input type="checkbox" class="checkbox">
-                        <span>Enable two-factor authentication</span>
-                    </label>
-                </div>
-
-                <div class="form-group">
-                    <label>Account Type</label>
-                    <label class="radio-group">
-                        <input type="radio" name="account" class="radio" checked>
-                        <span>Personal</span>
-                    </label>
-                    <label class="radio-group">
-                        <input type="radio" name="account" class="radio">
-                        <span>Business</span>
-                    </label>
-                </div>
-
-                <div class="form-group">
-                    <label>Dark Mode</label>
-                    <div class="toggle" onclick="this.classList.toggle('active')"></div>
+                <div class="form-field">
+                    <label class="form-label">Notes</label>
+                    <textarea class="form-input" placeholder="Additional information..."></textarea>
                 </div>
             </div>
         </section>
 
-        <!-- Section 6: Cards -->
-        <section id="cards">
-            <h2><span class="section-number">06</span> Cards</h2>
-            <p>Flexible containers for grouping related content with subtle elevation.</p>
+        <!-- 06: Cards -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <div>
+                    <h2 class="section-title">Cards</h2>
+                    <p class="section-description">Flexible containers for grouping related content with subtle elevation on interaction.</p>
+                </div>
+            </div>
 
             <div class="card-grid">
                 <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Project Overview</div>
-                        <div class="card-subtitle">Last updated 2 hours ago</div>
-                    </div>
-                    <p style="font-size: var(--text-sm); color: var(--color-gray-600);">Track project milestones, team assignments, and deliverables in one centralized location.</p>
+                    <span class="card-eyebrow">Project</span>
+                    <h4 class="card-title">Q4 Strategic Initiative</h4>
+                    <p class="card-description">Cross-functional alignment on key deliverables for the upcoming quarter with clear ownership and milestones.</p>
                 </div>
-
-                <div class="stat-card">
-                    <div class="stat-label">Total Revenue</div>
-                    <div class="stat-value">$124,500</div>
-                    <div class="stat-change positive">↑ 12.5% from last month</div>
+                <div class="card stat-card">
+                    <span class="stat-label">Total Revenue</span>
+                    <div class="stat-value">$2.4M</div>
+                    <span class="stat-change positive">↑ 12.5% vs last quarter</span>
                 </div>
-
-                <div class="stat-card">
-                    <div class="stat-label">Active Users</div>
-                    <div class="stat-value">8,429</div>
-                    <div class="stat-change negative">↓ 3.2% from last week</div>
+                <div class="card stat-card">
+                    <span class="stat-label">Active Users</span>
+                    <div class="stat-value">48.2K</div>
+                    <span class="stat-change positive">↑ 8.3% growth</span>
                 </div>
             </div>
         </section>
 
-        <!-- Section 7: Table -->
-        <section id="table">
-            <h2><span class="section-number">07</span> Data Table</h2>
-            <p>Clean, scannable tables for displaying structured data.</p>
+        <!-- 07: Data Table -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <div>
+                    <h2 class="section-title">Data Table</h2>
+                    <p class="section-description">Clean, scannable tables optimized for displaying structured data at scale.</p>
+                </div>
+            </div>
 
-            <div class="table-container">
+            <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -1193,7 +1296,7 @@
                             <th>Department</th>
                             <th>Status</th>
                             <th>Start Date</th>
-                            <th>Salary</th>
+                            <th>Compensation</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1201,205 +1304,202 @@
                             <td>Sarah Johnson</td>
                             <td>Engineering</td>
                             <td><span class="badge badge-success">Active</span></td>
-                            <td>Jan 15, 2023</td>
-                            <td>$95,000</td>
+                            <td>Jan 15, 2024</td>
+                            <td>$145,000</td>
                         </tr>
                         <tr>
                             <td>Michael Chen</td>
-                            <td>Marketing</td>
+                            <td>Product</td>
                             <td><span class="badge badge-success">Active</span></td>
-                            <td>Mar 22, 2023</td>
-                            <td>$78,000</td>
+                            <td>Mar 22, 2024</td>
+                            <td>$128,000</td>
                         </tr>
                         <tr>
                             <td>Emily Davis</td>
                             <td>Finance</td>
                             <td><span class="badge badge-warning">On Leave</span></td>
-                            <td>Jun 01, 2022</td>
-                            <td>$82,000</td>
+                            <td>Jun 01, 2023</td>
+                            <td>$112,000</td>
                         </tr>
                         <tr>
                             <td>James Wilson</td>
                             <td>Operations</td>
                             <td><span class="badge badge-neutral">Pending</span></td>
                             <td>—</td>
-                            <td>$70,000</td>
+                            <td>$95,000</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Section 8: Badges -->
-        <section id="badges">
-            <h2><span class="section-number">08</span> Badges & Status Indicators</h2>
-            <p>Compact labels for status, categories, and metadata.</p>
+        <!-- 08: Badges -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">08</span>
+                <div>
+                    <h2 class="section-title">Badges & Tags</h2>
+                    <p class="section-description">Compact labels for status indicators, categories, and metadata.</p>
+                </div>
+            </div>
 
-            <h3>Filled</h3>
-            <div class="badge-group">
+            <h3>Status Badges</h3>
+            <div class="badge-row">
                 <span class="badge badge-success">Active</span>
                 <span class="badge badge-warning">Pending</span>
                 <span class="badge badge-error">Inactive</span>
                 <span class="badge badge-info">New</span>
                 <span class="badge badge-neutral">Draft</span>
-            </div>
-
-            <h3>Outline</h3>
-            <div class="badge-group">
-                <span class="badge badge-success badge-outline">Active</span>
-                <span class="badge badge-warning badge-outline">Pending</span>
-                <span class="badge badge-error badge-outline">Inactive</span>
-                <span class="badge badge-info badge-outline">New</span>
-                <span class="badge badge-neutral badge-outline">Draft</span>
+                <span class="badge badge-primary">Featured</span>
             </div>
         </section>
 
-        <!-- Section 9: Principles -->
-        <section id="principles">
-            <h2><span class="section-number">09</span> Design Principles</h2>
-            <p>Core values that guide every design decision in the Meridian system.</p>
+        <!-- 09: Design Principles -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">09</span>
+                <div>
+                    <h2 class="section-title">Design Principles</h2>
+                    <p class="section-description">Core values guiding every design decision in the Meridian system.</p>
+                </div>
+            </div>
 
             <div class="principles-grid">
-                <div class="principle">
-                    <div class="principle-number">01</div>
-                    <div class="principle-title">Clarity First</div>
-                    <div class="principle-desc">Every element should communicate its purpose immediately. Remove ambiguity through consistent patterns and clear hierarchy.</div>
+                <div class="principle-card">
+                    <span class="principle-number">01</span>
+                    <h4 class="principle-title">Clarity First</h4>
+                    <p class="principle-desc">Every element communicates its purpose immediately. Remove ambiguity through consistent patterns and clear hierarchy.</p>
                 </div>
-                <div class="principle">
-                    <div class="principle-number">02</div>
-                    <div class="principle-title">Consistent Experience</div>
-                    <div class="principle-desc">Users should feel confident navigating the system. Familiar patterns reduce cognitive load and build trust.</div>
+                <div class="principle-card">
+                    <span class="principle-number">02</span>
+                    <h4 class="principle-title">Professional Trust</h4>
+                    <p class="principle-desc">Sophisticated aesthetics signal reliability. Clean, polished interfaces inspire confidence in critical decisions.</p>
                 </div>
-                <div class="principle">
-                    <div class="principle-number">03</div>
-                    <div class="principle-title">Accessible by Default</div>
-                    <div class="principle-desc">Design for everyone. WCAG compliance isn't an afterthought—it's foundational to how we build.</div>
+                <div class="principle-card">
+                    <span class="principle-number">03</span>
+                    <h4 class="principle-title">Accessible by Default</h4>
+                    <p class="principle-desc">Design for everyone. WCAG compliance isn't an afterthought—it's foundational to how we build.</p>
                 </div>
-                <div class="principle">
-                    <div class="principle-number">04</div>
-                    <div class="principle-title">Efficient Interactions</div>
-                    <div class="principle-desc">Respect users' time. Minimize steps, provide shortcuts, and ensure the fastest path to completion.</div>
-                </div>
-                <div class="principle">
-                    <div class="principle-number">05</div>
-                    <div class="principle-title">Build Trust</div>
-                    <div class="principle-desc">Professional aesthetics signal reliability. Clean, polished interfaces inspire confidence in our products.</div>
-                </div>
-                <div class="principle">
-                    <div class="principle-number">06</div>
-                    <div class="principle-title">Scale Gracefully</div>
-                    <div class="principle-desc">Components should work from mobile to desktop, from simple forms to complex dashboards.</div>
+                <div class="principle-card">
+                    <span class="principle-number">04</span>
+                    <h4 class="principle-title">Scale Gracefully</h4>
+                    <p class="principle-desc">Components work from mobile to desktop, from simple forms to complex dashboards without compromise.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Section 10: Micro-interactions -->
-        <section id="interactions">
-            <h2><span class="section-number">10</span> Micro-interactions</h2>
-            <p>Subtle, purposeful animations that provide feedback and enhance usability.</p>
+        <!-- 10: Animations -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">10</span>
+                <div>
+                    <h2 class="section-title">Micro-interactions</h2>
+                    <p class="section-description">Subtle, purposeful animations that provide feedback without distraction.</p>
+                </div>
+            </div>
 
-            <div class="interaction-grid">
-                <div class="interaction-demo">
-                    <div class="hover-lift">Hover to Lift</div>
-                    <p style="font-size: var(--text-sm); color: var(--color-gray-500); margin-top: var(--space-3);">Subtle elevation on hover</p>
+            <div class="animation-grid">
+                <div class="animation-demo">
+                    <div class="hover-lift-demo">Hover to Lift</div>
+                    <span class="animation-label">Elevation on hover</span>
                 </div>
-                <div class="interaction-demo">
-                    <button class="btn btn-md btn-secondary focus-ring" tabindex="0">Focus Ring</button>
-                    <p style="font-size: var(--text-sm); color: var(--color-gray-500); margin-top: var(--space-3);">Clear keyboard focus state</p>
-                </div>
-                <div class="interaction-demo">
+                <div class="animation-demo">
                     <div class="loading-spinner"></div>
-                    <p style="font-size: var(--text-sm); color: var(--color-gray-500); margin-top: var(--space-3);">Loading indicator</p>
+                    <span class="animation-label">Loading state</span>
+                </div>
+                <div class="animation-demo">
+                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                    <span class="animation-label">Progress indicator</span>
                 </div>
             </div>
         </section>
 
-        <!-- Section 11: Professional Components -->
-        <section id="components">
-            <h2><span class="section-number">11</span> Professional Components</h2>
-            <p>Navigation patterns essential for enterprise applications.</p>
-
-            <h3>Breadcrumb Navigation</h3>
-            <div class="breadcrumb">
-                <a href="#">Home</a>
-                <span class="breadcrumb-separator">/</span>
-                <a href="#">Projects</a>
-                <span class="breadcrumb-separator">/</span>
-                <a href="#">Q4 Planning</a>
-                <span class="breadcrumb-separator">/</span>
-                <span class="breadcrumb-current">Budget Review</span>
+        <!-- 11: KPI Dashboard -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">11</span>
+                <div>
+                    <h2 class="section-title">Special Component: KPI Dashboard</h2>
+                    <p class="section-description">A data-rich widget for executive dashboards and performance monitoring.</p>
+                </div>
             </div>
 
-            <h3>Tabs</h3>
-            <div class="tabs">
-                <button class="tab active">Overview</button>
-                <button class="tab">Analytics</button>
-                <button class="tab">Reports</button>
-                <button class="tab">Settings</button>
-            </div>
-            <div class="tab-content">
-                <p style="color: var(--color-gray-600);">Tab content appears here. Each tab reveals relevant content while maintaining page context.</p>
+            <div class="kpi-dashboard">
+                <div class="kpi-header">
+                    <span class="kpi-title">Performance Overview</span>
+                    <span class="kpi-period">Q4 2024</span>
+                </div>
+                <div class="kpi-grid">
+                    <div class="kpi-item">
+                        <span class="kpi-label">Revenue</span>
+                        <div class="kpi-value">$4.2M</div>
+                        <span class="kpi-trend up">↑ 23.5%</span>
+                    </div>
+                    <div class="kpi-item">
+                        <span class="kpi-label">Customers</span>
+                        <div class="kpi-value">12,847</div>
+                        <span class="kpi-trend up">↑ 18.2%</span>
+                    </div>
+                    <div class="kpi-item">
+                        <span class="kpi-label">NPS Score</span>
+                        <div class="kpi-value">72</div>
+                        <span class="kpi-trend up">↑ 8 pts</span>
+                    </div>
+                    <div class="kpi-item">
+                        <span class="kpi-label">Churn Rate</span>
+                        <div class="kpi-value">2.1%</div>
+                        <span class="kpi-trend down">↓ 0.4%</span>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Section 12: Alerts -->
-        <section id="alerts">
-            <h2><span class="section-number">12</span> Notifications & Alerts</h2>
-            <p>Clear, actionable feedback for user actions and system status.</p>
+        <!-- 12: Alerts -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">12</span>
+                <div>
+                    <h2 class="section-title">Alert Messages</h2>
+                    <p class="section-description">Clear, actionable feedback for user actions and system status.</p>
+                </div>
+            </div>
 
-            <h3>Inline Alerts</h3>
             <div class="alert alert-success">
                 <svg class="alert-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                 <div class="alert-content">
                     <div class="alert-title">Changes saved successfully</div>
-                    <div class="alert-description">Your profile information has been updated.</div>
+                    <div class="alert-description">Your profile information has been updated across all systems.</div>
                 </div>
-                <button class="alert-dismiss">×</button>
             </div>
 
             <div class="alert alert-info">
                 <svg class="alert-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
                 <div class="alert-content">
-                    <div class="alert-title">System maintenance scheduled</div>
-                    <div class="alert-description">The platform will undergo maintenance on Sunday from 2-4 AM EST.</div>
+                    <div class="alert-title">Scheduled maintenance</div>
+                    <div class="alert-description">Platform maintenance is scheduled for Sunday 2-4 AM EST.</div>
                 </div>
-                <button class="alert-dismiss">×</button>
             </div>
 
             <div class="alert alert-warning">
                 <svg class="alert-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
                 <div class="alert-content">
-                    <div class="alert-title">Your subscription expires soon</div>
-                    <div class="alert-description">Renew before Jan 15 to maintain uninterrupted access.</div>
+                    <div class="alert-title">Subscription expiring</div>
+                    <div class="alert-description">Renew before January 15 to maintain uninterrupted access.</div>
                 </div>
-                <button class="alert-dismiss">×</button>
             </div>
 
             <div class="alert alert-error">
                 <svg class="alert-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
                 <div class="alert-content">
                     <div class="alert-title">Payment failed</div>
-                    <div class="alert-description">We couldn't process your payment. Please update your billing information.</div>
-                </div>
-                <button class="alert-dismiss">×</button>
-            </div>
-
-            <h3>Toast Notifications</h3>
-            <div style="display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-4);">
-                <div class="toast toast-success">
-                    ✓ &nbsp; File uploaded successfully
-                </div>
-                <div class="toast toast-error">
-                    ✕ &nbsp; Connection lost. Retrying...
+                    <div class="alert-description">We couldn't process your payment. Please update billing information.</div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <p class="footer-text">Meridian Design System v1.0 — Built for enterprise applications</p>
-        </div>
+    <footer class="container">
+        <p class="footer-text">Meridian Design System v2.0 — Built for enterprise excellence</p>
     </footer>
 </body>
 </html>

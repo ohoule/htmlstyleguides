@@ -3,59 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8-BIT QUEST - Pixel Art Style Guide</title>
+    <title>Arcade - Pixel Art Style Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* 8-Bit Color Palette - Limited, vibrant, retro */
+            /* Pixel Art Color Palette - Limited 16-color NES-inspired */
+            --pixel-black: #000000;
+            --pixel-dark: #1D2B53;
+            --pixel-purple: #7E2553;
+            --pixel-green: #008751;
+            --pixel-brown: #AB5236;
+            --pixel-navy: #5F574F;
+            --pixel-gray: #C2C3C7;
+            --pixel-white: #FFF1E8;
             --pixel-red: #FF004D;
             --pixel-orange: #FFA300;
             --pixel-yellow: #FFEC27;
-            --pixel-green: #00E436;
+            --pixel-lime: #00E436;
             --pixel-cyan: #29ADFF;
-            --pixel-blue: #1D2B53;
-            --pixel-purple: #7E2553;
+            --pixel-lavender: #83769C;
             --pixel-pink: #FF77A8;
-            --pixel-black: #000000;
-            --pixel-dark: #1D1D1D;
-            --pixel-gray: #5F574F;
-            --pixel-light: #C2C3C7;
-            --pixel-white: #FFF1E8;
+            --pixel-peach: #FFCCAA;
 
             /* Typography */
             --font-display: 'Press Start 2P', cursive;
-            --font-body: 'VT323', monospace;
+            --font-body: 'Silkscreen', sans-serif;
 
             /* Spacing - 8px grid */
-            --space-xs: 4px;
-            --space-sm: 8px;
-            --space-md: 16px;
-            --space-lg: 24px;
-            --space-xl: 32px;
-            --space-2xl: 48px;
-            --space-3xl: 64px;
+            --space-1: 8px;
+            --space-2: 16px;
+            --space-3: 24px;
+            --space-4: 32px;
+            --space-5: 40px;
+            --space-6: 48px;
+            --space-8: 64px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Disable anti-aliasing for that crisp pixel look */
             image-rendering: pixelated;
+            image-rendering: crisp-edges;
         }
 
         body {
             font-family: var(--font-body);
             background: var(--pixel-dark);
             color: var(--pixel-white);
-            line-height: 1.6;
-            font-size: 18px;
+            line-height: 1.8;
+            overflow-x: hidden;
         }
 
-        /* CRT scanline effect */
-        body::after {
+        /* Scanline effect */
+        body::before {
             content: '';
             position: fixed;
             top: 0;
@@ -73,119 +76,149 @@
             z-index: 1000;
         }
 
+        /* Pixel border top */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--pixel-red) 0px,
+                var(--pixel-red) 8px,
+                var(--pixel-orange) 8px,
+                var(--pixel-orange) 16px,
+                var(--pixel-yellow) 16px,
+                var(--pixel-yellow) 24px,
+                var(--pixel-lime) 24px,
+                var(--pixel-lime) 32px,
+                var(--pixel-cyan) 32px,
+                var(--pixel-cyan) 40px,
+                var(--pixel-lavender) 40px,
+                var(--pixel-lavender) 48px
+            );
+            z-index: 1001;
+        }
+
         .container {
-            max-width: 960px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: var(--space-xl);
+            padding: var(--space-4);
+        }
+
+        /* Navigation */
+        .back-link {
+            display: inline-block;
+            color: var(--pixel-cyan);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 10px;
+            margin-bottom: var(--space-4);
+            padding: var(--space-1) var(--space-2);
+            border: 4px solid var(--pixel-cyan);
+            background: var(--pixel-dark);
+            transition: all 0.1s steps(2);
+        }
+
+        .back-link:hover {
+            background: var(--pixel-cyan);
+            color: var(--pixel-dark);
+            transform: translate(-4px, -4px);
+            box-shadow: 4px 4px 0 var(--pixel-black);
         }
 
         /* Header */
         header {
             text-align: center;
-            padding: var(--space-3xl) var(--space-xl);
-            border: 4px solid var(--pixel-cyan);
-            background: var(--pixel-blue);
-            margin-bottom: var(--space-3xl);
+            padding: var(--space-8) var(--space-4);
+            margin-bottom: var(--space-8);
+            background: var(--pixel-black);
+            border: 8px solid var(--pixel-cyan);
             position: relative;
         }
 
         header::before {
-            content: '★ ★ ★';
+            content: '>>> PRESS START <<<';
             position: absolute;
-            top: var(--space-md);
+            bottom: var(--space-2);
             left: 50%;
             transform: translateX(-50%);
-            color: var(--pixel-yellow);
             font-family: var(--font-display);
-            font-size: 0.5rem;
-            letter-spacing: 0.5em;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-size: 2rem;
+            font-size: 8px;
             color: var(--pixel-yellow);
-            text-shadow:
-                4px 4px 0 var(--pixel-orange),
-                -2px -2px 0 var(--pixel-red);
-            margin-bottom: var(--space-md);
-            animation: blink 1s step-end infinite;
+            animation: blink 1s steps(2) infinite;
         }
 
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
-        .tagline {
+        .header-sprite {
+            font-size: 48px;
+            margin-bottom: var(--space-2);
+            animation: bounce 0.5s steps(4) infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(16px, 4vw, 32px);
+            color: var(--pixel-yellow);
+            text-shadow: 4px 4px 0 var(--pixel-red);
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-2);
+        }
+
+        header p {
             font-family: var(--font-body);
-            font-size: 1.5rem;
-            color: var(--pixel-green);
-        }
-
-        .coin {
-            display: inline-block;
-            animation: coin-spin 0.5s steps(4) infinite;
-        }
-
-        @keyframes coin-spin {
-            0% { transform: scaleX(1); }
-            25% { transform: scaleX(0.5); }
-            50% { transform: scaleX(0); }
-            75% { transform: scaleX(0.5); }
-            100% { transform: scaleX(1); }
+            font-size: 14px;
+            color: var(--pixel-gray);
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         /* Section Styling */
         section {
-            margin-bottom: var(--space-3xl);
+            margin-bottom: var(--space-8);
+            padding: var(--space-4);
             background: var(--pixel-black);
-            border: 4px solid var(--pixel-light);
-            padding: var(--space-xl);
+            border: 4px solid var(--pixel-gray);
             position: relative;
         }
 
-        /* Pixel corners */
-        section::before,
-        section::after {
+        section::before {
             content: '';
             position: absolute;
-            width: 8px;
-            height: 8px;
-            background: var(--pixel-cyan);
+            top: -4px;
+            left: var(--space-2);
+            padding: 0 var(--space-1);
+            font-family: var(--font-display);
+            font-size: 8px;
+            color: var(--pixel-lime);
+            background: var(--pixel-black);
         }
-
-        section::before { top: -4px; left: -4px; }
-        section::after { top: -4px; right: -4px; }
 
         h2 {
             font-family: var(--font-display);
-            font-size: 0.875rem;
-            color: var(--pixel-cyan);
-            margin-bottom: var(--space-lg);
-            padding-bottom: var(--space-sm);
-            border-bottom: 4px solid var(--pixel-cyan);
-            text-transform: uppercase;
+            font-size: 12px;
+            color: var(--pixel-lime);
+            margin-bottom: var(--space-3);
+            padding-bottom: var(--space-1);
+            border-bottom: 4px solid var(--pixel-green);
         }
 
-        h2::before {
-            content: '> ';
-            color: var(--pixel-green);
-        }
-
-        h3 {
-            font-family: var(--font-display);
-            font-size: 0.625rem;
-            color: var(--pixel-yellow);
-            text-transform: uppercase;
-            margin-bottom: var(--space-sm);
-        }
-
-        /* Color Palette */
+        /* Color Palette - Pixel Blocks */
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 4px;
         }
 
         .color-swatch {
@@ -193,73 +226,158 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: var(--space-sm);
-            border: 2px solid var(--pixel-dark);
+            padding: var(--space-1);
+            border: 4px solid var(--pixel-black);
+            transition: transform 0.1s steps(2);
+            cursor: pointer;
         }
 
-        .color-swatch span {
+        .color-swatch:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        .color-name {
             font-family: var(--font-display);
-            font-size: 0.5rem;
-            color: var(--pixel-black);
-            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+            font-size: 6px;
+            text-transform: uppercase;
         }
 
-        .swatch-dark span {
-            color: var(--pixel-white);
-            text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+        .color-value {
+            font-family: var(--font-body);
+            font-size: 10px;
         }
+
+        .swatch-black { background: var(--pixel-black); color: var(--pixel-white); border-color: var(--pixel-gray); }
+        .swatch-dark { background: var(--pixel-dark); color: var(--pixel-white); }
+        .swatch-purple { background: var(--pixel-purple); color: var(--pixel-white); }
+        .swatch-green { background: var(--pixel-green); color: var(--pixel-white); }
+        .swatch-brown { background: var(--pixel-brown); color: var(--pixel-white); }
+        .swatch-gray { background: var(--pixel-gray); color: var(--pixel-black); }
+        .swatch-white { background: var(--pixel-white); color: var(--pixel-black); }
+        .swatch-red { background: var(--pixel-red); color: var(--pixel-white); }
+        .swatch-orange { background: var(--pixel-orange); color: var(--pixel-black); }
+        .swatch-yellow { background: var(--pixel-yellow); color: var(--pixel-black); }
+        .swatch-lime { background: var(--pixel-lime); color: var(--pixel-black); }
+        .swatch-cyan { background: var(--pixel-cyan); color: var(--pixel-black); }
+        .swatch-lavender { background: var(--pixel-lavender); color: var(--pixel-white); }
+        .swatch-pink { background: var(--pixel-pink); color: var(--pixel-black); }
+        .swatch-peach { background: var(--pixel-peach); color: var(--pixel-black); }
+        .swatch-navy { background: var(--pixel-navy); color: var(--pixel-white); }
 
         /* Typography */
-        .type-sample {
-            margin-bottom: var(--space-xl);
+        .type-specimen {
+            margin-bottom: var(--space-4);
+            padding: var(--space-3);
+            background: var(--pixel-dark);
+            border: 4px solid var(--pixel-purple);
+        }
+
+        .type-specimen h3 {
+            font-family: var(--font-display);
+            font-size: 16px;
+            color: var(--pixel-yellow);
+            margin-bottom: var(--space-1);
+        }
+
+        .type-specimen .font-name {
+            font-family: var(--font-body);
+            font-size: 12px;
+            color: var(--pixel-cyan);
+            margin-bottom: var(--space-2);
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-2);
+        }
+
+        .type-label {
+            font-family: var(--font-display);
+            font-size: 6px;
+            color: var(--pixel-orange);
+            min-width: 50px;
         }
 
         .display-text {
             font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: var(--pixel-pink);
-            text-shadow: 2px 2px 0 var(--pixel-purple);
+            font-size: 16px;
+            color: var(--pixel-red);
+        }
+
+        .heading-text {
+            font-family: var(--font-display);
+            font-size: 12px;
+            color: var(--pixel-white);
         }
 
         .body-text {
             font-family: var(--font-body);
-            font-size: 1.5rem;
-            color: var(--pixel-white);
-            max-width: 600px;
+            font-size: 14px;
+            color: var(--pixel-gray);
         }
 
-        /* Spacing Scale */
-        .spacing-demo {
+        .small-text {
+            font-family: var(--font-body);
+            font-size: 12px;
+            color: var(--pixel-lavender);
+        }
+
+        /* Spacing Scale - Pixel Bars */
+        .spacing-visual {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-sm);
+            gap: var(--space-3);
             align-items: flex-end;
         }
 
-        .spacing-block {
-            background: var(--pixel-green);
+        .spacing-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            color: var(--pixel-black);
-            font-family: var(--font-display);
-            font-size: 0.5rem;
+            gap: var(--space-1);
         }
 
-        /* Buttons */
+        .spacing-bar {
+            width: 16px;
+            background: linear-gradient(180deg, var(--pixel-lime), var(--pixel-green));
+            border: 2px solid var(--pixel-black);
+        }
+
+        .spacing-label {
+            font-family: var(--font-display);
+            font-size: 6px;
+            color: var(--pixel-cyan);
+        }
+
+        .spacing-value {
+            font-family: var(--font-body);
+            font-size: 10px;
+            color: var(--pixel-yellow);
+        }
+
+        /* Buttons - Pixel Style */
         .button-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-md);
+            gap: var(--space-2);
+            margin-bottom: var(--space-3);
         }
 
         .btn {
             font-family: var(--font-display);
-            font-size: 0.625rem;
-            padding: var(--space-md) var(--space-xl);
+            font-size: 10px;
+            padding: var(--space-2) var(--space-3);
             border: none;
             cursor: pointer;
-            transition: transform 0.1s;
+            transition: all 0.1s steps(2);
             position: relative;
             text-transform: uppercase;
         }
@@ -268,136 +386,173 @@
             content: '';
             position: absolute;
             bottom: -4px;
-            left: 4px;
-            right: 0;
-            height: 4px;
-            background: rgba(0, 0, 0, 0.5);
+            right: -4px;
+            width: 100%;
+            height: 100%;
+            background: var(--pixel-black);
+            z-index: -1;
+        }
+
+        .btn:hover {
+            transform: translate(-2px, -2px);
         }
 
         .btn:active {
-            transform: translateY(2px);
+            transform: translate(2px, 2px);
         }
 
         .btn:active::after {
-            height: 2px;
-            bottom: -2px;
+            transform: translate(-4px, -4px);
         }
 
         .btn-primary {
             background: var(--pixel-red);
             color: var(--pixel-white);
-            box-shadow: inset -4px -4px 0 var(--pixel-purple);
+            border: 4px solid var(--pixel-white);
         }
 
         .btn-secondary {
-            background: var(--pixel-green);
-            color: var(--pixel-black);
-            box-shadow: inset -4px -4px 0 #00A029;
+            background: var(--pixel-dark);
+            color: var(--pixel-cyan);
+            border: 4px solid var(--pixel-cyan);
         }
 
-        .btn-tertiary {
-            background: var(--pixel-cyan);
+        .btn-success {
+            background: var(--pixel-lime);
             color: var(--pixel-black);
-            box-shadow: inset -4px -4px 0 #0085CC;
+            border: 4px solid var(--pixel-green);
+        }
+
+        .btn-warning {
+            background: var(--pixel-yellow);
+            color: var(--pixel-black);
+            border: 4px solid var(--pixel-orange);
         }
 
         /* Forms */
         .form-group {
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-3);
         }
 
-        label {
+        .form-label {
             display: block;
             font-family: var(--font-display);
-            font-size: 0.5rem;
-            color: var(--pixel-yellow);
-            text-transform: uppercase;
-            margin-bottom: var(--space-sm);
+            font-size: 8px;
+            color: var(--pixel-cyan);
+            margin-bottom: var(--space-1);
         }
 
-        input[type="text"],
-        input[type="email"],
-        textarea,
-        select {
+        .form-input {
             width: 100%;
-            max-width: 400px;
-            padding: var(--space-md);
+            padding: var(--space-2);
             font-family: var(--font-body);
-            font-size: 1.25rem;
-            border: 4px solid var(--pixel-light);
-            background: var(--pixel-blue);
+            font-size: 14px;
+            border: 4px solid var(--pixel-gray);
+            background: var(--pixel-dark);
             color: var(--pixel-white);
+            outline: none;
         }
 
-        input:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
+        .form-input:focus {
             border-color: var(--pixel-cyan);
             box-shadow: 0 0 0 4px rgba(41, 173, 255, 0.3);
         }
 
-        input::placeholder,
-        textarea::placeholder {
-            color: var(--pixel-gray);
+        .form-input::placeholder {
+            color: var(--pixel-navy);
         }
 
-        textarea {
+        textarea.form-input {
             min-height: 100px;
             resize: vertical;
         }
 
-        /* Cards */
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill='%2329ADFF' d='M0 0h8L4 8z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-2) center;
+            padding-right: var(--space-5);
+        }
+
+        .form-checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .form-checkbox {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--pixel-lime);
+            cursor: pointer;
+        }
+
+        /* Cards - Game Cartridge Style */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-md);
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-3);
         }
 
         .card {
-            background: var(--pixel-blue);
-            border: 4px solid var(--pixel-light);
-            transition: transform 0.1s;
+            background: var(--pixel-dark);
+            border: 4px solid var(--pixel-gray);
+            transition: all 0.1s steps(2);
         }
 
         .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--pixel-yellow);
+            transform: translate(-4px, -4px);
+            box-shadow: 4px 4px 0 var(--pixel-black);
+            border-color: var(--pixel-cyan);
         }
 
         .card-image {
             height: 120px;
+            background: linear-gradient(135deg, var(--pixel-purple), var(--pixel-dark), var(--pixel-green));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
-            border-bottom: 4px solid var(--pixel-light);
+            border-bottom: 4px solid var(--pixel-gray);
         }
 
-        .card:nth-child(1) .card-image { background: var(--pixel-red); }
-        .card:nth-child(2) .card-image { background: var(--pixel-green); }
-        .card:nth-child(3) .card-image { background: var(--pixel-cyan); }
+        .card-image::after {
+            content: '🎮';
+            font-size: 40px;
+            animation: bounce 0.5s steps(4) infinite;
+        }
 
         .card-content {
-            padding: var(--space-md);
+            padding: var(--space-2);
         }
 
         .card-title {
             font-family: var(--font-display);
-            font-size: 0.625rem;
+            font-size: 10px;
             color: var(--pixel-yellow);
-            margin-bottom: var(--space-sm);
+            margin-bottom: var(--space-1);
         }
 
         .card-text {
-            font-size: 1.25rem;
-            color: var(--pixel-light);
+            font-family: var(--font-body);
+            font-size: 12px;
+            color: var(--pixel-gray);
+            margin-bottom: var(--space-2);
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+            font-family: var(--font-display);
+            font-size: 6px;
+            color: var(--pixel-lime);
         }
 
         /* Data Table */
         .table-wrapper {
-            border: 4px solid var(--pixel-light);
             overflow-x: auto;
+            border: 4px solid var(--pixel-gray);
         }
 
         table {
@@ -405,511 +560,648 @@
             border-collapse: collapse;
         }
 
-        th {
+        thead {
             background: var(--pixel-purple);
-            color: var(--pixel-white);
+        }
+
+        th {
             font-family: var(--font-display);
-            font-size: 0.5rem;
-            text-transform: uppercase;
-            padding: var(--space-md);
+            font-size: 8px;
+            color: var(--pixel-white);
             text-align: left;
-            border: 2px solid var(--pixel-pink);
+            padding: var(--space-2);
+            border-bottom: 4px solid var(--pixel-black);
         }
 
         td {
-            padding: var(--space-md);
-            border: 2px solid var(--pixel-gray);
-            font-size: 1.25rem;
+            padding: var(--space-2);
+            border-bottom: 2px solid var(--pixel-dark);
+            font-family: var(--font-body);
+            font-size: 12px;
+            color: var(--pixel-gray);
         }
 
-        tr:nth-child(even) {
-            background: var(--pixel-blue);
+        tbody tr {
+            transition: background 0.1s steps(2);
+        }
+
+        tbody tr:hover {
+            background: var(--pixel-dark);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-active {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--pixel-lime);
+            color: var(--pixel-black);
+            font-family: var(--font-display);
+            font-size: 6px;
+        }
+
+        .status-pending {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--pixel-yellow);
+            color: var(--pixel-black);
+            font-family: var(--font-display);
+            font-size: 6px;
         }
 
         /* Badges */
         .badge-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-sm);
+            gap: var(--space-1);
         }
 
         .badge {
             font-family: var(--font-display);
-            font-size: 0.5rem;
+            font-size: 6px;
+            padding: 4px 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
             text-transform: uppercase;
-            padding: var(--space-xs) var(--space-sm);
-            border: 2px solid;
         }
 
-        .badge-red {
-            background: var(--pixel-red);
-            color: var(--pixel-white);
-            border-color: var(--pixel-white);
-        }
-
-        .badge-green {
-            background: var(--pixel-green);
-            color: var(--pixel-black);
-            border-color: var(--pixel-black);
-        }
-
-        .badge-yellow {
-            background: var(--pixel-yellow);
-            color: var(--pixel-black);
-            border-color: var(--pixel-black);
-        }
-
-        .badge-cyan {
-            background: var(--pixel-cyan);
-            color: var(--pixel-black);
-            border-color: var(--pixel-black);
-        }
+        .badge-red { background: var(--pixel-red); color: var(--pixel-white); }
+        .badge-green { background: var(--pixel-lime); color: var(--pixel-black); }
+        .badge-blue { background: var(--pixel-cyan); color: var(--pixel-black); }
+        .badge-yellow { background: var(--pixel-yellow); color: var(--pixel-black); }
+        .badge-purple { background: var(--pixel-purple); color: var(--pixel-white); }
+        .badge-outline { background: transparent; border: 2px solid var(--pixel-gray); color: var(--pixel-gray); }
 
         /* Design Principles */
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--space-md);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-2);
         }
 
-        .principle {
-            background: var(--pixel-blue);
-            border: 4px solid var(--pixel-light);
-            padding: var(--space-lg);
+        .principle-card {
+            padding: var(--space-2);
+            background: var(--pixel-dark);
+            border: 4px solid var(--pixel-green);
             text-align: center;
+            transition: all 0.1s steps(2);
+        }
+
+        .principle-card:hover {
+            border-color: var(--pixel-lime);
+            background: var(--pixel-black);
         }
 
         .principle-icon {
-            font-size: 2.5rem;
-            margin-bottom: var(--space-sm);
-            animation: bounce 0.5s steps(2) infinite;
-        }
-
-        .principle:nth-child(2) .principle-icon { animation-delay: 0.1s; }
-        .principle:nth-child(3) .principle-icon { animation-delay: 0.2s; }
-        .principle:nth-child(4) .principle-icon { animation-delay: 0.3s; }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            font-size: 32px;
+            margin-bottom: var(--space-1);
         }
 
         .principle-title {
             font-family: var(--font-display);
-            font-size: 0.5rem;
-            color: var(--pixel-green);
-            margin-bottom: var(--space-xs);
+            font-size: 8px;
+            color: var(--pixel-yellow);
+            margin-bottom: var(--space-1);
         }
 
         .principle-text {
-            font-size: 1.25rem;
-            color: var(--pixel-light);
+            font-family: var(--font-body);
+            font-size: 11px;
+            color: var(--pixel-gray);
         }
 
         /* Animations */
-        .animation-grid {
+        .animation-showcase {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-md);
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--space-2);
         }
 
         .animation-demo {
-            height: 120px;
-            background: var(--pixel-blue);
-            border: 4px solid var(--pixel-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            padding: var(--space-2);
+            background: var(--pixel-dark);
+            border: 4px solid var(--pixel-lavender);
+            text-align: center;
         }
 
-        .walk-demo {
+        .animation-element {
             width: 32px;
             height: 32px;
+            margin: 0 auto var(--space-1);
             background: var(--pixel-red);
-            animation: walk 0.5s steps(4) infinite;
-            position: relative;
         }
 
-        .walk-demo::before {
-            content: '';
-            position: absolute;
-            top: 4px;
-            left: 8px;
-            width: 16px;
-            height: 8px;
-            background: var(--pixel-white);
+        .walk-demo .animation-element {
+            animation: walk 0.4s steps(4) infinite;
         }
 
         @keyframes walk {
-            0%, 100% { transform: translateX(-30px); }
-            50% { transform: translateX(30px); }
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
         }
 
-        .jump-demo {
-            width: 24px;
-            height: 24px;
-            background: var(--pixel-yellow);
+        .jump-demo .animation-element {
             animation: jump 0.6s steps(3) infinite;
         }
 
         @keyframes jump {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-40px); }
+            50% { transform: translateY(-16px); }
         }
 
-        .spin-demo {
-            width: 32px;
-            height: 32px;
-            background: var(--pixel-green);
-            animation: pixel-spin 0.4s steps(4) infinite;
+        .flash-demo .animation-element {
+            animation: flash 0.3s steps(2) infinite;
         }
 
-        @keyframes pixel-spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes flash {
+            0%, 100% { background: var(--pixel-red); }
+            50% { background: var(--pixel-white); }
         }
 
-        /* Special Component: Game HUD */
-        .game-hud {
+        .spin-demo .animation-element {
+            animation: pixelSpin 1s steps(8) infinite;
+        }
+
+        @keyframes pixelSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animation-label {
+            font-family: var(--font-display);
+            font-size: 6px;
+            color: var(--pixel-cyan);
+            text-transform: uppercase;
+        }
+
+        /* Special Component - High Score Board */
+        .highscore-board {
             background: var(--pixel-black);
-            border: 4px solid var(--pixel-yellow);
-            padding: var(--space-lg);
+            border: 8px solid var(--pixel-yellow);
+            padding: var(--space-3);
+            position: relative;
         }
 
-        .hud-top {
+        .highscore-header {
+            text-align: center;
+            margin-bottom: var(--space-3);
+        }
+
+        .highscore-title {
+            font-family: var(--font-display);
+            font-size: 16px;
+            color: var(--pixel-red);
+            text-shadow: 2px 2px 0 var(--pixel-orange);
+            animation: blink 1s steps(2) infinite;
+        }
+
+        .highscore-subtitle {
+            font-family: var(--font-body);
+            font-size: 12px;
+            color: var(--pixel-yellow);
+            margin-top: var(--space-1);
+        }
+
+        .highscore-list {
+            list-style: none;
+        }
+
+        .highscore-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: var(--space-lg);
-            padding-bottom: var(--space-md);
-            border-bottom: 2px dashed var(--pixel-gray);
-        }
-
-        .hud-score {
+            padding: var(--space-1) var(--space-2);
+            border-bottom: 2px solid var(--pixel-dark);
             font-family: var(--font-display);
-            font-size: 0.75rem;
+            font-size: 10px;
         }
 
-        .hud-score .label {
+        .highscore-item:last-child {
+            border-bottom: none;
+        }
+
+        .highscore-rank {
             color: var(--pixel-yellow);
+            min-width: 30px;
         }
 
-        .hud-score .value {
-            color: var(--pixel-white);
-        }
-
-        .hud-lives {
-            display: flex;
-            gap: var(--space-xs);
-        }
-
-        .heart {
-            font-size: 1.5rem;
-            color: var(--pixel-red);
-        }
-
-        .heart.empty {
-            color: var(--pixel-gray);
-        }
-
-        .hud-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-md);
-        }
-
-        .stat {
+        .highscore-name {
+            color: var(--pixel-cyan);
+            flex: 1;
             text-align: center;
         }
 
-        .stat-icon {
-            font-size: 2rem;
-            margin-bottom: var(--space-xs);
+        .highscore-score {
+            color: var(--pixel-lime);
+            min-width: 80px;
+            text-align: right;
         }
 
-        .stat-bar {
-            height: 16px;
-            background: var(--pixel-gray);
-            border: 2px solid var(--pixel-light);
-            position: relative;
-            overflow: hidden;
+        .highscore-item.top-1 {
+            background: var(--pixel-dark);
         }
 
-        .stat-fill {
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            animation: fill-pulse 2s steps(4) infinite;
+        .highscore-item.top-1 .highscore-rank {
+            color: var(--pixel-red);
         }
 
-        .stat-fill.hp { background: var(--pixel-red); width: 75%; }
-        .stat-fill.mp { background: var(--pixel-cyan); width: 50%; }
-        .stat-fill.xp { background: var(--pixel-green); width: 90%; }
-
-        @keyframes fill-pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        .highscore-coins {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-2);
+            margin-top: var(--space-3);
+            padding-top: var(--space-2);
+            border-top: 4px solid var(--pixel-dark);
         }
 
-        .stat-label {
-            font-family: var(--font-display);
-            font-size: 0.5rem;
-            color: var(--pixel-yellow);
-            margin-top: var(--space-xs);
+        .coin {
+            width: 24px;
+            height: 24px;
+            background: var(--pixel-yellow);
+            border-radius: 50%;
+            animation: coinSpin 1s steps(4) infinite;
+            box-shadow: inset -4px 0 0 var(--pixel-orange);
+        }
+
+        @keyframes coinSpin {
+            0%, 100% { transform: scaleX(1); }
+            50% { transform: scaleX(0.3); }
         }
 
         /* Alerts */
         .alert {
-            padding: var(--space-md);
-            margin-bottom: var(--space-md);
+            padding: var(--space-2);
+            margin-bottom: var(--space-2);
             display: flex;
-            align-items: center;
-            gap: var(--space-md);
+            align-items: flex-start;
+            gap: var(--space-2);
             border: 4px solid;
-            font-size: 1.25rem;
         }
 
         .alert-icon {
-            font-size: 1.5rem;
-            animation: alert-blink 0.5s steps(2) infinite;
+            font-size: 16px;
+            flex-shrink: 0;
         }
 
-        @keyframes alert-blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-display);
+            font-size: 8px;
+            margin-bottom: 4px;
+        }
+
+        .alert-text {
+            font-family: var(--font-body);
+            font-size: 11px;
+        }
+
+        .alert-success {
+            background: var(--pixel-green);
+            border-color: var(--pixel-lime);
+            color: var(--pixel-white);
         }
 
         .alert-info {
-            background: var(--pixel-blue);
+            background: var(--pixel-dark);
             border-color: var(--pixel-cyan);
             color: var(--pixel-cyan);
         }
 
-        .alert-success {
-            background: var(--pixel-blue);
-            border-color: var(--pixel-green);
-            color: var(--pixel-green);
-        }
-
         .alert-warning {
-            background: var(--pixel-blue);
-            border-color: var(--pixel-yellow);
+            background: var(--pixel-brown);
+            border-color: var(--pixel-orange);
             color: var(--pixel-yellow);
         }
 
         .alert-error {
-            background: var(--pixel-blue);
+            background: var(--pixel-purple);
             border-color: var(--pixel-red);
-            color: var(--pixel-red);
-        }
-
-        /* Back Link */
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-sm);
-            color: var(--pixel-cyan);
-            text-decoration: none;
-            font-family: var(--font-display);
-            font-size: 0.625rem;
-            margin-bottom: var(--space-xl);
-            transition: color 0.1s;
-        }
-
-        .back-link:hover {
-            color: var(--pixel-yellow);
-        }
-
-        .back-link::before {
-            content: '◄';
+            color: var(--pixel-pink);
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: var(--space-2xl);
+            padding: var(--space-4);
+            margin-top: var(--space-8);
+            background: var(--pixel-black);
+            border: 4px solid var(--pixel-gray);
+        }
+
+        footer p {
             font-family: var(--font-display);
-            font-size: 0.5rem;
+            font-size: 8px;
             color: var(--pixel-gray);
         }
 
-        footer .credits {
+        footer p:first-child {
             color: var(--pixel-yellow);
-            margin-bottom: var(--space-sm);
+            margin-bottom: var(--space-1);
         }
 
         /* Responsive */
-        @media (max-width: 600px) {
-            .color-grid {
-                grid-template-columns: repeat(2, 1fr);
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--space-2);
             }
 
-            .animation-grid,
-            .principles-grid {
-                grid-template-columns: 1fr;
+            header {
+                padding: var(--space-4) var(--space-2);
             }
 
-            .hud-stats {
-                grid-template-columns: 1fr;
+            section {
+                padding: var(--space-2);
+            }
+
+            .highscore-item {
+                font-size: 8px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">Back to Gallery</a>
+        <a href="../index.html" class="back-link">← BACK</a>
 
         <header>
-            <h1 class="logo">8-BIT QUEST</h1>
-            <p class="tagline">INSERT <span class="coin">●</span> TO CONTINUE</p>
+            <div class="header-sprite">👾</div>
+            <h1>ARCADE</h1>
+            <p>A retro pixel art design system inspired by 8-bit classics and arcade cabinets</p>
         </header>
 
         <!-- Color Palette -->
-        <section>
-            <h2>Color Palette</h2>
+        <section id="colors">
+            <h2>COLOR PALETTE</h2>
             <div class="color-grid">
-                <div class="color-swatch" style="background: var(--pixel-red);">
-                    <span>Red</span>
+                <div class="color-swatch swatch-black">
+                    <span class="color-name">Black</span>
+                    <span class="color-value">#000000</span>
                 </div>
-                <div class="color-swatch" style="background: var(--pixel-orange);">
-                    <span>Orange</span>
+                <div class="color-swatch swatch-dark">
+                    <span class="color-name">Dark</span>
+                    <span class="color-value">#1D2B53</span>
                 </div>
-                <div class="color-swatch" style="background: var(--pixel-yellow);">
-                    <span>Yellow</span>
+                <div class="color-swatch swatch-purple">
+                    <span class="color-name">Purple</span>
+                    <span class="color-value">#7E2553</span>
                 </div>
-                <div class="color-swatch" style="background: var(--pixel-green);">
-                    <span>Green</span>
+                <div class="color-swatch swatch-green">
+                    <span class="color-name">Green</span>
+                    <span class="color-value">#008751</span>
                 </div>
-                <div class="color-swatch" style="background: var(--pixel-cyan);">
-                    <span>Cyan</span>
+                <div class="color-swatch swatch-brown">
+                    <span class="color-name">Brown</span>
+                    <span class="color-value">#AB5236</span>
                 </div>
-                <div class="color-swatch swatch-dark" style="background: var(--pixel-blue);">
-                    <span>Blue</span>
+                <div class="color-swatch swatch-navy">
+                    <span class="color-name">Navy</span>
+                    <span class="color-value">#5F574F</span>
                 </div>
-                <div class="color-swatch swatch-dark" style="background: var(--pixel-purple);">
-                    <span>Purple</span>
+                <div class="color-swatch swatch-gray">
+                    <span class="color-name">Gray</span>
+                    <span class="color-value">#C2C3C7</span>
                 </div>
-                <div class="color-swatch" style="background: var(--pixel-pink);">
-                    <span>Pink</span>
+                <div class="color-swatch swatch-white">
+                    <span class="color-name">White</span>
+                    <span class="color-value">#FFF1E8</span>
+                </div>
+                <div class="color-swatch swatch-red">
+                    <span class="color-name">Red</span>
+                    <span class="color-value">#FF004D</span>
+                </div>
+                <div class="color-swatch swatch-orange">
+                    <span class="color-name">Orange</span>
+                    <span class="color-value">#FFA300</span>
+                </div>
+                <div class="color-swatch swatch-yellow">
+                    <span class="color-name">Yellow</span>
+                    <span class="color-value">#FFEC27</span>
+                </div>
+                <div class="color-swatch swatch-lime">
+                    <span class="color-name">Lime</span>
+                    <span class="color-value">#00E436</span>
+                </div>
+                <div class="color-swatch swatch-cyan">
+                    <span class="color-name">Cyan</span>
+                    <span class="color-value">#29ADFF</span>
+                </div>
+                <div class="color-swatch swatch-lavender">
+                    <span class="color-name">Lavender</span>
+                    <span class="color-value">#83769C</span>
+                </div>
+                <div class="color-swatch swatch-pink">
+                    <span class="color-name">Pink</span>
+                    <span class="color-value">#FF77A8</span>
+                </div>
+                <div class="color-swatch swatch-peach">
+                    <span class="color-name">Peach</span>
+                    <span class="color-value">#FFCCAA</span>
                 </div>
             </div>
         </section>
 
         <!-- Typography -->
-        <section>
-            <h2>Typography</h2>
-            <div class="type-sample">
-                <h3>Display - Press Start 2P</h3>
-                <p class="display-text">GAME OVER</p>
+        <section id="typography">
+            <h2>TYPOGRAPHY</h2>
+            <div class="type-specimen">
+                <h3>Press Start 2P</h3>
+                <p class="font-name">Display Font - Authentic 8-bit arcade text</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">DISP</span>
+                        <span class="display-text">GAME OVER</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">HEAD</span>
+                        <span class="heading-text">INSERT COIN</span>
+                    </div>
+                </div>
             </div>
-            <div class="type-sample">
-                <h3>Body - VT323</h3>
-                <p class="body-text">Welcome, brave adventurer! Your quest begins in the pixelated realm of 8-bit glory. Collect coins, defeat enemies, and save the kingdom from the forces of darkness!</p>
+            <div class="type-specimen">
+                <h3 style="font-family: var(--font-body); color: var(--pixel-cyan);">Silkscreen</h3>
+                <p class="font-name">Body Font - Readable pixel-perfect text</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">BODY</span>
+                        <span class="body-text">Player 1 has entered the game. Ready?</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">SMALL</span>
+                        <span class="small-text">Press any key to continue...</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Spacing Scale -->
-        <section>
-            <h2>Spacing Scale</h2>
-            <div class="spacing-demo">
-                <div class="spacing-block" style="width: 24px; height: 24px;">4</div>
-                <div class="spacing-block" style="width: 32px; height: 32px;">8</div>
-                <div class="spacing-block" style="width: 48px; height: 48px;">16</div>
-                <div class="spacing-block" style="width: 64px; height: 64px;">24</div>
-                <div class="spacing-block" style="width: 80px; height: 80px;">32</div>
-                <div class="spacing-block" style="width: 96px; height: 96px;">48</div>
+        <section id="spacing">
+            <h2>SPACING SCALE</h2>
+            <p style="margin-bottom: var(--space-3); font-size: 12px; color: var(--pixel-lavender);">8-pixel grid system for crisp alignment.</p>
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="height: 16px;"></div>
+                    <span class="spacing-label">1</span>
+                    <span class="spacing-value">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="height: 32px;"></div>
+                    <span class="spacing-label">2</span>
+                    <span class="spacing-value">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="height: 48px;"></div>
+                    <span class="spacing-label">3</span>
+                    <span class="spacing-value">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="height: 64px;"></div>
+                    <span class="spacing-label">4</span>
+                    <span class="spacing-value">32px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="height: 80px;"></div>
+                    <span class="spacing-label">5</span>
+                    <span class="spacing-value">40px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="height: 96px;"></div>
+                    <span class="spacing-label">6</span>
+                    <span class="spacing-value">48px</span>
+                </div>
             </div>
         </section>
 
         <!-- Buttons -->
-        <section>
-            <h2>Buttons</h2>
+        <section id="buttons">
+            <h2>BUTTONS</h2>
             <div class="button-grid">
-                <button class="btn btn-primary">Start</button>
-                <button class="btn btn-secondary">Continue</button>
-                <button class="btn btn-tertiary">Options</button>
+                <button class="btn btn-primary">START</button>
+                <button class="btn btn-secondary">SELECT</button>
+                <button class="btn btn-success">1UP</button>
+                <button class="btn btn-warning">PAUSE</button>
+            </div>
+            <div class="button-grid">
+                <button class="btn btn-primary" disabled style="opacity: 0.5; cursor: not-allowed;">LOCKED</button>
+                <button class="btn btn-secondary" style="font-size: 8px; padding: var(--space-1) var(--space-2);">MINI</button>
             </div>
         </section>
 
         <!-- Forms -->
-        <section>
-            <h2>Forms</h2>
-            <div class="form-group">
-                <label>Player Name</label>
-                <input type="text" placeholder="ENTER NAME..." maxlength="8">
-            </div>
-            <div class="form-group">
-                <label>High Score Email</label>
-                <input type="email" placeholder="YOUR@EMAIL.COM">
-            </div>
-            <div class="form-group">
-                <label>Message</label>
-                <textarea placeholder="TYPE YOUR MESSAGE..."></textarea>
-            </div>
-            <button class="btn btn-primary">Submit</button>
+        <section id="forms">
+            <h2>FORMS</h2>
+            <form onsubmit="return false;" style="max-width: 400px;">
+                <div class="form-group">
+                    <label class="form-label">PLAYER NAME</label>
+                    <input type="text" class="form-input" placeholder="AAA" maxlength="3">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">DIFFICULTY</label>
+                    <select class="form-input form-select">
+                        <option>SELECT LEVEL</option>
+                        <option>EASY</option>
+                        <option>NORMAL</option>
+                        <option>HARD</option>
+                        <option>NIGHTMARE</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">MESSAGE</label>
+                    <textarea class="form-input" placeholder="Enter message..."></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="form-checkbox-group">
+                        <input type="checkbox" class="form-checkbox" id="sound" checked>
+                        <label for="sound" style="font-size: 12px;">SOUND ON</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">SUBMIT</button>
+            </form>
         </section>
 
         <!-- Cards -->
-        <section>
-            <h2>Cards</h2>
+        <section id="cards">
+            <h2>CARDS</h2>
             <div class="card-grid">
                 <div class="card">
-                    <div class="card-image">⚔️</div>
+                    <div class="card-image"></div>
                     <div class="card-content">
-                        <h4 class="card-title">Sword</h4>
-                        <p class="card-text">ATK +10</p>
+                        <h3 class="card-title">SPACE INVADERS</h3>
+                        <p class="card-text">Defend Earth from waves of descending alien invaders.</p>
+                        <div class="card-meta">
+                            <span>⭐</span>
+                            <span>CLASSIC • 1978</span>
+                        </div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-image">🛡️</div>
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--pixel-red), var(--pixel-orange), var(--pixel-yellow));"></div>
                     <div class="card-content">
-                        <h4 class="card-title">Shield</h4>
-                        <p class="card-text">DEF +8</p>
+                        <h3 class="card-title">PAC-MAN</h3>
+                        <p class="card-text">Navigate mazes, eat dots, and avoid colorful ghosts.</p>
+                        <div class="card-meta">
+                            <span>⭐</span>
+                            <span>ARCADE • 1980</span>
+                        </div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-image">🧪</div>
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--pixel-cyan), var(--pixel-lime), var(--pixel-green));"></div>
                     <div class="card-content">
-                        <h4 class="card-title">Potion</h4>
-                        <p class="card-text">HP +50</p>
+                        <h3 class="card-title">TETRIS</h3>
+                        <p class="card-text">Stack falling blocks to clear lines and score points.</p>
+                        <div class="card-meta">
+                            <span>⭐</span>
+                            <span>PUZZLE • 1984</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Data Table -->
-        <section>
-            <h2>Data Table</h2>
+        <section id="table">
+            <h2>DATA TABLE</h2>
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th>Rank</th>
-                            <th>Name</th>
-                            <th>Score</th>
-                            <th>Level</th>
+                            <th>GAME</th>
+                            <th>GENRE</th>
+                            <th>YEAR</th>
+                            <th>STATUS</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1ST</td>
-                            <td>AAA</td>
-                            <td>999999</td>
-                            <td><span class="badge badge-yellow">MAX</span></td>
+                            <td>MEGA MAN</td>
+                            <td>ACTION</td>
+                            <td>1987</td>
+                            <td><span class="status-active">ACTIVE</span></td>
                         </tr>
                         <tr>
-                            <td>2ND</td>
-                            <td>BOB</td>
-                            <td>850000</td>
-                            <td><span class="badge badge-green">42</span></td>
+                            <td>ZELDA</td>
+                            <td>ADVENTURE</td>
+                            <td>1986</td>
+                            <td><span class="status-active">ACTIVE</span></td>
                         </tr>
                         <tr>
-                            <td>3RD</td>
-                            <td>CAT</td>
-                            <td>720000</td>
-                            <td><span class="badge badge-cyan">38</span></td>
+                            <td>CASTLEVANIA</td>
+                            <td>PLATFORMER</td>
+                            <td>1986</td>
+                            <td><span class="status-pending">LOADING</span></td>
+                        </tr>
+                        <tr>
+                            <td>CONTRA</td>
+                            <td>SHOOTER</td>
+                            <td>1987</td>
+                            <td><span class="status-pending">LOADING</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -917,133 +1209,148 @@
         </section>
 
         <!-- Badges -->
-        <section>
-            <h2>Badges & Tags</h2>
+        <section id="badges">
+            <h2>BADGES & TAGS</h2>
             <div class="badge-grid">
-                <span class="badge badge-red">Boss</span>
-                <span class="badge badge-green">1-UP</span>
-                <span class="badge badge-yellow">Star</span>
-                <span class="badge badge-cyan">Save</span>
+                <span class="badge badge-red">♥ LIVES</span>
+                <span class="badge badge-green">✓ CLEAR</span>
+                <span class="badge badge-blue">★ BONUS</span>
+                <span class="badge badge-yellow">⚡ POWER</span>
+                <span class="badge badge-purple">◆ RARE</span>
+                <span class="badge badge-outline">NEW</span>
             </div>
         </section>
 
         <!-- Design Principles -->
-        <section>
-            <h2>Design Principles</h2>
+        <section id="principles">
+            <h2>DESIGN PRINCIPLES</h2>
             <div class="principles-grid">
-                <div class="principle">
-                    <span class="principle-icon">🎮</span>
-                    <h4 class="principle-title">Constraints</h4>
-                    <p class="principle-text">Limited palette creates cohesion</p>
+                <div class="principle-card">
+                    <div class="principle-icon">🎮</div>
+                    <h3 class="principle-title">8-BIT GRID</h3>
+                    <p class="principle-text">Everything aligns to an 8-pixel grid for authentic retro feel.</p>
                 </div>
-                <div class="principle">
-                    <span class="principle-icon">📐</span>
-                    <h4 class="principle-title">Grid-Based</h4>
-                    <p class="principle-text">Everything aligns to 8px</p>
+                <div class="principle-card">
+                    <div class="principle-icon">🎨</div>
+                    <h3 class="principle-title">LIMITED PALETTE</h3>
+                    <p class="principle-text">Use only 16 colors for that classic hardware constraint.</p>
                 </div>
-                <div class="principle">
-                    <span class="principle-icon">✨</span>
-                    <h4 class="principle-title">Clarity</h4>
-                    <p class="principle-text">Simple shapes, clear meaning</p>
+                <div class="principle-card">
+                    <div class="principle-icon">⚡</div>
+                    <h3 class="principle-title">STEP ANIMATIONS</h3>
+                    <p class="principle-text">Animations use steps() for choppy, authentic movement.</p>
                 </div>
-                <div class="principle">
-                    <span class="principle-icon">🕹️</span>
-                    <h4 class="principle-title">Fun</h4>
-                    <p class="principle-text">Nostalgia meets usability</p>
+                <div class="principle-card">
+                    <div class="principle-icon">📺</div>
+                    <h3 class="principle-title">CRISP EDGES</h3>
+                    <p class="principle-text">No anti-aliasing. Every pixel is intentional and sharp.</p>
                 </div>
             </div>
         </section>
 
         <!-- Animations -->
-        <section>
-            <h2>Animations</h2>
-            <div class="animation-grid">
-                <div>
-                    <h3>Walk</h3>
-                    <div class="animation-demo">
-                        <div class="walk-demo"></div>
-                    </div>
+        <section id="animations">
+            <h2>ANIMATION & MICRO-INTERACTIONS</h2>
+            <div class="animation-showcase">
+                <div class="animation-demo walk-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">WALK</span>
                 </div>
-                <div>
-                    <h3>Jump</h3>
-                    <div class="animation-demo">
-                        <div class="jump-demo"></div>
-                    </div>
+                <div class="animation-demo jump-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">JUMP</span>
                 </div>
-                <div>
-                    <h3>Spin</h3>
-                    <div class="animation-demo">
-                        <div class="spin-demo"></div>
-                    </div>
+                <div class="animation-demo flash-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">FLASH</span>
+                </div>
+                <div class="animation-demo spin-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">SPIN</span>
                 </div>
             </div>
         </section>
 
-        <!-- Special Component: Game HUD -->
-        <section>
-            <h2>Special Component: Game HUD</h2>
-            <div class="game-hud">
-                <div class="hud-top">
-                    <div class="hud-score">
-                        <span class="label">SCORE:</span>
-                        <span class="value">0012450</span>
-                    </div>
-                    <div class="hud-lives">
-                        <span class="heart">♥</span>
-                        <span class="heart">♥</span>
-                        <span class="heart empty">♥</span>
-                    </div>
+        <!-- Special Component: High Score Board -->
+        <section id="special">
+            <h2>SPECIAL COMPONENT</h2>
+            <p style="margin-bottom: var(--space-3); font-size: 12px; color: var(--pixel-lavender);">High Score Board - Classic arcade leaderboard with coin animation.</p>
+            <div class="highscore-board">
+                <div class="highscore-header">
+                    <div class="highscore-title">HIGH SCORES</div>
+                    <div class="highscore-subtitle">TOP PLAYERS</div>
                 </div>
-                <div class="hud-stats">
-                    <div class="stat">
-                        <div class="stat-icon">❤️</div>
-                        <div class="stat-bar">
-                            <div class="stat-fill hp"></div>
-                        </div>
-                        <div class="stat-label">HP</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-icon">💧</div>
-                        <div class="stat-bar">
-                            <div class="stat-fill mp"></div>
-                        </div>
-                        <div class="stat-label">MP</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-icon">⭐</div>
-                        <div class="stat-bar">
-                            <div class="stat-fill xp"></div>
-                        </div>
-                        <div class="stat-label">XP</div>
-                    </div>
+                <ul class="highscore-list">
+                    <li class="highscore-item top-1">
+                        <span class="highscore-rank">1ST</span>
+                        <span class="highscore-name">ACE</span>
+                        <span class="highscore-score">999,999</span>
+                    </li>
+                    <li class="highscore-item">
+                        <span class="highscore-rank">2ND</span>
+                        <span class="highscore-name">MAX</span>
+                        <span class="highscore-score">875,420</span>
+                    </li>
+                    <li class="highscore-item">
+                        <span class="highscore-rank">3RD</span>
+                        <span class="highscore-name">ZAP</span>
+                        <span class="highscore-score">654,321</span>
+                    </li>
+                    <li class="highscore-item">
+                        <span class="highscore-rank">4TH</span>
+                        <span class="highscore-name">KID</span>
+                        <span class="highscore-score">543,210</span>
+                    </li>
+                    <li class="highscore-item">
+                        <span class="highscore-rank">5TH</span>
+                        <span class="highscore-name">PRO</span>
+                        <span class="highscore-score">432,100</span>
+                    </li>
+                </ul>
+                <div class="highscore-coins">
+                    <div class="coin"></div>
+                    <div class="coin" style="animation-delay: 0.2s;"></div>
+                    <div class="coin" style="animation-delay: 0.4s;"></div>
                 </div>
             </div>
         </section>
 
         <!-- Alerts -->
-        <section>
-            <h2>Alert Messages</h2>
-            <div class="alert alert-info">
-                <span class="alert-icon">💬</span>
-                <span>HINT: Press A to jump over obstacles!</span>
-            </div>
+        <section id="alerts">
+            <h2>ALERT MESSAGES</h2>
             <div class="alert alert-success">
                 <span class="alert-icon">✓</span>
-                <span>LEVEL COMPLETE! +1000 bonus points!</span>
+                <div class="alert-content">
+                    <div class="alert-title">LEVEL COMPLETE!</div>
+                    <p class="alert-text">You cleared all enemies. Bonus points awarded.</p>
+                </div>
+            </div>
+            <div class="alert alert-info">
+                <span class="alert-icon">ℹ</span>
+                <div class="alert-content">
+                    <div class="alert-title">CHECKPOINT</div>
+                    <p class="alert-text">Progress saved. You can continue from here.</p>
+                </div>
             </div>
             <div class="alert alert-warning">
                 <span class="alert-icon">⚠</span>
-                <span>LOW HEALTH! Find a potion quickly!</span>
+                <div class="alert-content">
+                    <div class="alert-title">LOW HEALTH</div>
+                    <p class="alert-text">Find a health pickup before it's too late!</p>
+                </div>
             </div>
             <div class="alert alert-error">
-                <span class="alert-icon">✗</span>
-                <span>GAME OVER! Continue? 9...8...7...</span>
+                <span class="alert-icon">✕</span>
+                <div class="alert-content">
+                    <div class="alert-title">GAME OVER</div>
+                    <p class="alert-text">You ran out of lives. Insert coin to continue.</p>
+                </div>
             </div>
         </section>
 
         <footer>
-            <p class="credits">★ 8-BIT QUEST ★</p>
-            <p>© 1985 PIXEL GAMES INC.</p>
+            <p>★ ARCADE DESIGN SYSTEM ★</p>
+            <p>INSERT COIN TO CONTINUE</p>
         </footer>
     </div>
 </body>

@@ -3,58 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEON//GRID — Cyberpunk Design System</title>
+    <title>Synth — Cyberpunk Style Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Oxanium:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        /* ══════════════════════════════════════════════════════════════════════════
+           SYNTH — CYBERPUNK STYLE GUIDE
+           Neon-drenched dystopia meets high-tech interface design
+           ══════════════════════════════════════════════════════════════════════════ */
+
         :root {
-            --color-void: #0A0A0F;
-            --color-dark: #12121A;
-            --color-surface: #1A1A25;
-            --color-muted: #2A2A3A;
-            --color-neon-pink: #FF00FF;
-            --color-neon-cyan: #00FFFF;
-            --color-neon-yellow: #FFFF00;
-            --color-neon-green: #39FF14;
-            --color-chrome: #C0C0C0;
-            --color-text: #E0E0E0;
+            /* Core Palette */
+            --void: #050508;
+            --abyss: #0A0A0F;
+            --steel: #15151D;
+            --chrome: #252532;
+            --alloy: #3A3A4D;
 
-            --color-success: #39FF14;
-            --color-warning: #FFFF00;
-            --color-error: #FF0040;
-            --color-info: #00FFFF;
+            /* Neon Spectrum */
+            --neon-magenta: #FF0080;
+            --neon-cyan: #00F0FF;
+            --neon-yellow: #FFEA00;
+            --neon-green: #00FF66;
+            --neon-purple: #BF00FF;
+            --neon-orange: #FF6600;
 
-            --font-display: 'Orbitron', sans-serif;
-            --font-mono: 'Share Tech Mono', monospace;
+            /* Text */
+            --text-primary: #EAEAF0;
+            --text-secondary: #9A9AB0;
+            --text-muted: #5A5A70;
 
-            --space-1: 0.25rem;
-            --space-2: 0.5rem;
-            --space-3: 0.75rem;
-            --space-4: 1rem;
-            --space-5: 1.5rem;
-            --space-6: 2rem;
-            --space-7: 3rem;
-            --space-8: 4rem;
+            /* Typography */
+            --font-display: 'Oxanium', sans-serif;
+            --font-body: 'Rajdhani', sans-serif;
+            --font-mono: 'Fira Code', monospace;
 
-            --border-radius: 0;
-            --transition: 0.2s ease;
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            --space-4xl: 6rem;
+
+            /* Effects */
+            --glow-magenta: 0 0 20px rgba(255, 0, 128, 0.5);
+            --glow-cyan: 0 0 20px rgba(0, 240, 255, 0.5);
+            --glow-yellow: 0 0 20px rgba(255, 234, 0, 0.5);
+            --border-glow: 1px solid rgba(0, 240, 255, 0.3);
         }
 
-        * {
+        /* Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: var(--font-mono);
-            background: var(--color-void);
-            color: var(--color-text);
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 400;
             line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--void);
+            overflow-x: hidden;
         }
 
-        /* Scanline effect */
+        /* Scanline Effect */
         body::before {
             content: '';
             position: fixed;
@@ -62,420 +85,540 @@
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
             background: repeating-linear-gradient(
                 0deg,
-                rgba(0, 0, 0, 0.15),
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 2px
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.1) 2px,
+                rgba(0, 0, 0, 0.1) 4px
             );
-            z-index: 10000;
+            pointer-events: none;
+            z-index: 9999;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--space-6);
-        }
-
-        /* Navigation */
-        .nav {
+        /* Grid Background */
+        body::after {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            background: rgba(10, 10, 15, 0.95);
-            border-bottom: 1px solid var(--color-neon-cyan);
-            padding: var(--space-4) var(--space-6);
-            z-index: 1000;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(var(--chrome) 1px, transparent 1px),
+                linear-gradient(90deg, var(--chrome) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: -1;
         }
 
-        .nav-inner {
-            display: flex;
-            justify-content: space-between;
+        /* Navigation */
+        .back-link {
+            position: fixed;
+            top: var(--space-lg);
+            left: var(--space-lg);
+            display: inline-flex;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-brand {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 900;
-            color: var(--color-neon-cyan);
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--steel);
+            color: var(--neon-cyan);
             text-decoration: none;
-            text-shadow: 0 0 10px var(--color-neon-cyan);
-            letter-spacing: 0.1em;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: var(--space-5);
-            list-style: none;
-        }
-
-        .nav-links a {
             font-family: var(--font-display);
-            font-size: 0.75rem;
-            color: var(--color-chrome);
-            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            transition: var(--transition);
+            border: 1px solid var(--neon-cyan);
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            transition: all 0.2s ease;
+            z-index: 1000;
         }
 
-        .nav-links a:hover {
-            color: var(--color-neon-pink);
-            text-shadow: 0 0 10px var(--color-neon-pink);
+        .back-link:hover {
+            background: var(--neon-cyan);
+            color: var(--void);
+            box-shadow: var(--glow-cyan);
         }
 
-        /* Hero */
-        .hero {
-            padding: calc(var(--space-8) * 2) 0 var(--space-8);
+        .back-link::before {
+            content: '◄';
+            font-size: 0.75em;
+        }
+
+        /* Header */
+        header {
+            padding: var(--space-4xl) var(--space-xl) var(--space-3xl);
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100px;
+            background: linear-gradient(180deg, var(--neon-magenta), transparent);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 15vw, 10rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            line-height: 0.9;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+            text-shadow:
+                0 0 10px var(--neon-magenta),
+                0 0 20px var(--neon-magenta),
+                0 0 40px var(--neon-magenta),
+                0 0 80px var(--neon-magenta);
+            position: relative;
+        }
+
+        .logo::after {
+            content: 'SYNTH';
+            position: absolute;
+            left: 4px;
+            top: 4px;
+            color: var(--neon-cyan);
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .tagline {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--neon-cyan);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+        .tagline::before,
+        .tagline::after {
+            content: '//';
+            opacity: 0.5;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-xl);
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: var(--space-3xl);
+            padding: var(--space-2xl);
+            background: var(--abyss);
+            border: 1px solid var(--chrome);
+            position: relative;
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+        }
+
+        section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-magenta), var(--neon-cyan), var(--neon-magenta));
+        }
+
+        section::after {
+            content: '';
+            position: absolute;
+            top: 0;
             right: 0;
-            bottom: 0;
-            background:
-                linear-gradient(90deg, transparent 49%, var(--color-muted) 49%, var(--color-muted) 51%, transparent 51%),
-                linear-gradient(transparent 49%, var(--color-muted) 49%, var(--color-muted) 51%, transparent 51%);
-            background-size: 50px 50px;
-            opacity: 0.3;
+            width: 20px;
+            height: 20px;
+            border-left: 1px solid var(--neon-cyan);
+            border-bottom: 1px solid var(--neon-cyan);
+            transform: rotate(-45deg) translate(7px, -7px);
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-glitch {
+        .section-title {
             font-family: var(--font-display);
-            font-size: 0.75rem;
-            color: var(--color-neon-green);
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            margin-bottom: var(--space-4);
-        }
-
-        .hero h1 {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            line-height: 1;
-            margin-bottom: var(--space-5);
-        }
-
-        .hero h1 .line1 {
-            color: var(--color-neon-cyan);
-            text-shadow: 0 0 30px var(--color-neon-cyan), 0 0 60px var(--color-neon-cyan);
-        }
-
-        .hero h1 .line2 {
-            color: var(--color-neon-pink);
-            text-shadow: 0 0 30px var(--color-neon-pink), 0 0 60px var(--color-neon-pink);
-        }
-
-        .hero p {
-            font-size: 1.125rem;
-            color: var(--color-chrome);
-            max-width: 500px;
-        }
-
-        /* Sections */
-        section {
-            padding: var(--space-8) 0;
-            border-top: 1px solid var(--color-muted);
-        }
-
-        .section-header {
-            margin-bottom: var(--space-6);
-        }
-
-        .section-id {
-            font-family: var(--font-display);
-            font-size: 0.625rem;
-            color: var(--color-neon-pink);
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            margin-bottom: var(--space-2);
-        }
-
-        h2 {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 700;
-            color: var(--color-neon-cyan);
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            letter-spacing: 0.15em;
+            color: var(--neon-cyan);
+            margin-bottom: var(--space-xl);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
         }
 
-        h3 {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--color-chrome);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: var(--space-4);
+        .section-title::before {
+            content: '>';
+            font-family: var(--font-mono);
+            color: var(--neon-magenta);
         }
 
-        p {
-            margin-bottom: var(--space-4);
-            color: var(--color-text);
-        }
-
-        /* Colors */
+        /* ═══════════════════════════════════════════════════════════════════
+           1. COLOR PALETTE
+           ═══════════════════════════════════════════════════════════════════ */
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: var(--space-4);
-        }
-
-        .color-card {
-            border: 1px solid var(--color-muted);
-            background: var(--color-dark);
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: var(--space-md);
         }
 
         .color-swatch {
+            background: var(--steel);
+            border: 1px solid var(--chrome);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .color-swatch:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+            transform: translateY(-4px);
+        }
+
+        .color-preview {
             height: 80px;
             position: relative;
         }
 
-        .color-swatch.neon::after {
+        .color-preview::after {
             content: '';
             position: absolute;
-            inset: 0;
-            box-shadow: inset 0 0 30px currentColor;
-            opacity: 0.5;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.5));
         }
 
         .color-info {
-            padding: var(--space-3);
-            border-top: 1px solid var(--color-muted);
+            padding: var(--space-md);
+            text-align: center;
         }
 
         .color-name {
             font-family: var(--font-display);
             font-size: 0.75rem;
-            color: var(--color-chrome);
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-xs);
         }
 
         .color-hex {
-            font-size: 0.6875rem;
-            color: var(--color-text);
-            opacity: 0.6;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
         }
 
-        /* Typography */
-        .type-showcase {
-            background: var(--color-dark);
-            border: 1px solid var(--color-neon-cyan);
-            padding: var(--space-6);
-            margin-bottom: var(--space-6);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        /* ═══════════════════════════════════════════════════════════════════
+           2. TYPOGRAPHY
+           ═══════════════════════════════════════════════════════════════════ */
+        .type-specimen {
+            margin-bottom: var(--space-xl);
+            padding: var(--space-lg);
+            background: var(--steel);
+            border-left: 3px solid var(--neon-magenta);
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--neon-magenta);
+            margin-bottom: var(--space-sm);
         }
 
         .type-display {
             font-family: var(--font-display);
             font-size: 3rem;
-            font-weight: 900;
-            color: var(--color-neon-cyan);
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            text-shadow: 0 0 20px var(--color-neon-cyan);
-            margin-bottom: var(--space-3);
+            color: var(--text-primary);
+            text-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 1.125rem;
+            font-weight: 400;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            max-width: 60ch;
         }
 
         .type-mono {
-            font-size: 1.25rem;
-            color: var(--color-neon-pink);
+            font-family: var(--font-mono);
+            font-size: 0.9375rem;
+            color: var(--neon-green);
+            background: rgba(0, 255, 102, 0.1);
+            padding: var(--space-md);
+            border-left: 2px solid var(--neon-green);
         }
 
         .type-scale {
             display: flex;
             flex-direction: column;
-            gap: var(--space-4);
+            gap: var(--space-md);
         }
 
-        .type-row {
+        .type-scale-item {
             display: flex;
             align-items: baseline;
-            gap: var(--space-5);
-            padding: var(--space-4);
-            border: 1px solid var(--color-muted);
-            background: var(--color-dark);
+            gap: var(--space-lg);
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--chrome);
         }
 
-        .type-label {
-            width: 80px;
-            font-family: var(--font-display);
-            font-size: 0.625rem;
-            color: var(--color-neon-green);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+        .type-scale-size {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--neon-yellow);
+            min-width: 100px;
         }
 
-        /* Spacing */
-        .spacing-grid {
+        /* ═══════════════════════════════════════════════════════════════════
+           3. SPACING SCALE
+           ═══════════════════════════════════════════════════════════════════ */
+        .spacing-demo {
             display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-4);
-            align-items: flex-end;
+            flex-direction: column;
+            gap: var(--space-md);
         }
 
         .spacing-item {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: var(--space-2);
-        }
-
-        .spacing-box {
-            background: linear-gradient(135deg, var(--color-neon-cyan), var(--color-neon-pink));
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+            gap: var(--space-lg);
         }
 
         .spacing-label {
-            font-size: 0.6875rem;
-            color: var(--color-chrome);
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            min-width: 100px;
         }
 
-        /* Buttons */
-        .button-row {
+        .spacing-bar {
+            height: 20px;
+            background: linear-gradient(90deg, var(--neon-magenta), var(--neon-cyan));
+            position: relative;
+        }
+
+        .spacing-bar::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--text-primary);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           4. BUTTONS
+           ═══════════════════════════════════════════════════════════════════ */
+        .button-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-4);
-            margin-bottom: var(--space-6);
+            gap: var(--space-lg);
+            align-items: flex-start;
         }
 
         .btn {
             font-family: var(--font-display);
-            font-size: 0.75rem;
+            font-size: 0.875rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: var(--space-3) var(--space-5);
+            letter-spacing: 0.15em;
+            padding: var(--space-md) var(--space-xl);
             border: none;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.2s ease;
             position: relative;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            text-decoration: none;
+            display: inline-block;
+            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
         }
 
         .btn-primary {
-            background: var(--color-neon-cyan);
-            color: var(--color-void);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            background: var(--neon-magenta);
+            color: var(--void);
         }
 
         .btn-primary:hover {
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+            box-shadow: var(--glow-magenta), inset 0 0 20px rgba(255,255,255,0.2);
             transform: translateY(-2px);
         }
 
         .btn-secondary {
-            background: var(--color-neon-pink);
-            color: var(--color-void);
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+            background: transparent;
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
         }
 
         .btn-secondary:hover {
-            box-shadow: 0 0 40px rgba(255, 0, 255, 0.8);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--color-neon-cyan);
-            border: 1px solid var(--color-neon-cyan);
-            clip-path: none;
-        }
-
-        .btn-outline:hover {
-            background: var(--color-neon-cyan);
-            color: var(--color-void);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            background: var(--neon-cyan);
+            color: var(--void);
+            box-shadow: var(--glow-cyan);
         }
 
         .btn-ghost {
             background: transparent;
-            color: var(--color-chrome);
-            clip-path: none;
+            color: var(--text-secondary);
+            border: 1px solid var(--alloy);
         }
 
         .btn-ghost:hover {
-            color: var(--color-neon-pink);
-            text-shadow: 0 0 10px var(--color-neon-pink);
+            border-color: var(--text-primary);
+            color: var(--text-primary);
         }
 
-        /* Forms */
+        .btn-danger {
+            background: transparent;
+            color: var(--neon-orange);
+            border: 1px solid var(--neon-orange);
+        }
+
+        .btn-danger:hover {
+            background: var(--neon-orange);
+            color: var(--void);
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.5);
+        }
+
+        .btn[disabled] {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           5. FORMS
+           ═══════════════════════════════════════════════════════════════════ */
         .form-group {
-            margin-bottom: var(--space-5);
+            margin-bottom: var(--space-xl);
         }
 
         .form-label {
             display: block;
             font-family: var(--font-display);
-            font-size: 0.625rem;
+            font-size: 0.75rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: var(--color-neon-green);
-            margin-bottom: var(--space-2);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
         }
 
         .form-input {
             width: 100%;
-            padding: var(--space-3) var(--space-4);
-            font-family: var(--font-mono);
+            max-width: 400px;
+            padding: var(--space-md);
+            font-family: var(--font-body);
             font-size: 1rem;
-            background: var(--color-dark);
-            border: 1px solid var(--color-muted);
-            color: var(--color-text);
-            transition: var(--transition);
+            color: var(--text-primary);
+            background: var(--steel);
+            border: 1px solid var(--chrome);
+            outline: none;
+            transition: all 0.2s ease;
         }
 
         .form-input:focus {
-            outline: none;
-            border-color: var(--color-neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan), inset 0 0 10px rgba(0, 240, 255, 0.1);
         }
 
         .form-input::placeholder {
-            color: var(--color-muted);
+            color: var(--text-muted);
         }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--space-5);
+        .form-input.error {
+            border-color: var(--neon-orange);
+            box-shadow: 0 0 10px rgba(255, 102, 0, 0.3);
         }
 
-        /* Cards */
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%2300F0FF' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 48px;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            cursor: pointer;
+            font-family: var(--font-body);
+        }
+
+        .form-checkbox input {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--chrome);
+            background: var(--steel);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .form-checkbox input:checked {
+            border-color: var(--neon-cyan);
+            background: var(--neon-cyan);
+        }
+
+        .form-checkbox input:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--void);
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           6. CARDS
+           ═══════════════════════════════════════════════════════════════════ */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-5);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
         }
 
         .card {
-            background: var(--color-dark);
-            border: 1px solid var(--color-muted);
-            position: relative;
+            background: var(--steel);
+            border: 1px solid var(--chrome);
             overflow: hidden;
-            transition: var(--transition);
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .card::before {
@@ -485,775 +628,1129 @@
             left: 0;
             right: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--color-neon-cyan), var(--color-neon-pink));
+            background: linear-gradient(90deg, transparent, var(--neon-magenta), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .card:hover {
-            border-color: var(--color-neon-cyan);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            border-color: var(--neon-magenta);
+            transform: translateY(-4px);
         }
 
-        .card-header {
-            padding: var(--space-4);
-            border-bottom: 1px solid var(--color-muted);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .card:hover::before {
+            opacity: 1;
         }
 
-        .card-id {
-            font-family: var(--font-display);
-            font-size: 0.6875rem;
-            color: var(--color-neon-cyan);
-            letter-spacing: 0.1em;
+        .card-image {
+            height: 150px;
+            background: linear-gradient(135deg, var(--neon-magenta) 0%, var(--neon-purple) 50%, var(--neon-cyan) 100%);
+            position: relative;
+            overflow: hidden;
         }
 
-        .card-status {
-            font-family: var(--font-display);
-            font-size: 0.5625rem;
-            padding: var(--space-1) var(--space-2);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .status-online {
-            background: var(--color-neon-green);
-            color: var(--color-void);
-            box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
-        }
-
-        .status-offline {
-            background: var(--color-error);
-            color: var(--color-void);
+        .card-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.2) 2px,
+                rgba(0,0,0,0.2) 4px
+            );
         }
 
         .card-body {
-            padding: var(--space-5);
+            padding: var(--space-lg);
         }
 
         .card-title {
             font-family: var(--font-display);
             font-size: 1.125rem;
-            color: var(--color-chrome);
+            font-weight: 600;
             text-transform: uppercase;
-            margin-bottom: var(--space-2);
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
         }
 
         .card-text {
-            font-size: 0.875rem;
-            color: var(--color-text);
-            opacity: 0.8;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
-        /* Table */
-        .table-wrapper {
+        .card-footer {
+            padding: var(--space-md) var(--space-lg);
+            border-top: 1px solid var(--chrome);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           7. DATA TABLE
+           ═══════════════════════════════════════════════════════════════════ */
+        .table-container {
             overflow-x: auto;
-            border: 1px solid var(--color-muted);
+            border: 1px solid var(--chrome);
         }
 
-        table {
+        .data-table {
             width: 100%;
             border-collapse: collapse;
+            font-family: var(--font-body);
         }
 
-        th {
-            background: var(--color-surface);
-            padding: var(--space-4);
-            text-align: left;
+        .data-table thead {
+            background: var(--steel);
+        }
+
+        .data-table th {
             font-family: var(--font-display);
-            font-size: 0.625rem;
-            color: var(--color-neon-cyan);
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            border-bottom: 1px solid var(--color-neon-cyan);
+            letter-spacing: 0.1em;
+            font-size: 0.75rem;
+            padding: var(--space-md) var(--space-lg);
+            text-align: left;
+            color: var(--neon-cyan);
+            border-bottom: 1px solid var(--chrome);
         }
 
-        td {
-            padding: var(--space-4);
-            border-bottom: 1px solid var(--color-muted);
-            font-size: 0.875rem;
+        .data-table td {
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--chrome);
+            font-size: 0.9375rem;
         }
 
-        tr:hover td {
-            background: rgba(0, 255, 255, 0.05);
+        .data-table tbody tr {
+            transition: background 0.2s ease;
         }
 
-        /* Badges */
-        .badge-group {
+        .data-table tbody tr:hover {
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .table-action {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: var(--space-xs) var(--space-sm);
+            background: transparent;
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .table-action:hover {
+            background: var(--neon-cyan);
+            color: var(--void);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           8. BADGES & TAGS
+           ═══════════════════════════════════════════════════════════════════ */
+        .badge-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-3);
+            gap: var(--space-md);
+            align-items: center;
         }
 
         .badge {
             font-family: var(--font-display);
-            font-size: 0.5625rem;
+            font-size: 0.6875rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: var(--space-1) var(--space-3);
+            letter-spacing: 0.15em;
+            padding: var(--space-xs) var(--space-md);
+            display: inline-block;
         }
 
-        .badge-cyan {
-            background: var(--color-neon-cyan);
-            color: var(--color-void);
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        .badge-primary {
+            background: var(--neon-magenta);
+            color: var(--void);
         }
 
-        .badge-pink {
-            background: var(--color-neon-pink);
-            color: var(--color-void);
-            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
-        }
-
-        .badge-green {
-            background: var(--color-neon-green);
-            color: var(--color-void);
-            box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
-        }
-
-        .badge-yellow {
-            background: var(--color-neon-yellow);
-            color: var(--color-void);
-        }
-
-        .badge-outline {
+        .badge-secondary {
             background: transparent;
-            border: 1px solid var(--color-chrome);
-            color: var(--color-chrome);
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
         }
 
-        /* Principles */
+        .badge-success {
+            background: transparent;
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+        }
+
+        .badge-warning {
+            background: transparent;
+            color: var(--neon-yellow);
+            border: 1px solid var(--neon-yellow);
+        }
+
+        .badge-danger {
+            background: transparent;
+            color: var(--neon-orange);
+            border: 1px solid var(--neon-orange);
+        }
+
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--steel);
+            border: 1px solid var(--chrome);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .tag-dot {
+            width: 6px;
+            height: 6px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           9. DESIGN PRINCIPLES
+           ═══════════════════════════════════════════════════════════════════ */
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-5);
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-xl);
         }
 
         .principle {
-            padding: var(--space-5);
-            background: var(--color-dark);
-            border: 1px solid var(--color-muted);
-            border-left: 3px solid var(--color-neon-pink);
+            padding: var(--space-lg);
+            background: var(--steel);
+            border: 1px solid var(--chrome);
+            position: relative;
         }
+
+        .principle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+        }
+
+        .principle:nth-child(1)::before { background: var(--neon-magenta); }
+        .principle:nth-child(2)::before { background: var(--neon-cyan); }
+        .principle:nth-child(3)::before { background: var(--neon-yellow); }
+        .principle:nth-child(4)::before { background: var(--neon-green); }
 
         .principle-number {
             font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--color-neon-pink);
-            text-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
-            margin-bottom: var(--space-3);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--alloy);
+            line-height: 1;
+            margin-bottom: var(--space-sm);
         }
 
         .principle-title {
             font-family: var(--font-display);
-            font-size: 0.875rem;
-            color: var(--color-chrome);
+            font-size: 1rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: var(--space-2);
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
         }
 
         .principle-text {
-            font-size: 0.875rem;
-            color: var(--color-text);
-            opacity: 0.7;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
-        /* Animations */
-        .animation-grid {
+        /* ═══════════════════════════════════════════════════════════════════
+           10. ANIMATIONS
+           ═══════════════════════════════════════════════════════════════════ */
+        .animation-demos {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: var(--space-4);
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-xl);
         }
 
         .animation-demo {
-            padding: var(--space-5);
-            background: var(--color-dark);
-            border: 1px solid var(--color-muted);
             text-align: center;
+            padding: var(--space-xl);
+            background: var(--steel);
+            border: 1px solid var(--chrome);
         }
 
-        .animation-box {
-            width: 40px;
-            height: 40px;
-            background: var(--color-neon-cyan);
-            margin: 0 auto var(--space-3);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        .animation-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            margin-top: var(--space-md);
+            color: var(--text-muted);
         }
 
-        .demo-glitch:hover .animation-box {
-            animation: glitch 0.3s ease infinite;
-        }
-
-        .demo-flicker:hover .animation-box {
-            animation: flicker 0.5s ease infinite;
-        }
-
-        .demo-scan:hover .animation-box {
-            animation: scan 1s linear infinite;
-        }
-
-        .demo-pulse:hover .animation-box {
-            animation: neonPulse 0.8s ease infinite;
+        /* Glitch Animation */
+        .anim-glitch {
+            width: 60px;
+            height: 60px;
+            background: var(--neon-magenta);
+            margin: 0 auto;
+            position: relative;
+            animation: glitch 2s infinite;
         }
 
         @keyframes glitch {
-            0%, 100% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(2px, -2px); }
-            60% { transform: translate(-2px, -2px); }
-            80% { transform: translate(2px, 2px); }
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-5px, 2px); background: var(--neon-cyan); }
+            94% { transform: translate(5px, -2px); background: var(--neon-yellow); }
+            96% { transform: translate(-3px, -1px); background: var(--neon-magenta); }
+            98% { transform: translate(3px, 1px); }
         }
 
-        @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-            52% { opacity: 1; }
-            54% { opacity: 0.7; }
+        /* Pulse Animation */
+        .anim-pulse {
+            width: 60px;
+            height: 60px;
+            background: transparent;
+            border: 2px solid var(--neon-cyan);
+            margin: 0 auto;
+            animation: pulse 2s ease-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 var(--neon-cyan); }
+            50% { transform: scale(1.1); opacity: 0.7; box-shadow: 0 0 20px var(--neon-cyan); }
+            100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 var(--neon-cyan); }
+        }
+
+        /* Scan Animation */
+        .anim-scan {
+            width: 60px;
+            height: 60px;
+            background: var(--steel);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anim-scan::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--neon-green);
+            box-shadow: 0 0 10px var(--neon-green);
+            animation: scan 2s linear infinite;
         }
 
         @keyframes scan {
-            0% { box-shadow: 0 -40px 20px rgba(0, 255, 255, 0.3); }
-            100% { box-shadow: 0 40px 20px rgba(0, 255, 255, 0.3); }
+            0% { top: 0; }
+            100% { top: 100%; }
         }
 
-        @keyframes neonPulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(0, 255, 255, 0.8), 0 0 60px rgba(255, 0, 255, 0.5); }
+        /* Flicker Animation */
+        .anim-flicker {
+            width: 60px;
+            height: 60px;
+            background: var(--neon-yellow);
+            margin: 0 auto;
+            animation: flicker 3s infinite;
         }
 
-        .animation-name {
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+            20%, 24%, 55% { opacity: 0.4; }
+        }
+
+        /* Data Stream Animation */
+        .anim-stream {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+            background: repeating-linear-gradient(
+                0deg,
+                var(--neon-green) 0px,
+                var(--neon-green) 2px,
+                transparent 2px,
+                transparent 8px
+            );
+            animation: stream 1s linear infinite;
+        }
+
+        @keyframes stream {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 20px; }
+        }
+
+        /* Rotate Animation */
+        .anim-rotate {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+            border: 2px solid var(--neon-purple);
+            border-top-color: transparent;
+            animation: rotate 1s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           11. SPECIAL COMPONENT: NEURAL INTERFACE
+           ═══════════════════════════════════════════════════════════════════ */
+        .neural-interface {
+            position: relative;
+            padding: var(--space-2xl);
+            background: var(--steel);
+            border: 1px solid var(--neon-cyan);
+            overflow: hidden;
+        }
+
+        .neural-interface::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(0, 240, 255, 0.1) 0%,
+                transparent 30%,
+                transparent 70%,
+                rgba(255, 0, 128, 0.1) 100%
+            );
+            pointer-events: none;
+        }
+
+        .neural-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(var(--chrome) 1px, transparent 1px),
+                linear-gradient(90deg, var(--chrome) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .neural-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .neural-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .neural-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--neon-magenta), var(--neon-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            color: var(--void);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .neural-title {
             font-family: var(--font-display);
-            font-size: 0.625rem;
-            color: var(--color-chrome);
+            font-size: 2rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.1em;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
         }
 
-        /* Special: Terminal */
-        .terminal {
-            background: var(--color-void);
-            border: 1px solid var(--color-neon-green);
-            box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
-        }
-
-        .terminal-header {
-            background: var(--color-dark);
-            padding: var(--space-3) var(--space-4);
-            border-bottom: 1px solid var(--color-muted);
-            display: flex;
-            gap: var(--space-2);
-        }
-
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .terminal-dot.red { background: #FF5F56; }
-        .terminal-dot.yellow { background: #FFBD2E; }
-        .terminal-dot.green { background: #27CA40; }
-
-        .terminal-body {
-            padding: var(--space-5);
+        .neural-subtitle {
+            font-family: var(--font-mono);
             font-size: 0.875rem;
-            line-height: 1.8;
+            color: var(--text-muted);
         }
 
-        .terminal-line {
-            margin-bottom: var(--space-2);
+        .neural-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
         }
 
-        .terminal-prompt {
-            color: var(--color-neon-green);
+        .neural-stat {
+            text-align: center;
+            padding: var(--space-lg);
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid var(--chrome);
         }
 
-        .terminal-command {
-            color: var(--color-chrome);
+        .neural-stat-value {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--neon-magenta);
+            text-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
         }
 
-        .terminal-output {
-            color: var(--color-text);
-            opacity: 0.7;
+        .neural-stat-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: var(--space-xs);
         }
 
-        .terminal-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background: var(--color-neon-green);
-            animation: blink 1s step-end infinite;
+        .neural-bar {
+            margin-top: var(--space-xl);
+            height: 4px;
+            background: var(--chrome);
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes blink {
-            50% { opacity: 0; }
+        .neural-bar-fill {
+            height: 100%;
+            width: 75%;
+            background: linear-gradient(90deg, var(--neon-magenta), var(--neon-cyan));
+            box-shadow: 0 0 10px var(--neon-cyan);
+            animation: barPulse 2s ease-in-out infinite;
         }
 
-        /* Alerts */
-        .alert {
-            padding: var(--space-4);
-            margin-bottom: var(--space-4);
-            border-left: 3px solid;
+        @keyframes barPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           12. ALERTS
+           ═══════════════════════════════════════════════════════════════════ */
+        .alerts-grid {
             display: flex;
-            gap: var(--space-3);
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .alert {
+            padding: var(--space-lg);
+            background: var(--steel);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            border-left: 3px solid;
+            position: relative;
+        }
+
+        .alert-icon {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .alert-success {
+            border-color: var(--neon-green);
+            background: rgba(0, 255, 102, 0.05);
+        }
+
+        .alert-success .alert-icon {
+            color: var(--neon-green);
+        }
+
+        .alert-warning {
+            border-color: var(--neon-yellow);
+            background: rgba(255, 234, 0, 0.05);
+        }
+
+        .alert-warning .alert-icon {
+            color: var(--neon-yellow);
+        }
+
+        .alert-error {
+            border-color: var(--neon-orange);
+            background: rgba(255, 102, 0, 0.05);
+        }
+
+        .alert-error .alert-icon {
+            color: var(--neon-orange);
+        }
+
+        .alert-info {
+            border-color: var(--neon-cyan);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .alert-info .alert-icon {
+            color: var(--neon-cyan);
+        }
+
+        .alert-content {
+            flex: 1;
         }
 
         .alert-title {
             font-family: var(--font-display);
-            font-size: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: var(--space-1);
+            margin-bottom: var(--space-xs);
         }
 
         .alert-text {
-            font-size: 0.875rem;
-            margin: 0;
-            opacity: 0.8;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
         }
 
-        .alert-info {
-            background: rgba(0, 255, 255, 0.1);
-            border-color: var(--color-neon-cyan);
+        .alert-close {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.25rem;
+            padding: 0;
+            transition: color 0.2s ease;
         }
-        .alert-info .alert-title { color: var(--color-neon-cyan); }
 
-        .alert-success {
-            background: rgba(57, 255, 20, 0.1);
-            border-color: var(--color-neon-green);
+        .alert-close:hover {
+            color: var(--text-primary);
         }
-        .alert-success .alert-title { color: var(--color-neon-green); }
-
-        .alert-warning {
-            background: rgba(255, 255, 0, 0.1);
-            border-color: var(--color-neon-yellow);
-        }
-        .alert-warning .alert-title { color: var(--color-neon-yellow); }
-
-        .alert-error {
-            background: rgba(255, 0, 64, 0.1);
-            border-color: var(--color-error);
-        }
-        .alert-error .alert-title { color: var(--color-error); }
 
         /* Footer */
         footer {
-            border-top: 1px solid var(--color-neon-cyan);
-            padding: var(--space-7) 0;
-            margin-top: var(--space-8);
             text-align: center;
-            box-shadow: 0 -10px 30px rgba(0, 255, 255, 0.1);
+            padding: var(--space-3xl) var(--space-xl);
+            margin-top: var(--space-4xl);
+            border-top: 1px solid var(--chrome);
+            position: relative;
         }
 
-        .footer-brand {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            color: var(--color-neon-cyan);
-            text-shadow: 0 0 10px var(--color-neon-cyan);
-            letter-spacing: 0.2em;
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-magenta), transparent);
         }
 
         .footer-text {
-            font-size: 0.75rem;
-            color: var(--color-chrome);
-            margin-top: var(--space-2);
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--neon-magenta);
+            text-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
         }
 
+        .footer-sub {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            margin-top: var(--space-sm);
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .form-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.5rem; }
+            .logo {
+                font-size: 3rem;
+                letter-spacing: 0.1em;
+            }
+
+            .section-title {
+                font-size: 1.25rem;
+            }
+
+            .type-display {
+                font-size: 2rem;
+            }
+
+            .neural-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .back-link {
+                top: var(--space-md);
+                left: var(--space-md);
+                padding: var(--space-xs) var(--space-sm);
+                font-size: 0.75rem;
+            }
         }
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <div class="nav-inner">
-            <a href="#" class="nav-brand">NEON//GRID</a>
-            <ul class="nav-links">
-                <li><a href="#colors">Colors</a></li>
-                <li><a href="#type">Typography</a></li>
-                <li><a href="#components">Components</a></li>
-            </ul>
-        </div>
-    </nav>
+    <a href="../index.html" class="back-link">Gallery</a>
 
-    <div class="container">
-        <header class="hero">
-            <div class="hero-content">
-                <div class="hero-glitch">[SYS_INIT] Loading design_matrix...</div>
-                <h1>
-                    <span class="line1">NEON</span><br>
-                    <span class="line2">//GRID</span>
-                </h1>
-                <p>A high-voltage design system for the digital underground. Jack in, tune out, and build the future.</p>
-            </div>
-        </header>
+    <header>
+        <h1 class="logo">Synth</h1>
+        <p class="tagline">Cyberpunk Style Guide</p>
+    </header>
 
-        <!-- Colors -->
+    <main class="container">
+        <!-- 1. Color Palette -->
         <section id="colors">
-            <div class="section-header">
-                <div class="section-id">[01] // Color.Matrix</div>
-                <h2>Color Palette</h2>
-            </div>
-            <p>High-contrast neons against the void. Maximum visibility, zero subtlety.</p>
+            <h2 class="section-title">Color Palette</h2>
             <div class="color-grid">
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-void);"></div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--neon-magenta);"></div>
                     <div class="color-info">
-                        <div class="color-name">Void</div>
-                        <div class="color-hex">#0A0A0F</div>
+                        <div class="color-name">Neon Magenta</div>
+                        <div class="color-hex">#FF0080</div>
                     </div>
                 </div>
-                <div class="color-card">
-                    <div class="color-swatch neon" style="background: var(--color-neon-cyan); color: var(--color-neon-cyan);"></div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--neon-cyan);"></div>
                     <div class="color-info">
                         <div class="color-name">Neon Cyan</div>
-                        <div class="color-hex">#00FFFF</div>
+                        <div class="color-hex">#00F0FF</div>
                     </div>
                 </div>
-                <div class="color-card">
-                    <div class="color-swatch neon" style="background: var(--color-neon-pink); color: var(--color-neon-pink);"></div>
-                    <div class="color-info">
-                        <div class="color-name">Neon Pink</div>
-                        <div class="color-hex">#FF00FF</div>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-swatch neon" style="background: var(--color-neon-green); color: var(--color-neon-green);"></div>
-                    <div class="color-info">
-                        <div class="color-name">Neon Green</div>
-                        <div class="color-hex">#39FF14</div>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-swatch neon" style="background: var(--color-neon-yellow); color: var(--color-neon-yellow);"></div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--neon-yellow);"></div>
                     <div class="color-info">
                         <div class="color-name">Neon Yellow</div>
-                        <div class="color-hex">#FFFF00</div>
+                        <div class="color-hex">#FFEA00</div>
                     </div>
                 </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: var(--color-chrome);"></div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--neon-green);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Neon Green</div>
+                        <div class="color-hex">#00FF66</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--neon-purple);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Neon Purple</div>
+                        <div class="color-hex">#BF00FF</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--void);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Void</div>
+                        <div class="color-hex">#050508</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--steel);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Steel</div>
+                        <div class="color-hex">#15151D</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--chrome);"></div>
                     <div class="color-info">
                         <div class="color-name">Chrome</div>
-                        <div class="color-hex">#C0C0C0</div>
+                        <div class="color-hex">#252532</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Typography -->
-        <section id="type">
-            <div class="section-header">
-                <div class="section-id">[02] // Type.Face</div>
-                <h2>Typography</h2>
+        <!-- 2. Typography -->
+        <section id="typography">
+            <h2 class="section-title">Typography</h2>
+
+            <div class="type-specimen">
+                <div class="type-label">Display — Oxanium</div>
+                <div class="type-display">Neural Link</div>
             </div>
-            <div class="type-showcase">
-                <div class="type-display">ORBITRON</div>
-                <div class="type-mono">Share Tech Mono // System Font</div>
+
+            <div class="type-specimen">
+                <div class="type-label">Body — Rajdhani</div>
+                <p class="type-body">In the neon-drenched streets of the megacity, technology and humanity blur into one. Neural interfaces connect minds to the global network, while towering arcologies cast shadows over the sprawl below. This is the world of high tech and low life.</p>
             </div>
+
+            <div class="type-specimen">
+                <div class="type-label">Monospace — Fira Code</div>
+                <div class="type-mono">const neural = await connect('cortex.link');</div>
+            </div>
+
             <div class="type-scale">
-                <div class="type-row">
-                    <span class="type-label">DISPLAY</span>
-                    <span style="font-family: var(--font-display); font-size: 2rem; font-weight: 900; color: var(--color-neon-cyan);">SYSTEM_ONLINE</span>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">3rem / 48px</span>
+                    <span style="font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Display</span>
                 </div>
-                <div class="type-row">
-                    <span class="type-label">HEADER</span>
-                    <span style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--color-chrome);">NEURAL_INTERFACE</span>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">1.75rem / 28px</span>
+                    <span style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; text-transform: uppercase;">Heading</span>
                 </div>
-                <div class="type-row">
-                    <span class="type-label">BODY</span>
-                    <span style="font-family: var(--font-mono); font-size: 1rem; color: var(--color-text);">The streets find their own uses for things.</span>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">1.125rem / 18px</span>
+                    <span style="font-family: var(--font-body); font-size: 1.125rem;">Body Large</span>
                 </div>
-                <div class="type-row">
-                    <span class="type-label">CODE</span>
-                    <span style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--color-neon-green);">$ ./hack_the_planet.sh --verbose</span>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">1rem / 16px</span>
+                    <span style="font-family: var(--font-body); font-size: 1rem;">Body</span>
                 </div>
-            </div>
-        </section>
-
-        <!-- Spacing -->
-        <section>
-            <div class="section-header">
-                <div class="section-id">[03] // Grid.Space</div>
-                <h2>Spacing Scale</h2>
-            </div>
-            <div class="spacing-grid">
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 4px; height: 4px;"></div>
-                    <span class="spacing-label">4px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 8px; height: 8px;"></div>
-                    <span class="spacing-label">8px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 16px; height: 16px;"></div>
-                    <span class="spacing-label">16px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 24px; height: 24px;"></div>
-                    <span class="spacing-label">24px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 32px; height: 32px;"></div>
-                    <span class="spacing-label">32px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 48px; height: 48px;"></div>
-                    <span class="spacing-label">48px</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-box" style="width: 64px; height: 64px;"></div>
-                    <span class="spacing-label">64px</span>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">0.875rem / 14px</span>
+                    <span style="font-family: var(--font-mono); font-size: 0.875rem;">Mono</span>
                 </div>
             </div>
         </section>
 
-        <!-- Buttons -->
-        <section>
-            <div class="section-header">
-                <div class="section-id">[04] // Input.Actions</div>
-                <h2>Buttons</h2>
-            </div>
-            <h3>Primary Actions</h3>
-            <div class="button-row">
-                <button class="btn btn-primary">JACK IN</button>
-                <button class="btn btn-secondary">OVERRIDE</button>
-                <button class="btn btn-outline">DECRYPT</button>
-                <button class="btn btn-ghost">ABORT</button>
+        <!-- 3. Spacing -->
+        <section id="spacing">
+            <h2 class="section-title">Spacing Scale</h2>
+            <div class="spacing-demo">
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-xs</div>
+                    <div class="spacing-bar" style="width: 4px;"></div>
+                    <span class="spacing-value">0.25rem</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-sm</div>
+                    <div class="spacing-bar" style="width: 8px;"></div>
+                    <span class="spacing-value">0.5rem</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-md</div>
+                    <div class="spacing-bar" style="width: 16px;"></div>
+                    <span class="spacing-value">1rem</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-lg</div>
+                    <div class="spacing-bar" style="width: 24px;"></div>
+                    <span class="spacing-value">1.5rem</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-xl</div>
+                    <div class="spacing-bar" style="width: 32px;"></div>
+                    <span class="spacing-value">2rem</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-2xl</div>
+                    <div class="spacing-bar" style="width: 48px;"></div>
+                    <span class="spacing-value">3rem</span>
+                </div>
             </div>
         </section>
 
-        <!-- Forms -->
-        <section>
-            <div class="section-header">
-                <div class="section-id">[05] // Data.Input</div>
-                <h2>Forms</h2>
+        <!-- 4. Buttons -->
+        <section id="buttons">
+            <h2 class="section-title">Buttons</h2>
+            <div class="button-grid">
+                <button class="btn btn-primary">Primary</button>
+                <button class="btn btn-secondary">Secondary</button>
+                <button class="btn btn-ghost">Ghost</button>
+                <button class="btn btn-danger">Danger</button>
+                <button class="btn btn-primary" disabled>Disabled</button>
             </div>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label class="form-label">User.Handle</label>
-                    <input type="text" class="form-input" placeholder="Enter handle...">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Access.Code</label>
-                    <input type="password" class="form-input" placeholder="••••••••">
-                </div>
-            </div>
-            <button class="btn btn-primary">AUTHENTICATE</button>
         </section>
 
-        <!-- Cards -->
-        <section id="components">
-            <div class="section-header">
-                <div class="section-id">[06] // Data.Cards</div>
-                <h2>Cards</h2>
+        <!-- 5. Forms -->
+        <section id="forms">
+            <h2 class="section-title">Forms</h2>
+
+            <div class="form-group">
+                <label class="form-label">Text Input</label>
+                <input type="text" class="form-input" placeholder="Enter neural ID...">
             </div>
+
+            <div class="form-group">
+                <label class="form-label">Select</label>
+                <select class="form-input form-select">
+                    <option>Select interface</option>
+                    <option>Neural Link v3</option>
+                    <option>Cortex Bridge</option>
+                    <option>Synapse Hub</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Textarea</label>
+                <textarea class="form-input form-textarea" placeholder="Enter message..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Error State</label>
+                <input type="text" class="form-input error" value="Connection failed">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Checkboxes</label>
+                <div style="display: flex; gap: var(--space-lg); flex-wrap: wrap;">
+                    <label class="form-checkbox">
+                        <input type="checkbox" checked>
+                        <span>Neural sync</span>
+                    </label>
+                    <label class="form-checkbox">
+                        <input type="checkbox">
+                        <span>Firewall bypass</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Cards -->
+        <section id="cards">
+            <h2 class="section-title">Cards</h2>
             <div class="card-grid">
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-id">NODE_001</span>
-                        <span class="card-status status-online">ONLINE</span>
-                    </div>
+                <article class="card">
+                    <div class="card-image"></div>
                     <div class="card-body">
-                        <h4 class="card-title">Neural Interface</h4>
-                        <p class="card-text">Direct cortical connection established. Bandwidth: 10TB/s. Latency: 0.3ms.</p>
+                        <h3 class="card-title">Neural Implant</h3>
+                        <p class="card-text">Direct cortex interface enabling seamless connection to the global network.</p>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-id">NODE_002</span>
-                        <span class="card-status status-offline">OFFLINE</span>
+                    <div class="card-footer">
+                        <span class="badge badge-primary">Active</span>
+                        <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Access</button>
                     </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--neon-cyan), var(--neon-green));"></div>
                     <div class="card-body">
-                        <h4 class="card-title">Firewall Breach</h4>
-                        <p class="card-text">ICE detected. Initiating countermeasures. ETA: 12 seconds.</p>
+                        <h3 class="card-title">Data Runner</h3>
+                        <p class="card-text">High-speed data extraction module for corporate infiltration.</p>
                     </div>
-                </div>
+                    <div class="card-footer">
+                        <span class="badge badge-success">Online</span>
+                        <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Deploy</button>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--neon-yellow), var(--neon-orange));"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">ICE Breaker</h3>
+                        <p class="card-text">Advanced intrusion countermeasures bypass system.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge badge-warning">Standby</span>
+                        <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Activate</button>
+                    </div>
+                </article>
             </div>
         </section>
 
-        <!-- Table -->
-        <section>
-            <div class="section-header">
-                <div class="section-id">[07] // Data.Table</div>
-                <h2>Data Table</h2>
-            </div>
-            <div class="table-wrapper">
-                <table>
+        <!-- 7. Data Table -->
+        <section id="table">
+            <h2 class="section-title">Data Table</h2>
+            <div class="table-container">
+                <table class="data-table">
                     <thead>
                         <tr>
-                            <th>Node.ID</th>
-                            <th>Type</th>
+                            <th>Module</th>
                             <th>Status</th>
-                            <th>Uptime</th>
+                            <th>Latency</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="color: var(--color-neon-cyan);">NX-7742</td>
-                            <td>Server</td>
-                            <td><span class="badge badge-green">ACTIVE</span></td>
-                            <td>99.97%</td>
+                            <td>Neural-Core v4.2</td>
+                            <td><span style="color: var(--neon-green);">ONLINE</span></td>
+                            <td>12ms</td>
+                            <td><a href="#" class="table-action">CONFIG</a></td>
                         </tr>
                         <tr>
-                            <td style="color: var(--color-neon-cyan);">NX-7743</td>
-                            <td>Router</td>
-                            <td><span class="badge badge-yellow">WARNING</span></td>
-                            <td>94.21%</td>
+                            <td>Cortex Bridge</td>
+                            <td><span style="color: var(--neon-green);">ONLINE</span></td>
+                            <td>8ms</td>
+                            <td><a href="#" class="table-action">CONFIG</a></td>
                         </tr>
                         <tr>
-                            <td style="color: var(--color-neon-cyan);">NX-7744</td>
-                            <td>Terminal</td>
-                            <td><span class="badge badge-cyan">STANDBY</span></td>
-                            <td>100%</td>
+                            <td>Synapse Hub</td>
+                            <td><span style="color: var(--neon-yellow);">STANDBY</span></td>
+                            <td>—</td>
+                            <td><a href="#" class="table-action">WAKE</a></td>
+                        </tr>
+                        <tr>
+                            <td>ICE Protocol</td>
+                            <td><span style="color: var(--neon-orange);">OFFLINE</span></td>
+                            <td>—</td>
+                            <td><a href="#" class="table-action">BOOT</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Badges -->
-        <section>
-            <div class="section-header">
-                <div class="section-id">[08] // Status.Tags</div>
-                <h2>Badges</h2>
+        <!-- 8. Badges & Tags -->
+        <section id="badges">
+            <h2 class="section-title">Badges & Tags</h2>
+            <div class="badge-grid">
+                <span class="badge badge-primary">Primary</span>
+                <span class="badge badge-secondary">Secondary</span>
+                <span class="badge badge-success">Success</span>
+                <span class="badge badge-warning">Warning</span>
+                <span class="badge badge-danger">Danger</span>
             </div>
-            <div class="badge-group">
-                <span class="badge badge-cyan">ACTIVE</span>
-                <span class="badge badge-pink">PRIORITY</span>
-                <span class="badge badge-green">SECURE</span>
-                <span class="badge badge-yellow">WARNING</span>
-                <span class="badge badge-outline">ARCHIVED</span>
+
+            <div class="badge-grid" style="margin-top: var(--space-xl);">
+                <span class="tag"><span class="tag-dot" style="background: var(--neon-magenta);"></span>neural</span>
+                <span class="tag"><span class="tag-dot" style="background: var(--neon-cyan);"></span>cyber</span>
+                <span class="tag"><span class="tag-dot" style="background: var(--neon-green);"></span>synth</span>
+                <span class="tag"><span class="tag-dot" style="background: var(--neon-yellow);"></span>chrome</span>
             </div>
         </section>
 
-        <!-- Principles -->
-        <section>
-            <div class="section-header">
-                <div class="section-id">[09] // Core.Values</div>
-                <h2>Design Principles</h2>
-            </div>
+        <!-- 9. Design Principles -->
+        <section id="principles">
+            <h2 class="section-title">Design Principles</h2>
             <div class="principles-grid">
                 <div class="principle">
                     <div class="principle-number">01</div>
-                    <h4 class="principle-title">High Contrast</h4>
-                    <p class="principle-text">Neon against void. Maximum visibility in any environment.</p>
+                    <h3 class="principle-title">High Contrast</h3>
+                    <p class="principle-text">Neon colors against dark backgrounds create visual hierarchy and draw attention to critical elements.</p>
                 </div>
                 <div class="principle">
                     <div class="principle-number">02</div>
-                    <h4 class="principle-title">Information Dense</h4>
-                    <p class="principle-text">Every pixel carries data. No wasted space.</p>
+                    <h3 class="principle-title">Sharp Edges</h3>
+                    <p class="principle-text">Angled corners and cut polygons suggest technology and precision, breaking from organic forms.</p>
                 </div>
                 <div class="principle">
                     <div class="principle-number">03</div>
-                    <h4 class="principle-title">Tech Aesthetic</h4>
-                    <p class="principle-text">The interface is the art. Form follows function.</p>
+                    <h3 class="principle-title">Glow Effects</h3>
+                    <p class="principle-text">Neon glows and light bleeding create atmosphere and depth, simulating real neon signage.</p>
                 </div>
                 <div class="principle">
                     <div class="principle-number">04</div>
-                    <h4 class="principle-title">Glitch Ready</h4>
-                    <p class="principle-text">Embrace imperfection. Digital decay is beautiful.</p>
+                    <h3 class="principle-title">Data Density</h3>
+                    <p class="principle-text">Information-rich interfaces with grids, scanlines, and technical overlays enhance the tech aesthetic.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Animations -->
-        <section>
-            <div class="section-header">
-                <div class="section-id">[10] // Motion.FX</div>
-                <h2>Animations</h2>
-            </div>
-            <div class="animation-grid">
-                <div class="animation-demo demo-glitch">
-                    <div class="animation-box"></div>
-                    <div class="animation-name">Glitch</div>
+        <!-- 10. Animations -->
+        <section id="animations">
+            <h2 class="section-title">Animations</h2>
+            <div class="animation-demos">
+                <div class="animation-demo">
+                    <div class="anim-glitch"></div>
+                    <div class="animation-label">Glitch</div>
                 </div>
-                <div class="animation-demo demo-flicker">
-                    <div class="animation-box"></div>
-                    <div class="animation-name">Flicker</div>
+                <div class="animation-demo">
+                    <div class="anim-pulse"></div>
+                    <div class="animation-label">Pulse</div>
                 </div>
-                <div class="animation-demo demo-scan">
-                    <div class="animation-box"></div>
-                    <div class="animation-name">Scan</div>
+                <div class="animation-demo">
+                    <div class="anim-scan"></div>
+                    <div class="animation-label">Scan</div>
                 </div>
-                <div class="animation-demo demo-pulse">
-                    <div class="animation-box"></div>
-                    <div class="animation-name">Pulse</div>
+                <div class="animation-demo">
+                    <div class="anim-flicker"></div>
+                    <div class="animation-label">Flicker</div>
+                </div>
+                <div class="animation-demo">
+                    <div class="anim-stream"></div>
+                    <div class="animation-label">Stream</div>
+                </div>
+                <div class="animation-demo">
+                    <div class="anim-rotate"></div>
+                    <div class="animation-label">Rotate</div>
                 </div>
             </div>
         </section>
 
-        <!-- Special: Terminal -->
-        <section>
-            <div class="section-header">
-                <div class="section-id">[11] // Sys.Terminal</div>
-                <h2>Terminal</h2>
-            </div>
-            <div class="terminal">
-                <div class="terminal-header">
-                    <span class="terminal-dot red"></span>
-                    <span class="terminal-dot yellow"></span>
-                    <span class="terminal-dot green"></span>
-                </div>
-                <div class="terminal-body">
-                    <div class="terminal-line">
-                        <span class="terminal-prompt">root@neon:~$ </span>
-                        <span class="terminal-command">./initialize_grid.sh</span>
+        <!-- 11. Special Component -->
+        <section id="special">
+            <h2 class="section-title">Special Component</h2>
+            <div class="neural-interface">
+                <div class="neural-grid"></div>
+                <div class="neural-content">
+                    <div class="neural-header">
+                        <div class="neural-icon">◆</div>
+                        <div>
+                            <h3 class="neural-title">Neural Interface</h3>
+                            <p class="neural-subtitle">CORTEX://LINK.ACTIVE</p>
+                        </div>
                     </div>
-                    <div class="terminal-line terminal-output">[OK] Neural link established</div>
-                    <div class="terminal-line terminal-output">[OK] Firewall bypassed</div>
-                    <div class="terminal-line terminal-output">[OK] System ready</div>
-                    <div class="terminal-line">
-                        <span class="terminal-prompt">root@neon:~$ </span>
-                        <span class="terminal-cursor"></span>
+                    <div class="neural-stats">
+                        <div class="neural-stat">
+                            <div class="neural-stat-value">98%</div>
+                            <div class="neural-stat-label">Sync Rate</div>
+                        </div>
+                        <div class="neural-stat">
+                            <div class="neural-stat-value">4ms</div>
+                            <div class="neural-stat-label">Latency</div>
+                        </div>
+                        <div class="neural-stat">
+                            <div class="neural-stat-value">2.4TB</div>
+                            <div class="neural-stat-label">Bandwidth</div>
+                        </div>
+                        <div class="neural-stat">
+                            <div class="neural-stat-value">ACTIVE</div>
+                            <div class="neural-stat-label">Status</div>
+                        </div>
+                    </div>
+                    <div class="neural-bar">
+                        <div class="neural-bar-fill"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Alerts -->
-        <section>
-            <div class="section-header">
-                <div class="section-id">[12] // Sys.Alerts</div>
-                <h2>Alert Messages</h2>
-            </div>
-            <div class="alert alert-info">
-                <div>
-                    <div class="alert-title">System Update</div>
-                    <p class="alert-text">New firmware available. Download initiating...</p>
+        <!-- 12. Alerts -->
+        <section id="alerts">
+            <h2 class="section-title">Alert Messages</h2>
+            <div class="alerts-grid">
+                <div class="alert alert-success">
+                    <span class="alert-icon">[✓]</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Connection Established</div>
+                        <p class="alert-text">Neural link synchronized successfully. Data transfer rate optimal.</p>
+                    </div>
+                    <button class="alert-close">×</button>
                 </div>
-            </div>
-            <div class="alert alert-success">
-                <div>
-                    <div class="alert-title">Connection Secure</div>
-                    <p class="alert-text">Encrypted tunnel established. 256-bit AES active.</p>
+
+                <div class="alert alert-warning">
+                    <span class="alert-icon">[!]</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Firewall Detected</div>
+                        <p class="alert-text">Corporate ICE barrier encountered. Bypass protocols initiated.</p>
+                    </div>
+                    <button class="alert-close">×</button>
                 </div>
-            </div>
-            <div class="alert alert-warning">
-                <div>
-                    <div class="alert-title">ICE Detected</div>
-                    <p class="alert-text">Intrusion countermeasures active. Proceed with caution.</p>
+
+                <div class="alert alert-error">
+                    <span class="alert-icon">[X]</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Critical Error</div>
+                        <p class="alert-text">Neural feedback loop detected. Disconnect immediately.</p>
+                    </div>
+                    <button class="alert-close">×</button>
                 </div>
-            </div>
-            <div class="alert alert-error">
-                <div>
-                    <div class="alert-title">Breach Alert</div>
-                    <p class="alert-text">Unauthorized access attempt. Trace initiated.</p>
+
+                <div class="alert alert-info">
+                    <span class="alert-icon">[i]</span>
+                    <div class="alert-content">
+                        <div class="alert-title">System Update</div>
+                        <p class="alert-text">New firmware available for cortex implant. Version 4.2.1.</p>
+                    </div>
+                    <button class="alert-close">×</button>
                 </div>
             </div>
         </section>
-    </div>
+    </main>
 
     <footer>
-        <div class="container">
-            <div class="footer-brand">NEON//GRID</div>
-            <div class="footer-text">Design System v2.0.77 // The Future Is Now</div>
-        </div>
+        <p class="footer-text">Synth Style Guide</p>
+        <p class="footer-sub">//NEON_DREAMS.ENABLED</p>
     </footer>
 </body>
 </html>

@@ -3,32 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cogsworth Industries — Mechanical Design System v1.8.8.9</title>
+    <title>Clockwork — Steampunk Design System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cutive+Mono&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
     <style>
         :root {
-            --brass: #B8860B;
-            --brass-light: #DAA520;
-            --brass-dark: #8B6914;
-            --copper: #B87333;
-            --copper-light: #CD7F32;
+            --brass: #B87333;
+            --brass-light: #CD853F;
+            --brass-dark: #8B5A2B;
+            --copper: #B8860B;
+            --copper-light: #DAA520;
             --bronze: #8C7853;
             --iron: #3D3D3D;
             --steel: #71797E;
             --rust: #8B4513;
             --mahogany: #4A2C2A;
             --leather: #6B4423;
-            --cream: #F5F1E4;
-            --parchment: #EDE4D1;
+            --parchment: #F5E6C8;
+            --cream: #EDE4D1;
             --sepia: #704214;
             --ink: #1C1410;
-            --steam: rgba(255, 255, 255, 0.6);
 
             --font-display: 'Cinzel', serif;
-            --font-body: 'Spectral', serif;
-            --font-mono: 'Cutive Mono', monospace;
+            --font-body: 'Crimson Text', serif;
+            --font-mono: 'Special Elite', monospace;
 
             --space-xs: 4px;
             --space-sm: 8px;
@@ -39,12 +38,8 @@
             --space-3xl: 64px;
             --space-4xl: 96px;
 
-            --border-thin: 1px;
-            --border-medium: 2px;
-            --border-thick: 3px;
-
-            --shadow-brass: 0 0 20px rgba(184, 134, 11, 0.3);
-            --shadow-deep: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --shadow-brass: 0 0 20px rgba(184, 115, 51, 0.4);
+            --shadow-deep: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
         * {
@@ -53,270 +48,230 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             font-family: var(--font-body);
-            font-size: 16px;
+            font-weight: 400;
             line-height: 1.7;
-            background: var(--ink);
-            color: var(--cream);
-            background-image:
-                radial-gradient(ellipse at top, rgba(184, 134, 11, 0.05) 0%, transparent 50%),
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-        }
-
-        ::selection {
-            background: var(--brass);
             color: var(--ink);
+            background: var(--mahogany);
+            font-size: 18px;
         }
 
-        /* Gear Background Animation */
-        .gear-bg {
+        /* Textured background */
+        body::before {
+            content: '';
             position: fixed;
-            width: 300px;
-            height: 300px;
-            opacity: 0.03;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: 0;
-        }
-
-        .gear-bg::before {
-            content: '⚙';
-            font-size: 300px;
-            color: var(--brass);
-            animation: rotate 60s linear infinite;
-        }
-
-        .gear-bg.top-right {
-            top: -100px;
-            right: -100px;
-        }
-
-        .gear-bg.bottom-left {
-            bottom: -100px;
-            left: -100px;
-            animation-direction: reverse;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         /* Navigation */
         .nav {
             position: fixed;
-            top: var(--space-lg);
-            right: var(--space-lg);
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, var(--ink) 0%, var(--mahogany) 100%);
+            padding: var(--space-md) var(--space-2xl);
             z-index: 1000;
             display: flex;
-            flex-direction: column;
-            gap: var(--space-xs);
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--brass);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
-        .nav-link {
-            font-family: var(--font-mono);
-            font-size: 11px;
+        .nav::before,
+        .nav::after {
+            content: '⚙';
             color: var(--brass);
+            font-size: 1.5rem;
+        }
+
+        .nav-brand {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            color: var(--copper-light);
             text-decoration: none;
-            padding: var(--space-sm) var(--space-md);
-            background: rgba(28, 20, 16, 0.9);
-            border: var(--border-thin) solid var(--brass-dark);
-            transition: all 0.3s ease;
+            letter-spacing: 0.15em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-xl);
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--cream);
+            text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 0.1em;
+            transition: color 0.3s;
         }
 
-        .nav-link:hover {
-            background: var(--brass);
-            color: var(--ink);
-            box-shadow: var(--shadow-brass);
+        .nav-links a:hover {
+            color: var(--brass);
         }
 
-        @media (max-width: 768px) {
-            .nav { display: none; }
-        }
-
-        /* Sections */
-        section {
-            padding: var(--space-4xl) var(--space-xl);
-            max-width: 1100px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .section-header {
+        .back-link {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--brass);
+            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: var(--space-md);
-            margin-bottom: var(--space-lg);
-        }
-
-        .section-number {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--brass);
-            padding: var(--space-xs) var(--space-sm);
-            border: var(--border-thin) solid var(--brass-dark);
-        }
-
-        /* Decorative Dividers */
-        .divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-md);
-            margin: var(--space-3xl) 0;
-        }
-
-        .divider-line {
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--brass-dark), transparent);
-        }
-
-        .divider-gear {
-            font-size: 24px;
-            color: var(--brass);
-            animation: rotate 20s linear infinite;
-        }
-
-        /* Typography */
-        h1 {
-            font-family: var(--font-display);
-            font-size: clamp(40px, 8vw, 80px);
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            color: var(--brass-light);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        h2 {
-            font-family: var(--font-display);
-            font-size: clamp(28px, 4vw, 40px);
-            font-weight: 500;
-            letter-spacing: 0.03em;
-            color: var(--brass);
-        }
-
-        h3 {
-            font-family: var(--font-display);
-            font-size: 20px;
-            font-weight: 500;
-            color: var(--copper-light);
-            margin-bottom: var(--space-md);
-        }
-
-        h4 {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--steel);
-            margin-bottom: var(--space-md);
-        }
-
-        p {
-            max-width: 60ch;
-            color: var(--parchment);
-        }
-
-        .lead {
-            font-size: 20px;
-            font-weight: 300;
-            font-style: italic;
-            color: var(--cream);
+            gap: var(--space-sm);
         }
 
         /* Hero */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: var(--space-4xl) var(--space-2xl);
+            padding-top: calc(var(--space-4xl) + 80px);
+            background: linear-gradient(180deg, var(--mahogany) 0%, var(--leather) 50%, var(--mahogany) 100%);
             text-align: center;
             position: relative;
-            padding: var(--space-4xl);
+            z-index: 1;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(184, 134, 11, 0.1) 0%, transparent 70%);
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='28' fill='none' stroke='%23B87333' stroke-width='0.5' opacity='0.1'/%3E%3Ccircle cx='30' cy='30' r='20' fill='none' stroke='%23B87333' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E");
+            background-size: 60px 60px;
         }
 
-        .hero-badge {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hero-gear {
+            font-size: 4rem;
             color: var(--brass);
             margin-bottom: var(--space-lg);
-            padding: var(--space-sm) var(--space-lg);
-            border: var(--border-thin) solid var(--brass-dark);
-            background: rgba(184, 134, 11, 0.1);
+            text-shadow: var(--shadow-brass);
+            animation: rotate-slow 20s linear infinite;
+        }
+
+        @keyframes rotate-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: var(--copper-light);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 40px rgba(184, 115, 51, 0.3);
             margin-bottom: var(--space-lg);
         }
 
-        .hero-tagline {
-            font-family: var(--font-body);
-            font-size: 18px;
-            font-style: italic;
-            color: var(--parchment);
-            max-width: 500px;
+        .hero-subtitle {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--cream);
+            letter-spacing: 0.15em;
             margin-bottom: var(--space-xl);
         }
 
-        .hero-version {
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--cream);
+            max-width: 600px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        /* Main */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: var(--space-3xl) var(--space-2xl);
+            background: var(--parchment);
+            position: relative;
+            z-index: 1;
+            box-shadow: var(--shadow-deep);
+        }
+
+        section {
+            margin-bottom: var(--space-4xl);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-number {
             font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--steel);
+            font-size: 1rem;
+            color: var(--brass);
+            display: block;
+            margin-bottom: var(--space-sm);
         }
 
-        .hero-gears {
-            display: flex;
-            gap: var(--space-sm);
-            margin-top: var(--space-2xl);
-            font-size: 32px;
-            color: var(--brass-dark);
+        h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--sepia);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            position: relative;
+            display: inline-block;
         }
 
-        .hero-gears span:nth-child(1) { animation: rotate 10s linear infinite; }
-        .hero-gears span:nth-child(2) { animation: rotate 8s linear infinite reverse; }
-        .hero-gears span:nth-child(3) { animation: rotate 12s linear infinite; }
+        h2::before,
+        h2::after {
+            content: '—— ⚙ ——';
+            display: block;
+            font-size: 0.75rem;
+            color: var(--brass);
+            margin: var(--space-sm) 0;
+        }
 
-        /* Color Palette */
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            color: var(--mahogany);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-lg);
+        }
+
+        p {
+            margin-bottom: var(--space-md);
+            color: var(--ink);
+        }
+
+        /* Colors */
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: var(--space-md);
-            margin-top: var(--space-xl);
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-lg);
         }
 
         .color-card {
-            background: rgba(0, 0, 0, 0.3);
-            border: var(--border-thin) solid var(--brass-dark);
-            transition: all 0.3s ease;
-        }
-
-        .color-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-brass);
-            border-color: var(--brass);
+            background: var(--cream);
+            border: 3px solid var(--brass);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 4px 4px 0 var(--brass-dark);
         }
 
         .color-swatch {
@@ -325,762 +280,682 @@
         }
 
         .color-swatch::after {
-            content: '⚙';
+            content: '';
             position: absolute;
-            bottom: 8px;
+            top: 8px;
             right: 8px;
-            font-size: 20px;
-            opacity: 0.3;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
         }
 
         .color-info {
             padding: var(--space-md);
-            border-top: var(--border-thin) solid var(--brass-dark);
+            border-top: 2px solid var(--brass);
+            text-align: center;
         }
 
         .color-name {
             font-family: var(--font-display);
-            font-size: 14px;
-            color: var(--cream);
+            font-size: 0.9375rem;
+            color: var(--sepia);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             margin-bottom: var(--space-xs);
         }
 
         .color-hex {
             font-family: var(--font-mono);
-            font-size: 11px;
+            font-size: 0.75rem;
             color: var(--steel);
         }
 
-        /* Typography Specimen */
+        /* Typography */
         .type-specimen {
-            background: linear-gradient(135deg, rgba(74, 44, 42, 0.3), rgba(28, 20, 16, 0.8));
-            border: var(--border-thin) solid var(--brass-dark);
+            margin-bottom: var(--space-2xl);
             padding: var(--space-2xl);
-            margin-top: var(--space-xl);
+            background: linear-gradient(135deg, var(--mahogany) 0%, var(--leather) 100%);
+            border: 4px solid var(--brass);
+            border-radius: 4px;
+            text-align: center;
             position: relative;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.3);
         }
 
-        .type-specimen::before {
-            content: '';
+        /* Corner rivets */
+        .type-specimen::before,
+        .type-specimen::after {
+            content: '●';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--brass-dark), var(--brass), var(--brass-dark));
+            color: var(--copper);
+            font-size: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
+
+        .type-specimen::before { top: 12px; left: 12px; }
+        .type-specimen::after { top: 12px; right: 12px; }
 
         .type-display {
             font-family: var(--font-display);
-            font-size: clamp(32px, 5vw, 48px);
-            font-weight: 600;
-            color: var(--brass-light);
-            margin-bottom: var(--space-lg);
+            font-size: 4rem;
+            color: var(--copper-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: var(--space-md);
         }
 
         .type-body {
             font-family: var(--font-body);
-            font-size: 18px;
-            color: var(--parchment);
-            margin-bottom: var(--space-lg);
-            max-width: 55ch;
+            font-size: 1.25rem;
+            color: var(--cream);
+            font-style: italic;
         }
 
-        .type-mono {
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--cream);
+            border: 2px solid var(--brass);
+            border-left: 6px solid var(--brass);
+        }
+
+        .type-label {
+            width: 100px;
             font-family: var(--font-mono);
-            font-size: 14px;
-            color: var(--brass);
-            padding: var(--space-md);
-            background: rgba(0, 0, 0, 0.3);
-            border-left: var(--border-thick) solid var(--brass-dark);
+            font-size: 0.75rem;
+            color: var(--brass-dark);
+            flex-shrink: 0;
         }
 
-        .font-info {
+        /* Spacing */
+        .spacing-visual {
             display: flex;
             flex-wrap: wrap;
             gap: var(--space-xl);
-            margin-top: var(--space-xl);
-            padding-top: var(--space-xl);
-            border-top: var(--border-thin) solid var(--brass-dark);
-        }
-
-        .font-item {
-            min-width: 180px;
-        }
-
-        .font-label {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--steel);
-            margin-bottom: var(--space-sm);
-        }
-
-        .font-name {
-            font-size: 16px;
-            color: var(--brass);
-        }
-
-        /* Spacing Scale */
-        .spacing-scale {
-            margin-top: var(--space-xl);
+            align-items: flex-end;
+            padding: var(--space-xl);
+            background: linear-gradient(135deg, var(--leather) 0%, var(--mahogany) 100%);
+            border: 3px solid var(--brass);
+            border-radius: 4px;
         }
 
         .spacing-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: var(--space-lg);
-            padding: var(--space-sm) 0;
-            border-bottom: var(--border-thin) solid rgba(184, 134, 11, 0.2);
+            gap: var(--space-sm);
         }
 
-        .spacing-bar {
-            height: 28px;
-            background: linear-gradient(90deg, var(--brass-dark), var(--brass));
-            border: var(--border-thin) solid var(--brass);
-            position: relative;
-        }
-
-        .spacing-bar::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--copper);
+        .spacing-box {
+            background: linear-gradient(135deg, var(--brass) 0%, var(--copper) 100%);
+            border-radius: 2px;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .spacing-label {
             font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--brass);
-            min-width: 70px;
-        }
-
-        .spacing-value {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--steel);
-            min-width: 60px;
+            font-size: 0.75rem;
+            color: var(--cream);
         }
 
         /* Buttons */
         .button-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-xl);
-            margin-top: var(--space-xl);
-        }
-
-        .button-group {
-            display: flex;
-            flex-direction: column;
             gap: var(--space-md);
+            margin-bottom: var(--space-xl);
         }
 
         .btn {
-            font-family: var(--font-display);
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            padding: var(--space-md) var(--space-xl);
-            border: var(--border-medium) solid;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: var(--space-sm);
-            position: relative;
-            overflow: hidden;
+            padding: var(--space-md) var(--space-xl);
+            font-family: var(--font-display);
+            font-size: 0.8125rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 3px solid;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
         }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .btn:hover::before {
-            left: 100%;
+        .btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0 rgba(0,0,0,0.2);
         }
 
         .btn-primary {
-            background: linear-gradient(180deg, var(--brass), var(--brass-dark));
+            background: linear-gradient(180deg, var(--brass) 0%, var(--brass-dark) 100%);
             color: var(--ink);
-            border-color: var(--brass);
+            border-color: var(--brass-dark);
         }
 
         .btn-primary:hover {
-            box-shadow: var(--shadow-brass);
-            transform: translateY(-2px);
+            background: linear-gradient(180deg, var(--copper-light) 0%, var(--copper) 100%);
         }
 
         .btn-secondary {
-            background: transparent;
+            background: linear-gradient(180deg, var(--mahogany) 0%, var(--ink) 100%);
             color: var(--brass);
             border-color: var(--brass);
         }
 
         .btn-secondary:hover {
-            background: var(--brass);
-            color: var(--ink);
+            color: var(--copper-light);
+            border-color: var(--copper-light);
         }
 
-        .btn-copper {
-            background: linear-gradient(180deg, var(--copper), var(--rust));
-            color: var(--cream);
-            border-color: var(--copper);
+        .btn-outline {
+            background: transparent;
+            color: var(--sepia);
+            border-color: var(--sepia);
         }
 
-        .btn-copper:hover {
-            box-shadow: 0 0 20px rgba(184, 115, 51, 0.4);
+        .btn-outline:hover {
+            background: var(--sepia);
+            color: var(--parchment);
         }
 
         .btn-ghost {
             background: transparent;
-            color: var(--steel);
-            border-color: var(--steel);
-            border-style: dashed;
+            color: var(--brass-dark);
+            border-color: transparent;
+            box-shadow: none;
         }
 
         .btn-ghost:hover {
-            border-style: solid;
             color: var(--brass);
-            border-color: var(--brass);
         }
 
-        .btn-sm {
-            padding: var(--space-sm) var(--space-md);
-            font-size: 11px;
-        }
-
-        .btn-lg {
-            padding: var(--space-lg) var(--space-2xl);
-            font-size: 14px;
-        }
-
-        .btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
+        .btn-sm { padding: var(--space-sm) var(--space-md); font-size: 0.75rem; }
+        .btn-lg { padding: var(--space-lg) var(--space-2xl); font-size: 0.9375rem; }
 
         /* Forms */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-xl);
-            margin-top: var(--space-xl);
-        }
-
         .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
         }
 
         .form-label {
-            font-family: var(--font-mono);
-            font-size: 11px;
+            display: block;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--brass);
+            color: var(--sepia);
+            margin-bottom: var(--space-sm);
         }
 
-        .form-input,
-        .form-select,
-        .form-textarea {
-            font-family: var(--font-body);
-            font-size: 15px;
+        .form-input {
+            width: 100%;
             padding: var(--space-md);
-            background: rgba(0, 0, 0, 0.4);
-            border: var(--border-thin) solid var(--brass-dark);
-            color: var(--cream);
-            transition: all 0.3s ease;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            border: 2px solid var(--brass);
+            border-radius: 4px;
+            background: var(--cream);
+            color: var(--ink);
+            transition: all 0.3s;
         }
 
-        .form-input:focus,
-        .form-select:focus,
-        .form-textarea:focus {
+        .form-input:focus {
             outline: none;
-            border-color: var(--brass);
-            box-shadow: 0 0 10px rgba(184, 134, 11, 0.2);
+            border-color: var(--copper);
+            box-shadow: 0 0 10px rgba(184, 115, 51, 0.3);
         }
 
-        .form-input::placeholder,
-        .form-textarea::placeholder {
+        .form-input::placeholder {
             color: var(--steel);
             font-style: italic;
         }
 
-        .form-input.error {
-            border-color: var(--rust);
-        }
-
-        .form-error {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--rust);
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
         }
 
         .form-select {
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23B8860B' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23B87333' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right var(--space-md) center;
             padding-right: var(--space-2xl);
-            cursor: pointer;
         }
 
-        .form-textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-        }
-
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .checkbox-input {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: var(--border-medium) solid var(--brass-dark);
-            background: rgba(0, 0, 0, 0.4);
-            cursor: pointer;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .checkbox-input:checked {
-            background: var(--brass);
-            border-color: var(--brass);
-        }
-
-        .checkbox-input:checked::after {
-            content: '⚙';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 14px;
-            color: var(--ink);
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
         }
 
         /* Cards */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: var(--space-xl);
-            margin-top: var(--space-xl);
         }
 
-        .card {
-            background: linear-gradient(180deg, rgba(74, 44, 42, 0.4), rgba(28, 20, 16, 0.9));
-            border: var(--border-thin) solid var(--brass-dark);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--brass-dark), var(--brass), var(--brass-dark));
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-deep), var(--shadow-brass);
-            border-color: var(--brass);
-        }
-
-        .card-image {
-            height: 160px;
-            background: linear-gradient(135deg, var(--mahogany), var(--ink));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+        .steam-card {
+            background: var(--cream);
+            border: 3px solid var(--brass);
+            border-radius: 4px;
             overflow: hidden;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.15);
+            transition: transform 0.3s;
         }
 
-        .card-image::before {
-            content: '⚙';
-            position: absolute;
-            font-size: 200px;
-            color: rgba(184, 134, 11, 0.05);
-            animation: rotate 30s linear infinite;
+        .steam-card:hover {
+            transform: translateY(-4px);
         }
 
-        .card-icon {
-            font-size: 48px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .card-body {
-            padding: var(--space-xl);
+        .card-header {
+            background: linear-gradient(135deg, var(--mahogany) 0%, var(--leather) 100%);
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 3px solid var(--brass);
         }
 
         .card-title {
             font-family: var(--font-display);
-            font-size: 18px;
-            color: var(--brass-light);
-            margin-bottom: var(--space-sm);
+            font-size: 1.125rem;
+            color: var(--copper-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .card-body {
+            padding: var(--space-lg);
         }
 
         .card-text {
-            font-size: 14px;
-            color: var(--parchment);
-            margin-bottom: var(--space-md);
+            font-size: 0.9375rem;
+            color: var(--ink);
+            font-style: italic;
         }
 
-        .card-footer {
-            padding: var(--space-md) var(--space-xl);
-            border-top: var(--border-thin) solid var(--brass-dark);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* Table */
+        .table-wrapper {
+            border: 3px solid var(--brass);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.15);
         }
 
-        .card-meta {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            color: var(--steel);
-            text-transform: uppercase;
-        }
-
-        /* Data Table */
-        .table-container {
-            overflow-x: auto;
-            margin-top: var(--space-xl);
-            border: var(--border-thin) solid var(--brass-dark);
-        }
-
-        .data-table {
+        table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 14px;
         }
 
-        .data-table thead {
-            background: linear-gradient(90deg, var(--brass-dark), var(--brass), var(--brass-dark));
-        }
-
-        .data-table th {
-            font-family: var(--font-display);
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            color: var(--ink);
-            padding: var(--space-md) var(--space-lg);
+        th {
+            background: linear-gradient(180deg, var(--brass) 0%, var(--brass-dark) 100%);
+            padding: var(--space-md);
             text-align: left;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--ink);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
-        .data-table td {
-            padding: var(--space-md) var(--space-lg);
-            border-bottom: var(--border-thin) solid rgba(184, 134, 11, 0.2);
-            color: var(--parchment);
+        td {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--brass);
+            background: var(--cream);
+            color: var(--ink);
         }
 
-        .data-table tbody tr {
-            transition: all 0.3s ease;
-        }
-
-        .data-table tbody tr:hover {
-            background: rgba(184, 134, 11, 0.1);
+        tr:hover td {
+            background: rgba(184, 115, 51, 0.1);
         }
 
         /* Badges */
-        .badge-grid {
+        .badge-group {
             display: flex;
             flex-wrap: wrap;
             gap: var(--space-md);
-            margin-top: var(--space-md);
         }
 
         .badge {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: var(--space-xs) var(--space-md);
-            border: var(--border-thin) solid;
             display: inline-flex;
             align-items: center;
             gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-md);
+            font-family: var(--font-display);
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 2px solid;
+            border-radius: 4px;
         }
 
         .badge-brass {
             background: var(--brass);
             color: var(--ink);
-            border-color: var(--brass);
+            border-color: var(--brass-dark);
         }
 
         .badge-copper {
             background: var(--copper);
-            color: var(--cream);
+            color: var(--ink);
             border-color: var(--copper);
         }
 
-        .badge-outline {
-            background: transparent;
-            color: var(--brass);
-            border-color: var(--brass);
-        }
-
-        .badge-success {
-            background: #2D5A2D;
+        .badge-iron {
+            background: var(--iron);
             color: var(--cream);
-            border-color: #2D5A2D;
+            border-color: var(--steel);
         }
 
-        .badge-warning {
+        .badge-rust {
             background: var(--rust);
             color: var(--cream);
             border-color: var(--rust);
         }
 
-        .badge-danger {
-            background: #8B0000;
-            color: var(--cream);
-            border-color: #8B0000;
+        .badge-outline {
+            background: transparent;
+            color: var(--sepia);
+            border-color: var(--sepia);
         }
 
         /* Principles */
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: var(--space-lg);
-            margin-top: var(--space-xl);
         }
 
-        .principle {
+        .principle-card {
             padding: var(--space-xl);
-            background: rgba(0, 0, 0, 0.3);
-            border: var(--border-thin) solid var(--brass-dark);
-            border-left: var(--border-thick) solid var(--brass);
-            position: relative;
+            background: var(--cream);
+            border: 3px solid var(--brass);
+            border-radius: 4px;
+            text-align: center;
         }
 
-        .principle::before {
-            content: attr(data-number);
-            font-family: var(--font-display);
-            font-size: 48px;
-            color: var(--brass-dark);
-            position: absolute;
-            top: var(--space-sm);
-            right: var(--space-md);
-            opacity: 0.3;
+        .principle-icon {
+            font-size: 2.5rem;
+            color: var(--brass);
+            margin-bottom: var(--space-md);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
         .principle-title {
             font-family: var(--font-display);
-            font-size: 16px;
-            color: var(--brass-light);
+            font-size: 1rem;
+            color: var(--sepia);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             margin-bottom: var(--space-sm);
         }
 
         .principle-text {
-            font-size: 14px;
-            color: var(--parchment);
+            font-size: 0.9375rem;
+            color: var(--ink);
+            font-style: italic;
         }
 
         /* Animations */
         .animation-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: var(--space-md);
-            margin-top: var(--space-xl);
+            gap: var(--space-lg);
         }
 
         .animation-demo {
-            background: rgba(0, 0, 0, 0.4);
-            border: var(--border-thin) solid var(--brass-dark);
             padding: var(--space-xl);
+            background: linear-gradient(135deg, var(--leather) 0%, var(--mahogany) 100%);
+            border: 3px solid var(--brass);
+            border-radius: 4px;
             text-align: center;
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-md);
         }
 
-        .anim-gear {
-            font-size: 48px;
-            color: var(--brass);
-        }
-
-        .anim-spin .anim-gear {
-            animation: rotate 4s linear infinite;
-        }
-
-        .anim-pulse .anim-gear {
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.7; }
-        }
-
-        .anim-steam .anim-gear {
+        .animation-box {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto var(--space-md);
             position: relative;
         }
 
-        .anim-steam .anim-gear::after {
-            content: '💨';
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            font-size: 20px;
-            animation: steam 2s ease-out infinite;
-        }
-
-        @keyframes steam {
-            0% { opacity: 0; transform: translateY(0) translateX(-50%); }
-            50% { opacity: 1; }
-            100% { opacity: 0; transform: translateY(-30px) translateX(-50%); }
-        }
-
-        .anim-swing .anim-gear {
-            animation: swing 2s ease-in-out infinite;
-            transform-origin: top center;
-        }
-
-        @keyframes swing {
-            0%, 100% { transform: rotate(-10deg); }
-            50% { transform: rotate(10deg); }
-        }
-
-        .animation-label {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--steel);
-        }
-
-        /* Pressure Gauge */
-        .pressure-gauge {
-            margin-top: var(--space-xl);
-            max-width: 400px;
-            background: linear-gradient(135deg, var(--mahogany), var(--ink));
-            border: var(--border-thick) solid var(--brass);
-            border-radius: 50%;
-            padding: var(--space-2xl);
-            position: relative;
-            aspect-ratio: 1;
-            box-shadow: var(--shadow-deep), inset 0 0 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .gauge-inner {
+        .gear-icon {
             width: 100%;
             height: 100%;
-            border: var(--border-medium) solid var(--brass-dark);
-            border-radius: 50%;
+            color: var(--brass);
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .demo-rotate:hover .gear-icon {
+            animation: gear-spin 2s linear infinite;
+        }
+
+        .demo-pulse:hover .gear-icon {
+            animation: gear-pulse 0.5s ease infinite;
+        }
+
+        .demo-tick:hover .gear-icon {
+            animation: gear-tick 0.3s steps(8) infinite;
+        }
+
+        .demo-wobble:hover .gear-icon {
+            animation: gear-wobble 0.5s ease infinite;
+        }
+
+        @keyframes gear-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes gear-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes gear-tick {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes gear-wobble {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .animation-name {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            color: var(--copper-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Special: Gear Widget Card */
+        .gear-widget {
+            max-width: 420px;
+            background: linear-gradient(180deg, var(--mahogany) 0%, var(--leather) 50%, var(--mahogany) 100%);
+            border: 4px solid var(--brass);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-deep), inset 0 0 40px rgba(0,0,0,0.3);
             position: relative;
+        }
+
+        /* Rivets */
+        .gear-widget::before {
+            content: '● ● ● ●';
+            position: absolute;
+            top: 8px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: var(--copper);
+            font-size: 0.75rem;
+            letter-spacing: 2em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .gear-display {
+            padding: var(--space-2xl) var(--space-xl);
+            padding-top: var(--space-2xl);
+            text-align: center;
+            position: relative;
+        }
+
+        .gear-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto var(--space-lg);
+        }
+
+        .main-gear {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            top: 15px;
+            left: 15px;
+            color: var(--brass);
+            filter: drop-shadow(var(--shadow-brass));
+            animation: main-gear-rotate 10s linear infinite;
+        }
+
+        .small-gear {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            color: var(--copper);
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+            animation: small-gear-rotate 5s linear infinite reverse;
+        }
+
+        .small-gear:nth-child(2) { top: -10px; right: -5px; }
+        .small-gear:nth-child(3) { bottom: -10px; left: -5px; }
+
+        @keyframes main-gear-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes small-gear-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .gear-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--copper-light);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .gauge-section {
+            padding: var(--space-lg) var(--space-xl);
+            background: rgba(0,0,0,0.2);
+            border-top: 3px solid var(--brass);
+            border-bottom: 3px solid var(--brass);
+        }
+
+        .gauge {
             display: flex;
             align-items: center;
-            justify-content: center;
-            flex-direction: column;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
         }
 
-        .gauge-needle {
-            position: absolute;
-            width: 4px;
-            height: 40%;
-            background: linear-gradient(180deg, var(--copper), var(--brass));
-            transform-origin: bottom center;
-            animation: needle 4s ease-in-out infinite;
-            bottom: 50%;
-            border-radius: 2px;
-        }
-
-        @keyframes needle {
-            0%, 100% { transform: rotate(-45deg); }
-            50% { transform: rotate(45deg); }
-        }
-
-        .gauge-center {
-            width: 20px;
-            height: 20px;
-            background: var(--brass);
-            border-radius: 50%;
-            position: absolute;
-            box-shadow: 0 0 10px rgba(184, 134, 11, 0.5);
+        .gauge:last-child {
+            margin-bottom: 0;
         }
 
         .gauge-label {
-            font-family: var(--font-display);
-            font-size: 14px;
-            color: var(--brass);
-            position: absolute;
-            bottom: 25%;
-        }
-
-        .gauge-title {
+            width: 80px;
             font-family: var(--font-mono);
-            font-size: 10px;
-            color: var(--steel);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-top: var(--space-md);
-            text-align: center;
+            font-size: 0.75rem;
+            color: var(--cream);
+            flex-shrink: 0;
         }
 
-        /* Alerts */
-        .alert-grid {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-md);
-            margin-top: var(--space-xl);
-        }
-
-        .alert {
-            padding: var(--space-lg);
-            border: var(--border-thin) solid;
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-md);
-            background: rgba(0, 0, 0, 0.4);
+        .gauge-bar {
+            flex: 1;
+            height: 16px;
+            background: var(--ink);
+            border: 2px solid var(--brass);
+            border-radius: 8px;
+            overflow: hidden;
             position: relative;
         }
 
-        .alert::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
+        .gauge-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--brass-dark), var(--brass), var(--copper-light));
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+
+        .gauge-value {
+            width: 50px;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--copper-light);
+            text-align: right;
+        }
+
+        .gear-footer {
+            padding: var(--space-md) var(--space-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .gear-status {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--cream);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #4ADE80;
+            border-radius: 50%;
+            margin-right: var(--space-xs);
+            animation: blink 2s ease infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-lg);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            border: 3px solid;
+            border-radius: 4px;
+            border-left-width: 6px;
         }
 
         .alert-icon {
-            font-size: 20px;
+            width: 24px;
+            height: 24px;
             flex-shrink: 0;
         }
 
@@ -1090,667 +965,553 @@
 
         .alert-title {
             font-family: var(--font-display);
-            font-size: 14px;
+            font-size: 0.9375rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             margin-bottom: var(--space-xs);
         }
 
         .alert-text {
-            font-size: 14px;
-            opacity: 0.9;
+            font-size: 0.9375rem;
+            margin: 0;
+            font-style: italic;
         }
-
-        .alert-success {
-            border-color: #2D5A2D;
-            color: #7CB47C;
-        }
-
-        .alert-success::before { background: #2D5A2D; }
 
         .alert-info {
-            border-color: var(--brass);
-            color: var(--brass-light);
+            background: rgba(113, 121, 126, 0.1);
+            border-color: var(--steel);
         }
+        .alert-info .alert-title { color: var(--steel); }
 
-        .alert-info::before { background: var(--brass); }
+        .alert-success {
+            background: rgba(74, 222, 128, 0.1);
+            border-color: #4ADE80;
+        }
+        .alert-success .alert-title { color: #166534; }
 
         .alert-warning {
-            border-color: var(--copper);
-            color: var(--copper-light);
+            background: rgba(184, 115, 51, 0.1);
+            border-color: var(--brass);
         }
-
-        .alert-warning::before { background: var(--copper); }
+        .alert-warning .alert-title { color: var(--brass-dark); }
 
         .alert-error {
-            border-color: #8B0000;
-            color: #CD5C5C;
+            background: rgba(139, 69, 19, 0.1);
+            border-color: var(--rust);
         }
-
-        .alert-error::before { background: #8B0000; }
+        .alert-error .alert-title { color: var(--rust); }
 
         /* Footer */
         footer {
-            background: linear-gradient(180deg, var(--ink), #0A0806);
-            padding: var(--space-4xl) var(--space-xl);
+            background: linear-gradient(180deg, var(--ink) 0%, var(--mahogany) 100%);
+            padding: var(--space-2xl);
             text-align: center;
-            border-top: var(--border-thin) solid var(--brass-dark);
+            border-top: 4px solid var(--brass);
             position: relative;
+            z-index: 1;
         }
 
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--brass), transparent);
+        .footer-gear {
+            font-size: 2rem;
+            color: var(--brass);
+            margin-bottom: var(--space-md);
         }
-
-        .footer-gears {
-            font-size: 48px;
-            color: var(--brass-dark);
-            margin-bottom: var(--space-lg);
-        }
-
-        .footer-gears span:nth-child(1) { animation: rotate 15s linear infinite; }
-        .footer-gears span:nth-child(2) { animation: rotate 12s linear infinite reverse; }
-        .footer-gears span:nth-child(3) { animation: rotate 18s linear infinite; }
 
         .footer-brand {
             font-family: var(--font-display);
-            font-size: 24px;
-            color: var(--brass-light);
+            font-size: 1.5rem;
+            color: var(--copper-light);
+            letter-spacing: 0.15em;
             margin-bottom: var(--space-sm);
         }
 
-        .footer-tagline {
-            font-family: var(--font-body);
-            font-size: 16px;
-            font-style: italic;
-            color: var(--parchment);
-            margin-bottom: var(--space-xl);
-        }
-
-        .footer-copy {
+        .footer-text {
             font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--steel);
+            font-size: 0.875rem;
+            color: var(--cream);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            section {
-                padding: var(--space-3xl) var(--space-md);
-            }
-
-            .hero {
-                padding: var(--space-3xl) var(--space-md);
-            }
-
-            .button-grid {
-                flex-direction: column;
-            }
-
-            .pressure-gauge {
-                max-width: 280px;
-            }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; letter-spacing: 0.1em; }
+            .type-display { font-size: 2.5rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .gear-container { width: 120px; height: 120px; }
+            .main-gear { width: 90px; height: 90px; }
         }
     </style>
 </head>
 <body>
-    <div class="gear-bg top-right"></div>
-    <div class="gear-bg bottom-left"></div>
-
-    <!-- Navigation -->
     <nav class="nav">
-        <a href="#colors" class="nav-link">Colors</a>
-        <a href="#typography" class="nav-link">Typography</a>
-        <a href="#spacing" class="nav-link">Spacing</a>
-        <a href="#buttons" class="nav-link">Buttons</a>
-        <a href="#forms" class="nav-link">Forms</a>
-        <a href="#cards" class="nav-link">Cards</a>
-        <a href="#tables" class="nav-link">Tables</a>
-        <a href="#badges" class="nav-link">Badges</a>
-        <a href="#principles" class="nav-link">Principles</a>
-        <a href="#animations" class="nav-link">Animations</a>
-        <a href="#gauge" class="nav-link">Gauge</a>
-        <a href="#alerts" class="nav-link">Alerts</a>
+        <a href="../index.html" class="back-link">← RETURN</a>
+        <a href="#" class="nav-brand">Clockwork</a>
+        <ul class="nav-links">
+            <li><a href="#colors">Colors</a></li>
+            <li><a href="#typography">Typography</a></li>
+            <li><a href="#components">Components</a></li>
+            <li><a href="#principles">Principles</a></li>
+        </ul>
     </nav>
 
-    <!-- Hero -->
     <header class="hero">
-        <span class="hero-badge">Est. 1889</span>
-        <h1>Cogsworth Industries</h1>
-        <p class="hero-tagline">"Precision Engineering for the Modern Age"</p>
-        <p class="hero-version">Mechanical Design System v1.8.8.9</p>
-        <div class="hero-gears">
-            <span>⚙</span>
-            <span>⚙</span>
-            <span>⚙</span>
+        <div class="hero-content">
+            <div class="hero-gear">⚙</div>
+            <h1>Clockwork</h1>
+            <p class="hero-subtitle">Steampunk Design System</p>
+            <p>A Victorian industrial aesthetic where brass, gears, and steam power meet digital interfaces. Where the past imagined the future.</p>
         </div>
     </header>
 
-    <div class="divider">
-        <span class="divider-line"></span>
-        <span class="divider-gear">⚙</span>
-        <span class="divider-line"></span>
-    </div>
-
-    <!-- Colors -->
-    <section id="colors">
-        <div class="section-header">
-            <span class="section-number">01</span>
-            <h2>Color Palette</h2>
-        </div>
-        <p class="lead">Metals forged in the foundry — brass, copper, and iron form the backbone of our aesthetic.</p>
-
-        <div class="color-grid">
-            <div class="color-card">
-                <div class="color-swatch" style="background: var(--brass);"></div>
-                <div class="color-info">
-                    <p class="color-name">Brass</p>
-                    <p class="color-hex">#B8860B</p>
-                </div>
-            </div>
-            <div class="color-card">
-                <div class="color-swatch" style="background: var(--copper);"></div>
-                <div class="color-info">
-                    <p class="color-name">Copper</p>
-                    <p class="color-hex">#B87333</p>
-                </div>
-            </div>
-            <div class="color-card">
-                <div class="color-swatch" style="background: var(--bronze);"></div>
-                <div class="color-info">
-                    <p class="color-name">Bronze</p>
-                    <p class="color-hex">#8C7853</p>
-                </div>
-            </div>
-            <div class="color-card">
-                <div class="color-swatch" style="background: var(--iron);"></div>
-                <div class="color-info">
-                    <p class="color-name">Iron</p>
-                    <p class="color-hex">#3D3D3D</p>
-                </div>
-            </div>
-            <div class="color-card">
-                <div class="color-swatch" style="background: var(--steel);"></div>
-                <div class="color-info">
-                    <p class="color-name">Steel</p>
-                    <p class="color-hex">#71797E</p>
-                </div>
-            </div>
-            <div class="color-card">
-                <div class="color-swatch" style="background: var(--mahogany);"></div>
-                <div class="color-info">
-                    <p class="color-name">Mahogany</p>
-                    <p class="color-hex">#4A2C2A</p>
-                </div>
-            </div>
-            <div class="color-card">
-                <div class="color-swatch" style="background: var(--leather);"></div>
-                <div class="color-info">
-                    <p class="color-name">Leather</p>
-                    <p class="color-hex">#6B4423</p>
-                </div>
-            </div>
-            <div class="color-card">
-                <div class="color-swatch" style="background: var(--parchment);"></div>
-                <div class="color-info">
-                    <p class="color-name">Parchment</p>
-                    <p class="color-hex">#EDE4D1</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Typography -->
-    <section id="typography">
-        <div class="section-header">
-            <span class="section-number">02</span>
-            <h2>Typography</h2>
-        </div>
-        <p class="lead">Typefaces befitting the Victorian era — elegant serifs and precise mechanicals.</p>
-
-        <div class="type-specimen">
-            <p class="type-display">Steam & Precision</p>
-            <p class="type-body">In the grand tradition of engineering excellence, every component must serve its purpose with unwavering reliability. The mechanisms of progress turn upon the gears of innovation.</p>
-            <p class="type-mono">SYSTEM.STATUS: OPERATIONAL // PRESSURE: NOMINAL // EFFICIENCY: 98.7%</p>
-
-            <div class="font-info">
-                <div class="font-item">
-                    <p class="font-label">Display</p>
-                    <p class="font-name" style="font-family: var(--font-display);">Cinzel</p>
-                </div>
-                <div class="font-item">
-                    <p class="font-label">Body</p>
-                    <p class="font-name" style="font-family: var(--font-body);">Spectral</p>
-                </div>
-                <div class="font-item">
-                    <p class="font-label">Mechanical</p>
-                    <p class="font-name" style="font-family: var(--font-mono);">Cutive Mono</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Spacing -->
-    <section id="spacing">
-        <div class="section-header">
-            <span class="section-number">03</span>
-            <h2>Spacing Scale</h2>
-        </div>
-        <p class="lead">Measured with precision — every millimeter calculated for optimal composition.</p>
-
-        <div class="spacing-scale">
-            <div class="spacing-item">
-                <span class="spacing-label">XS</span>
-                <div class="spacing-bar" style="width: 4px;"></div>
-                <span class="spacing-value">4px</span>
-            </div>
-            <div class="spacing-item">
-                <span class="spacing-label">SM</span>
-                <div class="spacing-bar" style="width: 8px;"></div>
-                <span class="spacing-value">8px</span>
-            </div>
-            <div class="spacing-item">
-                <span class="spacing-label">MD</span>
-                <div class="spacing-bar" style="width: 16px;"></div>
-                <span class="spacing-value">16px</span>
-            </div>
-            <div class="spacing-item">
-                <span class="spacing-label">LG</span>
-                <div class="spacing-bar" style="width: 24px;"></div>
-                <span class="spacing-value">24px</span>
-            </div>
-            <div class="spacing-item">
-                <span class="spacing-label">XL</span>
-                <div class="spacing-bar" style="width: 32px;"></div>
-                <span class="spacing-value">32px</span>
-            </div>
-            <div class="spacing-item">
-                <span class="spacing-label">2XL</span>
-                <div class="spacing-bar" style="width: 48px;"></div>
-                <span class="spacing-value">48px</span>
-            </div>
-            <div class="spacing-item">
-                <span class="spacing-label">3XL</span>
-                <div class="spacing-bar" style="width: 64px;"></div>
-                <span class="spacing-value">64px</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Buttons -->
-    <section id="buttons">
-        <div class="section-header">
-            <span class="section-number">04</span>
-            <h2>Buttons</h2>
-        </div>
-        <p class="lead">Levers and switches — each actuation triggers the machinery of interaction.</p>
-
-        <div class="button-grid">
-            <div class="button-group">
-                <h4>Variants</h4>
-                <button class="btn btn-primary">Engage</button>
-                <button class="btn btn-secondary">Configure</button>
-                <button class="btn btn-copper">Activate</button>
-                <button class="btn btn-ghost">Inspect</button>
+    <main>
+        <!-- 01. Colors -->
+        <section id="colors">
+            <div class="section-header">
+                <span class="section-number">Chapter I</span>
+                <h2>Color Palette</h2>
             </div>
 
-            <div class="button-group">
-                <h4>Sizes</h4>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--brass);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Brass</div>
+                        <div class="color-hex">#B87333</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--copper);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Copper</div>
+                        <div class="color-hex">#B8860B</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--mahogany);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Mahogany</div>
+                        <div class="color-hex">#4A2C2A</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--parchment);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Parchment</div>
+                        <div class="color-hex">#F5E6C8</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: var(--iron);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Iron</div>
+                        <div class="color-hex">#3D3D3D</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02. Typography -->
+        <section id="typography">
+            <div class="section-header">
+                <span class="section-number">Chapter II</span>
+                <h2>Typography</h2>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-display">Cinzel</div>
+                <div class="type-body">Crimson Text for elegant prose</div>
+            </div>
+
+            <div class="type-scale">
+                <div class="type-row">
+                    <span class="type-label">Display</span>
+                    <span style="font-family: var(--font-display); font-size: 2rem; color: var(--sepia); text-transform: uppercase;">THE DIRIGIBLE</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">Heading</span>
+                    <span style="font-family: var(--font-display); font-size: 1.5rem; color: var(--sepia);">Brass & Steam</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">Body</span>
+                    <span style="font-family: var(--font-body); font-size: 1rem; color: var(--ink);">The great machine hummed with the promise of industry and adventure.</span>
+                </div>
+                <div class="type-row">
+                    <span class="type-label">Mono</span>
+                    <span style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--brass-dark);">PATENT No. 1847-B</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03. Spacing -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">Chapter III</span>
+                <h2>Spacing Scale</h2>
+            </div>
+
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 4px; height: 4px;"></div>
+                    <span class="spacing-label">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 8px; height: 8px;"></div>
+                    <span class="spacing-label">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 16px; height: 16px;"></div>
+                    <span class="spacing-label">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 24px; height: 24px;"></div>
+                    <span class="spacing-label">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 32px; height: 32px;"></div>
+                    <span class="spacing-label">32px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 48px; height: 48px;"></div>
+                    <span class="spacing-label">48px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-box" style="width: 64px; height: 64px;"></div>
+                    <span class="spacing-label">64px</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04. Buttons -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">Chapter IV</span>
+                <h2>Buttons</h2>
+            </div>
+
+            <h3>Actions</h3>
+            <div class="button-grid">
+                <button class="btn btn-primary">⚙ Engage</button>
+                <button class="btn btn-secondary">View Schematics</button>
+                <button class="btn btn-outline">Read More</button>
+                <button class="btn btn-ghost">Dismiss</button>
+            </div>
+
+            <h3>Sizes</h3>
+            <div class="button-grid">
                 <button class="btn btn-primary btn-sm">Small</button>
                 <button class="btn btn-primary">Default</button>
                 <button class="btn btn-primary btn-lg">Large</button>
             </div>
+        </section>
 
-            <div class="button-group">
-                <h4>States</h4>
-                <button class="btn btn-primary">Operational</button>
-                <button class="btn btn-primary" disabled>Disabled</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Forms -->
-    <section id="forms">
-        <div class="section-header">
-            <span class="section-number">05</span>
-            <h2>Forms</h2>
-        </div>
-        <p class="lead">Input mechanisms — gathering data with mechanical precision.</p>
-
-        <div class="form-grid">
-            <div class="form-group">
-                <label class="form-label">Operator Name</label>
-                <input type="text" class="form-input" placeholder="Enter designation...">
+        <!-- 05. Forms -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">Chapter V</span>
+                <h2>Forms</h2>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Telegraph Address</label>
-                <input type="email" class="form-input" placeholder="operator@cogsworth.ind">
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Error State</label>
-                <input type="text" class="form-input error" value="MALFUNCTION">
-                <span class="form-error">⚠ Calibration required</span>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Department</label>
-                <select class="form-select">
-                    <option>Select division...</option>
-                    <option>Boiler Room</option>
-                    <option>Gear Assembly</option>
-                    <option>Steam Generation</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Transmission</label>
-                <textarea class="form-textarea" placeholder="Compose your message..."></textarea>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Protocols</label>
-                <div class="checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" class="checkbox-input" checked>
-                        <span>Safety protocols engaged</span>
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" class="checkbox-input">
-                        <span>Maintenance mode</span>
-                    </label>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Inventor's Name</label>
+                    <input type="text" class="form-input" placeholder="H.G. Wells">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Patent Number</label>
+                    <input type="text" class="form-input" placeholder="1847-B-XXIV">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Machine Type</label>
+                    <select class="form-input form-select">
+                        <option>Select apparatus</option>
+                        <option>Dirigible</option>
+                        <option>Automaton</option>
+                        <option>Difference Engine</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Power Source</label>
+                    <select class="form-input form-select">
+                        <option>Select fuel</option>
+                        <option>Steam</option>
+                        <option>Clockwork</option>
+                        <option>Aether</option>
+                    </select>
                 </div>
             </div>
-        </div>
-    </section>
+            <button class="btn btn-primary">⚙ Submit Patent</button>
+        </section>
 
-    <!-- Cards -->
-    <section id="cards">
-        <div class="section-header">
-            <span class="section-number">06</span>
-            <h2>Cards</h2>
-        </div>
-        <p class="lead">Compartments of information — organized with industrial efficiency.</p>
+        <!-- 06. Cards -->
+        <section id="components">
+            <div class="section-header">
+                <span class="section-number">Chapter VI</span>
+                <h2>Cards</h2>
+            </div>
 
-        <div class="card-grid">
-            <article class="card">
-                <div class="card-image">
-                    <span class="card-icon">⚙️</span>
+            <div class="card-grid">
+                <div class="steam-card">
+                    <div class="card-header">
+                        <div class="card-title">The Aeolipile</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">A remarkable engine harnessing the power of pressurized steam to drive the mechanisms of industry forward.</p>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h3 class="card-title">The Engine Room</h3>
-                    <p class="card-text">Where steam meets steel, and power is born. The heart of every mechanical endeavor.</p>
-                    <button class="btn btn-secondary btn-sm">Inspect</button>
+                <div class="steam-card">
+                    <div class="card-header">
+                        <div class="card-title">The Automaton</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">A mechanical marvel of brass and springs, capable of performing the most intricate tasks with clockwork precision.</p>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <span class="card-meta">Est. 1889</span>
-                    <span class="badge badge-brass">Operational</span>
+            </div>
+        </section>
+
+        <!-- 07. Table -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">Chapter VII</span>
+                <h2>Data Table</h2>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Apparatus</th>
+                            <th>Inventor</th>
+                            <th>Year</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Difference Engine</td>
+                            <td>Charles Babbage</td>
+                            <td>1822</td>
+                            <td><span class="badge badge-brass">Operational</span></td>
+                        </tr>
+                        <tr>
+                            <td>Analytical Engine</td>
+                            <td>Ada Lovelace</td>
+                            <td>1837</td>
+                            <td><span class="badge badge-copper">In Progress</span></td>
+                        </tr>
+                        <tr>
+                            <td>Time Machine</td>
+                            <td>H.G. Wells</td>
+                            <td>1895</td>
+                            <td><span class="badge badge-iron">Theoretical</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 08. Badges -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">Chapter VIII</span>
+                <h2>Badges</h2>
+            </div>
+
+            <div class="badge-group">
+                <span class="badge badge-brass">⚙ Operational</span>
+                <span class="badge badge-copper">⚡ Powered</span>
+                <span class="badge badge-iron">Prototype</span>
+                <span class="badge badge-rust">Deprecated</span>
+                <span class="badge badge-outline">Archived</span>
+            </div>
+        </section>
+
+        <!-- 09. Principles -->
+        <section id="principles">
+            <div class="section-header">
+                <span class="section-number">Chapter IX</span>
+                <h2>Design Principles</h2>
+            </div>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-icon">⚙</div>
+                    <h4 class="principle-title">Mechanism</h4>
+                    <p class="principle-text">Every element serves a function. Decoration emerges from engineering.</p>
                 </div>
-            </article>
-
-            <article class="card">
-                <div class="card-image">
-                    <span class="card-icon">🔧</span>
+                <div class="principle-card">
+                    <div class="principle-icon">🔩</div>
+                    <h4 class="principle-title">Craft</h4>
+                    <p class="principle-text">Handmade quality in every detail. Visible construction celebrates the maker.</p>
                 </div>
-                <div class="card-body">
-                    <h3 class="card-title">Workshop Bay</h3>
-                    <p class="card-text">Where craftsmen shape metal into marvels. Every gear hand-fitted with precision.</p>
-                    <button class="btn btn-secondary btn-sm">Enter</button>
+                <div class="principle-card">
+                    <div class="principle-icon">💨</div>
+                    <h4 class="principle-title">Power</h4>
+                    <p class="principle-text">Steam and clockwork drive progress. Energy made visible and tangible.</p>
                 </div>
-                <div class="card-footer">
-                    <span class="card-meta">Sector B-7</span>
-                    <span class="badge badge-outline">Active</span>
+                <div class="principle-card">
+                    <div class="principle-icon">🎩</div>
+                    <h4 class="principle-title">Elegance</h4>
+                    <p class="principle-text">Victorian refinement meets industrial might. Beauty in brass and leather.</p>
                 </div>
-            </article>
+            </div>
+        </section>
 
-            <article class="card">
-                <div class="card-image">
-                    <span class="card-icon">📜</span>
+        <!-- 10. Animations -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">Chapter X</span>
+                <h2>Animations</h2>
+            </div>
+
+            <div class="animation-grid">
+                <div class="animation-demo demo-rotate">
+                    <div class="animation-box">
+                        <svg class="gear-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+                            <path fill-rule="evenodd" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+                        </svg>
+                    </div>
+                    <div class="animation-name">Rotate</div>
                 </div>
-                <div class="card-body">
-                    <h3 class="card-title">The Archives</h3>
-                    <p class="card-text">Blueprints of genius preserved for posterity. The accumulated wisdom of engineers past.</p>
-                    <button class="btn btn-secondary btn-sm">Browse</button>
+                <div class="animation-demo demo-pulse">
+                    <div class="animation-box">
+                        <svg class="gear-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+                            <path fill-rule="evenodd" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+                        </svg>
+                    </div>
+                    <div class="animation-name">Pulse</div>
                 </div>
-                <div class="card-footer">
-                    <span class="card-meta">Restricted</span>
-                    <span class="badge badge-copper">Classified</span>
+                <div class="animation-demo demo-tick">
+                    <div class="animation-box">
+                        <svg class="gear-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+                            <path fill-rule="evenodd" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+                        </svg>
+                    </div>
+                    <div class="animation-name">Tick</div>
                 </div>
-            </article>
-        </div>
-    </section>
-
-    <!-- Data Table -->
-    <section id="tables">
-        <div class="section-header">
-            <span class="section-number">07</span>
-            <h2>Data Table</h2>
-        </div>
-        <p class="lead">Ledgers of operation — every reading logged and catalogued.</p>
-
-        <div class="table-container">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Component</th>
-                        <th>Serial No.</th>
-                        <th>Pressure</th>
-                        <th>Temperature</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Main Boiler</td>
-                        <td>MB-001-A</td>
-                        <td>150 PSI</td>
-                        <td>212°F</td>
-                        <td><span class="badge badge-success">Nominal</span></td>
-                    </tr>
-                    <tr>
-                        <td>Drive Shaft</td>
-                        <td>DS-042-C</td>
-                        <td>—</td>
-                        <td>98°F</td>
-                        <td><span class="badge badge-success">Nominal</span></td>
-                    </tr>
-                    <tr>
-                        <td>Pressure Valve</td>
-                        <td>PV-103-B</td>
-                        <td>175 PSI</td>
-                        <td>230°F</td>
-                        <td><span class="badge badge-warning">Caution</span></td>
-                    </tr>
-                    <tr>
-                        <td>Auxiliary Pump</td>
-                        <td>AP-007-D</td>
-                        <td>45 PSI</td>
-                        <td>85°F</td>
-                        <td><span class="badge badge-danger">Offline</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- Badges -->
-    <section id="badges">
-        <div class="section-header">
-            <span class="section-number">08</span>
-            <h2>Badges</h2>
-        </div>
-        <p class="lead">Status indicators — communicating state at a glance.</p>
-
-        <h4>Metal Types</h4>
-        <div class="badge-grid">
-            <span class="badge badge-brass">Brass</span>
-            <span class="badge badge-copper">Copper</span>
-            <span class="badge badge-outline">Iron</span>
-        </div>
-
-        <h4 style="margin-top: var(--space-xl);">Operational States</h4>
-        <div class="badge-grid">
-            <span class="badge badge-success">Nominal</span>
-            <span class="badge badge-warning">Caution</span>
-            <span class="badge badge-danger">Critical</span>
-        </div>
-
-        <h4 style="margin-top: var(--space-xl);">Classifications</h4>
-        <div class="badge-grid">
-            <span class="badge badge-outline">Standard</span>
-            <span class="badge badge-outline">Priority</span>
-            <span class="badge badge-outline">Classified</span>
-        </div>
-    </section>
-
-    <!-- Principles -->
-    <section id="principles">
-        <div class="section-header">
-            <span class="section-number">09</span>
-            <h2>Design Principles</h2>
-        </div>
-        <p class="lead">The tenets of our craft — guiding every rivet and weld.</p>
-
-        <div class="principles-grid">
-            <div class="principle" data-number="I">
-                <h3 class="principle-title">Precision Engineering</h3>
-                <p class="principle-text">Every component must fit with exactitude. Tolerance is measured in thousandths.</p>
-            </div>
-
-            <div class="principle" data-number="II">
-                <h3 class="principle-title">Visible Mechanics</h3>
-                <p class="principle-text">Let the workings be seen. Beauty lies in the machinery itself.</p>
-            </div>
-
-            <div class="principle" data-number="III">
-                <h3 class="principle-title">Robust Construction</h3>
-                <p class="principle-text">Build to last generations. Quality materials, masterful craftsmanship.</p>
-            </div>
-
-            <div class="principle" data-number="IV">
-                <h3 class="principle-title">Analog Warmth</h3>
-                <p class="principle-text">The patina of brass, the grain of wood. Embrace natural imperfection.</p>
-            </div>
-
-            <div class="principle" data-number="V">
-                <h3 class="principle-title">Functional Ornament</h3>
-                <p class="principle-text">Decoration should serve purpose. Every flourish has function.</p>
-            </div>
-
-            <div class="principle" data-number="VI">
-                <h3 class="principle-title">Steam-Powered Soul</h3>
-                <p class="principle-text">Infuse life into metal. The hiss and hum of working machinery.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Animations -->
-    <section id="animations">
-        <div class="section-header">
-            <span class="section-number">10</span>
-            <h2>Animations</h2>
-        </div>
-        <p class="lead">Movement and motion — the life force of mechanical systems.</p>
-
-        <div class="animation-grid">
-            <div class="animation-demo anim-spin">
-                <span class="anim-gear">⚙</span>
-                <span class="animation-label">Rotation</span>
-            </div>
-
-            <div class="animation-demo anim-pulse">
-                <span class="anim-gear">⚙</span>
-                <span class="animation-label">Pulse</span>
-            </div>
-
-            <div class="animation-demo anim-steam">
-                <span class="anim-gear">⚙</span>
-                <span class="animation-label">Steam</span>
-            </div>
-
-            <div class="animation-demo anim-swing">
-                <span class="anim-gear">⚙</span>
-                <span class="animation-label">Pendulum</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pressure Gauge -->
-    <section id="gauge">
-        <div class="section-header">
-            <span class="section-number">11</span>
-            <h2>Pressure Gauge</h2>
-        </div>
-        <p class="lead">A signature component — monitoring system vitality.</p>
-
-        <div class="pressure-gauge">
-            <div class="gauge-inner">
-                <div class="gauge-needle"></div>
-                <div class="gauge-center"></div>
-                <span class="gauge-label">PSI</span>
-            </div>
-        </div>
-        <p class="gauge-title">Main Boiler Pressure Indicator</p>
-    </section>
-
-    <!-- Alerts -->
-    <section id="alerts">
-        <div class="section-header">
-            <span class="section-number">12</span>
-            <h2>Alerts</h2>
-        </div>
-        <p class="lead">System notifications — from nominal operation to critical warnings.</p>
-
-        <div class="alert-grid">
-            <div class="alert alert-success">
-                <span class="alert-icon">✓</span>
-                <div class="alert-content">
-                    <p class="alert-title">Systems Nominal</p>
-                    <p class="alert-text">All pressure readings within acceptable parameters. Operations may proceed.</p>
+                <div class="animation-demo demo-wobble">
+                    <div class="animation-box">
+                        <svg class="gear-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+                            <path fill-rule="evenodd" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+                        </svg>
+                    </div>
+                    <div class="animation-name">Wobble</div>
                 </div>
+            </div>
+        </section>
+
+        <!-- 11. Special: Gear Widget -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">Chapter XI</span>
+                <h2>Gear Widget</h2>
+            </div>
+
+            <div class="gear-widget">
+                <div class="gear-display">
+                    <div class="gear-container">
+                        <svg class="main-gear" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+                            <path fill-rule="evenodd" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+                        </svg>
+                        <svg class="small-gear" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+                            <path fill-rule="evenodd" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+                        </svg>
+                        <svg class="small-gear" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+                            <path fill-rule="evenodd" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+                        </svg>
+                    </div>
+                    <h3 class="gear-title">Steam Engine No. 7</h3>
+                </div>
+                <div class="gauge-section">
+                    <div class="gauge">
+                        <span class="gauge-label">PRESSURE</span>
+                        <div class="gauge-bar">
+                            <div class="gauge-fill" style="width: 75%;"></div>
+                        </div>
+                        <span class="gauge-value">75 PSI</span>
+                    </div>
+                    <div class="gauge">
+                        <span class="gauge-label">TEMP</span>
+                        <div class="gauge-bar">
+                            <div class="gauge-fill" style="width: 60%;"></div>
+                        </div>
+                        <span class="gauge-value">180°F</span>
+                    </div>
+                    <div class="gauge">
+                        <span class="gauge-label">OUTPUT</span>
+                        <div class="gauge-bar">
+                            <div class="gauge-fill" style="width: 85%;"></div>
+                        </div>
+                        <span class="gauge-value">850 HP</span>
+                    </div>
+                </div>
+                <div class="gear-footer">
+                    <span class="gear-status"><span class="status-indicator"></span> OPERATIONAL</span>
+                    <span class="gear-status">PATENT 1847-B</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Alerts -->
+        <section>
+            <div class="section-header">
+                <span class="section-number">Chapter XII</span>
+                <h2>Alerts</h2>
             </div>
 
             <div class="alert alert-info">
-                <span class="alert-icon">ℹ</span>
+                <svg class="alert-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
                 <div class="alert-content">
-                    <p class="alert-title">Maintenance Notice</p>
-                    <p class="alert-text">Scheduled inspection of Drive Shaft DS-042-C at 1400 hours.</p>
+                    <div class="alert-title">Mechanical Notice</div>
+                    <p class="alert-text">The difference engine requires calibration before the next operation cycle.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <svg class="alert-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div class="alert-content">
+                    <div class="alert-title">Operation Complete</div>
+                    <p class="alert-text">All gears are properly aligned. The mechanism is functioning at peak efficiency.</p>
                 </div>
             </div>
 
             <div class="alert alert-warning">
-                <span class="alert-icon">⚠</span>
+                <svg class="alert-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
                 <div class="alert-content">
-                    <p class="alert-title">Pressure Elevation</p>
-                    <p class="alert-text">Valve PV-103-B exceeding recommended pressure. Monitor closely.</p>
+                    <div class="alert-title">Pressure Warning</div>
+                    <p class="alert-text">Boiler pressure approaching maximum threshold. Reduce steam input immediately.</p>
                 </div>
             </div>
 
             <div class="alert alert-error">
-                <span class="alert-icon">⛔</span>
+                <svg class="alert-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
                 <div class="alert-content">
-                    <p class="alert-title">Critical Failure</p>
-                    <p class="alert-text">Auxiliary Pump AP-007-D offline. Immediate attention required.</p>
+                    <div class="alert-title">Critical Failure</div>
+                    <p class="alert-text">Main drive shaft has seized. Emergency shutdown initiated. Summon the engineer.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-gears">
-            <span>⚙</span>
-            <span>⚙</span>
-            <span>⚙</span>
-        </div>
-        <p class="footer-brand">Cogsworth Industries</p>
-        <p class="footer-tagline">"Where Steam Meets Ingenuity"</p>
-        <p class="footer-copy">Mechanical Design System v1.8.8.9 · Established 1889</p>
+        <div class="footer-gear">⚙</div>
+        <div class="footer-brand">Clockwork</div>
+        <div class="footer-text">Steampunk Design System — Est. MDCCCXLVII</div>
     </footer>
 </body>
 </html>

@@ -6,7 +6,7 @@
     <title>HTML Style Guides — A Collection of Themed Design Systems</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=Poiret+One&family=Archivo+Black&family=VT323&family=Orbitron:wght@400;700&family=Cormorant+Garamond:wght@400;500&family=Cinzel:wght@500;600&family=Noto+Serif+JP:wght@400;500&family=Space+Mono:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Fredoka:wght@500;600&family=Quicksand:wght@500;600&family=Silkscreen&family=Monoton&family=Comfortaa:wght@500&family=Press+Start+2P&family=Outfit:wght@500&family=Cormorant+Infant:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=Poiret+One&family=Archivo+Black&family=VT323&family=Orbitron:wght@400;700&family=Cormorant+Garamond:wght@400;500&family=Cinzel:wght@500;600&family=Noto+Serif+JP:wght@400;500&family=Space+Mono:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Fredoka:wght@500;600&family=Quicksand:wght@500;600&family=Silkscreen&family=Monoton&family=Comfortaa:wght@500&family=Press+Start+2P&family=Outfit:wght@500&family=Cormorant+Infant:wght@500&family=Teko:wght@500;600&family=Pacifico&family=Bebas+Neue&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #FAFAFA;
@@ -864,6 +864,210 @@
             border: 1px solid #9d4edd;
         }
 
+        /* Dieselpunk */
+        .card-dieselpunk {
+            background: linear-gradient(135deg, #1C1410 0%, #2A1F1A 100%);
+            border: 2px solid #B7410E;
+            color: #E8DCC4;
+        }
+
+        .card-dieselpunk:hover {
+            box-shadow: 0 20px 40px rgba(183, 65, 14, 0.4);
+        }
+
+        .card-dieselpunk .card-title {
+            font-family: 'Teko', sans-serif;
+            color: #B5A642;
+            font-size: 28px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .card-dieselpunk .card-number {
+            font-family: 'Space Mono', monospace;
+            color: #B87333;
+        }
+
+        .card-dieselpunk .card-tag {
+            background: #B7410E;
+            color: #E8DCC4;
+        }
+
+        .card-dieselpunk::after {
+            content: '⚡';
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 24px;
+            opacity: 0.5;
+        }
+
+        /* Tropical */
+        .card-tropical {
+            background: linear-gradient(135deg, #FFF5E6 0%, #E8F8F5 100%);
+            border: 2px solid #4D96FF;
+            color: #1A1A1A;
+        }
+
+        .card-tropical:hover {
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.3);
+        }
+
+        .card-tropical .card-title {
+            font-family: 'Pacifico', cursive;
+            color: #FF6B6B;
+            font-size: 28px;
+        }
+
+        .card-tropical .card-number {
+            color: #4D96FF;
+        }
+
+        .card-tropical .card-tag {
+            background: #2D5A27;
+            color: #FFFFFF;
+        }
+
+        .card-tropical::before {
+            content: '🌴';
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 20px;
+        }
+
+        /* Gothic */
+        .card-gothic {
+            background: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
+            border: 2px solid #8B0000;
+            color: #E8E4D9;
+        }
+
+        .card-gothic:hover {
+            box-shadow: 0 20px 40px rgba(139, 0, 0, 0.5);
+        }
+
+        .card-gothic .card-title {
+            font-family: 'Cinzel', serif;
+            color: #D4AF37;
+            font-size: 24px;
+            letter-spacing: 0.05em;
+        }
+
+        .card-gothic .card-number {
+            color: #8B0000;
+        }
+
+        .card-gothic .card-tag {
+            background: #8B0000;
+            color: #E8E4D9;
+        }
+
+        .card-gothic::before {
+            content: '⚰';
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 20px;
+            color: #D4AF37;
+            opacity: 0.6;
+        }
+
+        /* Wabi-Sabi */
+        .card-wabi-sabi {
+            background: #F5F2E9;
+            border: 1px solid #C9A227;
+            color: #1C1C1C;
+        }
+
+        .card-wabi-sabi:hover {
+            box-shadow: 0 20px 40px rgba(201, 162, 39, 0.2);
+        }
+
+        .card-wabi-sabi .card-title {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            color: #5C5C5C;
+            font-size: 26px;
+            font-weight: 400;
+        }
+
+        .card-wabi-sabi .card-number {
+            color: #C9A227;
+        }
+
+        .card-wabi-sabi .card-subtitle {
+            color: #6B6B6B;
+            font-style: italic;
+        }
+
+        .card-wabi-sabi .card-tag {
+            background: #1C1C1C;
+            color: #F5F2E9;
+        }
+
+        .card-wabi-sabi::before {
+            content: '金';
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 24px;
+            color: #C9A227;
+            opacity: 0.6;
+        }
+
+        /* Neon Noir */
+        .card-neon-noir {
+            background: linear-gradient(135deg, #0A0A0F 0%, #1A1A2E 100%);
+            border: 2px solid #FF2E97;
+            color: #8888AA;
+        }
+
+        .card-neon-noir:hover {
+            box-shadow: 0 0 30px rgba(255, 46, 151, 0.5), 0 0 60px rgba(0, 212, 255, 0.3);
+        }
+
+        .card-neon-noir .card-title {
+            font-family: 'Bebas Neue', sans-serif;
+            color: #FF2E97;
+            font-size: 28px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(255, 46, 151, 0.5);
+        }
+
+        .card-neon-noir .card-number {
+            font-family: 'Space Mono', monospace;
+            color: #00D4FF;
+        }
+
+        .card-neon-noir .card-subtitle {
+            color: #6688AA;
+        }
+
+        .card-neon-noir .card-tag {
+            background: transparent;
+            border: 1px solid #00D4FF;
+            color: #00D4FF;
+        }
+
+        @keyframes neonFlicker {
+            0%, 100% { opacity: 1; }
+            92% { opacity: 1; }
+            93% { opacity: 0.8; }
+            94% { opacity: 1; }
+        }
+
+        .card-neon-noir::before {
+            content: '◉';
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 16px;
+            color: #FF2E97;
+            text-shadow: 0 0 10px #FF2E97;
+            animation: neonFlicker 5s infinite;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -1019,7 +1223,7 @@
         <header>
             <h1>HTML Style Guides</h1>
             <p>A collection of themed, single-file design systems. Each style guide showcases a unique aesthetic with colors, typography, components, and more.</p>
-            <span class="badge-count">40 Themes</span>
+            <span class="badge-count">45 Themes</span>
         </header>
 
         <section class="section">
@@ -1305,6 +1509,76 @@
                         <span class="card-tag">Space</span>
                         <span class="card-tag">Stars</span>
                         <span class="card-tag">Cosmos</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Dieselpunk -->
+            <a href="styles/dieselpunk.html" class="card card-dieselpunk">
+                <div class="card-content">
+                    <p class="card-number">21 — Industrial Age</p>
+                    <h2 class="card-title">IRONCLAD</h2>
+                    <p class="card-subtitle">Diesel-powered industrial aesthetic with rust and iron</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Industrial</span>
+                        <span class="card-tag">Rust</span>
+                        <span class="card-tag">Power</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Tropical -->
+            <a href="styles/tropical.html" class="card card-tropical">
+                <div class="card-content">
+                    <p class="card-number">22 — Island Vibes</p>
+                    <h2 class="card-title">Paradise</h2>
+                    <p class="card-subtitle">Sun-soaked resort aesthetic with coral and ocean blues</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Beach</span>
+                        <span class="card-tag">Coral</span>
+                        <span class="card-tag">Vibrant</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Gothic -->
+            <a href="styles/gothic.html" class="card card-gothic">
+                <div class="card-content">
+                    <p class="card-number">23 — Dark Romantic</p>
+                    <h2 class="card-title">Cathedral</h2>
+                    <p class="card-subtitle">Medieval darkness with garnet, obsidian, and gold leaf</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Dark</span>
+                        <span class="card-tag">Medieval</span>
+                        <span class="card-tag">Ornate</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Wabi-Sabi -->
+            <a href="styles/wabi-sabi.html" class="card card-wabi-sabi">
+                <div class="card-content">
+                    <p class="card-number">24 — 侘寂</p>
+                    <h2 class="card-title">Kintsugi</h2>
+                    <p class="card-subtitle">Beauty in imperfection with natural materials and gold repair</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Imperfect</span>
+                        <span class="card-tag">Natural</span>
+                        <span class="card-tag">Zen</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Neon Noir -->
+            <a href="styles/neon-noir.html" class="card card-neon-noir">
+                <div class="card-content">
+                    <p class="card-number">25 — Night City</p>
+                    <h2 class="card-title">SHADOWRUN</h2>
+                    <p class="card-subtitle">Rain-slicked streets and neon signs in the city that never sleeps</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Noir</span>
+                        <span class="card-tag">Neon</span>
+                        <span class="card-tag">Mystery</span>
                     </div>
                 </div>
             </a>

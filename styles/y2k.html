@@ -3,169 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FUTURE//NOW - Y2K Style Guide</title>
+    <title>Millennium — Y2K Style Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;500;600;700;800&family=Lexend:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
     <style>
+        /* ══════════════════════════════════════════════════════════════════════════
+           MILLENNIUM — Y2K STYLE GUIDE
+           Chrome dreams and digital optimism from the turn of the century
+           ══════════════════════════════════════════════════════════════════════════ */
+
         :root {
-            /* Y2K Color Palette - Chrome, bubble gum, digital */
+            /* Chrome & Metallics */
+            --chrome: linear-gradient(135deg, #F0F0F0 0%, #C0C0C0 25%, #E8E8E8 50%, #A8A8A8 75%, #E0E0E0 100%);
             --silver: #C0C0C0;
-            --chrome: linear-gradient(135deg, #E8E8E8 0%, #A8A8A8 25%, #E8E8E8 50%, #A8A8A8 75%, #E8E8E8 100%);
-            --hot-pink: #FF69B4;
-            --electric-blue: #00BFFF;
-            --lime-green: #32CD32;
-            --cyber-yellow: #FFE135;
-            --purple-haze: #9370DB;
             --white: #FFFFFF;
             --light-gray: #F5F5F5;
-            --black: #1A1A1A;
+
+            /* Y2K Brights */
+            --hot-pink: #FF6EC7;
+            --electric-blue: #00BFFF;
+            --lime-green: #7FFF00;
+            --cyber-yellow: #FFEA00;
+            --purple-haze: #9F7FFF;
+            --aqua: #00FFFF;
+            --orange-pop: #FF6600;
+
+            /* Dark */
+            --space-black: #0A0A14;
+            --charcoal: #1A1A2E;
 
             /* Typography */
-            --font-display: 'Silkscreen', cursive;
-            --font-body: 'Quicksand', sans-serif;
+            --font-display: 'Anybody', sans-serif;
+            --font-body: 'Lexend', sans-serif;
+            --font-pixel: 'VT323', monospace;
 
             /* Spacing */
-            --space-xs: 4px;
-            --space-sm: 8px;
-            --space-md: 16px;
-            --space-lg: 24px;
-            --space-xl: 32px;
-            --space-2xl: 48px;
-            --space-3xl: 64px;
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            --space-4xl: 6rem;
 
-            /* Border Radius */
+            /* Borders */
             --radius-sm: 8px;
             --radius-md: 16px;
             --radius-lg: 24px;
-            --radius-full: 50%;
+            --radius-xl: 32px;
             --radius-blob: 30% 70% 70% 30% / 30% 30% 70% 70%;
-
-            /* Shadows */
-            --shadow-soft: 0 4px 20px rgba(255, 105, 180, 0.3);
-            --shadow-glow: 0 0 20px rgba(0, 191, 255, 0.5);
         }
 
-        * {
+        /* Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: var(--font-body);
-            background: linear-gradient(180deg, #E8F4FF 0%, #FFE8F5 50%, #E8FFF0 100%);
-            min-height: 100vh;
-            color: var(--black);
+            font-size: 16px;
             line-height: 1.6;
+            color: var(--charcoal);
+            background: var(--white);
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: var(--space-xl);
+        /* Star Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(2px 2px at 20% 30%, var(--hot-pink), transparent),
+                radial-gradient(2px 2px at 80% 20%, var(--electric-blue), transparent),
+                radial-gradient(2px 2px at 40% 70%, var(--lime-green), transparent),
+                radial-gradient(2px 2px at 60% 40%, var(--purple-haze), transparent),
+                radial-gradient(2px 2px at 90% 80%, var(--aqua), transparent);
+            background-size: 200px 200px;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Navigation */
+        .back-link {
+            position: fixed;
+            top: var(--space-lg);
+            left: var(--space-lg);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--chrome);
+            color: var(--charcoal);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 600;
+            border: 2px solid var(--silver);
+            border-radius: var(--radius-xl);
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,0.8),
+                0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-link:hover {
+            background: var(--hot-pink);
+            color: var(--white);
+            border-color: var(--hot-pink);
+            transform: scale(1.05);
+        }
+
+        .back-link::before {
+            content: '◄';
+            font-size: 0.75em;
         }
 
         /* Header */
         header {
+            padding: var(--space-4xl) var(--space-xl) var(--space-3xl);
             text-align: center;
-            padding: var(--space-3xl) var(--space-xl);
             position: relative;
-            overflow: hidden;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255, 105, 180, 0.3) 0%, transparent 70%);
-            border-radius: var(--radius-full);
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.1); }
+            background: linear-gradient(180deg, rgba(255,110,199,0.1) 0%, transparent 100%);
         }
 
         .logo {
-            position: relative;
             font-family: var(--font-display);
-            font-size: 4rem;
+            font-size: clamp(4rem, 14vw, 9rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 0.9;
+            margin-bottom: var(--space-md);
             background: var(--chrome);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: var(--space-md);
+            filter: drop-shadow(2px 2px 0 var(--hot-pink)) drop-shadow(-1px -1px 0 var(--electric-blue));
         }
 
         .tagline {
-            font-size: 1.25rem;
+            font-family: var(--font-pixel);
+            font-size: 1.5rem;
             color: var(--hot-pink);
-            font-weight: 500;
-            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-xl);
         }
 
         /* Section Styling */
         section {
             margin-bottom: var(--space-3xl);
+            padding: var(--space-2xl);
+            background: var(--white);
+            border: 3px solid var(--silver);
+            border-radius: var(--radius-lg);
+            box-shadow:
+                inset 0 2px 0 rgba(255,255,255,0.8),
+                0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
         }
 
-        h2 {
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--hot-pink), var(--electric-blue), var(--lime-green), var(--cyber-yellow));
+        }
+
+        .section-title {
             font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: var(--electric-blue);
-            margin-bottom: var(--space-lg);
-            display: flex;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: var(--space-xl);
+            display: inline-flex;
             align-items: center;
             gap: var(--space-sm);
         }
 
-        h2::before {
-            content: '✧';
+        .section-title::before {
+            content: '★';
             color: var(--hot-pink);
         }
 
-        h3 {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            color: var(--purple-haze);
-            margin-bottom: var(--space-sm);
-        }
-
-        /* Bubble Card */
-        .bubble-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            border: 3px solid transparent;
-            background-image: linear-gradient(white, white), linear-gradient(135deg, var(--hot-pink), var(--electric-blue), var(--lime-green));
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
-            box-shadow: var(--shadow-soft);
-        }
-
-        /* Color Palette */
+        /* ═══════════════════════════════════════════════════════════════════
+           1. COLOR PALETTE
+           ═══════════════════════════════════════════════════════════════════ */
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: var(--space-md);
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: var(--space-lg);
         }
 
         .color-swatch {
-            height: 120px;
-            border-radius: var(--radius-blob);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: var(--space-md);
-            position: relative;
+            text-align: center;
+            background: var(--light-gray);
+            border: 2px solid var(--silver);
+            border-radius: var(--radius-md);
             overflow: hidden;
             transition: transform 0.3s ease;
         }
@@ -174,82 +232,167 @@
             transform: scale(1.05) rotate(2deg);
         }
 
-        .color-swatch::after {
+        .color-preview {
+            height: 80px;
+            position: relative;
+        }
+
+        .color-preview::after {
             content: '';
             position: absolute;
-            top: 10px;
-            left: 20%;
+            top: 10%;
+            left: 10%;
             width: 30%;
-            height: 20%;
-            background: rgba(255, 255, 255, 0.6);
+            height: 30%;
+            background: rgba(255,255,255,0.5);
             border-radius: 50%;
-            transform: rotate(-30deg);
+            filter: blur(5px);
         }
 
-        .color-swatch span {
-            font-family: var(--font-display);
-            font-size: 0.7rem;
+        .color-info {
+            padding: var(--space-md);
             background: var(--white);
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--radius-sm);
-            position: relative;
-            z-index: 1;
         }
 
-        /* Typography */
-        .type-sample {
-            margin-bottom: var(--space-lg);
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
         }
 
-        .display-text {
+        .color-hex {
+            font-family: var(--font-pixel);
+            font-size: 0.875rem;
+            color: var(--charcoal);
+            opacity: 0.7;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           2. TYPOGRAPHY
+           ═══════════════════════════════════════════════════════════════════ */
+        .type-specimen {
+            margin-bottom: var(--space-xl);
+            padding: var(--space-lg);
+            background: var(--light-gray);
+            border: 2px solid var(--silver);
+            border-radius: var(--radius-md);
+        }
+
+        .type-label {
+            font-family: var(--font-pixel);
+            font-size: 1rem;
+            color: var(--electric-blue);
+            margin-bottom: var(--space-sm);
+        }
+
+        .type-display {
             font-family: var(--font-display);
             font-size: 3rem;
-            background: linear-gradient(90deg, var(--hot-pink), var(--electric-blue), var(--lime-green));
+            font-weight: 800;
+            text-transform: uppercase;
+            background: var(--chrome);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            line-height: 1.1;
         }
 
-        .body-text {
+        .type-body {
             font-family: var(--font-body);
-            font-size: 1.1rem;
-            max-width: 600px;
+            font-size: 1.0625rem;
+            line-height: 1.7;
+            color: var(--charcoal);
+            max-width: 60ch;
         }
 
-        /* Spacing Scale */
+        .type-pixel {
+            font-family: var(--font-pixel);
+            font-size: 1.5rem;
+            color: var(--hot-pink);
+            letter-spacing: 0.05em;
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .type-scale-item {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-lg);
+            padding: var(--space-sm) 0;
+            border-bottom: 2px dashed var(--silver);
+        }
+
+        .type-scale-size {
+            font-family: var(--font-pixel);
+            font-size: 0.875rem;
+            color: var(--purple-haze);
+            min-width: 100px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           3. SPACING SCALE
+           ═══════════════════════════════════════════════════════════════════ */
         .spacing-demo {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: var(--space-md);
-            align-items: flex-end;
         }
 
-        .spacing-block {
-            background: linear-gradient(135deg, var(--hot-pink), var(--purple-haze));
-            border-radius: var(--radius-sm);
+        .spacing-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-family: var(--font-display);
-            font-size: 0.7rem;
+            gap: var(--space-lg);
         }
 
-        /* Buttons */
+        .spacing-label {
+            font-family: var(--font-pixel);
+            font-size: 1rem;
+            color: var(--charcoal);
+            min-width: 100px;
+        }
+
+        .spacing-bar {
+            height: 24px;
+            background: linear-gradient(90deg, var(--hot-pink), var(--electric-blue));
+            border-radius: var(--radius-xl);
+            box-shadow:
+                inset 0 2px 0 rgba(255,255,255,0.5),
+                0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .spacing-value {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: var(--charcoal);
+            opacity: 0.6;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           4. BUTTONS
+           ═══════════════════════════════════════════════════════════════════ */
         .button-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-md);
+            gap: var(--space-lg);
+            align-items: flex-start;
         }
 
         .btn {
             font-family: var(--font-display);
-            font-size: 0.9rem;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            text-transform: uppercase;
             padding: var(--space-md) var(--space-xl);
-            border: none;
-            border-radius: 50px;
+            border: 3px solid;
+            border-radius: var(--radius-xl);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
             position: relative;
             overflow: hidden;
         }
@@ -257,791 +400,1182 @@
         .btn::before {
             content: '';
             position: absolute;
-            top: 5px;
-            left: 10%;
-            width: 80%;
-            height: 40%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, transparent 100%);
-            border-radius: 50px;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: rgba(255,255,255,0.3);
+            pointer-events: none;
         }
 
         .btn-primary {
-            background: linear-gradient(180deg, #FF8DC7 0%, var(--hot-pink) 100%);
+            background: var(--hot-pink);
             color: var(--white);
-            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+            border-color: var(--hot-pink);
+            box-shadow: 0 4px 0 #CC5799;
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #CC5799;
+        }
+
+        .btn-primary:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #CC5799;
         }
 
         .btn-secondary {
-            background: linear-gradient(180deg, #5DD8FF 0%, var(--electric-blue) 100%);
+            background: var(--electric-blue);
             color: var(--white);
-            box-shadow: 0 4px 15px rgba(0, 191, 255, 0.4);
+            border-color: var(--electric-blue);
+            box-shadow: 0 4px 0 #0099CC;
         }
 
         .btn-secondary:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #0099CC;
         }
 
         .btn-chrome {
             background: var(--chrome);
-            background-size: 200% 200%;
-            color: var(--black);
-            border: 2px solid var(--silver);
-            animation: chrome-shift 3s ease infinite;
-        }
-
-        @keyframes chrome-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+            color: var(--charcoal);
+            border-color: var(--silver);
+            box-shadow: 0 4px 0 #999;
         }
 
         .btn-chrome:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
 
-        /* Forms */
+        .btn-lime {
+            background: var(--lime-green);
+            color: var(--charcoal);
+            border-color: var(--lime-green);
+            box-shadow: 0 4px 0 #66CC00;
+        }
+
+        .btn[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           5. FORMS
+           ═══════════════════════════════════════════════════════════════════ */
         .form-group {
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-xl);
         }
 
-        label {
+        .form-label {
             display: block;
             font-family: var(--font-display);
-            font-size: 0.8rem;
-            color: var(--purple-haze);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--charcoal);
             margin-bottom: var(--space-sm);
         }
 
-        input[type="text"],
-        input[type="email"],
-        textarea,
-        select {
+        .form-input {
             width: 100%;
             max-width: 400px;
-            padding: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
             font-family: var(--font-body);
             font-size: 1rem;
-            border: 3px solid var(--silver);
-            border-radius: 50px;
+            color: var(--charcoal);
             background: var(--white);
-            transition: all 0.3s ease;
-        }
-
-        input:focus,
-        textarea:focus,
-        select:focus {
+            border: 3px solid var(--silver);
+            border-radius: var(--radius-md);
             outline: none;
-            border-color: var(--hot-pink);
-            box-shadow: var(--shadow-glow);
+            transition: all 0.2s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        textarea {
-            border-radius: var(--radius-lg);
+        .form-input:focus {
+            border-color: var(--electric-blue);
+            box-shadow:
+                inset 0 2px 4px rgba(0,0,0,0.1),
+                0 0 0 3px rgba(0, 191, 255, 0.2);
+        }
+
+        .form-input::placeholder {
+            color: var(--silver);
+        }
+
+        .form-input.error {
+            border-color: var(--orange-pop);
+        }
+
+        .form-textarea {
+            min-height: 120px;
             resize: vertical;
-            min-height: 100px;
         }
 
-        /* Cards */
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23FF6EC7' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 48px;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            cursor: pointer;
+        }
+
+        .form-checkbox input {
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 3px solid var(--silver);
+            border-radius: var(--radius-sm);
+            background: var(--white);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .form-checkbox input:checked {
+            background: var(--hot-pink);
+            border-color: var(--hot-pink);
+        }
+
+        .form-checkbox input:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--white);
+            font-weight: bold;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           6. CARDS
+           ═══════════════════════════════════════════════════════════════════ */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
+            gap: var(--space-xl);
         }
 
         .card {
             background: var(--white);
+            border: 3px solid var(--silver);
             border-radius: var(--radius-lg);
             overflow: hidden;
-            border: 3px solid var(--silver);
             transition: all 0.3s ease;
+            box-shadow: 0 4px 0 var(--silver);
         }
 
         .card:hover {
-            transform: translateY(-8px) rotate(1deg);
-            border-color: var(--hot-pink);
-            box-shadow: var(--shadow-soft);
+            transform: translateY(-4px) rotate(1deg);
+            box-shadow: 0 8px 0 var(--silver);
         }
 
         .card-image {
             height: 150px;
-            background: linear-gradient(135deg, var(--hot-pink), var(--electric-blue), var(--lime-green), var(--cyber-yellow));
-            background-size: 300% 300%;
-            animation: gradient-flow 5s ease infinite;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: linear-gradient(135deg, var(--hot-pink) 0%, var(--purple-haze) 50%, var(--electric-blue) 100%);
+            position: relative;
+        }
+
+        .card-image::after {
+            content: '★';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             font-size: 3rem;
+            color: rgba(255,255,255,0.5);
         }
 
-        @keyframes gradient-flow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .card-content {
+        .card-body {
             padding: var(--space-lg);
         }
 
         .card-title {
             font-family: var(--font-display);
-            font-size: 1rem;
-            color: var(--electric-blue);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--charcoal);
             margin-bottom: var(--space-sm);
         }
 
         .card-text {
-            font-size: 0.9rem;
-            color: var(--black);
+            font-size: 0.9375rem;
+            color: var(--charcoal);
+            line-height: 1.6;
         }
 
-        /* Data Table */
-        .table-wrapper {
+        .card-footer {
+            padding: var(--space-md) var(--space-lg);
+            border-top: 2px dashed var(--silver);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--light-gray);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           7. DATA TABLE
+           ═══════════════════════════════════════════════════════════════════ */
+        .table-container {
             overflow-x: auto;
-            border-radius: var(--radius-lg);
             border: 3px solid var(--silver);
+            border-radius: var(--radius-md);
         }
 
-        table {
+        .data-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.9rem;
         }
 
-        th {
-            background: linear-gradient(180deg, var(--electric-blue), #0095C8);
-            color: var(--white);
+        .data-table thead {
+            background: var(--chrome);
+        }
+
+        .data-table th {
             font-family: var(--font-display);
-            font-size: 0.8rem;
-            padding: var(--space-md);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            padding: var(--space-md) var(--space-lg);
             text-align: left;
+            color: var(--charcoal);
+            border-bottom: 3px solid var(--silver);
         }
 
-        td {
-            padding: var(--space-md);
-            border-bottom: 2px solid var(--light-gray);
+        .data-table td {
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--silver);
+            font-size: 0.9375rem;
         }
 
-        tr:nth-child(even) {
-            background: rgba(255, 105, 180, 0.05);
+        .data-table tbody tr:hover {
+            background: rgba(255, 110, 199, 0.05);
         }
 
-        tr:hover {
-            background: rgba(0, 191, 255, 0.1);
+        .table-action {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--electric-blue);
+            color: var(--white);
+            border: 2px solid var(--electric-blue);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            text-decoration: none;
         }
 
-        /* Badges */
+        .table-action:hover {
+            background: var(--hot-pink);
+            border-color: var(--hot-pink);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           8. BADGES & TAGS
+           ═══════════════════════════════════════════════════════════════════ */
         .badge-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-sm);
+            gap: var(--space-md);
+            align-items: center;
         }
 
         .badge {
             font-family: var(--font-display);
-            font-size: 0.7rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
             padding: var(--space-xs) var(--space-md);
-            border-radius: 50px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .badge::before {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 15%;
-            width: 70%;
-            height: 30%;
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 50px;
+            border-radius: var(--radius-xl);
+            display: inline-block;
         }
 
         .badge-pink {
-            background: linear-gradient(180deg, #FF8DC7, var(--hot-pink));
+            background: var(--hot-pink);
             color: var(--white);
         }
 
         .badge-blue {
-            background: linear-gradient(180deg, #5DD8FF, var(--electric-blue));
+            background: var(--electric-blue);
             color: var(--white);
         }
 
-        .badge-green {
-            background: linear-gradient(180deg, #7FE57F, var(--lime-green));
-            color: var(--white);
-        }
-
-        .badge-yellow {
-            background: linear-gradient(180deg, #FFF06B, var(--cyber-yellow));
-            color: var(--black);
+        .badge-lime {
+            background: var(--lime-green);
+            color: var(--charcoal);
         }
 
         .badge-purple {
-            background: linear-gradient(180deg, #B19CD9, var(--purple-haze));
+            background: var(--purple-haze);
             color: var(--white);
         }
 
-        /* Design Principles */
+        .badge-chrome {
+            background: var(--chrome);
+            color: var(--charcoal);
+            border: 2px solid var(--silver);
+        }
+
+        .tag {
+            font-family: var(--font-pixel);
+            font-size: 0.875rem;
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--light-gray);
+            border: 2px solid var(--silver);
+            border-radius: var(--radius-sm);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           9. DESIGN PRINCIPLES
+           ═══════════════════════════════════════════════════════════════════ */
         .principles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-lg);
+            gap: var(--space-xl);
         }
 
         .principle {
+            padding: var(--space-lg);
+            background: var(--light-gray);
+            border: 3px solid var(--silver);
+            border-radius: var(--radius-md);
             text-align: center;
-            padding: var(--space-xl);
         }
 
         .principle-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: var(--space-md);
-            display: inline-block;
-            animation: bounce 2s ease-in-out infinite;
         }
 
-        .principle:nth-child(2) .principle-icon { animation-delay: 0.3s; }
-        .principle:nth-child(3) .principle-icon { animation-delay: 0.6s; }
-        .principle:nth-child(4) .principle-icon { animation-delay: 0.9s; }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+        .principle:nth-child(1) .principle-icon { color: var(--hot-pink); }
+        .principle:nth-child(2) .principle-icon { color: var(--electric-blue); }
+        .principle:nth-child(3) .principle-icon { color: var(--lime-green); }
+        .principle:nth-child(4) .principle-icon { color: var(--purple-haze); }
 
         .principle-title {
             font-family: var(--font-display);
-            font-size: 1rem;
-            color: var(--hot-pink);
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--charcoal);
             margin-bottom: var(--space-sm);
         }
 
-        /* Animations */
-        .animation-grid {
+        .principle-text {
+            font-size: 0.9375rem;
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           10. ANIMATIONS
+           ═══════════════════════════════════════════════════════════════════ */
+        .animation-demos {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-lg);
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-xl);
         }
 
         .animation-demo {
-            height: 150px;
-            background: var(--white);
-            border-radius: var(--radius-lg);
+            text-align: center;
+            padding: var(--space-xl);
+            background: var(--light-gray);
             border: 3px solid var(--silver);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-radius: var(--radius-md);
+        }
+
+        .animation-label {
+            font-family: var(--font-pixel);
+            font-size: 0.875rem;
+            margin-top: var(--space-md);
+            color: var(--charcoal);
+        }
+
+        /* Spin Animation */
+        .anim-spin {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto;
+            font-size: 2.5rem;
+            animation: y2kSpin 3s linear infinite;
+        }
+
+        .anim-spin::before { content: '★'; color: var(--hot-pink); }
+
+        @keyframes y2kSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Bounce Animation */
+        .anim-bounce {
+            width: 50px;
+            height: 50px;
+            background: var(--electric-blue);
+            border-radius: 50%;
+            margin: 0 auto;
+            animation: y2kBounce 1s ease-in-out infinite;
+        }
+
+        @keyframes y2kBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.1); }
+        }
+
+        /* Pulse Animation */
+        .anim-pulse {
+            width: 50px;
+            height: 50px;
+            background: var(--lime-green);
+            border-radius: var(--radius-blob);
+            margin: 0 auto;
+            animation: y2kPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes y2kPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+
+        /* Shimmer Animation */
+        .anim-shimmer {
+            width: 80px;
+            height: 40px;
+            background: var(--chrome);
+            border-radius: var(--radius-sm);
+            margin: 0 auto;
+            position: relative;
             overflow: hidden;
         }
 
-        .spin-demo {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--hot-pink), var(--electric-blue));
-            border-radius: var(--radius-full);
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-
-        .morph-demo {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--lime-green), var(--cyber-yellow));
-            animation: morph 3s ease-in-out infinite;
-        }
-
-        @keyframes morph {
-            0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-            50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
-        }
-
-        .shimmer-demo {
-            width: 100px;
-            height: 40px;
-            background: var(--chrome);
-            background-size: 200% 100%;
-            border-radius: 50px;
+        .anim-shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
             animation: shimmer 2s linear infinite;
         }
 
         @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
-        /* Special Component: MP3 Player */
-        .mp3-player {
-            background: var(--chrome);
-            background-size: 200% 200%;
-            animation: chrome-shift 5s ease infinite;
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            max-width: 350px;
-            border: 3px solid var(--silver);
-            box-shadow:
-                inset 0 2px 10px rgba(255, 255, 255, 0.8),
-                0 8px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .player-screen {
-            background: linear-gradient(180deg, #1a3a4a 0%, #0a1a2a 100%);
-            border-radius: var(--radius-md);
-            padding: var(--space-md);
-            margin-bottom: var(--space-md);
-            border: 2px solid var(--black);
-        }
-
-        .player-title {
-            font-family: var(--font-display);
-            font-size: 0.8rem;
-            color: var(--lime-green);
-            text-align: center;
-            margin-bottom: var(--space-sm);
-        }
-
-        .player-visualizer {
-            display: flex;
-            justify-content: center;
-            gap: 4px;
-            height: 40px;
-            align-items: flex-end;
-        }
-
-        .viz-bar {
-            width: 8px;
-            background: var(--lime-green);
-            border-radius: 2px;
-            animation: visualize 0.5s ease-in-out infinite alternate;
-        }
-
-        .viz-bar:nth-child(1) { animation-delay: 0s; height: 20px; }
-        .viz-bar:nth-child(2) { animation-delay: 0.1s; height: 30px; }
-        .viz-bar:nth-child(3) { animation-delay: 0.2s; height: 15px; }
-        .viz-bar:nth-child(4) { animation-delay: 0.3s; height: 35px; }
-        .viz-bar:nth-child(5) { animation-delay: 0.4s; height: 25px; }
-        .viz-bar:nth-child(6) { animation-delay: 0.5s; height: 18px; }
-        .viz-bar:nth-child(7) { animation-delay: 0.6s; height: 32px; }
-
-        @keyframes visualize {
-            0% { transform: scaleY(0.5); }
-            100% { transform: scaleY(1.2); }
-        }
-
-        .player-progress {
-            height: 6px;
-            background: #0a1a2a;
-            border-radius: 3px;
-            overflow: hidden;
-            margin-top: var(--space-md);
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 65%;
-            background: linear-gradient(90deg, var(--hot-pink), var(--electric-blue));
-            border-radius: 3px;
-        }
-
-        .player-controls {
-            display: flex;
-            justify-content: center;
-            gap: var(--space-md);
-            margin-top: var(--space-md);
-        }
-
-        .control-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-full);
-            border: 2px solid var(--silver);
-            background: linear-gradient(180deg, #E8E8E8, #A8A8A8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: transform 0.2s ease;
-        }
-
-        .control-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .control-btn.play {
+        /* Color Cycle */
+        .anim-color {
             width: 50px;
             height: 50px;
-            background: linear-gradient(180deg, #FF8DC7, var(--hot-pink));
-            border-color: var(--hot-pink);
+            border-radius: 50%;
+            margin: 0 auto;
+            animation: colorCycle 3s linear infinite;
         }
 
-        /* Alerts */
-        .alert {
-            padding: var(--space-md) var(--space-lg);
-            border-radius: 50px;
-            margin-bottom: var(--space-md);
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            font-size: 0.9rem;
-            border: 3px solid;
+        @keyframes colorCycle {
+            0% { background: var(--hot-pink); }
+            25% { background: var(--electric-blue); }
+            50% { background: var(--lime-green); }
+            75% { background: var(--purple-haze); }
+            100% { background: var(--hot-pink); }
+        }
+
+        /* Wobble Animation */
+        .anim-wobble {
+            width: 50px;
+            height: 50px;
+            background: var(--cyber-yellow);
+            margin: 0 auto;
+            animation: wobble 2s ease-in-out infinite;
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           11. SPECIAL COMPONENT: DIGITAL PET
+           ═══════════════════════════════════════════════════════════════════ */
+        .digital-pet {
+            max-width: 400px;
+            margin: 0 auto;
+            background: var(--chrome);
+            border: 4px solid var(--silver);
+            border-radius: var(--radius-xl);
+            padding: var(--space-md);
+            box-shadow:
+                inset 0 2px 0 rgba(255,255,255,0.8),
+                0 6px 0 #999;
+        }
+
+        .pet-screen {
+            background: #9BBC0F;
+            border: 4px solid var(--charcoal);
+            border-radius: var(--radius-md);
+            padding: var(--space-xl);
+            text-align: center;
             position: relative;
-            overflow: hidden;
         }
 
-        .alert::before {
+        .pet-screen::before {
             content: '';
             position: absolute;
-            top: 3px;
-            left: 5%;
-            width: 90%;
-            height: 40%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, transparent 100%);
-            border-radius: 50px;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.03) 2px,
+                rgba(0,0,0,0.03) 4px
+            );
+            pointer-events: none;
+        }
+
+        .pet-character {
+            font-size: 4rem;
+            animation: petBounce 1s ease-in-out infinite;
+        }
+
+        @keyframes petBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .pet-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: var(--space-lg);
+            padding-top: var(--space-md);
+            border-top: 2px dashed rgba(0,0,0,0.2);
+        }
+
+        .pet-stat {
+            text-align: center;
+        }
+
+        .pet-stat-label {
+            font-family: var(--font-pixel);
+            font-size: 0.875rem;
+            color: var(--charcoal);
+            opacity: 0.7;
+        }
+
+        .pet-stat-bar {
+            width: 60px;
+            height: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: var(--space-xs);
+        }
+
+        .pet-stat-fill {
+            height: 100%;
+            background: var(--charcoal);
+        }
+
+        .pet-controls {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+
+        .pet-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--charcoal);
+            border: none;
+            border-radius: 50%;
+            color: var(--silver);
+            font-size: 1.25rem;
+            cursor: pointer;
+            box-shadow:
+                inset 0 -2px 0 rgba(0,0,0,0.3),
+                0 3px 0 #000;
+            transition: all 0.1s ease;
+        }
+
+        .pet-btn:active {
+            transform: translateY(2px);
+            box-shadow:
+                inset 0 -2px 0 rgba(0,0,0,0.3),
+                0 1px 0 #000;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           12. ALERTS
+           ═══════════════════════════════════════════════════════════════════ */
+        .alerts-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .alert {
+            padding: var(--space-lg);
+            border: 3px solid;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
         }
 
         .alert-icon {
             font-size: 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .alert-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .alert-info {
-            background: linear-gradient(180deg, #B5E8FF, #87CEEB);
-            border-color: var(--electric-blue);
-            color: #006994;
+            flex-shrink: 0;
         }
 
         .alert-success {
-            background: linear-gradient(180deg, #B5FFB5, #90EE90);
+            background: rgba(127, 255, 0, 0.1);
             border-color: var(--lime-green);
-            color: #228B22;
         }
 
         .alert-warning {
-            background: linear-gradient(180deg, #FFF5B5, #FFE87C);
+            background: rgba(255, 234, 0, 0.1);
             border-color: var(--cyber-yellow);
-            color: #B8860B;
         }
 
         .alert-error {
-            background: linear-gradient(180deg, #FFB5D5, #FF91AF);
-            border-color: var(--hot-pink);
-            color: #C71585;
+            background: rgba(255, 102, 0, 0.1);
+            border-color: var(--orange-pop);
         }
 
-        /* Back Link */
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-sm);
-            color: var(--electric-blue);
-            text-decoration: none;
+        .alert-info {
+            background: rgba(0, 191, 255, 0.1);
+            border-color: var(--electric-blue);
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
             font-family: var(--font-display);
-            font-size: 0.9rem;
-            margin-bottom: var(--space-xl);
-            transition: color 0.3s ease;
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: var(--space-xs);
         }
 
-        .back-link:hover {
-            color: var(--hot-pink);
+        .alert-text {
+            font-size: 0.875rem;
+            color: var(--charcoal);
+        }
+
+        .alert-close {
+            background: transparent;
+            border: none;
+            color: var(--charcoal);
+            cursor: pointer;
+            font-size: 1.5rem;
+            opacity: 0.5;
+        }
+
+        .alert-close:hover {
+            opacity: 1;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: var(--space-2xl);
-            font-family: var(--font-display);
-            font-size: 0.8rem;
-            color: var(--purple-haze);
+            padding: var(--space-3xl) var(--space-xl);
+            margin-top: var(--space-4xl);
+            background: var(--light-gray);
+            border-top: 4px solid var(--silver);
         }
 
-        footer span {
+        .footer-text {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--chrome);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-sub {
+            font-family: var(--font-pixel);
+            font-size: 1rem;
+            margin-top: var(--space-sm);
             color: var(--hot-pink);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 3.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .type-display {
+                font-size: 2rem;
+            }
+
+            .back-link {
+                top: var(--space-md);
+                left: var(--space-md);
+                padding: var(--space-xs) var(--space-sm);
+                font-size: 0.75rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../index.html" class="back-link">← Back to Gallery</a>
+    <a href="../index.html" class="back-link">Gallery</a>
 
-        <header>
-            <h1 class="logo">FUTURE//NOW</h1>
-            <p class="tagline">✧ Y2K Design System ✧ Ready for the Millennium ✧</p>
-        </header>
+    <header>
+        <h1 class="logo">Millennium</h1>
+        <p class="tagline">Y2K Style Guide</p>
+    </header>
 
-        <!-- Color Palette -->
-        <section class="bubble-card">
-            <h2>Color Palette</h2>
+    <main class="container">
+        <!-- 1. Color Palette -->
+        <section id="colors">
+            <h2 class="section-title">Color Palette</h2>
             <div class="color-grid">
-                <div class="color-swatch" style="background: linear-gradient(180deg, #FF8DC7, #FF69B4);">
-                    <span>Hot Pink</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--hot-pink);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Hot Pink</div>
+                        <div class="color-hex">#FF6EC7</div>
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: linear-gradient(180deg, #5DD8FF, #00BFFF);">
-                    <span>Electric Blue</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--electric-blue);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Electric Blue</div>
+                        <div class="color-hex">#00BFFF</div>
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: linear-gradient(180deg, #7FE57F, #32CD32);">
-                    <span>Lime Green</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--lime-green);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Lime Green</div>
+                        <div class="color-hex">#7FFF00</div>
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: linear-gradient(180deg, #FFF06B, #FFE135);">
-                    <span>Cyber Yellow</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--purple-haze);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Purple Haze</div>
+                        <div class="color-hex">#9F7FFF</div>
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: linear-gradient(180deg, #B19CD9, #9370DB);">
-                    <span>Purple Haze</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--cyber-yellow);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Cyber Yellow</div>
+                        <div class="color-hex">#FFEA00</div>
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: linear-gradient(135deg, #E8E8E8 0%, #A8A8A8 50%, #E8E8E8 100%);">
-                    <span>Chrome</span>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--aqua);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Aqua</div>
+                        <div class="color-hex">#00FFFF</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--chrome); border: 1px solid var(--silver);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Chrome</div>
+                        <div class="color-hex">gradient</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background: var(--charcoal);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Space Black</div>
+                        <div class="color-hex">#1A1A2E</div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Typography -->
-        <section class="bubble-card">
-            <h2>Typography</h2>
-            <div class="type-sample">
-                <h3>Display Font - Silkscreen</h3>
-                <p class="display-text">Welcome 2 the Future!</p>
+        <!-- 2. Typography -->
+        <section id="typography">
+            <h2 class="section-title">Typography</h2>
+
+            <div class="type-specimen">
+                <div class="type-label">Display — Anybody</div>
+                <div class="type-display">Future Now</div>
             </div>
-            <div class="type-sample">
-                <h3>Body Font - Quicksand</h3>
-                <p class="body-text">The new millennium brings endless possibilities. With cutting-edge technology and futuristic design, we're creating a digital world that's both fun and functional. Get ready to experience the future today!</p>
+
+            <div class="type-specimen">
+                <div class="type-label">Body — Lexend</div>
+                <p class="type-body">Welcome to the new millennium! The future is now, and it's chrome, pink, and full of digital possibilities. From iMacs to flip phones, we're living in an age of technological optimism and bubbly aesthetics.</p>
+            </div>
+
+            <div class="type-specimen">
+                <div class="type-label">Pixel — VT323</div>
+                <p class="type-pixel">LOADING... PLEASE WAIT...</p>
+            </div>
+
+            <div class="type-scale">
+                <div class="type-scale-item">
+                    <span class="type-scale-size">3rem / 48px</span>
+                    <span style="font-family: var(--font-display); font-size: 1.75rem; font-weight: 800; text-transform: uppercase;">Display</span>
+                </div>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">2rem / 32px</span>
+                    <span style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700;">Heading</span>
+                </div>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">1.5rem / 24px</span>
+                    <span style="font-family: var(--font-pixel); font-size: 1.25rem;">Pixel Text</span>
+                </div>
+                <div class="type-scale-item">
+                    <span class="type-scale-size">1.0625rem / 17px</span>
+                    <span style="font-family: var(--font-body); font-size: 1.0625rem;">Body</span>
+                </div>
             </div>
         </section>
 
-        <!-- Spacing Scale -->
-        <section class="bubble-card">
-            <h2>Spacing Scale</h2>
+        <!-- 3. Spacing -->
+        <section id="spacing">
+            <h2 class="section-title">Spacing Scale</h2>
             <div class="spacing-demo">
-                <div class="spacing-block" style="width: 32px; height: 32px;">XS</div>
-                <div class="spacing-block" style="width: 48px; height: 48px;">SM</div>
-                <div class="spacing-block" style="width: 64px; height: 64px;">MD</div>
-                <div class="spacing-block" style="width: 80px; height: 80px;">LG</div>
-                <div class="spacing-block" style="width: 96px; height: 96px;">XL</div>
-                <div class="spacing-block" style="width: 120px; height: 120px;">2XL</div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-xs</div>
+                    <div class="spacing-bar" style="width: 4px;"></div>
+                    <span class="spacing-value">0.25rem</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-sm</div>
+                    <div class="spacing-bar" style="width: 8px;"></div>
+                    <span class="spacing-value">0.5rem</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-md</div>
+                    <div class="spacing-bar" style="width: 16px;"></div>
+                    <span class="spacing-value">1rem</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-lg</div>
+                    <div class="spacing-bar" style="width: 24px;"></div>
+                    <span class="spacing-value">1.5rem</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-xl</div>
+                    <div class="spacing-bar" style="width: 32px;"></div>
+                    <span class="spacing-value">2rem</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">--space-2xl</div>
+                    <div class="spacing-bar" style="width: 48px;"></div>
+                    <span class="spacing-value">3rem</span>
+                </div>
             </div>
         </section>
 
-        <!-- Buttons -->
-        <section class="bubble-card">
-            <h2>Buttons</h2>
+        <!-- 4. Buttons -->
+        <section id="buttons">
+            <h2 class="section-title">Buttons</h2>
             <div class="button-grid">
-                <button class="btn btn-primary">Click Me!</button>
-                <button class="btn btn-secondary">Learn More</button>
-                <button class="btn btn-chrome">Download</button>
+                <button class="btn btn-primary">Primary</button>
+                <button class="btn btn-secondary">Secondary</button>
+                <button class="btn btn-chrome">Chrome</button>
+                <button class="btn btn-lime">Lime</button>
+                <button class="btn btn-primary" disabled>Disabled</button>
             </div>
         </section>
 
-        <!-- Forms -->
-        <section class="bubble-card">
-            <h2>Forms</h2>
+        <!-- 5. Forms -->
+        <section id="forms">
+            <h2 class="section-title">Forms</h2>
+
             <div class="form-group">
-                <label>Your Screen Name</label>
-                <input type="text" placeholder="xX_CoolUser_Xx">
+                <label class="form-label">Screen Name</label>
+                <input type="text" class="form-input" placeholder="Enter your handle...">
             </div>
+
             <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" placeholder="you@aol.com">
+                <label class="form-label">Select Theme</label>
+                <select class="form-input form-select">
+                    <option>Choose your vibe</option>
+                    <option>Bubble Gum</option>
+                    <option>Chrome Dreams</option>
+                    <option>Cyber Space</option>
+                </select>
             </div>
+
             <div class="form-group">
-                <label>Your Message</label>
-                <textarea placeholder="Type your message here..."></textarea>
+                <label class="form-label">Away Message</label>
+                <textarea class="form-input form-textarea" placeholder="BRB..."></textarea>
             </div>
-            <button class="btn btn-primary">Send It! ✉</button>
+
+            <div class="form-group">
+                <label class="form-label">Preferences</label>
+                <div style="display: flex; gap: var(--space-lg); flex-wrap: wrap;">
+                    <label class="form-checkbox">
+                        <input type="checkbox" checked>
+                        <span>Enable sounds</span>
+                    </label>
+                    <label class="form-checkbox">
+                        <input type="checkbox">
+                        <span>Auto-away</span>
+                    </label>
+                </div>
+            </div>
         </section>
 
-        <!-- Cards -->
-        <section class="bubble-card">
-            <h2>Cards</h2>
+        <!-- 6. Cards -->
+        <section id="cards">
+            <h2 class="section-title">Cards</h2>
             <div class="card-grid">
-                <div class="card">
-                    <div class="card-image">💿</div>
-                    <div class="card-content">
-                        <h4 class="card-title">Burn CDs</h4>
-                        <p class="card-text">Create your own mix CDs with all your favorite tracks!</p>
+                <article class="card">
+                    <div class="card-image"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">Cyber Messenger</h3>
+                        <p class="card-text">Chat with your friends using fun emojis and custom away messages!</p>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">🖥️</div>
-                    <div class="card-content">
-                        <h4 class="card-title">Build Websites</h4>
-                        <p class="card-text">Design your own homepage with animated GIFs and visitor counters!</p>
+                    <div class="card-footer">
+                        <span class="badge badge-pink">New!</span>
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Download</button>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">📱</div>
-                    <div class="card-content">
-                        <h4 class="card-title">Stay Connected</h4>
-                        <p class="card-text">Chat with friends on AIM and customize your buddy profile!</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--lime-green), var(--aqua));"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">MP3 Player</h3>
+                        <p class="card-text">1000 songs in your pocket! The future of music is here.</p>
                     </div>
-                </div>
+                    <div class="card-footer">
+                        <span class="badge badge-lime">Hot!</span>
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Shop</button>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--cyber-yellow), var(--orange-pop));"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">Web Builder</h3>
+                        <p class="card-text">Create your own homepage with cool graphics and guestbooks!</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge badge-chrome">Free!</span>
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Start</button>
+                    </div>
+                </article>
             </div>
         </section>
 
-        <!-- Data Table -->
-        <section class="bubble-card">
-            <h2>Data Table</h2>
-            <div class="table-wrapper">
-                <table>
+        <!-- 7. Data Table -->
+        <section id="table">
+            <h2 class="section-title">Data Table</h2>
+            <div class="table-container">
+                <table class="data-table">
                     <thead>
                         <tr>
-                            <th>File Name</th>
-                            <th>Type</th>
-                            <th>Size</th>
+                            <th>Item</th>
                             <th>Status</th>
+                            <th>Downloads</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>summer_mix.mp3</td>
-                            <td>Audio</td>
-                            <td>4.2 MB</td>
-                            <td><span class="badge badge-green">Complete</span></td>
+                            <td>Buddy Icon Pack</td>
+                            <td><span style="color: var(--lime-green);">✓ Ready</span></td>
+                            <td>10,482</td>
+                            <td><a href="#" class="table-action">Get</a></td>
                         </tr>
                         <tr>
-                            <td>vacation_pics.zip</td>
-                            <td>Archive</td>
-                            <td>12.8 MB</td>
-                            <td><span class="badge badge-blue">Downloading</span></td>
+                            <td>Sound Effects v2</td>
+                            <td><span style="color: var(--lime-green);">✓ Ready</span></td>
+                            <td>8,291</td>
+                            <td><a href="#" class="table-action">Get</a></td>
                         </tr>
                         <tr>
-                            <td>away_message.txt</td>
-                            <td>Text</td>
-                            <td>2 KB</td>
-                            <td><span class="badge badge-pink">New</span></td>
+                            <td>Cursor Collection</td>
+                            <td><span style="color: var(--cyber-yellow);">⟳ Loading</span></td>
+                            <td>5,847</td>
+                            <td><a href="#" class="table-action">Wait</a></td>
+                        </tr>
+                        <tr>
+                            <td>Wallpaper Pack</td>
+                            <td><span style="color: var(--lime-green);">✓ Ready</span></td>
+                            <td>12,103</td>
+                            <td><a href="#" class="table-action">Get</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Badges -->
-        <section class="bubble-card">
-            <h2>Badges & Tags</h2>
+        <!-- 8. Badges & Tags -->
+        <section id="badges">
+            <h2 class="section-title">Badges & Tags</h2>
             <div class="badge-grid">
-                <span class="badge badge-pink">New!</span>
-                <span class="badge badge-blue">Cool</span>
-                <span class="badge badge-green">Online</span>
-                <span class="badge badge-yellow">Featured</span>
-                <span class="badge badge-purple">VIP</span>
+                <span class="badge badge-pink">Pink</span>
+                <span class="badge badge-blue">Blue</span>
+                <span class="badge badge-lime">Lime</span>
+                <span class="badge badge-purple">Purple</span>
+                <span class="badge badge-chrome">Chrome</span>
+            </div>
+
+            <div class="badge-grid" style="margin-top: var(--space-xl);">
+                <span class="tag">y2k</span>
+                <span class="tag">retro</span>
+                <span class="tag">chrome</span>
+                <span class="tag">millennium</span>
             </div>
         </section>
 
-        <!-- Design Principles -->
-        <section class="bubble-card">
-            <h2>Design Principles</h2>
+        <!-- 9. Design Principles -->
+        <section id="principles">
+            <h2 class="section-title">Design Principles</h2>
             <div class="principles-grid">
                 <div class="principle">
-                    <span class="principle-icon">✨</span>
-                    <h4 class="principle-title">Glossy & Shiny</h4>
-                    <p>Chrome effects, gradients, and that signature plastic-y sheen</p>
+                    <div class="principle-icon">★</div>
+                    <h3 class="principle-title">Chrome & Shine</h3>
+                    <p class="principle-text">Metallic gradients and glossy surfaces evoke the optimistic tech aesthetic of 2000.</p>
                 </div>
                 <div class="principle">
-                    <span class="principle-icon">🌈</span>
-                    <h4 class="principle-title">Bold Colors</h4>
-                    <p>Saturated hues, vibrant combinations, and electric energy</p>
+                    <div class="principle-icon">●</div>
+                    <h3 class="principle-title">Bubble Shapes</h3>
+                    <p class="principle-text">Rounded, organic forms and blob shapes create playful, friendly interfaces.</p>
                 </div>
                 <div class="principle">
-                    <span class="principle-icon">🫧</span>
-                    <h4 class="principle-title">Bubbly Shapes</h4>
-                    <p>Rounded corners, blob forms, and organic curves</p>
+                    <div class="principle-icon">◆</div>
+                    <h3 class="principle-title">Bright Colors</h3>
+                    <p class="principle-text">Hot pink, electric blue, and lime green capture the era's bold optimism.</p>
                 </div>
                 <div class="principle">
-                    <span class="principle-icon">🚀</span>
-                    <h4 class="principle-title">Techno-Optimism</h4>
-                    <p>Celebrating the digital future with playful enthusiasm</p>
+                    <div class="principle-icon">▲</div>
+                    <h3 class="principle-title">Digital Textures</h3>
+                    <p class="principle-text">Pixel fonts, gradients, and 3D effects recall early digital design.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Animations -->
-        <section class="bubble-card">
-            <h2>Animation & Micro-interactions</h2>
-            <div class="animation-grid">
-                <div>
-                    <h3>Spin</h3>
-                    <div class="animation-demo">
-                        <div class="spin-demo"></div>
-                    </div>
+        <!-- 10. Animations -->
+        <section id="animations">
+            <h2 class="section-title">Animations</h2>
+            <div class="animation-demos">
+                <div class="animation-demo">
+                    <div class="anim-spin"></div>
+                    <div class="animation-label">Spin</div>
                 </div>
-                <div>
-                    <h3>Morph</h3>
-                    <div class="animation-demo">
-                        <div class="morph-demo"></div>
-                    </div>
+                <div class="animation-demo">
+                    <div class="anim-bounce"></div>
+                    <div class="animation-label">Bounce</div>
                 </div>
-                <div>
-                    <h3>Chrome Shimmer</h3>
-                    <div class="animation-demo">
-                        <div class="shimmer-demo"></div>
-                    </div>
+                <div class="animation-demo">
+                    <div class="anim-pulse"></div>
+                    <div class="animation-label">Pulse</div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Special Component: MP3 Player -->
-        <section class="bubble-card">
-            <h2>Special Component: MP3 Player</h2>
-            <div class="mp3-player">
-                <div class="player-screen">
-                    <p class="player-title">♪ NOW PLAYING ♪</p>
-                    <div class="player-visualizer">
-                        <div class="viz-bar"></div>
-                        <div class="viz-bar"></div>
-                        <div class="viz-bar"></div>
-                        <div class="viz-bar"></div>
-                        <div class="viz-bar"></div>
-                        <div class="viz-bar"></div>
-                        <div class="viz-bar"></div>
-                    </div>
-                    <div class="player-progress">
-                        <div class="progress-bar"></div>
-                    </div>
+                <div class="animation-demo">
+                    <div class="anim-shimmer"></div>
+                    <div class="animation-label">Shimmer</div>
                 </div>
-                <div class="player-controls">
-                    <button class="control-btn">⏮</button>
-                    <button class="control-btn play">▶</button>
-                    <button class="control-btn">⏭</button>
+                <div class="animation-demo">
+                    <div class="anim-color"></div>
+                    <div class="animation-label">Color</div>
+                </div>
+                <div class="animation-demo">
+                    <div class="anim-wobble"></div>
+                    <div class="animation-label">Wobble</div>
                 </div>
             </div>
         </section>
 
-        <!-- Alerts -->
-        <section class="bubble-card">
-            <h2>Alert Messages</h2>
-            <div class="alert alert-info">
-                <span class="alert-icon">💡</span>
-                <span class="alert-content">You've got mail! Check your inbox for new messages.</span>
-            </div>
-            <div class="alert alert-success">
-                <span class="alert-icon">✓</span>
-                <span class="alert-content">Download complete! Your file is ready.</span>
-            </div>
-            <div class="alert alert-warning">
-                <span class="alert-icon">⚠</span>
-                <span class="alert-content">Low disk space! Consider burning files to CD.</span>
-            </div>
-            <div class="alert alert-error">
-                <span class="alert-icon">✗</span>
-                <span class="alert-content">Connection lost! Please check your dial-up modem.</span>
+        <!-- 11. Special Component -->
+        <section id="special">
+            <h2 class="section-title">Special Component</h2>
+            <div class="digital-pet">
+                <div class="pet-screen">
+                    <div class="pet-character">🐣</div>
+                    <div class="pet-stats">
+                        <div class="pet-stat">
+                            <div class="pet-stat-label">HAPPY</div>
+                            <div class="pet-stat-bar">
+                                <div class="pet-stat-fill" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div class="pet-stat">
+                            <div class="pet-stat-label">HUNGER</div>
+                            <div class="pet-stat-bar">
+                                <div class="pet-stat-fill" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <div class="pet-stat">
+                            <div class="pet-stat-label">ENERGY</div>
+                            <div class="pet-stat-bar">
+                                <div class="pet-stat-fill" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pet-controls">
+                    <button class="pet-btn">🍎</button>
+                    <button class="pet-btn">⚽</button>
+                    <button class="pet-btn">💤</button>
+                </div>
             </div>
         </section>
 
-        <footer>
-            <p>Made with <span>♥</span> in the Year 2000</p>
-            <p>Best viewed in 800x600 resolution</p>
-        </footer>
-    </div>
+        <!-- 12. Alerts -->
+        <section id="alerts">
+            <h2 class="section-title">Alert Messages</h2>
+            <div class="alerts-grid">
+                <div class="alert alert-success">
+                    <span class="alert-icon">✓</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Download Complete!</div>
+                        <p class="alert-text">Your file has finished downloading. Enjoy!</p>
+                    </div>
+                    <button class="alert-close">×</button>
+                </div>
+
+                <div class="alert alert-warning">
+                    <span class="alert-icon">!</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Low Disk Space</div>
+                        <p class="alert-text">Your disk is almost full. Delete some files to continue.</p>
+                    </div>
+                    <button class="alert-close">×</button>
+                </div>
+
+                <div class="alert alert-error">
+                    <span class="alert-icon">✕</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Connection Lost</div>
+                        <p class="alert-text">Unable to connect. Please check your dial-up modem.</p>
+                    </div>
+                    <button class="alert-close">×</button>
+                </div>
+
+                <div class="alert alert-info">
+                    <span class="alert-icon">i</span>
+                    <div class="alert-content">
+                        <div class="alert-title">New Message!</div>
+                        <p class="alert-text">You have 1 new message in your inbox.</p>
+                    </div>
+                    <button class="alert-close">×</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p class="footer-text">Millennium Style Guide</p>
+        <p class="footer-sub">★ THE FUTURE IS NOW ★</p>
+    </footer>
 </body>
 </html>

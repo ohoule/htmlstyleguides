@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paradise - Tropical Style Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Tropical Color Palette - Vibrant, sunny, island vibes */
+            --coral: #FF6B6B;
+            --sunset-orange: #FF8C42;
+            --golden-sun: #FFD93D;
+            --palm-green: #2D5A27;
+            --seafoam: #6BCB77;
+            --ocean-blue: #4D96FF;
+            --lagoon: #00D9FF;
+            --hibiscus: #FF0080;
+            --coconut: #F5F0E1;
+            --sand: #F4E4C1;
+            --volcanic: #2C3333;
+            --driftwood: #5C4033;
+
+            /* Typography */
+            --font-display: 'Pacifico', cursive;
+            --font-body: 'Poppins', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 40px;
+            --space-2xl: 64px;
+            --space-3xl: 96px;
+
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 40px;
+            --radius-wave: 60% 40% 60% 40% / 40% 60% 40% 60%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(180deg, var(--lagoon) 0%, var(--ocean-blue) 30%, var(--sand) 30%);
+            color: var(--volcanic);
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Sun decoration */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -100px;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--golden-sun) 0%, rgba(255, 217, 61, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Wave decoration */
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%234D96FF' fill-opacity='0.3' d='M0,50 C360,100 720,0 1080,50 C1260,75 1380,75 1440,50 L1440,100 L0,100 Z'/%3E%3C/svg%3E") repeat-x;
+            background-size: 100% 100%;
+            animation: wave 8s linear infinite;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes wave {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1440px; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--palm-green);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-weight: 600;
+            margin-bottom: var(--space-xl);
+            padding: var(--space-sm) var(--space-md);
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .back-link::before {
+            content: '🏝️';
+        }
+
+        .back-link:hover {
+            background: var(--palm-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: var(--space-3xl) var(--space-xl);
+            margin-bottom: var(--space-3xl);
+            background: linear-gradient(135deg, var(--sunset-orange), var(--coral), var(--hibiscus));
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '🌴';
+            position: absolute;
+            left: 30px;
+            bottom: 20px;
+            font-size: 4rem;
+            opacity: 0.5;
+        }
+
+        header::after {
+            content: '🌺';
+            position: absolute;
+            right: 30px;
+            top: 20px;
+            font-size: 3rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            margin-bottom: var(--space-md);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: var(--space-3xl);
+            padding: var(--space-xl);
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--coral), var(--golden-sun), var(--seafoam), var(--ocean-blue));
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            color: var(--palm-green);
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Color Palette - Tropical Fruits */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .color-swatch {
+            aspect-ratio: 1;
+            border-radius: var(--radius-wave);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: var(--space-md);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .color-name {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        .color-value {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            opacity: 0.8;
+        }
+
+        .swatch-coral { background: var(--coral); color: white; }
+        .swatch-sunset { background: var(--sunset-orange); color: white; }
+        .swatch-golden { background: var(--golden-sun); color: var(--volcanic); }
+        .swatch-palm { background: var(--palm-green); color: white; }
+        .swatch-seafoam { background: var(--seafoam); color: var(--volcanic); }
+        .swatch-ocean { background: var(--ocean-blue); color: white; }
+        .swatch-lagoon { background: var(--lagoon); color: var(--volcanic); }
+        .swatch-hibiscus { background: var(--hibiscus); color: white; }
+        .swatch-coconut { background: var(--coconut); color: var(--volcanic); }
+        .swatch-sand { background: var(--sand); color: var(--volcanic); }
+
+        /* Typography */
+        .type-specimen {
+            margin-bottom: var(--space-xl);
+            padding: var(--space-lg);
+            background: linear-gradient(135deg, var(--sand), var(--coconut));
+            border-radius: var(--radius-md);
+        }
+
+        .type-specimen h3 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--palm-green);
+            margin-bottom: var(--space-sm);
+        }
+
+        .type-specimen .font-name {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--coral);
+            margin-bottom: var(--space-md);
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-lg);
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--ocean-blue);
+            min-width: 60px;
+        }
+
+        .display-text { font-family: var(--font-display); font-size: 2rem; color: var(--hibiscus); }
+        .heading-text { font-family: var(--font-display); font-size: 1.5rem; color: var(--palm-green); }
+        .body-text { font-family: var(--font-body); font-size: 1rem; color: var(--volcanic); }
+        .small-text { font-family: var(--font-body); font-size: 0.875rem; color: var(--driftwood); }
+
+        /* Spacing Scale - Beach Shells */
+        .spacing-visual {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xl);
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .spacing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .spacing-shell {
+            background: linear-gradient(135deg, var(--coral), var(--sunset-orange));
+            border-radius: var(--radius-wave);
+        }
+
+        .spacing-label {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--palm-green);
+        }
+
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--ocean-blue);
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .btn {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-xl);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--coral), var(--hibiscus));
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--palm-green);
+            border: 2px solid var(--palm-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--palm-green);
+            color: white;
+        }
+
+        .btn-ocean {
+            background: linear-gradient(135deg, var(--ocean-blue), var(--lagoon));
+            color: white;
+        }
+
+        .btn-ocean:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(77, 150, 255, 0.5);
+        }
+
+        .btn-sunshine {
+            background: linear-gradient(135deg, var(--golden-sun), var(--sunset-orange));
+            color: var(--volcanic);
+        }
+
+        .btn-sunshine:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(255, 217, 61, 0.5);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--palm-green);
+            margin-bottom: var(--space-sm);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-md);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            border: 2px solid var(--sand);
+            border-radius: var(--radius-md);
+            background: white;
+            color: var(--volcanic);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--ocean-blue);
+            box-shadow: 0 0 0 4px rgba(77, 150, 255, 0.15);
+        }
+
+        .form-input::placeholder {
+            color: var(--driftwood);
+            opacity: 0.6;
+        }
+
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234D96FF' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-md) center;
+            padding-right: var(--space-2xl);
+        }
+
+        .form-checkbox {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--coral);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .card-image {
+            height: 160px;
+            background: linear-gradient(135deg, var(--ocean-blue), var(--lagoon), var(--seafoam));
+            position: relative;
+        }
+
+        .card-image::after {
+            content: '🌊';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 2rem;
+            animation: wave 2s ease-in-out infinite;
+        }
+
+        .card-content {
+            padding: var(--space-lg);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--palm-green);
+            margin-bottom: var(--space-sm);
+        }
+
+        .card-text {
+            color: var(--driftwood);
+            margin-bottom: var(--space-md);
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--ocean-blue);
+        }
+
+        /* Data Table */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: var(--radius-md);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--palm-green), var(--seafoam));
+        }
+
+        th {
+            font-weight: 600;
+            color: white;
+            text-align: left;
+            padding: var(--space-md);
+        }
+
+        td {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--sand);
+            color: var(--volcanic);
+        }
+
+        tbody tr:hover {
+            background: var(--coconut);
+        }
+
+        .status-active {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--seafoam);
+            color: var(--palm-green);
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .status-pending {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--golden-sun);
+            color: var(--volcanic);
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        /* Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .badge {
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-xl);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge-coral { background: var(--coral); color: white; }
+        .badge-ocean { background: var(--ocean-blue); color: white; }
+        .badge-palm { background: var(--palm-green); color: white; }
+        .badge-golden { background: var(--golden-sun); color: var(--volcanic); }
+        .badge-hibiscus { background: var(--hibiscus); color: white; }
+        .badge-outline { background: transparent; border: 2px solid var(--palm-green); color: var(--palm-green); }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .principle-card {
+            padding: var(--space-lg);
+            background: linear-gradient(135deg, var(--coconut), white);
+            border-radius: var(--radius-md);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .principle-card:hover {
+            border-color: var(--coral);
+            transform: translateY(-4px);
+        }
+
+        .principle-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--palm-green);
+            margin-bottom: var(--space-sm);
+        }
+
+        .principle-text {
+            font-size: 0.95rem;
+            color: var(--driftwood);
+        }
+
+        /* Animations */
+        .animation-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .animation-demo {
+            padding: var(--space-lg);
+            background: var(--coconut);
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+
+        .animation-element {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto var(--space-md);
+            background: linear-gradient(135deg, var(--coral), var(--sunset-orange));
+            border-radius: var(--radius-wave);
+        }
+
+        .sway-demo .animation-element {
+            animation: sway 2s ease-in-out infinite;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .bob-demo .animation-element {
+            background: var(--ocean-blue);
+            animation: bob 2s ease-in-out infinite;
+        }
+
+        @keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .shimmer-demo .animation-element {
+            background: var(--golden-sun);
+            animation: shimmer 1.5s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        .splash-demo .animation-element {
+            background: var(--lagoon);
+            animation: splash 1s ease-out infinite;
+        }
+
+        @keyframes splash {
+            0% { transform: scale(1); border-radius: var(--radius-wave); }
+            50% { transform: scale(1.2); border-radius: 50%; }
+            100% { transform: scale(1); border-radius: var(--radius-wave); }
+        }
+
+        .animation-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--palm-green);
+        }
+
+        /* Special Component - Resort Card */
+        .resort-card {
+            background: linear-gradient(135deg, var(--ocean-blue), var(--lagoon));
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resort-card::before {
+            content: '☀️';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 3rem;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .resort-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23F4E4C1' d='M0,30 C360,60 720,0 1080,30 C1260,45 1380,45 1440,30 L1440,60 L0,60 Z'/%3E%3C/svg%3E") repeat-x;
+        }
+
+        .resort-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-lg);
+        }
+
+        .resort-name {
+            font-family: var(--font-display);
+            font-size: 2rem;
+        }
+
+        .resort-rating {
+            background: rgba(255,255,255,0.2);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-xl);
+            font-size: 0.9rem;
+        }
+
+        .resort-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            background: rgba(255,255,255,0.15);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-lg);
+            font-size: 0.9rem;
+        }
+
+        .resort-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .stat {
+            text-align: center;
+            padding: var(--space-md);
+            background: rgba(255,255,255,0.1);
+            border-radius: var(--radius-md);
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+        }
+
+        .alert-icon {
+            font-size: 1.5rem;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .alert-success {
+            background: rgba(107, 203, 119, 0.15);
+            color: var(--palm-green);
+        }
+
+        .alert-info {
+            background: rgba(77, 150, 255, 0.15);
+            color: var(--ocean-blue);
+        }
+
+        .alert-warning {
+            background: rgba(255, 217, 61, 0.2);
+            color: var(--driftwood);
+        }
+
+        .alert-error {
+            background: rgba(255, 107, 107, 0.15);
+            color: var(--coral);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--space-2xl);
+            margin-top: var(--space-3xl);
+            background: linear-gradient(135deg, var(--sunset-orange), var(--coral));
+            border-radius: var(--radius-xl);
+            color: white;
+        }
+
+        footer p:first-child {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--space-md);
+            }
+
+            header {
+                padding: var(--space-2xl) var(--space-md);
+            }
+
+            section {
+                padding: var(--space-lg);
+            }
+
+            .resort-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">Back to Gallery</a>
+
+        <header>
+            <h1>Paradise</h1>
+            <p>A sun-kissed design system that captures the vibrant energy of tropical islands and endless summer days</p>
+        </header>
+
+        <!-- Color Palette -->
+        <section id="colors">
+            <h2>🎨 Color Palette</h2>
+            <div class="color-grid">
+                <div class="color-swatch swatch-coral">
+                    <span class="color-name">Coral</span>
+                    <span class="color-value">#FF6B6B</span>
+                </div>
+                <div class="color-swatch swatch-sunset">
+                    <span class="color-name">Sunset</span>
+                    <span class="color-value">#FF8C42</span>
+                </div>
+                <div class="color-swatch swatch-golden">
+                    <span class="color-name">Golden Sun</span>
+                    <span class="color-value">#FFD93D</span>
+                </div>
+                <div class="color-swatch swatch-palm">
+                    <span class="color-name">Palm</span>
+                    <span class="color-value">#2D5A27</span>
+                </div>
+                <div class="color-swatch swatch-seafoam">
+                    <span class="color-name">Seafoam</span>
+                    <span class="color-value">#6BCB77</span>
+                </div>
+                <div class="color-swatch swatch-ocean">
+                    <span class="color-name">Ocean</span>
+                    <span class="color-value">#4D96FF</span>
+                </div>
+                <div class="color-swatch swatch-lagoon">
+                    <span class="color-name">Lagoon</span>
+                    <span class="color-value">#00D9FF</span>
+                </div>
+                <div class="color-swatch swatch-hibiscus">
+                    <span class="color-name">Hibiscus</span>
+                    <span class="color-value">#FF0080</span>
+                </div>
+                <div class="color-swatch swatch-coconut">
+                    <span class="color-name">Coconut</span>
+                    <span class="color-value">#F5F0E1</span>
+                </div>
+                <div class="color-swatch swatch-sand">
+                    <span class="color-name">Sand</span>
+                    <span class="color-value">#F4E4C1</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section id="typography">
+            <h2>✏️ Typography</h2>
+            <div class="type-specimen">
+                <h3>Pacifico</h3>
+                <p class="font-name">Display Font — Playful, breezy, carefree</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">Display</span>
+                        <span class="display-text">Island Vibes</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">Heading</span>
+                        <span class="heading-text">Beach Life</span>
+                    </div>
+                </div>
+            </div>
+            <div class="type-specimen">
+                <h3 style="font-family: var(--font-body); font-weight: 400; color: var(--volcanic);">Poppins</h3>
+                <p class="font-name">Body Font — Clean, friendly, modern</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">Body</span>
+                        <span class="body-text">Feel the warm sand between your toes and let the ocean breeze carry your worries away.</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">Small</span>
+                        <span class="small-text">Every sunset brings a promise of a new dawn.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacing Scale -->
+        <section id="spacing">
+            <h2>📏 Spacing Scale</h2>
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-shell" style="width: 24px; height: 24px;"></div>
+                    <span class="spacing-label">XS</span>
+                    <span class="spacing-value">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-shell" style="width: 36px; height: 36px;"></div>
+                    <span class="spacing-label">SM</span>
+                    <span class="spacing-value">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-shell" style="width: 52px; height: 52px;"></div>
+                    <span class="spacing-label">MD</span>
+                    <span class="spacing-value">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-shell" style="width: 70px; height: 70px;"></div>
+                    <span class="spacing-label">LG</span>
+                    <span class="spacing-value">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-shell" style="width: 90px; height: 90px;"></div>
+                    <span class="spacing-label">XL</span>
+                    <span class="spacing-value">40px</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Buttons -->
+        <section id="buttons">
+            <h2>🔘 Buttons</h2>
+            <div class="button-grid">
+                <button class="btn btn-primary">🌺 Book Now</button>
+                <button class="btn btn-secondary">Learn More</button>
+                <button class="btn btn-ocean">🌊 Dive In</button>
+                <button class="btn btn-sunshine">☀️ Explore</button>
+            </div>
+        </section>
+
+        <!-- Forms -->
+        <section id="forms">
+            <h2>📝 Forms</h2>
+            <form onsubmit="return false;" style="max-width: 500px;">
+                <div class="form-group">
+                    <label class="form-label">Guest Name</label>
+                    <input type="text" class="form-input" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Destination</label>
+                    <select class="form-input form-select">
+                        <option>Select island</option>
+                        <option>Bora Bora</option>
+                        <option>Maldives</option>
+                        <option>Hawaii</option>
+                        <option>Fiji</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Special Requests</label>
+                    <textarea class="form-input" placeholder="Tell us about your dream vacation..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">🏝️ Reserve Paradise</button>
+            </form>
+        </section>
+
+        <!-- Cards -->
+        <section id="cards">
+            <h2>🃏 Cards</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-image"></div>
+                    <div class="card-content">
+                        <h3 class="card-title">Sunset Beach</h3>
+                        <p class="card-text">Watch the sky paint itself in shades of gold and coral as the sun dips below the horizon.</p>
+                        <div class="card-meta">
+                            <span>🌅</span>
+                            <span>Golden Hour • Daily</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--palm-green), var(--seafoam));"></div>
+                    <div class="card-content">
+                        <h3 class="card-title">Rainforest Trail</h3>
+                        <p class="card-text">Discover hidden waterfalls and exotic wildlife along our scenic nature paths.</p>
+                        <div class="card-meta">
+                            <span>🌴</span>
+                            <span>2.5 miles • Moderate</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--coral), var(--hibiscus));"></div>
+                    <div class="card-content">
+                        <h3 class="card-title">Coral Reef Dive</h3>
+                        <p class="card-text">Explore vibrant underwater gardens teeming with tropical fish and sea turtles.</p>
+                        <div class="card-meta">
+                            <span>🐠</span>
+                            <span>30m depth • All levels</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Table -->
+        <section id="table">
+            <h2>📊 Data Table</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Activity</th>
+                            <th>Location</th>
+                            <th>Duration</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Snorkeling Tour</td>
+                            <td>Coral Bay</td>
+                            <td>3 hours</td>
+                            <td><span class="status-active">Available</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sunset Cruise</td>
+                            <td>Marina</td>
+                            <td>2 hours</td>
+                            <td><span class="status-active">Available</span></td>
+                        </tr>
+                        <tr>
+                            <td>Volcano Hike</td>
+                            <td>Mt. Tropical</td>
+                            <td>5 hours</td>
+                            <td><span class="status-pending">Limited</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Badges -->
+        <section id="badges">
+            <h2>🏷️ Badges</h2>
+            <div class="badge-grid">
+                <span class="badge badge-coral">🌺 Featured</span>
+                <span class="badge badge-ocean">🌊 Popular</span>
+                <span class="badge badge-palm">🌴 Eco-Friendly</span>
+                <span class="badge badge-golden">☀️ Best Value</span>
+                <span class="badge badge-hibiscus">💖 Romantic</span>
+                <span class="badge badge-outline">New</span>
+            </div>
+        </section>
+
+        <!-- Design Principles -->
+        <section id="principles">
+            <h2>📐 Design Principles</h2>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-icon">☀️</div>
+                    <h3 class="principle-title">Warm & Inviting</h3>
+                    <p class="principle-text">Use sunset tones and gentle gradients to create a welcoming atmosphere.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">🌊</div>
+                    <h3 class="principle-title">Fluid Motion</h3>
+                    <p class="principle-text">Animations should flow like ocean waves—smooth and natural.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">🌴</div>
+                    <h3 class="principle-title">Organic Shapes</h3>
+                    <p class="principle-text">Embrace curved edges and natural forms over rigid geometry.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">🎉</div>
+                    <h3 class="principle-title">Joyful Energy</h3>
+                    <p class="principle-text">Every interaction should feel like a mini vacation for the user.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animations -->
+        <section id="animations">
+            <h2>✨ Animations</h2>
+            <div class="animation-showcase">
+                <div class="animation-demo sway-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Sway</span>
+                </div>
+                <div class="animation-demo bob-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Bob</span>
+                </div>
+                <div class="animation-demo shimmer-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Shimmer</span>
+                </div>
+                <div class="animation-demo splash-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Splash</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Component: Resort Card -->
+        <section id="special">
+            <h2>🏨 Special Component</h2>
+            <p style="margin-bottom: var(--space-lg); color: var(--driftwood);">Resort Card — Showcase accommodations with immersive tropical styling.</p>
+            <div class="resort-card">
+                <div class="resort-header">
+                    <div>
+                        <div class="resort-name">Coral Bay Resort</div>
+                        <p style="opacity: 0.9;">Maldives • Luxury Collection</p>
+                    </div>
+                    <div class="resort-rating">⭐ 4.9</div>
+                </div>
+
+                <div class="resort-features">
+                    <div class="feature">🏖️ Private Beach</div>
+                    <div class="feature">🍹 All-Inclusive</div>
+                    <div class="feature">🤿 Dive Center</div>
+                    <div class="feature">💆 Spa & Wellness</div>
+                </div>
+
+                <div class="resort-stats">
+                    <div class="stat">
+                        <div class="stat-value">87</div>
+                        <div class="stat-label">Water Villas</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Restaurants</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">24/7</div>
+                        <div class="stat-label">Concierge</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alerts -->
+        <section id="alerts">
+            <h2>🔔 Alerts</h2>
+            <div class="alert alert-success">
+                <span class="alert-icon">🌴</span>
+                <div class="alert-content">
+                    <div class="alert-title">Booking Confirmed!</div>
+                    <p>Your tropical getaway has been reserved. Pack your sunscreen!</p>
+                </div>
+            </div>
+            <div class="alert alert-info">
+                <span class="alert-icon">🌊</span>
+                <div class="alert-content">
+                    <div class="alert-title">High Tide Notice</div>
+                    <p>Beach activities will resume after 2 PM. Perfect time for a spa session!</p>
+                </div>
+            </div>
+            <div class="alert alert-warning">
+                <span class="alert-icon">☀️</span>
+                <div class="alert-content">
+                    <div class="alert-title">Sun Advisory</div>
+                    <p>UV index is high today. Don't forget your sunscreen and hat!</p>
+                </div>
+            </div>
+            <div class="alert alert-error">
+                <span class="alert-icon">🌺</span>
+                <div class="alert-content">
+                    <div class="alert-title">Fully Booked</div>
+                    <p>This activity is sold out. Check our other amazing experiences!</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Paradise Design System</p>
+            <p>Where every interface feels like a vacation 🏝️</p>
+        </footer>
+    </div>
+</body>
+</html>

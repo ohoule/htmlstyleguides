@@ -3,41 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Floréal - Art Nouveau Style Guide</title>
+    <title>Mucha - Art Nouveau Style Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Spectral:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Art Nouveau Color Palette - Organic, muted, nature-inspired */
-            --sage-green: #8B9A6B;
-            --deep-teal: #2F5D62;
-            --gold: #C5A572;
-            --burnt-orange: #C67D4A;
-            --dusty-rose: #C4918F;
-            --plum: #6B4E5C;
-            --cream: #F5F0E6;
-            --parchment: #EDE4D3;
-            --charcoal: #3A3A3A;
-            --ivory: #FFFFF0;
+            /* Art Nouveau Color Palette - Organic, muted, nature-inspired luxury */
+            --sage-mist: #9CAF88;
+            --deep-jade: #2D5A4A;
+            --burnished-gold: #C9A227;
+            --antique-bronze: #8B6914;
+            --dusty-rose: #C08497;
+            --plum-shadow: #6B4E5C;
+            --peacock-blue: #005B5C;
+            --terracotta: #C66B3D;
+            --ivory: #F8F4E9;
+            --parchment: #E8DCC4;
+            --walnut: #3D2B1F;
+            --charcoal: #2A2A2A;
 
             /* Typography */
-            --font-display: 'Cinzel', serif;
-            --font-body: 'Cormorant Garamond', serif;
+            --font-display: 'Cormorant', serif;
+            --font-body: 'EB Garamond', serif;
+            --font-accent: 'Spectral', serif;
 
-            /* Spacing */
+            /* Spacing - Organic flow */
             --space-xs: 4px;
             --space-sm: 8px;
             --space-md: 16px;
             --space-lg: 24px;
-            --space-xl: 32px;
-            --space-2xl: 48px;
-            --space-3xl: 64px;
+            --space-xl: 40px;
+            --space-2xl: 64px;
+            --space-3xl: 96px;
 
             /* Border Radius - Organic curves */
             --radius-sm: 4px;
-            --radius-md: 8px;
-            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --radius-organic: 60% 40% 55% 45% / 45% 55% 45% 55%;
         }
 
         * {
@@ -48,9 +52,41 @@
 
         body {
             font-family: var(--font-body);
-            background: var(--cream);
-            color: var(--charcoal);
-            line-height: 1.7;
+            background: var(--ivory);
+            color: var(--walnut);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Decorative Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 Q35 15 30 25 Q25 35 30 45 Q35 55 30 55' stroke='%23C9A22720' fill='none' stroke-width='1'/%3E%3Cpath d='M10 5 Q15 15 10 25 Q5 35 10 45 Q15 55 10 55' stroke='%23C9A22715' fill='none' stroke-width='1'/%3E%3Cpath d='M50 5 Q55 15 50 25 Q45 35 50 45 Q55 55 50 55' stroke='%23C9A22715' fill='none' stroke-width='1'/%3E%3C/svg%3E");
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Ornate border decoration */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg,
+                var(--deep-jade),
+                var(--burnished-gold),
+                var(--deep-jade),
+                var(--burnished-gold),
+                var(--deep-jade));
+            z-index: 1000;
         }
 
         .container {
@@ -59,120 +95,166 @@
             padding: var(--space-xl);
         }
 
-        /* Decorative SVG Border */
-        .ornament {
-            display: block;
-            margin: var(--space-xl) auto;
-            height: 60px;
-            opacity: 0.6;
+        /* Navigation */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--deep-jade);
+            text-decoration: none;
+            font-family: var(--font-accent);
+            font-weight: 500;
+            font-style: italic;
+            margin-bottom: var(--space-xl);
+            padding: var(--space-sm) var(--space-md);
+            border: 1px solid var(--burnished-gold);
+            border-radius: var(--radius-lg);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Header */
+        .back-link::before {
+            content: '❧';
+            font-size: 1.2em;
+            color: var(--burnished-gold);
+        }
+
+        .back-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: var(--burnished-gold);
+            transition: height 0.3s ease;
+            z-index: -1;
+        }
+
+        .back-link:hover {
+            color: var(--ivory);
+        }
+
+        .back-link:hover::after {
+            height: 100%;
+        }
+
+        /* Header - Ornate Frame */
         header {
             text-align: center;
             padding: var(--space-3xl) var(--space-xl);
+            margin-bottom: var(--space-3xl);
+            background: linear-gradient(135deg, var(--parchment), var(--ivory));
+            border: 3px solid var(--burnished-gold);
+            border-radius: var(--radius-lg);
             position: relative;
+            overflow: hidden;
         }
 
-        .logo {
+        /* Decorative corner flourishes */
+        header::before,
+        header::after {
+            content: '✿';
+            position: absolute;
+            font-size: 3rem;
+            color: var(--burnished-gold);
+            opacity: 0.4;
+        }
+
+        header::before {
+            top: 20px;
+            left: 30px;
+            transform: rotate(-15deg);
+        }
+
+        header::after {
+            bottom: 20px;
+            right: 30px;
+            transform: rotate(15deg);
+        }
+
+        .header-ornament {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: var(--burnished-gold);
+            letter-spacing: 0.5em;
+        }
+
+        .header-ornament-bottom {
+            top: auto;
+            bottom: 15px;
+        }
+
+        header h1 {
             font-family: var(--font-display);
-            font-size: 4rem;
-            font-weight: 400;
-            color: var(--deep-teal);
-            letter-spacing: 0.3em;
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 600;
+            color: var(--deep-jade);
+            letter-spacing: 0.15em;
             text-transform: uppercase;
             margin-bottom: var(--space-md);
+            text-shadow: 2px 2px 0 var(--burnished-gold);
         }
 
-        .tagline {
-            font-family: var(--font-body);
-            font-size: 1.5rem;
+        header p {
+            font-family: var(--font-accent);
             font-style: italic;
-            color: var(--gold);
-        }
-
-        /* Art Nouveau decorative line */
-        .art-line {
-            width: 200px;
-            height: 30px;
-            margin: var(--space-lg) auto;
-            position: relative;
-        }
-
-        .art-line::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: var(--gold);
-        }
-
-        .art-line::after {
-            content: '❧';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--cream);
-            padding: 0 var(--space-md);
-            color: var(--gold);
-            font-size: 1.5rem;
+            color: var(--walnut);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         /* Section Styling */
         section {
             margin-bottom: var(--space-3xl);
-            background: var(--ivory);
-            border: 1px solid var(--gold);
-            padding: var(--space-2xl);
+            padding: var(--space-xl);
+            background: white;
+            border: 2px solid var(--parchment);
+            border-radius: var(--radius-md);
             position: relative;
         }
 
         section::before {
             content: '';
             position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            border: 1px solid rgba(197, 165, 114, 0.3);
-            pointer-events: none;
+            top: -1px;
+            left: 30px;
+            right: 30px;
+            height: 4px;
+            background: linear-gradient(90deg,
+                transparent,
+                var(--burnished-gold),
+                transparent);
         }
 
         h2 {
             font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--deep-teal);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: var(--space-xl);
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--deep-jade);
+            margin-bottom: var(--space-lg);
             text-align: center;
+            letter-spacing: 0.1em;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
         }
 
+        h2::before,
         h2::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 1px;
-            background: var(--gold);
-            margin: var(--space-md) auto 0;
+            content: '—❦—';
+            font-size: 0.8rem;
+            color: var(--burnished-gold);
         }
 
-        h3 {
-            font-family: var(--font-display);
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--plum);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: var(--space-sm);
-        }
-
-        /* Color Palette */
+        /* Color Palette - Jewel Swatches */
         .color-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -180,96 +262,202 @@
         }
 
         .color-swatch {
-            height: 140px;
+            aspect-ratio: 3/4;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             padding: var(--space-md);
             position: relative;
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 2px solid rgba(201, 162, 39, 0.3);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
         }
 
-        /* Organic top border for swatches */
+        .color-swatch:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
         .color-swatch::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 20px;
-            background: inherit;
-            clip-path: ellipse(70% 100% at 50% 0%);
+            top: 15%;
+            left: 20%;
+            width: 30%;
+            height: 20%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4), transparent);
+            border-radius: 50%;
+            transform: rotate(-30deg);
         }
 
-        .color-swatch span {
+        .color-name {
             font-family: var(--font-display);
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            background: var(--ivory);
-            padding: var(--space-xs) var(--space-sm);
-            color: var(--charcoal);
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
         }
+
+        .color-value {
+            font-family: var(--font-accent);
+            font-size: 0.7rem;
+            font-style: italic;
+            opacity: 0.85;
+        }
+
+        .swatch-sage { background: var(--sage-mist); color: var(--walnut); }
+        .swatch-jade { background: var(--deep-jade); color: var(--ivory); }
+        .swatch-gold { background: var(--burnished-gold); color: var(--walnut); }
+        .swatch-bronze { background: var(--antique-bronze); color: var(--ivory); }
+        .swatch-rose { background: var(--dusty-rose); color: white; }
+        .swatch-plum { background: var(--plum-shadow); color: var(--ivory); }
+        .swatch-peacock { background: var(--peacock-blue); color: var(--ivory); }
+        .swatch-terracotta { background: var(--terracotta); color: var(--ivory); }
+        .swatch-walnut { background: var(--walnut); color: var(--ivory); }
+        .swatch-parchment { background: var(--parchment); color: var(--walnut); border: 2px solid var(--burnished-gold); }
 
         /* Typography */
-        .type-sample {
+        .type-specimen {
             margin-bottom: var(--space-xl);
-            text-align: center;
+            padding: var(--space-xl);
+            background: var(--parchment);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--burnished-gold);
+        }
+
+        .type-specimen h3 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--deep-jade);
+            margin-bottom: var(--space-sm);
+            letter-spacing: 0.1em;
+        }
+
+        .type-specimen .font-name {
+            font-family: var(--font-accent);
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--burnished-gold);
+            margin-bottom: var(--space-md);
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-lg);
+        }
+
+        .type-label {
+            font-family: var(--font-accent);
+            font-style: italic;
+            font-size: 0.75rem;
+            color: var(--terracotta);
+            min-width: 70px;
         }
 
         .display-text {
             font-family: var(--font-display);
-            font-size: 3rem;
-            font-weight: 400;
-            color: var(--deep-teal);
-            letter-spacing: 0.1em;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--deep-jade);
+            letter-spacing: 0.08em;
+        }
+
+        .heading-text {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--walnut);
         }
 
         .body-text {
             font-family: var(--font-body);
-            font-size: 1.25rem;
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-            color: var(--charcoal);
+            font-size: 1.1rem;
+            color: var(--walnut);
+        }
+
+        .small-text {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--walnut);
+            opacity: 0.85;
         }
 
         /* Spacing Scale */
-        .spacing-demo {
+        .spacing-visual {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-md);
-            justify-content: center;
+            gap: var(--space-xl);
             align-items: flex-end;
+            justify-content: center;
         }
 
-        .spacing-block {
-            background: linear-gradient(180deg, var(--sage-green), var(--deep-teal));
+        .spacing-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            color: var(--ivory);
+            gap: var(--space-sm);
+        }
+
+        .spacing-vine {
+            background: linear-gradient(to top, var(--deep-jade), var(--sage-mist));
+            width: 8px;
+            position: relative;
+            border-radius: 4px;
+        }
+
+        .spacing-vine::before,
+        .spacing-vine::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--burnished-gold);
+            border-radius: 50%;
+            background: var(--ivory);
+        }
+
+        .spacing-vine::before { top: -6px; left: -2px; }
+        .spacing-vine::after { bottom: -6px; left: -2px; }
+
+        .spacing-label {
             font-family: var(--font-display);
-            font-size: 0.7rem;
+            font-size: 0.8rem;
+            color: var(--deep-jade);
             letter-spacing: 0.1em;
         }
 
-        /* Buttons */
+        .spacing-value {
+            font-family: var(--font-accent);
+            font-style: italic;
+            font-size: 0.75rem;
+            color: var(--terracotta);
+        }
+
+        /* Buttons - Ornate */
         .button-grid {
             display: flex;
             flex-wrap: wrap;
             gap: var(--space-md);
             justify-content: center;
+            margin-bottom: var(--space-lg);
         }
 
         .btn {
             font-family: var(--font-display);
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            padding: var(--space-md) var(--space-2xl);
-            border: 1px solid;
+            letter-spacing: 0.1em;
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-lg);
             cursor: pointer;
             transition: all 0.4s ease;
             position: relative;
@@ -280,141 +468,180 @@
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s ease;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .btn:hover::before {
-            left: 100%;
+            opacity: 1;
         }
 
         .btn-primary {
-            background: var(--deep-teal);
+            background: linear-gradient(135deg, var(--deep-jade), var(--peacock-blue));
             color: var(--ivory);
-            border-color: var(--deep-teal);
+            border: 2px solid var(--burnished-gold);
+            box-shadow: 0 4px 15px rgba(45, 90, 74, 0.3);
         }
 
         .btn-primary:hover {
-            background: var(--plum);
-            border-color: var(--plum);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(45, 90, 74, 0.4);
         }
 
         .btn-secondary {
-            background: var(--gold);
-            color: var(--charcoal);
-            border-color: var(--gold);
+            background: var(--ivory);
+            color: var(--deep-jade);
+            border: 2px solid var(--deep-jade);
         }
 
         .btn-secondary:hover {
-            background: var(--burnt-orange);
-            border-color: var(--burnt-orange);
+            background: var(--deep-jade);
             color: var(--ivory);
         }
 
-        .btn-outline {
-            background: transparent;
-            color: var(--deep-teal);
-            border-color: var(--deep-teal);
+        .btn-gold {
+            background: linear-gradient(135deg, var(--burnished-gold), var(--antique-bronze));
+            color: var(--walnut);
+            border: 2px solid var(--antique-bronze);
         }
 
-        .btn-outline:hover {
-            background: var(--deep-teal);
-            color: var(--ivory);
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(201, 162, 39, 0.4);
+        }
+
+        .btn-rose {
+            background: var(--dusty-rose);
+            color: white;
+            border: 2px solid var(--plum-shadow);
+        }
+
+        .btn-rose:hover {
+            background: var(--plum-shadow);
         }
 
         /* Forms */
         .form-group {
             margin-bottom: var(--space-lg);
-            max-width: 450px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
-        label {
+        .form-label {
             display: block;
             font-family: var(--font-display);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--plum);
+            font-weight: 500;
+            color: var(--deep-jade);
             margin-bottom: var(--space-sm);
+            letter-spacing: 0.05em;
         }
 
-        input[type="text"],
-        input[type="email"],
-        textarea,
-        select {
+        .form-input {
             width: 100%;
             padding: var(--space-md);
             font-family: var(--font-body);
-            font-size: 1.1rem;
-            border: 1px solid var(--sage-green);
-            background: var(--cream);
-            color: var(--charcoal);
+            font-size: 1rem;
+            border: 2px solid var(--parchment);
+            border-radius: var(--radius-md);
+            background: var(--ivory);
+            color: var(--walnut);
             transition: all 0.3s ease;
         }
 
-        input:focus,
-        textarea:focus,
-        select:focus {
+        .form-input:focus {
             outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(197, 165, 114, 0.2);
+            border-color: var(--burnished-gold);
+            box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.15);
         }
 
-        textarea {
+        .form-input::placeholder {
+            color: rgba(61, 43, 31, 0.4);
+            font-style: italic;
+        }
+
+        textarea.form-input {
             min-height: 120px;
             resize: vertical;
         }
 
-        /* Cards */
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23C9A227' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-md) center;
+            padding-right: var(--space-2xl);
+        }
+
+        .form-checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .form-checkbox {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--deep-jade);
+            cursor: pointer;
+        }
+
+        /* Cards - Framed Panels */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
+            gap: var(--space-xl);
         }
 
         .card {
-            background: var(--cream);
-            border: 1px solid var(--gold);
-            transition: all 0.4s ease;
+            background: var(--ivory);
+            border: 3px solid var(--parchment);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: all 0.5s ease;
             position: relative;
         }
 
         .card::before {
             content: '';
             position: absolute;
-            top: 8px;
-            left: 8px;
-            right: -8px;
-            bottom: -8px;
-            border: 1px solid var(--sage-green);
-            transition: all 0.4s ease;
-            z-index: -1;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid var(--burnished-gold);
+            border-radius: var(--radius-sm);
+            pointer-events: none;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(61, 43, 31, 0.15);
+            border-color: var(--burnished-gold);
         }
 
         .card:hover::before {
-            top: 4px;
-            left: 4px;
-            right: -4px;
-            bottom: -4px;
+            opacity: 1;
         }
 
         .card-image {
             height: 180px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            border-bottom: 1px solid var(--gold);
+            background: linear-gradient(135deg, var(--sage-mist), var(--deep-jade), var(--peacock-blue));
+            position: relative;
         }
 
-        .card:nth-child(1) .card-image { background: linear-gradient(135deg, var(--sage-green), var(--deep-teal)); }
-        .card:nth-child(2) .card-image { background: linear-gradient(135deg, var(--dusty-rose), var(--plum)); }
-        .card:nth-child(3) .card-image { background: linear-gradient(135deg, var(--gold), var(--burnt-orange)); }
+        .card-image::after {
+            content: '❀';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: rgba(255,255,255,0.3);
+        }
 
         .card-content {
             padding: var(--space-lg);
@@ -422,23 +649,35 @@
 
         .card-title {
             font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--deep-teal);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            font-size: 1.3rem;
+            color: var(--deep-jade);
             margin-bottom: var(--space-sm);
+            letter-spacing: 0.05em;
         }
 
         .card-text {
-            font-size: 1rem;
-            color: var(--charcoal);
+            font-family: var(--font-body);
+            color: var(--walnut);
+            opacity: 0.85;
+            margin-bottom: var(--space-md);
+            line-height: 1.7;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-family: var(--font-accent);
             font-style: italic;
+            font-size: 0.85rem;
+            color: var(--terracotta);
         }
 
         /* Data Table */
         .table-wrapper {
-            border: 1px solid var(--gold);
+            overflow-x: auto;
+            border: 2px solid var(--parchment);
+            border-radius: var(--radius-md);
         }
 
         table {
@@ -446,26 +685,59 @@
             border-collapse: collapse;
         }
 
+        thead {
+            background: linear-gradient(135deg, var(--deep-jade), var(--peacock-blue));
+        }
+
         th {
-            background: var(--deep-teal);
-            color: var(--ivory);
             font-family: var(--font-display);
-            font-size: 0.75rem;
             font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            padding: var(--space-md);
+            color: var(--ivory);
             text-align: left;
+            padding: var(--space-md) var(--space-lg);
+            letter-spacing: 0.08em;
+            font-size: 0.9rem;
         }
 
         td {
-            padding: var(--space-md);
-            border-bottom: 1px solid rgba(197, 165, 114, 0.3);
-            font-size: 1rem;
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--parchment);
+            font-family: var(--font-body);
+            color: var(--walnut);
         }
 
-        tr:nth-child(even) {
-            background: rgba(197, 165, 114, 0.1);
+        tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: rgba(201, 162, 39, 0.08);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-active {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            background: rgba(45, 90, 74, 0.15);
+            color: var(--deep-jade);
+            border-radius: var(--radius-lg);
+            font-size: 0.85rem;
+            font-family: var(--font-accent);
+        }
+
+        .status-pending {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(201, 162, 39, 0.15);
+            color: var(--antique-bronze);
+            border-radius: var(--radius-lg);
+            font-size: 0.85rem;
+            font-family: var(--font-accent);
         }
 
         /* Badges */
@@ -478,426 +750,646 @@
 
         .badge {
             font-family: var(--font-display);
-            font-size: 0.65rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
             padding: var(--space-xs) var(--space-md);
-            border: 1px solid;
+            border-radius: var(--radius-lg);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .badge-teal {
-            background: var(--deep-teal);
+        .badge-jade {
+            background: var(--deep-jade);
             color: var(--ivory);
-            border-color: var(--deep-teal);
         }
 
         .badge-gold {
-            background: var(--gold);
-            color: var(--charcoal);
-            border-color: var(--gold);
+            background: var(--burnished-gold);
+            color: var(--walnut);
         }
 
         .badge-rose {
             background: var(--dusty-rose);
-            color: var(--ivory);
-            border-color: var(--dusty-rose);
+            color: white;
         }
 
-        .badge-sage {
-            background: var(--sage-green);
+        .badge-peacock {
+            background: var(--peacock-blue);
             color: var(--ivory);
-            border-color: var(--sage-green);
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 2px solid var(--burnished-gold);
+            color: var(--burnished-gold);
+        }
+
+        .badge-terracotta {
+            background: var(--terracotta);
+            color: var(--ivory);
         }
 
         /* Design Principles */
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: var(--space-lg);
         }
 
-        .principle {
+        .principle-card {
+            padding: var(--space-lg);
+            background: var(--parchment);
+            border-radius: var(--radius-md);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
             text-align: center;
-            padding: var(--space-xl);
-            border: 1px solid var(--sage-green);
-            background: var(--cream);
+        }
+
+        .principle-card:hover {
+            border-color: var(--burnished-gold);
+            transform: translateY(-4px);
         }
 
         .principle-icon {
             font-size: 2.5rem;
             margin-bottom: var(--space-md);
-            color: var(--gold);
         }
 
         .principle-title {
             font-family: var(--font-display);
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--deep-teal);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
+            font-size: 1.1rem;
+            color: var(--deep-jade);
             margin-bottom: var(--space-sm);
+            letter-spacing: 0.08em;
         }
 
         .principle-text {
-            font-size: 1rem;
-            font-style: italic;
-            color: var(--charcoal);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--walnut);
+            opacity: 0.85;
         }
 
         /* Animations */
-        .animation-grid {
+        .animation-showcase {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: var(--space-lg);
         }
 
         .animation-demo {
-            height: 150px;
-            background: var(--cream);
-            border: 1px solid var(--sage-green);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: var(--space-lg);
+            background: var(--parchment);
+            border-radius: var(--radius-md);
+            text-align: center;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+        }
+
+        .animation-element {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto var(--space-md);
+            background: linear-gradient(135deg, var(--deep-jade), var(--sage-mist));
+            border-radius: var(--radius-organic);
+            border: 2px solid var(--burnished-gold);
+        }
+
+        .flourish-demo .animation-element {
+            animation: flourish 3s ease-in-out infinite;
+        }
+
+        @keyframes flourish {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(5deg) scale(1.05); }
+            75% { transform: rotate(-5deg) scale(1.05); }
+        }
+
+        .unfurl-demo .animation-element {
+            animation: unfurl 2.5s ease-in-out infinite;
+        }
+
+        @keyframes unfurl {
+            0%, 100% { border-radius: var(--radius-organic); }
+            50% { border-radius: 50%; transform: scale(1.1); }
+        }
+
+        .tendril-demo .animation-element {
+            animation: tendril 4s ease-in-out infinite;
+        }
+
+        @keyframes tendril {
+            0%, 100% { transform: scaleX(1) scaleY(1); }
+            50% { transform: scaleX(0.9) scaleY(1.15); }
+        }
+
+        .gild-demo .animation-element {
+            animation: gild 3s ease-in-out infinite;
+        }
+
+        @keyframes gild {
+            0%, 100% { box-shadow: 0 0 0 2px var(--burnished-gold); }
+            50% { box-shadow: 0 0 20px 4px var(--burnished-gold); }
+        }
+
+        .animation-label {
+            font-family: var(--font-accent);
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--deep-jade);
+        }
+
+        /* Special Component - Botanical Frame */
+        .botanical-frame {
+            background: linear-gradient(135deg, var(--parchment), var(--ivory));
+            border: 4px solid var(--burnished-gold);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            position: relative;
             overflow: hidden;
         }
 
-        .vine-demo {
-            width: 4px;
-            height: 80px;
-            background: var(--sage-green);
-            position: relative;
-            animation: vine-grow 3s ease-in-out infinite;
-        }
-
-        .vine-demo::before,
-        .vine-demo::after {
-            content: '🌿';
+        .botanical-frame::before {
+            content: '';
             position: absolute;
-            font-size: 1.5rem;
-            animation: leaf-appear 3s ease-in-out infinite;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid var(--deep-jade);
+            border-radius: var(--radius-md);
+            opacity: 0.5;
         }
 
-        .vine-demo::before { top: 20%; left: 10px; }
-        .vine-demo::after { top: 60%; right: 10px; transform: scaleX(-1); }
-
-        @keyframes vine-grow {
-            0%, 100% { transform: scaleY(0.6); }
-            50% { transform: scaleY(1); }
+        .botanical-corners {
+            position: absolute;
+            font-size: 2.5rem;
+            color: var(--burnished-gold);
+            animation: cornerPulse 4s ease-in-out infinite;
         }
 
-        @keyframes leaf-appear {
-            0%, 100% { opacity: 0.3; }
+        .corner-tl { top: 25px; left: 25px; }
+        .corner-tr { top: 25px; right: 25px; transform: scaleX(-1); }
+        .corner-bl { bottom: 25px; left: 25px; transform: scaleY(-1); }
+        .corner-br { bottom: 25px; right: 25px; transform: scale(-1); }
+
+        @keyframes cornerPulse {
+            0%, 100% { opacity: 0.6; }
             50% { opacity: 1; }
         }
 
-        .swirl-demo {
-            width: 60px;
-            height: 60px;
-            border: 3px solid var(--gold);
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: swirl 2s linear infinite;
-        }
-
-        @keyframes swirl {
-            100% { transform: rotate(360deg); }
-        }
-
-        .bloom-demo {
-            font-size: 3rem;
-            animation: bloom 3s ease-in-out infinite;
-        }
-
-        @keyframes bloom {
-            0%, 100% { transform: scale(0.8) rotate(-10deg); opacity: 0.6; }
-            50% { transform: scale(1.2) rotate(10deg); opacity: 1; }
-        }
-
-        /* Special Component: Botanical Frame */
-        .botanical-frame {
-            background: var(--cream);
-            border: 2px solid var(--gold);
-            padding: var(--space-2xl);
+        .botanical-content {
             position: relative;
+            z-index: 1;
             text-align: center;
         }
 
-        .frame-corner {
+        .botanical-illustration {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto var(--space-lg);
+            background: linear-gradient(135deg, var(--sage-mist), var(--deep-jade));
+            border-radius: 50%;
+            border: 4px solid var(--burnished-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .botanical-illustration::before {
+            content: '❁';
+            font-size: 5rem;
+            color: rgba(255,255,255,0.5);
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .botanical-illustration::after {
+            content: '';
             position: absolute;
-            font-size: 2rem;
-            color: var(--sage-green);
+            top: 10%;
+            left: 10%;
+            width: 30%;
+            height: 20%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent);
+            border-radius: 50%;
         }
 
-        .frame-corner.top-left { top: var(--space-md); left: var(--space-md); }
-        .frame-corner.top-right { top: var(--space-md); right: var(--space-md); transform: scaleX(-1); }
-        .frame-corner.bottom-left { bottom: var(--space-md); left: var(--space-md); transform: scaleY(-1); }
-        .frame-corner.bottom-right { bottom: var(--space-md); right: var(--space-md); transform: scale(-1); }
-
-        .frame-content {
-            padding: var(--space-xl);
-        }
-
-        .frame-title {
+        .botanical-title {
             font-family: var(--font-display);
             font-size: 1.75rem;
-            color: var(--deep-teal);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: var(--space-md);
+            color: var(--deep-jade);
+            letter-spacing: 0.15em;
+            margin-bottom: var(--space-sm);
         }
 
-        .frame-text {
-            font-family: var(--font-body);
-            font-size: 1.25rem;
+        .botanical-subtitle {
+            font-family: var(--font-accent);
             font-style: italic;
-            color: var(--charcoal);
-            max-width: 500px;
-            margin: 0 auto;
+            color: var(--terracotta);
+            margin-bottom: var(--space-lg);
         }
 
-        .frame-decoration {
-            margin-top: var(--space-lg);
+        .botanical-description {
+            font-family: var(--font-body);
+            color: var(--walnut);
+            max-width: 500px;
+            margin: 0 auto var(--space-lg);
+            line-height: 1.8;
+        }
+
+        .botanical-attributes {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            flex-wrap: wrap;
+        }
+
+        .attribute {
+            text-align: center;
+        }
+
+        .attribute-value {
+            font-family: var(--font-display);
             font-size: 1.5rem;
-            color: var(--gold);
+            color: var(--burnished-gold);
+        }
+
+        .attribute-label {
+            font-family: var(--font-accent);
+            font-style: italic;
+            font-size: 0.85rem;
+            color: var(--walnut);
         }
 
         /* Alerts */
         .alert {
             padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
             margin-bottom: var(--space-md);
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: var(--space-md);
-            border: 1px solid;
-            position: relative;
-        }
-
-        .alert::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
+            border: 2px solid;
         }
 
         .alert-icon {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
+            flex-shrink: 0;
         }
 
         .alert-content {
-            font-size: 1rem;
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-display);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        .alert-text {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+        }
+
+        .alert-success {
+            background: rgba(45, 90, 74, 0.1);
+            border-color: var(--deep-jade);
+            color: var(--deep-jade);
         }
 
         .alert-info {
-            background: rgba(47, 93, 98, 0.1);
-            border-color: var(--deep-teal);
+            background: rgba(201, 162, 39, 0.1);
+            border-color: var(--burnished-gold);
+            color: var(--antique-bronze);
         }
-
-        .alert-info::before { background: var(--deep-teal); }
-
-        .alert-success {
-            background: rgba(139, 154, 107, 0.1);
-            border-color: var(--sage-green);
-        }
-
-        .alert-success::before { background: var(--sage-green); }
 
         .alert-warning {
-            background: rgba(197, 165, 114, 0.1);
-            border-color: var(--gold);
+            background: rgba(198, 107, 61, 0.1);
+            border-color: var(--terracotta);
+            color: var(--terracotta);
         }
-
-        .alert-warning::before { background: var(--gold); }
 
         .alert-error {
-            background: rgba(196, 145, 143, 0.1);
-            border-color: var(--dusty-rose);
-        }
-
-        .alert-error::before { background: var(--dusty-rose); }
-
-        /* Back Link */
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-sm);
-            color: var(--deep-teal);
-            text-decoration: none;
-            font-family: var(--font-display);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: var(--space-xl);
-            transition: color 0.3s ease;
-        }
-
-        .back-link:hover {
-            color: var(--gold);
+            background: rgba(107, 78, 92, 0.1);
+            border-color: var(--plum-shadow);
+            color: var(--plum-shadow);
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: var(--space-2xl);
-            font-family: var(--font-body);
+            margin-top: var(--space-3xl);
+            background: var(--parchment);
+            border: 2px solid var(--burnished-gold);
+            border-radius: var(--radius-lg);
+        }
+
+        footer p {
+            font-family: var(--font-display);
+            color: var(--deep-jade);
+            letter-spacing: 0.1em;
+        }
+
+        footer p:first-child {
+            font-size: 1.2rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        footer p:last-child {
+            font-family: var(--font-accent);
             font-style: italic;
-            color: var(--plum);
+            color: var(--terracotta);
+            letter-spacing: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--space-md);
+            }
+
+            header {
+                padding: var(--space-2xl) var(--space-md);
+            }
+
+            header::before,
+            header::after {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: var(--space-lg);
+            }
+
+            .botanical-attributes {
+                gap: var(--space-lg);
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">← Back to Gallery</a>
+        <a href="../index.html" class="back-link">Back to Gallery</a>
 
         <header>
-            <h1 class="logo">Floréal</h1>
-            <p class="tagline">Nature's Curves in Perfect Harmony</p>
-            <div class="art-line"></div>
+            <div class="header-ornament">❦ ❦ ❦</div>
+            <h1>Mucha</h1>
+            <p>An organic design system inspired by the sinuous curves of nature, celebrating beauty in every flourish</p>
+            <div class="header-ornament header-ornament-bottom">❦ ❦ ❦</div>
         </header>
 
         <!-- Color Palette -->
-        <section>
+        <section id="colors">
             <h2>Color Palette</h2>
             <div class="color-grid">
-                <div class="color-swatch" style="background: var(--sage-green);">
-                    <span>Sage Green</span>
+                <div class="color-swatch swatch-sage">
+                    <span class="color-name">Sage Mist</span>
+                    <span class="color-value">#9CAF88</span>
                 </div>
-                <div class="color-swatch" style="background: var(--deep-teal);">
-                    <span>Deep Teal</span>
+                <div class="color-swatch swatch-jade">
+                    <span class="color-name">Deep Jade</span>
+                    <span class="color-value">#2D5A4A</span>
                 </div>
-                <div class="color-swatch" style="background: var(--gold);">
-                    <span>Gold</span>
+                <div class="color-swatch swatch-gold">
+                    <span class="color-name">Burnished Gold</span>
+                    <span class="color-value">#C9A227</span>
                 </div>
-                <div class="color-swatch" style="background: var(--burnt-orange);">
-                    <span>Burnt Orange</span>
+                <div class="color-swatch swatch-bronze">
+                    <span class="color-name">Antique Bronze</span>
+                    <span class="color-value">#8B6914</span>
                 </div>
-                <div class="color-swatch" style="background: var(--dusty-rose);">
-                    <span>Dusty Rose</span>
+                <div class="color-swatch swatch-rose">
+                    <span class="color-name">Dusty Rose</span>
+                    <span class="color-value">#C08497</span>
                 </div>
-                <div class="color-swatch" style="background: var(--plum);">
-                    <span>Plum</span>
+                <div class="color-swatch swatch-plum">
+                    <span class="color-name">Plum Shadow</span>
+                    <span class="color-value">#6B4E5C</span>
+                </div>
+                <div class="color-swatch swatch-peacock">
+                    <span class="color-name">Peacock Blue</span>
+                    <span class="color-value">#005B5C</span>
+                </div>
+                <div class="color-swatch swatch-terracotta">
+                    <span class="color-name">Terracotta</span>
+                    <span class="color-value">#C66B3D</span>
+                </div>
+                <div class="color-swatch swatch-walnut">
+                    <span class="color-name">Walnut</span>
+                    <span class="color-value">#3D2B1F</span>
+                </div>
+                <div class="color-swatch swatch-parchment">
+                    <span class="color-name">Parchment</span>
+                    <span class="color-value">#E8DCC4</span>
                 </div>
             </div>
         </section>
 
         <!-- Typography -->
-        <section>
+        <section id="typography">
             <h2>Typography</h2>
-            <div class="type-sample">
-                <h3>Display Font — Cinzel</h3>
-                <p class="display-text">Nature's Elegance</p>
+            <div class="type-specimen">
+                <h3>Cormorant</h3>
+                <p class="font-name">Display Font — Elegant, refined, classical beauty</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">Display</span>
+                        <span class="display-text">Floral Majesty</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">Heading</span>
+                        <span class="heading-text">Nature's Ornament</span>
+                    </div>
+                </div>
             </div>
-            <div class="type-sample">
-                <h3>Body Font — Cormorant Garamond</h3>
-                <p class="body-text">Art Nouveau celebrates the organic lines found in nature—the gentle curve of a flower stem, the graceful arc of a bird's wing, the flowing forms of water and wind. Every element speaks to the beauty inherent in the natural world.</p>
+            <div class="type-specimen">
+                <h3 style="font-family: var(--font-body); font-weight: 400;">EB Garamond</h3>
+                <p class="font-name">Body Font — Timeless legibility with organic warmth</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">Body</span>
+                        <span class="body-text">Where function meets organic form, beauty emerges naturally from purpose.</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">Small</span>
+                        <span class="small-text">Every curve tells a story of nature's infinite creativity.</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Spacing Scale -->
-        <section>
+        <section id="spacing">
             <h2>Spacing Scale</h2>
-            <div class="spacing-demo">
-                <div class="spacing-block" style="width: 28px; height: 28px;">4</div>
-                <div class="spacing-block" style="width: 40px; height: 40px;">8</div>
-                <div class="spacing-block" style="width: 56px; height: 56px;">16</div>
-                <div class="spacing-block" style="width: 72px; height: 72px;">24</div>
-                <div class="spacing-block" style="width: 88px; height: 88px;">32</div>
-                <div class="spacing-block" style="width: 104px; height: 104px;">48</div>
+            <p style="margin-bottom: var(--space-lg); text-align: center; font-style: italic; opacity: 0.8;">Organic spacing that breathes like nature itself.</p>
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-vine" style="height: 24px;"></div>
+                    <span class="spacing-label">XS</span>
+                    <span class="spacing-value">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-vine" style="height: 36px;"></div>
+                    <span class="spacing-label">SM</span>
+                    <span class="spacing-value">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-vine" style="height: 52px;"></div>
+                    <span class="spacing-label">MD</span>
+                    <span class="spacing-value">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-vine" style="height: 70px;"></div>
+                    <span class="spacing-label">LG</span>
+                    <span class="spacing-value">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-vine" style="height: 90px;"></div>
+                    <span class="spacing-label">XL</span>
+                    <span class="spacing-value">40px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-vine" style="height: 120px;"></div>
+                    <span class="spacing-label">2XL</span>
+                    <span class="spacing-value">64px</span>
+                </div>
             </div>
         </section>
 
         <!-- Buttons -->
-        <section>
+        <section id="buttons">
             <h2>Buttons</h2>
             <div class="button-grid">
-                <button class="btn btn-primary">Discover</button>
-                <button class="btn btn-secondary">Explore</button>
-                <button class="btn btn-outline">Learn More</button>
+                <button class="btn btn-primary">❧ Discover More</button>
+                <button class="btn btn-secondary">Learn More</button>
+                <button class="btn btn-gold">✦ Golden Path</button>
+                <button class="btn btn-rose">Bloom</button>
+            </div>
+            <div class="button-grid">
+                <button class="btn btn-primary" disabled style="opacity: 0.5; cursor: not-allowed;">Unavailable</button>
+                <button class="btn btn-secondary" style="font-size: 0.85rem; padding: var(--space-sm) var(--space-md);">Small</button>
             </div>
         </section>
 
         <!-- Forms -->
-        <section>
+        <section id="forms">
             <h2>Forms</h2>
-            <div class="form-group">
-                <label>Your Name</label>
-                <input type="text" placeholder="Enter your name">
-            </div>
-            <div class="form-group">
-                <label>Correspondence Address</label>
-                <input type="email" placeholder="your@email.com">
-            </div>
-            <div class="form-group">
-                <label>Your Message</label>
-                <textarea placeholder="Write your thoughts here..."></textarea>
-            </div>
-            <div style="text-align: center;">
-                <button class="btn btn-primary">Send Message</button>
-            </div>
+            <form onsubmit="return false;" style="max-width: 500px; margin: 0 auto;">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Preferred Style</label>
+                    <select class="form-input form-select">
+                        <option>Select a style</option>
+                        <option>Floral Motifs</option>
+                        <option>Geometric Patterns</option>
+                        <option>Organic Curves</option>
+                        <option>Natural Forms</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Your Vision</label>
+                    <textarea class="form-input" placeholder="Describe your artistic vision..."></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="form-checkbox-group">
+                        <input type="checkbox" class="form-checkbox" id="newsletter" checked>
+                        <label for="newsletter">Subscribe to artistic inspirations</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">❧ Submit</button>
+            </form>
         </section>
 
         <!-- Cards -->
-        <section>
+        <section id="cards">
             <h2>Cards</h2>
             <div class="card-grid">
                 <div class="card">
-                    <div class="card-image">🌸</div>
+                    <div class="card-image"></div>
                     <div class="card-content">
-                        <h4 class="card-title">Flora</h4>
-                        <p class="card-text">Delicate botanical motifs woven into every design element.</p>
+                        <h3 class="card-title">The Lily Panel</h3>
+                        <p class="card-text">Delicate petals unfurl in sinuous curves, celebrating the eternal dance of light and shadow.</p>
+                        <div class="card-meta">
+                            <span>❀</span>
+                            <span>Botanical Collection</span>
+                        </div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-image">🦋</div>
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--dusty-rose), var(--plum-shadow), var(--peacock-blue));"></div>
                     <div class="card-content">
-                        <h4 class="card-title">Fauna</h4>
-                        <p class="card-text">The grace of nature's creatures inspiring organic forms.</p>
+                        <h3 class="card-title">Twilight Garden</h3>
+                        <p class="card-text">Where dusk meets bloom, mysterious beauty awakens in the quiet hours.</p>
+                        <div class="card-meta">
+                            <span>✿</span>
+                            <span>Evening Series</span>
+                        </div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-image">🌊</div>
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--burnished-gold), var(--terracotta), var(--antique-bronze));"></div>
                     <div class="card-content">
-                        <h4 class="card-title">Flowing Forms</h4>
-                        <p class="card-text">Curves and waves that echo the rhythm of the natural world.</p>
+                        <h3 class="card-title">Autumn Arabesque</h3>
+                        <p class="card-text">Golden leaves weave intricate patterns against the fading warmth of harvest light.</p>
+                        <div class="card-meta">
+                            <span>❁</span>
+                            <span>Seasonal Works</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Data Table -->
-        <section>
+        <section id="table">
             <h2>Data Table</h2>
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th>Artist</th>
-                            <th>Medium</th>
-                            <th>Period</th>
+                            <th>Artwork</th>
+                            <th>Collection</th>
+                            <th>Year</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Alphonse Mucha</td>
-                            <td>Illustration</td>
-                            <td>1890-1910</td>
-                            <td><span class="badge badge-gold">Master</span></td>
+                            <td>Morning Glory Triptych</td>
+                            <td>Botanical</td>
+                            <td>1898</td>
+                            <td><span class="status-active">On Display</span></td>
                         </tr>
                         <tr>
-                            <td>Antoni Gaudí</td>
-                            <td>Architecture</td>
-                            <td>1883-1926</td>
-                            <td><span class="badge badge-teal">Visionary</span></td>
+                            <td>The Four Seasons</td>
+                            <td>Allegorical</td>
+                            <td>1896</td>
+                            <td><span class="status-active">On Display</span></td>
                         </tr>
                         <tr>
-                            <td>Louis Comfort Tiffany</td>
-                            <td>Glass</td>
-                            <td>1878-1933</td>
-                            <td><span class="badge badge-sage">Artisan</span></td>
+                            <td>Iris Panel Study</td>
+                            <td>Botanical</td>
+                            <td>1901</td>
+                            <td><span class="status-pending">In Restoration</span></td>
+                        </tr>
+                        <tr>
+                            <td>Zodiac Medallion</td>
+                            <td>Celestial</td>
+                            <td>1899</td>
+                            <td><span class="status-pending">On Loan</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -905,108 +1397,141 @@
         </section>
 
         <!-- Badges -->
-        <section>
+        <section id="badges">
             <h2>Badges & Tags</h2>
             <div class="badge-grid">
-                <span class="badge badge-teal">Featured</span>
-                <span class="badge badge-gold">Premium</span>
-                <span class="badge badge-rose">New</span>
-                <span class="badge badge-sage">Organic</span>
+                <span class="badge badge-jade">❀ Botanical</span>
+                <span class="badge badge-gold">✦ Featured</span>
+                <span class="badge badge-rose">Romantic</span>
+                <span class="badge badge-peacock">Rare</span>
+                <span class="badge badge-terracotta">Autumn</span>
+                <span class="badge badge-outline">Limited Edition</span>
             </div>
         </section>
 
         <!-- Design Principles -->
-        <section>
+        <section id="principles">
             <h2>Design Principles</h2>
             <div class="principles-grid">
-                <div class="principle">
+                <div class="principle-card">
                     <div class="principle-icon">🌿</div>
-                    <h4 class="principle-title">Organic Forms</h4>
-                    <p class="principle-text">Curves inspired by plants, flowers, and natural growth</p>
+                    <h3 class="principle-title">Nature as Teacher</h3>
+                    <p class="principle-text">Draw inspiration from organic forms—the curve of a stem, the spiral of a shell, the rhythm of flowing water.</p>
                 </div>
-                <div class="principle">
+                <div class="principle-card">
                     <div class="principle-icon">✨</div>
-                    <h4 class="principle-title">Ornamentation</h4>
-                    <p class="principle-text">Beautiful decoration that enhances rather than distracts</p>
+                    <h3 class="principle-title">Function in Beauty</h3>
+                    <p class="principle-text">Ornamentation should emerge naturally from structure, never applied as mere decoration.</p>
                 </div>
-                <div class="principle">
-                    <div class="principle-icon">🎨</div>
-                    <h4 class="principle-title">Unity of Arts</h4>
-                    <p class="principle-text">All arts working together in harmonious composition</p>
+                <div class="principle-card">
+                    <div class="principle-icon">🎭</div>
+                    <h3 class="principle-title">Unity of Arts</h3>
+                    <p class="principle-text">Architecture, furniture, graphics, and objects should speak the same visual language.</p>
                 </div>
-                <div class="principle">
-                    <div class="principle-icon">🏛️</div>
-                    <h4 class="principle-title">Craftsmanship</h4>
-                    <p class="principle-text">Excellence in execution and attention to detail</p>
+                <div class="principle-card">
+                    <div class="principle-icon">💫</div>
+                    <h3 class="principle-title">Whiplash Lines</h3>
+                    <p class="principle-text">Embrace the dynamic tension of asymmetrical, undulating curves that suggest movement and growth.</p>
                 </div>
             </div>
         </section>
 
         <!-- Animations -->
-        <section>
+        <section id="animations">
             <h2>Animation & Micro-interactions</h2>
-            <div class="animation-grid">
-                <div>
-                    <h3>Vine Growth</h3>
-                    <div class="animation-demo">
-                        <div class="vine-demo"></div>
-                    </div>
+            <div class="animation-showcase">
+                <div class="animation-demo flourish-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Flourish</span>
                 </div>
-                <div>
-                    <h3>Swirl</h3>
-                    <div class="animation-demo">
-                        <div class="swirl-demo"></div>
-                    </div>
+                <div class="animation-demo unfurl-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Unfurl</span>
                 </div>
-                <div>
-                    <h3>Bloom</h3>
-                    <div class="animation-demo">
-                        <div class="bloom-demo">🌺</div>
-                    </div>
+                <div class="animation-demo tendril-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Tendril</span>
+                </div>
+                <div class="animation-demo gild-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Gild</span>
                 </div>
             </div>
         </section>
 
         <!-- Special Component: Botanical Frame -->
-        <section>
-            <h2>Special Component: Botanical Frame</h2>
+        <section id="special">
+            <h2>Special Component</h2>
+            <p style="margin-bottom: var(--space-lg); text-align: center; font-style: italic; opacity: 0.8;">Botanical Frame — An ornate showcase for featured content.</p>
             <div class="botanical-frame">
-                <span class="frame-corner top-left">❧</span>
-                <span class="frame-corner top-right">❧</span>
-                <span class="frame-corner bottom-left">❧</span>
-                <span class="frame-corner bottom-right">❧</span>
-                <div class="frame-content">
-                    <h3 class="frame-title">Exhibition</h3>
-                    <p class="frame-text">"The line is a force which, like all elemental forces, is active; any line is meaningful, all depends on its character."</p>
-                    <p class="frame-decoration">✿ ❀ ✿</p>
+                <span class="botanical-corners corner-tl">❧</span>
+                <span class="botanical-corners corner-tr">❧</span>
+                <span class="botanical-corners corner-bl">❧</span>
+                <span class="botanical-corners corner-br">❧</span>
+
+                <div class="botanical-content">
+                    <div class="botanical-illustration"></div>
+                    <h3 class="botanical-title">Rosa Damascena</h3>
+                    <p class="botanical-subtitle">The Damask Rose — Symbol of Beauty & Grace</p>
+                    <p class="botanical-description">
+                        Native to the Near East, this ancient variety has been cultivated for millennia.
+                        Its intoxicating fragrance and layered petals have inspired artists, poets, and
+                        perfumers across countless generations.
+                    </p>
+                    <div class="botanical-attributes">
+                        <div class="attribute">
+                            <div class="attribute-value">1254</div>
+                            <div class="attribute-label">Year Catalogued</div>
+                        </div>
+                        <div class="attribute">
+                            <div class="attribute-value">36</div>
+                            <div class="attribute-label">Petal Layers</div>
+                        </div>
+                        <div class="attribute">
+                            <div class="attribute-value">∞</div>
+                            <div class="attribute-label">Beauty Index</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Alerts -->
-        <section>
+        <section id="alerts">
             <h2>Alert Messages</h2>
-            <div class="alert alert-info">
-                <span class="alert-icon">🌿</span>
-                <span class="alert-content">A new exhibition has been announced for the coming season.</span>
-            </div>
             <div class="alert alert-success">
-                <span class="alert-icon">✓</span>
-                <span class="alert-content">Your reservation has been confirmed. We await your arrival.</span>
+                <span class="alert-icon">❀</span>
+                <div class="alert-content">
+                    <div class="alert-title">Commission Accepted</div>
+                    <p class="alert-text">Your custom artwork request has been received with gratitude.</p>
+                </div>
+            </div>
+            <div class="alert alert-info">
+                <span class="alert-icon">✦</span>
+                <div class="alert-content">
+                    <div class="alert-title">Exhibition Opening</div>
+                    <p class="alert-text">The Spring Collection debuts this Saturday at the Grand Gallery.</p>
+                </div>
             </div>
             <div class="alert alert-warning">
-                <span class="alert-icon">☀</span>
-                <span class="alert-content">Gallery hours may vary during the holiday period.</span>
+                <span class="alert-icon">❁</span>
+                <div class="alert-content">
+                    <div class="alert-title">Limited Availability</div>
+                    <p class="alert-text">Only three prints remain of this limited edition series.</p>
+                </div>
             </div>
             <div class="alert alert-error">
-                <span class="alert-icon">✗</span>
-                <span class="alert-content">We regret that this artwork is currently unavailable for viewing.</span>
+                <span class="alert-icon">✿</span>
+                <div class="alert-content">
+                    <div class="alert-title">Restoration Required</div>
+                    <p class="alert-text">This piece requires conservation work before viewing.</p>
+                </div>
             </div>
         </section>
 
         <footer>
-            <p>❧ Floréal Design System ❧</p>
-            <p>Inspired by the Belle Époque, 1890–1910</p>
+            <p>❧ Mucha Design System ❧</p>
+            <p>Where nature's forms meet artistic expression</p>
         </footer>
     </div>
 </body>

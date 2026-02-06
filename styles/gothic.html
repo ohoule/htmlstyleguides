@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cathedral - Gothic Style Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Gothic Color Palette - Dark romantic, cathedral shadows */
+            --obsidian: #0D0D0D;
+            --charcoal: #1A1A1A;
+            --smoke: #2D2D2D;
+            --garnet: #8B0000;
+            --blood: #660000;
+            --gold-leaf: #D4AF37;
+            --tarnished-gold: #B8860B;
+            --bone: #E8E4D9;
+            --parchment: #D4C4A8;
+            --violet-shadow: #4A2040;
+            --midnight-blue: #191970;
+            --silver: #C0C0C0;
+
+            /* Typography */
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Crimson Text', serif;
+            --font-mono: 'Source Code Pro', monospace;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 40px;
+            --space-2xl: 64px;
+            --space-3xl: 96px;
+
+            /* Border Radius */
+            --radius-sm: 2px;
+            --radius-md: 4px;
+            --radius-lg: 8px;
+            --radius-arch: 50% 50% 0 0 / 100% 100% 0 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--obsidian);
+            color: var(--bone);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Dark texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Gothic arch border */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg,
+                var(--obsidian),
+                var(--garnet),
+                var(--gold-leaf),
+                var(--garnet),
+                var(--obsidian));
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+        }
+
+        /* Navigation */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--gold-leaf);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-xl);
+            padding: var(--space-sm) var(--space-md);
+            border: 1px solid var(--gold-leaf);
+            transition: all 0.3s ease;
+        }
+
+        .back-link::before {
+            content: '✧';
+        }
+
+        .back-link:hover {
+            background: var(--gold-leaf);
+            color: var(--obsidian);
+        }
+
+        /* Header - Cathedral Arch */
+        header {
+            text-align: center;
+            padding: var(--space-3xl) var(--space-xl);
+            margin-bottom: var(--space-3xl);
+            background: linear-gradient(180deg, var(--charcoal), var(--obsidian));
+            border: 2px solid var(--smoke);
+            position: relative;
+            clip-path: polygon(0 0, 50% 5%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        header::before {
+            content: '†';
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: var(--gold-leaf);
+        }
+
+        .header-ornament {
+            font-size: 1.5rem;
+            color: var(--gold-leaf);
+            letter-spacing: 1em;
+            margin-bottom: var(--space-lg);
+        }
+
+        header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 700;
+            color: var(--bone);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            letter-spacing: 0.2em;
+            margin-bottom: var(--space-md);
+        }
+
+        header p {
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--parchment);
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: var(--space-3xl);
+            padding: var(--space-xl);
+            background: var(--charcoal);
+            border: 1px solid var(--smoke);
+            position: relative;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--garnet), transparent);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold-leaf);
+            margin-bottom: var(--space-lg);
+            text-align: center;
+            letter-spacing: 0.15em;
+        }
+
+        h2::before,
+        h2::after {
+            content: ' ✧ ';
+            font-size: 0.8em;
+        }
+
+        /* Color Palette - Stained Glass */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .color-swatch {
+            aspect-ratio: 2/3;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--space-sm);
+            border: 2px solid var(--smoke);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0% 100%, 0% 25%);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .color-swatch:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(139, 0, 0, 0.3);
+        }
+
+        .color-name {
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+        }
+
+        .color-value {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            opacity: 0.8;
+        }
+
+        .swatch-obsidian { background: var(--obsidian); color: var(--bone); border-color: var(--garnet); }
+        .swatch-charcoal { background: var(--charcoal); color: var(--bone); }
+        .swatch-smoke { background: var(--smoke); color: var(--bone); }
+        .swatch-garnet { background: var(--garnet); color: var(--bone); }
+        .swatch-blood { background: var(--blood); color: var(--bone); }
+        .swatch-gold { background: var(--gold-leaf); color: var(--obsidian); }
+        .swatch-tarnished { background: var(--tarnished-gold); color: var(--obsidian); }
+        .swatch-bone { background: var(--bone); color: var(--obsidian); }
+        .swatch-violet { background: var(--violet-shadow); color: var(--bone); }
+        .swatch-midnight { background: var(--midnight-blue); color: var(--bone); }
+
+        /* Typography */
+        .type-specimen {
+            margin-bottom: var(--space-xl);
+            padding: var(--space-lg);
+            background: var(--obsidian);
+            border-left: 3px solid var(--garnet);
+        }
+
+        .type-specimen h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--gold-leaf);
+            margin-bottom: var(--space-sm);
+            letter-spacing: 0.15em;
+        }
+
+        .type-specimen .font-name {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--garnet);
+            margin-bottom: var(--space-md);
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-lg);
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--silver);
+            min-width: 60px;
+        }
+
+        .display-text { font-family: var(--font-display); font-size: 2rem; color: var(--bone); letter-spacing: 0.1em; }
+        .heading-text { font-family: var(--font-display); font-size: 1.3rem; color: var(--parchment); }
+        .body-text { font-family: var(--font-body); font-size: 1.1rem; color: var(--bone); }
+        .small-text { font-family: var(--font-body); font-size: 0.95rem; color: var(--parchment); font-style: italic; }
+
+        /* Spacing Scale - Candles */
+        .spacing-visual {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xl);
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .spacing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .spacing-candle {
+            background: linear-gradient(180deg, var(--gold-leaf) 0%, var(--tarnished-gold) 30%, var(--bone) 30%);
+            width: 12px;
+            position: relative;
+            border-radius: 2px 2px 0 0;
+        }
+
+        .spacing-candle::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 12px;
+            background: radial-gradient(ellipse at bottom, var(--gold-leaf), var(--garnet), transparent);
+            border-radius: 50% 50% 20% 20%;
+            animation: flicker 1s ease-in-out infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.8; transform: translateX(-50%) scale(0.95); }
+        }
+
+        .spacing-label {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            color: var(--gold-leaf);
+            letter-spacing: 0.1em;
+        }
+
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--silver);
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            justify-content: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .btn {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .btn::before,
+        .btn::after {
+            content: '✧';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.7em;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .btn::before { left: 10px; }
+        .btn::after { right: 10px; }
+
+        .btn:hover::before,
+        .btn:hover::after {
+            opacity: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(180deg, var(--garnet), var(--blood));
+            color: var(--bone);
+            border: 2px solid var(--gold-leaf);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold-leaf);
+            border: 2px solid var(--gold-leaf);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold-leaf);
+            color: var(--obsidian);
+        }
+
+        .btn-dark {
+            background: var(--obsidian);
+            color: var(--bone);
+            border: 2px solid var(--smoke);
+        }
+
+        .btn-dark:hover {
+            border-color: var(--garnet);
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.3);
+        }
+
+        .btn-violet {
+            background: var(--violet-shadow);
+            color: var(--bone);
+            border: 2px solid var(--midnight-blue);
+        }
+
+        .btn-violet:hover {
+            box-shadow: 0 0 20px rgba(74, 32, 64, 0.5);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            color: var(--gold-leaf);
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-md);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            border: 1px solid var(--smoke);
+            background: var(--obsidian);
+            color: var(--bone);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--garnet);
+            box-shadow: 0 0 10px rgba(139, 0, 0, 0.2);
+        }
+
+        .form-input::placeholder {
+            color: var(--smoke);
+            font-style: italic;
+        }
+
+        textarea.form-input {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23D4AF37' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-md) center;
+            padding-right: var(--space-2xl);
+        }
+
+        .form-checkbox {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--garnet);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .card {
+            background: var(--obsidian);
+            border: 1px solid var(--smoke);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--garnet);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .card-image {
+            height: 150px;
+            background: linear-gradient(135deg, var(--garnet), var(--violet-shadow), var(--midnight-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--smoke);
+        }
+
+        .card-image::after {
+            content: '✟';
+            font-size: 3rem;
+            color: var(--gold-leaf);
+            opacity: 0.5;
+        }
+
+        .card-content {
+            padding: var(--space-lg);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--gold-leaf);
+            letter-spacing: 0.08em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .card-text {
+            font-family: var(--font-body);
+            font-style: italic;
+            color: var(--parchment);
+            margin-bottom: var(--space-md);
+        }
+
+        .card-meta {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--silver);
+        }
+
+        /* Data Table */
+        .table-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--smoke);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(180deg, var(--garnet), var(--blood));
+        }
+
+        th {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            color: var(--bone);
+            text-align: left;
+            padding: var(--space-md);
+            letter-spacing: 0.1em;
+        }
+
+        td {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--smoke);
+            font-family: var(--font-body);
+            color: var(--parchment);
+        }
+
+        tbody tr {
+            background: var(--obsidian);
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: var(--charcoal);
+        }
+
+        .status-active {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--garnet);
+            color: var(--bone);
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .status-pending {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--violet-shadow);
+            color: var(--bone);
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+        }
+
+        /* Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            justify-content: center;
+        }
+
+        .badge {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            padding: var(--space-xs) var(--space-md);
+        }
+
+        .badge-garnet { background: var(--garnet); color: var(--bone); }
+        .badge-gold { background: var(--gold-leaf); color: var(--obsidian); }
+        .badge-violet { background: var(--violet-shadow); color: var(--bone); }
+        .badge-midnight { background: var(--midnight-blue); color: var(--bone); }
+        .badge-outline { background: transparent; border: 1px solid var(--gold-leaf); color: var(--gold-leaf); }
+        .badge-bone { background: var(--bone); color: var(--obsidian); }
+
+        /* Design Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .principle-card {
+            padding: var(--space-lg);
+            background: var(--obsidian);
+            border: 1px solid var(--smoke);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .principle-card:hover {
+            border-color: var(--garnet);
+        }
+
+        .principle-icon {
+            font-size: 2rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .principle-title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: var(--gold-leaf);
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .principle-text {
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--parchment);
+        }
+
+        /* Animations */
+        .animation-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .animation-demo {
+            padding: var(--space-lg);
+            background: var(--obsidian);
+            border: 1px solid var(--smoke);
+            text-align: center;
+        }
+
+        .animation-element {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto var(--space-md);
+            background: var(--garnet);
+            border: 2px solid var(--gold-leaf);
+        }
+
+        .fade-demo .animation-element {
+            animation: ghostFade 2s ease-in-out infinite;
+        }
+
+        @keyframes ghostFade {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .float-demo .animation-element {
+            animation: etherealFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes etherealFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .pulse-demo .animation-element {
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.05); }
+        }
+
+        .glow-demo .animation-element {
+            animation: candleGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes candleGlow {
+            0%, 100% { box-shadow: 0 0 10px var(--garnet); }
+            50% { box-shadow: 0 0 30px var(--garnet), 0 0 50px var(--gold-leaf); }
+        }
+
+        .animation-label {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            color: var(--gold-leaf);
+            letter-spacing: 0.1em;
+        }
+
+        /* Special Component - Crypt Card */
+        .crypt-card {
+            background: linear-gradient(180deg, var(--charcoal), var(--obsidian));
+            border: 2px solid var(--smoke);
+            padding: var(--space-xl);
+            position: relative;
+            clip-path: polygon(0 5%, 50% 0, 100% 5%, 100% 95%, 50% 100%, 0 95%);
+        }
+
+        .crypt-header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--smoke);
+        }
+
+        .crypt-symbol {
+            font-size: 3rem;
+            color: var(--gold-leaf);
+            margin-bottom: var(--space-sm);
+            animation: candleGlow 3s ease-in-out infinite;
+        }
+
+        .crypt-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--bone);
+            letter-spacing: 0.2em;
+        }
+
+        .crypt-subtitle {
+            font-family: var(--font-body);
+            font-style: italic;
+            color: var(--parchment);
+            margin-top: var(--space-xs);
+        }
+
+        .crypt-content {
+            text-align: center;
+        }
+
+        .crypt-verse {
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--parchment);
+            line-height: 2;
+            margin-bottom: var(--space-lg);
+            padding: var(--space-lg);
+            background: rgba(139, 0, 0, 0.1);
+            border-left: 2px solid var(--garnet);
+            border-right: 2px solid var(--garnet);
+        }
+
+        .crypt-stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+        }
+
+        .crypt-stat {
+            text-align: center;
+        }
+
+        .crypt-stat-value {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--gold-leaf);
+        }
+
+        .crypt-stat-label {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--silver);
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--space-md) var(--space-lg);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            border: 1px solid;
+        }
+
+        .alert-icon {
+            font-size: 1.2rem;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+
+        .alert-text {
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .alert-success {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--gold-leaf);
+            color: var(--gold-leaf);
+        }
+
+        .alert-info {
+            background: rgba(25, 25, 112, 0.2);
+            border-color: var(--midnight-blue);
+            color: var(--bone);
+        }
+
+        .alert-warning {
+            background: rgba(74, 32, 64, 0.2);
+            border-color: var(--violet-shadow);
+            color: var(--parchment);
+        }
+
+        .alert-error {
+            background: rgba(139, 0, 0, 0.2);
+            border-color: var(--garnet);
+            color: var(--garnet);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--space-2xl);
+            margin-top: var(--space-3xl);
+            background: var(--charcoal);
+            border: 1px solid var(--smoke);
+            clip-path: polygon(0 15%, 50% 0, 100% 15%, 100% 100%, 0 100%);
+        }
+
+        footer p {
+            font-family: var(--font-display);
+            letter-spacing: 0.1em;
+        }
+
+        footer p:first-child {
+            color: var(--gold-leaf);
+            font-size: 1.1rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        footer p:last-child {
+            font-family: var(--font-body);
+            font-style: italic;
+            color: var(--parchment);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--space-md);
+            }
+
+            header {
+                padding: var(--space-2xl) var(--space-md);
+                clip-path: none;
+            }
+
+            section {
+                padding: var(--space-lg);
+            }
+
+            .crypt-stats {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">Return to Gallery</a>
+
+        <header>
+            <div class="header-ornament">✧ ✦ ✧</div>
+            <h1>Cathedral</h1>
+            <p>A design system forged in shadow and candlelight, where darkness reveals beauty and mystery speaks through silence</p>
+        </header>
+
+        <!-- Color Palette -->
+        <section id="colors">
+            <h2>Color Palette</h2>
+            <div class="color-grid">
+                <div class="color-swatch swatch-obsidian">
+                    <span class="color-name">Obsidian</span>
+                    <span class="color-value">#0D0D0D</span>
+                </div>
+                <div class="color-swatch swatch-charcoal">
+                    <span class="color-name">Charcoal</span>
+                    <span class="color-value">#1A1A1A</span>
+                </div>
+                <div class="color-swatch swatch-smoke">
+                    <span class="color-name">Smoke</span>
+                    <span class="color-value">#2D2D2D</span>
+                </div>
+                <div class="color-swatch swatch-garnet">
+                    <span class="color-name">Garnet</span>
+                    <span class="color-value">#8B0000</span>
+                </div>
+                <div class="color-swatch swatch-blood">
+                    <span class="color-name">Blood</span>
+                    <span class="color-value">#660000</span>
+                </div>
+                <div class="color-swatch swatch-gold">
+                    <span class="color-name">Gold Leaf</span>
+                    <span class="color-value">#D4AF37</span>
+                </div>
+                <div class="color-swatch swatch-bone">
+                    <span class="color-name">Bone</span>
+                    <span class="color-value">#E8E4D9</span>
+                </div>
+                <div class="color-swatch swatch-violet">
+                    <span class="color-name">Violet</span>
+                    <span class="color-value">#4A2040</span>
+                </div>
+                <div class="color-swatch swatch-midnight">
+                    <span class="color-name">Midnight</span>
+                    <span class="color-value">#191970</span>
+                </div>
+                <div class="color-swatch swatch-tarnished">
+                    <span class="color-name">Tarnished</span>
+                    <span class="color-value">#B8860B</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section id="typography">
+            <h2>Typography</h2>
+            <div class="type-specimen">
+                <h3>Cinzel</h3>
+                <p class="font-name">Display Font — Ancient, noble, eternal</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">Display</span>
+                        <span class="display-text">Eternal Night</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">Heading</span>
+                        <span class="heading-text">Whispers in Stone</span>
+                    </div>
+                </div>
+            </div>
+            <div class="type-specimen">
+                <h3 style="font-family: var(--font-body); font-weight: 400; color: var(--bone); letter-spacing: 0;">Crimson Text</h3>
+                <p class="font-name">Body Font — Elegant, readable, timeless</p>
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="type-label">Body</span>
+                        <span class="body-text">In the shadows of ancient cathedrals, beauty endures beyond mortal time.</span>
+                    </div>
+                    <div class="type-row">
+                        <span class="type-label">Small</span>
+                        <span class="small-text">The darkness holds secrets for those who dare to look.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacing Scale -->
+        <section id="spacing">
+            <h2>Spacing Scale</h2>
+            <p style="margin-bottom: var(--space-lg); text-align: center; font-style: italic; color: var(--parchment);">Measured like the space between cathedral columns.</p>
+            <div class="spacing-visual">
+                <div class="spacing-item">
+                    <div class="spacing-candle" style="height: 40px;"></div>
+                    <span class="spacing-label">XS</span>
+                    <span class="spacing-value">4px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-candle" style="height: 55px;"></div>
+                    <span class="spacing-label">SM</span>
+                    <span class="spacing-value">8px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-candle" style="height: 75px;"></div>
+                    <span class="spacing-label">MD</span>
+                    <span class="spacing-value">16px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-candle" style="height: 95px;"></div>
+                    <span class="spacing-label">LG</span>
+                    <span class="spacing-value">24px</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-candle" style="height: 120px;"></div>
+                    <span class="spacing-label">XL</span>
+                    <span class="spacing-value">40px</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Buttons -->
+        <section id="buttons">
+            <h2>Buttons</h2>
+            <div class="button-grid">
+                <button class="btn btn-primary">Enter the Crypt</button>
+                <button class="btn btn-secondary">Read More</button>
+                <button class="btn btn-dark">Shadows</button>
+                <button class="btn btn-violet">Mysteries</button>
+            </div>
+        </section>
+
+        <!-- Forms -->
+        <section id="forms">
+            <h2>Forms</h2>
+            <form onsubmit="return false;" style="max-width: 450px; margin: 0 auto;">
+                <div class="form-group">
+                    <label class="form-label">Your Name</label>
+                    <input type="text" class="form-input" placeholder="Speak your name...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Dark Path</label>
+                    <select class="form-input form-select">
+                        <option>Choose your destiny</option>
+                        <option>The Cathedral</option>
+                        <option>The Crypt</option>
+                        <option>The Tower</option>
+                        <option>The Garden</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Your Confession</label>
+                    <textarea class="form-input" placeholder="Share your secrets..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </section>
+
+        <!-- Cards -->
+        <section id="cards">
+            <h2>Cards</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-image"></div>
+                    <div class="card-content">
+                        <h3 class="card-title">The Rose Window</h3>
+                        <p class="card-text">Light fractured through ancient glass, painting stories of saints and sinners alike.</p>
+                        <div class="card-meta">✧ Cathedral · North Transept</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--gold-leaf), var(--tarnished-gold), var(--blood));"></div>
+                    <div class="card-content">
+                        <h3 class="card-title">The Reliquary</h3>
+                        <p class="card-text">Sacred vessels containing fragments of forgotten devotion and eternal mystery.</p>
+                        <div class="card-meta">✧ Treasury · Lower Level</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, var(--obsidian), var(--charcoal), var(--smoke));"></div>
+                    <div class="card-content">
+                        <h3 class="card-title">The Ossuary</h3>
+                        <p class="card-text">Where mortality becomes art, and bones whisper prayers to the silence.</p>
+                        <div class="card-meta">✧ Catacombs · Beneath</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Table -->
+        <section id="table">
+            <h2>Data Table</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Artifact</th>
+                            <th>Origin</th>
+                            <th>Age</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>The Black Chalice</td>
+                            <td>Prague</td>
+                            <td>XIV Century</td>
+                            <td><span class="status-active">Displayed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Iron Crown Fragment</td>
+                            <td>Milan</td>
+                            <td>IX Century</td>
+                            <td><span class="status-active">Displayed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Mourning Candelabra</td>
+                            <td>Vienna</td>
+                            <td>XVI Century</td>
+                            <td><span class="status-pending">In Vault</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Badges -->
+        <section id="badges">
+            <h2>Badges & Tags</h2>
+            <div class="badge-grid">
+                <span class="badge badge-garnet">✧ Sacred</span>
+                <span class="badge badge-gold">✦ Rare</span>
+                <span class="badge badge-violet">☾ Nocturnal</span>
+                <span class="badge badge-midnight">★ Ancient</span>
+                <span class="badge badge-bone">† Holy</span>
+                <span class="badge badge-outline">New</span>
+            </div>
+        </section>
+
+        <!-- Design Principles -->
+        <section id="principles">
+            <h2>Design Principles</h2>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-icon">🕯️</div>
+                    <h3 class="principle-title">Sacred Shadow</h3>
+                    <p class="principle-text">Darkness is not absence but presence—let it embrace your design with purpose.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">✟</div>
+                    <h3 class="principle-title">Vertical Grace</h3>
+                    <p class="principle-text">Reach upward like cathedral spires, drawing the eye to higher purposes.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">📜</div>
+                    <h3 class="principle-title">Aged Elegance</h3>
+                    <p class="principle-text">Beauty that has endured speaks louder than fleeting trends.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">💀</div>
+                    <h3 class="principle-title">Memento Mori</h3>
+                    <p class="principle-text">Design with awareness of impermanence—make every element count.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animations -->
+        <section id="animations">
+            <h2>Animations</h2>
+            <div class="animation-showcase">
+                <div class="animation-demo fade-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Ghost</span>
+                </div>
+                <div class="animation-demo float-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Ethereal</span>
+                </div>
+                <div class="animation-demo pulse-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Heartbeat</span>
+                </div>
+                <div class="animation-demo glow-demo">
+                    <div class="animation-element"></div>
+                    <span class="animation-label">Candlelight</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Component: Crypt Card -->
+        <section id="special">
+            <h2>Special Component</h2>
+            <p style="margin-bottom: var(--space-lg); text-align: center; font-style: italic; color: var(--parchment);">Crypt Card — An ornate memorial-style component for featured content.</p>
+            <div class="crypt-card">
+                <div class="crypt-header">
+                    <div class="crypt-symbol">✟</div>
+                    <h3 class="crypt-title">In Memoriam</h3>
+                    <p class="crypt-subtitle">To those who dared to design in darkness</p>
+                </div>
+                <div class="crypt-content">
+                    <div class="crypt-verse">
+                        "In the heart of shadow lies beauty undefined,<br>
+                        Where candlelight whispers secrets to the blind,<br>
+                        And ancient stones remember what time forgot,<br>
+                        The gothic soul persists, immortal, unbought."
+                    </div>
+                    <div class="crypt-stats">
+                        <div class="crypt-stat">
+                            <div class="crypt-stat-value">XIII</div>
+                            <div class="crypt-stat-label">Centuries</div>
+                        </div>
+                        <div class="crypt-stat">
+                            <div class="crypt-stat-value">∞</div>
+                            <div class="crypt-stat-label">Beauty</div>
+                        </div>
+                        <div class="crypt-stat">
+                            <div class="crypt-stat-value">I</div>
+                            <div class="crypt-stat-label">Truth</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alerts -->
+        <section id="alerts">
+            <h2>Alerts</h2>
+            <div class="alert alert-success">
+                <span class="alert-icon">✧</span>
+                <div class="alert-content">
+                    <div class="alert-title">Blessing Received</div>
+                    <p class="alert-text">Your offering has been accepted by the shadows.</p>
+                </div>
+            </div>
+            <div class="alert alert-info">
+                <span class="alert-icon">☾</span>
+                <div class="alert-content">
+                    <div class="alert-title">Midnight Approaches</div>
+                    <p class="alert-text">The hour of transformation draws near.</p>
+                </div>
+            </div>
+            <div class="alert alert-warning">
+                <span class="alert-icon">⚰</span>
+                <div class="alert-content">
+                    <div class="alert-title">Ancient Warning</div>
+                    <p class="alert-text">Some doors, once opened, cannot be closed.</p>
+                </div>
+            </div>
+            <div class="alert alert-error">
+                <span class="alert-icon">†</span>
+                <div class="alert-content">
+                    <div class="alert-title">Forbidden Path</div>
+                    <p class="alert-text">This way is sealed to the uninitiated.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>✧ Cathedral Design System ✧</p>
+            <p>Where shadows become art and darkness finds its voice</p>
+        </footer>
+    </div>
+</body>
+</html>
