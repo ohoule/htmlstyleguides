@@ -1,0 +1,2412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulse v1.0 — PainOnSocial Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --teal: #0891B2;
+            --teal-light: #22D3EE;
+            --teal-dark: #0E7490;
+            --teal-bg: #ECFEFF;
+            --teal-glow: rgba(8,145,178,0.15);
+            --teal-glow-md: rgba(8,145,178,0.25);
+            --teal-glow-lg: rgba(8,145,178,0.4);
+            --orange: #F97316;
+            --purple: #A855F7;
+
+            --amber: #D97706;
+            --amber-light: #FBBF24;
+            --amber-glow: rgba(217,119,6,0.15);
+            --amber-glow-md: rgba(217,119,6,0.25);
+
+            --bg-deepest: #0C0A09;
+            --bg-dark: #1C1917;
+            --bg-medium: #292524;
+            --card-bg: rgba(41,37,36,0.6);
+            --card-border: rgba(255,255,255,0.06);
+            --card-border-hover: rgba(217,119,6,0.35);
+
+            --text-1: #FAFAF9;
+            --text-2: #A8A29E;
+            --text-3: #78716C;
+            --border: rgba(255,255,255,0.07);
+            --border-subtle: rgba(255,255,255,0.04);
+
+            --success: #16A34A;
+            --success-bg: rgba(22,163,74,0.1);
+            --success-border: rgba(22,163,74,0.3);
+            --warning: #EAB308;
+            --warning-bg: rgba(234,179,8,0.1);
+            --warning-border: rgba(234,179,8,0.3);
+            --error: #EF4444;
+            --error-bg: rgba(239,68,68,0.1);
+            --error-border: rgba(239,68,68,0.3);
+            --info: #0891B2;
+            --info-bg: rgba(8,145,178,0.1);
+            --info-border: rgba(8,145,178,0.3);
+
+            --font-display: 'Cabinet Grotesk', system-ui, sans-serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+
+            --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+            --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+            --radius-sm: 6px; --radius-md: 8px; --radius-lg: 12px;
+            --radius-xl: 16px; --radius-full: 9999px;
+
+            --ease: 200ms ease; --ease-slow: 300ms ease;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-1);
+            background: var(--bg-deepest);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px 256px;
+        }
+
+        /* Pulse ring animation */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.6; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+        @keyframes pulse-ring-slow {
+            0% { transform: scale(1); opacity: 0.4; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pulse-dot {
+            position: relative;
+            width: 12px; height: 12px;
+            background: var(--teal);
+            border-radius: 50%;
+        }
+        .pulse-dot::before, .pulse-dot::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 1.5px solid var(--teal-light);
+            animation: pulse-ring 2.5s ease-out infinite;
+        }
+        .pulse-dot::after { animation-delay: 0.8s; }
+
+        /* Amber accent line separator */
+        .amber-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--amber), var(--amber-light), var(--amber), transparent);
+            box-shadow: 0 0 12px var(--amber-glow), 0 0 24px var(--amber-glow);
+            border: none;
+            margin: 0;
+        }
+
+        /* Section styling */
+        .section { padding: 80px 0; position: relative; }
+        .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-label .num {
+            color: var(--amber);
+            font-weight: 600;
+        }
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-1);
+            margin-bottom: 48px;
+            line-height: 1.2;
+        }
+
+        a { color: var(--teal-light); text-decoration: none; transition: color var(--ease); }
+        a:hover { color: var(--amber-light); }
+
+        /* ========================================
+           01. NAVIGATION BAR
+           ======================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 24px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            background: rgba(12,10,9,0.8);
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .nav-logo-text {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .nav-logo-text .on { color: var(--teal-light); }
+        .nav-logo-text .pain, .nav-logo-text .social { color: var(--text-1); }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 450;
+            color: var(--text-2);
+            transition: color var(--ease);
+        }
+        .nav-links a:hover { color: var(--text-1); }
+        .nav-cta {
+            background: var(--teal);
+            color: #fff !important;
+            padding: 10px 22px;
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 600;
+            transition: all var(--ease);
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-body);
+        }
+        .nav-cta:hover { background: var(--teal-dark); color: #fff !important; box-shadow: 0 0 20px var(--teal-glow-md); }
+        .nav-cta:focus-visible { outline: 2px solid var(--teal-light); outline-offset: 2px; }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .mobile-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text-2);
+            margin: 5px 0;
+            border-radius: 2px;
+            transition: all var(--ease);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle { display: block; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: rgba(12,10,9,0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 24px;
+                gap: 16px;
+                border-bottom: 1px solid var(--border);
+            }
+            .nav-links.open { display: flex; }
+        }
+
+        /* ========================================
+           02. HERO
+           ======================================== */
+        .hero {
+            padding: 160px 0 100px;
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-deepest);
+        }
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px 6px 8px;
+            background: var(--amber-glow);
+            border: 1px solid rgba(217,119,6,0.25);
+            border-radius: var(--radius-full);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--amber-light);
+            margin-bottom: 32px;
+            animation: fade-in-up 0.6s ease both;
+        }
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(40px, 6vw, 68px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--text-1);
+            max-width: 800px;
+            margin-bottom: 24px;
+            animation: fade-in-up 0.6s ease 0.1s both;
+        }
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--teal-light), var(--amber-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-sub {
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text-2);
+            max-width: 560px;
+            margin-bottom: 40px;
+            animation: fade-in-up 0.6s ease 0.2s both;
+        }
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 56px;
+            animation: fade-in-up 0.6s ease 0.3s both;
+        }
+        .btn-primary {
+            background: var(--teal);
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: var(--radius-full);
+            font-size: 15px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            border: none;
+            cursor: pointer;
+            transition: all var(--ease);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            background: var(--teal-dark);
+            color: #fff;
+            box-shadow: 0 0 24px var(--teal-glow-md), 0 4px 16px rgba(0,0,0,0.3);
+            transform: translateY(-1px);
+        }
+        .btn-primary:focus-visible { outline: 2px solid var(--teal-light); outline-offset: 2px; }
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-2);
+            padding: 14px 32px;
+            border-radius: var(--radius-full);
+            font-size: 15px;
+            font-weight: 500;
+            font-family: var(--font-body);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all var(--ease);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .btn-ghost:hover {
+            border-color: var(--amber);
+            color: var(--amber-light);
+            box-shadow: 0 0 16px var(--amber-glow);
+        }
+        .hero-metrics {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            animation: fade-in-up 0.6s ease 0.4s both;
+        }
+        .hero-metric {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .hero-metric-value {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--teal-light);
+        }
+        .hero-metric-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        /* Pulse rings decorative */
+        .hero-pulse {
+            position: absolute;
+            top: 120px;
+            right: 10%;
+            width: 300px;
+            height: 300px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .hero-pulse .ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 1px solid var(--teal-light);
+            opacity: 0;
+            animation: pulse-ring-slow 4s ease-out infinite;
+        }
+        .hero-pulse .ring:nth-child(2) { animation-delay: 1s; }
+        .hero-pulse .ring:nth-child(3) { animation-delay: 2s; }
+        .hero-pulse .ring:nth-child(4) { animation-delay: 3s; }
+        .hero-pulse .core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: var(--teal-light);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--teal-glow-lg);
+        }
+
+        @media (max-width: 768px) {
+            .hero-pulse { display: none; }
+            .hero { padding: 120px 0 60px; }
+        }
+
+        /* ========================================
+           03. SOCIAL PROOF / BADGES
+           ======================================== */
+        .social-proof {
+            padding: 64px 0;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .social-proof-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .badges-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 500;
+            font-family: var(--font-body);
+            transition: all var(--ease);
+        }
+        .badge-explorer {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-2);
+        }
+        .badge-scout {
+            background: var(--teal);
+            border: 1px solid var(--teal);
+            color: #fff;
+        }
+        .badge-prospector {
+            background: var(--amber-glow);
+            border: 1px solid rgba(217,119,6,0.3);
+            color: var(--amber-light);
+        }
+        .badge-sm {
+            padding: 4px 10px;
+            font-size: 11px;
+            font-family: var(--font-mono);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .pill-active { background: var(--success-bg); color: var(--success); border: 1px solid var(--success-border); }
+        .pill-beta { background: var(--info-bg); color: var(--teal-light); border: 1px solid var(--info-border); }
+        .pill-new { background: var(--amber-glow); color: var(--amber-light); border: 1px solid rgba(217,119,6,0.3); }
+        .pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        .trusted-bar {
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+        .trusted-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-3);
+            margin-bottom: 20px;
+        }
+        .trusted-logos {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .trusted-logo {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-3);
+            opacity: 0.5;
+            letter-spacing: -0.02em;
+        }
+
+        /* ========================================
+           04. FEATURE CARDS
+           ======================================== */
+        .features {
+            padding: 100px 0;
+            background: var(--bg-deepest);
+        }
+        .features-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            transition: all var(--ease-slow);
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-lg);
+            border: 1px solid transparent;
+            transition: border-color var(--ease-slow);
+            pointer-events: none;
+        }
+        .feature-card:hover {
+            background: rgba(41,37,36,0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .feature-card:hover::before {
+            border-color: var(--card-border-hover);
+        }
+        .feature-num {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--amber);
+            margin-bottom: 16px;
+            letter-spacing: 0.05em;
+        }
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: var(--teal-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .feature-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--teal-light);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .feature-card h3 {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-1);
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+        .feature-card p {
+            font-size: 15px;
+            color: var(--text-2);
+            line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .features-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ========================================
+           05. STATS
+           ======================================== */
+        .stats {
+            padding: 80px 0;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .stats-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px;
+            text-align: center;
+        }
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 44px;
+            font-weight: 800;
+            color: var(--text-1);
+            line-height: 1;
+            margin-bottom: 8px;
+            letter-spacing: -0.03em;
+        }
+        .stat-value .teal { color: var(--teal-light); }
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ========================================
+           06. TESTIMONIALS
+           ======================================== */
+        .testimonials {
+            padding: 100px 0;
+            background: var(--bg-deepest);
+        }
+        .testimonials-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .testimonial-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            border-left: 3px solid var(--teal);
+            position: relative;
+        }
+        .testimonial-quote-mark {
+            font-family: var(--font-display);
+            font-size: 64px;
+            font-weight: 800;
+            color: var(--amber);
+            opacity: 0.3;
+            line-height: 1;
+            position: absolute;
+            top: 20px;
+            right: 28px;
+        }
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-1);
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--teal), var(--amber));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+        }
+        .testimonial-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-1);
+        }
+        .testimonial-role {
+            font-size: 13px;
+            color: var(--text-3);
+        }
+        @media (max-width: 768px) {
+            .testimonials-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ========================================
+           07. PRICING
+           ======================================== */
+        .pricing {
+            padding: 100px 0;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+        }
+        .pricing-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            align-items: start;
+        }
+        .pricing-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-xl);
+            padding: 40px 32px;
+            transition: all var(--ease-slow);
+        }
+        .pricing-card.recommended {
+            border-color: var(--teal);
+            position: relative;
+            box-shadow: 0 0 30px var(--teal-glow), 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .pricing-card.recommended .pricing-rec-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--teal);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 4px 16px;
+            border-radius: var(--radius-full);
+        }
+        .pricing-tier {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+        }
+        .pricing-name {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-1);
+            margin-bottom: 8px;
+        }
+        .pricing-price {
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--text-1);
+            line-height: 1.1;
+            margin-bottom: 4px;
+            letter-spacing: -0.03em;
+        }
+        .pricing-price .currency { font-size: 24px; color: var(--text-3); vertical-align: super; }
+        .pricing-price .period { font-size: 16px; color: var(--text-3); font-weight: 400; }
+        .pricing-desc {
+            font-size: 14px;
+            color: var(--text-3);
+            margin-bottom: 28px;
+        }
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+        .pricing-features li {
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--text-2);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .pricing-features li::before {
+            content: '';
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+            border-radius: 50%;
+            background: var(--teal-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+            background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5L4.5 7.5L8 3' stroke='%2322D3EE' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .pricing-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: all var(--ease);
+            text-align: center;
+            display: block;
+            text-decoration: none;
+        }
+        .pricing-btn-primary {
+            background: var(--teal);
+            color: #fff;
+            border: 1px solid var(--teal);
+        }
+        .pricing-btn-primary:hover { background: var(--teal-dark); color: #fff; box-shadow: 0 0 20px var(--teal-glow-md); }
+        .pricing-btn-ghost {
+            background: transparent;
+            color: var(--text-2);
+            border: 1px solid var(--border);
+        }
+        .pricing-btn-ghost:hover { border-color: var(--amber); color: var(--amber-light); }
+        @media (max-width: 900px) {
+            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; padding: 0 24px; }
+        }
+
+        /* ========================================
+           08. FORMS
+           ======================================== */
+        .forms-section {
+            padding: 100px 0;
+            background: var(--bg-deepest);
+            border-top: 1px solid var(--border);
+        }
+        .forms-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-2);
+            margin-bottom: 6px;
+        }
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(28,25,23,0.8);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-1);
+            font-family: var(--font-body);
+            font-size: 14px;
+            transition: all var(--ease);
+            outline: none;
+        }
+        .form-input::placeholder { color: var(--text-3); }
+        .form-input:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px var(--teal-glow);
+        }
+        .form-input.error { border-color: var(--error); }
+        .form-input.error:focus { box-shadow: 0 0 0 3px var(--error-bg); }
+        .form-input.success { border-color: var(--success); }
+        .form-hint {
+            font-size: 12px;
+            color: var(--text-3);
+            margin-top: 4px;
+        }
+        .form-hint.error { color: var(--error); }
+        .form-hint.success { color: var(--success); }
+        select.form-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2378716C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+        }
+        .toggle-label { font-size: 14px; color: var(--text-2); }
+        .toggle {
+            width: 44px;
+            height: 24px;
+            background: var(--bg-medium);
+            border-radius: var(--radius-full);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            position: relative;
+            transition: all var(--ease);
+        }
+        .toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--text-3);
+            transition: all var(--ease);
+        }
+        .toggle.active {
+            background: var(--teal);
+            border-color: var(--teal);
+        }
+        .toggle.active::after {
+            transform: translateX(20px);
+            background: #fff;
+        }
+        .mini-signup {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+        }
+        .mini-signup h4 {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-1);
+            margin-bottom: 6px;
+        }
+        .mini-signup p {
+            font-size: 14px;
+            color: var(--text-3);
+            margin-bottom: 20px;
+        }
+        .input-row {
+            display: flex;
+            gap: 8px;
+        }
+        .input-row .form-input { flex: 1; }
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .input-row { flex-direction: column; }
+        }
+
+        /* ========================================
+           09. FOOTER
+           ======================================== */
+        .footer {
+            padding: 80px 0 40px;
+            background: #0A0908;
+            border-top: 1px solid var(--border);
+        }
+        .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 56px;
+        }
+        .footer-brand p {
+            font-size: 14px;
+            color: var(--text-3);
+            margin-top: 12px;
+            max-width: 280px;
+            line-height: 1.6;
+        }
+        .footer-col h5 {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 16px;
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 10px; }
+        .footer-col a {
+            font-size: 14px;
+            color: var(--text-2);
+            transition: color var(--ease);
+        }
+        .footer-col a:hover { color: var(--text-1); }
+        .footer-newsletter {
+            margin-bottom: 40px;
+            padding: 28px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            max-width: 480px;
+        }
+        .footer-newsletter h5 {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-1);
+            margin-bottom: 10px;
+        }
+        .footer-newsletter .input-row { margin-top: 12px; }
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .footer-copy {
+            font-size: 13px;
+            color: var(--text-3);
+        }
+        .footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+        .footer-legal a {
+            font-size: 13px;
+            color: var(--text-3);
+        }
+        @media (max-width: 768px) {
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+
+        /* ========================================
+           GROUP DIVIDER
+           ======================================== */
+        .group-divider {
+            padding: 48px 0;
+            text-align: center;
+            background: var(--bg-deepest);
+        }
+        .group-divider-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--amber);
+            margin-top: 24px;
+        }
+
+        /* ========================================
+           10. COLOR PALETTE
+           ======================================== */
+        .colors-section {
+            padding: 100px 0;
+            background: var(--bg-dark);
+        }
+        .colors-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .color-group {
+            margin-bottom: 40px;
+        }
+        .color-group-title {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-3);
+            margin-bottom: 16px;
+        }
+        .color-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .color-swatch {
+            width: 120px;
+        }
+        .color-swatch-block {
+            width: 100%;
+            height: 72px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            margin-bottom: 8px;
+        }
+        .color-swatch-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-1);
+            margin-bottom: 2px;
+        }
+        .color-swatch-value {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+        }
+
+        /* ========================================
+           11. TYPOGRAPHY
+           ======================================== */
+        .type-section {
+            padding: 100px 0;
+            background: var(--bg-deepest);
+            border-top: 1px solid var(--border);
+        }
+        .type-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .type-specimen {
+            margin-bottom: 36px;
+            padding-bottom: 36px;
+            border-bottom: 1px solid var(--border);
+        }
+        .type-specimen:last-child { border-bottom: none; }
+        .type-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .type-meta-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        .type-meta-detail {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--amber);
+        }
+
+        /* ========================================
+           12. SPACING
+           ======================================== */
+        .spacing-section {
+            padding: 100px 0;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+        }
+        .spacing-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .spacing-scale {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-3);
+            min-width: 80px;
+        }
+        .spacing-bar {
+            height: 12px;
+            background: linear-gradient(90deg, var(--teal), var(--teal-light));
+            border-radius: 2px;
+            opacity: 0.7;
+        }
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-2);
+            min-width: 48px;
+        }
+
+        /* ========================================
+           13. BUTTONS
+           ======================================== */
+        .buttons-section {
+            padding: 100px 0;
+            background: var(--bg-deepest);
+            border-top: 1px solid var(--border);
+        }
+        .buttons-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .btn-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+        .btn-row-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            width: 100%;
+            margin-bottom: 4px;
+        }
+        .btn {
+            padding: 12px 28px;
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: all var(--ease);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .btn:focus-visible { outline: 2px solid var(--teal-light); outline-offset: 2px; }
+        .btn-teal { background: var(--teal); color: #fff; }
+        .btn-teal:hover { background: var(--teal-dark); box-shadow: 0 0 20px var(--teal-glow-md); color: #fff; }
+        .btn-secondary {
+            background: rgba(41,37,36,0.6);
+            color: var(--text-2);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover { background: rgba(41,37,36,0.9); color: var(--text-1); border-color: rgba(255,255,255,0.12); }
+        .btn-ghost-border {
+            background: transparent;
+            color: var(--text-2);
+            border: 1px solid var(--border);
+        }
+        .btn-ghost-border:hover { border-color: var(--amber); color: var(--amber-light); }
+        .btn-amber { background: var(--amber); color: #fff; }
+        .btn-amber:hover { background: #B45309; box-shadow: 0 0 20px var(--amber-glow-md); color: #fff; }
+        .btn-text {
+            background: none;
+            border: none;
+            color: var(--teal-light);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: var(--font-body);
+            padding: 4px 0;
+            transition: color var(--ease);
+        }
+        .btn-text:hover { color: var(--amber-light); }
+        .btn:disabled, .btn[disabled] {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* ========================================
+           14. DIVIDERS & DECORATIVE
+           ======================================== */
+        .dividers-section {
+            padding: 100px 0;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+        }
+        .dividers-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .demo-box {
+            margin-bottom: 48px;
+        }
+        .demo-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-3);
+            margin-bottom: 16px;
+        }
+        .pulse-demo {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+            padding: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+        }
+        .pulse-ring-demo {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        .pulse-ring-demo .ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 1px solid var(--teal-light);
+            opacity: 0;
+            animation: pulse-ring-slow 3s ease-out infinite;
+        }
+        .pulse-ring-demo .ring:nth-child(2) { animation-delay: 0.75s; }
+        .pulse-ring-demo .ring:nth-child(3) { animation-delay: 1.5s; }
+        .pulse-ring-demo .ring:nth-child(4) { animation-delay: 2.25s; }
+        .pulse-ring-demo .core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: var(--teal-light);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--teal-glow-lg);
+        }
+        .grain-demo {
+            height: 120px;
+            border-radius: var(--radius-lg);
+            background: var(--bg-deepest);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+        }
+        .grain-demo::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.08;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px 256px;
+        }
+        .grain-demo-label {
+            position: absolute;
+            bottom: 16px;
+            left: 20px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            z-index: 1;
+        }
+        .border-demos {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .border-demo-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .border-demo-line {
+            flex: 1;
+            height: 1px;
+        }
+        .border-demo-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            min-width: 180px;
+        }
+
+        /* ========================================
+           15. ALERTS
+           ======================================== */
+        .alerts-section {
+            padding: 100px 0;
+            background: var(--bg-deepest);
+            border-top: 1px solid var(--border);
+        }
+        .alerts-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .alert {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            border-left: 3px solid;
+        }
+        .alert-success {
+            background: var(--success-bg);
+            border-left-color: var(--success);
+        }
+        .alert-warning {
+            background: var(--warning-bg);
+            border-left-color: var(--warning);
+        }
+        .alert-error {
+            background: var(--error-bg);
+            border-left-color: var(--error);
+        }
+        .alert-info {
+            background: var(--info-bg);
+            border-left-color: var(--info);
+        }
+        .alert-icon {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 1px;
+        }
+        .alert-success .alert-icon { background: var(--success); color: #fff; }
+        .alert-warning .alert-icon { background: var(--warning); color: #000; }
+        .alert-error .alert-icon { background: var(--error); color: #fff; }
+        .alert-info .alert-icon { background: var(--info); color: #fff; }
+        .alert-content h5 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .alert-success .alert-content h5 { color: var(--success); }
+        .alert-warning .alert-content h5 { color: var(--warning); }
+        .alert-error .alert-content h5 { color: var(--error); }
+        .alert-info .alert-content h5 { color: var(--teal-light); }
+        .alert-content p {
+            font-size: 13px;
+            color: var(--text-2);
+            line-height: 1.5;
+        }
+        .toast-demos {
+            margin-top: 48px;
+        }
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 20px;
+            background: rgba(41,37,36,0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 12px;
+            max-width: 420px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+        .toast-dot {
+            width: 8px;
+            height: 8px;
+            min-width: 8px;
+            border-radius: 50%;
+        }
+        .toast-success .toast-dot { background: var(--success); box-shadow: 0 0 8px var(--success-bg); }
+        .toast-error .toast-dot { background: var(--error); box-shadow: 0 0 8px var(--error-bg); }
+        .toast-info .toast-dot { background: var(--teal-light); box-shadow: 0 0 8px var(--teal-glow); }
+        .toast-text {
+            font-size: 13px;
+            color: var(--text-1);
+            flex: 1;
+        }
+        .toast-close {
+            background: none;
+            border: none;
+            color: var(--text-3);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px;
+            line-height: 1;
+            transition: color var(--ease);
+        }
+        .toast-close:hover { color: var(--text-1); }
+    </style>
+</head>
+<body>
+
+<!-- ============================================
+     01. NAVIGATION BAR
+     ============================================ -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.15)" stroke="#22D3EE" stroke-width="1.5"/>
+                <circle cx="14" cy="14" r="3" stroke="#22D3EE" stroke-width="1.5" fill="none"/>
+                <line x1="14" y1="8" x2="14" y2="11" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="14" y1="17" x2="14" y2="20" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="8" y1="14" x2="11" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="17" y1="14" x2="20" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="nav-logo-text">
+                <span class="pain">Pain</span><span class="on">On</span><span class="social">Social</span>
+            </span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#design-system">Design System</a></li>
+            <li><button class="nav-cta">Start Free Trial</button></li>
+        </ul>
+        <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ============================================
+     02. HERO
+     ============================================ -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-badge">
+            <div class="pulse-dot" style="width:8px;height:8px;"></div>
+            Pulse v1.0 — Feel the frequency
+        </div>
+        <h1>Stop guessing what to build.<br>Start with <span class="highlight">validated pain.</span></h1>
+        <p class="hero-sub">PainOnSocial scans Reddit communities to surface real user frustrations, severity-score them with AI, and generate solution ideas — so you build what people actually need.</p>
+        <div class="hero-actions">
+            <a href="#" class="btn-primary">
+                Start Free Trial
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#" class="btn-ghost">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><polygon points="6,3 13,8 6,13" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg>
+                Watch demo
+            </a>
+        </div>
+        <div class="hero-metrics">
+            <div class="hero-metric">
+                <span class="hero-metric-value">800+</span>
+                <span class="hero-metric-label">Communities tracked</span>
+            </div>
+            <div class="hero-metric">
+                <span class="hero-metric-value">142K+</span>
+                <span class="hero-metric-label">Pain points found</span>
+            </div>
+            <div class="hero-metric">
+                <span class="hero-metric-value">97.4%</span>
+                <span class="hero-metric-label">Accuracy rate</span>
+            </div>
+            <div class="hero-metric">
+                <span class="hero-metric-value">&lt; 2min</span>
+                <span class="hero-metric-label">Time to insight</span>
+            </div>
+        </div>
+    </div>
+    <div class="hero-pulse" aria-hidden="true">
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="core"></div>
+    </div>
+</section>
+
+<!-- ============================================
+     03. SOCIAL PROOF / BADGES
+     ============================================ -->
+<section class="social-proof">
+    <div class="social-proof-inner">
+        <div class="section-label"><span class="num">03</span> Social Proof &amp; Badges</div>
+
+        <div style="margin-bottom:32px;">
+            <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Tier Badges</p>
+            <div class="badges-row">
+                <span class="badge badge-explorer">Explorer</span>
+                <span class="badge badge-scout">Scout</span>
+                <span class="badge badge-prospector">Prospector</span>
+            </div>
+        </div>
+
+        <div style="margin-bottom:32px;">
+            <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Status Pills</p>
+            <div class="badges-row">
+                <span class="pill pill-active"><span class="pill-dot"></span> Active</span>
+                <span class="pill pill-beta"><span class="pill-dot"></span> Beta</span>
+                <span class="pill pill-new"><span class="pill-dot"></span> New</span>
+            </div>
+        </div>
+
+        <div style="margin-bottom:32px;">
+            <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Marketing Badges</p>
+            <div class="badges-row">
+                <span class="badge badge-sm" style="background:var(--teal-glow);color:var(--teal-light);border:1px solid rgba(8,145,178,0.25);">AI-Powered</span>
+                <span class="badge badge-sm" style="background:var(--amber-glow);color:var(--amber-light);border:1px solid rgba(217,119,6,0.25);">Top Rated</span>
+                <span class="badge badge-sm" style="background:rgba(168,85,247,0.1);color:#A855F7;border:1px solid rgba(168,85,247,0.25);">Enterprise Ready</span>
+                <span class="badge badge-sm" style="background:var(--success-bg);color:var(--success);border:1px solid var(--success-border);">SOC 2</span>
+            </div>
+        </div>
+
+        <div class="trusted-bar">
+            <p class="trusted-label">Trusted by teams at</p>
+            <div class="trusted-logos">
+                <span class="trusted-logo">Vercel</span>
+                <span class="trusted-logo">Linear</span>
+                <span class="trusted-logo">Notion</span>
+                <span class="trusted-logo">Resend</span>
+                <span class="trusted-logo">Cal.com</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     04. FEATURE CARDS
+     ============================================ -->
+<section class="features" id="features">
+    <div class="features-inner">
+        <div class="section-label"><span class="num">04</span> Features</div>
+        <div class="section-title">Everything you need to find<br>product-market fit faster.</div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-num">01</div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 019 9"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <h3>Community Discovery</h3>
+                <p>Browse 800+ curated Reddit communities organized by industry, niche, and audience. Find exactly where your customers are talking.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-num">02</div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 5-9"/></svg>
+                </div>
+                <h3>Pain Point Analysis</h3>
+                <p>AI severity scoring ranks frustrations by frequency, intensity, and market potential. Know which problems are worth solving.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-num">03</div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                </div>
+                <h3>Solution Ideation</h3>
+                <p>Generate 10 AI-powered solution concepts per pain point, complete with competitive landscape and revenue potential estimates.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-num">04</div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                </div>
+                <h3>Evidence Trail</h3>
+                <p>Every pain point comes with actual Reddit quotes, permalinks, upvote counts, and thread context. Real voices, verifiable data.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     05. STATS
+     ============================================ -->
+<section class="stats">
+    <div class="stats-inner">
+        <div class="section-label"><span class="num">05</span> By the Numbers</div>
+        <div style="margin-bottom:36px;"></div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">800<span class="teal">+</span></div>
+                <div class="stat-label">Communities</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">142<span class="teal">K</span></div>
+                <div class="stat-label">Pain Points</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">10<span class="teal">x</span></div>
+                <div class="stat-label">Solutions / Pain</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">97<span class="teal">%</span></div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     06. TESTIMONIALS
+     ============================================ -->
+<section class="testimonials" id="testimonials">
+    <div class="testimonials-inner">
+        <div class="section-label"><span class="num">06</span> Testimonials</div>
+        <div class="section-title">Trusted by product builders.</div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-quote-mark">"</div>
+                <p class="testimonial-text">PainOnSocial completely changed how we prioritize our roadmap. Instead of guessing, we're building features that real users are begging for. The severity scoring is incredibly accurate.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MC</div>
+                    <div>
+                        <div class="testimonial-name">Maya Chen</div>
+                        <div class="testimonial-role">Head of Product, Stackline</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-quote-mark">"</div>
+                <p class="testimonial-text">We found a $2M opportunity hiding in a niche subreddit. The evidence trail feature meant our investors could see exactly why we pivoted. This tool pays for itself 100x over.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">JK</div>
+                    <div>
+                        <div class="testimonial-name">James Kowalski</div>
+                        <div class="testimonial-role">CEO, Freight Protocol</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     07. PRICING
+     ============================================ -->
+<section class="pricing" id="pricing">
+    <div class="pricing-inner">
+        <div class="section-label"><span class="num">07</span> Pricing</div>
+        <div class="section-title">Start free. Scale as you grow.</div>
+        <div class="pricing-grid">
+            <!-- Explorer -->
+            <div class="pricing-card">
+                <div class="pricing-tier">Free tier</div>
+                <div class="pricing-name">Explorer</div>
+                <div class="pricing-price"><span class="currency">$</span>0<span class="period">/mo</span></div>
+                <div class="pricing-desc">Get started with community discovery.</div>
+                <ul class="pricing-features">
+                    <li>5 communities</li>
+                    <li>10 pain points / month</li>
+                    <li>Basic severity scores</li>
+                    <li>Community browser</li>
+                </ul>
+                <a href="#" class="pricing-btn pricing-btn-ghost">Get Started</a>
+            </div>
+            <!-- Scout (Recommended) -->
+            <div class="pricing-card recommended">
+                <div class="pricing-rec-badge">Recommended</div>
+                <div class="pricing-tier">Most popular</div>
+                <div class="pricing-name">Scout</div>
+                <div class="pricing-price"><span class="currency">$</span>29<span class="period">/mo</span></div>
+                <div class="pricing-desc">For serious product builders.</div>
+                <ul class="pricing-features">
+                    <li>50 communities</li>
+                    <li>Unlimited pain points</li>
+                    <li>AI severity scoring</li>
+                    <li>10 solutions per pain point</li>
+                    <li>Evidence trail + permalinks</li>
+                    <li>Export to CSV</li>
+                </ul>
+                <a href="#" class="pricing-btn pricing-btn-primary">Start Free Trial</a>
+            </div>
+            <!-- Prospector -->
+            <div class="pricing-card">
+                <div class="pricing-tier">Power user</div>
+                <div class="pricing-name">Prospector</div>
+                <div class="pricing-price"><span class="currency">$</span>79<span class="period">/mo</span></div>
+                <div class="pricing-desc">Full access for teams and agencies.</div>
+                <ul class="pricing-features">
+                    <li>Unlimited communities</li>
+                    <li>Unlimited pain points</li>
+                    <li>Advanced AI models</li>
+                    <li>20 solutions per pain point</li>
+                    <li>API access</li>
+                    <li>Team collaboration</li>
+                    <li>Priority support</li>
+                </ul>
+                <a href="#" class="pricing-btn pricing-btn-ghost">Start Free Trial</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     08. FORMS
+     ============================================ -->
+<section class="forms-section">
+    <div class="forms-inner">
+        <div class="section-label"><span class="num">08</span> Form Elements</div>
+        <div class="section-title">Inputs, selects, and controls.</div>
+        <div class="form-grid">
+            <div>
+                <div class="form-group">
+                    <label class="form-label">Email address</label>
+                    <input type="email" class="form-input" placeholder="you@company.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" placeholder="Enter your password" value="mysecretpassword">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Industry</label>
+                    <select class="form-input">
+                        <option>Select an industry</option>
+                        <option>SaaS / Software</option>
+                        <option>E-commerce</option>
+                        <option>Fintech</option>
+                        <option>Healthcare</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Error state</label>
+                    <input type="text" class="form-input error" value="invalid-email">
+                    <p class="form-hint error">Please enter a valid email address.</p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Success state</label>
+                    <input type="text" class="form-input success" value="maya@stackline.io">
+                    <p class="form-hint success">Email verified successfully.</p>
+                </div>
+                <div style="margin-top:24px;">
+                    <div class="toggle-row">
+                        <span class="toggle-label">Email notifications</span>
+                        <div class="toggle active" onclick="this.classList.toggle('active')" role="switch" tabindex="0"></div>
+                    </div>
+                    <div class="toggle-row">
+                        <span class="toggle-label">Weekly digest</span>
+                        <div class="toggle" onclick="this.classList.toggle('active')" role="switch" tabindex="0"></div>
+                    </div>
+                    <div class="toggle-row">
+                        <span class="toggle-label">Marketing emails</span>
+                        <div class="toggle" onclick="this.classList.toggle('active')" role="switch" tabindex="0"></div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="mini-signup">
+                    <h4>Start discovering pain points</h4>
+                    <p>Join 2,400+ product builders using PainOnSocial.</p>
+                    <div class="form-group">
+                        <label class="form-label">Full name</label>
+                        <input type="text" class="form-input" placeholder="Jane Smith">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Work email</label>
+                        <input type="email" class="form-input" placeholder="jane@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Company size</label>
+                        <select class="form-input">
+                            <option>Select size</option>
+                            <option>1-10</option>
+                            <option>11-50</option>
+                            <option>51-200</option>
+                            <option>200+</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary" style="width:100%;justify-content:center;margin-top:8px;">Create Free Account</button>
+                    <p style="font-size:12px;color:var(--text-3);margin-top:12px;text-align:center;">No credit card required. Free for 14 days.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     09. FOOTER
+     ============================================ -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="#" class="nav-logo" style="margin-bottom:4px;">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.15)" stroke="#22D3EE" stroke-width="1.5"/>
+                        <circle cx="14" cy="14" r="3" stroke="#22D3EE" stroke-width="1.5" fill="none"/>
+                        <line x1="14" y1="8" x2="14" y2="11" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="14" y1="17" x2="14" y2="20" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="8" y1="14" x2="11" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="17" y1="14" x2="20" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span class="nav-logo-text"><span class="pain">Pain</span><span class="on">On</span><span class="social">Social</span></span>
+                </a>
+                <p>Discover validated business pain points from Reddit discussions. AI-powered analysis for product builders.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Product</h5>
+                <ul>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Changelog</a></li>
+                    <li><a href="#">API Docs</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Company</h5>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Resources</h5>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Status</a></li>
+                    <li><a href="#">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-newsletter">
+            <h5>Stay in the loop</h5>
+            <p style="font-size:13px;color:var(--text-3);">Get weekly insights on emerging pain points and market opportunities.</p>
+            <div class="input-row">
+                <input type="email" class="form-input" placeholder="you@company.com">
+                <button class="btn-primary" style="white-space:nowrap;">Subscribe</button>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="footer-copy">&copy; 2025 PainOnSocial. All rights reserved.</span>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Settings</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================
+     GROUP DIVIDER
+     ============================================ -->
+<div class="group-divider" id="design-system">
+    <hr class="amber-line">
+    <p class="group-divider-label">Design System Reference &mdash; Pulse v1.0</p>
+</div>
+
+<!-- ============================================
+     10. COLOR PALETTE
+     ============================================ -->
+<section class="colors-section">
+    <div class="colors-inner">
+        <div class="section-label"><span class="num">10</span> Color Palette</div>
+        <div class="section-title">Colors</div>
+
+        <div class="color-group">
+            <div class="color-group-title">Brand — Teal</div>
+            <div class="color-row">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#0891B2;"></div>
+                    <div class="color-swatch-name">Primary Teal</div>
+                    <div class="color-swatch-value">#0891B2</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#22D3EE;"></div>
+                    <div class="color-swatch-name">Teal Light</div>
+                    <div class="color-swatch-value">#22D3EE</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#0E7490;"></div>
+                    <div class="color-swatch-name">Teal Dark</div>
+                    <div class="color-swatch-value">#0E7490</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#ECFEFF;"></div>
+                    <div class="color-swatch-name">Teal BG</div>
+                    <div class="color-swatch-value">#ECFEFF</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:rgba(8,145,178,0.15);"></div>
+                    <div class="color-swatch-name">Teal Glow</div>
+                    <div class="color-swatch-value">rgba(8,145,178,0.15)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="color-group">
+            <div class="color-group-title">Brand — Accents</div>
+            <div class="color-row">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#F97316;"></div>
+                    <div class="color-swatch-name">Accent Orange</div>
+                    <div class="color-swatch-value">#F97316</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#A855F7;"></div>
+                    <div class="color-swatch-name">Accent Purple</div>
+                    <div class="color-swatch-value">#A855F7</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="color-group">
+            <div class="color-group-title">Warm Amber Accent</div>
+            <div class="color-row">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#D97706;"></div>
+                    <div class="color-swatch-name">Warm Amber</div>
+                    <div class="color-swatch-value">#D97706</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#FBBF24;"></div>
+                    <div class="color-swatch-name">Amber Light</div>
+                    <div class="color-swatch-value">#FBBF24</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:rgba(217,119,6,0.15);"></div>
+                    <div class="color-swatch-name">Amber Glow</div>
+                    <div class="color-swatch-value">rgba(217,119,6,0.15)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="color-group">
+            <div class="color-group-title">Dark Surfaces</div>
+            <div class="color-row">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#0C0A09;"></div>
+                    <div class="color-swatch-name">Warm Near-Black</div>
+                    <div class="color-swatch-value">#0C0A09</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#1C1917;"></div>
+                    <div class="color-swatch-name">Warm Dark</div>
+                    <div class="color-swatch-value">#1C1917</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#292524;"></div>
+                    <div class="color-swatch-name">Warm Medium</div>
+                    <div class="color-swatch-value">#292524</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:rgba(41,37,36,0.6);border-color:rgba(255,255,255,0.06);"></div>
+                    <div class="color-swatch-name">Card Surface</div>
+                    <div class="color-swatch-value">rgba(41,37,36,0.6)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="color-group">
+            <div class="color-group-title">Text</div>
+            <div class="color-row">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#FAFAF9;"></div>
+                    <div class="color-swatch-name">Warm White</div>
+                    <div class="color-swatch-value">#FAFAF9</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#A8A29E;"></div>
+                    <div class="color-swatch-name">Secondary</div>
+                    <div class="color-swatch-value">#A8A29E</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#78716C;"></div>
+                    <div class="color-swatch-name">Muted</div>
+                    <div class="color-swatch-value">#78716C</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="color-group">
+            <div class="color-group-title">Semantic</div>
+            <div class="color-row">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#16A34A;"></div>
+                    <div class="color-swatch-name">Success</div>
+                    <div class="color-swatch-value">#16A34A</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#EAB308;"></div>
+                    <div class="color-swatch-name">Warning</div>
+                    <div class="color-swatch-value">#EAB308</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#EF4444;"></div>
+                    <div class="color-swatch-name">Error</div>
+                    <div class="color-swatch-value">#EF4444</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background:#0891B2;"></div>
+                    <div class="color-swatch-name">Info</div>
+                    <div class="color-swatch-value">#0891B2</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     11. TYPOGRAPHY
+     ============================================ -->
+<section class="type-section">
+    <div class="type-inner">
+        <div class="section-label"><span class="num">11</span> Typography</div>
+        <div class="section-title">Type Scale</div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">Hero Display</span>
+                <span class="type-meta-detail">Cabinet Grotesk / 56px / 800 / -0.03em</span>
+            </div>
+            <div style="font-family:var(--font-display);font-size:56px;font-weight:800;line-height:1.05;letter-spacing:-0.03em;color:var(--text-1);">Stop guessing what to build.</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">H1</span>
+                <span class="type-meta-detail">Cabinet Grotesk / 40px / 700 / -0.02em</span>
+            </div>
+            <div style="font-family:var(--font-display);font-size:40px;font-weight:700;line-height:1.1;letter-spacing:-0.02em;color:var(--text-1);">Validated pain points at scale</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">H2</span>
+                <span class="type-meta-detail">Cabinet Grotesk / 32px / 700 / -0.01em</span>
+            </div>
+            <div style="font-family:var(--font-display);font-size:32px;font-weight:700;line-height:1.2;letter-spacing:-0.01em;color:var(--text-1);">AI-powered severity scoring</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">H3</span>
+                <span class="type-meta-detail">Cabinet Grotesk / 24px / 700</span>
+            </div>
+            <div style="font-family:var(--font-display);font-size:24px;font-weight:700;line-height:1.3;color:var(--text-1);">Community discovery engine</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">H4</span>
+                <span class="type-meta-detail">Cabinet Grotesk / 20px / 600</span>
+            </div>
+            <div style="font-family:var(--font-display);font-size:20px;font-weight:600;line-height:1.4;color:var(--text-1);">Evidence trail with permalinks</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">Body</span>
+                <span class="type-meta-detail">Inter / 16px / 400 / 1.6</span>
+            </div>
+            <div style="font-family:var(--font-body);font-size:16px;font-weight:400;line-height:1.6;color:var(--text-2);max-width:640px;">PainOnSocial scans Reddit communities to surface real user frustrations, severity-score them with AI, and generate solution ideas — so you build what people actually need.</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">Body Small</span>
+                <span class="type-meta-detail">Inter / 14px / 400 / 1.6</span>
+            </div>
+            <div style="font-family:var(--font-body);font-size:14px;font-weight:400;line-height:1.6;color:var(--text-2);">Every pain point comes with actual Reddit quotes, permalinks, and thread context.</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">Caption</span>
+                <span class="type-meta-detail">Inter / 12px / 400</span>
+            </div>
+            <div style="font-family:var(--font-body);font-size:12px;font-weight:400;line-height:1.5;color:var(--text-3);">Last updated 2 hours ago. Severity score: 8.7/10.</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">Overline</span>
+                <span class="type-meta-detail">IBM Plex Mono / 11px / 600 / uppercase / 0.08em</span>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);">Pain Point Analysis</div>
+        </div>
+
+        <div class="type-specimen">
+            <div class="type-meta">
+                <span class="type-meta-label">Monospace</span>
+                <span class="type-meta-detail">IBM Plex Mono / 14px / 400</span>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:14px;font-weight:400;line-height:1.6;color:var(--teal-light);">severity_score: 8.7 | frequency: 342 | communities: 12</div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     12. SPACING
+     ============================================ -->
+<section class="spacing-section">
+    <div class="spacing-inner">
+        <div class="section-label"><span class="num">12</span> Spacing Scale</div>
+        <div class="section-title">Spacing</div>
+        <div class="spacing-scale">
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-1</span>
+                <div class="spacing-bar" style="width:4px;"></div>
+                <span class="spacing-value">4px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-2</span>
+                <div class="spacing-bar" style="width:8px;"></div>
+                <span class="spacing-value">8px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-3</span>
+                <div class="spacing-bar" style="width:12px;"></div>
+                <span class="spacing-value">12px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-4</span>
+                <div class="spacing-bar" style="width:16px;"></div>
+                <span class="spacing-value">16px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-5</span>
+                <div class="spacing-bar" style="width:24px;"></div>
+                <span class="spacing-value">24px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-6</span>
+                <div class="spacing-bar" style="width:32px;"></div>
+                <span class="spacing-value">32px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-7</span>
+                <div class="spacing-bar" style="width:48px;"></div>
+                <span class="spacing-value">48px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-8</span>
+                <div class="spacing-bar" style="width:64px;"></div>
+                <span class="spacing-value">64px</span>
+            </div>
+            <div class="spacing-item">
+                <span class="spacing-label">--sp-9</span>
+                <div class="spacing-bar" style="width:96px;"></div>
+                <span class="spacing-value">96px</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     13. BUTTONS
+     ============================================ -->
+<section class="buttons-section">
+    <div class="buttons-inner">
+        <div class="section-label"><span class="num">13</span> Button Components</div>
+        <div class="section-title">Buttons</div>
+
+        <div class="btn-row">
+            <span class="btn-row-label">Default States</span>
+            <button class="btn btn-teal">Primary Teal</button>
+            <button class="btn btn-secondary">Secondary</button>
+            <button class="btn btn-ghost-border">Ghost</button>
+            <button class="btn btn-amber">Amber Accent</button>
+            <button class="btn-text">Text Link &rarr;</button>
+        </div>
+
+        <div class="btn-row">
+            <span class="btn-row-label">With Icons</span>
+            <button class="btn btn-teal">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Start Trial
+            </button>
+            <button class="btn btn-ghost-border">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><polygon points="6,3 13,8 6,13" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg>
+                Watch Demo
+            </button>
+        </div>
+
+        <div class="btn-row">
+            <span class="btn-row-label">Disabled States</span>
+            <button class="btn btn-teal" disabled>Primary Disabled</button>
+            <button class="btn btn-secondary" disabled>Secondary Disabled</button>
+            <button class="btn btn-ghost-border" disabled>Ghost Disabled</button>
+        </div>
+
+        <div class="btn-row">
+            <span class="btn-row-label">Sizes</span>
+            <button class="btn btn-teal" style="padding:8px 18px;font-size:12px;">Small</button>
+            <button class="btn btn-teal">Default</button>
+            <button class="btn btn-teal" style="padding:16px 36px;font-size:16px;">Large</button>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     14. DIVIDERS & DECORATIVE
+     ============================================ -->
+<section class="dividers-section">
+    <div class="dividers-inner">
+        <div class="section-label"><span class="num">14</span> Dividers &amp; Decorative</div>
+        <div class="section-title">Decorative Elements</div>
+
+        <div class="demo-box">
+            <div class="demo-label">Amber Accent Line</div>
+            <hr class="amber-line">
+        </div>
+
+        <div class="demo-box">
+            <div class="demo-label">Pulse Ring Animation</div>
+            <div class="pulse-demo">
+                <div class="pulse-ring-demo">
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="core"></div>
+                </div>
+                <div>
+                    <div style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-1);margin-bottom:4px;">Signature Pulse Motif</div>
+                    <div style="font-size:14px;color:var(--text-3);">Concentric rings expand and fade from teal accent points. Used in hero decoration and on interactive elements.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-box">
+            <div class="demo-label">Grain Texture (exaggerated for demo)</div>
+            <div class="grain-demo">
+                <span class="grain-demo-label">SVG fractalNoise filter at 8% opacity</span>
+            </div>
+        </div>
+
+        <div class="demo-box">
+            <div class="demo-label">Border Separators</div>
+            <div class="border-demos">
+                <div class="border-demo-item">
+                    <span class="border-demo-label">Default — rgba(255,255,255,0.07)</span>
+                    <div class="border-demo-line" style="background:var(--border);"></div>
+                </div>
+                <div class="border-demo-item">
+                    <span class="border-demo-label">Subtle — rgba(255,255,255,0.04)</span>
+                    <div class="border-demo-line" style="background:var(--border-subtle);"></div>
+                </div>
+                <div class="border-demo-item">
+                    <span class="border-demo-label">Card — rgba(255,255,255,0.06)</span>
+                    <div class="border-demo-line" style="background:var(--card-border);"></div>
+                </div>
+                <div class="border-demo-item">
+                    <span class="border-demo-label">Teal Glow</span>
+                    <div class="border-demo-line" style="background:var(--teal);box-shadow:0 0 8px var(--teal-glow-md);height:1px;"></div>
+                </div>
+                <div class="border-demo-item">
+                    <span class="border-demo-label">Amber Glow</span>
+                    <div class="border-demo-line" style="background:var(--amber);box-shadow:0 0 8px var(--amber-glow-md);height:1px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     15. ALERTS
+     ============================================ -->
+<section class="alerts-section">
+    <div class="alerts-inner">
+        <div class="section-label"><span class="num">15</span> Alerts &amp; Toasts</div>
+        <div class="section-title">Notifications</div>
+
+        <div style="margin-bottom:48px;">
+            <div class="demo-label" style="margin-bottom:16px;">Alert Banners</div>
+            <div class="alert alert-success">
+                <div class="alert-icon">&#10003;</div>
+                <div class="alert-content">
+                    <h5>Analysis complete</h5>
+                    <p>142 new pain points discovered across 12 communities. View your results dashboard.</p>
+                </div>
+            </div>
+            <div class="alert alert-warning">
+                <div class="alert-icon">!</div>
+                <div class="alert-content">
+                    <h5>Rate limit approaching</h5>
+                    <p>You've used 85% of your monthly pain point quota. Consider upgrading to Scout.</p>
+                </div>
+            </div>
+            <div class="alert alert-error">
+                <div class="alert-icon">&#10005;</div>
+                <div class="alert-content">
+                    <h5>Connection failed</h5>
+                    <p>Unable to reach Reddit API. Retrying automatically in 30 seconds.</p>
+                </div>
+            </div>
+            <div class="alert alert-info">
+                <div class="alert-icon">i</div>
+                <div class="alert-content">
+                    <h5>New communities available</h5>
+                    <p>24 communities were added this week. Browse the latest additions in the discovery tab.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="toast-demos">
+            <div class="demo-label" style="margin-bottom:16px;">Toast Notifications</div>
+            <div class="toast toast-success">
+                <div class="toast-dot"></div>
+                <span class="toast-text">Pain point saved to your collection.</span>
+                <button class="toast-close">&times;</button>
+            </div>
+            <div class="toast toast-error">
+                <div class="toast-dot"></div>
+                <span class="toast-text">Failed to export. Please try again.</span>
+                <button class="toast-close">&times;</button>
+            </div>
+            <div class="toast toast-info">
+                <div class="toast-dot"></div>
+                <span class="toast-text">New analysis results are ready.</span>
+                <button class="toast-close">&times;</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bottom padding -->
+<div style="height:80px;background:var(--bg-deepest);"></div>
+
+</body>
+</html>

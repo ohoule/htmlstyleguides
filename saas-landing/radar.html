@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radar v1.0 — PainOnSocial Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --teal: #0891B2;
+            --teal-light: #22D3EE;
+            --teal-dark: #0E7490;
+            --teal-bg: #ECFEFF;
+            --teal-glow: rgba(8,145,178,0.15);
+            --teal-glow-md: rgba(8,145,178,0.25);
+            --teal-glow-lg: rgba(8,145,178,0.35);
+
+            --orange: #F97316;
+            --orange-bg: rgba(249,115,22,0.1);
+            --purple: #A855F7;
+            --purple-bg: rgba(168,85,247,0.1);
+
+            --void: #0B0F1A;
+            --surface-1: #111827;
+            --surface-2: #1E293B;
+            --surface-3: rgba(30,41,59,0.6);
+            --card: rgba(30,41,59,0.5);
+            --card-border: rgba(255,255,255,0.06);
+            --card-border-hover: rgba(8,145,178,0.3);
+
+            --text-1: #F1F5F9;
+            --text-2: #94A3B8;
+            --text-3: #64748B;
+            --border: rgba(255,255,255,0.08);
+            --border-subtle: rgba(255,255,255,0.04);
+
+            --success: #16A34A;
+            --success-bg: rgba(22,163,74,0.1);
+            --success-border: rgba(22,163,74,0.25);
+            --warning: #EAB308;
+            --warning-bg: rgba(234,179,8,0.1);
+            --warning-border: rgba(234,179,8,0.25);
+            --error: #EF4444;
+            --error-bg: rgba(239,68,68,0.1);
+            --error-border: rgba(239,68,68,0.25);
+            --info: #0891B2;
+            --info-bg: rgba(8,145,178,0.1);
+            --info-border: rgba(8,145,178,0.25);
+
+            --font-display: 'Outfit', system-ui, sans-serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+            --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+            --shadow-glow-sm: 0 0 12px var(--teal-glow);
+            --shadow-glow-md: 0 0 24px var(--teal-glow-md);
+            --shadow-glow-lg: 0 0 40px var(--teal-glow-lg);
+            --shadow-card: 0 4px 24px rgba(0,0,0,0.3);
+
+            --radius-sm: 6px; --radius-md: 8px; --radius-lg: 12px;
+            --radius-xl: 16px; --radius-full: 9999px;
+
+            --ease: 200ms ease; --ease-slow: 300ms ease;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-1);
+            background: var(--void);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Dot grid texture */
+        .dot-grid {
+            background-image: radial-gradient(circle, rgba(148,163,184,0.08) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .dot-grid-dense {
+            background-image: radial-gradient(circle, rgba(148,163,184,0.06) 1px, transparent 1px);
+            background-size: 16px 16px;
+        }
+
+        .container { max-width: 1180px; margin: 0 auto; padding: 0 var(--sp-5); }
+
+        *:focus-visible {
+            outline: 2px solid var(--teal);
+            outline-offset: 2px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-glow-sm);
+        }
+
+        /* ——— Section Labels (HUD style) ——— */
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-4);
+            margin-bottom: var(--sp-7);
+            padding-top: var(--sp-9);
+        }
+        .section-label .num {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--teal);
+            background: var(--teal-glow);
+            padding: 2px 8px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(8,145,178,0.2);
+            flex-shrink: 0;
+        }
+        .section-label .rule {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        .section-label .title {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            flex-shrink: 0;
+        }
+
+        /* ——— Radar Scan Line ——— */
+        @keyframes scanline {
+            0% { left: -20%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 120%; opacity: 0; }
+        }
+        .scan-divider {
+            position: relative;
+            height: 1px;
+            background: var(--border);
+            margin: var(--sp-7) 0;
+            overflow: hidden;
+        }
+        .scan-divider::after {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -20%;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--teal-light), transparent);
+            box-shadow: var(--shadow-glow-md);
+            animation: scanline 4s ease-in-out infinite;
+            border-radius: 2px;
+        }
+        .scan-divider-slow::after { animation-duration: 6s; }
+
+        /* ——— Sub Labels ——— */
+        .sub-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: var(--sp-4);
+        }
+
+        /* ——— Logo ——— */
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .logo-icon { width: 28px; height: 28px; flex-shrink: 0; filter: drop-shadow(0 0 6px var(--teal-glow)); }
+        .logo-text {
+            font-family: var(--font-body);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+        .logo-text .pain { color: var(--text-2); }
+        .logo-text .on { color: var(--teal-light); }
+        .logo-text .social { color: var(--text-2); }
+
+        /* ——— Logo SVG reusable ——— */
+        .logo-svg { fill: none; }
+
+        /* ==============================
+           SYSTEM HEADER
+           ============================== */
+        .system-header {
+            background: var(--void);
+            padding: var(--sp-9) 0 var(--sp-8);
+            position: relative;
+            overflow: hidden;
+        }
+        .system-header::before {
+            content: '';
+            position: absolute;
+            top: -200px; right: -150px;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(8,145,178,0.08) 0%, transparent 55%);
+            pointer-events: none;
+        }
+        .system-header .container { position: relative; z-index: 1; }
+        .system-header .eyebrow {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--teal);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: var(--sp-5);
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+        .system-header .eyebrow::before {
+            content: '';
+            width: 8px; height: 8px;
+            background: var(--teal);
+            border-radius: 50%;
+            box-shadow: var(--shadow-glow-sm);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; box-shadow: var(--shadow-glow-sm); }
+            50% { opacity: 0.6; box-shadow: var(--shadow-glow-md); }
+        }
+        .system-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(44px, 6vw, 72px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.0;
+            margin-bottom: var(--sp-4);
+            color: var(--text-1);
+        }
+        .system-header h1 .teal { color: var(--teal-light); }
+        .system-header .subtitle {
+            font-size: 17px;
+            color: var(--text-3);
+            max-width: 520px;
+            line-height: 1.65;
+        }
+        .system-header .meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--sp-5);
+            margin-top: var(--sp-7);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-3);
+        }
+        .system-header .meta-row span { color: var(--text-2); }
+
+        /* ==============================
+           01 — NAV
+           ============================== */
+        .demo-nav {
+            background: rgba(17,24,39,0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-3) var(--sp-5);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .demo-nav .nav-links {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-5);
+            list-style: none;
+        }
+        .demo-nav .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-3);
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+        .demo-nav .nav-links a:hover { color: var(--text-1); }
+        .nav-cta {
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--void);
+            background: var(--teal);
+            border: none;
+            padding: var(--sp-2) var(--sp-4);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--ease);
+            text-decoration: none;
+        }
+        .nav-cta:hover {
+            background: var(--teal-light);
+            box-shadow: var(--shadow-glow-md);
+        }
+        .demo-nav-mobile { max-width: 380px; }
+        .demo-nav-mobile .nav-links { display: none; }
+        .hamburger {
+            display: flex; flex-direction: column; gap: 5px;
+            cursor: pointer; padding: var(--sp-2);
+        }
+        .hamburger span {
+            display: block; width: 20px; height: 2px;
+            background: var(--text-2); border-radius: 1px;
+        }
+
+        /* ==============================
+           02 — HERO
+           ============================== */
+        .hero-demo {
+            background: var(--void);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-xl);
+            padding: var(--sp-9) var(--sp-8);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-demo::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(148,163,184,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+        }
+        .hero-demo::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 30%;
+            transform: translate(-50%, -50%);
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(8,145,178,0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 680px; }
+        .hero-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--teal);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: var(--sp-5);
+            display: flex;
+            align-items: center;
+            gap: var(--sp-2);
+        }
+        .hero-eyebrow .dot {
+            width: 6px; height: 6px;
+            background: var(--teal);
+            border-radius: 50%;
+            box-shadow: var(--shadow-glow-sm);
+        }
+        .hero-demo h2 {
+            font-family: var(--font-display);
+            font-size: clamp(30px, 4.5vw, 48px);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -0.025em;
+            margin-bottom: var(--sp-5);
+            color: var(--text-1);
+        }
+        .hero-demo h2 .teal { color: var(--teal-light); }
+        .hero-sub {
+            font-size: 16px;
+            color: var(--text-3);
+            line-height: 1.7;
+            margin-bottom: var(--sp-6);
+            max-width: 560px;
+        }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: var(--sp-4); margin-bottom: var(--sp-7); }
+        .btn-glow {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--void);
+            background: var(--teal);
+            border: 2px solid var(--teal);
+            padding: var(--sp-3) var(--sp-6);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--ease);
+            text-decoration: none;
+        }
+        .btn-glow:hover {
+            background: var(--teal-light);
+            border-color: var(--teal-light);
+            box-shadow: var(--shadow-glow-lg);
+        }
+        .btn-ghost {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-2);
+            background: transparent;
+            border: 2px solid var(--border);
+            padding: var(--sp-3) var(--sp-6);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--ease);
+            text-decoration: none;
+        }
+        .btn-ghost:hover {
+            color: var(--text-1);
+            border-color: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.03);
+        }
+        .trust-readout {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-3);
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--sp-2);
+            padding: var(--sp-3) var(--sp-4);
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            width: fit-content;
+        }
+        .trust-readout .sep { color: var(--teal-dark); }
+        .trust-readout .val { color: var(--teal-light); font-weight: 600; }
+
+        /* Scan line in hero */
+        .hero-scan {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 1px;
+            background: var(--border-subtle);
+            overflow: hidden;
+        }
+        .hero-scan::after {
+            content: '';
+            position: absolute;
+            top: -1px; left: -20%;
+            width: 120px; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--teal-light), transparent);
+            box-shadow: var(--shadow-glow-md);
+            animation: scanline 5s ease-in-out infinite;
+        }
+
+        /* ==============================
+           03 — BADGES
+           ============================== */
+        .badges-wrap { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-bottom: var(--sp-6); }
+        .badge-tier {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            padding: var(--sp-1) var(--sp-3);
+            border-radius: var(--radius-full);
+            border: 1px solid;
+        }
+        .badge-tier.explorer { color: var(--text-3); border-color: var(--border); background: transparent; }
+        .badge-tier.scout { color: var(--void); border-color: var(--teal); background: var(--teal); }
+        .badge-tier.prospector { color: var(--text-1); border-color: var(--orange); background: var(--orange-bg); }
+        .pill {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            padding: var(--sp-1) var(--sp-3);
+            border-radius: var(--radius-full);
+        }
+        .pill.active { color: var(--success); background: var(--success-bg); box-shadow: 0 0 8px rgba(22,163,74,0.15); }
+        .pill.trending { color: var(--orange); background: var(--orange-bg); box-shadow: 0 0 8px rgba(249,115,22,0.15); }
+        .pill.severity { color: var(--purple); background: var(--purple-bg); box-shadow: 0 0 8px rgba(168,85,247,0.15); }
+        .pill.validated { color: var(--teal-light); background: var(--info-bg); box-shadow: var(--shadow-glow-sm); }
+        .mbadge {
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: var(--sp-1) var(--sp-3);
+            border-radius: var(--radius-sm);
+        }
+        .mbadge.new { color: var(--text-1); background: var(--surface-2); border: 1px solid var(--border); }
+        .mbadge.popular { color: var(--void); background: var(--teal); }
+        .mbadge.best-value { color: var(--void); background: var(--orange); }
+        .trusted-bar {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-7);
+            padding: var(--sp-5) 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+        }
+        .trusted-bar .tb-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .trusted-bar .co {
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.15);
+            white-space: nowrap;
+            transition: color var(--ease);
+        }
+        .trusted-bar .co:hover { color: rgba(255,255,255,0.35); }
+
+        /* ==============================
+           04 — FEATURE CARDS
+           ============================== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--sp-5);
+        }
+        @media (max-width: 768px) { .features-grid { grid-template-columns: 1fr; } }
+        .fcard {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+            transition: all var(--ease-slow);
+            position: relative;
+            backdrop-filter: blur(8px);
+        }
+        .fcard:hover {
+            border-color: var(--card-border-hover);
+            box-shadow: var(--shadow-glow-sm);
+            transform: translateY(-2px);
+        }
+        .fcard:nth-child(2), .fcard:nth-child(4) { margin-top: var(--sp-6); }
+        @media (max-width: 768px) { .fcard:nth-child(2), .fcard:nth-child(4) { margin-top: 0; } }
+        .fcard .fnum {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--teal);
+            background: var(--teal-glow);
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--sp-4);
+        }
+        .fcard h4 {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-1);
+            margin-bottom: var(--sp-3);
+        }
+        .fcard p {
+            font-size: 14px;
+            color: var(--text-3);
+            line-height: 1.65;
+        }
+
+        /* ==============================
+           05 — STATS
+           ============================== */
+        .stats-section {
+            background: var(--surface-1);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-xl);
+            padding: var(--sp-7);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+        @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+        .stat {
+            text-align: center;
+            padding: var(--sp-5);
+            position: relative;
+        }
+        .stat:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0; top: 20%; height: 60%;
+            width: 1px;
+            background: var(--border);
+        }
+        @media (max-width: 768px) {
+            .stat:nth-child(2)::after { display: none; }
+        }
+        .stat .stat-num {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 5vw, 50px);
+            font-weight: 700;
+            color: var(--text-1);
+            line-height: 1;
+            margin-bottom: var(--sp-2);
+            letter-spacing: -0.02em;
+        }
+        .stat .stat-num .accent { color: var(--teal-light); }
+        .stat .stat-label {
+            font-size: 13px;
+            color: var(--text-3);
+            font-weight: 500;
+        }
+
+        /* ==============================
+           06 — TESTIMONIALS
+           ============================== */
+        .tcard {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-left: 3px solid var(--teal);
+            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+            padding: var(--sp-6);
+            backdrop-filter: blur(8px);
+            box-shadow: inset 3px 0 12px -6px var(--teal-glow);
+        }
+        .tcard blockquote {
+            font-family: var(--font-display);
+            font-size: 19px;
+            font-weight: 400;
+            color: var(--text-1);
+            line-height: 1.55;
+            margin-bottom: var(--sp-5);
+        }
+        .tcard .attr { display: flex; align-items: center; gap: var(--sp-3); }
+        .tcard .avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: var(--teal-glow);
+            border: 1px solid rgba(8,145,178,0.2);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 13px;
+            color: var(--teal-light);
+            flex-shrink: 0;
+        }
+        .tcard .attr-name { font-weight: 600; font-size: 14px; color: var(--text-1); }
+        .tcard .attr-role { font-size: 13px; color: var(--text-3); }
+
+        .pullquote {
+            text-align: center;
+            padding: var(--sp-8) var(--sp-6);
+            position: relative;
+        }
+        .pullquote .bq-mark {
+            font-family: var(--font-display);
+            font-size: 140px;
+            font-weight: 800;
+            color: var(--teal);
+            opacity: 0.08;
+            line-height: 0.5;
+            position: absolute;
+            top: 10px; left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            user-select: none;
+        }
+        .pullquote blockquote {
+            font-family: var(--font-display);
+            font-size: clamp(20px, 3vw, 26px);
+            font-weight: 400;
+            color: var(--text-1);
+            line-height: 1.45;
+            max-width: 660px;
+            margin: 0 auto var(--sp-5);
+            position: relative;
+        }
+        .pullquote .pq-name { font-weight: 600; font-size: 14px; color: var(--text-1); }
+        .pullquote .pq-role { font-size: 13px; color: var(--text-3); }
+
+        /* ==============================
+           07 — PRICING
+           ============================== */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--sp-5);
+            align-items: start;
+        }
+        @media (max-width: 900px) {
+            .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+        }
+        .pcard {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+            transition: all var(--ease);
+            backdrop-filter: blur(8px);
+        }
+        .pcard:hover { border-color: rgba(255,255,255,0.1); }
+        .pcard.recommended {
+            border-color: var(--teal);
+            box-shadow: var(--shadow-glow-sm);
+            position: relative;
+        }
+        .pcard .rec-badge {
+            position: absolute;
+            top: -11px; left: 50%;
+            transform: translateX(-50%);
+            background: var(--teal);
+            color: var(--void);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 3px 12px;
+            border-radius: var(--radius-full);
+            white-space: nowrap;
+            box-shadow: var(--shadow-glow-sm);
+        }
+        .pcard .tier-name {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-1);
+            margin-bottom: var(--sp-2);
+        }
+        .pcard .tier-price .amount {
+            font-family: var(--font-display);
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--text-1);
+            letter-spacing: -0.02em;
+        }
+        .pcard .tier-price .period { font-size: 14px; color: var(--text-3); }
+        .pcard .tier-price { margin-bottom: var(--sp-5); }
+        .pcard .tier-features { list-style: none; margin-bottom: var(--sp-6); }
+        .pcard .tier-features li {
+            font-size: 14px;
+            color: var(--text-2);
+            padding: var(--sp-2) 0;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex; align-items: baseline; gap: var(--sp-2);
+        }
+        .pcard .tier-features li::before {
+            content: '✓';
+            color: var(--teal);
+            font-weight: 700;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        .tier-btn {
+            display: block; width: 100%; text-align: center;
+            font-family: var(--font-body);
+            font-size: 14px; font-weight: 600;
+            padding: var(--sp-3) var(--sp-5);
+            border-radius: var(--radius-md);
+            border: 2px solid;
+            cursor: pointer;
+            transition: all var(--ease);
+            text-decoration: none;
+        }
+        .tier-btn.outline {
+            color: var(--text-2);
+            border-color: var(--border);
+            background: transparent;
+        }
+        .tier-btn.outline:hover { border-color: rgba(255,255,255,0.2); color: var(--text-1); }
+        .tier-btn.filled {
+            color: var(--void);
+            background: var(--teal);
+            border-color: var(--teal);
+        }
+        .tier-btn.filled:hover {
+            background: var(--teal-light);
+            border-color: var(--teal-light);
+            box-shadow: var(--shadow-glow-md);
+        }
+
+        .tier-detail {
+            background: var(--surface-1);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+            margin-top: var(--sp-6);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--sp-5);
+        }
+        @media (max-width: 600px) { .tier-detail { grid-template-columns: 1fr; } }
+        .tier-detail h5 {
+            font-family: var(--font-mono);
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--text-3); margin-bottom: var(--sp-3);
+        }
+        .tier-detail ul { list-style: none; }
+        .tier-detail li { font-size: 14px; color: var(--text-2); padding: var(--sp-1) 0; }
+
+        /* ==============================
+           08 — FORMS
+           ============================== */
+        .form-group { margin-bottom: var(--sp-5); }
+        .form-group label {
+            display: block; font-size: 13px; font-weight: 600;
+            color: var(--text-2); margin-bottom: var(--sp-2);
+        }
+        .form-group .hint { font-size: 12px; color: var(--text-3); margin-top: var(--sp-1); }
+        .form-input {
+            display: block; width: 100%;
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--text-1);
+            background: rgba(17,24,39,0.8);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: var(--sp-3) var(--sp-4);
+            transition: border-color var(--ease), box-shadow var(--ease);
+        }
+        .form-input::placeholder { color: var(--text-3); }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px var(--teal-glow), var(--shadow-glow-sm);
+        }
+        .form-input.is-success { border-color: var(--success); box-shadow: 0 0 0 3px rgba(22,163,74,0.1); }
+        .form-input.is-error { border-color: var(--error); box-shadow: 0 0 0 3px rgba(239,68,68,0.1); }
+        .form-msg { font-size: 12px; margin-top: var(--sp-1); }
+        .form-msg.success { color: var(--success); }
+        .form-msg.error { color: var(--error); }
+        .form-select {
+            display: block; width: 100%;
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--text-1);
+            background: rgba(17,24,39,0.8);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: var(--sp-3) var(--sp-4);
+            padding-right: 40px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%2364748B' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            cursor: pointer;
+            transition: border-color var(--ease);
+        }
+        .form-select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-glow); }
+        .toggle-row {
+            display: flex; align-items: center;
+            justify-content: space-between;
+            padding: var(--sp-3) 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .toggle-label { font-size: 14px; color: var(--text-1); }
+        .toggle-label .toggle-desc { display: block; font-size: 12px; color: var(--text-3); }
+        .toggle-switch { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+        .toggle-track {
+            position: absolute; inset: 0;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all var(--ease);
+        }
+        .toggle-track::after {
+            content: '';
+            position: absolute; top: 2px; left: 2px;
+            width: 18px; height: 18px;
+            background: var(--text-3);
+            border-radius: 50%;
+            transition: all var(--ease);
+        }
+        .toggle-switch input:checked + .toggle-track {
+            background: var(--teal);
+            border-color: var(--teal);
+            box-shadow: var(--shadow-glow-sm);
+        }
+        .toggle-switch input:checked + .toggle-track::after {
+            transform: translateX(20px);
+            background: var(--void);
+        }
+
+        .mini-signup {
+            background: var(--surface-1);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-xl);
+            padding: var(--sp-8);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .mini-signup::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: radial-gradient(circle, rgba(148,163,184,0.04) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+        }
+        .mini-signup h3 {
+            font-family: var(--font-display);
+            font-size: 30px; font-weight: 700;
+            margin-bottom: var(--sp-3);
+            position: relative;
+        }
+        .mini-signup p { color: var(--text-3); font-size: 15px; margin-bottom: var(--sp-6); position: relative; }
+        .mini-signup .signup-row {
+            display: flex; gap: var(--sp-3);
+            max-width: 440px; margin: 0 auto; position: relative;
+        }
+        .mini-signup .signup-row input {
+            flex: 1;
+            font-family: var(--font-body); font-size: 14px;
+            padding: var(--sp-3) var(--sp-4);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: rgba(11,15,26,0.6);
+            color: var(--text-1);
+            transition: border-color var(--ease);
+        }
+        .mini-signup .signup-row input::placeholder { color: var(--text-3); }
+        .mini-signup .signup-row input:focus { outline: none; border-color: var(--teal); }
+
+        /* ==============================
+           09 — FOOTER
+           ============================== */
+        .demo-footer {
+            background: var(--void);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-xl);
+            padding: var(--sp-8);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+            gap: var(--sp-7); margin-bottom: var(--sp-7);
+        }
+        @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 500px) { .footer-grid { grid-template-columns: 1fr; } }
+        .footer-brand p { font-size: 14px; color: var(--text-3); line-height: 1.6; max-width: 260px; margin-top: var(--sp-4); }
+        .footer-col h6 {
+            font-size: 12px; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--text-2); margin-bottom: var(--sp-4);
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: var(--sp-2); }
+        .footer-col a { font-size: 14px; color: var(--text-3); text-decoration: none; transition: color var(--ease); }
+        .footer-col a:hover { color: var(--teal-light); }
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: var(--sp-5);
+            display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap; gap: var(--sp-4);
+        }
+        .footer-bottom .copyright { font-family: var(--font-mono); font-size: 12px; color: var(--text-3); }
+        .footer-bottom .flinks { display: flex; gap: var(--sp-5); }
+        .footer-bottom .flinks a { font-size: 12px; color: var(--text-3); text-decoration: none; transition: color var(--ease); }
+        .footer-bottom .flinks a:hover { color: var(--teal-light); }
+
+        /* ==============================
+           GROUP DIVIDER
+           ============================== */
+        .group-divider {
+            text-align: center;
+            padding: var(--sp-9) 0 var(--sp-5);
+        }
+        .group-divider .gd-label {
+            font-family: var(--font-mono);
+            font-size: 11px; font-weight: 500;
+            letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--text-3); margin-top: var(--sp-4);
+        }
+
+        /* ==============================
+           10 — COLORS
+           ============================== */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--sp-4);
+        }
+        .cswatch {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            background: var(--card);
+        }
+        .cswatch .block { height: 64px; }
+        .cswatch .info { padding: var(--sp-3); }
+        .cswatch .name { font-size: 13px; font-weight: 600; color: var(--text-1); }
+        .cswatch .hex { font-family: var(--font-mono); font-size: 12px; color: var(--text-3); }
+        .cswatch .varname { font-family: var(--font-mono); font-size: 11px; color: var(--text-3); opacity: 0.6; }
+
+        .surface-demos {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: var(--sp-5); margin-top: var(--sp-6);
+        }
+        @media (max-width: 600px) { .surface-demos { grid-template-columns: 1fr; } }
+        .surface-demo { padding: var(--sp-6); border-radius: var(--radius-lg); }
+        .surface-demo.s-void { background: var(--void); border: 1px solid var(--card-border); }
+        .surface-demo.s-surface { background: var(--surface-1); border: 1px solid var(--card-border); }
+        .surface-demo h5 {
+            font-family: var(--font-mono);
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--text-3); margin-bottom: var(--sp-3);
+        }
+        .surface-demo p { font-size: 14px; color: var(--text-2); line-height: 1.6; }
+
+        /* ==============================
+           11 — TYPOGRAPHY
+           ============================== */
+        .type-row {
+            margin-bottom: var(--sp-6);
+            padding-bottom: var(--sp-6);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .type-row:last-child { border-bottom: none; }
+        .type-row .type-meta {
+            font-family: var(--font-mono);
+            font-size: 11px; color: var(--text-3);
+            margin-bottom: var(--sp-3);
+        }
+        .type-row .type-meta span { color: var(--teal); }
+
+        /* ==============================
+           12 — SPACING
+           ============================== */
+        .sp-scale { display: flex; flex-direction: column; gap: var(--sp-3); }
+        .sp-item { display: flex; align-items: center; gap: var(--sp-4); }
+        .sp-item .sp-label {
+            font-family: var(--font-mono);
+            font-size: 12px; color: var(--text-3);
+            width: 72px; flex-shrink: 0; text-align: right;
+        }
+        .sp-item .sp-bar {
+            height: 24px;
+            background: var(--teal);
+            opacity: 0.15;
+            border-radius: var(--radius-sm);
+            transition: opacity var(--ease);
+        }
+        .sp-item:hover .sp-bar { opacity: 0.3; box-shadow: var(--shadow-glow-sm); }
+        .sp-item .sp-val { font-family: var(--font-mono); font-size: 12px; color: var(--text-3); flex-shrink: 0; }
+
+        /* ==============================
+           13 — BUTTONS
+           ============================== */
+        .btn-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-4); margin-bottom: var(--sp-5); }
+        .btn {
+            font-family: var(--font-body); font-weight: 600;
+            border-radius: var(--radius-md); cursor: pointer;
+            transition: all var(--ease); text-decoration: none;
+            display: inline-flex; align-items: center; gap: var(--sp-2);
+            border: 2px solid transparent;
+        }
+        .btn-sm { font-size: 13px; padding: var(--sp-1) var(--sp-3); }
+        .btn-md { font-size: 14px; padding: var(--sp-2) var(--sp-5); }
+        .btn-lg { font-size: 15px; padding: var(--sp-3) var(--sp-6); }
+        .btn.primary { color: var(--void); background: var(--teal); border-color: var(--teal); }
+        .btn.primary:hover { background: var(--teal-light); border-color: var(--teal-light); box-shadow: var(--shadow-glow-md); }
+        .btn.primary:active { box-shadow: none; }
+        .btn.primary[disabled] { opacity: 0.35; cursor: not-allowed; }
+        .btn.secondary { color: var(--text-1); background: var(--surface-2); border-color: var(--border); }
+        .btn.secondary:hover { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); }
+        .btn.ghost { color: var(--text-2); background: transparent; border-color: var(--border); }
+        .btn.ghost:hover { border-color: rgba(255,255,255,0.15); color: var(--text-1); }
+        .btn.textlink { color: var(--teal-light); background: none; border: none; padding-left: 0; padding-right: 0; border-radius: 0; }
+        .btn.textlink:hover { color: var(--teal); text-decoration: underline; }
+
+        /* ==============================
+           14 — DIVIDERS
+           ============================== */
+        .divider-thin { height: 1px; background: var(--border); }
+        .divider-thick { height: 2px; background: rgba(255,255,255,0.1); border-radius: 1px; }
+        .divider-teal { height: 2px; background: var(--teal); width: 64px; border-radius: 1px; box-shadow: var(--shadow-glow-sm); }
+        .bg-pats {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: var(--sp-4); margin-top: var(--sp-6);
+        }
+        @media (max-width: 600px) { .bg-pats { grid-template-columns: 1fr; } }
+        .bg-pat {
+            height: 100px; border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-mono); font-size: 12px;
+            color: var(--text-3); border: 1px solid var(--card-border);
+        }
+        .bg-pat.v { background: var(--void); }
+        .bg-pat.s1 { background: var(--surface-1); }
+        .bg-pat.s2 { background: var(--surface-2); }
+        .dot-demo {
+            height: 100px; border-radius: var(--radius-md);
+            border: 1px solid var(--card-border);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-mono); font-size: 11px; color: var(--text-3);
+        }
+
+        /* ==============================
+           15 — ALERTS
+           ============================== */
+        .alert {
+            display: flex; align-items: flex-start; gap: var(--sp-3);
+            padding: var(--sp-4) var(--sp-5);
+            border-radius: var(--radius-md);
+            border-left: 3px solid;
+            margin-bottom: var(--sp-4);
+            font-size: 14px; line-height: 1.55;
+        }
+        .alert svg { flex-shrink: 0; width: 18px; height: 18px; margin-top: 1px; }
+        .alert.success { background: var(--success-bg); border-color: var(--success); color: #4ADE80; }
+        .alert.info { background: var(--info-bg); border-color: var(--info); color: var(--teal-light); }
+        .alert.warning { background: var(--warning-bg); border-color: var(--warning); color: #FDE047; }
+        .alert.error { background: var(--error-bg); border-color: var(--error); color: #FCA5A5; }
+        .alert strong { color: var(--text-1); }
+        .toast {
+            display: inline-flex; align-items: center; gap: var(--sp-3);
+            padding: var(--sp-3) var(--sp-5);
+            background: var(--surface-2);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+            color: var(--text-1); border-radius: var(--radius-md);
+            box-shadow: var(--shadow-card); font-size: 14px;
+        }
+        .toast svg { flex-shrink: 0; width: 18px; height: 18px; }
+        .toast .dismiss {
+            background: none; border: none; color: var(--text-3);
+            cursor: pointer; font-size: 18px; padding: 0 0 0 var(--sp-3);
+            line-height: 1; transition: color var(--ease);
+        }
+        .toast .dismiss:hover { color: var(--text-1); }
+
+        /* Site footer */
+        .site-footer {
+            text-align: center;
+            padding: var(--sp-7) 0;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: var(--sp-9);
+        }
+        .site-footer p { font-family: var(--font-mono); font-size: 12px; color: var(--text-3); }
+
+        .mb-4 { margin-bottom: var(--sp-4); }
+        .mb-5 { margin-bottom: var(--sp-5); }
+        .mb-6 { margin-bottom: var(--sp-6); }
+        .mb-7 { margin-bottom: var(--sp-7); }
+        .mt-6 { margin-top: var(--sp-6); }
+    </style>
+</head>
+<body>
+
+    <!-- SYSTEM HEADER -->
+    <header class="system-header dot-grid">
+        <div class="container">
+            <div class="eyebrow"><span></span>System Active</div>
+            <h1><span class="teal">Radar</span> v1.0</h1>
+            <p class="subtitle">Dark-mode design system for PainOnSocial. Data-forward, terminal-grade, built for scanning signal in the noise.</p>
+            <div class="meta-row">
+                <div>Fonts <span>Outfit · Inter · JetBrains Mono</span></div>
+                <div>Primary <span>#0891B2 Teal</span></div>
+                <div>Mode <span>Dark</span></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- 01 — NAV -->
+        <div class="section-label">
+            <span class="num">01</span>
+            <span class="rule"></span>
+            <span class="title">Navigation Bar</span>
+        </div>
+
+        <p class="sub-label">Desktop</p>
+        <nav class="demo-nav mb-6">
+            <a href="#" class="logo">
+                <svg class="logo-icon" viewBox="0 0 28 28" fill="none">
+                    <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.15)" stroke="#22D3EE" stroke-width="1.5"/>
+                    <circle cx="14" cy="14" r="3" stroke="#22D3EE" stroke-width="1.5"/>
+                    <line x1="14" y1="8" x2="14" y2="11" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="14" y1="17" x2="14" y2="20" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="8" y1="14" x2="11" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="17" y1="14" x2="20" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <span class="logo-text"><span class="pain">Pain</span><span class="on">On</span><span class="social">Social</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#">How It Works</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Resources</a></li>
+            </ul>
+            <a href="#" class="nav-cta">Start Free Trial</a>
+        </nav>
+
+        <p class="sub-label">Mobile</p>
+        <nav class="demo-nav demo-nav-mobile">
+            <a href="#" class="logo">
+                <svg class="logo-icon" viewBox="0 0 28 28" fill="none">
+                    <path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.15)" stroke="#22D3EE" stroke-width="1.5"/>
+                    <circle cx="14" cy="14" r="3" stroke="#22D3EE" stroke-width="1.5"/>
+                    <line x1="14" y1="8" x2="14" y2="11" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="14" y1="17" x2="14" y2="20" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="8" y1="14" x2="11" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="17" y1="14" x2="20" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <span class="logo-text"><span class="pain">Pain</span><span class="on">On</span><span class="social">Social</span></span>
+            </a>
+            <div class="hamburger" role="button" aria-label="Menu" tabindex="0"><span></span><span></span><span></span></div>
+        </nav>
+
+        <!-- 02 — HERO -->
+        <div class="section-label">
+            <span class="num">02</span>
+            <span class="rule"></span>
+            <span class="title">Hero Pattern</span>
+        </div>
+
+        <div class="hero-demo dot-grid">
+            <div class="hero-scan"></div>
+            <div class="hero-content">
+                <div class="hero-eyebrow"><span class="dot"></span> AI-Powered Discovery</div>
+                <h2>Stop guessing what to build.<br>Start with <span class="teal">validated pain.</span></h2>
+                <p class="hero-sub">PainOnSocial analyzes Reddit discussions to surface real problems people will pay to solve — ranked by severity, backed by evidence.</p>
+                <div class="hero-actions">
+                    <a href="#" class="btn-glow">Start Free Trial →</a>
+                    <a href="#" class="btn-ghost">Watch demo</a>
+                </div>
+                <div class="trust-readout">
+                    <span><span class="val">800+</span> communities</span>
+                    <span class="sep">|</span>
+                    <span><span class="val">12k+</span> pain points</span>
+                    <span class="sep">|</span>
+                    <span><span class="val">94%</span> accuracy</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 03 — BADGES -->
+        <div class="section-label">
+            <span class="num">03</span>
+            <span class="rule"></span>
+            <span class="title">Social Proof / Badges</span>
+        </div>
+
+        <p class="sub-label">Plan Tiers</p>
+        <div class="badges-wrap mb-5">
+            <span class="badge-tier explorer">Explorer — Free</span>
+            <span class="badge-tier scout">Scout — $29/mo</span>
+            <span class="badge-tier prospector">Prospector — $79/mo</span>
+        </div>
+        <p class="sub-label">Status Pills</p>
+        <div class="badges-wrap mb-5">
+            <span class="pill active">Active</span>
+            <span class="pill trending">Trending</span>
+            <span class="pill severity">High Severity</span>
+            <span class="pill validated">Validated</span>
+        </div>
+        <p class="sub-label">Marketing Badges</p>
+        <div class="badges-wrap mb-6">
+            <span class="mbadge new">New</span>
+            <span class="mbadge popular">Popular</span>
+            <span class="mbadge best-value">Best Value</span>
+        </div>
+        <p class="sub-label">Trusted By</p>
+        <div class="trusted-bar">
+            <span class="tb-label">Trusted by</span>
+            <span class="co">Launchpad Studio</span>
+            <span class="co">Metric Labs</span>
+            <span class="co">FounderPath</span>
+            <span class="co">BuildStack</span>
+            <span class="co">NovaTech Research</span>
+        </div>
+
+        <!-- 04 — FEATURES -->
+        <div class="section-label">
+            <span class="num">04</span>
+            <span class="rule"></span>
+            <span class="title">Feature Cards</span>
+        </div>
+
+        <div class="features-grid">
+            <div class="fcard">
+                <div class="fnum">01</div>
+                <h4>Community Discovery</h4>
+                <p>Browse 800+ curated communities organized by profession, company, or product. Find where your audience actually talks.</p>
+            </div>
+            <div class="fcard">
+                <div class="fnum">02</div>
+                <h4>Pain Point Analysis</h4>
+                <p>AI reads thousands of discussions and surfaces recurring frustrations, ranked by severity and frequency.</p>
+            </div>
+            <div class="fcard">
+                <div class="fnum">03</div>
+                <h4>Solution Ideation</h4>
+                <p>Get up to 10 AI-generated solution ideas per pain point, each with target audience and market context.</p>
+            </div>
+            <div class="fcard">
+                <div class="fnum">04</div>
+                <h4>Evidence Trail</h4>
+                <p>Every insight links back to real Reddit quotes with permalinks. No black boxes, just validated data.</p>
+            </div>
+        </div>
+
+        <!-- 05 — STATS -->
+        <div class="section-label">
+            <span class="num">05</span>
+            <span class="rule"></span>
+            <span class="title">Stats / Metrics</span>
+        </div>
+
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat"><div class="stat-num">800<span class="accent">+</span></div><div class="stat-label">Communities analyzed</div></div>
+                <div class="stat"><div class="stat-num">12<span class="accent">k+</span></div><div class="stat-label">Pain points discovered</div></div>
+                <div class="stat"><div class="stat-num">94<span class="accent">%</span></div><div class="stat-label">Severity accuracy</div></div>
+                <div class="stat"><div class="stat-num">3<span class="accent">×</span></div><div class="stat-label">Faster than manual</div></div>
+            </div>
+        </div>
+
+        <!-- 06 — TESTIMONIALS -->
+        <div class="section-label">
+            <span class="num">06</span>
+            <span class="rule"></span>
+            <span class="title">Testimonials</span>
+        </div>
+
+        <p class="sub-label">Side-Accent Card</p>
+        <div class="tcard mb-7">
+            <blockquote>"PainOnSocial found 3 validated SaaS ideas in my first week. I stopped guessing and started building with confidence."</blockquote>
+            <div class="attr">
+                <div class="avatar">MC</div>
+                <div><div class="attr-name">Maya Chen</div><div class="attr-role">Solo Founder, SyncLayer</div></div>
+            </div>
+        </div>
+
+        <p class="sub-label">Centered Pullquote</p>
+        <div class="pullquote">
+            <div class="bq-mark">"</div>
+            <blockquote>"We replaced 40 hours of manual Reddit research with a 15-minute analysis. The severity scoring alone saved months of debate."</blockquote>
+            <div class="pq-name">James Kowalski</div>
+            <div class="pq-role">Head of Product, BuildStack</div>
+        </div>
+
+        <!-- 07 — PRICING -->
+        <div class="section-label">
+            <span class="num">07</span>
+            <span class="rule"></span>
+            <span class="title">Pricing</span>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pcard">
+                <div class="tier-name">Explorer</div>
+                <div class="tier-price"><span class="amount">Free</span></div>
+                <ul class="tier-features">
+                    <li>3 analyses per month</li>
+                    <li>Basic severity scoring</li>
+                    <li>Community browsing</li>
+                    <li>5 pain points per run</li>
+                </ul>
+                <a href="#" class="tier-btn outline">Start exploring</a>
+            </div>
+            <div class="pcard recommended">
+                <span class="rec-badge">Most Popular</span>
+                <div class="tier-name">Scout</div>
+                <div class="tier-price"><span class="amount">$29</span> <span class="period">/month</span></div>
+                <ul class="tier-features">
+                    <li>25 analyses per month</li>
+                    <li>Full severity reports</li>
+                    <li>Solution ideation</li>
+                    <li>CSV &amp; PDF export</li>
+                    <li>Target audience analysis</li>
+                </ul>
+                <a href="#" class="tier-btn filled">Start scouting</a>
+            </div>
+            <div class="pcard">
+                <div class="tier-name">Prospector</div>
+                <div class="tier-price"><span class="amount">$79</span> <span class="period">/month</span></div>
+                <ul class="tier-features">
+                    <li>Unlimited analyses</li>
+                    <li>Priority processing</li>
+                    <li>Full API access</li>
+                    <li>Team sharing (up to 5)</li>
+                    <li>Custom categories</li>
+                    <li>Dedicated support</li>
+                </ul>
+                <a href="#" class="tier-btn outline">Go prospecting</a>
+            </div>
+        </div>
+
+        <p class="sub-label mt-6">Scout — Detail Breakdown</p>
+        <div class="tier-detail">
+            <div><h5>Analysis</h5><ul><li>25 deep analyses/mo</li><li>50 pain points per run</li><li>Severity 1–10 scale</li><li>Frequency detection</li></ul></div>
+            <div><h5>Ideation</h5><ul><li>10 solutions per point</li><li>Target audience profiles</li><li>Market context</li><li>Competitive landscape</li></ul></div>
+            <div><h5>Export</h5><ul><li>CSV export</li><li>PDF summaries</li><li>Shareable links</li><li>Bookmark findings</li></ul></div>
+            <div><h5>Support</h5><ul><li>Email (24h response)</li><li>Knowledge base</li><li>Slack community</li><li>Product updates</li></ul></div>
+        </div>
+
+        <!-- 08 — FORMS -->
+        <div class="section-label">
+            <span class="num">08</span>
+            <span class="rule"></span>
+            <span class="title">Forms</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-7)">
+            <div>
+                <p class="sub-label">Input Fields</p>
+                <div class="form-group"><label>Email address</label><input type="email" class="form-input" placeholder="you@company.com"></div>
+                <div class="form-group"><label>Company name</label><input type="text" class="form-input" placeholder="Acme Corp"></div>
+                <div class="form-group"><label>Target market</label><input type="text" class="form-input" placeholder="e.g. SaaS founders, freelancers"><div class="hint">Describe who you're building for</div></div>
+                <p class="sub-label mt-6">Validation</p>
+                <div class="form-group"><label>Success</label><input type="email" class="form-input is-success" value="maya@synclayer.io"><div class="form-msg success">✓ Valid email</div></div>
+                <div class="form-group"><label>Error</label><input type="email" class="form-input is-error" value="not-an-email"><div class="form-msg error">Invalid email address</div></div>
+            </div>
+            <div>
+                <p class="sub-label">Selects</p>
+                <div class="form-group"><label>Team size</label><select class="form-select"><option value="">Select…</option><option>Just me</option><option>2–5</option><option>6–20</option><option>20+</option></select></div>
+                <div class="form-group"><label>Research focus</label><select class="form-select"><option value="">Select…</option><option>Idea validation</option><option>Feature prioritization</option><option>Market research</option></select></div>
+                <p class="sub-label mt-6">Toggles</p>
+                <div class="toggle-row">
+                    <div class="toggle-label">Weekly digest<span class="toggle-desc">Trending pain points summary</span></div>
+                    <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-track"></span></label>
+                </div>
+                <div class="toggle-row">
+                    <div class="toggle-label">Competitor alerts<span class="toggle-desc">Notify on competitor mentions</span></div>
+                    <label class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></label>
+                </div>
+            </div>
+        </div>
+
+        <p class="sub-label mt-6">Mini Signup — Final CTA</p>
+        <div class="mini-signup">
+            <h3>Start discovering pain points</h3>
+            <p>Join 2,400+ founders who validate with data, not assumptions.</p>
+            <div class="signup-row">
+                <input type="email" placeholder="you@company.com">
+                <a href="#" class="btn-glow">Start Free Trial →</a>
+            </div>
+        </div>
+
+        <!-- 09 — FOOTER -->
+        <div class="section-label">
+            <span class="num">09</span>
+            <span class="rule"></span>
+            <span class="title">Footer</span>
+        </div>
+
+        <div class="demo-footer">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo" style="margin-bottom:var(--sp-4);display:inline-flex">
+                        <svg class="logo-icon" viewBox="0 0 28 28" fill="none"><path d="M14 2C7.373 2 2 7.373 2 14c0 2.197.595 4.254 1.632 6.02L2 26l6.26-1.585A11.95 11.95 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="rgba(8,145,178,0.15)" stroke="#22D3EE" stroke-width="1.5"/><circle cx="14" cy="14" r="3" stroke="#22D3EE" stroke-width="1.5"/><line x1="14" y1="8" x2="14" y2="11" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/><line x1="14" y1="17" x2="14" y2="20" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="14" x2="11" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/><line x1="17" y1="14" x2="20" y2="14" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        <span class="logo-text"><span class="pain">Pain</span><span class="on">On</span><span class="social">Social</span></span>
+                    </a>
+                    <p>AI-powered pain point discovery from real Reddit discussions.</p>
+                </div>
+                <div class="footer-col"><h6>Product</h6><ul><li><a href="#">Features</a></li><li><a href="#">Pricing</a></li><li><a href="#">API</a></li><li><a href="#">Changelog</a></li></ul></div>
+                <div class="footer-col"><h6>Resources</h6><ul><li><a href="#">Blog</a></li><li><a href="#">Guides</a></li><li><a href="#">Case Studies</a></li><li><a href="#">Community</a></li></ul></div>
+                <div class="footer-col"><h6>Company</h6><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li><li><a href="#">Press</a></li></ul></div>
+                <div class="footer-col"><h6>Legal</h6><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Cookies</a></li></ul></div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">© 2026 PainOnSocial</div>
+                <div class="flinks"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div>
+            </div>
+        </div>
+
+        <!-- GROUP DIVIDER -->
+        <div class="group-divider">
+            <div class="scan-divider scan-divider-slow"></div>
+            <div class="gd-label">Design System Reference — Tokens &amp; Primitives</div>
+        </div>
+
+        <!-- 10 — COLORS -->
+        <div class="section-label">
+            <span class="num">10</span>
+            <span class="rule"></span>
+            <span class="title">Color Palette</span>
+        </div>
+
+        <p class="sub-label">Brand</p>
+        <div class="color-grid mb-6">
+            <div class="cswatch"><div class="block" style="background:#0891B2"></div><div class="info"><div class="name">Teal</div><div class="hex">#0891B2</div><div class="varname">--teal</div></div></div>
+            <div class="cswatch"><div class="block" style="background:#22D3EE"></div><div class="info"><div class="name">Teal Light</div><div class="hex">#22D3EE</div><div class="varname">--teal-light</div></div></div>
+            <div class="cswatch"><div class="block" style="background:#0E7490"></div><div class="info"><div class="name">Teal Dark</div><div class="hex">#0E7490</div><div class="varname">--teal-dark</div></div></div>
+            <div class="cswatch"><div class="block" style="background:#F97316"></div><div class="info"><div class="name">Orange</div><div class="hex">#F97316</div><div class="varname">--orange</div></div></div>
+            <div class="cswatch"><div class="block" style="background:#A855F7"></div><div class="info"><div class="name">Purple</div><div class="hex">#A855F7</div><div class="varname">--purple</div></div></div>
+        </div>
+        <p class="sub-label">Semantic</p>
+        <div class="color-grid mb-6">
+            <div class="cswatch"><div class="block" style="background:#16A34A"></div><div class="info"><div class="name">Success</div><div class="hex">#16A34A</div><div class="varname">--success</div></div></div>
+            <div class="cswatch"><div class="block" style="background:#EAB308"></div><div class="info"><div class="name">Warning</div><div class="hex">#EAB308</div><div class="varname">--warning</div></div></div>
+            <div class="cswatch"><div class="block" style="background:#EF4444"></div><div class="info"><div class="name">Error</div><div class="hex">#EF4444</div><div class="varname">--error</div></div></div>
+            <div class="cswatch"><div class="block" style="background:#0891B2"></div><div class="info"><div class="name">Info</div><div class="hex">#0891B2</div><div class="varname">--info</div></div></div>
+        </div>
+        <p class="sub-label">Dark Surfaces</p>
+        <div class="color-grid mb-6">
+            <div class="cswatch"><div class="block" style="background:#0B0F1A"></div><div class="info"><div class="name">Void</div><div class="hex">#0B0F1A</div><div class="varname">--void</div></div></div>
+            <div class="cswatch"><div class="block" style="background:#111827"></div><div class="info"><div class="name">Surface 1</div><div class="hex">#111827</div><div class="varname">--surface-1</div></div></div>
+            <div class="cswatch"><div class="block" style="background:#1E293B"></div><div class="info"><div class="name">Surface 2</div><div class="hex">#1E293B</div><div class="varname">--surface-2</div></div></div>
+        </div>
+        <p class="sub-label">Surfaces Demo</p>
+        <div class="surface-demos">
+            <div class="surface-demo s-void"><h5>Void — Body</h5><p>The deepest background. Used for the page body and hero sections.</p></div>
+            <div class="surface-demo s-surface"><h5>Surface 1 — Cards</h5><p>Elevated surface for cards, sections, and contained content areas.</p></div>
+        </div>
+
+        <!-- 11 — TYPOGRAPHY -->
+        <div class="section-label">
+            <span class="num">11</span>
+            <span class="rule"></span>
+            <span class="title">Typography</span>
+        </div>
+
+        <div class="type-row"><div class="type-meta"><span>Hero</span> Outfit · 56px · Weight 700</div><div style="font-family:var(--font-display);font-size:clamp(36px,5vw,56px);font-weight:700;line-height:1.05;letter-spacing:-0.03em">Stop guessing what to build</div></div>
+        <div class="type-row"><div class="type-meta"><span>H1</span> Outfit · 42px · Weight 700</div><div style="font-family:var(--font-display);font-size:42px;font-weight:700;line-height:1.1;letter-spacing:-0.02em">Discover validated pain points</div></div>
+        <div class="type-row"><div class="type-meta"><span>H2</span> Outfit · 32px · Weight 600</div><div style="font-family:var(--font-display);font-size:32px;font-weight:600;line-height:1.15;letter-spacing:-0.01em">AI-powered analysis at scale</div></div>
+        <div class="type-row"><div class="type-meta"><span>H3</span> Outfit · 24px · Weight 600</div><div style="font-family:var(--font-display);font-size:24px;font-weight:600;line-height:1.2">Community discovery made simple</div></div>
+        <div class="type-row"><div class="type-meta"><span>H4</span> Inter · 18px · Weight 600</div><div style="font-family:var(--font-body);font-size:18px;font-weight:600;line-height:1.3">Evidence-backed insights</div></div>
+        <div class="type-row"><div class="type-meta"><span>Body Large</span> Inter · 16px · Weight 400</div><div style="font-size:16px;color:var(--text-2);line-height:1.65">PainOnSocial analyzes Reddit discussions to surface real problems people will pay to solve — ranked by severity, backed by evidence.</div></div>
+        <div class="type-row"><div class="type-meta"><span>Body</span> Inter · 14px · Weight 400</div><div style="font-size:14px;color:var(--text-2);line-height:1.65">Browse 800+ curated communities organized by profession, company, or product. Our AI identifies recurring frustrations ranked by severity.</div></div>
+        <div class="type-row"><div class="type-meta"><span>Caption</span> Inter · 13px · Weight 500</div><div style="font-size:13px;font-weight:500;color:var(--text-3)">Last analyzed 2 hours ago · 47 pain points found</div></div>
+        <div class="type-row"><div class="type-meta"><span>Overline</span> JetBrains Mono · 11px · Weight 600</div><div style="font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-3)">Severity Score · Analysis Report</div></div>
+        <div class="type-row"><div class="type-meta"><span>Mono Data</span> JetBrains Mono · 14px · Weight 500</div><div style="font-family:var(--font-mono);font-size:14px;font-weight:500;color:var(--teal-light)">severity: 8.4 | frequency: 127 | communities: 12</div></div>
+
+        <!-- 12 — SPACING -->
+        <div class="section-label">
+            <span class="num">12</span>
+            <span class="rule"></span>
+            <span class="title">Spacing Scale</span>
+        </div>
+        <div class="sp-scale">
+            <div class="sp-item"><div class="sp-label">--sp-1</div><div class="sp-bar" style="width:4px"></div><div class="sp-val">4px</div></div>
+            <div class="sp-item"><div class="sp-label">--sp-2</div><div class="sp-bar" style="width:8px"></div><div class="sp-val">8px</div></div>
+            <div class="sp-item"><div class="sp-label">--sp-3</div><div class="sp-bar" style="width:12px"></div><div class="sp-val">12px</div></div>
+            <div class="sp-item"><div class="sp-label">--sp-4</div><div class="sp-bar" style="width:16px"></div><div class="sp-val">16px</div></div>
+            <div class="sp-item"><div class="sp-label">--sp-5</div><div class="sp-bar" style="width:24px"></div><div class="sp-val">24px</div></div>
+            <div class="sp-item"><div class="sp-label">--sp-6</div><div class="sp-bar" style="width:32px"></div><div class="sp-val">32px</div></div>
+            <div class="sp-item"><div class="sp-label">--sp-7</div><div class="sp-bar" style="width:48px"></div><div class="sp-val">48px</div></div>
+            <div class="sp-item"><div class="sp-label">--sp-8</div><div class="sp-bar" style="width:64px"></div><div class="sp-val">64px</div></div>
+            <div class="sp-item"><div class="sp-label">--sp-9</div><div class="sp-bar" style="width:96px"></div><div class="sp-val">96px</div></div>
+        </div>
+
+        <!-- 13 — BUTTONS -->
+        <div class="section-label">
+            <span class="num">13</span>
+            <span class="rule"></span>
+            <span class="title">Buttons</span>
+        </div>
+        <p class="sub-label">Primary — Teal Glow</p>
+        <div class="btn-row"><button class="btn primary btn-sm">Discover pain points</button><button class="btn primary btn-md">Run analysis</button><button class="btn primary btn-lg">Start Free Trial →</button></div>
+        <p class="sub-label">Secondary — Glass</p>
+        <div class="btn-row"><button class="btn secondary btn-sm">View report</button><button class="btn secondary btn-md">Export report</button><button class="btn secondary btn-lg">See how it works</button></div>
+        <p class="sub-label">Ghost</p>
+        <div class="btn-row"><button class="btn ghost btn-sm">Browse</button><button class="btn ghost btn-md">Compare plans</button><button class="btn ghost btn-lg">View case studies</button></div>
+        <p class="sub-label">Text Link</p>
+        <div class="btn-row"><button class="btn textlink btn-sm">Learn more →</button><button class="btn textlink btn-md">Read docs →</button><button class="btn textlink btn-lg">View pricing →</button></div>
+        <p class="sub-label">States</p>
+        <div class="btn-row">
+            <button class="btn primary btn-md">Default</button>
+            <button class="btn primary btn-md" style="background:var(--teal-light);border-color:var(--teal-light);box-shadow:var(--shadow-glow-md)">Hover</button>
+            <button class="btn primary btn-md" style="background:var(--teal-dark);border-color:var(--teal-dark)">Active</button>
+            <button class="btn primary btn-md" disabled>Disabled</button>
+        </div>
+
+        <!-- 14 — DIVIDERS -->
+        <div class="section-label">
+            <span class="num">14</span>
+            <span class="rule"></span>
+            <span class="title">Dividers &amp; Decorative</span>
+        </div>
+        <p class="sub-label">Radar Scan Line (animated)</p>
+        <div class="scan-divider mb-6"></div>
+        <p class="sub-label">Separators</p>
+        <div style="display:flex;flex-direction:column;gap:var(--sp-6);margin-bottom:var(--sp-6)">
+            <div><div class="sub-label" style="margin-bottom:var(--sp-2);font-size:10px">Thin</div><div class="divider-thin"></div></div>
+            <div><div class="sub-label" style="margin-bottom:var(--sp-2);font-size:10px">Thick</div><div class="divider-thick"></div></div>
+            <div><div class="sub-label" style="margin-bottom:var(--sp-2);font-size:10px">Brand Accent (Teal + glow)</div><div class="divider-teal"></div></div>
+        </div>
+        <p class="sub-label">Background Surfaces</p>
+        <div class="bg-pats mb-6">
+            <div class="bg-pat v">Void · #0B0F1A</div>
+            <div class="bg-pat s1">Surface 1 · #111827</div>
+            <div class="bg-pat s2">Surface 2 · #1E293B</div>
+        </div>
+        <p class="sub-label">Dot Grid Textures</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--sp-4)">
+            <div class="dot-demo dot-grid" style="background-color:var(--void)">24px · 0.08 opacity</div>
+            <div class="dot-demo dot-grid-dense" style="background-color:var(--void)">16px · 0.06 opacity</div>
+            <div class="dot-demo" style="background-color:var(--surface-1);background-image:radial-gradient(circle, rgba(8,145,178,0.08) 1px, transparent 1px);background-size:20px 20px">Teal dots · 0.08</div>
+        </div>
+
+        <!-- 15 — ALERTS -->
+        <div class="section-label">
+            <span class="num">15</span>
+            <span class="rule"></span>
+            <span class="title">Alerts</span>
+        </div>
+        <p class="sub-label">Inline</p>
+        <div class="alert success"><svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M6 9.5l2 2 4-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Analysis complete</strong> — 47 pain points across 12 communities.</span></div>
+        <div class="alert info"><svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M9 8v5M9 5.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span><strong>Scout plan</strong> — 25 analyses/month. 18 used.</span></div>
+        <div class="alert warning"><svg viewBox="0 0 18 18" fill="none"><path d="M9 1.5L1 16h16L9 1.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 7v4M9 13v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span><strong>Approaching limit</strong> — 23 of 25 analyses used.</span></div>
+        <div class="alert error"><svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6.5l5 5M11.5 6.5l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span><strong>Analysis failed</strong> — Community may be private or restricted.</span></div>
+        <p class="sub-label mt-6">Toast</p>
+        <div style="display:flex;flex-direction:column;gap:var(--sp-3);align-items:flex-start">
+            <div class="toast"><svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#16A34A" stroke-width="1.5"/><path d="M6 9.5l2 2 4-4.5" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Analysis saved to dashboard</span><button class="dismiss" aria-label="Dismiss">×</button></div>
+            <div class="toast"><svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#EF4444" stroke-width="1.5"/><path d="M6.5 6.5l5 5M11.5 6.5l-5 5" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/></svg><span>Export failed — try again</span><button class="dismiss" aria-label="Dismiss">×</button></div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container"><p>Radar v1.0 — Dark-mode design system for PainOnSocial · Scanning for signal</p></div>
+    </footer>
+</body>
+</html>

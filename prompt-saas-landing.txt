@@ -1,0 +1,82 @@
+IMPORTANT: You MUST use the /frontend-design skill for this task. Invoke it before generating any code.
+
+Create a complete, single-file HTML style guide/design system page themed around a SaaS landing page aesthetic.
+
+THEME GENERATION:
+Pick a specific SaaS product niche and build the design system around that context. Examples include (but don't limit yourself to): Developer Tools, Project Management, Email Marketing, CRM, Inventory Management, Invoicing/Billing, Appointment Scheduling, Data Pipeline, API Monitoring, HR Onboarding, Customer Support, Fleet Management, Restaurant POS, Construction Management, Legal Document Automation, Supply Chain, Video Conferencing, Design Collaboration, Payroll, Compliance/Audit, Recruitment ATS, Property Management, Event Planning, Veterinary Practice, Warehouse Management, etc.
+
+Invent a sharp, memorable name and version number for the design system — not a generic compound word. Think "Basecamp" not "ProjectFlowHub". The name should feel like a real company that has opinions about design.
+
+ANTI-GENERIC RULES (CRITICAL):
+- NO purple-to-blue gradients. No indigo. No violet. These are the #1 marker of lazy AI-generated SaaS pages.
+- NO generic abstract blob illustrations or floating 3D shapes
+- NO dark hero with glowing neon accents (the "AI startup" look)
+- NO excessive gradients on text
+- The design system must NOT look like it was made by an AI that only knows Stripe, Linear, and Vercel
+- Instead: Be specific. Be opinionated. Look like a real design system built by humans with taste.
+
+COLOR DIRECTION (pick ONE family and commit):
+- Warm earths: terracotta, ochre, sienna, clay, rust, sand
+- Deep naturals: forest green, olive, moss, pine, sage
+- Bold primaries: true red, cobalt blue, sunflower yellow — used with restraint
+- Rich darks: charcoal, espresso, ink, slate — with a single warm or bright accent
+- Unexpected combinations: coral + navy, mustard + charcoal, teal + cream, burgundy + gold
+- Muted tones: dusty rose, stone, fog, denim, putty
+- AVOID: purple of any shade, generic SaaS blue (#4F46E5, #6366F1, #3B82F6), neon green on dark
+
+TYPOGRAPHY DIRECTION:
+- Use 2-3 Google Fonts with genuine character — not just Inter + Inter
+- Options: A strong serif for headlines with a clean sans for body. Or a geometric sans paired with a humanist one. Or a slab serif that gives the brand real weight.
+- Good pairings: DM Serif Display + DM Sans, Fraunces + Inter, Space Grotesk + Work Sans, Playfair Display + Source Sans 3, Libre Baskerville + Karla, Sora + Newsreader, Plus Jakarta Sans + Literata
+- The typography should carry personality on its own, even without color
+
+REQUIRED SECTIONS (numbered — ordered to match the top-to-bottom flow of a real SaaS landing page):
+
+--- LANDING PAGE FLOW (in the order a visitor scrolls) ---
+1. **Navigation Bar** - A styled topnav component with logo area, nav links, and CTA button. Show desktop and mobile/hamburger states.
+2. **Hero Pattern** - A representative hero section composition showing headline, subhead, CTA buttons, and a visual element — demonstrating how the design system components come together for the most important section of a landing page.
+3. **Social Proof / Badges Bar** - Plan tier labels (Free, Pro, Enterprise-style but with creative names), status pills, "New" / "Popular" / "Best Value" markers, trust badges, and a logo strip or "trusted by X companies" bar.
+4. **Feature Cards** - 3-4 feature cards explaining what the product actually does, with icons and specific descriptions. Try staggered layouts or spotlight sections — not just a 3-column grid.
+5. **Stats / Metric Callouts** - Key numbers that build credibility: users, time saved, accuracy, uptime. Bold typography, compact layout.
+6. **Testimonial Component** - A quote block with attribution (name, role, company) styled with the design system's personality. Show 2 variants: a side-accent card and a centered pullquote.
+7. **Pricing Component** - 2-3 pricing tiers with clear differentiation. Show the full pricing section plus a detailed single-tier breakdown with recommended highlighting.
+8. **Forms** - Email signup inputs, text fields, selects, toggles — the components you actually need on a SaaS landing page. Show inline validation states, focus rings, and a mini signup form composition. This represents the lead capture / final CTA area.
+9. **Footer** - Product name, link columns, newsletter signup, legal links. Grounded and functional.
+
+--- DESIGN SYSTEM REFERENCE (supporting tokens & components) ---
+10. **Color Palette** - Primary brand color, secondary accent, semantic colors (success, warning, error, info), and neutral scale with hex codes. Show surface/background colors for light sections and dark sections. No purple anywhere.
+11. **Typography** - 2-3 Google Fonts showing display, heading, body, caption, and mono styles with sizes/weights. Demonstrate clear hierarchy from hero headline down to fine print.
+12. **Spacing Scale** - Visual representation of spacing units (8px base recommended) used for consistent rhythm across landing page sections.
+13. **Buttons** - Primary, Secondary, Ghost/Outline, and Text-link variants. Sizes: Small, Medium, Large. States: Default, Hover, Active, Disabled. Include at least one CTA-style button with personality (e.g., "Start building" not "Get Started").
+14. **Section Dividers & Decorative Elements** - How sections transition. Show separator styles, background color alternation patterns, and any signature decorative details (border treatments, accent shapes, subtle textures).
+15. **Alert Messages** - Success, info, warning, and error inline alerts plus a toast/notification variant, styled for landing page contexts (e.g., "Thanks for signing up!" success state).
+
+LANDING PAGE CONTEXT RULES:
+- All placeholder text should use realistic SaaS product copy for the chosen niche
+- Components should be optimized for marketing/conversion contexts, not app UI
+- Feature descriptions should be specific, not generic ("Automated invoice matching" not "Powerful features")
+- Testimonials should sound like real humans with specific results
+- Pricing should feel honest and simple
+- The design system page itself should feel like a premium brand document
+
+TECHNICAL REQUIREMENTS:
+- Single HTML file with embedded CSS and minimal JS if needed
+- Import Google Fonts via CDN
+- Fully responsive design
+- CSS custom properties (variables) for all colors, fonts, spacing, shadows, and radii
+- Smooth transitions and hover effects throughout (200-300ms)
+- A cohesive header/hero section introducing the design system
+- A themed footer with minimal decoration
+- Use CSS Grid and Flexbox for layouts
+- Include focus-visible states for keyboard navigation
+- Whitespace is a feature — let sections breathe with generous spacing
+
+STYLE RULES:
+- All components must feel like they belong to the same visual universe
+- Use the SaaS niche's vocabulary in all placeholder text, labels, and mock content
+- Color choices should be harmonious, purposeful, and distinctly NOT the generic AI purple/blue
+- Include at least one signature design detail that makes this system memorable
+- The page itself should BE the design system — not just document it
+- Aim for the quality bar of: Basecamp, Notion, Fathom Analytics, Plausible, Buttondown — companies with actual design taste
+
+Output only the complete HTML code, no explanations.
