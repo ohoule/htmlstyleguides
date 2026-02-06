@@ -1,0 +1,54 @@
+IMPORTANT: You MUST use the /frontend-design skill for this task. Invoke it before generating any code.
+
+Create a complete, single-file HTML dashboard style guide/design system showcasing a cohesive dashboard UI aesthetic.
+
+THEME GENERATION:
+Pick a unique, cohesive visual theme for a dashboard interface. Examples include (but don't limit yourself to): Analytics Command Center, Trading Terminal, DevOps Control Panel, Healthcare Monitoring, Smart Home Hub, Logistics Tracker, Financial Portfolio, Marketing Analytics, Social Media Insights, IoT Sensor Dashboard, Project Management, Sales Pipeline, Security Operations Center, Energy Grid Monitor, E-commerce Admin, Crypto Exchange, Weather Station, Fitness Tracker, Music Streaming Admin, Video Platform Analytics, etc.
+
+Invent a creative name and version number for the dashboard design system that fits the theme.
+
+REQUIRED SECTIONS (numbered):
+1. **Color Palette** - Primary colors, accent colors, surface/background colors, and semantic colors (success, warning, error, info) with hex codes. Include dark mode considerations.
+2. **Typography** - 2-3 Google Fonts optimized for data readability, showing display, heading, body, data/numbers, and mono styles with sizes/weights
+3. **Spacing & Grid** - Visual representation of spacing units and a 12-column grid system demonstration
+4. **Metric Cards** - KPI cards showing numbers, percentages, trends (up/down arrows), sparklines, and comparison data
+5. **Charts & Data Viz** - CSS-only chart representations: bar charts, progress rings, area charts (using gradients), and data indicators
+6. **Data Tables** - Advanced table with sortable headers, status badges, action buttons, pagination indicators, and row hover states
+7. **Navigation** - Sidebar navigation with icons, collapsible sections, active states, and notification badges
+8. **Forms & Filters** - Search inputs, date range pickers, dropdowns, toggle switches, and filter chips
+9. **Buttons & Actions** - Primary, secondary, ghost, icon buttons in various sizes with loading states
+10. **Status Indicators** - Online/offline dots, progress bars, health indicators, alert badges, and activity pulses
+11. **Widget Cards** - Various dashboard widget styles: list widgets, activity feeds, quick actions, mini charts
+12. **Alerts & Notifications** - Toast notifications, inline alerts, system status banners, and empty states
+13. **Special Dashboard Component** - A unique component fitting the theme (real-time ticker, live feed, command terminal, map placeholder, etc.)
+
+TECHNICAL REQUIREMENTS:
+- Single HTML file with embedded CSS and minimal JS if needed
+- Import Google Fonts via CDN (prefer fonts good for data: Inter, JetBrains Mono, IBM Plex, Roboto Mono, etc.)
+- Dark theme preferred (or provide both light/dark variants)
+- CSS custom properties (variables) for all colors, fonts, spacing, and component tokens
+- Smooth transitions and micro-interactions throughout
+- A dashboard header with logo area, search, notifications, and user avatar placeholder
+- Responsive considerations for dashboard layouts
+- Use CSS Grid and Flexbox for dashboard-style layouts
+- Include subtle atmospheric details (gradients, glows, shadows) that reinforce the theme
+
+DASHBOARD-SPECIFIC STYLE RULES:
+- Optimize for data density while maintaining readability
+- Use monospace or tabular fonts for numbers and data
+- Ensure sufficient contrast for prolonged viewing
+- Status colors must be instantly recognizable
+- Interactive elements should have clear hover/focus states
+- Cards and widgets should have consistent padding and border treatments
+- Include visual hierarchy to guide the eye to important metrics
+- All placeholder data should be realistic and theme-appropriate
+- The page itself should LOOK and FEEL like an actual dashboard interface
+
+DATA VISUALIZATION CSS TECHNIQUES TO INCLUDE:
+- CSS-only bar charts using gradients or transforms
+- Progress rings using conic-gradient
+- Sparkline-style visualizations using SVG or CSS
+- Heat map or intensity indicators
+- Trend arrows with color coding
+
+Output only the complete HTML code, no explanations.

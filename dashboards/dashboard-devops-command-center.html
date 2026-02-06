@@ -1,0 +1,3025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS OPS v2.0 — DevOps Command Center Style Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Core Palette */
+            --void: #05080F;
+            --abyss: #0A0E1A;
+            --deep: #111827;
+            --surface: #1A2332;
+            --elevated: #243044;
+            --border: #2D3B4F;
+            --border-glow: #3D4F66;
+
+            /* Primary Accents */
+            --cyan: #00F0FF;
+            --cyan-dim: #00F0FF80;
+            --cyan-glow: #00F0FF40;
+            --cyan-subtle: #00F0FF15;
+
+            /* Terminal Green */
+            --green: #00FF88;
+            --green-dim: #00FF8880;
+            --green-glow: #00FF8840;
+            --green-subtle: #00FF8815;
+
+            /* Warning Amber */
+            --amber: #FFB800;
+            --amber-dim: #FFB80080;
+            --amber-glow: #FFB80040;
+
+            /* Semantic Colors */
+            --success: #00FF88;
+            --warning: #FFB800;
+            --error: #FF3366;
+            --error-glow: #FF336640;
+            --info: #00F0FF;
+
+            /* Text */
+            --text-primary: #F0F4F8;
+            --text-secondary: #8899AA;
+            --text-muted: #556677;
+
+            /* Typography */
+            --font-display: 'Orbitron', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+
+            /* Shadows */
+            --shadow-glow-cyan: 0 0 20px var(--cyan-glow), 0 0 40px var(--cyan-glow);
+            --shadow-glow-green: 0 0 20px var(--green-glow), 0 0 40px var(--green-glow);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--void);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Scanline overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 240, 255, 0.01) 2px,
+                rgba(0, 240, 255, 0.01) 4px
+            );
+            z-index: 10000;
+        }
+
+        /* Grid background */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px var(--cyan-glow); }
+            50% { box-shadow: 0 0 20px var(--cyan-glow), 0 0 40px var(--cyan-glow); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes cursorBlink {
+            0%, 100% { border-color: var(--green); }
+            50% { border-color: transparent; }
+        }
+
+        @keyframes dataStream {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        @keyframes progressPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: linear-gradient(180deg, var(--abyss) 0%, var(--abyss) 80%, transparent 100%);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-xl);
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--cyan), var(--green));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--void);
+        }
+
+        .logo-text {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--cyan);
+            text-shadow: 0 0 20px var(--cyan-glow);
+        }
+
+        .logo-version {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-left: var(--space-sm);
+        }
+
+        .header-center {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: var(--space-sm) var(--space-md);
+            gap: var(--space-sm);
+            width: 400px;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus-within {
+            border-color: var(--cyan);
+            box-shadow: 0 0 10px var(--cyan-glow);
+        }
+
+        .search-bar input {
+            background: none;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .search-bar input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-icon {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .header-status {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--green);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 10px var(--green);
+            animation: pulse 2s infinite;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .header-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .header-btn:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 18px;
+            height: 18px;
+            background: var(--error);
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--cyan), var(--green));
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .user-avatar:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px var(--cyan-glow);
+        }
+
+        /* Main Layout */
+        .dashboard-layout {
+            display: flex;
+            padding-top: 64px;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--abyss);
+            border-right: 1px solid var(--border);
+            padding: var(--space-lg);
+            position: fixed;
+            top: 64px;
+            left: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+
+        .nav-section {
+            margin-bottom: var(--space-xl);
+        }
+
+        .nav-section-title {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: var(--space-md);
+            padding-left: var(--space-sm);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: var(--space-xs);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background: var(--surface);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: var(--cyan-subtle);
+            color: var(--cyan);
+            border-left: 2px solid var(--cyan);
+            margin-left: -2px;
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--cyan);
+            box-shadow: 0 0 10px var(--cyan);
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .nav-label {
+            font-size: 0.9rem;
+            flex: 1;
+        }
+
+        .nav-badge {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: var(--error);
+            color: white;
+        }
+
+        .nav-badge.success {
+            background: var(--green-subtle);
+            color: var(--green);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: var(--space-2xl);
+            max-width: calc(100% - 280px);
+        }
+
+        /* Section Styles */
+        section {
+            margin-bottom: var(--space-3xl);
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .section-number {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--cyan);
+            background: var(--cyan-subtle);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--cyan);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+        }
+
+        h3 {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-md);
+            max-width: 70ch;
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .color-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .color-card:hover {
+            border-color: var(--cyan);
+            transform: translateY(-4px);
+        }
+
+        .color-swatch {
+            height: 80px;
+            position: relative;
+        }
+
+        .color-swatch.glow::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: inherit;
+            filter: blur(30px);
+            opacity: 0.5;
+        }
+
+        .color-info {
+            padding: var(--space-md);
+        }
+
+        .color-name {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Typography */
+        .type-specimen {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-lg);
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: var(--space-md);
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--cyan);
+            text-shadow: 0 0 30px var(--cyan-glow);
+            line-height: 1.2;
+        }
+
+        .type-heading {
+            font-family: var(--font-body);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .type-body {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .type-mono {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--green);
+            background: var(--void);
+            padding: var(--space-md);
+            border-radius: var(--radius-sm);
+            border-left: 2px solid var(--green);
+        }
+
+        .type-data {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Spacing & Grid */
+        .spacing-demo {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .spacing-bar {
+            height: 32px;
+            background: linear-gradient(90deg, var(--cyan), var(--green));
+            border-radius: var(--radius-sm);
+            box-shadow: 0 0 15px var(--cyan-glow);
+        }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            min-width: 100px;
+        }
+
+        .spacing-value {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--cyan);
+        }
+
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-sm);
+            padding: var(--space-lg);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+        }
+
+        .grid-col {
+            height: 60px;
+            background: var(--cyan-subtle);
+            border: 1px solid var(--cyan);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--cyan);
+        }
+
+        /* Metric Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .metric-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--cyan), var(--green));
+        }
+
+        .metric-card:hover {
+            border-color: var(--cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(0, 240, 255, 0.1);
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-md);
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .metric-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--cyan-subtle);
+            border: 1px solid var(--cyan);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cyan);
+            font-size: 16px;
+        }
+
+        .metric-value {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+            margin-bottom: var(--space-sm);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .metric-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .metric-trend {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+        }
+
+        .metric-trend.up {
+            color: var(--green);
+        }
+
+        .metric-trend.down {
+            color: var(--error);
+        }
+
+        .trend-arrow {
+            font-size: 12px;
+        }
+
+        .sparkline {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 30px;
+        }
+
+        .sparkline-bar {
+            width: 4px;
+            background: var(--cyan);
+            border-radius: 2px;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .sparkline-bar:last-child {
+            opacity: 1;
+            background: var(--green);
+            box-shadow: 0 0 10px var(--green-glow);
+        }
+
+        .metric-card:hover .sparkline-bar {
+            opacity: 1;
+        }
+
+        /* Charts */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .chart-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .chart-title {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .chart-period {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--elevated);
+            border-radius: var(--radius-sm);
+        }
+
+        /* Bar Chart */
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 200px;
+            padding-top: var(--space-lg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+            flex: 1;
+        }
+
+        .bar {
+            width: 24px;
+            background: linear-gradient(180deg, var(--cyan), var(--cyan-dim));
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .bar:hover {
+            background: linear-gradient(180deg, var(--green), var(--cyan));
+            box-shadow: 0 0 20px var(--cyan-glow);
+        }
+
+        .bar-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        /* Progress Ring */
+        .progress-ring-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: var(--space-xl);
+        }
+
+        .progress-ring {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--cyan) 0deg,
+                var(--green) 120deg,
+                var(--amber) 200deg,
+                var(--elevated) 200deg
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: progressPulse 3s infinite;
+        }
+
+        .progress-ring::before {
+            content: '';
+            position: absolute;
+            inset: 12px;
+            background: var(--surface);
+            border-radius: 50%;
+        }
+
+        .progress-ring-value {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .progress-ring-number {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .progress-ring-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Data Table */
+        .table-container {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .table-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .table-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-body);
+        }
+
+        thead {
+            background: var(--elevated);
+        }
+
+        th {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: var(--space-md) var(--space-lg);
+            text-align: left;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        th:hover {
+            color: var(--cyan);
+        }
+
+        th .sort-icon {
+            margin-left: var(--space-xs);
+            opacity: 0.5;
+        }
+
+        td {
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        tr {
+            transition: background 0.3s ease;
+        }
+
+        tbody tr:hover {
+            background: var(--cyan-subtle);
+        }
+
+        .table-cell-mono {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+        }
+
+        .table-status {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .table-status.running {
+            background: var(--green-subtle);
+            color: var(--green);
+        }
+
+        .table-status.stopped {
+            background: var(--error-glow);
+            color: var(--error);
+        }
+
+        .table-status.pending {
+            background: var(--amber-glow);
+            color: var(--amber);
+        }
+
+        .table-status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .table-status.running .table-status-dot {
+            animation: pulse 1.5s infinite;
+        }
+
+        .table-action-btn {
+            width: 28px;
+            height: 28px;
+            background: var(--elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--space-xs);
+        }
+
+        .table-action-btn:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .table-pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) var(--space-lg);
+            border-top: 1px solid var(--border);
+        }
+
+        .pagination-info {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: var(--space-xs);
+        }
+
+        .pagination-btn {
+            width: 32px;
+            height: 32px;
+            background: var(--elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+        }
+
+        .pagination-btn:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .pagination-btn.active {
+            background: var(--cyan);
+            border-color: var(--cyan);
+            color: var(--void);
+        }
+
+        /* Forms & Filters */
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-sm);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="search"],
+        textarea,
+        select {
+            width: 100%;
+            padding: var(--space-md);
+            background: var(--void);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 3px var(--cyan-glow);
+        }
+
+        input::placeholder {
+            color: var(--text-muted);
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2300F0FF' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-md) center;
+            padding-right: var(--space-xl);
+            cursor: pointer;
+        }
+
+        /* Toggle Switch */
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .toggle {
+            width: 48px;
+            height: 24px;
+            background: var(--border);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle.active {
+            background: var(--cyan);
+            box-shadow: 0 0 15px var(--cyan-glow);
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: var(--text-primary);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .toggle.active::after {
+            left: 26px;
+        }
+
+        .toggle-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Filter Chips */
+        .filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--elevated);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chip:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .chip.active {
+            background: var(--cyan-subtle);
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .chip-remove {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--border);
+            border-radius: 50%;
+            font-size: 10px;
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--cyan), var(--green));
+            color: var(--void);
+        }
+
+        .btn-primary:hover {
+            box-shadow: var(--shadow-glow-cyan);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+        }
+
+        .btn-secondary:hover {
+            background: var(--cyan-subtle);
+            box-shadow: 0 0 20px var(--cyan-glow);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--text-secondary);
+            color: var(--text-primary);
+        }
+
+        .btn-danger {
+            background: var(--error);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            box-shadow: 0 0 20px var(--error-glow);
+        }
+
+        .btn-sm {
+            padding: var(--space-sm) var(--space-md);
+            font-size: 0.8rem;
+        }
+
+        .btn-lg {
+            padding: var(--space-lg) var(--space-2xl);
+            font-size: 1rem;
+        }
+
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+        }
+
+        .btn-loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .btn-loading .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Status Indicators */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .status-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+
+        .status-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .status-row:last-child {
+            border-bottom: none;
+        }
+
+        .status-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .status-indicator.online {
+            background: var(--green);
+            box-shadow: 0 0 10px var(--green);
+            animation: pulse 2s infinite;
+        }
+
+        .status-indicator.offline {
+            background: var(--error);
+            box-shadow: 0 0 10px var(--error);
+        }
+
+        .status-indicator.warning {
+            background: var(--amber);
+            box-shadow: 0 0 10px var(--amber);
+            animation: pulse 1s infinite;
+        }
+
+        .status-value {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            margin-bottom: var(--space-lg);
+        }
+
+        .progress-bar-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-sm);
+        }
+
+        .progress-bar-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .progress-bar-value {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--cyan);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--elevated);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--cyan), var(--green));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 20px;
+            background: linear-gradient(90deg, transparent, var(--green));
+            animation: progressPulse 1.5s infinite;
+        }
+
+        /* Health Bars */
+        .health-indicator {
+            display: flex;
+            gap: 3px;
+        }
+
+        .health-segment {
+            width: 20px;
+            height: 8px;
+            background: var(--elevated);
+            border-radius: 2px;
+        }
+
+        .health-segment.active {
+            background: var(--green);
+            box-shadow: 0 0 5px var(--green);
+        }
+
+        .health-segment.warning {
+            background: var(--amber);
+        }
+
+        .health-segment.danger {
+            background: var(--error);
+        }
+
+        /* Widget Cards */
+        .widgets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .widget-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .widget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .widget-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .widget-more {
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .widget-more:hover {
+            color: var(--cyan);
+        }
+
+        .widget-body {
+            padding: var(--space-lg);
+        }
+
+        /* Activity Feed */
+        .activity-item {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .activity-icon.deploy {
+            background: var(--green-subtle);
+            color: var(--green);
+        }
+
+        .activity-icon.alert {
+            background: var(--error-glow);
+            color: var(--error);
+        }
+
+        .activity-icon.update {
+            background: var(--cyan-subtle);
+            color: var(--cyan);
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .activity-time {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-sm);
+        }
+
+        .quick-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-lg);
+            background: var(--elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action:hover {
+            border-color: var(--cyan);
+            background: var(--cyan-subtle);
+        }
+
+        .quick-action-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cyan);
+            font-size: 18px;
+        }
+
+        .quick-action-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        /* Alerts & Notifications */
+        .alerts-container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .alert {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            border-left: 3px solid;
+        }
+
+        .alert-info {
+            background: var(--cyan-subtle);
+            border-color: var(--cyan);
+        }
+
+        .alert-success {
+            background: var(--green-subtle);
+            border-color: var(--green);
+        }
+
+        .alert-warning {
+            background: var(--amber-glow);
+            border-color: var(--amber);
+        }
+
+        .alert-error {
+            background: var(--error-glow);
+            border-color: var(--error);
+        }
+
+        .alert-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .alert-info .alert-icon { color: var(--cyan); }
+        .alert-success .alert-icon { color: var(--green); }
+        .alert-warning .alert-icon { color: var(--amber); }
+        .alert-error .alert-icon { color: var(--error); }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: var(--space-xs);
+        }
+
+        .alert-info .alert-title { color: var(--cyan); }
+        .alert-success .alert-title { color: var(--green); }
+        .alert-warning .alert-title { color: var(--amber); }
+        .alert-error .alert-title { color: var(--error); }
+
+        .alert-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .alert-close {
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .alert-close:hover {
+            color: var(--text-primary);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: var(--space-xl);
+            right: var(--space-xl);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--surface);
+            border: 1px solid var(--green);
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), var(--shadow-glow-green);
+            animation: slideIn 0.3s ease;
+            z-index: 10001;
+        }
+
+        .toast-icon {
+            color: var(--green);
+            font-size: 18px;
+        }
+
+        .toast-message {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        /* System Banner */
+        .system-banner {
+            background: linear-gradient(90deg, var(--amber-glow), var(--amber-glow));
+            border: 1px solid var(--amber);
+            border-radius: var(--radius-md);
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .system-banner-icon {
+            color: var(--amber);
+            font-size: 18px;
+            animation: pulse 2s infinite;
+        }
+
+        .system-banner-text {
+            flex: 1;
+            font-size: 0.9rem;
+            color: var(--amber);
+        }
+
+        .system-banner-action {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--amber);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: var(--space-3xl);
+            color: var(--text-muted);
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-lg);
+            opacity: 0.5;
+        }
+
+        .empty-state-title {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .empty-state-text {
+            font-size: 0.9rem;
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Terminal Component */
+        .terminal {
+            background: var(--void);
+            border: 1px solid var(--green);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 0 30px var(--green-glow);
+        }
+
+        .terminal-header {
+            background: var(--abyss);
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-btn.close { background: #FF5F56; }
+        .terminal-btn.minimize { background: #FFBD2E; }
+        .terminal-btn.maximize { background: #27CA40; }
+
+        .terminal-title {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            flex: 1;
+            text-align: center;
+        }
+
+        .terminal-body {
+            padding: var(--space-lg);
+            height: 300px;
+            overflow-y: auto;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            line-height: 1.8;
+        }
+
+        .terminal-line {
+            margin-bottom: var(--space-xs);
+        }
+
+        .terminal-prompt {
+            color: var(--green);
+        }
+
+        .terminal-command {
+            color: var(--text-primary);
+        }
+
+        .terminal-output {
+            color: var(--text-secondary);
+        }
+
+        .terminal-success {
+            color: var(--green);
+        }
+
+        .terminal-error {
+            color: var(--error);
+        }
+
+        .terminal-warning {
+            color: var(--amber);
+        }
+
+        .terminal-info {
+            color: var(--cyan);
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: var(--green);
+            margin-left: 4px;
+            animation: blink 1s infinite;
+        }
+
+        .terminal-typing {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid var(--green);
+            animation: typing 2s steps(40) forwards, cursorBlink 0.8s infinite;
+        }
+
+        /* Live Feed Animation */
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--error);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--error);
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: var(--space-3xl);
+            padding: var(--space-2xl);
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--cyan);
+            letter-spacing: 3px;
+            margin-bottom: var(--space-md);
+            text-shadow: 0 0 20px var(--cyan-glow);
+        }
+
+        .footer-text {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            margin-top: var(--space-lg);
+        }
+
+        .footer-link {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 80px;
+                padding: var(--space-md);
+            }
+
+            .nav-label,
+            .nav-badge,
+            .nav-section-title {
+                display: none;
+            }
+
+            .nav-item {
+                justify-content: center;
+                padding: var(--space-md);
+            }
+
+            .main-content {
+                margin-left: 80px;
+                max-width: calc(100% - 80px);
+            }
+
+            .search-bar {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header {
+                padding: 0 var(--space-md);
+            }
+
+            .header-center {
+                display: none;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+                max-width: 100%;
+                padding: var(--space-lg);
+            }
+
+            .metrics-grid,
+            .charts-grid,
+            .widgets-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="logo">
+            <div class="logo-icon">N</div>
+            <span class="logo-text">NEXUS OPS</span>
+            <span class="logo-version">v2.0</span>
+        </div>
+        <div class="header-center">
+            <div class="search-bar">
+                <span class="search-icon">⌘</span>
+                <input type="text" placeholder="Search servers, deployments, logs...">
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-status">
+                <span class="status-dot"></span>
+                ALL SYSTEMS OPERATIONAL
+            </div>
+            <div class="header-actions">
+                <button class="header-btn">
+                    <span>⚡</span>
+                </button>
+                <button class="header-btn">
+                    <span>🔔</span>
+                    <span class="notification-badge">3</span>
+                </button>
+                <button class="header-btn">
+                    <span>⚙</span>
+                </button>
+            </div>
+            <div class="user-avatar"></div>
+        </div>
+    </header>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="nav-section">
+                <div class="nav-section-title">Overview</div>
+                <a href="#colors" class="nav-item active">
+                    <span class="nav-icon">◉</span>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+                <a href="#typography" class="nav-item">
+                    <span class="nav-icon">Aa</span>
+                    <span class="nav-label">Typography</span>
+                </a>
+                <a href="#metrics" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Metrics</span>
+                    <span class="nav-badge success">Live</span>
+                </a>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Infrastructure</div>
+                <a href="#charts" class="nav-item">
+                    <span class="nav-icon">📈</span>
+                    <span class="nav-label">Analytics</span>
+                </a>
+                <a href="#table" class="nav-item">
+                    <span class="nav-icon">🖥</span>
+                    <span class="nav-label">Servers</span>
+                    <span class="nav-badge">24</span>
+                </a>
+                <a href="#navigation" class="nav-item">
+                    <span class="nav-icon">🔗</span>
+                    <span class="nav-label">Navigation</span>
+                </a>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Components</div>
+                <a href="#forms" class="nav-item">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-label">Forms</span>
+                </a>
+                <a href="#buttons" class="nav-item">
+                    <span class="nav-icon">🔘</span>
+                    <span class="nav-label">Buttons</span>
+                </a>
+                <a href="#status" class="nav-item">
+                    <span class="nav-icon">🚦</span>
+                    <span class="nav-label">Status</span>
+                </a>
+                <a href="#widgets" class="nav-item">
+                    <span class="nav-icon">🧩</span>
+                    <span class="nav-label">Widgets</span>
+                </a>
+                <a href="#alerts" class="nav-item">
+                    <span class="nav-icon">⚠</span>
+                    <span class="nav-label">Alerts</span>
+                </a>
+                <a href="#terminal" class="nav-item">
+                    <span class="nav-icon">></span>
+                    <span class="nav-label">Terminal</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Section 1: Color Palette -->
+            <section id="colors">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>COLOR PALETTE</h2>
+                </div>
+                <p>A dark-first color system optimized for extended monitoring sessions. High contrast accents ensure critical information stands out.</p>
+
+                <h3>Core Backgrounds</h3>
+                <div class="color-grid" style="margin-bottom: var(--space-xl);">
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: var(--void);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Void</div>
+                            <div class="color-hex">#05080F</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: var(--abyss);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Abyss</div>
+                            <div class="color-hex">#0A0E1A</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: var(--deep);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Deep</div>
+                            <div class="color-hex">#111827</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: var(--surface);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Surface</div>
+                            <div class="color-hex">#1A2332</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: var(--elevated);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Elevated</div>
+                            <div class="color-hex">#243044</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Accent Colors</h3>
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-swatch glow" style="background: var(--cyan);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Electric Cyan</div>
+                            <div class="color-hex">#00F0FF</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch glow" style="background: var(--green);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Terminal Green</div>
+                            <div class="color-hex">#00FF88</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch glow" style="background: var(--amber);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Warning Amber</div>
+                            <div class="color-hex">#FFB800</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch glow" style="background: var(--error);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Alert Red</div>
+                            <div class="color-hex">#FF3366</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Typography -->
+            <section id="typography">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>TYPOGRAPHY</h2>
+                </div>
+                <p>Three-tier type system optimized for data density and readability. Monospace for data, display for headlines, body for interface text.</p>
+
+                <div class="type-specimen">
+                    <div class="type-label">Display / Orbitron</div>
+                    <div class="type-display">SYSTEM ONLINE</div>
+                </div>
+
+                <div class="type-specimen">
+                    <div class="type-label">Heading / Outfit</div>
+                    <div class="type-heading">Infrastructure Health Dashboard</div>
+                </div>
+
+                <div class="type-specimen">
+                    <div class="type-label">Body / Outfit</div>
+                    <p class="type-body">Monitor your entire infrastructure in real-time. Track server health, deployment status, and system metrics across all environments with precision and clarity.</p>
+                </div>
+
+                <div class="type-specimen">
+                    <div class="type-label">Mono / JetBrains Mono</div>
+                    <div class="type-mono">const status = await cluster.getHealth(); // Returns: { uptime: 99.97% }</div>
+                </div>
+
+                <div class="type-specimen">
+                    <div class="type-label">Data / JetBrains Mono Bold</div>
+                    <div class="type-data">2,847,391</div>
+                </div>
+            </section>
+
+            <!-- Section 3: Spacing & Grid -->
+            <section id="spacing">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>SPACING & GRID</h2>
+                </div>
+                <p>Consistent spacing scale based on 4px base unit. 12-column grid system for flexible dashboard layouts.</p>
+
+                <h3>Spacing Scale</h3>
+                <div class="spacing-demo">
+                    <div class="spacing-item">
+                        <span class="spacing-label">--space-xs</span>
+                        <div class="spacing-bar" style="width: 4px;"></div>
+                        <span class="spacing-value">4px</span>
+                    </div>
+                    <div class="spacing-item">
+                        <span class="spacing-label">--space-sm</span>
+                        <div class="spacing-bar" style="width: 8px;"></div>
+                        <span class="spacing-value">8px</span>
+                    </div>
+                    <div class="spacing-item">
+                        <span class="spacing-label">--space-md</span>
+                        <div class="spacing-bar" style="width: 16px;"></div>
+                        <span class="spacing-value">16px</span>
+                    </div>
+                    <div class="spacing-item">
+                        <span class="spacing-label">--space-lg</span>
+                        <div class="spacing-bar" style="width: 24px;"></div>
+                        <span class="spacing-value">24px</span>
+                    </div>
+                    <div class="spacing-item">
+                        <span class="spacing-label">--space-xl</span>
+                        <div class="spacing-bar" style="width: 32px;"></div>
+                        <span class="spacing-value">32px</span>
+                    </div>
+                    <div class="spacing-item">
+                        <span class="spacing-label">--space-2xl</span>
+                        <div class="spacing-bar" style="width: 48px;"></div>
+                        <span class="spacing-value">48px</span>
+                    </div>
+                    <div class="spacing-item">
+                        <span class="spacing-label">--space-3xl</span>
+                        <div class="spacing-bar" style="width: 64px;"></div>
+                        <span class="spacing-value">64px</span>
+                    </div>
+                </div>
+
+                <h3>12-Column Grid</h3>
+                <div class="grid-demo">
+                    <div class="grid-col">1</div>
+                    <div class="grid-col">2</div>
+                    <div class="grid-col">3</div>
+                    <div class="grid-col">4</div>
+                    <div class="grid-col">5</div>
+                    <div class="grid-col">6</div>
+                    <div class="grid-col">7</div>
+                    <div class="grid-col">8</div>
+                    <div class="grid-col">9</div>
+                    <div class="grid-col">10</div>
+                    <div class="grid-col">11</div>
+                    <div class="grid-col">12</div>
+                </div>
+            </section>
+
+            <!-- Section 4: Metric Cards -->
+            <section id="metrics">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2>METRIC CARDS</h2>
+                </div>
+                <p>KPI cards with real-time data, trend indicators, and sparkline visualizations for at-a-glance monitoring.</p>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-label">Total Requests</span>
+                            <div class="metric-icon">📊</div>
+                        </div>
+                        <div class="metric-value">2.4M</div>
+                        <div class="metric-footer">
+                            <div class="metric-trend up">
+                                <span class="trend-arrow">↑</span>
+                                <span>12.5%</span>
+                            </div>
+                            <div class="sparkline">
+                                <div class="sparkline-bar" style="height: 40%;"></div>
+                                <div class="sparkline-bar" style="height: 65%;"></div>
+                                <div class="sparkline-bar" style="height: 45%;"></div>
+                                <div class="sparkline-bar" style="height: 80%;"></div>
+                                <div class="sparkline-bar" style="height: 55%;"></div>
+                                <div class="sparkline-bar" style="height: 70%;"></div>
+                                <div class="sparkline-bar" style="height: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-label">CPU Usage</span>
+                            <div class="metric-icon">⚡</div>
+                        </div>
+                        <div class="metric-value">67.3%</div>
+                        <div class="metric-footer">
+                            <div class="metric-trend up">
+                                <span class="trend-arrow">↑</span>
+                                <span>3.2%</span>
+                            </div>
+                            <div class="sparkline">
+                                <div class="sparkline-bar" style="height: 50%;"></div>
+                                <div class="sparkline-bar" style="height: 55%;"></div>
+                                <div class="sparkline-bar" style="height: 60%;"></div>
+                                <div class="sparkline-bar" style="height: 58%;"></div>
+                                <div class="sparkline-bar" style="height: 65%;"></div>
+                                <div class="sparkline-bar" style="height: 62%;"></div>
+                                <div class="sparkline-bar" style="height: 67%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-label">Memory</span>
+                            <div class="metric-icon">🧠</div>
+                        </div>
+                        <div class="metric-value">12.8 GB</div>
+                        <div class="metric-footer">
+                            <div class="metric-trend down">
+                                <span class="trend-arrow">↓</span>
+                                <span>2.1%</span>
+                            </div>
+                            <div class="sparkline">
+                                <div class="sparkline-bar" style="height: 85%;"></div>
+                                <div class="sparkline-bar" style="height: 82%;"></div>
+                                <div class="sparkline-bar" style="height: 78%;"></div>
+                                <div class="sparkline-bar" style="height: 80%;"></div>
+                                <div class="sparkline-bar" style="height: 75%;"></div>
+                                <div class="sparkline-bar" style="height: 72%;"></div>
+                                <div class="sparkline-bar" style="height: 70%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-label">Uptime</span>
+                            <div class="metric-icon">🟢</div>
+                        </div>
+                        <div class="metric-value">99.97%</div>
+                        <div class="metric-footer">
+                            <div class="metric-trend up">
+                                <span class="trend-arrow">↑</span>
+                                <span>0.02%</span>
+                            </div>
+                            <div class="sparkline">
+                                <div class="sparkline-bar" style="height: 100%;"></div>
+                                <div class="sparkline-bar" style="height: 100%;"></div>
+                                <div class="sparkline-bar" style="height: 95%;"></div>
+                                <div class="sparkline-bar" style="height: 100%;"></div>
+                                <div class="sparkline-bar" style="height: 100%;"></div>
+                                <div class="sparkline-bar" style="height: 100%;"></div>
+                                <div class="sparkline-bar" style="height: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Charts -->
+            <section id="charts">
+                <div class="section-header">
+                    <span class="section-number">05</span>
+                    <h2>CHARTS & DATA VIZ</h2>
+                </div>
+                <p>CSS-only chart components for visualizing trends, distributions, and progress without external dependencies.</p>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Request Volume</span>
+                            <span class="chart-period">Last 7 days</span>
+                        </div>
+                        <div class="bar-chart">
+                            <div class="bar-group">
+                                <div class="bar" style="height: 60%;"></div>
+                                <span class="bar-label">Mon</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 85%;"></div>
+                                <span class="bar-label">Tue</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 70%;"></div>
+                                <span class="bar-label">Wed</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 95%;"></div>
+                                <span class="bar-label">Thu</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 80%;"></div>
+                                <span class="bar-label">Fri</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 45%;"></div>
+                                <span class="bar-label">Sat</span>
+                            </div>
+                            <div class="bar-group">
+                                <div class="bar" style="height: 35%;"></div>
+                                <span class="bar-label">Sun</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Resource Allocation</span>
+                            <span class="chart-period">Current</span>
+                        </div>
+                        <div class="progress-ring-container">
+                            <div class="progress-ring">
+                                <div class="progress-ring-value">
+                                    <div class="progress-ring-number">78%</div>
+                                    <div class="progress-ring-label">Allocated</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Data Table -->
+            <section id="table">
+                <div class="section-header">
+                    <span class="section-number">06</span>
+                    <h2>DATA TABLES</h2>
+                </div>
+                <p>Advanced data tables with sortable columns, status indicators, inline actions, and pagination.</p>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <span class="table-title">Server Fleet</span>
+                        <div class="table-actions">
+                            <button class="btn btn-sm btn-ghost">Export</button>
+                            <button class="btn btn-sm btn-primary">+ Add Server</button>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Server ID <span class="sort-icon">↕</span></th>
+                                <th>Hostname</th>
+                                <th>Region</th>
+                                <th>CPU <span class="sort-icon">↕</span></th>
+                                <th>Memory</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="table-cell-mono">srv-001</td>
+                                <td>prod-api-primary</td>
+                                <td>us-east-1</td>
+                                <td class="table-cell-mono">45%</td>
+                                <td class="table-cell-mono">8.2 GB</td>
+                                <td>
+                                    <span class="table-status running">
+                                        <span class="table-status-dot"></span>
+                                        Running
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="table-action-btn">⟳</button>
+                                    <button class="table-action-btn">⚙</button>
+                                    <button class="table-action-btn">⋮</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-cell-mono">srv-002</td>
+                                <td>prod-api-secondary</td>
+                                <td>us-west-2</td>
+                                <td class="table-cell-mono">62%</td>
+                                <td class="table-cell-mono">12.4 GB</td>
+                                <td>
+                                    <span class="table-status running">
+                                        <span class="table-status-dot"></span>
+                                        Running
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="table-action-btn">⟳</button>
+                                    <button class="table-action-btn">⚙</button>
+                                    <button class="table-action-btn">⋮</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-cell-mono">srv-003</td>
+                                <td>staging-worker-01</td>
+                                <td>eu-west-1</td>
+                                <td class="table-cell-mono">28%</td>
+                                <td class="table-cell-mono">4.1 GB</td>
+                                <td>
+                                    <span class="table-status pending">
+                                        <span class="table-status-dot"></span>
+                                        Pending
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="table-action-btn">⟳</button>
+                                    <button class="table-action-btn">⚙</button>
+                                    <button class="table-action-btn">⋮</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-cell-mono">srv-004</td>
+                                <td>dev-database</td>
+                                <td>us-east-1</td>
+                                <td class="table-cell-mono">—</td>
+                                <td class="table-cell-mono">—</td>
+                                <td>
+                                    <span class="table-status stopped">
+                                        <span class="table-status-dot"></span>
+                                        Stopped
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="table-action-btn">⟳</button>
+                                    <button class="table-action-btn">⚙</button>
+                                    <button class="table-action-btn">⋮</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="table-pagination">
+                        <span class="pagination-info">Showing 1-4 of 24 servers</span>
+                        <div class="pagination-controls">
+                            <button class="pagination-btn">←</button>
+                            <button class="pagination-btn active">1</button>
+                            <button class="pagination-btn">2</button>
+                            <button class="pagination-btn">3</button>
+                            <button class="pagination-btn">→</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Sidebar Navigation -->
+            <section id="navigation">
+                <div class="section-header">
+                    <span class="section-number">07</span>
+                    <h2>NAVIGATION</h2>
+                </div>
+                <p>Sidebar navigation with collapsible sections, active states, and notification badges. See the live sidebar on the left.</p>
+
+                <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-lg); max-width: 300px;">
+                    <div class="nav-section">
+                        <div class="nav-section-title">Sample Section</div>
+                        <a class="nav-item active">
+                            <span class="nav-icon">◉</span>
+                            <span class="nav-label">Active Item</span>
+                        </a>
+                        <a class="nav-item">
+                            <span class="nav-icon">○</span>
+                            <span class="nav-label">Default Item</span>
+                        </a>
+                        <a class="nav-item">
+                            <span class="nav-icon">⚠</span>
+                            <span class="nav-label">With Badge</span>
+                            <span class="nav-badge">5</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 8: Forms & Filters -->
+            <section id="forms">
+                <div class="section-header">
+                    <span class="section-number">08</span>
+                    <h2>FORMS & FILTERS</h2>
+                </div>
+                <p>Input components for search, filtering, and data entry with focus states and validation styling.</p>
+
+                <div class="forms-grid">
+                    <div>
+                        <div class="form-group">
+                            <label>Search Query</label>
+                            <input type="search" placeholder="Search servers, logs, deployments...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Environment</label>
+                            <select>
+                                <option>All Environments</option>
+                                <option>Production</option>
+                                <option>Staging</option>
+                                <option>Development</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Date Range</label>
+                            <input type="text" placeholder="Last 7 days">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-group">
+                            <label>Toggles</label>
+                            <div class="toggle-group" style="margin-bottom: var(--space-md);">
+                                <div class="toggle active"></div>
+                                <span class="toggle-label">Auto-refresh enabled</span>
+                            </div>
+                            <div class="toggle-group" style="margin-bottom: var(--space-md);">
+                                <div class="toggle"></div>
+                                <span class="toggle-label">Show deprecated</span>
+                            </div>
+                            <div class="toggle-group">
+                                <div class="toggle active"></div>
+                                <span class="toggle-label">Notifications</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Filter Tags</label>
+                            <div class="filter-chips">
+                                <span class="chip active">Production <span class="chip-remove">×</span></span>
+                                <span class="chip active">us-east-1 <span class="chip-remove">×</span></span>
+                                <span class="chip">Staging</span>
+                                <span class="chip">EU Region</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 9: Buttons -->
+            <section id="buttons">
+                <div class="section-header">
+                    <span class="section-number">09</span>
+                    <h2>BUTTONS & ACTIONS</h2>
+                </div>
+                <p>Action buttons with multiple variants, sizes, and loading states for all interaction patterns.</p>
+
+                <h3>Variants</h3>
+                <div class="button-grid">
+                    <button class="btn btn-primary">Primary</button>
+                    <button class="btn btn-secondary">Secondary</button>
+                    <button class="btn btn-ghost">Ghost</button>
+                    <button class="btn btn-danger">Danger</button>
+                </div>
+
+                <h3>Sizes</h3>
+                <div class="button-grid">
+                    <button class="btn btn-primary btn-sm">Small</button>
+                    <button class="btn btn-primary">Medium</button>
+                    <button class="btn btn-primary btn-lg">Large</button>
+                </div>
+
+                <h3>States</h3>
+                <div class="button-grid">
+                    <button class="btn btn-primary">Normal</button>
+                    <button class="btn btn-primary btn-loading">
+                        <span class="spinner"></span>
+                        Loading
+                    </button>
+                    <button class="btn btn-primary" disabled style="opacity: 0.5; cursor: not-allowed;">Disabled</button>
+                    <button class="btn btn-primary btn-icon">⚡</button>
+                </div>
+            </section>
+
+            <!-- Section 10: Status Indicators -->
+            <section id="status">
+                <div class="section-header">
+                    <span class="section-number">10</span>
+                    <h2>STATUS INDICATORS</h2>
+                </div>
+                <p>Visual indicators for system health, progress tracking, and real-time status monitoring.</p>
+
+                <div class="status-grid">
+                    <div class="status-card">
+                        <h3>Service Status</h3>
+                        <div class="status-row">
+                            <span class="status-label">
+                                <span class="status-indicator online"></span>
+                                API Gateway
+                            </span>
+                            <span class="status-value">Healthy</span>
+                        </div>
+                        <div class="status-row">
+                            <span class="status-label">
+                                <span class="status-indicator online"></span>
+                                Database
+                            </span>
+                            <span class="status-value">Connected</span>
+                        </div>
+                        <div class="status-row">
+                            <span class="status-label">
+                                <span class="status-indicator warning"></span>
+                                Cache Layer
+                            </span>
+                            <span class="status-value">Degraded</span>
+                        </div>
+                        <div class="status-row">
+                            <span class="status-label">
+                                <span class="status-indicator offline"></span>
+                                Worker Queue
+                            </span>
+                            <span class="status-value">Offline</span>
+                        </div>
+                    </div>
+
+                    <div class="status-card">
+                        <h3>Progress Bars</h3>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-header">
+                                <span class="progress-bar-label">Deployment Progress</span>
+                                <span class="progress-bar-value">73%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill" style="width: 73%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-header">
+                                <span class="progress-bar-label">Disk Usage</span>
+                                <span class="progress-bar-value">45%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill" style="width: 45%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-header">
+                                <span class="progress-bar-label">Backup Complete</span>
+                                <span class="progress-bar-value">100%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="status-card">
+                        <h3>Health Indicators</h3>
+                        <div class="status-row">
+                            <span class="status-label">Cluster Alpha</span>
+                            <div class="health-indicator">
+                                <div class="health-segment active"></div>
+                                <div class="health-segment active"></div>
+                                <div class="health-segment active"></div>
+                                <div class="health-segment active"></div>
+                                <div class="health-segment active"></div>
+                            </div>
+                        </div>
+                        <div class="status-row">
+                            <span class="status-label">Cluster Beta</span>
+                            <div class="health-indicator">
+                                <div class="health-segment active"></div>
+                                <div class="health-segment active"></div>
+                                <div class="health-segment active"></div>
+                                <div class="health-segment warning"></div>
+                                <div class="health-segment"></div>
+                            </div>
+                        </div>
+                        <div class="status-row">
+                            <span class="status-label">Cluster Gamma</span>
+                            <div class="health-indicator">
+                                <div class="health-segment danger"></div>
+                                <div class="health-segment danger"></div>
+                                <div class="health-segment"></div>
+                                <div class="health-segment"></div>
+                                <div class="health-segment"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 11: Widget Cards -->
+            <section id="widgets">
+                <div class="section-header">
+                    <span class="section-number">11</span>
+                    <h2>WIDGET CARDS</h2>
+                </div>
+                <p>Modular widget components for activity feeds, quick actions, and compact data displays.</p>
+
+                <div class="widgets-grid">
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">Recent Activity</span>
+                            <span class="widget-more">⋮</span>
+                        </div>
+                        <div class="widget-body">
+                            <div class="activity-item">
+                                <div class="activity-icon deploy">🚀</div>
+                                <div class="activity-content">
+                                    <div class="activity-text">Deployed v2.4.1 to production</div>
+                                    <div class="activity-time">2 minutes ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon alert">⚠</div>
+                                <div class="activity-content">
+                                    <div class="activity-text">High CPU alert on srv-002</div>
+                                    <div class="activity-time">15 minutes ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon update">🔄</div>
+                                <div class="activity-content">
+                                    <div class="activity-text">Auto-scaled cluster to 8 nodes</div>
+                                    <div class="activity-time">1 hour ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">Quick Actions</span>
+                            <span class="widget-more">⋮</span>
+                        </div>
+                        <div class="widget-body">
+                            <div class="quick-actions">
+                                <div class="quick-action">
+                                    <div class="quick-action-icon">🚀</div>
+                                    <span class="quick-action-label">Deploy</span>
+                                </div>
+                                <div class="quick-action">
+                                    <div class="quick-action-icon">⟳</div>
+                                    <span class="quick-action-label">Restart</span>
+                                </div>
+                                <div class="quick-action">
+                                    <div class="quick-action-icon">📊</div>
+                                    <span class="quick-action-label">Metrics</span>
+                                </div>
+                                <div class="quick-action">
+                                    <div class="quick-action-icon">📋</div>
+                                    <span class="quick-action-label">Logs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">Deployments</span>
+                            <span class="live-indicator">
+                                <span class="live-dot"></span>
+                                LIVE
+                            </span>
+                        </div>
+                        <div class="widget-body">
+                            <div class="status-row">
+                                <span class="status-label">Production</span>
+                                <span class="status-value" style="color: var(--green);">v2.4.1</span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-label">Staging</span>
+                                <span class="status-value" style="color: var(--cyan);">v2.5.0-rc1</span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-label">Development</span>
+                                <span class="status-value" style="color: var(--amber);">v2.5.0-dev</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 12: Alerts -->
+            <section id="alerts">
+                <div class="section-header">
+                    <span class="section-number">12</span>
+                    <h2>ALERTS & NOTIFICATIONS</h2>
+                </div>
+                <p>System alerts, toast notifications, and status banners for communicating important information.</p>
+
+                <div class="system-banner">
+                    <span class="system-banner-icon">⚠</span>
+                    <span class="system-banner-text">Scheduled maintenance window: Saturday 2:00 AM - 4:00 AM UTC</span>
+                    <span class="system-banner-action">Learn more</span>
+                </div>
+
+                <div class="alerts-container">
+                    <div class="alert alert-info">
+                        <span class="alert-icon">ℹ</span>
+                        <div class="alert-content">
+                            <div class="alert-title">System Update Available</div>
+                            <div class="alert-text">A new version of the monitoring agent is ready to install.</div>
+                        </div>
+                        <span class="alert-close">×</span>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <span class="alert-icon">✓</span>
+                        <div class="alert-content">
+                            <div class="alert-title">Deployment Successful</div>
+                            <div class="alert-text">Version 2.4.1 has been deployed to all production servers.</div>
+                        </div>
+                        <span class="alert-close">×</span>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <span class="alert-icon">⚠</span>
+                        <div class="alert-content">
+                            <div class="alert-title">High Memory Usage</div>
+                            <div class="alert-text">Server srv-002 is approaching memory threshold (85% used).</div>
+                        </div>
+                        <span class="alert-close">×</span>
+                    </div>
+
+                    <div class="alert alert-error">
+                        <span class="alert-icon">✕</span>
+                        <div class="alert-content">
+                            <div class="alert-title">Connection Failed</div>
+                            <div class="alert-text">Unable to connect to database replica in eu-west-1 region.</div>
+                        </div>
+                        <span class="alert-close">×</span>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: var(--space-xl);">Empty State</h3>
+                <div class="empty-state" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);">
+                    <div class="empty-state-icon">📭</div>
+                    <div class="empty-state-title">No alerts to display</div>
+                    <div class="empty-state-text">When system issues are detected, they will appear here.</div>
+                    <button class="btn btn-secondary btn-sm">Configure Alerts</button>
+                </div>
+            </section>
+
+            <!-- Section 13: Terminal -->
+            <section id="terminal">
+                <div class="section-header">
+                    <span class="section-number">13</span>
+                    <h2>LIVE TERMINAL FEED</h2>
+                </div>
+                <p>Real-time terminal component for log streaming, command execution, and system monitoring.</p>
+
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="terminal-btn close"></span>
+                            <span class="terminal-btn minimize"></span>
+                            <span class="terminal-btn maximize"></span>
+                        </div>
+                        <span class="terminal-title">nexus-ops — bash — 80×24</span>
+                        <span class="live-indicator">
+                            <span class="live-dot"></span>
+                            LIVE
+                        </span>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">nexus@ops:~$</span>
+                            <span class="terminal-command"> kubectl get pods -n production</span>
+                        </div>
+                        <div class="terminal-line terminal-output">NAME                          READY   STATUS    RESTARTS   AGE</div>
+                        <div class="terminal-line terminal-success">api-gateway-7b9f4d6b8-x2k4m   1/1     Running   0          2d</div>
+                        <div class="terminal-line terminal-success">auth-service-5c8f7d9b2-p3n7   1/1     Running   0          2d</div>
+                        <div class="terminal-line terminal-success">user-service-4a7e6c8d1-q9m2   1/1     Running   0          2d</div>
+                        <div class="terminal-line terminal-warning">cache-redis-3f5d4b7a9-r4k8    0/1     Pending   0          5m</div>
+                        <div class="terminal-line"></div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">nexus@ops:~$</span>
+                            <span class="terminal-command"> docker stats --no-stream</span>
+                        </div>
+                        <div class="terminal-line terminal-output">CONTAINER ID   NAME             CPU %   MEM USAGE / LIMIT</div>
+                        <div class="terminal-line terminal-info">a1b2c3d4e5f6   api-gateway      45.2%   512MiB / 1GiB</div>
+                        <div class="terminal-line terminal-info">b2c3d4e5f6a7   auth-service     23.8%   256MiB / 512MiB</div>
+                        <div class="terminal-line terminal-info">c3d4e5f6a7b8   user-service     31.4%   384MiB / 768MiB</div>
+                        <div class="terminal-line"></div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">nexus@ops:~$</span>
+                            <span class="terminal-command"> tail -f /var/log/nexus/deploy.log</span>
+                        </div>
+                        <div class="terminal-line terminal-success">[2024-01-15 14:32:01] Deployment started: v2.4.1</div>
+                        <div class="terminal-line terminal-info">[2024-01-15 14:32:05] Building container images...</div>
+                        <div class="terminal-line terminal-info">[2024-01-15 14:32:42] Pushing to registry...</div>
+                        <div class="terminal-line terminal-info">[2024-01-15 14:33:18] Rolling update in progress...</div>
+                        <div class="terminal-line terminal-success">[2024-01-15 14:34:52] Deployment complete ✓</div>
+                        <div class="terminal-line"></div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">nexus@ops:~$</span>
+                            <span class="terminal-cursor"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div class="footer-logo">NEXUS OPS</div>
+                <p class="footer-text">DevOps Command Center Style Guide v2.0 — Built for infrastructure at scale</p>
+                <div class="footer-links">
+                    <a href="../index.html" class="footer-link">← Back to Gallery</a>
+                    <a href="#" class="footer-link">Documentation</a>
+                    <a href="#" class="footer-link">GitHub</a>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Toast Notification (Demo) -->
+    <div class="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message">All systems operational</span>
+    </div>
+</body>
+</html>

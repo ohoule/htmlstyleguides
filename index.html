@@ -6,7 +6,7 @@
     <title>HTML Style Guides — A Collection of Themed Design Systems</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=Poiret+One&family=Archivo+Black&family=VT323&family=Orbitron:wght@400;700&family=Cormorant+Garamond:wght@400;500&family=Cinzel:wght@500;600&family=Noto+Serif+JP:wght@400;500&family=Space+Mono:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Fredoka:wght@500;600&family=Quicksand:wght@500;600&family=Silkscreen&family=Monoton&family=Comfortaa:wght@500&family=Press+Start+2P&family=Outfit:wght@500&family=Cormorant+Infant:wght@500&family=Teko:wght@500;600&family=Pacifico&family=Bebas+Neue&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Poiret+One&family=Bebas+Neue&family=Press+Start+2P&family=VT323&family=Orbitron:wght@500;700&family=Jost:wght@300;400;500&family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@400;500&family=Zen+Antique&family=Dela+Gothic+One&family=Playfair+Display:wght@500;600&family=Archivo+Black&family=Outfit:wght@400;500;600&family=Rajdhani:wght@500;600&family=Lora:wght@400;500&family=Anybody:wght@500;600&family=Work+Sans:wght@500;600&family=Bricolage+Grotesque:wght@500;600&family=Cormorant:wght@500;600&family=Righteous&family=Cinzel+Decorative:wght@400;700&family=Silkscreen&family=Space+Grotesk:wght@500;600&family=Teko:wght@500;600&family=Pacifico&family=Noto+Serif+JP:wght@400;500&family=Exo+2:wght@500;600&family=IBM+Plex+Sans:wght@500;600&family=Fraunces:opsz,wght@9..144,500&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #FAFAFA;
@@ -32,7 +32,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 24px;
         }
@@ -69,12 +69,29 @@
             margin-top: 24px;
         }
 
+        /* Sections */
+        .section {
+            padding: 60px 0 20px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
         /* Grid */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
             gap: 32px;
-            padding: 60px 0;
+            padding: 40px 0;
         }
 
         @media (max-width: 400px) {
@@ -136,50 +153,29 @@
             font-weight: 500;
         }
 
-        .card-coming-soon {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            font-size: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 4px 8px;
-            border-radius: 4px;
-            background: rgba(0,0,0,0.5);
-            color: white;
-        }
+        /* ════════════════════════════════════════════════════════════════════════════
+           CREATIVE THEME CARDS
+           ════════════════════════════════════════════════════════════════════════════ */
 
-        /* ========== THEME CARDS ========== */
-
-        /* Art Deco */
+        /* 01. Art Deco - Gatsby */
         .card-art-deco {
-            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            background: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
             border: 2px solid #D4AF37;
-            color: #F5F0E1;
+            color: #FDF8E8;
         }
-
-        .card-art-deco:hover {
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
-        }
-
+        .card-art-deco:hover { box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3); }
         .card-art-deco .card-title {
             font-family: 'Poiret One', cursive;
             font-size: 28px;
             color: #D4AF37;
             letter-spacing: 0.05em;
         }
-
-        .card-art-deco .card-number {
-            color: #D4AF37;
-        }
-
+        .card-art-deco .card-number { color: #D4AF37; }
         .card-art-deco .card-tag {
             background: rgba(212, 175, 55, 0.2);
             color: #D4AF37;
             border: 1px solid #D4AF37;
         }
-
         .card-art-deco::before {
             content: '◆';
             position: absolute;
@@ -190,414 +186,303 @@
             opacity: 0.5;
         }
 
-        /* Brutalist */
+        /* 02. Brutalist - Concrete */
         .card-brutalist {
             background: #FFFFFF;
             border: 4px solid #000000;
             color: #000000;
             border-radius: 0;
         }
-
         .card-brutalist:hover {
             box-shadow: 8px 8px 0 #000000;
             transform: translate(-4px, -4px);
         }
-
         .card-brutalist .card-title {
-            font-family: 'Archivo Black', sans-serif;
+            font-family: 'Bebas Neue', sans-serif;
             text-transform: uppercase;
-            font-size: 22px;
+            font-size: 26px;
+            letter-spacing: 2px;
         }
-
-        .card-brutalist .card-number {
-            font-family: 'Space Mono', monospace;
-        }
-
+        .card-brutalist .card-number { font-family: 'IBM Plex Mono', monospace; }
         .card-brutalist .card-tag {
             background: #000000;
             color: #FFFFFF;
             border-radius: 0;
         }
 
-        /* Vaporwave */
+        /* 03. Vaporwave - ｖａｐｏｒ */
         .card-vaporwave {
-            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+            background: linear-gradient(180deg, #0D0D1A 0%, #1A1A2E 100%);
             border: 2px solid #FF6AD5;
             color: #FFFFFF;
         }
-
         .card-vaporwave:hover {
             box-shadow: 0 0 30px rgba(255, 106, 213, 0.4), 0 0 60px rgba(0, 255, 255, 0.2);
         }
-
         .card-vaporwave .card-title {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Press Start 2P', cursive;
             background: linear-gradient(90deg, #FF6AD5, #00FFFF);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            font-size: 14px;
         }
-
         .card-vaporwave .card-number {
             font-family: 'VT323', monospace;
             color: #00FFFF;
             font-size: 14px;
         }
-
-        .card-vaporwave .card-subtitle {
-            color: #9B59B6;
-        }
-
         .card-vaporwave .card-tag {
             background: transparent;
             border: 1px solid #FF6AD5;
             color: #FF6AD5;
         }
 
-        /* Nordic */
+        /* 04. Nordic - Fjord */
         .card-nordic {
             background: #FAFAFA;
             border: 1px solid #E8E8E8;
             color: #262626;
         }
-
-        .card-nordic:hover {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-        }
-
+        .card-nordic:hover { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); }
         .card-nordic .card-title {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Jost', sans-serif;
             font-weight: 400;
             font-size: 28px;
+            color: #262626;
         }
-
-        .card-nordic .card-number {
-            color: #A3A3A3;
-        }
-
-        .card-nordic .card-subtitle {
-            color: #525252;
-        }
-
+        .card-nordic .card-number { color: #A3A3A3; }
+        .card-nordic .card-subtitle { color: #525252; }
         .card-nordic .card-tag {
             background: #4A5D52;
             color: #FAFAFA;
         }
-
         .card-nordic .card-content {
             border-left: 2px solid #4A5D52;
             margin-left: 20px;
             padding-left: 20px;
         }
 
-        /* Steampunk */
+        /* 05. Steampunk - Clockwork */
         .card-steampunk {
             background: linear-gradient(135deg, #1C1410 0%, #2A1F1A 100%);
-            border: 2px solid #B8860B;
-            color: #EDE4D1;
+            border: 2px solid #B87333;
+            color: #F5E6C8;
         }
-
-        .card-steampunk:hover {
-            box-shadow: 0 20px 40px rgba(184, 134, 11, 0.3);
-        }
-
+        .card-steampunk:hover { box-shadow: 0 20px 40px rgba(184, 115, 51, 0.4); }
         .card-steampunk .card-title {
             font-family: 'Cinzel', serif;
-            color: #DAA520;
+            color: #B87333;
             font-size: 22px;
+            letter-spacing: 1px;
         }
-
-        .card-steampunk .card-number {
-            font-family: 'Cutive Mono', monospace;
-            color: #B8860B;
-        }
-
+        .card-steampunk .card-number { color: #B8860B; }
         .card-steampunk .card-tag {
-            background: linear-gradient(180deg, #B8860B, #8B6914);
+            background: linear-gradient(180deg, #B87333, #8B5A2B);
             color: #1C1410;
         }
-
         .card-steampunk::after {
             content: '⚙';
             position: absolute;
             bottom: 20px;
             right: 20px;
             font-size: 32px;
-            color: #B8860B;
+            color: #B87333;
             opacity: 0.3;
             animation: rotate 20s linear infinite;
         }
-
         @keyframes rotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        /* Japanese Zen */
+        /* 06. Japanese Zen - Ensō */
         .card-zen {
-            background: #F8F6F1;
-            border: 1px solid #D4C5B0;
-            color: #2C2C2C;
+            background: #F7F5F0;
+            border: 1px solid #E5DFD3;
+            color: #1C1C1C;
         }
-
-        .card-zen:hover {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
-        }
-
+        .card-zen:hover { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06); }
         .card-zen .card-title {
-            font-family: 'Noto Serif JP', serif;
+            font-family: 'Zen Antique', serif;
             font-weight: 400;
-            font-size: 26px;
+            font-size: 28px;
             color: #4A4A4A;
         }
-
-        .card-zen .card-number {
-            color: #8B7355;
-        }
-
-        .card-zen .card-subtitle {
-            color: #6B6B6B;
-            font-style: italic;
-        }
-
+        .card-zen .card-number { color: #8B7355; }
+        .card-zen .card-subtitle { color: #6B6B6B; font-style: italic; }
         .card-zen .card-tag {
-            background: #2C2C2C;
-            color: #F8F6F1;
+            background: #1C1C1C;
+            color: #F7F5F0;
         }
-
         .card-zen::before {
-            content: '禅';
+            content: '円';
             position: absolute;
             top: 20px;
             right: 24px;
-            font-family: 'Noto Serif JP', serif;
-            font-size: 24px;
+            font-family: 'Zen Antique', serif;
+            font-size: 28px;
             color: #D4C5B0;
         }
 
-        /* Retro Futurism */
+        /* 07. Retro-Futurism - Cosmodrome */
         .card-retro {
-            background: linear-gradient(135deg, #1a1a2e 0%, #0d0d1a 100%);
-            border: 2px solid #FF6B35;
-            color: #FFFFFF;
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFFEF7 100%);
+            border: 3px solid #FF5F1F;
+            color: #1B2838;
         }
-
-        .card-retro:hover {
-            box-shadow: 0 0 40px rgba(255, 107, 53, 0.4);
-        }
-
+        .card-retro:hover { box-shadow: 0 0 40px rgba(255, 95, 31, 0.3); }
         .card-retro .card-title {
-            font-family: 'Orbitron', sans-serif;
-            color: #FF6B35;
-            text-transform: uppercase;
+            font-family: 'Dela Gothic One', cursive;
+            color: #FF5F1F;
             font-size: 20px;
-            letter-spacing: 0.1em;
+            letter-spacing: 1px;
         }
-
-        .card-retro .card-number {
-            color: #4ECDC4;
-        }
-
-        .card-retro .card-subtitle {
-            color: #87CEEB;
-        }
-
+        .card-retro .card-number { color: #40E0D0; }
+        .card-retro .card-subtitle { color: #2D3748; }
         .card-retro .card-tag {
-            background: transparent;
-            border: 1px solid #4ECDC4;
-            color: #4ECDC4;
+            background: #40E0D0;
+            color: #1B2838;
         }
 
-        /* Dark Academia */
+        /* 08. Dark Academia - Codex */
         .card-academia {
-            background: linear-gradient(135deg, #2C1810 0%, #1A0F0A 100%);
+            background: linear-gradient(135deg, #16140F 0%, #2A251F 100%);
             border: 1px solid #8B7355;
-            color: #E8DCC4;
+            color: #F4EFE6;
         }
-
-        .card-academia:hover {
-            box-shadow: 0 20px 40px rgba(139, 115, 85, 0.3);
-        }
-
+        .card-academia:hover { box-shadow: 0 20px 40px rgba(139, 115, 85, 0.3); }
         .card-academia .card-title {
-            font-family: 'Libre Baskerville', serif;
-            color: #D4B896;
-            font-size: 24px;
-        }
-
-        .card-academia .card-number {
-            color: #8B7355;
+            font-family: 'Playfair Display', serif;
+            color: #C4A35A;
+            font-size: 26px;
             font-style: italic;
         }
-
-        .card-academia .card-subtitle {
-            color: #A89070;
-            font-style: italic;
-        }
-
+        .card-academia .card-number { color: #8B7355; font-style: italic; }
+        .card-academia .card-subtitle { color: #C9B99A; font-style: italic; }
         .card-academia .card-tag {
-            background: #4A3728;
-            color: #D4B896;
+            background: #5D3A1A;
+            color: #F4EFE6;
             border: 1px solid #8B7355;
         }
 
-        /* Memphis */
+        /* 09. Memphis - Squiggle */
         .card-memphis {
-            background: #FFFFFF;
-            border: 3px solid #000000;
-            color: #000000;
+            background: #FFF8E7;
+            border: 4px solid #1A1A2E;
+            color: #1A1A2E;
             position: relative;
             overflow: visible;
         }
-
         .card-memphis::before {
             content: '';
             position: absolute;
-            top: -8px;
-            right: -8px;
+            top: -10px;
+            right: -10px;
             width: 40px;
             height: 40px;
-            background: #FF6B6B;
+            background: #FF2E8B;
             border-radius: 50%;
             z-index: -1;
         }
-
         .card-memphis::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -12px;
             left: 20px;
             width: 0;
             height: 0;
             border-left: 20px solid transparent;
             border-right: 20px solid transparent;
-            border-top: 30px solid #4ECDC4;
+            border-top: 30px solid #00E5A0;
             z-index: -1;
         }
-
         .card-memphis:hover {
-            box-shadow: 8px 8px 0 #FFE66D;
+            box-shadow: 8px 8px 0 #FFDE00;
             transform: translate(-4px, -4px);
         }
-
         .card-memphis .card-title {
-            font-family: 'Fredoka', sans-serif;
-            color: #FF6B6B;
+            font-family: 'Archivo Black', sans-serif;
+            color: #FF2E8B;
             font-size: 26px;
         }
+        .card-memphis .card-tag { background: #0057FF; color: #FFFFFF; border-radius: 0; }
+        .card-memphis .card-tag:nth-child(2) { background: #FFDE00; color: #1A1A2E; }
+        .card-memphis .card-tag:nth-child(3) { background: #00E5A0; color: #1A1A2E; }
 
-        .card-memphis .card-tag {
-            background: #4ECDC4;
-            color: #000000;
-            border-radius: 0;
-        }
-
-        .card-memphis .card-tag:nth-child(2) {
-            background: #FFE66D;
-        }
-
-        .card-memphis .card-tag:nth-child(3) {
-            background: #FF6B6B;
-            color: #FFFFFF;
-        }
-
-        /* Glassmorphism */
+        /* 10. Glassmorphism - Prism */
         .card-glass {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2);
             color: #FFFFFF;
             position: relative;
         }
-
         .card-glass-bg {
             position: absolute;
             inset: -2px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: linear-gradient(135deg, #7B68EE 0%, #00CED1 50%, #FF69B4 100%);
             border-radius: 14px;
             z-index: -1;
         }
-
-        .card-glass:hover {
-            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.4);
-        }
-
+        .card-glass:hover { box-shadow: 0 25px 50px rgba(123, 104, 238, 0.4); }
         .card-glass .card-title {
-            font-family: 'Quicksand', sans-serif;
+            font-family: 'Outfit', sans-serif;
             font-weight: 600;
             font-size: 26px;
         }
-
-        .card-glass .card-number {
-            color: rgba(255,255,255,0.7);
-        }
-
-        .card-glass .card-subtitle {
-            color: rgba(255,255,255,0.8);
-        }
-
+        .card-glass .card-number { color: rgba(255,255,255,0.7); }
+        .card-glass .card-subtitle { color: rgba(255,255,255,0.8); }
         .card-glass .card-tag {
             background: rgba(255,255,255,0.2);
             color: #FFFFFF;
             border: 1px solid rgba(255,255,255,0.3);
         }
 
-        /* Cyberpunk */
+        /* 11. Cyberpunk - Synth */
         .card-cyberpunk {
-            background: linear-gradient(135deg, #0a0a0f 0%, #0d0d15 100%);
-            border: 2px solid #00fff9;
-            color: #e0e0e0;
+            background: linear-gradient(135deg, #050508 0%, #0A0A0F 100%);
+            border: 2px solid #FF0080;
+            color: #EAEAF0;
         }
-
         .card-cyberpunk:hover {
-            box-shadow: 0 0 30px rgba(0, 255, 249, 0.4), 0 0 60px rgba(255, 0, 128, 0.2);
+            box-shadow: 0 0 30px rgba(255, 0, 128, 0.4), 0 0 60px rgba(0, 240, 255, 0.2);
         }
-
         .card-cyberpunk .card-title {
-            font-family: 'Orbitron', sans-serif;
-            color: #00fff9;
-            font-size: 20px;
-            letter-spacing: 0.05em;
+            font-family: 'Rajdhani', sans-serif;
+            color: #00F0FF;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
-
         .card-cyberpunk .card-number {
-            font-family: 'VT323', monospace;
-            color: #ff0080;
+            font-family: 'Fira Code', monospace;
+            color: #FF0080;
         }
-
         .card-cyberpunk .card-tag {
             background: transparent;
-            border: 1px solid #00fff9;
-            color: #00fff9;
+            border: 1px solid #00F0FF;
+            color: #00F0FF;
         }
 
-        /* Cottagecore */
+        /* 12. Cottagecore - Bramble */
         .card-cottagecore {
-            background: #faf6f0;
-            border: 1px solid #c7b299;
-            color: #4a4a3a;
+            background: #FDF8F0;
+            border: 1px solid #D4C9B0;
+            color: #4A3F35;
         }
-
-        .card-cottagecore:hover {
-            box-shadow: 0 15px 40px rgba(167, 143, 110, 0.2);
-        }
-
+        .card-cottagecore:hover { box-shadow: 0 15px 40px rgba(107, 91, 79, 0.15); }
         .card-cottagecore .card-title {
-            font-family: 'Cormorant Infant', serif;
-            color: #6b5d4d;
-            font-size: 28px;
+            font-family: 'Lora', serif;
+            color: #6B5B4F;
+            font-size: 26px;
         }
-
-        .card-cottagecore .card-number {
-            color: #8b9a6b;
-        }
-
+        .card-cottagecore .card-number { color: #8B9F82; }
         .card-cottagecore .card-tag {
-            background: #8b9a6b;
-            color: #faf6f0;
+            background: #8B9F82;
+            color: #FDF8F0;
         }
-
         .card-cottagecore::before {
             content: '🌿';
             position: absolute;
@@ -606,293 +491,232 @@
             font-size: 20px;
         }
 
-        /* Y2K */
+        /* 13. Y2K - Millennium */
         .card-y2k {
-            background: linear-gradient(135deg, #e8f4ff 0%, #ffe8f5 50%, #e8fff0 100%);
-            border: 3px solid #c0c0c0;
-            color: #1a1a1a;
+            background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
+            border: 3px solid #C0C0C0;
+            color: #1A1A2E;
         }
-
         .card-y2k:hover {
-            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
-            border-color: #ff69b4;
+            box-shadow: 0 15px 40px rgba(255, 110, 199, 0.3);
+            border-color: #FF6EC7;
         }
-
         .card-y2k .card-title {
-            font-family: 'Silkscreen', cursive;
-            color: #ff69b4;
-            font-size: 18px;
+            font-family: 'Anybody', sans-serif;
+            color: #FF6EC7;
+            font-size: 22px;
+            font-weight: 700;
         }
-
         .card-y2k .card-number {
-            font-family: 'Silkscreen', cursive;
-            color: #00bfff;
-            font-size: 10px;
+            color: #00BFFF;
+            font-weight: 600;
         }
-
         .card-y2k .card-tag {
-            background: linear-gradient(180deg, #ff8dc7, #ff69b4);
-            color: #ffffff;
+            background: linear-gradient(180deg, #FF6EC7, #9F7FFF);
+            color: #FFFFFF;
             border-radius: 20px;
         }
 
-        /* Bauhaus */
+        /* 14. Bauhaus - Werkstatt */
         .card-bauhaus {
-            background: #fafafa;
-            border: 4px solid #212121;
+            background: #FAFAFA;
+            border: 4px solid #1A1A1A;
             border-radius: 0;
-            color: #212121;
+            color: #1A1A1A;
         }
-
         .card-bauhaus:hover {
-            box-shadow: 8px 8px 0 #e53935;
+            box-shadow: 8px 8px 0 #E53935;
             transform: translate(-4px, -4px);
         }
-
         .card-bauhaus .card-title {
-            font-family: 'Space Mono', monospace;
+            font-family: 'Bebas Neue', sans-serif;
             text-transform: uppercase;
-            font-size: 20px;
-            letter-spacing: 0.1em;
+            font-size: 26px;
+            letter-spacing: 3px;
         }
+        .card-bauhaus .card-tag { border-radius: 0; }
+        .card-bauhaus .card-tag:nth-child(1) { background: #E53935; color: #fff; }
+        .card-bauhaus .card-tag:nth-child(2) { background: #FDD835; color: #1A1A1A; }
+        .card-bauhaus .card-tag:nth-child(3) { background: #1565C0; color: #fff; }
 
-        .card-bauhaus .card-tag {
-            border-radius: 0;
-        }
-
-        .card-bauhaus .card-tag:nth-child(1) { background: #e53935; color: #fff; }
-        .card-bauhaus .card-tag:nth-child(2) { background: #fdd835; color: #212121; }
-        .card-bauhaus .card-tag:nth-child(3) { background: #1e88e5; color: #fff; }
-
-        /* Solarpunk */
+        /* 15. Solarpunk - Thrive */
         .card-solarpunk {
-            background: linear-gradient(135deg, #fff8e7 0%, #a8e6cf 100%);
-            border: 2px solid #4caf50;
-            color: #1b3d1b;
+            background: linear-gradient(135deg, #F0FDF4 0%, #FEFCE8 100%);
+            border: 2px solid #22C55E;
+            color: #166534;
         }
-
-        .card-solarpunk:hover {
-            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.3);
-        }
-
+        .card-solarpunk:hover { box-shadow: 0 15px 40px rgba(34, 197, 94, 0.3); }
         .card-solarpunk .card-title {
-            font-family: 'Outfit', sans-serif;
-            color: #2d5a27;
-            font-size: 24px;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            color: #166534;
+            font-size: 26px;
+            font-weight: 600;
         }
-
-        .card-solarpunk .card-number {
-            color: #ff8f00;
-        }
-
+        .card-solarpunk .card-number { color: #F59E0B; }
         .card-solarpunk .card-tag {
-            background: #4caf50;
+            background: #22C55E;
             color: #fff;
         }
-
         .card-solarpunk::before {
-            content: '☀️';
+            content: '☀';
             position: absolute;
             top: 16px;
             right: 16px;
-            font-size: 20px;
+            font-size: 24px;
+            color: #FCD34D;
         }
 
-        /* Art Nouveau */
+        /* 16. Art Nouveau - Mucha */
         .card-art-nouveau {
-            background: #f5f0e6;
-            border: 2px solid #c5a572;
-            color: #3a3a3a;
+            background: #F8F4E9;
+            border: 2px solid #C9A227;
+            color: #3D2B1F;
         }
-
-        .card-art-nouveau:hover {
-            box-shadow: 0 15px 40px rgba(197, 165, 114, 0.3);
-        }
-
+        .card-art-nouveau:hover { box-shadow: 0 15px 40px rgba(201, 162, 39, 0.3); }
         .card-art-nouveau .card-title {
-            font-family: 'Cinzel', serif;
-            color: #2f5d62;
-            font-size: 26px;
-            letter-spacing: 0.1em;
+            font-family: 'Cormorant', serif;
+            color: #2D5A4A;
+            font-size: 28px;
+            font-weight: 600;
         }
-
-        .card-art-nouveau .card-number {
-            color: #c5a572;
-        }
-
+        .card-art-nouveau .card-number { color: #C9A227; }
         .card-art-nouveau .card-tag {
-            background: #2f5d62;
-            color: #fffff0;
+            background: #2D5A4A;
+            color: #F8F4E9;
         }
-
         .card-art-nouveau::before {
             content: '❧';
             position: absolute;
             top: 16px;
             right: 20px;
             font-size: 24px;
-            color: #c5a572;
+            color: #C9A227;
         }
 
-        /* Psychedelic */
+        /* 17. Psychedelic - Kaleidoscope */
         .card-psychedelic {
-            background: linear-gradient(135deg, #0d001a 0%, #1a0033 100%);
-            border: 2px solid #ff1493;
+            background: linear-gradient(135deg, #0A0010 0%, #2D0040 100%);
+            border: 2px solid #FF0090;
             color: #ffffff;
         }
-
         .card-psychedelic:hover {
-            box-shadow: 0 0 40px rgba(255, 20, 147, 0.5), 0 0 80px rgba(57, 255, 20, 0.3);
+            box-shadow: 0 0 40px rgba(255, 0, 144, 0.5), 0 0 80px rgba(204, 255, 0, 0.3);
         }
-
         .card-psychedelic .card-title {
-            font-family: 'Monoton', cursive;
-            background: linear-gradient(90deg, #ff1493, #00ffff, #39ff14);
+            font-family: 'Righteous', cursive;
+            background: linear-gradient(90deg, #FF0090, #00FFFF, #CCFF00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-size: 22px;
+            font-size: 24px;
         }
-
-        .card-psychedelic .card-number {
-            font-family: 'Comfortaa', cursive;
-            color: #00ffff;
-        }
-
+        .card-psychedelic .card-number { color: #00FFFF; }
         .card-psychedelic .card-tag {
             background: transparent;
-            border: 1px solid #39ff14;
-            color: #39ff14;
+            border: 1px solid #CCFF00;
+            color: #CCFF00;
         }
 
-        /* Baroque */
+        /* 18. Baroque - Versailles */
         .card-baroque {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2c1810 100%);
-            border: 2px solid #d4af37;
-            color: #f5f0e1;
+            background: linear-gradient(135deg, #0D0D0D 0%, #1A1A40 100%);
+            border: 2px solid #D4AF37;
+            color: #FFFFF0;
         }
-
-        .card-baroque:hover {
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
-        }
-
+        .card-baroque:hover { box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4); }
         .card-baroque .card-title {
-            font-family: 'Playfair Display', serif;
-            color: #d4af37;
-            font-size: 28px;
-            font-style: italic;
+            font-family: 'Cinzel Decorative', serif;
+            color: #D4AF37;
+            font-size: 22px;
         }
-
-        .card-baroque .card-number {
-            color: #722f37;
-            font-style: italic;
-        }
-
+        .card-baroque .card-number { color: #722F37; font-style: italic; }
         .card-baroque .card-tag {
-            background: linear-gradient(180deg, #d4af37, #b8860b);
-            color: #1a1a1a;
+            background: linear-gradient(180deg, #D4AF37, #B45309);
+            color: #0D0D0D;
         }
-
         .card-baroque::before {
-            content: '👑';
+            content: '♛';
             position: absolute;
             top: 16px;
-            right: 16px;
-            font-size: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #D4AF37;
+            opacity: 0.7;
         }
 
-        /* Pixel Art */
+        /* 19. Pixel Art - Arcade */
         .card-pixel {
-            background: #1d1d1d;
-            border: 4px solid #c2c3c7;
+            background: #1D2B53;
+            border: 4px solid #C2C3C7;
             border-radius: 0;
-            color: #fff1e8;
+            color: #FFF1E8;
             image-rendering: pixelated;
         }
-
         .card-pixel:hover {
-            box-shadow: 4px 4px 0 #ff004d, 8px 8px 0 #00e436;
+            box-shadow: 4px 4px 0 #FF004D, 8px 8px 0 #00E436;
             transform: translate(-4px, -4px);
         }
-
         .card-pixel .card-title {
             font-family: 'Press Start 2P', cursive;
-            color: #ffec27;
-            font-size: 14px;
+            color: #FFEC27;
+            font-size: 12px;
         }
-
         .card-pixel .card-number {
-            font-family: 'VT323', monospace;
-            color: #00e436;
-            font-size: 14px;
+            font-family: 'Silkscreen', sans-serif;
+            color: #00E436;
+            font-size: 11px;
         }
-
         .card-pixel .card-tag {
-            background: #ff004d;
-            color: #fff1e8;
+            background: #FF004D;
+            color: #FFF1E8;
             border-radius: 0;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 8px;
+            font-family: 'Silkscreen', sans-serif;
+            font-size: 9px;
         }
 
-        /* Cosmic */
+        /* 20. Cosmic - Astral */
         .card-cosmic {
-            background: linear-gradient(135deg, #0a0a0f 0%, #0d1b2a 100%);
-            border: 1px solid rgba(157, 78, 221, 0.5);
-            color: #f8f9fa;
+            background: linear-gradient(135deg, #050510 0%, #0B0B1A 100%);
+            border: 1px solid rgba(168, 85, 247, 0.5);
+            color: #F8FAFC;
         }
-
         .card-cosmic:hover {
-            box-shadow: 0 0 40px rgba(157, 78, 221, 0.4), 0 0 80px rgba(58, 134, 255, 0.2);
-            border-color: #9d4edd;
+            box-shadow: 0 0 40px rgba(168, 85, 247, 0.4), 0 0 80px rgba(59, 130, 246, 0.2);
+            border-color: #A855F7;
         }
-
         .card-cosmic .card-title {
-            font-family: 'Orbitron', sans-serif;
-            color: #00f5d4;
-            font-size: 22px;
-            letter-spacing: 0.15em;
+            font-family: 'Space Grotesk', sans-serif;
+            color: #22D3EE;
+            font-size: 24px;
+            letter-spacing: 2px;
+            font-weight: 600;
         }
-
-        .card-cosmic .card-number {
-            color: #9d4edd;
-        }
-
+        .card-cosmic .card-number { color: #A855F7; }
         .card-cosmic .card-tag {
-            background: rgba(157, 78, 221, 0.2);
-            color: #9d4edd;
-            border: 1px solid #9d4edd;
+            background: rgba(168, 85, 247, 0.2);
+            color: #A855F7;
+            border: 1px solid #A855F7;
         }
 
-        /* Dieselpunk */
+        /* 21. Dieselpunk - Ironclad */
         .card-dieselpunk {
-            background: linear-gradient(135deg, #1C1410 0%, #2A1F1A 100%);
+            background: linear-gradient(135deg, #1A1A1A 0%, #2C3E50 100%);
             border: 2px solid #B7410E;
-            color: #E8DCC4;
+            color: #F5F5DC;
         }
-
-        .card-dieselpunk:hover {
-            box-shadow: 0 20px 40px rgba(183, 65, 14, 0.4);
-        }
-
+        .card-dieselpunk:hover { box-shadow: 0 20px 40px rgba(183, 65, 14, 0.4); }
         .card-dieselpunk .card-title {
             font-family: 'Teko', sans-serif;
             color: #B5A642;
-            font-size: 28px;
-            letter-spacing: 0.1em;
+            font-size: 30px;
+            letter-spacing: 3px;
             text-transform: uppercase;
         }
-
-        .card-dieselpunk .card-number {
-            font-family: 'Space Mono', monospace;
-            color: #B87333;
-        }
-
+        .card-dieselpunk .card-number { color: #B87333; }
         .card-dieselpunk .card-tag {
             background: #B7410E;
-            color: #E8DCC4;
+            color: #F5F5DC;
         }
-
         .card-dieselpunk::after {
             content: '⚡';
             position: absolute;
@@ -902,109 +726,78 @@
             opacity: 0.5;
         }
 
-        /* Tropical */
+        /* 22. Tropical - Paradise */
         .card-tropical {
-            background: linear-gradient(135deg, #FFF5E6 0%, #E8F8F5 100%);
+            background: linear-gradient(135deg, #F5F0E1 0%, #E8F8F5 100%);
             border: 2px solid #4D96FF;
-            color: #1A1A1A;
+            color: #2C3333;
         }
-
-        .card-tropical:hover {
-            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.3);
-        }
-
+        .card-tropical:hover { box-shadow: 0 20px 40px rgba(255, 107, 107, 0.3); }
         .card-tropical .card-title {
             font-family: 'Pacifico', cursive;
             color: #FF6B6B;
-            font-size: 28px;
+            font-size: 30px;
         }
-
-        .card-tropical .card-number {
-            color: #4D96FF;
-        }
-
+        .card-tropical .card-number { color: #4D96FF; }
         .card-tropical .card-tag {
             background: #2D5A27;
             color: #FFFFFF;
         }
-
         .card-tropical::before {
             content: '🌴';
             position: absolute;
             top: 16px;
             right: 16px;
-            font-size: 20px;
+            font-size: 24px;
         }
 
-        /* Gothic */
+        /* 23. Gothic - Cathedral */
         .card-gothic {
             background: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
             border: 2px solid #8B0000;
             color: #E8E4D9;
         }
-
-        .card-gothic:hover {
-            box-shadow: 0 20px 40px rgba(139, 0, 0, 0.5);
-        }
-
+        .card-gothic:hover { box-shadow: 0 20px 40px rgba(139, 0, 0, 0.5); }
         .card-gothic .card-title {
             font-family: 'Cinzel', serif;
             color: #D4AF37;
             font-size: 24px;
-            letter-spacing: 0.05em;
+            letter-spacing: 2px;
         }
-
-        .card-gothic .card-number {
-            color: #8B0000;
-        }
-
+        .card-gothic .card-number { color: #8B0000; }
         .card-gothic .card-tag {
             background: #8B0000;
             color: #E8E4D9;
         }
-
         .card-gothic::before {
-            content: '⚰';
+            content: '✝';
             position: absolute;
             top: 16px;
             right: 20px;
-            font-size: 20px;
+            font-size: 24px;
             color: #D4AF37;
             opacity: 0.6;
         }
 
-        /* Wabi-Sabi */
+        /* 24. Wabi-Sabi - Kintsugi */
         .card-wabi-sabi {
             background: #F5F2E9;
             border: 1px solid #C9A227;
             color: #1C1C1C;
         }
-
-        .card-wabi-sabi:hover {
-            box-shadow: 0 20px 40px rgba(201, 162, 39, 0.2);
-        }
-
+        .card-wabi-sabi:hover { box-shadow: 0 20px 40px rgba(201, 162, 39, 0.2); }
         .card-wabi-sabi .card-title {
-            font-family: 'Zen Kaku Gothic New', sans-serif;
+            font-family: 'Noto Serif JP', serif;
             color: #5C5C5C;
             font-size: 26px;
             font-weight: 400;
         }
-
-        .card-wabi-sabi .card-number {
-            color: #C9A227;
-        }
-
-        .card-wabi-sabi .card-subtitle {
-            color: #6B6B6B;
-            font-style: italic;
-        }
-
+        .card-wabi-sabi .card-number { color: #C9A227; }
+        .card-wabi-sabi .card-subtitle { color: #6B6B6B; font-style: italic; }
         .card-wabi-sabi .card-tag {
             background: #1C1C1C;
             color: #F5F2E9;
         }
-
         .card-wabi-sabi::before {
             content: '金';
             position: absolute;
@@ -1016,17 +809,15 @@
             opacity: 0.6;
         }
 
-        /* Neon Noir */
+        /* 25. Neon Noir - Shadowrun */
         .card-neon-noir {
             background: linear-gradient(135deg, #0A0A0F 0%, #1A1A2E 100%);
             border: 2px solid #FF2E97;
             color: #8888AA;
         }
-
         .card-neon-noir:hover {
             box-shadow: 0 0 30px rgba(255, 46, 151, 0.5), 0 0 60px rgba(0, 212, 255, 0.3);
         }
-
         .card-neon-noir .card-title {
             font-family: 'Bebas Neue', sans-serif;
             color: #FF2E97;
@@ -1034,29 +825,19 @@
             letter-spacing: 3px;
             text-shadow: 0 0 10px rgba(255, 46, 151, 0.5);
         }
-
-        .card-neon-noir .card-number {
-            font-family: 'Space Mono', monospace;
-            color: #00D4FF;
-        }
-
-        .card-neon-noir .card-subtitle {
-            color: #6688AA;
-        }
-
+        .card-neon-noir .card-number { color: #00D4FF; }
+        .card-neon-noir .card-subtitle { color: #6688AA; }
         .card-neon-noir .card-tag {
             background: transparent;
             border: 1px solid #00D4FF;
             color: #00D4FF;
         }
-
         @keyframes neonFlicker {
             0%, 100% { opacity: 1; }
             92% { opacity: 1; }
             93% { opacity: 0.8; }
             94% { opacity: 1; }
         }
-
         .card-neon-noir::before {
             content: '◉';
             position: absolute;
@@ -1066,6 +847,157 @@
             color: #FF2E97;
             text-shadow: 0 0 10px #FF2E97;
             animation: neonFlicker 5s infinite;
+        }
+
+        /* ════════════════════════════════════════════════════════════════════════════
+           PROFESSIONAL THEME CARDS
+           ════════════════════════════════════════════════════════════════════════════ */
+
+        .card-pro {
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+        .card-pro:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: #D4D4D4;
+        }
+        .card-pro .card-title {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-weight: 600;
+            font-size: 22px;
+        }
+        .card-pro .card-subtitle { color: var(--text-muted); }
+        .card-pro .card-tag {
+            background: var(--bg-alt);
+            color: var(--text-muted);
+        }
+        .card-pro .industry-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        /* Professional Card Variants */
+        .card-pro-corporate .card-title { color: #2563EB; }
+        .card-pro-corporate .industry-badge { background: #DBEAFE; color: #1E40AF; }
+
+        .card-pro-legal .card-title { color: #102A43; }
+        .card-pro-legal .industry-badge { background: #FEF3C7; color: #92400E; }
+
+        .card-pro-healthcare .card-title { color: #0D9488; }
+        .card-pro-healthcare .industry-badge { background: #CCFBF1; color: #115E59; }
+
+        .card-pro-finance .card-title { color: #4338CA; }
+        .card-pro-finance .industry-badge { background: #E0E7FF; color: #3730A3; }
+
+        .card-pro-saas .card-title { color: #0284C7; }
+        .card-pro-saas .industry-badge { background: #E0F2FE; color: #075985; }
+
+        .card-pro-consulting .card-title { color: #7C3AED; }
+        .card-pro-consulting .industry-badge { background: #EDE9FE; color: #5B21B6; }
+
+        .card-pro-realestate .card-title { color: #059669; }
+        .card-pro-realestate .industry-badge { background: #D1FAE5; color: #065F46; }
+
+        .card-pro-insurance .card-title { color: #2563EB; }
+        .card-pro-insurance .industry-badge { background: #DBEAFE; color: #1E40AF; }
+
+        .card-pro-government .card-title { color: #334155; }
+        .card-pro-government .industry-badge { background: #F1F5F9; color: #334155; }
+
+        .card-pro-education .card-title { color: #9A3412; }
+        .card-pro-education .industry-badge { background: #FFEDD5; color: #9A3412; }
+
+        .card-pro-nonprofit .card-title { color: #0D9488; }
+        .card-pro-nonprofit .industry-badge { background: #CCFBF1; color: #115E59; }
+
+        .card-pro-accounting .card-title { color: #0D9488; }
+        .card-pro-accounting .industry-badge { background: #CCFBF1; color: #115E59; }
+
+        .card-pro-architecture .card-title { color: #B87333; }
+        .card-pro-architecture .industry-badge { background: #FEF3C7; color: #92400E; }
+
+        .card-pro-manufacturing .card-title { color: #EA580C; }
+        .card-pro-manufacturing .industry-badge { background: #FFEDD5; color: #9A3412; }
+
+        .card-pro-ecommerce .card-title { color: #18181B; }
+        .card-pro-ecommerce .industry-badge { background: #E4E4E7; color: #27272A; }
+
+        .card-pro-hr .card-title { color: #7C3AED; }
+        .card-pro-hr .industry-badge { background: #F3E8FF; color: #6B21A8; }
+
+        .card-pro-logistics .card-title { color: #0891B2; }
+        .card-pro-logistics .industry-badge { background: #CFFAFE; color: #155E75; }
+
+        .card-pro-media .card-title { color: #DC2626; }
+        .card-pro-media .industry-badge { background: #FEE2E2; color: #991B1B; }
+
+        .card-pro-pharma .card-title { color: #0891B2; }
+        .card-pro-pharma .industry-badge { background: #CFFAFE; color: #155E75; }
+
+        .card-pro-engineering .card-title { color: #18181B; }
+        .card-pro-engineering .industry-badge { background: #E4E4E7; color: #27272A; }
+
+        /* ════════════════════════════════════════════════════════════════════════════
+           DASHBOARD THEME CARDS
+           ════════════════════════════════════════════════════════════════════════════ */
+
+        .card-dashboard {
+            background: linear-gradient(135deg, #0A0E1A 0%, #111827 100%);
+            border: 1px solid #2D3B4F;
+            color: #F0F4F8;
+        }
+        .card-dashboard:hover {
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+            border-color: #00F0FF;
+        }
+        .card-dashboard .card-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00F0FF;
+            font-size: 20px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+        .card-dashboard .card-number {
+            font-family: 'JetBrains Mono', monospace;
+            color: #00FF88;
+        }
+        .card-dashboard .card-subtitle { color: #8899AA; }
+        .card-dashboard .card-tag {
+            background: rgba(0, 240, 255, 0.15);
+            color: #00F0FF;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+        }
+        .card-dashboard .dashboard-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: rgba(0, 255, 136, 0.15);
+            color: #00FF88;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+        .card-dashboard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00F0FF, #00FF88);
         }
 
         /* Footer */
@@ -1114,108 +1046,6 @@
             height: 18px;
             fill: currentColor;
         }
-
-        /* Sections */
-        .section {
-            padding: 60px 0 20px;
-        }
-
-        .section-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.02em;
-        }
-
-        .section-subtitle {
-            color: var(--text-muted);
-            font-size: 16px;
-        }
-
-        /* Professional Cards Base */
-        .card-pro {
-            background: #FFFFFF;
-            border: 1px solid var(--border);
-            color: var(--text);
-        }
-
-        .card-pro:hover {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            border-color: #D4D4D4;
-        }
-
-        .card-pro .card-title {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 700;
-            font-size: 22px;
-        }
-
-        .card-pro .card-subtitle {
-            color: var(--text-muted);
-        }
-
-        .card-pro .card-tag {
-            background: var(--bg-alt);
-            color: var(--text-muted);
-        }
-
-        .card-pro .industry-badge {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            font-size: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 4px 10px;
-            border-radius: 4px;
-        }
-
-        /* Pro Card Color Variants */
-        .card-pro-blue .card-title { color: #2563EB; }
-        .card-pro-blue .industry-badge { background: #DBEAFE; color: #1E40AF; }
-
-        .card-pro-navy .card-title { color: #1E3A5F; }
-        .card-pro-navy .industry-badge { background: #FEF3C7; color: #92400E; }
-
-        .card-pro-teal .card-title { color: #0D9488; }
-        .card-pro-teal .industry-badge { background: #CCFBF1; color: #115E59; }
-
-        .card-pro-indigo .card-title { color: #4338CA; }
-        .card-pro-indigo .industry-badge { background: #E0E7FF; color: #3730A3; }
-
-        .card-pro-sky .card-title { color: #0284C7; }
-        .card-pro-sky .industry-badge { background: #E0F2FE; color: #075985; }
-
-        .card-pro-violet .card-title { color: #7C3AED; }
-        .card-pro-violet .industry-badge { background: #EDE9FE; color: #5B21B6; }
-
-        .card-pro-emerald .card-title { color: #059669; }
-        .card-pro-emerald .industry-badge { background: #D1FAE5; color: #065F46; }
-
-        .card-pro-slate .card-title { color: #334155; }
-        .card-pro-slate .industry-badge { background: #F1F5F9; color: #334155; }
-
-        .card-pro-sienna .card-title { color: #9A3412; }
-        .card-pro-sienna .industry-badge { background: #FFEDD5; color: #9A3412; }
-
-        .card-pro-copper .card-title { color: #B87333; }
-        .card-pro-copper .industry-badge { background: #FEF3C7; color: #92400E; }
-
-        .card-pro-orange .card-title { color: #EA580C; }
-        .card-pro-orange .industry-badge { background: #FFEDD5; color: #9A3412; }
-
-        .card-pro-plum .card-title { color: #7C3AED; }
-        .card-pro-plum .industry-badge { background: #F3E8FF; color: #6B21A8; }
-
-        .card-pro-cyan .card-title { color: #0891B2; }
-        .card-pro-cyan .industry-badge { background: #CFFAFE; color: #155E75; }
-
-        .card-pro-red .card-title { color: #DC2626; }
-        .card-pro-red .industry-badge { background: #FEE2E2; color: #991B1B; }
-
-        .card-pro-dark .card-title { color: #18181B; }
-        .card-pro-dark .industry-badge { background: #E4E4E7; color: #27272A; }
     </style>
 </head>
 <body>
@@ -1223,20 +1053,23 @@
         <header>
             <h1>HTML Style Guides</h1>
             <p>A collection of themed, single-file design systems. Each style guide showcases a unique aesthetic with colors, typography, components, and more.</p>
-            <span class="badge-count">45 Themes</span>
+            <span class="badge-count">46 Themes</span>
         </header>
 
+        <!-- ═══════════════════════════════════════════════════════════════════════
+             CREATIVE THEMES SECTION
+             ═══════════════════════════════════════════════════════════════════════ -->
         <section class="section">
             <h2 class="section-title">Creative Themes</h2>
             <p class="section-subtitle">Artistic and expressive design systems with unique aesthetics</p>
         </section>
 
         <main class="grid">
-            <!-- Art Deco -->
+            <!-- 01. Art Deco -->
             <a href="styles/art-deco.html" class="card card-art-deco">
                 <div class="card-content">
                     <p class="card-number">01 — Style Guide</p>
-                    <h2 class="card-title">The Gilded Standard</h2>
+                    <h2 class="card-title">Gatsby</h2>
                     <p class="card-subtitle">Art Deco elegance with gold, geometric patterns, and 1920s glamour</p>
                     <div class="card-tags">
                         <span class="card-tag">Gold</span>
@@ -1246,11 +1079,11 @@
                 </div>
             </a>
 
-            <!-- Brutalist -->
+            <!-- 02. Brutalist -->
             <a href="styles/brutalist.html" class="card card-brutalist">
                 <div class="card-content">
                     <p class="card-number">02 — Style Guide</p>
-                    <h2 class="card-title">CONCRETE_SYS</h2>
+                    <h2 class="card-title">CONCRETE</h2>
                     <p class="card-subtitle">Raw, unpolished design with bold typography and stark contrasts</p>
                     <div class="card-tags">
                         <span class="card-tag">RAW</span>
@@ -1260,11 +1093,11 @@
                 </div>
             </a>
 
-            <!-- Vaporwave -->
+            <!-- 03. Vaporwave -->
             <a href="styles/vaporwave.html" class="card card-vaporwave">
                 <div class="card-content">
                     <p class="card-number">03 — デジタル</p>
-                    <h2 class="card-title">ａｅｓｔｈｅｔｉｃ．ｓｙｓ</h2>
+                    <h2 class="card-title">ｖａｐｏｒ</h2>
                     <p class="card-subtitle">Digital dreams with neon gradients and retro nostalgia</p>
                     <div class="card-tags">
                         <span class="card-tag">Neon</span>
@@ -1274,11 +1107,11 @@
                 </div>
             </a>
 
-            <!-- Nordic -->
+            <!-- 04. Nordic -->
             <a href="styles/nordic-minimalist.html" class="card card-nordic">
                 <div class="card-content">
                     <p class="card-number">04 — Style Guide</p>
-                    <h2 class="card-title">Stillhet</h2>
+                    <h2 class="card-title">Fjord</h2>
                     <p class="card-subtitle">Scandinavian minimalism with muted tones and quiet elegance</p>
                     <div class="card-tags">
                         <span class="card-tag">Minimal</span>
@@ -1288,11 +1121,11 @@
                 </div>
             </a>
 
-            <!-- Steampunk -->
+            <!-- 05. Steampunk -->
             <a href="styles/steampunk.html" class="card card-steampunk">
                 <div class="card-content">
                     <p class="card-number">05 — Est. 1889</p>
-                    <h2 class="card-title">Cogsworth Industries</h2>
+                    <h2 class="card-title">Clockwork</h2>
                     <p class="card-subtitle">Victorian engineering with brass, gears, and mechanical precision</p>
                     <div class="card-tags">
                         <span class="card-tag">Brass</span>
@@ -1302,11 +1135,11 @@
                 </div>
             </a>
 
-            <!-- Japanese Zen -->
+            <!-- 06. Japanese Zen -->
             <a href="styles/japanese-zen.html" class="card card-zen">
                 <div class="card-content">
                     <p class="card-number">06 — 静けさ</p>
-                    <h2 class="card-title">Serenity</h2>
+                    <h2 class="card-title">Ensō</h2>
                     <p class="card-subtitle">Wabi-sabi aesthetics with natural balance and tranquility</p>
                     <div class="card-tags">
                         <span class="card-tag">Zen</span>
@@ -1316,11 +1149,11 @@
                 </div>
             </a>
 
-            <!-- Retro Futurism -->
+            <!-- 07. Retro Futurism -->
             <a href="styles/retro-futurism.html" class="card card-retro">
                 <div class="card-content">
                     <p class="card-number">07 — YEAR 2000</p>
-                    <h2 class="card-title">TOMORROW TODAY</h2>
+                    <h2 class="card-title">Cosmodrome</h2>
                     <p class="card-subtitle">1960s space age optimism meets atomic-era design</p>
                     <div class="card-tags">
                         <span class="card-tag">Space Age</span>
@@ -1330,11 +1163,11 @@
                 </div>
             </a>
 
-            <!-- Dark Academia -->
+            <!-- 08. Dark Academia -->
             <a href="styles/dark-academia.html" class="card card-academia">
                 <div class="card-content">
                     <p class="card-number">08 — Scholarly</p>
-                    <h2 class="card-title">The Athenaeum</h2>
+                    <h2 class="card-title">Codex</h2>
                     <p class="card-subtitle">Classical scholarship with rich browns and literary elegance</p>
                     <div class="card-tags">
                         <span class="card-tag">Classical</span>
@@ -1344,11 +1177,11 @@
                 </div>
             </a>
 
-            <!-- Memphis -->
+            <!-- 09. Memphis -->
             <a href="styles/memphis-design.html" class="card card-memphis">
                 <div class="card-content">
                     <p class="card-number">09 — Style Guide</p>
-                    <h2 class="card-title">Radical!</h2>
+                    <h2 class="card-title">Squiggle</h2>
                     <p class="card-subtitle">Bold geometric shapes, vibrant colors, and playful patterns</p>
                     <div class="card-tags">
                         <span class="card-tag">Bold</span>
@@ -1358,12 +1191,12 @@
                 </div>
             </a>
 
-            <!-- Glassmorphism -->
+            <!-- 10. Glassmorphism -->
             <a href="styles/glassmorphism.html" class="card card-glass">
                 <div class="card-glass-bg"></div>
                 <div class="card-content">
                     <p class="card-number">10 — Style Guide</p>
-                    <h2 class="card-title">Frost UI</h2>
+                    <h2 class="card-title">Prism</h2>
                     <p class="card-subtitle">Modern frosted glass effects with blur and transparency</p>
                     <div class="card-tags">
                         <span class="card-tag">Glass</span>
@@ -1373,11 +1206,11 @@
                 </div>
             </a>
 
-            <!-- Cyberpunk -->
+            <!-- 11. Cyberpunk -->
             <a href="styles/cyberpunk.html" class="card card-cyberpunk">
                 <div class="card-content">
                     <p class="card-number">11 — SYS://INIT</p>
-                    <h2 class="card-title">NEON//GRID</h2>
+                    <h2 class="card-title">SYNTH</h2>
                     <p class="card-subtitle">High-tech low-life with neon colors and terminal aesthetics</p>
                     <div class="card-tags">
                         <span class="card-tag">Neon</span>
@@ -1387,11 +1220,11 @@
                 </div>
             </a>
 
-            <!-- Cottagecore -->
+            <!-- 12. Cottagecore -->
             <a href="styles/cottagecore.html" class="card card-cottagecore">
                 <div class="card-content">
                     <p class="card-number">12 — Style Guide</p>
-                    <h2 class="card-title">Meadowbrook</h2>
+                    <h2 class="card-title">Bramble</h2>
                     <p class="card-subtitle">Soft pastoral charm with natural textures and handcrafted warmth</p>
                     <div class="card-tags">
                         <span class="card-tag">Natural</span>
@@ -1401,11 +1234,11 @@
                 </div>
             </a>
 
-            <!-- Y2K -->
+            <!-- 13. Y2K -->
             <a href="styles/y2k.html" class="card card-y2k">
                 <div class="card-content">
                     <p class="card-number">13 — YEAR 2000</p>
-                    <h2 class="card-title">FUTURE//NOW</h2>
+                    <h2 class="card-title">Millennium</h2>
                     <p class="card-subtitle">Bubbly chrome aesthetics with hot pink and electric blue</p>
                     <div class="card-tags">
                         <span class="card-tag">Chrome</span>
@@ -1415,11 +1248,11 @@
                 </div>
             </a>
 
-            <!-- Bauhaus -->
+            <!-- 14. Bauhaus -->
             <a href="styles/bauhaus.html" class="card card-bauhaus">
                 <div class="card-content">
                     <p class="card-number">14 — STYLE GUIDE</p>
-                    <h2 class="card-title">BAUFORM</h2>
+                    <h2 class="card-title">WERKSTATT</h2>
                     <p class="card-subtitle">Primary colors, geometric shapes, and functional modernism</p>
                     <div class="card-tags">
                         <span class="card-tag">Red</span>
@@ -1429,11 +1262,11 @@
                 </div>
             </a>
 
-            <!-- Solarpunk -->
+            <!-- 15. Solarpunk -->
             <a href="styles/solarpunk.html" class="card card-solarpunk">
                 <div class="card-content">
                     <p class="card-number">15 — Style Guide</p>
-                    <h2 class="card-title">Verdant</h2>
+                    <h2 class="card-title">Thrive</h2>
                     <p class="card-subtitle">Eco-futurist optimism with solar gold and living greens</p>
                     <div class="card-tags">
                         <span class="card-tag">Eco</span>
@@ -1443,11 +1276,11 @@
                 </div>
             </a>
 
-            <!-- Art Nouveau -->
+            <!-- 16. Art Nouveau -->
             <a href="styles/art-nouveau.html" class="card card-art-nouveau">
                 <div class="card-content">
                     <p class="card-number">16 — Style Guide</p>
-                    <h2 class="card-title">Floréal</h2>
+                    <h2 class="card-title">Mucha</h2>
                     <p class="card-subtitle">Organic curves and botanical motifs inspired by nature</p>
                     <div class="card-tags">
                         <span class="card-tag">Organic</span>
@@ -1457,11 +1290,11 @@
                 </div>
             </a>
 
-            <!-- Psychedelic -->
+            <!-- 17. Psychedelic -->
             <a href="styles/psychedelic.html" class="card card-psychedelic">
                 <div class="card-content">
                     <p class="card-number">17 — Style Guide</p>
-                    <h2 class="card-title">MINDSCAPE</h2>
+                    <h2 class="card-title">Kaleidoscope</h2>
                     <p class="card-subtitle">Trippy vibrant colors with flowing forms and cosmic energy</p>
                     <div class="card-tags">
                         <span class="card-tag">Trippy</span>
@@ -1471,11 +1304,11 @@
                 </div>
             </a>
 
-            <!-- Baroque -->
+            <!-- 18. Baroque -->
             <a href="styles/baroque.html" class="card card-baroque">
                 <div class="card-content">
                     <p class="card-number">18 — Style Guide</p>
-                    <h2 class="card-title">Opulence</h2>
+                    <h2 class="card-title">Versailles</h2>
                     <p class="card-subtitle">Dramatic luxury with gold, burgundy, and ornate grandeur</p>
                     <div class="card-tags">
                         <span class="card-tag">Luxury</span>
@@ -1485,11 +1318,11 @@
                 </div>
             </a>
 
-            <!-- Pixel Art -->
+            <!-- 19. Pixel Art -->
             <a href="styles/pixel-art.html" class="card card-pixel">
                 <div class="card-content">
                     <p class="card-number">19 — INSERT COIN</p>
-                    <h2 class="card-title">8-BIT QUEST</h2>
+                    <h2 class="card-title">ARCADE</h2>
                     <p class="card-subtitle">Retro gaming nostalgia with limited palette and crisp pixels</p>
                     <div class="card-tags">
                         <span class="card-tag">Retro</span>
@@ -1499,11 +1332,11 @@
                 </div>
             </a>
 
-            <!-- Cosmic -->
+            <!-- 20. Cosmic -->
             <a href="styles/cosmic.html" class="card card-cosmic">
                 <div class="card-content">
                     <p class="card-number">20 — Deep Space</p>
-                    <h2 class="card-title">NEBULA</h2>
+                    <h2 class="card-title">ASTRAL</h2>
                     <p class="card-subtitle">Celestial depths with nebula purples and stellar blues</p>
                     <div class="card-tags">
                         <span class="card-tag">Space</span>
@@ -1513,7 +1346,7 @@
                 </div>
             </a>
 
-            <!-- Dieselpunk -->
+            <!-- 21. Dieselpunk -->
             <a href="styles/dieselpunk.html" class="card card-dieselpunk">
                 <div class="card-content">
                     <p class="card-number">21 — Industrial Age</p>
@@ -1527,7 +1360,7 @@
                 </div>
             </a>
 
-            <!-- Tropical -->
+            <!-- 22. Tropical -->
             <a href="styles/tropical.html" class="card card-tropical">
                 <div class="card-content">
                     <p class="card-number">22 — Island Vibes</p>
@@ -1541,7 +1374,7 @@
                 </div>
             </a>
 
-            <!-- Gothic -->
+            <!-- 23. Gothic -->
             <a href="styles/gothic.html" class="card card-gothic">
                 <div class="card-content">
                     <p class="card-number">23 — Dark Romantic</p>
@@ -1555,7 +1388,7 @@
                 </div>
             </a>
 
-            <!-- Wabi-Sabi -->
+            <!-- 24. Wabi-Sabi -->
             <a href="styles/wabi-sabi.html" class="card card-wabi-sabi">
                 <div class="card-content">
                     <p class="card-number">24 — 侘寂</p>
@@ -1569,7 +1402,7 @@
                 </div>
             </a>
 
-            <!-- Neon Noir -->
+            <!-- 25. Neon Noir -->
             <a href="styles/neon-noir.html" class="card card-neon-noir">
                 <div class="card-content">
                     <p class="card-number">25 — Night City</p>
@@ -1584,14 +1417,16 @@
             </a>
         </main>
 
+        <!-- ═══════════════════════════════════════════════════════════════════════
+             PROFESSIONAL THEMES SECTION
+             ═══════════════════════════════════════════════════════════════════════ -->
         <section class="section">
             <h2 class="section-title">Professional Style Guides</h2>
             <p class="section-subtitle">Enterprise-grade design systems for specific industries and use cases</p>
         </section>
 
         <div class="grid">
-            <!-- Corporate -->
-            <a href="styles/pro-corporate.html" class="card card-pro card-pro-blue">
+            <a href="styles/pro-corporate.html" class="card card-pro card-pro-corporate">
                 <span class="industry-badge">Corporate</span>
                 <div class="card-content">
                     <p class="card-number">01 — Professional</p>
@@ -1605,8 +1440,7 @@
                 </div>
             </a>
 
-            <!-- Legal -->
-            <a href="styles/pro-legal.html" class="card card-pro card-pro-navy">
+            <a href="styles/pro-legal.html" class="card card-pro card-pro-legal">
                 <span class="industry-badge">Legal</span>
                 <div class="card-content">
                     <p class="card-number">02 — Professional</p>
@@ -1620,8 +1454,7 @@
                 </div>
             </a>
 
-            <!-- Healthcare -->
-            <a href="styles/pro-healthcare.html" class="card card-pro card-pro-teal">
+            <a href="styles/pro-healthcare.html" class="card card-pro card-pro-healthcare">
                 <span class="industry-badge">Healthcare</span>
                 <div class="card-content">
                     <p class="card-number">03 — Professional</p>
@@ -1635,8 +1468,7 @@
                 </div>
             </a>
 
-            <!-- Finance -->
-            <a href="styles/pro-finance.html" class="card card-pro card-pro-indigo">
+            <a href="styles/pro-finance.html" class="card card-pro card-pro-finance">
                 <span class="industry-badge">Finance</span>
                 <div class="card-content">
                     <p class="card-number">04 — Professional</p>
@@ -1650,8 +1482,7 @@
                 </div>
             </a>
 
-            <!-- SaaS -->
-            <a href="styles/pro-saas.html" class="card card-pro card-pro-sky">
+            <a href="styles/pro-saas.html" class="card card-pro card-pro-saas">
                 <span class="industry-badge">SaaS</span>
                 <div class="card-content">
                     <p class="card-number">05 — Professional</p>
@@ -1665,8 +1496,7 @@
                 </div>
             </a>
 
-            <!-- Consulting -->
-            <a href="styles/pro-consulting.html" class="card card-pro card-pro-violet">
+            <a href="styles/pro-consulting.html" class="card card-pro card-pro-consulting">
                 <span class="industry-badge">Consulting</span>
                 <div class="card-content">
                     <p class="card-number">06 — Professional</p>
@@ -1680,8 +1510,7 @@
                 </div>
             </a>
 
-            <!-- Real Estate -->
-            <a href="styles/pro-realestate.html" class="card card-pro card-pro-emerald">
+            <a href="styles/pro-realestate.html" class="card card-pro card-pro-realestate">
                 <span class="industry-badge">Real Estate</span>
                 <div class="card-content">
                     <p class="card-number">07 — Professional</p>
@@ -1695,8 +1524,7 @@
                 </div>
             </a>
 
-            <!-- Insurance -->
-            <a href="styles/pro-insurance.html" class="card card-pro card-pro-blue">
+            <a href="styles/pro-insurance.html" class="card card-pro card-pro-insurance">
                 <span class="industry-badge">Insurance</span>
                 <div class="card-content">
                     <p class="card-number">08 — Professional</p>
@@ -1710,8 +1538,7 @@
                 </div>
             </a>
 
-            <!-- Government -->
-            <a href="styles/pro-government.html" class="card card-pro card-pro-slate">
+            <a href="styles/pro-government.html" class="card card-pro card-pro-government">
                 <span class="industry-badge">Government</span>
                 <div class="card-content">
                     <p class="card-number">09 — Professional</p>
@@ -1725,8 +1552,7 @@
                 </div>
             </a>
 
-            <!-- Education -->
-            <a href="styles/pro-education.html" class="card card-pro card-pro-sienna">
+            <a href="styles/pro-education.html" class="card card-pro card-pro-education">
                 <span class="industry-badge">Education</span>
                 <div class="card-content">
                     <p class="card-number">10 — Professional</p>
@@ -1740,8 +1566,7 @@
                 </div>
             </a>
 
-            <!-- Nonprofit -->
-            <a href="styles/pro-nonprofit.html" class="card card-pro card-pro-teal">
+            <a href="styles/pro-nonprofit.html" class="card card-pro card-pro-nonprofit">
                 <span class="industry-badge">Nonprofit</span>
                 <div class="card-content">
                     <p class="card-number">11 — Professional</p>
@@ -1755,8 +1580,7 @@
                 </div>
             </a>
 
-            <!-- Accounting -->
-            <a href="styles/pro-accounting.html" class="card card-pro card-pro-teal">
+            <a href="styles/pro-accounting.html" class="card card-pro card-pro-accounting">
                 <span class="industry-badge">Accounting</span>
                 <div class="card-content">
                     <p class="card-number">12 — Professional</p>
@@ -1770,8 +1594,7 @@
                 </div>
             </a>
 
-            <!-- Architecture -->
-            <a href="styles/pro-architecture.html" class="card card-pro card-pro-copper">
+            <a href="styles/pro-architecture.html" class="card card-pro card-pro-architecture">
                 <span class="industry-badge">Architecture</span>
                 <div class="card-content">
                     <p class="card-number">13 — Professional</p>
@@ -1785,8 +1608,7 @@
                 </div>
             </a>
 
-            <!-- Manufacturing -->
-            <a href="styles/pro-manufacturing.html" class="card card-pro card-pro-orange">
+            <a href="styles/pro-manufacturing.html" class="card card-pro card-pro-manufacturing">
                 <span class="industry-badge">Manufacturing</span>
                 <div class="card-content">
                     <p class="card-number">14 — Professional</p>
@@ -1800,8 +1622,7 @@
                 </div>
             </a>
 
-            <!-- E-commerce -->
-            <a href="styles/pro-ecommerce.html" class="card card-pro card-pro-dark">
+            <a href="styles/pro-ecommerce.html" class="card card-pro card-pro-ecommerce">
                 <span class="industry-badge">E-Commerce</span>
                 <div class="card-content">
                     <p class="card-number">15 — Professional</p>
@@ -1815,8 +1636,7 @@
                 </div>
             </a>
 
-            <!-- HR -->
-            <a href="styles/pro-hr.html" class="card card-pro card-pro-plum">
+            <a href="styles/pro-hr.html" class="card card-pro card-pro-hr">
                 <span class="industry-badge">HR</span>
                 <div class="card-content">
                     <p class="card-number">16 — Professional</p>
@@ -1830,8 +1650,7 @@
                 </div>
             </a>
 
-            <!-- Logistics -->
-            <a href="styles/pro-logistics.html" class="card card-pro card-pro-cyan">
+            <a href="styles/pro-logistics.html" class="card card-pro card-pro-logistics">
                 <span class="industry-badge">Logistics</span>
                 <div class="card-content">
                     <p class="card-number">17 — Professional</p>
@@ -1845,8 +1664,7 @@
                 </div>
             </a>
 
-            <!-- Media -->
-            <a href="styles/pro-media.html" class="card card-pro card-pro-red">
+            <a href="styles/pro-media.html" class="card card-pro card-pro-media">
                 <span class="industry-badge">Media</span>
                 <div class="card-content">
                     <p class="card-number">18 — Professional</p>
@@ -1860,8 +1678,7 @@
                 </div>
             </a>
 
-            <!-- Pharma -->
-            <a href="styles/pro-pharma.html" class="card card-pro card-pro-cyan">
+            <a href="styles/pro-pharma.html" class="card card-pro card-pro-pharma">
                 <span class="industry-badge">Pharma</span>
                 <div class="card-content">
                     <p class="card-number">19 — Professional</p>
@@ -1875,8 +1692,7 @@
                 </div>
             </a>
 
-            <!-- Engineering -->
-            <a href="styles/pro-engineering.html" class="card card-pro card-pro-dark">
+            <a href="styles/pro-engineering.html" class="card card-pro card-pro-engineering">
                 <span class="industry-badge">Engineering</span>
                 <div class="card-content">
                     <p class="card-number">20 — Professional</p>
@@ -1886,6 +1702,30 @@
                         <span class="card-tag">Technical</span>
                         <span class="card-tag">Developer</span>
                         <span class="card-tag">Precise</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════════
+             DASHBOARD THEMES SECTION
+             ═══════════════════════════════════════════════════════════════════════ -->
+        <section class="section">
+            <h2 class="section-title">Dashboard Style Guides</h2>
+            <p class="section-subtitle">Data-rich dashboard design systems optimized for analytics and monitoring interfaces</p>
+        </section>
+
+        <div class="grid">
+            <a href="dashboards/dashboard-devops-command-center.html" class="card card-dashboard">
+                <span class="dashboard-badge">DevOps</span>
+                <div class="card-content">
+                    <p class="card-number">01 — Dashboard</p>
+                    <h2 class="card-title">NEXUS OPS</h2>
+                    <p class="card-subtitle">DevOps command center with terminal aesthetics and real-time metrics</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Monitoring</span>
+                        <span class="card-tag">Terminal</span>
+                        <span class="card-tag">Dark</span>
                     </div>
                 </div>
             </a>
