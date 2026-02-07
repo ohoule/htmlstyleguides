@@ -53,6 +53,7 @@
             --radius-md: 8px;
             --radius-lg: 12px;
             --radius-xl: 16px;
+            --radius-full: 9999px;
         }
 
         * {
@@ -69,579 +70,174 @@
             min-height: 100vh;
         }
 
-        /* Grid Pattern Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px),
-                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .dashboard-container {
-            position: relative;
-            z-index: 1;
-            max-width: 1500px;
-            margin: 0 auto;
-            padding: var(--space-2xl);
+        /* Dashboard Layout */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            grid-template-rows: 70px 1fr;
+            min-height: 100vh;
         }
 
         /* Header */
-        .dashboard-header {
-            text-align: center;
-            margin-bottom: var(--space-3xl);
-            padding: var(--space-2xl);
-            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-dark) 100%);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-xl);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .dashboard-header::before {
-            content: '';
-            position: absolute;
+        .header {
+            grid-column: 1 / -1;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-xl);
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--active-green), var(--data-blue), var(--warning-orange));
+            z-index: 100;
         }
 
-        .dashboard-header h1 {
-            font-family: var(--font-display);
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            background: linear-gradient(135deg, var(--data-blue), var(--active-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: var(--space-sm);
-        }
-
-        .dashboard-header .version {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--data-blue);
-            letter-spacing: 0.2em;
-        }
-
-        .dashboard-header .tagline {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-top: var(--space-md);
-        }
-
-        /* Section Styling */
-        .section {
-            margin-bottom: var(--space-3xl);
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            color: var(--data-blue);
-            margin-bottom: var(--space-lg);
-            padding-bottom: var(--space-sm);
-            border-bottom: 1px solid var(--border-subtle);
+        .logo {
             display: flex;
             align-items: center;
             gap: var(--space-md);
-        }
-
-        .section-title::before {
-            content: '◆';
-            font-size: 0.8rem;
-        }
-
-        /* ==================== 1. COLOR PALETTE ==================== */
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: var(--space-md);
-        }
-
-        .color-swatch {
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            border: 1px solid var(--border-subtle);
-            transition: all 0.3s ease;
-        }
-
-        .color-swatch:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .color-preview {
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .color-preview.active { background: var(--active-green); }
-        .color-preview.warning { background: var(--warning-orange); }
-        .color-preview.critical { background: var(--critical-red); }
-        .color-preview.data { background: var(--data-blue); }
-        .color-preview.offline { background: var(--offline-gray); }
-        .color-preview.slate { background: var(--bg-dark); border-bottom: 1px solid var(--border-subtle); }
-
-        .color-info {
-            padding: var(--space-md);
-        }
-
-        .color-name {
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            color: var(--text-primary);
-        }
-
-        .color-hex {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        /* ==================== 2. TYPOGRAPHY ==================== */
-        .typography-showcase {
-            display: grid;
-            gap: var(--space-lg);
-        }
-
-        .type-specimen {
-            background: var(--bg-card);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-subtle);
-        }
-
-        .type-label {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: var(--data-blue);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: var(--space-md);
-        }
-
-        .display-font {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            color: var(--text-primary);
-        }
-
-        .ui-font {
-            font-family: var(--font-ui);
-            font-size: 1rem;
-            color: var(--text-secondary);
-        }
-
-        .mono-font {
-            font-family: var(--font-mono);
-            font-size: 1rem;
-            color: var(--active-green);
-        }
-
-        /* ==================== 3. SPACING & GRID ==================== */
-        .spacing-demo {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-md);
-            align-items: flex-end;
-        }
-
-        .space-block {
-            background: linear-gradient(135deg, var(--data-blue), var(--active-green));
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .space-block span {
-            font-family: var(--font-mono);
-            font-size: 0.55rem;
-            color: white;
-            font-weight: 600;
-        }
-
-        .grid-demo {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: var(--space-sm);
-            margin-top: var(--space-xl);
-        }
-
-        .grid-cell {
-            height: 40px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-active);
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--text-muted);
-        }
-
-        /* ==================== 4. METRIC CARDS ==================== */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .metric-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .metric-card:hover {
-            border-color: var(--border-active);
-            box-shadow: 0 0 20px var(--data-glow);
-        }
-
-        .metric-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-        }
-
-        .metric-card.sensors::before { background: var(--active-green); }
-        .metric-card.data::before { background: var(--data-blue); }
-        .metric-card.latency::before { background: var(--warning-orange); }
-        .metric-card.alerts::before { background: var(--critical-red); }
-
-        .metric-icon {
-            font-size: 1.5rem;
-            margin-bottom: var(--space-md);
-        }
-
-        .metric-label {
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: var(--space-sm);
-        }
-
-        .metric-value {
-            font-family: var(--font-mono);
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .metric-unit {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-left: var(--space-xs);
-        }
-
-        .metric-status {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-            margin-top: var(--space-md);
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--radius-sm);
-        }
-
-        .metric-status.good {
-            background: rgba(34, 197, 94, 0.15);
-            color: var(--active-green);
-        }
-
-        .metric-status.warning {
-            background: rgba(249, 115, 22, 0.15);
-            color: var(--warning-orange);
-        }
-
-        /* ==================== 5. CSS-ONLY CHARTS ==================== */
-        .charts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .chart-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-        }
-
-        .chart-title {
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            color: var(--text-secondary);
-            margin-bottom: var(--space-lg);
-        }
-
-        /* Sensor Readings Chart */
-        .sensor-chart {
-            display: flex;
-            align-items: flex-end;
-            gap: 4px;
-            height: 120px;
-            padding-bottom: var(--space-md);
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .sensor-bar {
-            flex: 1;
-            background: linear-gradient(to top, var(--bg-elevated), var(--data-blue));
-            border-radius: 2px 2px 0 0;
-            transition: all 0.3s ease;
-        }
-
-        .sensor-bar:hover {
-            background: linear-gradient(to top, var(--bg-elevated), var(--active-green));
-        }
-
-        /* Device Distribution Donut */
-        .device-donut {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            background: conic-gradient(
-                var(--active-green) 0deg 144deg,
-                var(--data-blue) 144deg 234deg,
-                var(--warning-orange) 234deg 288deg,
-                var(--offline-gray) 288deg 360deg
-            );
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .device-donut::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: var(--bg-card);
-            border-radius: 50%;
-        }
-
-        .device-donut::after {
-            content: '247';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .donut-legend {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-sm);
-            margin-top: var(--space-lg);
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-
-        .legend-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        /* Latency Histogram */
-        .latency-chart {
-            display: flex;
-            align-items: flex-end;
-            gap: 6px;
-            height: 100px;
-        }
-
-        .latency-bar {
-            flex: 1;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .latency-bar.good { background: var(--active-green); }
-        .latency-bar.moderate { background: var(--data-blue); }
-        .latency-bar.high { background: var(--warning-orange); }
-        .latency-bar.critical { background: var(--critical-red); }
-
-        /* ==================== 6. DATA TABLES ==================== */
-        .data-table-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .data-table thead {
-            background: var(--bg-elevated);
-        }
-
-        .data-table th {
-            font-family: var(--font-display);
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            color: var(--text-muted);
-            text-align: left;
-            padding: var(--space-md) var(--space-lg);
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .data-table td {
-            padding: var(--space-md) var(--space-lg);
-            border-bottom: 1px solid var(--border-subtle);
-            font-size: 0.85rem;
-        }
-
-        .data-table tbody tr:hover {
-            background: rgba(59, 130, 246, 0.05);
-        }
-
-        .sensor-id {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--data-blue);
-        }
-
-        .sensor-type {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        .type-icon {
-            width: 28px;
-            height: 28px;
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-        }
-
-        .type-icon.temp { background: rgba(249, 115, 22, 0.2); }
-        .type-icon.humidity { background: rgba(59, 130, 246, 0.2); }
-        .type-icon.pressure { background: rgba(147, 51, 234, 0.2); }
-        .type-icon.motion { background: rgba(34, 197, 94, 0.2); }
-
-        .reading-cell {
-            font-family: var(--font-mono);
-            color: var(--text-primary);
-        }
-
-        .battery-cell {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        .battery-bar {
-            width: 40px;
-            height: 12px;
-            background: var(--bg-elevated);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .battery-fill {
-            height: 100%;
-            border-radius: 2px;
-        }
-
-        .battery-fill.high { background: var(--active-green); }
-        .battery-fill.medium { background: var(--warning-orange); }
-        .battery-fill.low { background: var(--critical-red); }
-
-        .battery-text {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .status-dot.online { background: var(--active-green); box-shadow: 0 0 8px var(--active-glow); }
-        .status-dot.offline { background: var(--offline-gray); }
-        .status-dot.error { background: var(--critical-red); box-shadow: 0 0 8px var(--critical-glow); }
-
-        /* ==================== 7. SIDEBAR NAVIGATION ==================== */
-        .sidebar-demo {
-            display: flex;
-            gap: var(--space-xl);
-        }
-
-        .sidebar {
-            width: 240px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-        }
-
-        .sidebar-logo {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            padding: var(--space-md);
-            margin-bottom: var(--space-xl);
         }
 
         .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--bg-elevated);
+            border: 2px solid var(--data-blue);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .logo-icon::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: conic-gradient(
+                var(--active-green) 0deg 90deg,
+                var(--data-blue) 90deg 180deg,
+                var(--warning-orange) 180deg 270deg,
+                var(--critical-red) 270deg 360deg
+            );
+            border-radius: 50%;
+            animation: pulse-rotate 4s linear infinite;
+        }
+
+        @keyframes pulse-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .logo-text {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+        }
+
+        .logo-text span {
+            color: var(--data-blue);
+        }
+
+        .logo-version {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            padding: 2px 6px;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .header-search {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 var(--space-2xl);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--space-sm) var(--space-md);
+            padding-left: 40px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--data-blue);
+            box-shadow: 0 0 0 3px var(--data-glow);
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-wrapper::before {
+            content: '🔍';
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.85rem;
+            opacity: 0.5;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .notification-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .notification-btn:hover {
+            background: var(--bg-dark);
+            border-color: var(--data-blue);
+        }
+
+        .notification-btn::after {
+            content: '7';
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 18px;
+            height: 18px;
+            background: var(--critical-red);
+            border-radius: var(--radius-full);
+            font-size: 0.65rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: alert-pulse 2s infinite;
+        }
+
+        @keyframes alert-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .user-avatar {
             width: 40px;
             height: 40px;
             background: linear-gradient(135deg, var(--data-blue), var(--active-green));
@@ -649,14 +245,38 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
         }
 
-        .logo-text {
+        .user-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--bg-card);
+            border-right: 1px solid var(--border-subtle);
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-section {
+            margin-bottom: var(--space-xl);
+        }
+
+        .nav-label {
             font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: var(--space-md);
+            padding-left: var(--space-md);
         }
 
         .nav-item {
@@ -669,381 +289,883 @@
             cursor: pointer;
             transition: all 0.2s ease;
             margin-bottom: var(--space-xs);
+            border: 1px solid transparent;
         }
 
         .nav-item:hover {
-            background: rgba(59, 130, 246, 0.1);
+            background: var(--bg-elevated);
             color: var(--text-primary);
         }
 
         .nav-item.active {
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent);
+            background: var(--bg-dark);
             color: var(--data-blue);
+            border-color: var(--data-blue);
         }
 
         .nav-icon {
             font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
         }
 
         .nav-badge {
             margin-left: auto;
-            background: var(--critical-red);
-            color: white;
             font-family: var(--font-mono);
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             padding: 2px 6px;
-            border-radius: 10px;
+            background: var(--critical-red);
+            border-radius: var(--radius-sm);
         }
 
-        /* ==================== 8. FORMS & FILTERS ==================== */
-        .forms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .form-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
+        /* Main Content */
+        .main-content {
             padding: var(--space-xl);
+            overflow-y: auto;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #0a1628 100%);
         }
 
-        .form-title {
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            color: var(--text-primary);
+        .section {
+            margin-bottom: var(--space-3xl);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
             margin-bottom: var(--space-lg);
         }
 
-        .form-group {
-            margin-bottom: var(--space-md);
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-bottom: var(--space-xs);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .form-input {
-            width: 100%;
-            background: var(--bg-input);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
-            padding: var(--space-md);
-            color: var(--text-primary);
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            transition: all 0.2s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--data-blue);
-            box-shadow: 0 0 0 3px var(--data-glow);
-        }
-
-        .form-select {
-            width: 100%;
-            background: var(--bg-input);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
-            padding: var(--space-md);
-            color: var(--text-primary);
-            font-family: var(--font-ui);
-            font-size: 0.85rem;
-            cursor: pointer;
-        }
-
-        /* ==================== 9. BUTTONS ==================== */
-        .buttons-showcase {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-md);
-            align-items: center;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-sm);
-            padding: var(--space-md) var(--space-xl);
-            border: none;
-            border-radius: var(--radius-md);
+        .section-title {
             font-family: var(--font-display);
-            font-size: 0.8rem;
+            font-size: 1.6rem;
             font-weight: 600;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            color: var(--text-primary);
         }
 
-        .btn-primary {
-            background: var(--data-blue);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 0 20px var(--data-glow);
-        }
-
-        .btn-success {
-            background: var(--active-green);
-            color: var(--bg-dark);
-        }
-
-        .btn-warning {
-            background: var(--warning-orange);
-            color: white;
-        }
-
-        .btn-danger {
-            background: var(--critical-red);
-            color: white;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--data-blue);
+        .section-badge {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            padding: 4px 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
             color: var(--data-blue);
         }
 
-        .btn-outline:hover {
-            background: var(--data-blue);
-            color: white;
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-md);
         }
 
-        /* ==================== 10. STATUS INDICATORS ==================== */
-        .status-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-lg);
-        }
-
-        .status-group {
+        .color-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
             border-radius: var(--radius-lg);
-            padding: var(--space-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            transition: transform 0.2s ease;
         }
 
-        .status-group-title {
+        .color-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .color-swatch {
+            height: 80px;
+            position: relative;
+        }
+
+        .color-swatch.active-green { background: var(--active-green); }
+        .color-swatch.warning-orange { background: var(--warning-orange); }
+        .color-swatch.critical-red { background: var(--critical-red); }
+        .color-swatch.data-blue { background: var(--data-blue); }
+        .color-swatch.offline-gray { background: var(--offline-gray); }
+        .color-swatch.bg-dark { background: var(--bg-dark); border: 1px solid var(--border-subtle); }
+        .color-swatch.bg-card { background: var(--bg-card); }
+        .color-swatch.bg-elevated { background: var(--bg-elevated); }
+
+        .color-info {
+            padding: var(--space-md);
+        }
+
+        .color-name {
+            font-weight: 500;
+            font-size: 0.85rem;
+            margin-bottom: var(--space-xs);
+        }
+
+        .color-hex {
             font-family: var(--font-mono);
-            font-size: 0.6rem;
-            color: var(--text-dim);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Typography */
+        .type-specimen {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            border: 1px solid var(--border-subtle);
             margin-bottom: var(--space-md);
         }
 
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-sm);
-            padding: var(--space-sm) var(--space-md);
-            border-radius: var(--radius-sm);
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            line-height: 1.1;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
         }
 
-        .status-badge.online {
-            background: rgba(34, 197, 94, 0.15);
+        .type-display span {
+            color: var(--data-blue);
+        }
+
+        .type-ui {
+            font-family: var(--font-ui);
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-md);
+        }
+
+        .type-mono {
+            font-family: var(--font-mono);
+            font-size: 1rem;
             color: var(--active-green);
         }
 
-        .status-badge.offline {
-            background: rgba(107, 114, 128, 0.15);
-            color: var(--offline-gray);
+        .type-meta {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--border-subtle);
         }
 
-        .status-badge.error {
-            background: rgba(220, 38, 38, 0.15);
-            color: var(--critical-red);
+        /* Spacing & Grid */
+        .spacing-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+            background: var(--bg-card);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
         }
 
-        /* Battery Indicators */
-        .battery-indicator {
+        .spacing-item {
             display: flex;
             align-items: center;
-            gap: var(--space-sm);
-            padding: var(--space-sm) var(--space-md);
-            background: var(--bg-elevated);
+            gap: var(--space-md);
+        }
+
+        .spacing-box {
+            background: linear-gradient(135deg, var(--data-blue), var(--active-green));
             border-radius: var(--radius-sm);
         }
 
-        .battery-icon {
-            font-size: 1rem;
+        .spacing-box.xs { width: 4px; height: 24px; }
+        .spacing-box.sm { width: 8px; height: 24px; }
+        .spacing-box.md { width: 16px; height: 24px; }
+        .spacing-box.lg { width: 24px; height: 24px; }
+        .spacing-box.xl { width: 32px; height: 24px; }
+        .spacing-box.xxl { width: 48px; height: 24px; }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
         }
 
-        .battery-level {
+        /* Metric Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            border: 1px solid var(--border-subtle);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            border-color: var(--data-blue);
+            transform: translateY(-2px);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--data-blue);
+        }
+
+        .metric-card.green::before { background: var(--active-green); }
+        .metric-card.orange::before { background: var(--warning-orange); }
+        .metric-card.red::before { background: var(--critical-red); }
+
+        .metric-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: var(--space-md);
+        }
+
+        .metric-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .metric-status {
+            width: 10px;
+            height: 10px;
+            border-radius: var(--radius-full);
+            background: var(--active-green);
+            animation: status-blink 2s infinite;
+        }
+
+        @keyframes status-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: var(--space-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-value {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .metric-change {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
             font-family: var(--font-mono);
             font-size: 0.75rem;
         }
 
-        .battery-level.high { color: var(--active-green); }
-        .battery-level.medium { color: var(--warning-orange); }
-        .battery-level.low { color: var(--critical-red); }
+        .metric-change.positive { color: var(--active-green); }
+        .metric-change.negative { color: var(--critical-red); }
 
-        /* Signal Strength */
-        .signal-bars {
-            display: flex;
-            align-items: flex-end;
-            gap: 2px;
-            height: 16px;
-        }
-
-        .signal-bar {
-            width: 4px;
-            background: var(--bg-elevated);
-            border-radius: 1px;
-        }
-
-        .signal-bar.active { background: var(--active-green); }
-
-        /* ==================== 11. WIDGET CARDS ==================== */
-        .widgets-grid {
+        /* Charts */
+        .charts-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: 2fr 1fr;
             gap: var(--space-lg);
         }
 
-        .widget-card {
+        @media (max-width: 1200px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
             border-radius: var(--radius-lg);
-            overflow: hidden;
+            padding: var(--space-xl);
+            border: 1px solid var(--border-subtle);
         }
 
-        .widget-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: var(--space-md) var(--space-lg);
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .widget-title {
+        .chart-title {
             font-family: var(--font-display);
-            font-size: 0.75rem;
             font-weight: 600;
-            letter-spacing: 0.15em;
-            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .widget-content {
-            padding: var(--space-lg);
+        .chart-legend {
+            display: flex;
+            gap: var(--space-md);
+            font-size: 0.7rem;
+            color: var(--text-muted);
         }
 
-        /* Alert List */
-        .alert-list {
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: var(--radius-full);
+            display: inline-block;
+            margin-right: var(--space-xs);
+        }
+
+        /* Bar Chart */
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 180px;
+            padding-top: var(--space-lg);
+            gap: var(--space-sm);
+        }
+
+        .bar-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .bar {
+            width: 100%;
+            max-width: 35px;
+            background: linear-gradient(180deg, var(--data-blue), var(--active-green));
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            position: relative;
+            transition: all 0.3s ease;
+            animation: barGrow 1s ease-out forwards;
+            transform-origin: bottom;
+        }
+
+        @keyframes barGrow {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        .bar:hover {
+            filter: brightness(1.2);
+        }
+
+        .bar-label {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+        }
+
+        /* Donut Chart */
+        .donut-container {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xl);
+        }
+
+        .donut-chart {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--active-green) 0deg 162deg,
+                var(--data-blue) 162deg 252deg,
+                var(--warning-orange) 252deg 324deg,
+                var(--critical-red) 324deg 360deg
+            );
+            position: relative;
+            animation: donutSpin 1s ease-out;
+        }
+
+        @keyframes donutSpin {
+            from { transform: rotate(-90deg); opacity: 0; }
+            to { transform: rotate(0deg); opacity: 1; }
+        }
+
+        .donut-chart::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            background: var(--bg-card);
+            border-radius: 50%;
+        }
+
+        .donut-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .donut-value {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .donut-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        .donut-legend {
             display: flex;
             flex-direction: column;
             gap: var(--space-sm);
         }
 
-        .alert-item {
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 0.8rem;
+        }
+
+        .legend-color {
+            width: 10px;
+            height: 10px;
+            border-radius: var(--radius-sm);
+        }
+
+        .legend-percent {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-left: auto;
+        }
+
+        /* Data Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .data-table th {
+            background: var(--bg-elevated);
+            padding: var(--space-md) var(--space-lg);
+            text-align: left;
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .data-table td {
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.85rem;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover td {
+            background: var(--bg-elevated);
+        }
+
+        .device-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .device-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-md);
+            background: var(--bg-elevated);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .device-name {
+            font-weight: 500;
+        }
+
+        .device-type {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .device-id {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--data-blue);
+        }
+
+        .reading-value {
+            font-family: var(--font-mono);
+            color: var(--active-green);
+        }
+
+        .battery-indicator {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .battery-bar {
+            width: 40px;
+            height: 12px;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+
+        .battery-fill {
+            height: 100%;
+            background: var(--active-green);
+            transition: width 0.3s ease;
+        }
+
+        .battery-fill.medium { background: var(--warning-orange); }
+        .battery-fill.low { background: var(--critical-red); }
+
+        .battery-percent {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Forms & Filters */
+        .filters-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            background: var(--bg-card);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .filter-label {
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-input,
+        .filter-select {
+            padding: var(--space-sm) var(--space-md);
+            background: var(--bg-dark);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            min-width: 150px;
+            transition: all 0.2s ease;
+        }
+
+        .filter-input:focus,
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--data-blue);
+            box-shadow: 0 0 0 3px var(--data-glow);
+        }
+
+        /* Buttons */
+        .buttons-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .btn {
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-md);
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--data-blue), #2563eb);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px var(--data-glow);
+        }
+
+        .btn-secondary {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-dark);
+            border-color: var(--data-blue);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--active-green), #16a34a);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px var(--active-glow);
+        }
+
+        /* Status Indicators */
+        .status-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .status-badge {
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-md);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .status-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: var(--radius-full);
+        }
+
+        .status-online {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--active-green);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .status-online::before {
+            background: var(--active-green);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .status-warning {
+            background: rgba(249, 115, 22, 0.15);
+            color: var(--warning-orange);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+
+        .status-warning::before {
+            background: var(--warning-orange);
+        }
+
+        .status-offline {
+            background: rgba(107, 114, 128, 0.15);
+            color: var(--offline-gray);
+            border: 1px solid rgba(107, 114, 128, 0.3);
+        }
+
+        .status-offline::before {
+            background: var(--offline-gray);
+        }
+
+        .status-critical {
+            background: rgba(220, 38, 38, 0.15);
+            color: var(--critical-red);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+        }
+
+        .status-critical::before {
+            background: var(--critical-red);
+            animation: alert-pulse 1s infinite;
+        }
+
+        /* Widget Cards */
+        .widgets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .widget-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .widget-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-lg);
+        }
+
+        .widget-title {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .widget-action {
+            font-size: 0.75rem;
+            color: var(--data-blue);
+            cursor: pointer;
+        }
+
+        .widget-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .widget-item {
             display: flex;
             align-items: center;
             gap: var(--space-md);
             padding: var(--space-sm);
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius-md);
+            transition: background 0.2s ease;
+        }
+
+        .widget-item:hover {
             background: var(--bg-elevated);
         }
 
-        .alert-severity {
-            width: 4px;
-            height: 32px;
-            border-radius: 2px;
-        }
-
-        .alert-severity.critical { background: var(--critical-red); }
-        .alert-severity.warning { background: var(--warning-orange); }
-        .alert-severity.info { background: var(--data-blue); }
-
-        .alert-info {
-            flex: 1;
-        }
-
-        .alert-text {
-            font-size: 0.8rem;
-            color: var(--text-primary);
-        }
-
-        .alert-time {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: var(--text-muted);
-        }
-
-        /* Maintenance Schedule */
-        .schedule-item {
+        .widget-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--bg-elevated);
             display: flex;
             align-items: center;
-            gap: var(--space-md);
-            padding: var(--space-sm) 0;
-            border-bottom: 1px solid var(--border-subtle);
+            justify-content: center;
+            font-size: 1.1rem;
         }
 
-        .schedule-item:last-child {
-            border-bottom: none;
+        .widget-icon.alert {
+            background: rgba(220, 38, 38, 0.15);
         }
 
-        .schedule-date {
-            width: 50px;
-            text-align: center;
+        .widget-icon.warning {
+            background: rgba(249, 115, 22, 0.15);
         }
 
-        .schedule-day {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            color: var(--text-primary);
-        }
-
-        .schedule-month {
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        .schedule-info {
+        .widget-info {
             flex: 1;
         }
 
-        .schedule-title {
+        .widget-name {
+            font-weight: 500;
             font-size: 0.85rem;
-            color: var(--text-primary);
         }
 
-        .schedule-type {
+        .widget-meta {
+            font-family: var(--font-mono);
             font-size: 0.7rem;
             color: var(--text-muted);
         }
 
-        /* ==================== 12. ALERTS & NOTIFICATIONS ==================== */
-        .alerts-showcase {
-            display: grid;
+        .widget-stat {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+        }
+
+        .widget-stat.critical { color: var(--critical-red); }
+        .widget-stat.warning { color: var(--warning-orange); }
+        .widget-stat.success { color: var(--active-green); }
+
+        /* Alerts */
+        .alerts-stack {
+            display: flex;
+            flex-direction: column;
             gap: var(--space-md);
         }
 
         .alert {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-md);
-            padding: var(--space-lg);
+            padding: var(--space-md) var(--space-lg);
             border-radius: var(--radius-md);
-            border-left: 4px solid;
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .alert-success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: var(--active-green);
+        }
+
+        .alert-info {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--data-blue);
+        }
+
+        .alert-warning {
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            color: var(--warning-orange);
+        }
+
+        .alert-error {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            color: var(--critical-red);
         }
 
         .alert-icon {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .alert-content {
@@ -1052,791 +1174,1017 @@
 
         .alert-title {
             font-family: var(--font-display);
-            font-size: 0.85rem;
             font-weight: 600;
-            letter-spacing: 0.05em;
-            margin-bottom: var(--space-xs);
+            font-size: 0.85rem;
         }
 
         .alert-message {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+            font-size: 0.8rem;
+            opacity: 0.9;
         }
 
-        .alert.success {
-            background: rgba(34, 197, 94, 0.1);
-            border-color: var(--active-green);
+        .alert-time {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            opacity: 0.7;
         }
 
-        .alert.success .alert-title { color: var(--active-green); }
-
-        .alert.warning {
-            background: rgba(249, 115, 22, 0.1);
-            border-color: var(--warning-orange);
-        }
-
-        .alert.warning .alert-title { color: var(--warning-orange); }
-
-        .alert.critical {
-            background: rgba(220, 38, 38, 0.1);
-            border-color: var(--critical-red);
-        }
-
-        .alert.critical .alert-title { color: var(--critical-red); }
-
-        .alert.info {
-            background: rgba(59, 130, 246, 0.1);
-            border-color: var(--data-blue);
-        }
-
-        .alert.info .alert-title { color: var(--data-blue); }
-
-        /* ==================== 13. SPECIAL: REAL-TIME SENSOR GRID ==================== */
-        .sensor-grid-container {
+        /* Special Component: Live Sensor Feed */
+        .sensor-feed {
             background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
             border-radius: var(--radius-lg);
             padding: var(--space-xl);
+            border: 1px solid var(--border-subtle);
+            position: relative;
+            overflow: hidden;
         }
 
-        .sensor-grid-header {
+        .feed-header {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--space-xl);
+            margin-bottom: var(--space-lg);
         }
 
-        .sensor-grid-title {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            letter-spacing: 0.15em;
-            color: var(--text-primary);
+        .feed-title {
             display: flex;
             align-items: center;
-            gap: var(--space-sm);
-        }
-
-        .live-indicator {
-            width: 8px;
-            height: 8px;
-            background: var(--active-green);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--active-glow); }
-            50% { opacity: 0.7; box-shadow: 0 0 0 8px transparent; }
-        }
-
-        .sensor-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: var(--space-md);
         }
 
-        .sensor-node {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
-            padding: var(--space-md);
-            position: relative;
-            transition: all 0.3s ease;
+        .feed-title h3 {
+            font-family: var(--font-display);
+            font-weight: 600;
         }
 
-        .sensor-node:hover {
-            border-color: var(--border-active);
-            box-shadow: 0 0 15px var(--data-glow);
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--active-green);
+            padding: 4px 10px;
+            background: rgba(34, 197, 94, 0.15);
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(34, 197, 94, 0.3);
         }
 
-        .sensor-node::before {
-            content: '';
-            position: absolute;
-            top: var(--space-sm);
-            right: var(--space-sm);
+        .live-dot {
             width: 6px;
             height: 6px;
-            border-radius: 50%;
-            animation: blink 1.5s ease-in-out infinite;
+            background: var(--active-green);
+            border-radius: var(--radius-full);
+            animation: pulse 1s infinite;
         }
 
-        .sensor-node.online::before { background: var(--active-green); box-shadow: 0 0 6px var(--active-glow); }
-        .sensor-node.warning::before { background: var(--warning-orange); box-shadow: 0 0 6px var(--warning-glow); }
-        .sensor-node.offline::before { background: var(--offline-gray); animation: none; }
-        .sensor-node.critical::before { background: var(--critical-red); box-shadow: 0 0 6px var(--critical-glow); }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        .node-id {
+        .feed-stats {
+            display: flex;
+            gap: var(--space-lg);
             font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: var(--text-dim);
-            margin-bottom: var(--space-sm);
-        }
-
-        .node-type {
-            font-family: var(--font-display);
             font-size: 0.75rem;
-            color: var(--text-secondary);
-            margin-bottom: var(--space-sm);
+            color: var(--text-muted);
         }
 
-        .node-reading {
+        .feed-stat span {
+            color: var(--data-blue);
+            font-weight: 500;
+        }
+
+        .feed-container {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+            background: var(--bg-dark);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .feed-list {
+            padding: var(--space-md);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            animation: feedScroll 20s linear infinite;
+        }
+
+        @keyframes feedScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        .feed-item {
+            display: grid;
+            grid-template-columns: 120px 1fr 100px 80px;
+            gap: var(--space-md);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--active-green);
+            align-items: center;
+            animation: feedIn 0.3s ease;
+        }
+
+        @keyframes feedIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .feed-item.warning {
+            border-left-color: var(--warning-orange);
+        }
+
+        .feed-item.critical {
+            border-left-color: var(--critical-red);
+        }
+
+        .feed-sensor {
             font-family: var(--font-mono);
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 0.75rem;
+            color: var(--data-blue);
+        }
+
+        .feed-reading {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
             color: var(--text-primary);
         }
 
-        .node-reading .unit {
-            font-size: 0.7rem;
+        .feed-reading span {
             color: var(--text-muted);
+            font-size: 0.7rem;
         }
 
-        .node-timestamp {
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            color: var(--text-dim);
-            margin-top: var(--space-sm);
-        }
-
-        /* Footer */
-        .dashboard-footer {
-            text-align: center;
-            padding: var(--space-2xl) var(--space-lg);
-            margin-top: var(--space-3xl);
-            border-top: 1px solid var(--border-subtle);
-        }
-
-        .footer-logo {
+        .feed-value {
             font-family: var(--font-display);
             font-size: 1rem;
-            letter-spacing: 0.2em;
-            color: var(--text-muted);
+            font-weight: 600;
         }
 
-        .footer-text {
-            font-size: 0.85rem;
-            color: var(--text-dim);
-            margin-top: var(--space-sm);
+        .feed-value.success { color: var(--active-green); }
+        .feed-value.warning { color: var(--warning-orange); }
+        .feed-value.critical { color: var(--critical-red); }
+
+        .feed-time {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-align: right;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .dashboard-container {
-                padding: var(--space-lg);
-            }
-
-            .dashboard-header h1 {
-                font-size: 2rem;
-            }
-
-            .metrics-grid,
-            .charts-grid,
-            .widgets-grid {
+        @media (max-width: 1024px) {
+            .dashboard {
                 grid-template-columns: 1fr;
             }
 
-            .sidebar-demo {
-                flex-direction: column;
-            }
-
             .sidebar {
-                width: 100%;
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 var(--space-md);
             }
 
-            .sensor-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .header-search {
+                display: none;
+            }
+
+            .main-content {
+                padding: var(--space-md);
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feed-item {
+                grid-template-columns: 1fr 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="dashboard-container">
+    <div class="dashboard">
         <!-- Header -->
-        <header class="dashboard-header">
-            <h1>NEXUS IOT</h1>
-            <div class="version">v1.0 SENSOR NETWORK</div>
-            <p class="tagline">Industrial IoT Monitoring & Analytics Platform</p>
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span class="logo-text">NEXUS <span>IOT</span></span>
+                <span class="logo-version">v1.0</span>
+            </div>
+
+            <div class="header-search">
+                <div class="search-wrapper">
+                    <input type="text" class="search-input" placeholder="Search devices, sensors...">
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <div class="notification-btn">🔔</div>
+                <div class="user-avatar">SY</div>
+            </div>
         </header>
 
-        <!-- 1. Color Palette -->
-        <section class="section">
-            <h2 class="section-title">COLOR PALETTE</h2>
-            <div class="color-grid">
-                <div class="color-swatch">
-                    <div class="color-preview active">●</div>
-                    <div class="color-info">
-                        <div class="color-name">ACTIVE GREEN</div>
-                        <div class="color-hex">#22C55E</div>
-                    </div>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="nav-section">
+                <div class="nav-label">Monitor</div>
+                <div class="nav-item active">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
                 </div>
-                <div class="color-swatch">
-                    <div class="color-preview warning">!</div>
-                    <div class="color-info">
-                        <div class="color-name">WARNING ORANGE</div>
-                        <div class="color-hex">#F97316</div>
-                    </div>
+                <div class="nav-item">
+                    <span class="nav-icon">📱</span>
+                    <span>Devices</span>
+                    <span class="nav-badge">247</span>
                 </div>
-                <div class="color-swatch">
-                    <div class="color-preview critical">✕</div>
-                    <div class="color-info">
-                        <div class="color-name">CRITICAL RED</div>
-                        <div class="color-hex">#DC2626</div>
-                    </div>
+                <div class="nav-item">
+                    <span class="nav-icon">📡</span>
+                    <span>Sensors</span>
                 </div>
-                <div class="color-swatch">
-                    <div class="color-preview data">◈</div>
-                    <div class="color-info">
-                        <div class="color-name">DATA BLUE</div>
-                        <div class="color-hex">#3B82F6</div>
-                    </div>
+                <div class="nav-item">
+                    <span class="nav-icon">⚠️</span>
+                    <span>Alerts</span>
+                    <span class="nav-badge">7</span>
                 </div>
-                <div class="color-swatch">
-                    <div class="color-preview offline">○</div>
-                    <div class="color-info">
-                        <div class="color-name">OFFLINE GRAY</div>
-                        <div class="color-hex">#6B7280</div>
-                    </div>
-                </div>
-                <div class="color-swatch">
-                    <div class="color-preview slate"></div>
-                    <div class="color-info">
-                        <div class="color-name">DARK SLATE</div>
-                        <div class="color-hex">#0F172A</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </nav>
 
-        <!-- 2. Typography -->
-        <section class="section">
-            <h2 class="section-title">TYPOGRAPHY</h2>
-            <div class="typography-showcase">
+            <nav class="nav-section">
+                <div class="nav-label">Analytics</div>
+                <div class="nav-item">
+                    <span class="nav-icon">📈</span>
+                    <span>Analytics</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">📋</span>
+                    <span>Reports</span>
+                </div>
+            </nav>
+
+            <nav class="nav-section" style="margin-top: auto;">
+                <div class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Settings</span>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Section 1: Color Palette -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">COLOR PALETTE</h2>
+                    <span class="section-badge">01</span>
+                </div>
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-swatch active-green"></div>
+                        <div class="color-info">
+                            <div class="color-name">Active Green</div>
+                            <div class="color-hex">#22C55E</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch warning-orange"></div>
+                        <div class="color-info">
+                            <div class="color-name">Warning Orange</div>
+                            <div class="color-hex">#F97316</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch critical-red"></div>
+                        <div class="color-info">
+                            <div class="color-name">Critical Red</div>
+                            <div class="color-hex">#DC2626</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch data-blue"></div>
+                        <div class="color-info">
+                            <div class="color-name">Data Blue</div>
+                            <div class="color-hex">#3B82F6</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch offline-gray"></div>
+                        <div class="color-info">
+                            <div class="color-name">Offline Gray</div>
+                            <div class="color-hex">#6B7280</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch bg-dark"></div>
+                        <div class="color-info">
+                            <div class="color-name">Dark Slate</div>
+                            <div class="color-hex">#0F172A</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch bg-card"></div>
+                        <div class="color-info">
+                            <div class="color-name">Card Surface</div>
+                            <div class="color-hex">#1E293B</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch bg-elevated"></div>
+                        <div class="color-info">
+                            <div class="color-name">Elevated</div>
+                            <div class="color-hex">#334155</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Typography -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">TYPOGRAPHY</h2>
+                    <span class="section-badge">02</span>
+                </div>
                 <div class="type-specimen">
-                    <div class="type-label">Display / Chakra Petch</div>
-                    <div class="display-font">SENSOR NETWORK ONLINE</div>
-                </div>
-                <div class="type-specimen">
-                    <div class="type-label">UI Text / Inter</div>
-                    <div class="ui-font">Monitor real-time sensor data across your entire IoT network with advanced analytics and predictive maintenance alerts.</div>
-                </div>
-                <div class="type-specimen">
-                    <div class="type-label">Data / Source Code Pro</div>
-                    <div class="mono-font">SNR-TMP-001 | 23.4°C | 45.2% RH | 1013.25 hPa</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. Spacing & Grid -->
-        <section class="section">
-            <h2 class="section-title">SPACING & GRID</h2>
-            <div class="spacing-demo">
-                <div class="space-block" style="width: 4px; height: 4px;"></div>
-                <div class="space-block" style="width: 8px; height: 8px;"></div>
-                <div class="space-block" style="width: 16px; height: 16px;"></div>
-                <div class="space-block" style="width: 24px; height: 24px;"></div>
-                <div class="space-block" style="width: 32px; height: 32px;"><span>32</span></div>
-                <div class="space-block" style="width: 48px; height: 48px;"><span>48</span></div>
-                <div class="space-block" style="width: 64px; height: 64px;"><span>64</span></div>
-            </div>
-            <div class="grid-demo">
-                <div class="grid-cell">1</div>
-                <div class="grid-cell">2</div>
-                <div class="grid-cell">3</div>
-                <div class="grid-cell">4</div>
-                <div class="grid-cell">5</div>
-                <div class="grid-cell">6</div>
-                <div class="grid-cell">7</div>
-                <div class="grid-cell">8</div>
-                <div class="grid-cell">9</div>
-                <div class="grid-cell">10</div>
-                <div class="grid-cell">11</div>
-                <div class="grid-cell">12</div>
-            </div>
-        </section>
-
-        <!-- 4. Metric Cards -->
-        <section class="section">
-            <h2 class="section-title">METRIC CARDS</h2>
-            <div class="metrics-grid">
-                <div class="metric-card sensors">
-                    <div class="metric-icon">📡</div>
-                    <div class="metric-label">Active Sensors</div>
-                    <div class="metric-value">247<span class="metric-unit">/ 256</span></div>
-                    <span class="metric-status good">● 96.5% Online</span>
-                </div>
-                <div class="metric-card data">
-                    <div class="metric-icon">📊</div>
-                    <div class="metric-label">Data Points/sec</div>
-                    <div class="metric-value">12.4K</div>
-                    <span class="metric-status good">↑ Normal Rate</span>
-                </div>
-                <div class="metric-card latency">
-                    <div class="metric-icon">⚡</div>
-                    <div class="metric-label">Avg Latency</div>
-                    <div class="metric-value">24<span class="metric-unit">ms</span></div>
-                    <span class="metric-status good">● Low Latency</span>
-                </div>
-                <div class="metric-card alerts">
-                    <div class="metric-icon">🔔</div>
-                    <div class="metric-label">Alerts Triggered</div>
-                    <div class="metric-value">7</div>
-                    <span class="metric-status warning">! 3 Critical</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. CSS-Only Charts -->
-        <section class="section">
-            <h2 class="section-title">CSS-ONLY CHARTS</h2>
-            <div class="charts-grid">
-                <div class="chart-container">
-                    <div class="chart-title">SENSOR READINGS (24H)</div>
-                    <div class="sensor-chart">
-                        <div class="sensor-bar" style="height: 45%"></div>
-                        <div class="sensor-bar" style="height: 62%"></div>
-                        <div class="sensor-bar" style="height: 58%"></div>
-                        <div class="sensor-bar" style="height: 75%"></div>
-                        <div class="sensor-bar" style="height: 82%"></div>
-                        <div class="sensor-bar" style="height: 68%"></div>
-                        <div class="sensor-bar" style="height: 55%"></div>
-                        <div class="sensor-bar" style="height: 72%"></div>
-                        <div class="sensor-bar" style="height: 88%"></div>
-                        <div class="sensor-bar" style="height: 78%"></div>
-                        <div class="sensor-bar" style="height: 65%"></div>
-                        <div class="sensor-bar" style="height: 92%"></div>
+                    <div class="type-display">CHAKRA <span>PETCH</span></div>
+                    <div class="type-ui">Inter — Clean system interface typography for data-heavy displays</div>
+                    <div class="type-mono">Source Code Pro → TEMP: 23.5°C | HUM: 67% | BATT: 89%</div>
+                    <div class="type-meta">
+                        Display: Chakra Petch 400-700 | UI: Inter 300-600 | Mono: Source Code Pro 400-600
                     </div>
                 </div>
-                <div class="chart-container">
-                    <div class="chart-title">DEVICE DISTRIBUTION</div>
-                    <div class="device-donut"></div>
-                    <div class="donut-legend">
-                        <div class="legend-item"><span class="legend-dot" style="background: var(--active-green);"></span>Online 40%</div>
-                        <div class="legend-item"><span class="legend-dot" style="background: var(--data-blue);"></span>Idle 25%</div>
-                        <div class="legend-item"><span class="legend-dot" style="background: var(--warning-orange);"></span>Warning 15%</div>
-                        <div class="legend-item"><span class="legend-dot" style="background: var(--offline-gray);"></span>Offline 20%</div>
-                    </div>
-                </div>
-                <div class="chart-container">
-                    <div class="chart-title">LATENCY HISTOGRAM</div>
-                    <div class="latency-chart">
-                        <div class="latency-bar good" style="height: 90%"></div>
-                        <div class="latency-bar good" style="height: 85%"></div>
-                        <div class="latency-bar good" style="height: 78%"></div>
-                        <div class="latency-bar moderate" style="height: 55%"></div>
-                        <div class="latency-bar moderate" style="height: 42%"></div>
-                        <div class="latency-bar high" style="height: 28%"></div>
-                        <div class="latency-bar high" style="height: 18%"></div>
-                        <div class="latency-bar critical" style="height: 8%"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 6. Data Tables -->
-        <section class="section">
-            <h2 class="section-title">DATA TABLES</h2>
-            <div class="data-table-container">
+            <!-- Section 3: Spacing & Grid -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">SPACING & GRID</h2>
+                    <span class="section-badge">03</span>
+                </div>
+                <div class="spacing-demo">
+                    <div class="spacing-item">
+                        <div class="spacing-box xs"></div>
+                        <span class="spacing-label">4px (xs)</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box sm"></div>
+                        <span class="spacing-label">8px (sm)</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box md"></div>
+                        <span class="spacing-label">16px (md)</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box lg"></div>
+                        <span class="spacing-label">24px (lg)</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box xl"></div>
+                        <span class="spacing-label">32px (xl)</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box xxl"></div>
+                        <span class="spacing-label">48px (2xl)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Metric Cards -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">METRIC CARDS</h2>
+                    <span class="section-badge">04</span>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-card green">
+                        <div class="metric-header">
+                            <div class="metric-icon">📱</div>
+                            <div class="metric-status"></div>
+                        </div>
+                        <div class="metric-label">Active Devices</div>
+                        <div class="metric-value">247</div>
+                        <div class="metric-change positive">↑ 12 from yesterday</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <div class="metric-icon">📊</div>
+                            <div class="metric-status"></div>
+                        </div>
+                        <div class="metric-label">Data Points/sec</div>
+                        <div class="metric-value">1,842</div>
+                        <div class="metric-change positive">↑ 8.3% throughput</div>
+                    </div>
+                    <div class="metric-card orange">
+                        <div class="metric-header">
+                            <div class="metric-icon">⚠️</div>
+                            <div class="metric-status" style="background: var(--warning-orange);"></div>
+                        </div>
+                        <div class="metric-label">Alerts Today</div>
+                        <div class="metric-value">23</div>
+                        <div class="metric-change negative">↑ 5 from average</div>
+                    </div>
+                    <div class="metric-card green">
+                        <div class="metric-header">
+                            <div class="metric-icon">✓</div>
+                            <div class="metric-status"></div>
+                        </div>
+                        <div class="metric-label">Uptime</div>
+                        <div class="metric-value">99.7%</div>
+                        <div class="metric-change positive">↑ 0.2% this week</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Charts -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">CSS-ONLY CHARTS</h2>
+                    <span class="section-badge">05</span>
+                </div>
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">
+                            <span>Sensor Readings (24h)</span>
+                            <div class="chart-legend">
+                                <span><span class="legend-dot" style="background: var(--data-blue);"></span>Temperature</span>
+                            </div>
+                        </div>
+                        <div class="bar-chart">
+                            <div class="bar-column">
+                                <div class="bar" style="height: 55%;"></div>
+                                <span class="bar-label">00:00</span>
+                            </div>
+                            <div class="bar-column">
+                                <div class="bar" style="height: 52%;"></div>
+                                <span class="bar-label">04:00</span>
+                            </div>
+                            <div class="bar-column">
+                                <div class="bar" style="height: 58%;"></div>
+                                <span class="bar-label">08:00</span>
+                            </div>
+                            <div class="bar-column">
+                                <div class="bar" style="height: 75%;"></div>
+                                <span class="bar-label">12:00</span>
+                            </div>
+                            <div class="bar-column">
+                                <div class="bar" style="height: 90%;"></div>
+                                <span class="bar-label">16:00</span>
+                            </div>
+                            <div class="bar-column">
+                                <div class="bar" style="height: 72%;"></div>
+                                <span class="bar-label">20:00</span>
+                            </div>
+                            <div class="bar-column">
+                                <div class="bar" style="height: 60%;"></div>
+                                <span class="bar-label">Now</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Device Types</div>
+                        <div class="donut-container">
+                            <div class="donut-chart">
+                                <div class="donut-center">
+                                    <div class="donut-value">247</div>
+                                    <div class="donut-label">Total</div>
+                                </div>
+                            </div>
+                            <div class="donut-legend">
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--active-green);"></div>
+                                    <span>Temperature</span>
+                                    <span class="legend-percent">45%</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--data-blue);"></div>
+                                    <span>Humidity</span>
+                                    <span class="legend-percent">25%</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--warning-orange);"></div>
+                                    <span>Motion</span>
+                                    <span class="legend-percent">20%</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--critical-red);"></div>
+                                    <span>Pressure</span>
+                                    <span class="legend-percent">10%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Data Tables -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">DATA TABLES</h2>
+                    <span class="section-badge">06</span>
+                </div>
                 <table class="data-table">
                     <thead>
                         <tr>
-                            <th>SENSOR ID</th>
-                            <th>TYPE</th>
-                            <th>STATUS</th>
-                            <th>LAST READING</th>
-                            <th>BATTERY</th>
+                            <th>Device ID</th>
+                            <th>Device</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Last Reading</th>
+                            <th>Battery</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="sensor-id">SNR-TMP-001</td>
+                            <td class="device-id">IOT-TMP-001</td>
                             <td>
-                                <div class="sensor-type">
-                                    <div class="type-icon temp">🌡</div>
-                                    Temperature
+                                <div class="device-info">
+                                    <div class="device-icon">🌡️</div>
+                                    <div>
+                                        <div class="device-name">Warehouse A - Temp</div>
+                                        <div class="device-type">Zone 1 · North Wing</div>
+                                    </div>
                                 </div>
                             </td>
-                            <td><span class="status-dot online"></span> Online</td>
-                            <td class="reading-cell">23.4°C</td>
+                            <td>Temperature</td>
+                            <td><span class="status-badge status-online">Online</span></td>
+                            <td class="reading-value">23.5°C</td>
                             <td>
-                                <div class="battery-cell">
-                                    <div class="battery-bar"><div class="battery-fill high" style="width: 92%;"></div></div>
-                                    <span class="battery-text">92%</span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="sensor-id">SNR-HUM-004</td>
-                            <td>
-                                <div class="sensor-type">
-                                    <div class="type-icon humidity">💧</div>
-                                    Humidity
-                                </div>
-                            </td>
-                            <td><span class="status-dot online"></span> Online</td>
-                            <td class="reading-cell">45.2% RH</td>
-                            <td>
-                                <div class="battery-cell">
-                                    <div class="battery-bar"><div class="battery-fill high" style="width: 78%;"></div></div>
-                                    <span class="battery-text">78%</span>
+                                <div class="battery-indicator">
+                                    <div class="battery-bar"><div class="battery-fill" style="width: 89%;"></div></div>
+                                    <span class="battery-percent">89%</span>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="sensor-id">SNR-PRS-012</td>
+                            <td class="device-id">IOT-HUM-023</td>
                             <td>
-                                <div class="sensor-type">
-                                    <div class="type-icon pressure">📊</div>
-                                    Pressure
+                                <div class="device-info">
+                                    <div class="device-icon">💧</div>
+                                    <div>
+                                        <div class="device-name">Server Room - Humidity</div>
+                                        <div class="device-type">Floor 2 · Main DC</div>
+                                    </div>
                                 </div>
                             </td>
-                            <td><span class="status-dot error"></span> Error</td>
-                            <td class="reading-cell">1013.25 hPa</td>
+                            <td>Humidity</td>
+                            <td><span class="status-badge status-online">Online</span></td>
+                            <td class="reading-value">45%</td>
                             <td>
-                                <div class="battery-cell">
-                                    <div class="battery-bar"><div class="battery-fill low" style="width: 12%;"></div></div>
-                                    <span class="battery-text">12%</span>
+                                <div class="battery-indicator">
+                                    <div class="battery-bar"><div class="battery-fill" style="width: 67%;"></div></div>
+                                    <span class="battery-percent">67%</span>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="sensor-id">SNR-MOT-007</td>
+                            <td class="device-id">IOT-MOT-089</td>
                             <td>
-                                <div class="sensor-type">
-                                    <div class="type-icon motion">👁</div>
-                                    Motion
+                                <div class="device-info">
+                                    <div class="device-icon">👁️</div>
+                                    <div>
+                                        <div class="device-name">Entrance - Motion</div>
+                                        <div class="device-type">Building B · Lobby</div>
+                                    </div>
                                 </div>
                             </td>
-                            <td><span class="status-dot offline"></span> Offline</td>
-                            <td class="reading-cell">No Signal</td>
+                            <td>Motion</td>
+                            <td><span class="status-badge status-warning">Warning</span></td>
+                            <td class="reading-value">Active</td>
                             <td>
-                                <div class="battery-cell">
-                                    <div class="battery-bar"><div class="battery-fill medium" style="width: 45%;"></div></div>
-                                    <span class="battery-text">45%</span>
+                                <div class="battery-indicator">
+                                    <div class="battery-bar"><div class="battery-fill medium" style="width: 32%;"></div></div>
+                                    <span class="battery-percent">32%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="device-id">IOT-PRS-045</td>
+                            <td>
+                                <div class="device-info">
+                                    <div class="device-icon">🔵</div>
+                                    <div>
+                                        <div class="device-name">HVAC - Pressure</div>
+                                        <div class="device-type">Mechanical Room</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Pressure</td>
+                            <td><span class="status-badge status-offline">Offline</span></td>
+                            <td class="reading-value" style="color: var(--text-muted);">--</td>
+                            <td>
+                                <div class="battery-indicator">
+                                    <div class="battery-bar"><div class="battery-fill low" style="width: 8%;"></div></div>
+                                    <span class="battery-percent">8%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="device-id">IOT-TMP-156</td>
+                            <td>
+                                <div class="device-info">
+                                    <div class="device-icon">🌡️</div>
+                                    <div>
+                                        <div class="device-name">Cold Storage - Temp</div>
+                                        <div class="device-type">Zone 3 · Freezer Unit</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Temperature</td>
+                            <td><span class="status-badge status-critical">Critical</span></td>
+                            <td class="reading-value" style="color: var(--critical-red);">-12.8°C</td>
+                            <td>
+                                <div class="battery-indicator">
+                                    <div class="battery-bar"><div class="battery-fill" style="width: 94%;"></div></div>
+                                    <span class="battery-percent">94%</span>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </section>
+            </section>
 
-        <!-- 7. Sidebar Navigation -->
-        <section class="section">
-            <h2 class="section-title">SIDEBAR NAVIGATION</h2>
-            <div class="sidebar-demo">
-                <div class="sidebar">
-                    <div class="sidebar-logo">
-                        <div class="logo-icon">◈</div>
-                        <div class="logo-text">NEXUS</div>
-                    </div>
+            <!-- Section 7: Sidebar Navigation -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">SIDEBAR NAVIGATION</h2>
+                    <span class="section-badge">07</span>
+                </div>
+                <div style="background: var(--bg-card); border-radius: var(--radius-lg); padding: var(--space-lg); border: 1px solid var(--border-subtle); max-width: 260px;">
                     <div class="nav-item active">
                         <span class="nav-icon">📊</span>
-                        Dashboard
+                        <span>Dashboard</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">📱</span>
+                        <span>Devices</span>
+                        <span class="nav-badge">247</span>
                     </div>
                     <div class="nav-item">
                         <span class="nav-icon">📡</span>
-                        Devices
+                        <span>Sensors</span>
                     </div>
                     <div class="nav-item">
-                        <span class="nav-icon">📈</span>
-                        Analytics
-                    </div>
-                    <div class="nav-item">
-                        <span class="nav-icon">🔔</span>
-                        Alerts
+                        <span class="nav-icon">⚠️</span>
+                        <span>Alerts</span>
                         <span class="nav-badge">7</span>
                     </div>
                     <div class="nav-item">
+                        <span class="nav-icon">📈</span>
+                        <span>Analytics</span>
+                    </div>
+                    <div class="nav-item">
                         <span class="nav-icon">⚙️</span>
-                        Settings
+                        <span>Settings</span>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 8. Forms & Filters -->
-        <section class="section">
-            <h2 class="section-title">FORMS & FILTERS</h2>
-            <div class="forms-grid">
-                <div class="form-card">
-                    <div class="form-title">DEVICE SEARCH</div>
-                    <div class="form-group">
-                        <label class="form-label">Device ID</label>
-                        <input type="text" class="form-input" placeholder="SNR-XXX-000">
+            <!-- Section 8: Forms & Filters -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">FORMS & FILTERS</h2>
+                    <span class="section-badge">08</span>
+                </div>
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label class="filter-label">Device Search</label>
+                        <input type="text" class="filter-input" placeholder="Search by ID...">
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Device Type</label>
-                        <select class="form-select">
+                    <div class="filter-group">
+                        <label class="filter-label">Status</label>
+                        <select class="filter-select">
+                            <option>All Status</option>
+                            <option>Online</option>
+                            <option>Warning</option>
+                            <option>Offline</option>
+                            <option>Critical</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Location</label>
+                        <select class="filter-select">
+                            <option>All Locations</option>
+                            <option>Warehouse A</option>
+                            <option>Server Room</option>
+                            <option>Building B</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Sensor Type</label>
+                        <select class="filter-select">
                             <option>All Types</option>
                             <option>Temperature</option>
                             <option>Humidity</option>
-                            <option>Pressure</option>
                             <option>Motion</option>
+                            <option>Pressure</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-card">
-                    <div class="form-title">FILTERS</div>
-                    <div class="form-group">
-                        <label class="form-label">Status</label>
-                        <select class="form-select">
-                            <option>All Statuses</option>
-                            <option>Online</option>
-                            <option>Offline</option>
-                            <option>Error</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Location</label>
-                        <select class="form-select">
-                            <option>All Locations</option>
-                            <option>Building A</option>
-                            <option>Building B</option>
-                            <option>Warehouse</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 9. Buttons -->
-        <section class="section">
-            <h2 class="section-title">BUTTONS</h2>
-            <div class="buttons-showcase">
-                <button class="btn btn-primary">Refresh Data</button>
-                <button class="btn btn-success">Add Device</button>
-                <button class="btn btn-warning">Acknowledge</button>
-                <button class="btn btn-danger">Emergency Stop</button>
-                <button class="btn btn-outline">Export</button>
-            </div>
-        </section>
+            <!-- Section 9: Buttons -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">BUTTONS</h2>
+                    <span class="section-badge">09</span>
+                </div>
+                <div class="buttons-grid">
+                    <button class="btn btn-primary">➕ Add Device</button>
+                    <button class="btn btn-success">⚙️ Configure Sensor</button>
+                    <button class="btn btn-secondary">📊 Export Data</button>
+                    <button class="btn btn-secondary">🔄 Refresh All</button>
+                </div>
+            </section>
 
-        <!-- 10. Status Indicators -->
-        <section class="section">
-            <h2 class="section-title">STATUS INDICATORS</h2>
-            <div class="status-grid">
-                <div class="status-group">
-                    <div class="status-group-title">Device Status</div>
-                    <span class="status-badge online">● Online</span>
-                    <span class="status-badge offline">○ Offline</span>
-                    <span class="status-badge error">✕ Error</span>
+            <!-- Section 10: Status Indicators -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">STATUS INDICATORS</h2>
+                    <span class="section-badge">10</span>
                 </div>
-                <div class="status-group">
-                    <div class="status-group-title">Battery Level</div>
-                    <div class="battery-indicator">
-                        <span class="battery-icon">🔋</span>
-                        <span class="battery-level high">92%</span>
-                    </div>
-                    <div class="battery-indicator">
-                        <span class="battery-icon">🪫</span>
-                        <span class="battery-level low">12%</span>
-                    </div>
+                <div class="status-grid">
+                    <span class="status-badge status-online">Online</span>
+                    <span class="status-badge status-warning">Warning</span>
+                    <span class="status-badge status-offline">Offline</span>
+                    <span class="status-badge status-critical">Critical</span>
                 </div>
-                <div class="status-group">
-                    <div class="status-group-title">Signal Strength</div>
-                    <div style="display: flex; gap: var(--space-md);">
-                        <div class="signal-bars">
-                            <div class="signal-bar active" style="height: 4px;"></div>
-                            <div class="signal-bar active" style="height: 8px;"></div>
-                            <div class="signal-bar active" style="height: 12px;"></div>
-                            <div class="signal-bar active" style="height: 16px;"></div>
+            </section>
+
+            <!-- Section 11: Widget Cards -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">WIDGET CARDS</h2>
+                    <span class="section-badge">11</span>
+                </div>
+                <div class="widgets-grid">
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">Critical Alerts</span>
+                            <span class="widget-action">View All</span>
                         </div>
-                        <div class="signal-bars">
-                            <div class="signal-bar active" style="height: 4px;"></div>
-                            <div class="signal-bar active" style="height: 8px;"></div>
-                            <div class="signal-bar" style="height: 12px;"></div>
-                            <div class="signal-bar" style="height: 16px;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 11. Widget Cards -->
-        <section class="section">
-            <h2 class="section-title">WIDGET CARDS</h2>
-            <div class="widgets-grid">
-                <div class="widget-card">
-                    <div class="widget-header">
-                        <span class="widget-title">RECENT ALERTS</span>
-                    </div>
-                    <div class="widget-content">
-                        <div class="alert-list">
-                            <div class="alert-item">
-                                <div class="alert-severity critical"></div>
-                                <div class="alert-info">
-                                    <div class="alert-text">Sensor offline: SNR-MOT-007</div>
-                                    <div class="alert-time">2 min ago</div>
+                        <div class="widget-list">
+                            <div class="widget-item">
+                                <div class="widget-icon alert">🔴</div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Cold Storage Temp High</div>
+                                    <div class="widget-meta">IOT-TMP-156 · 2 min ago</div>
                                 </div>
+                                <span class="widget-stat critical">-12.8°C</span>
                             </div>
-                            <div class="alert-item">
-                                <div class="alert-severity warning"></div>
-                                <div class="alert-info">
-                                    <div class="alert-text">Low battery: SNR-PRS-012</div>
-                                    <div class="alert-time">15 min ago</div>
+                            <div class="widget-item">
+                                <div class="widget-icon alert">🔴</div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Server Humidity Alert</div>
+                                    <div class="widget-meta">IOT-HUM-089 · 15 min ago</div>
                                 </div>
+                                <span class="widget-stat critical">78%</span>
                             </div>
-                            <div class="alert-item">
-                                <div class="alert-severity info"></div>
-                                <div class="alert-info">
-                                    <div class="alert-text">Firmware update available</div>
-                                    <div class="alert-time">1 hour ago</div>
+                            <div class="widget-item">
+                                <div class="widget-icon warning">🟠</div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Low Battery Warning</div>
+                                    <div class="widget-meta">IOT-MOT-089 · 1 hr ago</div>
                                 </div>
+                                <span class="widget-stat warning">32%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">Offline Devices</span>
+                            <span class="widget-action">View All</span>
+                        </div>
+                        <div class="widget-list">
+                            <div class="widget-item">
+                                <div class="widget-icon">📱</div>
+                                <div class="widget-info">
+                                    <div class="widget-name">HVAC Pressure Sensor</div>
+                                    <div class="widget-meta">IOT-PRS-045 · Offline 3h</div>
+                                </div>
+                                <span class="widget-stat" style="color: var(--offline-gray);">8%</span>
+                            </div>
+                            <div class="widget-item">
+                                <div class="widget-icon">📱</div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Parking Motion Sensor</div>
+                                    <div class="widget-meta">IOT-MOT-234 · Offline 6h</div>
+                                </div>
+                                <span class="widget-stat" style="color: var(--offline-gray);">0%</span>
+                            </div>
+                            <div class="widget-item">
+                                <div class="widget-icon">📱</div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Rooftop Temp Sensor</div>
+                                    <div class="widget-meta">IOT-TMP-312 · Offline 12h</div>
+                                </div>
+                                <span class="widget-stat" style="color: var(--offline-gray);">--</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">Recent Readings</span>
+                            <span class="widget-action">View All</span>
+                        </div>
+                        <div class="widget-list">
+                            <div class="widget-item">
+                                <div class="widget-icon">🌡️</div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Warehouse A Temp</div>
+                                    <div class="widget-meta">IOT-TMP-001 · Just now</div>
+                                </div>
+                                <span class="widget-stat success">23.5°C</span>
+                            </div>
+                            <div class="widget-item">
+                                <div class="widget-icon">💧</div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Server Room Humidity</div>
+                                    <div class="widget-meta">IOT-HUM-023 · 30s ago</div>
+                                </div>
+                                <span class="widget-stat success">45%</span>
+                            </div>
+                            <div class="widget-item">
+                                <div class="widget-icon">🔵</div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Main Duct Pressure</div>
+                                    <div class="widget-meta">IOT-PRS-012 · 1 min ago</div>
+                                </div>
+                                <span class="widget-stat success">101.3 kPa</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="widget-card">
-                    <div class="widget-header">
-                        <span class="widget-title">MAINTENANCE</span>
-                    </div>
-                    <div class="widget-content">
-                        <div class="schedule-item">
-                            <div class="schedule-date">
-                                <div class="schedule-day">15</div>
-                                <div class="schedule-month">FEB</div>
-                            </div>
-                            <div class="schedule-info">
-                                <div class="schedule-title">Battery Replacement</div>
-                                <div class="schedule-type">Building A - Zone 3</div>
-                            </div>
-                        </div>
-                        <div class="schedule-item">
-                            <div class="schedule-date">
-                                <div class="schedule-day">22</div>
-                                <div class="schedule-month">FEB</div>
-                            </div>
-                            <div class="schedule-info">
-                                <div class="schedule-title">Firmware Update</div>
-                                <div class="schedule-type">All Devices</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="widget-card">
-                    <div class="widget-header">
-                        <span class="widget-title">FIRMWARE</span>
-                    </div>
-                    <div class="widget-content">
-                        <div style="text-align: center;">
-                            <div style="font-family: var(--font-display); font-size: 2rem; color: var(--warning-orange);">12</div>
-                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: var(--space-md);">Updates Available</div>
-                            <button class="btn btn-outline" style="width: 100%;">Update All</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 12. Alerts & Notifications -->
-        <section class="section">
-            <h2 class="section-title">ALERTS & NOTIFICATIONS</h2>
-            <div class="alerts-showcase">
-                <div class="alert success">
-                    <div class="alert-icon">✓</div>
-                    <div class="alert-content">
-                        <div class="alert-title">SENSOR RESTORED</div>
-                        <div class="alert-message">SNR-TMP-001 is back online and reporting normal readings.</div>
+            <!-- Section 12: Alerts & Notifications -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">ALERTS & NOTIFICATIONS</h2>
+                    <span class="section-badge">12</span>
+                </div>
+                <div class="alerts-stack">
+                    <div class="alert alert-success">
+                        <span class="alert-icon">✓</span>
+                        <div class="alert-content">
+                            <div class="alert-title">Device Connected</div>
+                            <div class="alert-message">IOT-TMP-001 is back online and transmitting data.</div>
+                        </div>
+                        <span class="alert-time">2 min ago</span>
+                    </div>
+                    <div class="alert alert-info">
+                        <span class="alert-icon">ℹ</span>
+                        <div class="alert-content">
+                            <div class="alert-title">Firmware Update Available</div>
+                            <div class="alert-message">12 devices have pending firmware updates.</div>
+                        </div>
+                        <span class="alert-time">1 hr ago</span>
+                    </div>
+                    <div class="alert alert-warning">
+                        <span class="alert-icon">⚠</span>
+                        <div class="alert-content">
+                            <div class="alert-title">Battery Low</div>
+                            <div class="alert-message">IOT-MOT-089 battery at 32%. Replace soon.</div>
+                        </div>
+                        <span class="alert-time">3 hr ago</span>
+                    </div>
+                    <div class="alert alert-error">
+                        <span class="alert-icon">✕</span>
+                        <div class="alert-content">
+                            <div class="alert-title">Sensor Failure</div>
+                            <div class="alert-message">IOT-PRS-045 has stopped responding. Check connection.</div>
+                        </div>
+                        <span class="alert-time">5 hr ago</span>
                     </div>
                 </div>
-                <div class="alert warning">
-                    <div class="alert-icon">⚠️</div>
-                    <div class="alert-content">
-                        <div class="alert-title">LOW BATTERY WARNING</div>
-                        <div class="alert-message">SNR-PRS-012 battery at 12%. Schedule replacement soon.</div>
-                    </div>
-                </div>
-                <div class="alert critical">
-                    <div class="alert-icon">🔴</div>
-                    <div class="alert-content">
-                        <div class="alert-title">SENSOR OFFLINE</div>
-                        <div class="alert-message">SNR-MOT-007 has been unresponsive for 15 minutes.</div>
-                    </div>
-                </div>
-                <div class="alert info">
-                    <div class="alert-icon">ℹ️</div>
-                    <div class="alert-content">
-                        <div class="alert-title">FIRMWARE UPDATE</div>
-                        <div class="alert-message">New firmware v2.4.1 available for 12 devices.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 13. Special: Real-time Sensor Grid -->
-        <section class="section">
-            <h2 class="section-title">SPECIAL: REAL-TIME SENSOR GRID</h2>
-            <div class="sensor-grid-container">
-                <div class="sensor-grid-header">
-                    <div class="sensor-grid-title">
-                        <span class="live-indicator"></span>
-                        LIVE SENSOR DATA
-                    </div>
-                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">Last update: 2s ago</span>
+            <!-- Section 13: Special Component - Live Sensor Feed -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">LIVE SENSOR FEED</h2>
+                    <span class="section-badge">13 · SPECIAL</span>
                 </div>
-                <div class="sensor-grid">
-                    <div class="sensor-node online">
-                        <div class="node-id">SNR-TMP-001</div>
-                        <div class="node-type">Temperature</div>
-                        <div class="node-reading">23.4<span class="unit">°C</span></div>
-                        <div class="node-timestamp">2s ago</div>
+                <div class="sensor-feed">
+                    <div class="feed-header">
+                        <div class="feed-title">
+                            <h3>Real-time Data Stream</h3>
+                            <div class="live-indicator">
+                                <div class="live-dot"></div>
+                                <span>LIVE</span>
+                            </div>
+                        </div>
+                        <div class="feed-stats">
+                            <div class="feed-stat">Throughput: <span>1,842/s</span></div>
+                            <div class="feed-stat">Latency: <span>12ms</span></div>
+                        </div>
                     </div>
-                    <div class="sensor-node online">
-                        <div class="node-id">SNR-HUM-004</div>
-                        <div class="node-type">Humidity</div>
-                        <div class="node-reading">45.2<span class="unit">%</span></div>
-                        <div class="node-timestamp">1s ago</div>
-                    </div>
-                    <div class="sensor-node warning">
-                        <div class="node-id">SNR-PRS-012</div>
-                        <div class="node-type">Pressure</div>
-                        <div class="node-reading">1013<span class="unit">hPa</span></div>
-                        <div class="node-timestamp">5s ago</div>
-                    </div>
-                    <div class="sensor-node offline">
-                        <div class="node-id">SNR-MOT-007</div>
-                        <div class="node-type">Motion</div>
-                        <div class="node-reading">--<span class="unit"></span></div>
-                        <div class="node-timestamp">15m ago</div>
-                    </div>
-                    <div class="sensor-node online">
-                        <div class="node-id">SNR-TMP-002</div>
-                        <div class="node-type">Temperature</div>
-                        <div class="node-reading">21.8<span class="unit">°C</span></div>
-                        <div class="node-timestamp">3s ago</div>
-                    </div>
-                    <div class="sensor-node online">
-                        <div class="node-id">SNR-HUM-005</div>
-                        <div class="node-type">Humidity</div>
-                        <div class="node-reading">52.1<span class="unit">%</span></div>
-                        <div class="node-timestamp">2s ago</div>
-                    </div>
-                    <div class="sensor-node critical">
-                        <div class="node-id">SNR-TMP-009</div>
-                        <div class="node-type">Temperature</div>
-                        <div class="node-reading">38.7<span class="unit">°C</span></div>
-                        <div class="node-timestamp">1s ago</div>
-                    </div>
-                    <div class="sensor-node online">
-                        <div class="node-id">SNR-PRS-003</div>
-                        <div class="node-type">Pressure</div>
-                        <div class="node-reading">1015<span class="unit">hPa</span></div>
-                        <div class="node-timestamp">4s ago</div>
+                    <div class="feed-container">
+                        <div class="feed-list">
+                            <div class="feed-item">
+                                <span class="feed-sensor">IOT-TMP-001</span>
+                                <span class="feed-reading">Temperature <span>Warehouse A</span></span>
+                                <span class="feed-value success">23.5°C</span>
+                                <span class="feed-time">00:00:01</span>
+                            </div>
+                            <div class="feed-item">
+                                <span class="feed-sensor">IOT-HUM-023</span>
+                                <span class="feed-reading">Humidity <span>Server Room</span></span>
+                                <span class="feed-value success">45%</span>
+                                <span class="feed-time">00:00:02</span>
+                            </div>
+                            <div class="feed-item warning">
+                                <span class="feed-sensor">IOT-TMP-089</span>
+                                <span class="feed-reading">Temperature <span>Cold Storage</span></span>
+                                <span class="feed-value warning">-8.2°C</span>
+                                <span class="feed-time">00:00:03</span>
+                            </div>
+                            <div class="feed-item">
+                                <span class="feed-sensor">IOT-PRS-012</span>
+                                <span class="feed-reading">Pressure <span>Main Duct</span></span>
+                                <span class="feed-value success">101.3 kPa</span>
+                                <span class="feed-time">00:00:04</span>
+                            </div>
+                            <div class="feed-item critical">
+                                <span class="feed-sensor">IOT-TMP-156</span>
+                                <span class="feed-reading">Temperature <span>Freezer Unit</span></span>
+                                <span class="feed-value critical">-12.8°C</span>
+                                <span class="feed-time">00:00:05</span>
+                            </div>
+                            <div class="feed-item">
+                                <span class="feed-sensor">IOT-HUM-045</span>
+                                <span class="feed-reading">Humidity <span>Lab Area</span></span>
+                                <span class="feed-value success">52%</span>
+                                <span class="feed-time">00:00:06</span>
+                            </div>
+                            <div class="feed-item">
+                                <span class="feed-sensor">IOT-TMP-078</span>
+                                <span class="feed-reading">Temperature <span>Office Floor 3</span></span>
+                                <span class="feed-value success">22.1°C</span>
+                                <span class="feed-time">00:00:07</span>
+                            </div>
+                            <div class="feed-item">
+                                <span class="feed-sensor">IOT-MOT-034</span>
+                                <span class="feed-reading">Motion <span>Entrance B</span></span>
+                                <span class="feed-value success">Idle</span>
+                                <span class="feed-time">00:00:08</span>
+                            </div>
+                            <!-- Duplicate for scroll animation -->
+                            <div class="feed-item">
+                                <span class="feed-sensor">IOT-TMP-001</span>
+                                <span class="feed-reading">Temperature <span>Warehouse A</span></span>
+                                <span class="feed-value success">23.6°C</span>
+                                <span class="feed-time">00:00:09</span>
+                            </div>
+                            <div class="feed-item">
+                                <span class="feed-sensor">IOT-HUM-023</span>
+                                <span class="feed-reading">Humidity <span>Server Room</span></span>
+                                <span class="feed-value success">44%</span>
+                                <span class="feed-time">00:00:10</span>
+                            </div>
+                            <div class="feed-item warning">
+                                <span class="feed-sensor">IOT-TMP-089</span>
+                                <span class="feed-reading">Temperature <span>Cold Storage</span></span>
+                                <span class="feed-value warning">-8.5°C</span>
+                                <span class="feed-time">00:00:11</span>
+                            </div>
+                            <div class="feed-item">
+                                <span class="feed-sensor">IOT-PRS-012</span>
+                                <span class="feed-reading">Pressure <span>Main Duct</span></span>
+                                <span class="feed-value success">101.2 kPa</span>
+                                <span class="feed-time">00:00:12</span>
+                            </div>
+                            <div class="feed-item critical">
+                                <span class="feed-sensor">IOT-TMP-156</span>
+                                <span class="feed-reading">Temperature <span>Freezer Unit</span></span>
+                                <span class="feed-value critical">-12.9°C</span>
+                                <span class="feed-time">00:00:13</span>
+                            </div>
+                            <div class="feed-item">
+                                <span class="feed-sensor">IOT-HUM-045</span>
+                                <span class="feed-reading">Humidity <span>Lab Area</span></span>
+                                <span class="feed-value success">51%</span>
+                                <span class="feed-time">00:00:14</span>
+                            </div>
+                            <div class="feed-item">
+                                <span class="feed-sensor">IOT-TMP-078</span>
+                                <span class="feed-reading">Temperature <span>Office Floor 3</span></span>
+                                <span class="feed-value success">22.0°C</span>
+                                <span class="feed-time">00:00:15</span>
+                            </div>
+                            <div class="feed-item">
+                                <span class="feed-sensor">IOT-MOT-034</span>
+                                <span class="feed-reading">Motion <span>Entrance B</span></span>
+                                <span class="feed-value success">Active</span>
+                                <span class="feed-time">00:00:16</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Footer -->
-        <footer class="dashboard-footer">
-            <div class="footer-logo">NEXUS IOT v1.0</div>
-            <p class="footer-text">IoT Sensor Dashboard Style Guide</p>
-        </footer>
+        </main>
     </div>
 </body>
 </html>

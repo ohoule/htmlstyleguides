@@ -1,0 +1,2051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tallow v1.0 — SaaS Landing Page Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500;1,9..144,600&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            /* Brand */
+            --forest: #2B5329;
+            --forest-light: #3A7237;
+            --forest-dark: #1C3A1B;
+            --forest-bg: #EEF4ED;
+            --honey: #C49B2A;
+            --honey-light: #DABA56;
+            --honey-dark: #A17F1A;
+            --honey-bg: #FDF6E3;
+
+            /* Surfaces */
+            --cream: #FAF7F0;
+            --warm-white: #FEFDFB;
+
+            /* Neutrals — warm olive tint */
+            --ink: #1E2118;
+            --olive-900: #2C3024;
+            --olive-800: #404638;
+            --olive-700: #585F4D;
+            --olive-600: #727963;
+            --olive-500: #949A84;
+            --olive-400: #B6BBA8;
+            --olive-300: #D3D7CA;
+            --olive-200: #E7EAE0;
+            --olive-100: #F3F5EF;
+            --white: #FFFFFF;
+
+            /* Semantic */
+            --success: #2E7D32;
+            --success-bg: #E8F5E9;
+            --success-border: #A5D6A7;
+            --warning: #E6A817;
+            --warning-bg: #FFF8E1;
+            --warning-border: #FFE082;
+            --error: #C62828;
+            --error-bg: #FFEBEE;
+            --error-border: #EF9A9A;
+            --info: #0277BD;
+            --info-bg: #E1F5FE;
+            --info-border: #81D4FA;
+
+            /* Typography */
+            --font-display: 'Fraunces', serif;
+            --font-body: 'Source Sans 3', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+
+            /* Spacing — 8px base */
+            --sp-1: 4px;
+            --sp-2: 8px;
+            --sp-3: 12px;
+            --sp-4: 16px;
+            --sp-5: 24px;
+            --sp-6: 32px;
+            --sp-7: 48px;
+            --sp-8: 64px;
+            --sp-9: 96px;
+
+            /* Shadows — warm, green-tinted */
+            --shadow-xs: 0 1px 2px rgba(43,83,41,0.04);
+            --shadow-sm: 0 2px 6px rgba(43,83,41,0.06);
+            --shadow-md: 0 4px 14px rgba(43,83,41,0.08);
+            --shadow-lg: 0 12px 32px rgba(43,83,41,0.10);
+            --shadow-xl: 0 20px 48px rgba(43,83,41,0.14);
+
+            /* Radii — softer, more organic */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 20px;
+
+            /* Motion */
+            --ease: 200ms ease;
+            --ease-slow: 300ms ease;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--ink);
+            background: var(--cream);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ————— Layout ————— */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--sp-5);
+        }
+
+        section { padding: var(--sp-9) 0; }
+        section.alt { background: var(--white); }
+        section.dark { background: var(--forest-dark); color: var(--olive-200); }
+
+        /* ————— Section Header ————— */
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: var(--sp-4);
+            margin-bottom: var(--sp-7);
+            padding-bottom: var(--sp-5);
+            border-bottom: 2px solid var(--olive-200);
+        }
+
+        .section-num {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--forest);
+            opacity: 0.25;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: -0.01em;
+        }
+
+        section.dark .section-header { border-bottom-color: rgba(255,255,255,0.12); }
+        section.dark .section-header h2 { color: var(--olive-100); }
+
+        .section-desc {
+            color: var(--olive-600);
+            font-size: 1rem;
+            margin-top: calc(-1 * var(--sp-6));
+            margin-bottom: var(--sp-7);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        /* ————— Group Divider ————— */
+        .group-divider {
+            background: var(--forest-bg);
+            padding: var(--sp-7) 0;
+            border-top: 3px solid var(--forest);
+            border-bottom: 1px solid var(--olive-200);
+        }
+
+        .group-divider h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--olive-700);
+            margin-bottom: var(--sp-2);
+        }
+
+        .group-divider p {
+            color: var(--olive-500);
+            font-size: 0.9375rem;
+        }
+
+        /* ————— Utility ————— */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5); }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-5); }
+        .flex-row { display: flex; flex-wrap: wrap; gap: var(--sp-4); align-items: center; }
+        .flex-col { display: flex; flex-direction: column; gap: var(--sp-4); }
+
+        .label {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--olive-500);
+            margin-bottom: var(--sp-3);
+        }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            section { padding: var(--sp-8) 0; }
+            .section-num { font-size: 2.2rem; }
+            .section-header h2 { font-size: 1.4rem; }
+        }
+
+        /* ===========================
+           SITE HEADER
+        =========================== */
+        .site-header {
+            background: var(--forest-dark);
+            color: var(--cream);
+            padding: var(--sp-9) 0 var(--sp-8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .site-header::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -20%;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(196,155,42,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .site-header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%; left: -10%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(58,114,55,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .site-header .container { position: relative; z-index: 1; }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--honey-light);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: var(--sp-1) var(--sp-3);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--sp-5);
+            letter-spacing: 0.04em;
+        }
+
+        .header-badge .dot {
+            width: 6px; height: 6px;
+            background: var(--honey);
+            border-radius: 50%;
+        }
+
+        .header-title {
+            font-family: var(--font-display);
+            font-size: clamp(4.5rem, 11vw, 9rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 0.9;
+            color: var(--cream);
+            margin-bottom: var(--sp-5);
+        }
+
+        .header-title em {
+            font-style: italic;
+            color: var(--honey);
+            font-weight: 500;
+        }
+
+        .header-subtitle {
+            font-size: 1.125rem;
+            color: var(--olive-400);
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: var(--sp-7);
+            margin-top: var(--sp-7);
+            padding-top: var(--sp-5);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+        }
+
+        .header-meta dt {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--olive-500);
+            margin-bottom: var(--sp-1);
+        }
+
+        .header-meta dd {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--honey-light);
+        }
+
+        /* ===========================
+           NAV BAR
+        =========================== */
+        .nav-demo {
+            background: var(--white);
+            border: 1px solid var(--olive-200);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--sp-4) var(--sp-5);
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .nav-logo em {
+            font-style: italic;
+            color: var(--forest);
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-6);
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--olive-600);
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+
+        .nav-links a:hover { color: var(--forest); }
+
+        .nav-dark {
+            background: var(--forest-dark);
+            border-color: rgba(255,255,255,0.08);
+        }
+
+        .nav-dark .nav-logo { color: var(--cream); }
+        .nav-dark .nav-logo em { color: var(--honey-light); }
+        .nav-dark .nav-links a { color: var(--olive-400); }
+        .nav-dark .nav-links a:hover { color: var(--cream); }
+
+        .nav-mobile {
+            max-width: 375px;
+            border: 1px solid var(--olive-200);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-mobile .nav-bar { padding: var(--sp-3) var(--sp-4); }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--ink);
+            border-radius: 2px;
+        }
+
+        /* ===========================
+           HERO PATTERN
+        =========================== */
+        .hero-demo {
+            background: var(--white);
+            border: 1px solid var(--olive-200);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-inner {
+            padding: var(--sp-9) var(--sp-7);
+            text-align: center;
+            position: relative;
+            background: linear-gradient(170deg, var(--forest-bg) 0%, var(--cream) 40%, var(--white) 100%);
+        }
+
+        .hero-kicker {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--forest);
+            margin-bottom: var(--sp-4);
+        }
+
+        .hero-headline {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            max-width: 680px;
+            margin: 0 auto var(--sp-5);
+        }
+
+        .hero-headline em {
+            font-style: italic;
+            color: var(--forest);
+        }
+
+        .hero-sub {
+            font-size: 1.125rem;
+            color: var(--olive-600);
+            max-width: 500px;
+            margin: 0 auto var(--sp-6);
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: var(--sp-4);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-7);
+        }
+
+        .hero-proof {
+            font-size: 0.8125rem;
+            color: var(--olive-500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp-2);
+        }
+
+        .hero-proof .dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .hero-proof .dots span {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--forest-light);
+        }
+
+        /* ===========================
+           BUTTONS
+        =========================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp-2);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            border: 2px solid transparent;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--ease);
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1;
+        }
+
+        .btn:focus-visible {
+            outline: 2px solid var(--forest);
+            outline-offset: 2px;
+        }
+
+        .btn-sm { padding: 8px 18px; font-size: 0.8125rem; }
+        .btn-md { padding: 12px 26px; font-size: 0.9375rem; }
+        .btn-lg { padding: 16px 34px; font-size: 1rem; }
+
+        .btn-primary {
+            background: var(--forest);
+            color: var(--white);
+            border-color: var(--forest);
+        }
+        .btn-primary:hover { background: var(--forest-dark); border-color: var(--forest-dark); }
+        .btn-primary:active { transform: translateY(1px); }
+        .btn-primary:disabled, .btn-primary.disabled {
+            background: var(--olive-300);
+            border-color: var(--olive-300);
+            color: var(--olive-500);
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: var(--ink);
+            color: var(--cream);
+            border-color: var(--ink);
+        }
+        .btn-secondary:hover { background: var(--olive-800); border-color: var(--olive-800); }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--ink);
+            border-color: var(--olive-300);
+        }
+        .btn-ghost:hover { border-color: var(--forest); color: var(--forest); background: var(--forest-bg); }
+
+        .btn-text {
+            background: none;
+            border: none;
+            color: var(--forest);
+            padding: 0;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: var(--olive-300);
+            cursor: pointer;
+            font-size: 0.9375rem;
+            font-family: var(--font-body);
+            transition: all var(--ease);
+        }
+        .btn-text:hover { color: var(--forest-dark); text-decoration-color: var(--forest); }
+        .btn-text:focus-visible { outline: 2px solid var(--forest); outline-offset: 2px; }
+
+        /* ===========================
+           FORMS
+        =========================== */
+        .form-group { display: flex; flex-direction: column; gap: var(--sp-2); }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--olive-800);
+        }
+
+        .form-input {
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            padding: 12px 16px;
+            border: 2px solid var(--olive-200);
+            border-radius: var(--radius-md);
+            background: var(--white);
+            color: var(--ink);
+            transition: border-color var(--ease), box-shadow var(--ease);
+            outline: none;
+            width: 100%;
+        }
+
+        .form-input::placeholder { color: var(--olive-400); }
+        .form-input:hover { border-color: var(--olive-300); }
+        .form-input:focus { border-color: var(--forest); box-shadow: 0 0 0 3px var(--forest-bg); }
+        .form-input.error { border-color: var(--error); }
+        .form-input.error:focus { box-shadow: 0 0 0 3px var(--error-bg); }
+        .form-input:disabled { background: var(--olive-100); color: var(--olive-500); cursor: not-allowed; }
+
+        .form-error {
+            font-size: 0.8125rem;
+            color: var(--error);
+        }
+
+        select.form-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23727963' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5-5h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+        }
+
+        .toggle {
+            position: relative;
+            width: 48px;
+            height: 26px;
+            background: var(--olive-300);
+            border-radius: 26px;
+            cursor: pointer;
+            transition: background var(--ease);
+            border: none;
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px; left: 3px;
+            width: 20px; height: 20px;
+            background: var(--white);
+            border-radius: 50%;
+            transition: transform var(--ease);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .toggle.on { background: var(--forest); }
+        .toggle.on::after { transform: translateX(22px); }
+        .toggle:focus-visible { outline: 2px solid var(--forest); outline-offset: 2px; }
+
+        .signup-form-demo {
+            background: var(--white);
+            border: 2px solid var(--olive-200);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+            max-width: 480px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .signup-form-demo h4 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: var(--sp-2);
+        }
+
+        .signup-form-demo p {
+            color: var(--olive-600);
+            font-size: 0.875rem;
+            margin-bottom: var(--sp-5);
+        }
+
+        .inline-form {
+            display: flex;
+            gap: var(--sp-3);
+        }
+
+        .inline-form .form-input { flex: 1; }
+
+        /* ===========================
+           CARDS
+        =========================== */
+        .card {
+            background: var(--white);
+            border: 1px solid var(--olive-200);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: box-shadow var(--ease), transform var(--ease);
+        }
+
+        .card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+        .card-body { padding: var(--sp-5); }
+
+        .card-feature {
+            border-top: 3px solid var(--forest);
+        }
+
+        .card-feature .card-icon {
+            width: 44px; height: 44px;
+            background: var(--forest-bg);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--sp-4);
+            color: var(--forest);
+            font-size: 1.2rem;
+        }
+
+        .card-feature h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: var(--sp-2);
+            color: var(--ink);
+        }
+
+        .card-feature p {
+            font-size: 0.9375rem;
+            color: var(--olive-600);
+            line-height: 1.6;
+        }
+
+        .card-stat {
+            border-left: 3px solid var(--honey);
+            background: var(--white);
+            padding: var(--sp-5);
+            border-radius: var(--radius-md);
+        }
+
+        .card-stat .stat-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--olive-500);
+            margin-bottom: var(--sp-1);
+        }
+
+        .card-stat .stat-value {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1.1;
+        }
+
+        .card-stat .stat-change {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            margin-top: var(--sp-2);
+        }
+
+        .card-stat .stat-change.up { color: var(--success); }
+        .card-stat .stat-change.down { color: var(--error); }
+
+        .card-testimonial {
+            border-left: 3px solid var(--honey);
+            padding: var(--sp-6);
+            background: var(--white);
+            border-radius: var(--radius-lg);
+        }
+
+        .card-testimonial blockquote {
+            font-size: 1.0625rem;
+            line-height: 1.7;
+            color: var(--olive-800);
+            margin-bottom: var(--sp-5);
+        }
+
+        .card-testimonial blockquote::before {
+            content: '"';
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-style: italic;
+            color: var(--honey);
+            line-height: 0;
+            display: block;
+            margin-bottom: var(--sp-3);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+
+        .testimonial-avatar {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: var(--forest-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--forest);
+            flex-shrink: 0;
+        }
+
+        .testimonial-name { font-weight: 600; font-size: 0.9375rem; }
+        .testimonial-role { font-size: 0.8125rem; color: var(--olive-500); }
+
+        .card-pricing {
+            border: 2px solid var(--olive-200);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+            background: var(--white);
+            text-align: center;
+            transition: all var(--ease);
+        }
+
+        .card-pricing:hover { border-color: var(--olive-300); box-shadow: var(--shadow-lg); }
+
+        .card-pricing.recommended {
+            border-color: var(--forest);
+            position: relative;
+        }
+
+        .card-pricing.recommended::before {
+            content: 'RECOMMENDED';
+            position: absolute;
+            top: -1px; left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            background: var(--forest);
+            color: var(--white);
+            padding: 4px 16px;
+            border-radius: 20px;
+        }
+
+        .card-pricing .tier-name {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: var(--sp-2);
+        }
+
+        .card-pricing .tier-price {
+            font-family: var(--font-display);
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: var(--sp-1);
+            color: var(--ink);
+        }
+
+        .card-pricing .tier-price span {
+            font-size: 1.1rem;
+            color: var(--olive-500);
+            font-weight: 400;
+        }
+
+        .card-pricing .tier-desc {
+            font-size: 0.875rem;
+            color: var(--olive-500);
+            margin-bottom: var(--sp-5);
+        }
+
+        .card-pricing ul {
+            list-style: none;
+            text-align: left;
+            margin-bottom: var(--sp-5);
+        }
+
+        .card-pricing li {
+            padding: var(--sp-2) 0;
+            font-size: 0.9375rem;
+            color: var(--olive-700);
+            border-bottom: 1px solid var(--olive-100);
+            display: flex;
+            align-items: center;
+            gap: var(--sp-2);
+        }
+
+        .card-pricing li::before {
+            content: '✓';
+            color: var(--forest);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* ===========================
+           BADGES
+        =========================== */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-1);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            padding: 4px 12px;
+        }
+
+        .badge-sm { font-size: 0.65rem; padding: 3px 8px; }
+
+        .badge-forest { background: var(--forest-bg); color: var(--forest); }
+        .badge-honey { background: var(--honey-bg); color: var(--honey-dark); }
+        .badge-ink { background: var(--ink); color: var(--cream); }
+        .badge-success { background: var(--success-bg); color: var(--success); }
+        .badge-warning { background: var(--warning-bg); color: var(--warning); }
+        .badge-error { background: var(--error-bg); color: var(--error); }
+        .badge-info { background: var(--info-bg); color: var(--info); }
+        .badge-outline { background: transparent; border: 1.5px solid currentColor; }
+        .badge-pill { border-radius: 20px; }
+
+        .status-dot {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            font-size: 0.8125rem;
+            font-weight: 500;
+        }
+
+        .status-dot::before {
+            content: '';
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-dot.active::before { background: var(--success); }
+        .status-dot.pending::before { background: var(--warning); }
+        .status-dot.inactive::before { background: var(--olive-400); }
+        .status-dot.critical::before { background: var(--error); }
+
+        /* ===========================
+           LOGO STRIP
+        =========================== */
+        .logo-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp-8);
+            flex-wrap: wrap;
+            padding: var(--sp-5) 0;
+        }
+
+        .logo-strip .fake-logo {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--olive-300);
+            transition: color var(--ease);
+        }
+
+        .logo-strip .fake-logo:hover { color: var(--olive-500); }
+
+        /* ===========================
+           COLOR SWATCHES
+        =========================== */
+        .color-swatch {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            background: var(--white);
+        }
+
+        .color-swatch-block {
+            height: 100px;
+        }
+
+        .color-swatch-info { padding: var(--sp-3) var(--sp-4); }
+
+        .color-swatch-name {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .color-swatch-hex {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--olive-500);
+        }
+
+        .color-row {
+            display: flex;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .color-row-chip {
+            flex: 1;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+        }
+
+        /* ===========================
+           DIVIDERS
+        =========================== */
+        .divider-demos { display: flex; flex-direction: column; gap: var(--sp-7); }
+        .divider-line { border: none; height: 1px; background: var(--olive-200); }
+        .divider-thick { border: none; height: 3px; background: var(--olive-200); }
+        .divider-forest { border: none; height: 3px; background: var(--forest); width: 80px; border-radius: 2px; }
+        .divider-dashed { border: none; border-top: 2px dashed var(--olive-200); }
+
+        .divider-wave {
+            height: 32px;
+            background: var(--forest-bg);
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .divider-wave::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 0; right: 0;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, var(--forest) 0, var(--forest) 8px, transparent 8px, transparent 16px);
+            opacity: 0.2;
+        }
+
+        .divider-label-row {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-4);
+        }
+
+        .divider-label-row span {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--olive-500);
+            white-space: nowrap;
+        }
+
+        .divider-label-row hr { flex: 1; border: none; height: 1px; background: var(--olive-200); }
+
+        .bg-alternation {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .bg-alternation > div {
+            padding: var(--sp-6) var(--sp-4);
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--olive-600);
+        }
+
+        /* ===========================
+           ALERTS
+        =========================== */
+        .alert {
+            display: flex;
+            gap: var(--sp-3);
+            padding: var(--sp-4) var(--sp-5);
+            border-radius: var(--radius-md);
+            font-size: 0.9375rem;
+            border-left: 4px solid transparent;
+            align-items: flex-start;
+        }
+
+        .alert-icon { flex-shrink: 0; font-size: 1.1rem; margin-top: 1px; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 2px; }
+        .alert-text { font-size: 0.875rem; opacity: 0.85; }
+
+        .alert-dismiss {
+            background: none; border: none; cursor: pointer;
+            font-size: 1.1rem; opacity: 0.5;
+            transition: opacity var(--ease); padding: 0; line-height: 1;
+        }
+        .alert-dismiss:hover { opacity: 1; }
+
+        .alert-success { background: var(--success-bg); border-left-color: var(--success); color: #1B5E20; }
+        .alert-info { background: var(--info-bg); border-left-color: var(--info); color: #01579B; }
+        .alert-warning { background: var(--warning-bg); border-left-color: var(--warning); color: #7A5F00; }
+        .alert-error { background: var(--error-bg); border-left-color: var(--error); color: #7F1D1D; }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+            background: var(--ink);
+            color: var(--cream);
+            padding: var(--sp-4) var(--sp-5);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-xl);
+            font-size: 0.9375rem;
+            max-width: 400px;
+        }
+
+        .toast-icon { flex-shrink: 0; }
+        .toast-text { flex: 1; }
+
+        .toast-dismiss {
+            background: none; border: none; color: var(--olive-500);
+            cursor: pointer; font-size: 1rem;
+            transition: color var(--ease); padding: 0; line-height: 1;
+        }
+        .toast-dismiss:hover { color: var(--cream); }
+
+        /* ===========================
+           FOOTER
+        =========================== */
+        .site-footer {
+            background: var(--forest-dark);
+            color: var(--olive-400);
+            padding: var(--sp-7) 0 var(--sp-6);
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--sp-7);
+            margin-bottom: var(--sp-7);
+            padding-bottom: var(--sp-6);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            flex-wrap: wrap;
+        }
+
+        .footer-brand p {
+            font-size: 0.875rem;
+            color: var(--olive-500);
+            max-width: 260px;
+            margin-top: var(--sp-3);
+            line-height: 1.6;
+        }
+
+        .footer-cols { display: flex; gap: var(--sp-9); }
+
+        .footer-col h4 {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--olive-400);
+            margin-bottom: var(--sp-4);
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: var(--sp-2); }
+
+        .footer-col a {
+            font-size: 0.875rem;
+            color: var(--olive-500);
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+
+        .footer-col a:hover { color: var(--cream); }
+
+        .footer-bottom {
+            font-size: 0.8125rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--sp-4);
+        }
+
+        .footer-bottom a { color: var(--olive-500); text-decoration: none; }
+        .footer-bottom a:hover { color: var(--cream); }
+
+        @media (max-width: 768px) {
+            .footer-top { flex-direction: column; }
+            .footer-cols { flex-direction: column; gap: var(--sp-6); }
+            .inline-form { flex-direction: column; }
+            .hero-inner { padding: var(--sp-7) var(--sp-5); }
+            .nav-links { display: none; }
+            .logo-strip { gap: var(--sp-5); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== SITE HEADER ===== -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-badge"><span class="dot"></span> v1.0 — SaaS Landing Page System</div>
+            <h1 class="header-title">Tallow<em>.</em></h1>
+            <p class="header-subtitle">A design system for veterinary practice management SaaS. Warm, grounded, trustworthy — built for landing pages that earn the trust of clinic owners.</p>
+            <dl class="header-meta">
+                <div>
+                    <dt>Niche</dt>
+                    <dd>Veterinary Practice Management</dd>
+                </div>
+                <div>
+                    <dt>Fonts</dt>
+                    <dd>Fraunces + Source Sans 3</dd>
+                </div>
+                <div>
+                    <dt>Primary</dt>
+                    <dd>#2B5329 — Forest</dd>
+                </div>
+                <div>
+                    <dt>Created</dt>
+                    <dd>2026.02</dd>
+                </div>
+            </dl>
+        </div>
+    </header>
+
+
+    <!-- =============================================
+         LANDING PAGE FLOW
+    ============================================= -->
+
+
+    <!-- ===== 01 — NAVIGATION BAR ===== -->
+    <section id="navigation" class="dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">01</span>
+                <h2>Navigation Bar</h2>
+            </div>
+
+            <div class="label" style="color: var(--olive-400);">Desktop — Light</div>
+            <div class="nav-demo" style="margin-bottom: var(--sp-6);">
+                <nav class="nav-bar">
+                    <a href="#" class="nav-logo">Tallow<em>.</em></a>
+                    <ul class="nav-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">For Clinics</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><button class="btn btn-primary btn-sm">Book a demo</button></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="label" style="color: var(--olive-400);">Desktop — Dark</div>
+            <div class="nav-demo nav-dark" style="margin-bottom: var(--sp-6);">
+                <nav class="nav-bar">
+                    <a href="#" class="nav-logo">Tallow<em>.</em></a>
+                    <ul class="nav-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">For Clinics</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><button class="btn btn-primary btn-sm">Book a demo</button></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="label" style="color: var(--olive-400);">Mobile</div>
+            <div class="nav-mobile">
+                <nav class="nav-bar">
+                    <a href="#" class="nav-logo" style="font-size: 1.2rem;">Tallow<em>.</em></a>
+                    <button class="hamburger" aria-label="Menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 02 — HERO PATTERN ===== -->
+    <section id="hero">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">02</span>
+                <h2>Hero Pattern</h2>
+            </div>
+            <p class="section-desc">The first thing a clinic owner sees. Clear value, warm tone, specific to veterinary practice.</p>
+
+            <div class="hero-demo">
+                <div class="hero-inner">
+                    <div class="hero-kicker">Veterinary practice management</div>
+                    <h2 class="hero-headline">Run your <em>clinic</em>, not your software</h2>
+                    <p class="hero-sub">Tallow handles appointments, patient records, billing, and client communication — so you can focus on the animals in your care.</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-lg">Start your free trial</button>
+                        <button class="btn btn-ghost btn-lg">See it in action</button>
+                    </div>
+                    <div class="hero-proof">
+                        <div class="dots"><span></span><span></span><span></span></div>
+                        Trusted by 4,200+ veterinary clinics across North America
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 03 — SOCIAL PROOF / BADGES BAR ===== -->
+    <section id="social-proof" class="alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">03</span>
+                <h2>Social Proof / Badges Bar</h2>
+            </div>
+
+            <div class="label">Logo Strip</div>
+            <div style="background: var(--olive-100); border-radius: var(--radius-lg); padding: var(--sp-4) var(--sp-5); margin-bottom: var(--sp-7);">
+                <p style="text-align: center; font-size: 0.8125rem; color: var(--olive-500); margin-bottom: var(--sp-4);">Trusted by 4,200+ veterinary clinics</p>
+                <div class="logo-strip">
+                    <span class="fake-logo">Oakridge Animal</span>
+                    <span class="fake-logo">Paws & Claws</span>
+                    <span class="fake-logo">Valley View Vet</span>
+                    <span class="fake-logo">Coastal Pet Care</span>
+                    <span class="fake-logo">Mountain Creek</span>
+                </div>
+            </div>
+
+            <div class="label">Plan Tier Labels</div>
+            <div class="flex-row" style="margin-bottom: var(--sp-6);">
+                <span class="badge badge-honey">Solo Practice</span>
+                <span class="badge badge-forest">Multi-Vet</span>
+                <span class="badge badge-ink">Hospital</span>
+            </div>
+
+            <div class="label">Marketing Labels</div>
+            <div class="flex-row" style="margin-bottom: var(--sp-6);">
+                <span class="badge badge-sm badge-forest badge-pill">New</span>
+                <span class="badge badge-sm badge-ink badge-pill">Most Popular</span>
+                <span class="badge badge-sm badge-success badge-pill">Best Value</span>
+                <span class="badge badge-sm badge-info badge-pill">Beta</span>
+            </div>
+
+            <div class="label">Semantic Badges</div>
+            <div class="flex-row" style="margin-bottom: var(--sp-6);">
+                <span class="badge badge-success">Confirmed</span>
+                <span class="badge badge-warning">Waitlist</span>
+                <span class="badge badge-error">Cancelled</span>
+                <span class="badge badge-info">Rescheduled</span>
+            </div>
+
+            <div class="label">Status Dots</div>
+            <div class="flex-row">
+                <span class="status-dot active">Available</span>
+                <span class="status-dot pending">In Appointment</span>
+                <span class="status-dot critical">Emergency</span>
+                <span class="status-dot inactive">Off Duty</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 04 — FEATURE CARDS ===== -->
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">04</span>
+                <h2>Feature Cards</h2>
+            </div>
+            <p class="section-desc">Specific to veterinary workflows — not generic "powerful features" copy.</p>
+
+            <div class="grid-2">
+                <div class="card card-feature">
+                    <div class="card-body">
+                        <div class="card-icon">📅</div>
+                        <h3>Appointment Scheduling</h3>
+                        <p>Drag-and-drop calendar with species-aware time blocks. A routine cat wellness visit gets 20 minutes; a large-breed dental gets 90. Your schedule reflects how you actually work.</p>
+                    </div>
+                </div>
+                <div class="card card-feature">
+                    <div class="card-body">
+                        <div class="card-icon">📋</div>
+                        <h3>Patient Records</h3>
+                        <p>Complete medical history for every patient — vaccinations, lab results, treatment plans, imaging. Integrates with IDEXX and Antech so bloodwork flows in automatically.</p>
+                    </div>
+                </div>
+                <div class="card card-feature">
+                    <div class="card-body">
+                        <div class="card-icon">🏠</div>
+                        <h3>Client Portal</h3>
+                        <p>Pet owners book appointments, view their animal's records, refill prescriptions, and pay invoices online. Fewer phone calls, happier clients, smoother front desk.</p>
+                    </div>
+                </div>
+                <div class="card card-feature">
+                    <div class="card-body">
+                        <div class="card-icon">💰</div>
+                        <h3>Billing & Invoicing</h3>
+                        <p>Invoices generate automatically from treatment plans. Built-in payment processing with card-on-file and payment plans for larger procedures.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 05 — STATS / METRIC CALLOUTS ===== -->
+    <section id="stats" class="alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">05</span>
+                <h2>Stats / Metric Callouts</h2>
+            </div>
+
+            <div class="grid-4">
+                <div class="card-stat">
+                    <div class="stat-label">Clinics Using Tallow</div>
+                    <div class="stat-value">4,200+</div>
+                    <div class="stat-change up">↑ across North America</div>
+                </div>
+                <div class="card-stat">
+                    <div class="stat-label">Platform Uptime</div>
+                    <div class="stat-value">98.7%</div>
+                    <div class="stat-change up">↑ trailing 12 months</div>
+                </div>
+                <div class="card-stat">
+                    <div class="stat-label">Time Saved / Appt</div>
+                    <div class="stat-value">23 min</div>
+                    <div class="stat-change up">↑ avg. across all clinics</div>
+                </div>
+                <div class="card-stat">
+                    <div class="stat-label">Fewer No-Shows</div>
+                    <div class="stat-value">41%</div>
+                    <div class="stat-change down">↓ with automated reminders</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 06 — TESTIMONIALS ===== -->
+    <section id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">06</span>
+                <h2>Testimonials</h2>
+            </div>
+            <p class="section-desc">Real veterinarians, specific results, natural language.</p>
+
+            <div class="label">Variant A — Card with Side Accent</div>
+            <div class="grid-2" style="margin-bottom: var(--sp-7);">
+                <div class="card-testimonial">
+                    <blockquote>We used to lose 30 minutes per appointment just pulling up records and cross-referencing lab work. With Tallow, everything's on one screen. Our DVMs see two more patients per day now — that's real revenue.</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">RL</div>
+                        <div>
+                            <div class="testimonial-name">Dr. Rachel Liu, DVM</div>
+                            <div class="testimonial-role">Owner, Oakridge Animal Hospital</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-testimonial">
+                    <blockquote>The client portal cut our front-desk phone volume by about 40%. Owners book their own appointments, check vaccination records, and pay online. My receptionist finally has time to breathe.</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MP</div>
+                        <div>
+                            <div class="testimonial-name">Maria Perez</div>
+                            <div class="testimonial-role">Practice Manager, Coastal Pet Care</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="label">Variant B — Centered Pullquote</div>
+            <div style="text-align: center; max-width: 680px; padding: var(--sp-7) 0;">
+                <div style="font-family: var(--font-display); font-size: 4rem; font-style: italic; color: var(--honey); line-height: 0.5; margin-bottom: var(--sp-5);">"</div>
+                <p style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; line-height: 1.7; color: var(--olive-800); margin-bottom: var(--sp-5);">We switched from a legacy system that hadn't been updated since 2018. Tallow's automatic invoicing from treatment plans alone saved us 6 hours a week in admin time. The migration was painless.</p>
+                <div style="display: flex; align-items: center; justify-content: center; gap: var(--sp-3);">
+                    <div class="testimonial-avatar">KW</div>
+                    <div style="text-align: left;">
+                        <div class="testimonial-name">Dr. Kevin Walsh, DVM</div>
+                        <div class="testimonial-role">Valley View Veterinary Clinic</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 07 — PRICING ===== -->
+    <section id="pricing" class="alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">07</span>
+                <h2>Pricing</h2>
+            </div>
+            <p class="section-desc">Honest pricing scaled to clinic size. No hidden fees, no per-patient charges.</p>
+
+            <div class="label">Full Pricing Section</div>
+            <div class="grid-3" style="margin-bottom: var(--sp-7);">
+                <div class="card-pricing">
+                    <div class="tier-name">Solo Practice</div>
+                    <div class="tier-price">$79<span>/mo</span></div>
+                    <div class="tier-desc">For single-vet clinics</div>
+                    <ul>
+                        <li>1 veterinarian + 3 staff</li>
+                        <li>Appointment scheduling</li>
+                        <li>Patient records &amp; history</li>
+                        <li>Basic invoicing</li>
+                        <li>Email support</li>
+                    </ul>
+                    <button class="btn btn-ghost btn-md" style="width: 100%;">Start with Solo</button>
+                </div>
+                <div class="card-pricing recommended">
+                    <div class="tier-name">Multi-Vet</div>
+                    <div class="tier-price">$189<span>/mo</span></div>
+                    <div class="tier-desc">For clinics with 2–6 vets</div>
+                    <ul>
+                        <li>Up to 6 vets + unlimited staff</li>
+                        <li>Client portal</li>
+                        <li>Lab integrations (IDEXX, Antech)</li>
+                        <li>Automated reminders</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="btn btn-primary btn-md" style="width: 100%;">Start with Multi-Vet</button>
+                </div>
+                <div class="card-pricing">
+                    <div class="tier-name">Hospital</div>
+                    <div class="tier-price">$349<span>/mo</span></div>
+                    <div class="tier-desc">For large practices &amp; hospitals</div>
+                    <ul>
+                        <li>Unlimited vets &amp; staff</li>
+                        <li>Multi-location support</li>
+                        <li>Advanced reporting &amp; analytics</li>
+                        <li>API access &amp; custom integrations</li>
+                        <li>Dedicated account manager</li>
+                    </ul>
+                    <button class="btn btn-secondary btn-md" style="width: 100%;">Talk to our team</button>
+                </div>
+            </div>
+
+            <div class="label">Single Tier Detail — Recommended</div>
+            <div style="max-width: 400px;">
+                <div class="card-pricing recommended" style="text-align: left;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--sp-4);">
+                        <div>
+                            <div class="tier-name" style="text-align: left;">Multi-Vet</div>
+                            <div class="tier-desc" style="text-align: left; margin-bottom: 0;">The right fit for most growing clinics</div>
+                        </div>
+                        <span class="badge badge-sm badge-ink badge-pill">Popular</span>
+                    </div>
+                    <div class="tier-price" style="text-align: left; margin-bottom: var(--sp-5);">$189<span>/mo</span></div>
+                    <ul style="margin-bottom: var(--sp-6);">
+                        <li>Up to 6 veterinarians + unlimited staff</li>
+                        <li>Client portal with online booking</li>
+                        <li>IDEXX &amp; Antech lab integrations</li>
+                        <li>Automated appointment reminders (SMS + email)</li>
+                        <li>Priority email &amp; phone support</li>
+                    </ul>
+                    <button class="btn btn-primary btn-lg" style="width: 100%; margin-bottom: var(--sp-3);">Start 14-day free trial</button>
+                    <p style="text-align: center; font-size: 0.8125rem; color: var(--olive-500);">No credit card required · Cancel anytime</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 08 — FORMS / LEAD CAPTURE ===== -->
+    <section id="forms">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">08</span>
+                <h2>Forms / Lead Capture</h2>
+            </div>
+            <p class="section-desc">The final CTA area. Capture clinic leads with minimal friction.</p>
+
+            <div class="label">Inline Signup — Final CTA</div>
+            <div class="signup-form-demo" style="margin-bottom: var(--sp-7);">
+                <h4>Try Tallow free for 14 days</h4>
+                <p>No credit card. No setup fees. Your data imports in under an hour.</p>
+                <div class="inline-form">
+                    <input class="form-input" type="email" placeholder="you@yourclinic.com">
+                    <button class="btn btn-primary btn-md">Start free trial</button>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-bottom: var(--sp-7);">
+                <div class="flex-col" style="gap: var(--sp-5);">
+                    <div class="form-group">
+                        <label class="form-label">Clinic email</label>
+                        <input class="form-input" type="email" placeholder="front.desk@oakridgeanimal.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Clinic name</label>
+                        <input class="form-input" type="text" placeholder="Oakridge Animal Hospital">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Number of veterinarians</label>
+                        <select class="form-input">
+                            <option>Select...</option>
+                            <option>1 (Solo practice)</option>
+                            <option>2–3</option>
+                            <option>4–6</option>
+                            <option>7+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex-col" style="gap: var(--sp-5);">
+                    <div class="form-group">
+                        <label class="form-label">Email with error</label>
+                        <input class="form-input error" type="email" value="not-a-valid-email">
+                        <span class="form-error">✕ Please enter a valid email address</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Disabled field</label>
+                        <input class="form-input" type="text" value="Locked during trial" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Notification preferences</label>
+                        <div class="flex-row" style="gap: var(--sp-5);">
+                            <div style="display: flex; align-items: center; gap: var(--sp-3);">
+                                <button class="toggle on" role="switch" aria-checked="true"></button>
+                                <span style="font-size: 0.875rem;">Appointment reminders</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: var(--sp-3);">
+                                <button class="toggle" role="switch" aria-checked="false"></button>
+                                <span style="font-size: 0.875rem;">Lab results alerts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 09 — FOOTER ===== -->
+    <section id="footer-demo" class="dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">09</span>
+                <h2>Footer</h2>
+            </div>
+            <p class="section-desc" style="color: var(--olive-500);">Warm and functional. Product links, resources, legal — nothing extraneous.</p>
+
+            <div style="background: rgba(0,0,0,0.2); border-radius: var(--radius-lg); padding: var(--sp-7) var(--sp-6);">
+                <div class="footer-top">
+                    <div class="footer-brand">
+                        <a href="#" class="nav-logo" style="color: var(--cream); font-size: 1.8rem;">Tallow<em style="color: var(--honey-light);">.</em></a>
+                        <p>Practice management built by people who understand veterinary medicine. Not another generic SaaS tool with a paw-print logo.</p>
+                    </div>
+                    <div class="footer-cols">
+                        <div class="footer-col">
+                            <h4>Product</h4>
+                            <ul>
+                                <li><a href="#">Features</a></li>
+                                <li><a href="#">Pricing</a></li>
+                                <li><a href="#">Integrations</a></li>
+                                <li><a href="#">What's New</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Resources</h4>
+                            <ul>
+                                <li><a href="#">Documentation</a></li>
+                                <li><a href="#">Migration Guide</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Webinars</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Company</h4>
+                            <ul>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">HIPAA Compliance</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <span>© 2026 Tallow. Made with care.</span>
+                    <div style="display: flex; gap: var(--sp-5);">
+                        <a href="#">Privacy</a>
+                        <a href="#">Terms</a>
+                        <a href="#">Security</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =============================================
+         DESIGN SYSTEM REFERENCE
+    ============================================= -->
+
+    <div class="group-divider">
+        <div class="container">
+            <h2>Design System Reference</h2>
+            <p>Supporting tokens, primitives, and utility components used across the landing page above.</p>
+        </div>
+    </div>
+
+
+    <!-- ===== 10 — COLOR PALETTE ===== -->
+    <section id="colors">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">10</span>
+                <h2>Color Palette</h2>
+            </div>
+            <p class="section-desc">Deep forest green, warm honey gold, olive-tinted neutrals. Grounded and trustworthy — no purple, no generic SaaS blue.</p>
+
+            <div class="label">Brand Colors</div>
+            <div class="grid-4" style="margin-bottom: var(--sp-7);">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--forest);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Forest</div>
+                        <div class="color-swatch-hex">#2B5329</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--forest-dark);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Forest Dark</div>
+                        <div class="color-swatch-hex">#1C3A1B</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--honey);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Honey</div>
+                        <div class="color-swatch-hex">#C49B2A</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--ink);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Ink</div>
+                        <div class="color-swatch-hex">#1E2118</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="label">Neutral Scale — Olive Tint</div>
+            <div class="color-row" style="margin-bottom: var(--sp-7);">
+                <div class="color-row-chip" style="background: var(--ink); color: var(--olive-400);">900</div>
+                <div class="color-row-chip" style="background: var(--olive-800); color: var(--olive-300);">800</div>
+                <div class="color-row-chip" style="background: var(--olive-700); color: var(--olive-200);">700</div>
+                <div class="color-row-chip" style="background: var(--olive-600); color: var(--white);">600</div>
+                <div class="color-row-chip" style="background: var(--olive-500); color: var(--white);">500</div>
+                <div class="color-row-chip" style="background: var(--olive-400); color: var(--olive-800);">400</div>
+                <div class="color-row-chip" style="background: var(--olive-300); color: var(--olive-800);">300</div>
+                <div class="color-row-chip" style="background: var(--olive-200); color: var(--olive-600);">200</div>
+                <div class="color-row-chip" style="background: var(--olive-100); color: var(--olive-600);">100</div>
+            </div>
+
+            <div class="label">Semantic Colors</div>
+            <div class="grid-4" style="margin-bottom: var(--sp-7);">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--success);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Success</div>
+                        <div class="color-swatch-hex">#2E7D32</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--warning);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Warning</div>
+                        <div class="color-swatch-hex">#E6A817</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--error);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Error</div>
+                        <div class="color-swatch-hex">#C62828</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--info);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Info</div>
+                        <div class="color-swatch-hex">#0277BD</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="label">Surfaces</div>
+            <div class="grid-3">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--cream); border: 1px solid var(--olive-200);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Cream</div>
+                        <div class="color-swatch-hex">#FAF7F0 — Page background</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--white); border: 1px solid var(--olive-200);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">White</div>
+                        <div class="color-swatch-hex">#FFFFFF — Cards, sections</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--forest-bg); border: 1px solid var(--olive-200);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Forest BG</div>
+                        <div class="color-swatch-hex">#EEF4ED — Accent surfaces</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 11 — TYPOGRAPHY ===== -->
+    <section id="typography" class="alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">11</span>
+                <h2>Typography</h2>
+            </div>
+            <p class="section-desc">Fraunces for warm, characterful headlines. Source Sans 3 for clean body copy. IBM Plex Mono for data.</p>
+
+            <div class="label">Display — Fraunces 800</div>
+            <div style="font-family: var(--font-display); font-weight: 800; font-size: clamp(2.8rem, 5.5vw, 4.5rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: var(--sp-7); color: var(--ink);">
+                Better care starts<br>with <em style="font-weight: 500; color: var(--forest);">better tools.</em>
+            </div>
+
+            <div class="grid-2" style="margin-bottom: var(--sp-7);">
+                <div>
+                    <div class="label">H1 — Fraunces 700 / 2.5rem</div>
+                    <div style="font-family: var(--font-display); font-weight: 700; font-size: 2.5rem; line-height: 1.1; letter-spacing: -0.01em;">Veterinary Practice Management</div>
+                </div>
+                <div>
+                    <div class="label">H2 — Fraunces 600 / 1.75rem</div>
+                    <div style="font-family: var(--font-display); font-weight: 600; font-size: 1.75rem; line-height: 1.2;">Built for clinics that care</div>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-bottom: var(--sp-7);">
+                <div>
+                    <div class="label">H3 — Fraunces 600 / 1.3rem</div>
+                    <div style="font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; line-height: 1.3;">Species-Aware Scheduling</div>
+                </div>
+                <div>
+                    <div class="label">H4 — Source Sans 3 700 / 1.125rem</div>
+                    <div style="font-family: var(--font-body); font-weight: 700; font-size: 1.125rem; line-height: 1.4;">Lab Integration & Results</div>
+                </div>
+            </div>
+
+            <div style="max-width: 600px; margin-bottom: var(--sp-7);">
+                <div class="label">Body — Source Sans 3 400 / 1rem / 1.6</div>
+                <p style="font-size: 1rem; line-height: 1.6; color: var(--olive-700);">Tallow keeps your appointments, patient records, billing, and client communication in one place. No more toggling between systems. From a routine check-up to an emergency surgery, your team sees exactly what they need.</p>
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <div class="label">Caption — Source Sans 3 400 / 0.8125rem</div>
+                    <p style="font-size: 0.8125rem; color: var(--olive-500);">Last vaccinated 3 months ago · Patient: Max (Golden Retriever, 4y)</p>
+                </div>
+                <div>
+                    <div class="label">Mono — IBM Plex Mono 400 / 0.875rem</div>
+                    <p style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--olive-600);">$2,340.00 invoiced · 12 appointments · 3 pending</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 12 — SPACING SCALE ===== -->
+    <section id="spacing">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">12</span>
+                <h2>Spacing Scale</h2>
+            </div>
+            <p class="section-desc">8px base. Generous rhythm for landing page sections that feel calm and breathable.</p>
+
+            <div style="display: flex; flex-direction: column; gap: var(--sp-5);">
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--olive-500); width: 80px;">4px — sp-1</span>
+                    <div style="height: 22px; width: 4px; background: var(--forest); border-radius: 3px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--olive-500); width: 80px;">8px — sp-2</span>
+                    <div style="height: 22px; width: 8px; background: var(--forest); border-radius: 3px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--olive-500); width: 80px;">12px — sp-3</span>
+                    <div style="height: 22px; width: 12px; background: var(--forest); border-radius: 3px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--olive-500); width: 80px;">16px — sp-4</span>
+                    <div style="height: 22px; width: 16px; background: var(--forest); border-radius: 3px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--olive-500); width: 80px;">24px — sp-5</span>
+                    <div style="height: 22px; width: 24px; background: var(--forest-light); border-radius: 3px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--olive-500); width: 80px;">32px — sp-6</span>
+                    <div style="height: 22px; width: 32px; background: var(--forest-light); border-radius: 3px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--olive-500); width: 80px;">48px — sp-7</span>
+                    <div style="height: 22px; width: 48px; background: var(--honey); border-radius: 3px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--olive-500); width: 80px;">64px — sp-8</span>
+                    <div style="height: 22px; width: 64px; background: var(--honey-light); border-radius: 3px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--olive-500); width: 80px;">96px — sp-9</span>
+                    <div style="height: 22px; width: 96px; background: var(--olive-300); border-radius: 3px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 13 — BUTTONS ===== -->
+    <section id="buttons" class="alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">13</span>
+                <h2>Buttons</h2>
+            </div>
+
+            <div class="label">Primary</div>
+            <div class="flex-row" style="margin-bottom: var(--sp-6);">
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary btn-md">Book a demo</button>
+                <button class="btn btn-primary btn-lg">Start your free trial</button>
+                <button class="btn btn-primary btn-md disabled" disabled>Disabled</button>
+            </div>
+
+            <div class="label">Secondary</div>
+            <div class="flex-row" style="margin-bottom: var(--sp-6);">
+                <button class="btn btn-secondary btn-sm">Small</button>
+                <button class="btn btn-secondary btn-md">View all features</button>
+                <button class="btn btn-secondary btn-lg">Talk to our team</button>
+            </div>
+
+            <div class="label">Ghost / Outline</div>
+            <div class="flex-row" style="margin-bottom: var(--sp-6);">
+                <button class="btn btn-ghost btn-sm">Small</button>
+                <button class="btn btn-ghost btn-md">See pricing</button>
+                <button class="btn btn-ghost btn-lg">Read the case study</button>
+            </div>
+
+            <div class="label">Text Link</div>
+            <div class="flex-row">
+                <button class="btn-text">Learn about lab integrations →</button>
+                <button class="btn-text">Compare plans</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 14 — SECTION DIVIDERS ===== -->
+    <section id="dividers">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">14</span>
+                <h2>Section Dividers & Decorative Elements</h2>
+            </div>
+            <p class="section-desc">Soft transitions between sections. Organic, not mechanical.</p>
+
+            <div class="divider-demos">
+                <div>
+                    <div class="label">Thin line</div>
+                    <hr class="divider-line">
+                </div>
+                <div>
+                    <div class="label">Thick line</div>
+                    <hr class="divider-thick">
+                </div>
+                <div>
+                    <div class="label">Forest accent (short)</div>
+                    <hr class="divider-forest">
+                </div>
+                <div>
+                    <div class="label">Dashed</div>
+                    <hr class="divider-dashed">
+                </div>
+                <div>
+                    <div class="label">Labeled divider</div>
+                    <div class="divider-label-row">
+                        <hr><span>Features</span><hr>
+                    </div>
+                </div>
+                <div>
+                    <div class="label">Organic wave pattern (signature element)</div>
+                    <div class="divider-wave"></div>
+                </div>
+                <div>
+                    <div class="label">Background alternation</div>
+                    <div class="bg-alternation">
+                        <div style="background: var(--cream);">Cream — #FAF7F0</div>
+                        <div style="background: var(--white);">White — #FFFFFF</div>
+                        <div style="background: var(--forest-bg);">Forest BG — #EEF4ED</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 15 — ALERT MESSAGES ===== -->
+    <section id="alerts" class="alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">15</span>
+                <h2>Alert Messages</h2>
+            </div>
+
+            <div class="label">Inline Alerts</div>
+            <div class="flex-col" style="gap: var(--sp-4); max-width: 640px; margin-bottom: var(--sp-7);">
+                <div class="alert alert-success">
+                    <span class="alert-icon">✓</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Welcome to Tallow</div>
+                        <div class="alert-text">Your free trial is active. Start by importing your patient records or creating your first appointment.</div>
+                    </div>
+                    <button class="alert-dismiss">✕</button>
+                </div>
+                <div class="alert alert-info">
+                    <span class="alert-icon">ℹ</span>
+                    <div class="alert-content">
+                        <div class="alert-title">New: IDEXX integration</div>
+                        <div class="alert-text">Lab results now flow directly into patient records. Enable it in Settings → Integrations.</div>
+                    </div>
+                    <button class="alert-dismiss">✕</button>
+                </div>
+                <div class="alert alert-warning">
+                    <span class="alert-icon">⚠</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Trial ending in 3 days</div>
+                        <div class="alert-text">Add a payment method to keep your clinic data and appointment history.</div>
+                    </div>
+                    <button class="alert-dismiss">✕</button>
+                </div>
+                <div class="alert alert-error">
+                    <span class="alert-icon">✕</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Payment failed</div>
+                        <div class="alert-text">We couldn't process the card ending in 8821. Please update your billing details.</div>
+                    </div>
+                    <button class="alert-dismiss">✕</button>
+                </div>
+            </div>
+
+            <div class="label">Toast Notifications</div>
+            <div class="flex-col" style="gap: var(--sp-4); max-width: 400px;">
+                <div class="toast">
+                    <span class="toast-icon">✓</span>
+                    <span class="toast-text">Appointment confirmed for Max</span>
+                    <button class="toast-dismiss">✕</button>
+                </div>
+                <div class="toast">
+                    <span class="toast-icon">📋</span>
+                    <span class="toast-text">Lab results received from IDEXX</span>
+                    <button class="toast-dismiss">✕</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== SITE FOOTER ===== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom" style="padding: var(--sp-4) 0;">
+                <span style="font-family: var(--font-mono); font-size: 0.75rem;">Tallow v1.0 — SaaS Landing Page Design System</span>
+                <span style="font-size: 0.75rem;">Made with care.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.toggle').forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                toggle.classList.toggle('on');
+                toggle.setAttribute('aria-checked', toggle.classList.contains('on'));
+            });
+        });
+
+        document.querySelectorAll('.alert-dismiss, .toast-dismiss').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const el = btn.closest('.alert, .toast');
+                el.style.opacity = '0';
+                el.style.transform = 'translateX(20px)';
+                el.style.transition = 'all 200ms ease';
+                setTimeout(() => el.style.display = 'none', 200);
+            });
+        });
+    </script>
+</body>
+</html>

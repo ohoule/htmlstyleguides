@@ -3,40 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATMOSPHERE v1.0 - Weather Station Dashboard Style Guide</title>
+    <title>ATMOSPHERE v1.0 — Weather Station Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* ═══════════════════════════════════════════════════════════════════════════
+           ATMOSPHERE v1.0 — WEATHER STATION DASHBOARD DESIGN SYSTEM
+           A light, airy interface for weather monitoring and forecasting
+           ═══════════════════════════════════════════════════════════════════════════ */
+
         :root {
-            /* Core Palette */
-            --sunny-yellow: #FCD34D;
-            --sunny-glow: rgba(252, 211, 77, 0.3);
-            --cloudy-gray: #9CA3AF;
-            --rain-blue: #3B82F6;
+            /* Weather Colors */
+            --sunny: #FCD34D;
+            --sunny-glow: rgba(252, 211, 77, 0.4);
+            --cloudy: #9CA3AF;
+            --rain: #3B82F6;
             --rain-glow: rgba(59, 130, 246, 0.3);
-            --storm-purple: #7C3AED;
-            --storm-glow: rgba(124, 58, 237, 0.3);
-            --snow-white: #F8FAFC;
+            --storm: #7C3AED;
+            --snow: #F0F9FF;
+            --temp-hot: #EF4444;
+            --temp-cold: #3B82F6;
+            --humidity: #14B8A6;
+            --wind: #8B5CF6;
 
-            /* Sky Gradients */
-            --sky-day: linear-gradient(180deg, #87CEEB 0%, #E0F2FE 50%, #FEF3C7 100%);
-            --sky-sunset: linear-gradient(180deg, #F97316 0%, #EC4899 50%, #7C3AED 100%);
-            --sky-night: linear-gradient(180deg, #1E3A5F 0%, #0F172A 100%);
+            /* Surface Colors */
+            --bg-sky: #F8FAFC;
+            --bg-cloud: #FFFFFF;
+            --bg-mist: #F1F5F9;
+            --bg-hover: #E2E8F0;
 
-            /* Backgrounds */
-            --bg-primary: #F0F9FF;
-            --bg-secondary: #E0F2FE;
-            --bg-card: #FFFFFF;
-            --bg-elevated: #FFFFFF;
-            --border-light: rgba(148, 163, 184, 0.2);
-            --border-medium: rgba(148, 163, 184, 0.3);
-
-            /* Text */
+            /* Text Colors */
             --text-primary: #0F172A;
             --text-secondary: #475569;
             --text-muted: #94A3B8;
-            --text-light: #CBD5E1;
+
+            /* Borders & Shadows */
+            --border: rgba(148, 163, 184, 0.25);
+            --border-focus: rgba(59, 130, 246, 0.5);
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-glow: 0 0 30px rgba(252, 211, 77, 0.2);
 
             /* Typography */
             --font-display: 'Poppins', sans-serif;
@@ -50,14 +57,17 @@
             --space-lg: 24px;
             --space-xl: 32px;
             --space-2xl: 48px;
-            --space-3xl: 64px;
 
-            /* Borders */
-            --radius-sm: 8px;
+            /* Radii */
+            --radius-sm: 6px;
             --radius-md: 12px;
             --radius-lg: 16px;
             --radius-xl: 24px;
-            --radius-full: 9999px;
+
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-normal: 250ms ease;
+            --transition-slow: 400ms ease;
         }
 
         * {
@@ -66,611 +76,268 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: var(--font-ui);
-            background: var(--sky-day);
-            background-attachment: fixed;
+            background: var(--bg-sky);
             color: var(--text-primary);
             line-height: 1.6;
             min-height: 100vh;
         }
 
-        /* Floating Clouds Background */
+        /* Sky gradient background */
         body::before {
             content: '';
             position: fixed;
-            top: 10%;
-            left: 5%;
-            width: 200px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 100px;
-            box-shadow:
-                40px 20px 0 20px rgba(255, 255, 255, 0.8),
-                -30px 10px 0 10px rgba(255, 255, 255, 0.8);
-            animation: floatCloud 30s linear infinite;
-            z-index: 0;
-            opacity: 0.6;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 400px;
+            background: linear-gradient(180deg, #E0F2FE 0%, #F8FAFC 100%);
+            z-index: -1;
         }
 
+        /* Floating clouds background effect */
         body::after {
             content: '';
             position: fixed;
-            top: 25%;
-            right: 10%;
-            width: 150px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 100px;
-            box-shadow:
-                30px 15px 0 15px rgba(255, 255, 255, 0.7),
-                -25px 8px 0 8px rgba(255, 255, 255, 0.7);
-            animation: floatCloud 25s linear infinite reverse;
-            z-index: 0;
-            opacity: 0.5;
+            top: 50px;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background:
+                radial-gradient(ellipse 200px 80px at 10% 50%, rgba(255,255,255,0.8) 0%, transparent 70%),
+                radial-gradient(ellipse 150px 60px at 30% 30%, rgba(255,255,255,0.6) 0%, transparent 70%),
+                radial-gradient(ellipse 180px 70px at 80% 60%, rgba(255,255,255,0.7) 0%, transparent 70%),
+                radial-gradient(ellipse 120px 50px at 60% 40%, rgba(255,255,255,0.5) 0%, transparent 70%);
+            animation: cloudDrift 60s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
         }
 
-        @keyframes floatCloud {
-            0% { transform: translateX(-100px); }
-            100% { transform: translateX(100vw); }
+        @keyframes cloudDrift {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(30px); }
         }
 
-        .dashboard-container {
-            position: relative;
-            z-index: 1;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: var(--space-2xl);
+        /* ═══════════════════════════════════════════════════════════════════════════
+           DASHBOARD LAYOUT
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            grid-template-rows: 70px 1fr;
+            min-height: 100vh;
         }
 
-        /* Header */
-        .dashboard-header {
-            text-align: center;
-            margin-bottom: var(--space-3xl);
-            padding: var(--space-2xl);
+        /* ═══════════════════════════════════════════════════════════════════════════
+           HEADER
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .header {
+            grid-column: 1 / -1;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-xl);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-lg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .dashboard-header h1 {
-            font-family: var(--font-display);
-            font-size: 3rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--rain-blue), var(--storm-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: var(--space-sm);
-        }
-
-        .dashboard-header .version {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--rain-blue);
-            letter-spacing: 0.2em;
-        }
-
-        .dashboard-header .tagline {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-top: var(--space-md);
-            font-weight: 300;
-        }
-
-        /* Section Styling */
-        .section {
-            margin-bottom: var(--space-3xl);
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            color: var(--storm-purple);
-            margin-bottom: var(--space-lg);
-            padding-bottom: var(--space-sm);
-            border-bottom: 2px solid var(--border-light);
+        .logo {
             display: flex;
             align-items: center;
             gap: var(--space-md);
         }
 
-        .section-title::before {
-            content: '☀';
-            font-size: 1.2rem;
-        }
-
-        /* ==================== 1. COLOR PALETTE ==================== */
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: var(--space-md);
-        }
-
-        .color-swatch {
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            border: 1px solid var(--border-light);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease;
-        }
-
-        .color-swatch:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-        }
-
-        .color-preview {
-            height: 90px;
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--sunny) 0%, #F59E0B 100%);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-        }
-
-        .color-preview.sunny { background: var(--sunny-yellow); }
-        .color-preview.cloudy { background: var(--cloudy-gray); }
-        .color-preview.rain { background: var(--rain-blue); color: white; }
-        .color-preview.storm { background: var(--storm-purple); color: white; }
-        .color-preview.snow { background: var(--snow-white); border-bottom: 1px solid var(--border-light); }
-        .color-preview.sky { background: var(--sky-day); }
-
-        .color-info {
-            padding: var(--space-md);
-        }
-
-        .color-name {
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            color: var(--text-primary);
-            margin-bottom: var(--space-xs);
-        }
-
-        .color-hex {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* ==================== 2. TYPOGRAPHY ==================== */
-        .typography-showcase {
-            display: grid;
-            gap: var(--space-lg);
-        }
-
-        .type-specimen {
-            background: var(--bg-card);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-light);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-        }
-
-        .type-label {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--rain-blue);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: var(--space-md);
-        }
-
-        .display-font {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .ui-font {
-            font-family: var(--font-ui);
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-        }
-
-        .mono-font {
-            font-family: var(--font-mono);
-            font-size: 1.1rem;
-            color: var(--storm-purple);
-        }
-
-        /* ==================== 3. SPACING & GRID ==================== */
-        .spacing-demo {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-md);
-            align-items: flex-end;
-        }
-
-        .space-block {
-            background: linear-gradient(135deg, var(--rain-blue), var(--storm-purple));
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .space-block span {
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            color: white;
-            font-weight: 600;
-        }
-
-        .grid-demo {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: var(--space-sm);
-            margin-top: var(--space-xl);
-        }
-
-        .grid-cell {
-            height: 40px;
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--rain-blue);
-        }
-
-        /* ==================== 4. METRIC CARDS ==================== */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .metric-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            box-shadow: var(--shadow-glow);
             position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
         }
 
-        .metric-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+        .logo-icon::before {
+            content: '☀';
+            font-size: 24px;
         }
 
-        .metric-card::before {
+        /* Sun rays animation */
+        .logo-icon::after {
             content: '';
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            opacity: 0.1;
-            transform: translate(30%, -30%);
-        }
-
-        .metric-card.temp::before { background: var(--sunny-yellow); }
-        .metric-card.humidity::before { background: var(--rain-blue); }
-        .metric-card.wind::before { background: var(--cloudy-gray); }
-        .metric-card.uv::before { background: var(--storm-purple); }
-
-        .metric-icon {
-            font-size: 2rem;
-            margin-bottom: var(--space-md);
-        }
-
-        .metric-label {
-            font-family: var(--font-ui);
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: var(--space-sm);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .metric-value {
-            font-family: var(--font-mono);
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .metric-value .unit {
-            font-size: 1rem;
-            color: var(--text-muted);
-            margin-left: var(--space-xs);
-        }
-
-        .metric-trend {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-            margin-top: var(--space-sm);
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--radius-full);
-        }
-
-        .metric-trend.up {
-            background: rgba(252, 211, 77, 0.2);
-            color: #B45309;
-        }
-
-        .metric-trend.down {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--rain-blue);
-        }
-
-        /* ==================== 5. CSS-ONLY CHARTS ==================== */
-        .charts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .chart-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-        }
-
-        .chart-title {
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            color: var(--text-secondary);
-            margin-bottom: var(--space-lg);
-        }
-
-        /* Temperature Trend */
-        .temp-chart {
-            height: 120px;
-            display: flex;
-            align-items: flex-end;
-            gap: 8px;
-            padding-bottom: var(--space-lg);
-            border-bottom: 2px solid var(--border-light);
-            position: relative;
-        }
-
-        .temp-bar {
-            flex: 1;
-            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-            background: linear-gradient(to top, var(--rain-blue), var(--sunny-yellow));
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .temp-bar:hover {
-            filter: brightness(1.1);
-        }
-
-        .temp-bar::after {
-            content: attr(data-temp);
-            position: absolute;
-            top: -24px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .temp-bar:hover::after {
-            opacity: 1;
-        }
-
-        .temp-labels {
-            display: flex;
-            justify-content: space-between;
-            margin-top: var(--space-sm);
-        }
-
-        .temp-labels span {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--text-muted);
-        }
-
-        /* Precipitation Bars */
-        .precip-chart {
-            display: flex;
-            align-items: flex-end;
-            gap: 6px;
-            height: 100px;
-        }
-
-        .precip-bar {
-            flex: 1;
-            background: linear-gradient(to top, rgba(59, 130, 246, 0.3), var(--rain-blue));
-            border-radius: var(--radius-sm);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .precip-bar:hover {
-            background: linear-gradient(to top, rgba(59, 130, 246, 0.5), var(--storm-purple));
-        }
-
-        /* Wind Compass */
-        .wind-compass {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
-            border: 3px solid var(--border-medium);
-            margin: 0 auto;
-            position: relative;
-            box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .compass-directions {
-            position: absolute;
-            inset: 0;
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        .compass-directions span {
-            position: absolute;
-        }
-
-        .compass-directions .n { top: 8px; left: 50%; transform: translateX(-50%); }
-        .compass-directions .s { bottom: 8px; left: 50%; transform: translateX(-50%); }
-        .compass-directions .e { right: 8px; top: 50%; transform: translateY(-50%); }
-        .compass-directions .w { left: 8px; top: 50%; transform: translateY(-50%); }
-
-        .compass-needle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 4px;
+            width: 60px;
             height: 60px;
-            background: linear-gradient(to top, var(--rain-blue), var(--storm-purple));
-            transform-origin: bottom center;
-            transform: translate(-50%, -100%) rotate(45deg);
-            border-radius: 4px;
-            box-shadow: 0 2px 8px var(--storm-glow);
-            animation: windSway 4s ease-in-out infinite;
-        }
-
-        @keyframes windSway {
-            0%, 100% { transform: translate(-50%, -100%) rotate(40deg); }
-            50% { transform: translate(-50%, -100%) rotate(50deg); }
-        }
-
-        .compass-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 16px;
-            height: 16px;
-            background: var(--storm-purple);
             border-radius: 50%;
-            border: 3px solid var(--bg-card);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            background: radial-gradient(circle, rgba(252,211,77,0.3) 0%, transparent 70%);
+            animation: sunPulse 3s ease-in-out infinite;
         }
 
-        /* ==================== 6. DATA TABLES ==================== */
-        .data-table-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        @keyframes sunPulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.3; }
         }
 
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .data-table thead {
-            background: var(--bg-secondary);
-        }
-
-        .data-table th {
+        .logo-text {
             font-family: var(--font-display);
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-            text-align: left;
-            padding: var(--space-md) var(--space-lg);
-            border-bottom: 1px solid var(--border-light);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
         }
 
-        .data-table td {
-            padding: var(--space-md) var(--space-lg);
-            border-bottom: 1px solid var(--border-light);
-            font-size: 0.9rem;
-        }
-
-        .data-table tbody tr:hover {
-            background: rgba(59, 130, 246, 0.03);
-        }
-
-        .time-cell {
+        .logo-version {
             font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-muted);
+            background: var(--bg-mist);
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: var(--space-sm);
+        }
+
+        .header-search {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 var(--space-xl);
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--bg-mist);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: var(--space-sm) var(--space-lg);
+            padding-left: 44px;
+            font-family: var(--font-ui);
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: var(--transition-normal);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: 14px center;
+        }
+
+        .search-input::placeholder {
             color: var(--text-muted);
         }
 
-        .weather-cell {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
+        .search-input:focus {
+            outline: none;
+            border-color: var(--border-focus);
+            background-color: var(--bg-cloud);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
         }
 
-        .weather-icon-small {
-            font-size: 1.2rem;
-        }
-
-        .temp-cell {
-            font-family: var(--font-mono);
-            font-weight: 600;
-        }
-
-        .temp-cell.high { color: #B45309; }
-        .temp-cell.low { color: var(--rain-blue); }
-
-        /* ==================== 7. SIDEBAR NAVIGATION ==================== */
-        .sidebar-demo {
-            display: flex;
-            gap: var(--space-xl);
-        }
-
-        .sidebar {
-            width: 240px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-        }
-
-        .sidebar-logo {
+        .header-actions {
             display: flex;
             align-items: center;
             gap: var(--space-md);
-            padding: var(--space-md);
-            margin-bottom: var(--space-xl);
         }
 
-        .sidebar-logo .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--sunny-yellow), var(--rain-blue));
-            border-radius: var(--radius-md);
+        .header-btn {
+            width: 42px;
+            height: 42px;
+            background: var(--bg-cloud);
+            border: 1px solid var(--border);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            position: relative;
         }
 
-        .sidebar-logo .logo-text {
-            font-family: var(--font-display);
-            font-size: 0.9rem;
-            font-weight: 700;
+        .header-btn:hover {
+            background: var(--bg-mist);
             color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        .header-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 18px;
+            height: 18px;
+            background: var(--temp-hot);
+            border-radius: 50%;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--bg-cloud);
+        }
+
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--rain) 0%, var(--humidity) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SECTION 7: SIDEBAR NAVIGATION
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .sidebar {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border);
+            padding: var(--space-lg) var(--space-md);
+            overflow-y: auto;
+        }
+
+        .nav-section {
+            margin-bottom: var(--space-lg);
+        }
+
+        .nav-section-title {
+            font-family: var(--font-ui);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            padding: 0 var(--space-md);
+            margin-bottom: var(--space-sm);
         }
 
         .nav-item {
@@ -678,119 +345,724 @@
             align-items: center;
             gap: var(--space-md);
             padding: var(--space-md);
-            border-radius: var(--radius-md);
             color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            transition: var(--transition-normal);
             cursor: pointer;
-            transition: all 0.2s ease;
             margin-bottom: var(--space-xs);
         }
 
         .nav-item:hover {
-            background: rgba(59, 130, 246, 0.08);
-            color: var(--rain-blue);
+            background: var(--bg-mist);
+            color: var(--text-primary);
         }
 
         .nav-item.active {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(124, 58, 237, 0.1));
-            color: var(--storm-purple);
-            font-weight: 500;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(20, 184, 166, 0.1) 100%);
+            color: var(--rain);
         }
 
         .nav-icon {
-            font-size: 1.1rem;
+            width: 20px;
+            height: 20px;
         }
 
-        /* ==================== 8. FORMS & FILTERS ==================== */
-        .forms-grid {
+        .nav-label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-badge {
+            margin-left: auto;
+            background: var(--temp-hot);
+            color: white;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .nav-badge.info {
+            background: var(--rain);
+        }
+
+        /* Current Weather Card in Sidebar */
+        .current-weather {
+            margin: var(--space-lg) var(--space-sm);
+            padding: var(--space-lg);
+            background: linear-gradient(135deg, #E0F2FE 0%, #FEF3C7 100%);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+
+        .current-temp {
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .current-temp span {
+            font-size: 24px;
+            color: var(--text-muted);
+        }
+
+        .current-condition {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: var(--space-sm);
+        }
+
+        .current-location {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: var(--space-xs);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           MAIN CONTENT
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .main-content {
+            padding: var(--space-lg);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xl);
+        }
+
+        .section {
+            background: var(--bg-cloud);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(180deg, var(--rain) 0%, var(--humidity) 100%);
+            border-radius: 2px;
+        }
+
+        .section-number {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            background: var(--bg-mist);
+            padding: 2px 8px;
+            border-radius: 8px;
+            margin-left: var(--space-sm);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SECTION 1: COLOR PALETTE
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .color-card {
+            background: var(--bg-cloud);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: var(--transition-normal);
+        }
+
+        .color-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .color-swatch {
+            height: 70px;
+        }
+
+        .color-info {
+            padding: var(--space-sm) var(--space-md);
+        }
+
+        .color-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SECTION 2: TYPOGRAPHY
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .type-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .type-item {
+            padding: var(--space-lg);
+            background: var(--bg-mist);
+            border-radius: var(--radius-md);
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -1px;
+        }
+
+        .type-heading {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .type-body {
+            font-family: var(--font-ui);
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .type-data {
+            font-family: var(--font-mono);
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--rain);
+        }
+
+        .type-mono {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SECTION 3: SPACING & GRID
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .spacing-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+
+        .spacing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .spacing-box {
+            background: linear-gradient(135deg, var(--rain) 0%, var(--humidity) 100%);
+            border-radius: var(--radius-sm);
+        }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-sm);
+        }
+
+        .grid-cell {
+            height: 44px;
+            background: var(--bg-mist);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .grid-cell:nth-child(odd) {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(20, 184, 166, 0.1) 100%);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SECTION 4: METRIC CARDS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .metric-card {
+            background: var(--bg-cloud);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-normal);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--rain) 0%, var(--humidity) 100%);
+        }
+
+        .metric-card.temp::before {
+            background: linear-gradient(90deg, var(--temp-cold) 0%, var(--temp-hot) 100%);
+        }
+
+        .metric-card.humidity::before {
+            background: var(--humidity);
+        }
+
+        .metric-card.wind::before {
+            background: var(--wind);
+        }
+
+        .metric-card.uv::before {
+            background: linear-gradient(90deg, var(--sunny) 0%, var(--temp-hot) 100%);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .metric-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: var(--space-md);
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .metric-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--bg-mist);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .metric-value {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .metric-value span {
+            font-size: 18px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .metric-change {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            margin-top: var(--space-sm);
+        }
+
+        .metric-change.up { color: var(--temp-hot); }
+        .metric-change.down { color: var(--rain); }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SECTION 5: CHARTS & DATA VIZ
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .charts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: var(--space-lg);
         }
 
-        .form-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        .chart-card {
+            background: var(--bg-mist);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
         }
 
-        .form-title {
+        .chart-title {
             font-family: var(--font-display);
-            font-size: 0.85rem;
+            font-size: 13px;
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: var(--space-lg);
-        }
-
-        .form-group {
+            color: var(--text-secondary);
             margin-bottom: var(--space-md);
         }
 
-        .form-label {
-            display: block;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: var(--space-xs);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .form-input {
-            width: 100%;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-md);
-            padding: var(--space-md);
-            color: var(--text-primary);
-            font-family: var(--font-ui);
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--rain-blue);
-            box-shadow: 0 0 0 3px var(--rain-glow);
-        }
-
-        .form-input::placeholder {
-            color: var(--text-light);
-        }
-
-        /* Toggle Switch */
-        .toggle-group {
+        /* Temperature Line Chart */
+        .temp-chart {
+            height: 120px;
             display: flex;
-            background: var(--bg-secondary);
-            border-radius: var(--radius-full);
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 4px;
+            padding-top: var(--space-md);
+            position: relative;
+        }
+
+        .temp-chart::before {
+            content: '';
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .temp-bar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .temp-bar-fill {
+            width: 100%;
+            max-width: 24px;
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            background: linear-gradient(180deg, var(--temp-hot) 0%, var(--sunny) 100%);
+            transition: var(--transition-normal);
+        }
+
+        .temp-bar:hover .temp-bar-fill {
+            filter: brightness(1.1);
+        }
+
+        .temp-bar-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* Precipitation Bars */
+        .precip-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: var(--space-sm);
+            height: 100px;
+        }
+
+        .precip-bar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .precip-bar-fill {
+            width: 100%;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(180deg, var(--rain) 0%, rgba(59, 130, 246, 0.3) 100%);
+        }
+
+        .precip-bar-value {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--rain);
+            font-weight: 600;
+        }
+
+        .precip-bar-label {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+
+        /* Pressure Gauge */
+        .pressure-gauge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-md);
+        }
+
+        .gauge {
+            width: 140px;
+            height: 70px;
+            border-radius: 70px 70px 0 0;
+            background: conic-gradient(
+                from 180deg,
+                var(--rain) 0deg,
+                var(--humidity) 90deg,
+                var(--sunny) 180deg
+            );
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gauge::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 50px;
+            background: var(--bg-mist);
+            border-radius: 50px 50px 0 0;
+        }
+
+        .gauge-needle {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            height: 50px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transform-origin: bottom center;
+            transform: translateX(-50%) rotate(30deg);
+        }
+
+        .gauge-value {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SECTION 6: DATA TABLES
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            font-family: var(--font-ui);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            text-align: left;
+            padding: var(--space-md);
+            border-bottom: 2px solid var(--border);
+        }
+
+        .data-table td {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        .data-table tbody tr {
+            transition: var(--transition-normal);
+        }
+
+        .data-table tbody tr:hover {
+            background: var(--bg-mist);
+        }
+
+        .time-cell {
+            font-family: var(--font-mono);
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .temp-cell {
+            font-family: var(--font-mono);
+            font-weight: 600;
+        }
+
+        .condition-cell {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .condition-icon {
+            font-size: 18px;
+        }
+
+        .precip-cell {
+            font-family: var(--font-mono);
+            color: var(--rain);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SECTION 8: FORMS & FILTERS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .filters-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+            align-items: flex-end;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .filter-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+
+        .filter-input {
+            background: var(--bg-cloud);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: var(--space-sm) var(--space-md);
+            font-family: var(--font-ui);
+            font-size: 14px;
+            color: var(--text-primary);
+            min-width: 160px;
+            transition: var(--transition-normal);
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .filter-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+            cursor: pointer;
+        }
+
+        /* Unit Toggle */
+        .unit-toggle {
+            display: flex;
+            background: var(--bg-mist);
+            border-radius: var(--radius-md);
             padding: 4px;
         }
 
-        .toggle-option {
-            flex: 1;
+        .unit-btn {
             padding: var(--space-sm) var(--space-md);
             border: none;
-            background: transparent;
+            background: none;
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 13px;
+            font-weight: 600;
             color: var(--text-muted);
+            border-radius: var(--radius-sm);
             cursor: pointer;
-            border-radius: var(--radius-full);
-            transition: all 0.2s ease;
+            transition: var(--transition-normal);
         }
 
-        .toggle-option.active {
-            background: var(--bg-card);
-            color: var(--rain-blue);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        .unit-btn.active {
+            background: var(--bg-cloud);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-soft);
         }
 
-        /* ==================== 9. BUTTONS ==================== */
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SECTION 9: BUTTONS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
         .buttons-showcase {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-md);
-            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .button-group-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
         }
 
         .btn {
@@ -798,178 +1070,213 @@
             align-items: center;
             justify-content: center;
             gap: var(--space-sm);
-            padding: var(--space-md) var(--space-xl);
-            border: none;
-            border-radius: var(--radius-full);
-            font-family: var(--font-display);
-            font-size: 0.85rem;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            font-family: var(--font-ui);
+            font-size: 14px;
             font-weight: 500;
-            letter-spacing: 0.05em;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition-normal);
+            border: none;
+        }
+
+        .btn svg {
+            width: 16px;
+            height: 16px;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--rain-blue), var(--storm-purple));
+            background: linear-gradient(135deg, var(--rain) 0%, var(--humidity) 100%);
             color: white;
-            box-shadow: 0 4px 16px var(--rain-glow);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px var(--storm-glow);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
         }
 
-        .btn-sunny {
-            background: linear-gradient(135deg, var(--sunny-yellow), #F59E0B);
-            color: #78350F;
-            box-shadow: 0 4px 16px var(--sunny-glow);
+        .btn-secondary {
+            background: var(--bg-cloud);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
         }
 
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--rain-blue);
-            color: var(--rain-blue);
-        }
-
-        .btn-outline:hover {
-            background: var(--rain-blue);
-            color: white;
+        .btn-secondary:hover {
+            background: var(--bg-mist);
         }
 
         .btn-ghost {
+            background: transparent;
+            color: var(--rain);
+        }
+
+        .btn-ghost:hover {
             background: rgba(59, 130, 246, 0.1);
-            color: var(--rain-blue);
         }
 
-        .btn-sm {
-            padding: var(--space-sm) var(--space-md);
-            font-size: 0.75rem;
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border-radius: 50%;
         }
 
-        /* ==================== 10. STATUS INDICATORS ==================== */
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SECTION 10: STATUS INDICATORS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
         .status-grid {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: var(--space-lg);
         }
 
-        .status-group {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
+        .status-card {
+            background: var(--bg-mist);
+            border-radius: var(--radius-md);
             padding: var(--space-lg);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
         }
 
-        .status-group-title {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
+        .status-title {
+            font-size: 12px;
+            font-weight: 600;
             color: var(--text-muted);
-            letter-spacing: 0.1em;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
             margin-bottom: var(--space-md);
         }
 
-        .status-badge {
-            display: inline-flex;
+        .status-item {
+            display: flex;
             align-items: center;
             gap: var(--space-sm);
-            padding: var(--space-sm) var(--space-md);
-            border-radius: var(--radius-full);
-            font-family: var(--font-ui);
-            font-size: 0.8rem;
-            font-weight: 500;
+            margin-bottom: var(--space-sm);
         }
 
-        .status-badge.good {
-            background: rgba(34, 197, 94, 0.1);
-            color: #15803D;
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
         }
 
-        .status-badge.moderate {
-            background: rgba(252, 211, 77, 0.2);
-            color: #B45309;
+        .status-dot.green { background: var(--humidity); }
+        .status-dot.yellow { background: var(--sunny); }
+        .status-dot.orange { background: #F97316; }
+        .status-dot.red { background: var(--temp-hot); }
+        .status-dot.purple { background: var(--storm); }
+
+        .status-label {
+            font-size: 13px;
+            color: var(--text-secondary);
         }
 
-        .status-badge.poor {
-            background: rgba(239, 68, 68, 0.1);
-            color: #DC2626;
+        /* Air Quality Index */
+        .aqi-bar {
+            height: 8px;
+            background: linear-gradient(90deg,
+                var(--humidity) 0%,
+                var(--sunny) 33%,
+                #F97316 66%,
+                var(--temp-hot) 100%
+            );
+            border-radius: 4px;
+            position: relative;
+            margin-top: var(--space-sm);
         }
 
-        .status-badge.storm {
-            background: rgba(124, 58, 237, 0.1);
-            color: var(--storm-purple);
+        .aqi-marker {
+            position: absolute;
+            top: -4px;
+            width: 16px;
+            height: 16px;
+            background: var(--bg-cloud);
+            border: 3px solid var(--text-primary);
+            border-radius: 50%;
+            transform: translateX(-50%);
         }
 
-        /* ==================== 11. WIDGET CARDS ==================== */
+        .aqi-value {
+            font-family: var(--font-mono);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: var(--space-md);
+        }
+
+        .aqi-label {
+            font-size: 13px;
+            color: var(--humidity);
+            font-weight: 600;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SECTION 11: WIDGET CARDS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
         .widgets-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: var(--space-lg);
         }
 
-        .widget-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
+        .widget {
+            background: var(--bg-mist);
+            border-radius: var(--radius-md);
             overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
         }
 
         .widget-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             padding: var(--space-md) var(--space-lg);
-            border-bottom: 1px solid var(--border-light);
-            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-cloud);
         }
 
         .widget-title {
             font-family: var(--font-display);
-            font-size: 0.75rem;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: 0.1em;
-            color: var(--text-secondary);
+            color: var(--text-primary);
         }
 
-        .widget-content {
+        .widget-body {
             padding: var(--space-lg);
         }
 
+        /* Sunrise/Sunset Widget */
         .sun-times {
             display: flex;
             justify-content: space-around;
             text-align: center;
         }
 
-        .sun-time {
+        .sun-time-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: var(--space-sm);
         }
 
-        .sun-time .icon {
-            font-size: 2rem;
+        .sun-icon {
+            font-size: 28px;
         }
 
-        .sun-time .label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        .sun-time .time {
+        .sun-time {
             font-family: var(--font-mono);
-            font-size: 1.1rem;
+            font-size: 18px;
             font-weight: 600;
             color: var(--text-primary);
         }
 
-        /* Moon Phase */
-        .moon-display {
+        .sun-label {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Moon Phase Widget */
+        .moon-phase {
             display: flex;
             align-items: center;
             gap: var(--space-lg);
@@ -979,30 +1286,88 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #1E293B 50%, var(--sunny-yellow) 50%);
-            box-shadow: inset -5px 0 10px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #1E293B 50%, #F8FAFC 50%);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
         }
 
         .moon-info {
             flex: 1;
         }
 
-        .moon-phase {
+        .moon-name {
             font-family: var(--font-display);
+            font-size: 16px;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: var(--space-xs);
         }
 
         .moon-illumination {
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 12px;
             color: var(--text-muted);
         }
 
-        /* ==================== 12. ALERTS & NOTIFICATIONS ==================== */
+        /* Weekly Outlook */
+        .weekly-outlook {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .day-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .day-row:last-child {
+            border-bottom: none;
+        }
+
+        .day-name {
+            width: 40px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .day-icon {
+            font-size: 18px;
+        }
+
+        .day-temps {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .day-high {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .day-low {
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+        }
+
+        .day-precip {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--rain);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SECTION 12: ALERTS & NOTIFICATIONS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
         .alerts-showcase {
-            display: grid;
+            display: flex;
+            flex-direction: column;
             gap: var(--space-md);
         }
 
@@ -1010,13 +1375,14 @@
             display: flex;
             align-items: flex-start;
             gap: var(--space-md);
-            padding: var(--space-lg);
+            padding: var(--space-md) var(--space-lg);
             border-radius: var(--radius-md);
             border-left: 4px solid;
         }
 
         .alert-icon {
-            font-size: 1.3rem;
+            width: 20px;
+            height: 20px;
             flex-shrink: 0;
         }
 
@@ -1025,913 +1391,1090 @@
         }
 
         .alert-title {
-            font-family: var(--font-display);
-            font-size: 0.85rem;
             font-weight: 600;
-            margin-bottom: var(--space-xs);
+            font-size: 14px;
+            margin-bottom: 2px;
         }
 
         .alert-message {
-            font-size: 0.9rem;
+            font-size: 13px;
             color: var(--text-secondary);
         }
 
-        .alert.sunny {
-            background: rgba(252, 211, 77, 0.15);
-            border-color: var(--sunny-yellow);
-        }
-
-        .alert.sunny .alert-title { color: #B45309; }
-
-        .alert.rain {
+        .alert.info {
             background: rgba(59, 130, 246, 0.1);
-            border-color: var(--rain-blue);
+            border-color: var(--rain);
         }
+        .alert.info .alert-icon { color: var(--rain); }
 
-        .alert.rain .alert-title { color: var(--rain-blue); }
-
-        .alert.storm {
-            background: rgba(124, 58, 237, 0.1);
-            border-color: var(--storm-purple);
+        .alert.success {
+            background: rgba(20, 184, 166, 0.1);
+            border-color: var(--humidity);
         }
+        .alert.success .alert-icon { color: var(--humidity); }
 
-        .alert.storm .alert-title { color: var(--storm-purple); }
-
-        .alert.snow {
-            background: rgba(148, 163, 184, 0.1);
-            border-color: var(--cloudy-gray);
+        .alert.warning {
+            background: rgba(252, 211, 77, 0.2);
+            border-color: var(--sunny);
         }
+        .alert.warning .alert-icon { color: #D97706; }
 
-        .alert.snow .alert-title { color: #475569; }
-
-        /* ==================== 13. SPECIAL: ANIMATED WEATHER ICONS ==================== */
-        .weather-showcase {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            padding: var(--space-2xl);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        .alert.error {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: var(--temp-hot);
         }
+        .alert.error .alert-icon { color: var(--temp-hot); }
 
-        .weather-icons-grid {
+        /* ═══════════════════════════════════════════════════════════════════════════
+           SECTION 13: ANIMATED WEATHER ICONS
+           ═══════════════════════════════════════════════════════════════════════════ */
+
+        .weather-icons-showcase {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: var(--space-xl);
         }
 
-        .weather-icon-demo {
+        .weather-icon-card {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: var(--space-md);
+            padding: var(--space-xl);
+            background: var(--bg-mist);
+            border-radius: var(--radius-lg);
         }
 
-        .icon-container {
-            width: 100px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .icon-label {
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+        .weather-icon-card span {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
         /* Animated Sun */
-        .sun {
-            width: 60px;
-            height: 60px;
-            background: var(--sunny-yellow);
-            border-radius: 50%;
-            box-shadow:
-                0 0 30px var(--sunny-glow),
-                0 0 60px var(--sunny-glow);
-            animation: sunPulse 3s ease-in-out infinite;
-            position: relative;
-        }
-
-        .sun::before {
-            content: '';
-            position: absolute;
-            inset: -15px;
-            background:
-                linear-gradient(0deg, var(--sunny-yellow) 2px, transparent 2px),
-                linear-gradient(90deg, var(--sunny-yellow) 2px, transparent 2px),
-                linear-gradient(45deg, var(--sunny-yellow) 2px, transparent 2px),
-                linear-gradient(-45deg, var(--sunny-yellow) 2px, transparent 2px);
-            background-size: 100% 100%;
-            animation: sunRays 10s linear infinite;
-            opacity: 0.6;
-        }
-
-        @keyframes sunPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        @keyframes sunRays {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Animated Cloud */
-        .cloud {
+        .animated-sun {
             width: 80px;
-            height: 30px;
-            background: var(--cloudy-gray);
-            border-radius: 50px;
+            height: 80px;
             position: relative;
+        }
+
+        .sun-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: var(--sunny);
+            border-radius: 50%;
+            box-shadow: 0 0 30px var(--sunny-glow);
+        }
+
+        .sun-ray {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 20px;
+            background: var(--sunny);
+            border-radius: 4px;
+            transform-origin: center 30px;
+            animation: sunRotate 10s linear infinite;
+        }
+
+        .sun-ray:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-30px); }
+        .sun-ray:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg) translateY(-30px); }
+        .sun-ray:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg) translateY(-30px); }
+        .sun-ray:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg) translateY(-30px); }
+        .sun-ray:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg) translateY(-30px); }
+        .sun-ray:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg) translateY(-30px); }
+        .sun-ray:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg) translateY(-30px); }
+        .sun-ray:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg) translateY(-30px); }
+
+        @keyframes sunRotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Animated Clouds */
+        .animated-clouds {
+            width: 100px;
+            height: 60px;
+            position: relative;
+        }
+
+        .cloud {
+            position: absolute;
+            background: var(--cloudy);
+            border-radius: 50px;
             animation: cloudFloat 4s ease-in-out infinite;
         }
 
-        .cloud::before {
-            content: '';
-            position: absolute;
-            width: 35px;
-            height: 35px;
-            background: var(--cloudy-gray);
-            border-radius: 50%;
-            top: -20px;
-            left: 15px;
+        .cloud-main {
+            width: 60px;
+            height: 30px;
+            top: 20px;
+            left: 20px;
         }
 
-        .cloud::after {
+        .cloud-main::before {
             content: '';
             position: absolute;
             width: 25px;
             height: 25px;
-            background: var(--cloudy-gray);
+            background: var(--cloudy);
             border-radius: 50%;
             top: -12px;
-            left: 45px;
+            left: 10px;
+        }
+
+        .cloud-main::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: var(--cloudy);
+            border-radius: 50%;
+            top: -18px;
+            left: 25px;
+        }
+
+        .cloud-small {
+            width: 40px;
+            height: 20px;
+            top: 35px;
+            left: 5px;
+            opacity: 0.6;
+            animation-delay: 1s;
         }
 
         @keyframes cloudFloat {
-            0%, 100% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
         }
 
         /* Animated Rain */
-        .rain-container {
-            position: relative;
+        .animated-rain {
             width: 80px;
             height: 80px;
+            position: relative;
+            overflow: hidden;
         }
 
         .rain-cloud {
-            width: 60px;
-            height: 22px;
-            background: #64748B;
-            border-radius: 50px;
             position: absolute;
-            top: 10px;
+            top: 0;
             left: 10px;
+            width: 60px;
+            height: 25px;
+            background: var(--cloudy);
+            border-radius: 25px;
         }
 
         .rain-cloud::before {
             content: '';
             position: absolute;
-            width: 28px;
-            height: 28px;
-            background: #64748B;
+            width: 20px;
+            height: 20px;
+            background: var(--cloudy);
             border-radius: 50%;
-            top: -15px;
+            top: -10px;
             left: 10px;
         }
 
         .rain-cloud::after {
             content: '';
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #64748B;
+            width: 28px;
+            height: 28px;
+            background: var(--cloudy);
             border-radius: 50%;
-            top: -8px;
-            left: 32px;
+            top: -14px;
+            left: 25px;
         }
 
-        .rain-drops {
-            position: absolute;
-            bottom: 0;
-            left: 15px;
-            right: 15px;
-            height: 40px;
-            overflow: hidden;
-        }
-
-        .drop {
+        .raindrop {
             position: absolute;
             width: 3px;
-            height: 12px;
-            background: var(--rain-blue);
-            border-radius: 0 0 3px 3px;
-            animation: falling 1s linear infinite;
+            height: 15px;
+            background: linear-gradient(180deg, transparent 0%, var(--rain) 100%);
+            border-radius: 3px;
+            animation: rainFall 1s linear infinite;
         }
 
-        .drop:nth-child(1) { left: 5px; animation-delay: 0s; }
-        .drop:nth-child(2) { left: 20px; animation-delay: 0.3s; }
-        .drop:nth-child(3) { left: 35px; animation-delay: 0.6s; }
+        .raindrop:nth-child(2) { left: 20px; animation-delay: 0.2s; }
+        .raindrop:nth-child(3) { left: 35px; animation-delay: 0.4s; }
+        .raindrop:nth-child(4) { left: 50px; animation-delay: 0.6s; }
+        .raindrop:nth-child(5) { left: 65px; animation-delay: 0.8s; }
 
-        @keyframes falling {
-            0% { transform: translateY(-20px); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(40px); opacity: 0; }
+        @keyframes rainFall {
+            0% { top: 30px; opacity: 0; }
+            20% { opacity: 1; }
+            100% { top: 80px; opacity: 0; }
         }
 
         /* Animated Snow */
-        .snow-container {
-            position: relative;
+        .animated-snow {
             width: 80px;
             height: 80px;
+            position: relative;
+            overflow: hidden;
         }
 
         .snow-cloud {
-            width: 60px;
-            height: 22px;
-            background: #94A3B8;
-            border-radius: 50px;
             position: absolute;
-            top: 10px;
+            top: 0;
             left: 10px;
+            width: 60px;
+            height: 25px;
+            background: #CBD5E1;
+            border-radius: 25px;
         }
 
         .snow-cloud::before {
             content: '';
             position: absolute;
-            width: 28px;
-            height: 28px;
-            background: #94A3B8;
+            width: 20px;
+            height: 20px;
+            background: #CBD5E1;
             border-radius: 50%;
-            top: -15px;
+            top: -10px;
             left: 10px;
         }
 
         .snow-cloud::after {
             content: '';
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #94A3B8;
+            width: 28px;
+            height: 28px;
+            background: #CBD5E1;
             border-radius: 50%;
-            top: -8px;
-            left: 32px;
+            top: -14px;
+            left: 25px;
         }
 
-        .snowflakes {
-            position: absolute;
-            bottom: 0;
-            left: 10px;
-            right: 10px;
-            height: 45px;
-            overflow: hidden;
-        }
-
-        .flake {
+        .snowflake {
             position: absolute;
             width: 6px;
             height: 6px;
             background: white;
             border-radius: 50%;
-            animation: snowing 2s linear infinite;
-            box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 5px rgba(255,255,255,0.8);
+            animation: snowFall 3s linear infinite;
         }
 
-        .flake:nth-child(1) { left: 5px; animation-delay: 0s; }
-        .flake:nth-child(2) { left: 18px; animation-delay: 0.5s; }
-        .flake:nth-child(3) { left: 32px; animation-delay: 1s; }
-        .flake:nth-child(4) { left: 45px; animation-delay: 0.3s; }
+        .snowflake:nth-child(2) { left: 15px; animation-delay: 0.5s; animation-duration: 3.5s; }
+        .snowflake:nth-child(3) { left: 30px; animation-delay: 1s; animation-duration: 2.5s; }
+        .snowflake:nth-child(4) { left: 45px; animation-delay: 1.5s; animation-duration: 3s; }
+        .snowflake:nth-child(5) { left: 60px; animation-delay: 2s; animation-duration: 2.8s; }
+        .snowflake:nth-child(6) { left: 25px; animation-delay: 0.3s; animation-duration: 3.2s; }
 
-        @keyframes snowing {
-            0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+        @keyframes snowFall {
+            0% {
+                top: 30px;
+                opacity: 0;
+                transform: translateX(0) rotate(0deg);
+            }
             20% { opacity: 1; }
-            100% { transform: translateY(45px) rotate(360deg); opacity: 0; }
-        }
-
-        /* Storm Icon */
-        .storm-container {
-            position: relative;
-            width: 80px;
-            height: 80px;
-        }
-
-        .storm-cloud {
-            width: 65px;
-            height: 25px;
-            background: #475569;
-            border-radius: 50px;
-            position: absolute;
-            top: 8px;
-            left: 8px;
-        }
-
-        .storm-cloud::before {
-            content: '';
-            position: absolute;
-            width: 32px;
-            height: 32px;
-            background: #475569;
-            border-radius: 50%;
-            top: -18px;
-            left: 10px;
-        }
-
-        .storm-cloud::after {
-            content: '';
-            position: absolute;
-            width: 22px;
-            height: 22px;
-            background: #475569;
-            border-radius: 50%;
-            top: -10px;
-            left: 35px;
-        }
-
-        .lightning {
-            position: absolute;
-            top: 40px;
-            left: 30px;
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 25px solid var(--sunny-yellow);
-            animation: flash 2s ease-in-out infinite;
-        }
-
-        .lightning::after {
-            content: '';
-            position: absolute;
-            top: 18px;
-            left: -4px;
-            width: 0;
-            height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-top: 18px solid var(--sunny-yellow);
-        }
-
-        @keyframes flash {
-            0%, 90%, 100% { opacity: 0; }
-            92%, 94%, 96% { opacity: 1; }
-            93%, 95% { opacity: 0; }
-        }
-
-        /* Footer */
-        .dashboard-footer {
-            text-align: center;
-            padding: var(--space-2xl) var(--space-lg);
-            margin-top: var(--space-3xl);
-        }
-
-        .footer-logo {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            letter-spacing: 0.15em;
-            color: var(--text-secondary);
-            margin-bottom: var(--space-sm);
-        }
-
-        .footer-text {
-            font-size: 0.85rem;
-            color: var(--text-muted);
+            100% {
+                top: 80px;
+                opacity: 0;
+                transform: translateX(10px) rotate(360deg);
+            }
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .dashboard-container {
-                padding: var(--space-lg);
-            }
-
-            .dashboard-header h1 {
-                font-size: 2rem;
-            }
-
-            .metrics-grid,
-            .charts-grid,
-            .widgets-grid {
+        @media (max-width: 1024px) {
+            .dashboard {
                 grid-template-columns: 1fr;
             }
 
-            .sidebar-demo {
-                flex-direction: column;
+            .sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-search {
+                display: none;
             }
 
-            .sidebar {
-                width: 100%;
+            .metrics-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <!-- Header -->
-        <header class="dashboard-header">
-            <h1>ATMOSPHERE</h1>
-            <div class="version">v1.0 WEATHER STATION</div>
-            <p class="tagline">Comprehensive Weather Monitoring Dashboard</p>
+    <div class="dashboard">
+        <!-- ═══════════════════════════════════════════════════════════════════════════
+             HEADER
+             ═══════════════════════════════════════════════════════════════════════════ -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span class="logo-text">ATMOSPHERE</span>
+                <span class="logo-version">v1.0</span>
+            </div>
+
+            <div class="header-search">
+                <input type="text" class="search-input" placeholder="Search locations, forecasts...">
+            </div>
+
+            <div class="header-actions">
+                <button class="header-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <span class="notification-badge">2</span>
+                </button>
+                <button class="header-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                    </svg>
+                </button>
+                <div class="user-avatar">JD</div>
+            </div>
         </header>
 
-        <!-- 1. Color Palette -->
-        <section class="section">
-            <h2 class="section-title">COLOR PALETTE</h2>
-            <div class="color-grid">
-                <div class="color-swatch">
-                    <div class="color-preview sunny">☀️</div>
-                    <div class="color-info">
-                        <div class="color-name">Sunny Yellow</div>
-                        <div class="color-hex">#FCD34D</div>
-                    </div>
-                </div>
-                <div class="color-swatch">
-                    <div class="color-preview cloudy">☁️</div>
-                    <div class="color-info">
-                        <div class="color-name">Cloudy Gray</div>
-                        <div class="color-hex">#9CA3AF</div>
-                    </div>
-                </div>
-                <div class="color-swatch">
-                    <div class="color-preview rain">🌧️</div>
-                    <div class="color-info">
-                        <div class="color-name">Rain Blue</div>
-                        <div class="color-hex">#3B82F6</div>
-                    </div>
-                </div>
-                <div class="color-swatch">
-                    <div class="color-preview storm">⛈️</div>
-                    <div class="color-info">
-                        <div class="color-name">Storm Purple</div>
-                        <div class="color-hex">#7C3AED</div>
-                    </div>
-                </div>
-                <div class="color-swatch">
-                    <div class="color-preview snow">❄️</div>
-                    <div class="color-info">
-                        <div class="color-name">Snow White</div>
-                        <div class="color-hex">#F8FAFC</div>
-                    </div>
-                </div>
-                <div class="color-swatch">
-                    <div class="color-preview sky"></div>
-                    <div class="color-info">
-                        <div class="color-name">Sky Gradient</div>
-                        <div class="color-hex">Day Sky</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- ═══════════════════════════════════════════════════════════════════════════
+             SECTION 7: SIDEBAR NAVIGATION
+             ═══════════════════════════════════════════════════════════════════════════ -->
+        <aside class="sidebar">
+            <nav class="nav-section">
+                <a href="#" class="nav-item active">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+                    </svg>
+                    <span class="nav-label">Forecasts</span>
+                    <span class="nav-badge info">7 day</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                        <path d="M2 12h20"/>
+                    </svg>
+                    <span class="nav-label">Radar</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    <span class="nav-label">Alerts</span>
+                    <span class="nav-badge">2</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <span class="nav-label">Locations</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                    <span class="nav-label">Settings</span>
+                </a>
+            </nav>
 
-        <!-- 2. Typography -->
-        <section class="section">
-            <h2 class="section-title">TYPOGRAPHY</h2>
-            <div class="typography-showcase">
-                <div class="type-specimen">
-                    <div class="type-label">Display / Poppins</div>
-                    <div class="display-font">Sunny with Clouds</div>
-                </div>
-                <div class="type-specimen">
-                    <div class="type-label">UI Text / Work Sans</div>
-                    <div class="ui-font">Today's forecast shows partly cloudy skies with a high of 72°F and gentle breezes from the southwest.</div>
-                </div>
-                <div class="type-specimen">
-                    <div class="type-label">Data / IBM Plex Mono</div>
-                    <div class="mono-font">72°F | 65% Humidity | 12 mph NW</div>
-                </div>
+            <!-- Current Weather Card -->
+            <div class="current-weather">
+                <div class="current-temp">72<span>°F</span></div>
+                <div class="current-condition">☀️ Sunny</div>
+                <div class="current-location">San Francisco, CA</div>
             </div>
-        </section>
+        </aside>
 
-        <!-- 3. Spacing & Grid -->
-        <section class="section">
-            <h2 class="section-title">SPACING & GRID</h2>
-            <div class="spacing-demo">
-                <div class="space-block" style="width: 4px; height: 4px;"></div>
-                <div class="space-block" style="width: 8px; height: 8px;"></div>
-                <div class="space-block" style="width: 16px; height: 16px;"></div>
-                <div class="space-block" style="width: 24px; height: 24px;"></div>
-                <div class="space-block" style="width: 32px; height: 32px;"><span>32</span></div>
-                <div class="space-block" style="width: 48px; height: 48px;"><span>48</span></div>
-                <div class="space-block" style="width: 64px; height: 64px;"><span>64</span></div>
-            </div>
-            <div class="grid-demo">
-                <div class="grid-cell">1</div>
-                <div class="grid-cell">2</div>
-                <div class="grid-cell">3</div>
-                <div class="grid-cell">4</div>
-                <div class="grid-cell">5</div>
-                <div class="grid-cell">6</div>
-                <div class="grid-cell">7</div>
-                <div class="grid-cell">8</div>
-                <div class="grid-cell">9</div>
-                <div class="grid-cell">10</div>
-                <div class="grid-cell">11</div>
-                <div class="grid-cell">12</div>
-            </div>
-        </section>
+        <!-- ═══════════════════════════════════════════════════════════════════════════
+             MAIN CONTENT
+             ═══════════════════════════════════════════════════════════════════════════ -->
+        <main class="main-content">
 
-        <!-- 4. Metric Cards -->
-        <section class="section">
-            <h2 class="section-title">METRIC CARDS</h2>
-            <div class="metrics-grid">
-                <div class="metric-card temp">
-                    <div class="metric-icon">🌡️</div>
-                    <div class="metric-label">Current Temperature</div>
-                    <div class="metric-value">72<span class="unit">°F</span></div>
-                    <div class="metric-trend up">↑ 5° from yesterday</div>
+            <!-- ═══════════════════════════════════════════════════════════════════════════
+                 SECTION 1: COLOR PALETTE
+                 ═══════════════════════════════════════════════════════════════════════════ -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Color Palette <span class="section-number">01</span></h2>
                 </div>
-                <div class="metric-card humidity">
-                    <div class="metric-icon">💧</div>
-                    <div class="metric-label">Humidity</div>
-                    <div class="metric-value">65<span class="unit">%</span></div>
-                    <div class="metric-trend down">↓ 8% from morning</div>
-                </div>
-                <div class="metric-card wind">
-                    <div class="metric-icon">💨</div>
-                    <div class="metric-label">Wind Speed</div>
-                    <div class="metric-value">12<span class="unit">mph</span></div>
-                    <div class="metric-trend up">↑ Gusts to 18 mph</div>
-                </div>
-                <div class="metric-card uv">
-                    <div class="metric-icon">☀️</div>
-                    <div class="metric-label">UV Index</div>
-                    <div class="metric-value">6<span class="unit">High</span></div>
-                    <div class="metric-trend up">⚠️ Wear sunscreen</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. CSS-Only Charts -->
-        <section class="section">
-            <h2 class="section-title">CSS-ONLY CHARTS</h2>
-            <div class="charts-grid">
-                <div class="chart-container">
-                    <div class="chart-title">Temperature Trend (24H)</div>
-                    <div class="temp-chart">
-                        <div class="temp-bar" style="height: 55%" data-temp="58°"></div>
-                        <div class="temp-bar" style="height: 52%" data-temp="56°"></div>
-                        <div class="temp-bar" style="height: 50%" data-temp="54°"></div>
-                        <div class="temp-bar" style="height: 48%" data-temp="52°"></div>
-                        <div class="temp-bar" style="height: 52%" data-temp="56°"></div>
-                        <div class="temp-bar" style="height: 60%" data-temp="62°"></div>
-                        <div class="temp-bar" style="height: 70%" data-temp="68°"></div>
-                        <div class="temp-bar" style="height: 82%" data-temp="74°"></div>
-                        <div class="temp-bar" style="height: 90%" data-temp="78°"></div>
-                        <div class="temp-bar" style="height: 88%" data-temp="76°"></div>
-                        <div class="temp-bar" style="height: 80%" data-temp="72°"></div>
-                        <div class="temp-bar" style="height: 72%" data-temp="68°"></div>
-                    </div>
-                    <div class="temp-labels">
-                        <span>12AM</span>
-                        <span>6AM</span>
-                        <span>12PM</span>
-                        <span>6PM</span>
-                    </div>
-                </div>
-                <div class="chart-container">
-                    <div class="chart-title">Precipitation Chance</div>
-                    <div class="precip-chart">
-                        <div class="precip-bar" style="height: 20%"></div>
-                        <div class="precip-bar" style="height: 15%"></div>
-                        <div class="precip-bar" style="height: 35%"></div>
-                        <div class="precip-bar" style="height: 60%"></div>
-                        <div class="precip-bar" style="height: 80%"></div>
-                        <div class="precip-bar" style="height: 45%"></div>
-                        <div class="precip-bar" style="height: 25%"></div>
-                    </div>
-                </div>
-                <div class="chart-container">
-                    <div class="chart-title">Wind Direction</div>
-                    <div class="wind-compass">
-                        <div class="compass-directions">
-                            <span class="n">N</span>
-                            <span class="s">S</span>
-                            <span class="e">E</span>
-                            <span class="w">W</span>
-                        </div>
-                        <div class="compass-needle"></div>
-                        <div class="compass-center"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. Data Tables -->
-        <section class="section">
-            <h2 class="section-title">DATA TABLES</h2>
-            <div class="data-table-container">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Time</th>
-                            <th>Conditions</th>
-                            <th>Temp</th>
-                            <th>Feels Like</th>
-                            <th>Precip</th>
-                            <th>Wind</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="time-cell">6:00 AM</td>
-                            <td><div class="weather-cell"><span class="weather-icon-small">🌤️</span>Partly Cloudy</div></td>
-                            <td class="temp-cell">58°F</td>
-                            <td class="temp-cell low">55°F</td>
-                            <td>10%</td>
-                            <td>8 mph NW</td>
-                        </tr>
-                        <tr>
-                            <td class="time-cell">9:00 AM</td>
-                            <td><div class="weather-cell"><span class="weather-icon-small">☀️</span>Sunny</div></td>
-                            <td class="temp-cell">65°F</td>
-                            <td class="temp-cell">64°F</td>
-                            <td>5%</td>
-                            <td>10 mph NW</td>
-                        </tr>
-                        <tr>
-                            <td class="time-cell">12:00 PM</td>
-                            <td><div class="weather-cell"><span class="weather-icon-small">☀️</span>Sunny</div></td>
-                            <td class="temp-cell high">74°F</td>
-                            <td class="temp-cell high">76°F</td>
-                            <td>5%</td>
-                            <td>12 mph W</td>
-                        </tr>
-                        <tr>
-                            <td class="time-cell">3:00 PM</td>
-                            <td><div class="weather-cell"><span class="weather-icon-small">⛅</span>Mostly Sunny</div></td>
-                            <td class="temp-cell high">78°F</td>
-                            <td class="temp-cell high">80°F</td>
-                            <td>15%</td>
-                            <td>14 mph SW</td>
-                        </tr>
-                        <tr>
-                            <td class="time-cell">6:00 PM</td>
-                            <td><div class="weather-cell"><span class="weather-icon-small">🌤️</span>Partly Cloudy</div></td>
-                            <td class="temp-cell">72°F</td>
-                            <td class="temp-cell">70°F</td>
-                            <td>20%</td>
-                            <td>10 mph S</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- 7. Sidebar Navigation -->
-        <section class="section">
-            <h2 class="section-title">SIDEBAR NAVIGATION</h2>
-            <div class="sidebar-demo">
-                <div class="sidebar">
-                    <div class="sidebar-logo">
-                        <div class="logo-icon">🌤️</div>
-                        <div class="logo-text">ATMOSPHERE</div>
-                    </div>
-                    <div class="nav-item active">
-                        <span class="nav-icon">📊</span>
-                        Dashboard
-                    </div>
-                    <div class="nav-item">
-                        <span class="nav-icon">📅</span>
-                        Forecast
-                    </div>
-                    <div class="nav-item">
-                        <span class="nav-icon">🗺️</span>
-                        Radar
-                    </div>
-                    <div class="nav-item">
-                        <span class="nav-icon">⚠️</span>
-                        Alerts
-                    </div>
-                    <div class="nav-item">
-                        <span class="nav-icon">⚙️</span>
-                        Settings
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 8. Forms & Filters -->
-        <section class="section">
-            <h2 class="section-title">FORMS & FILTERS</h2>
-            <div class="forms-grid">
-                <div class="form-card">
-                    <div class="form-title">Location Search</div>
-                    <div class="form-group">
-                        <label class="form-label">City or ZIP Code</label>
-                        <input type="text" class="form-input" placeholder="San Francisco, CA">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Time Range</label>
-                        <input type="text" class="form-input" placeholder="Next 7 Days">
-                    </div>
-                </div>
-                <div class="form-card">
-                    <div class="form-title">Temperature Unit</div>
-                    <div class="form-group">
-                        <div class="toggle-group">
-                            <button class="toggle-option active">°F</button>
-                            <button class="toggle-option">°C</button>
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #FCD34D;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Sunny</div>
+                            <div class="color-hex">#FCD34D</div>
                         </div>
                     </div>
-                    <div class="form-group" style="margin-top: var(--space-lg);">
-                        <label class="form-label">Wind Speed Unit</label>
-                        <div class="toggle-group">
-                            <button class="toggle-option active">mph</button>
-                            <button class="toggle-option">km/h</button>
-                            <button class="toggle-option">knots</button>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #9CA3AF;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Cloudy</div>
+                            <div class="color-hex">#9CA3AF</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #3B82F6;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Rain</div>
+                            <div class="color-hex">#3B82F6</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #7C3AED;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Storm</div>
+                            <div class="color-hex">#7C3AED</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #EF4444;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Hot</div>
+                            <div class="color-hex">#EF4444</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #14B8A6;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Humidity</div>
+                            <div class="color-hex">#14B8A6</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #F8FAFC;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Sky BG</div>
+                            <div class="color-hex">#F8FAFC</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #F0F9FF;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Snow</div>
+                            <div class="color-hex">#F0F9FF</div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 9. Buttons -->
-        <section class="section">
-            <h2 class="section-title">BUTTONS</h2>
-            <div class="buttons-showcase">
-                <button class="btn btn-primary">View Forecast</button>
-                <button class="btn btn-sunny">Sunny Mode</button>
-                <button class="btn btn-outline">Set Alert</button>
-                <button class="btn btn-ghost">More Details</button>
-                <button class="btn btn-primary btn-sm">Refresh</button>
-            </div>
-        </section>
-
-        <!-- 10. Status Indicators -->
-        <section class="section">
-            <h2 class="section-title">STATUS INDICATORS</h2>
-            <div class="status-grid">
-                <div class="status-group">
-                    <div class="status-group-title">Air Quality</div>
-                    <span class="status-badge good">🟢 Good (42 AQI)</span>
+            <!-- ═══════════════════════════════════════════════════════════════════════════
+                 SECTION 2: TYPOGRAPHY
+                 ═══════════════════════════════════════════════════════════════════════════ -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Typography <span class="section-number">02</span></h2>
                 </div>
-                <div class="status-group">
-                    <div class="status-group-title">Pollen Count</div>
-                    <span class="status-badge moderate">🟡 Moderate</span>
-                </div>
-                <div class="status-group">
-                    <div class="status-group-title">Severe Weather</div>
-                    <span class="status-badge storm">⚡ Storm Watch</span>
-                </div>
-                <div class="status-group">
-                    <div class="status-group-title">UV Warning</div>
-                    <span class="status-badge poor">🔴 Very High</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- 11. Widget Cards -->
-        <section class="section">
-            <h2 class="section-title">WIDGET CARDS</h2>
-            <div class="widgets-grid">
-                <div class="widget-card">
-                    <div class="widget-header">
-                        <span class="widget-title">SUNRISE / SUNSET</span>
+                <div class="type-showcase">
+                    <div class="type-item">
+                        <div class="type-label">Display — Poppins 700</div>
+                        <div class="type-display">ATMOSPHERE</div>
                     </div>
-                    <div class="widget-content">
-                        <div class="sun-times">
-                            <div class="sun-time">
-                                <span class="icon">🌅</span>
-                                <span class="label">Sunrise</span>
-                                <span class="time">6:42 AM</span>
+                    <div class="type-item">
+                        <div class="type-label">Heading — Poppins 600</div>
+                        <div class="type-heading">Weekly Forecast</div>
+                    </div>
+                    <div class="type-item">
+                        <div class="type-label">Body — Work Sans 400</div>
+                        <div class="type-body">Stay prepared for any weather with real-time forecasts, alerts, and detailed atmospheric data for your location.</div>
+                    </div>
+                    <div class="type-item">
+                        <div class="type-label">Data — IBM Plex Mono 600</div>
+                        <div class="type-data">72°F / 22°C</div>
+                    </div>
+                    <div class="type-item">
+                        <div class="type-label">Mono — IBM Plex Mono 400</div>
+                        <div class="type-mono">Updated: Feb 5, 2026 at 3:42 PM PST</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════════════
+                 SECTION 3: SPACING & GRID
+                 ═══════════════════════════════════════════════════════════════════════════ -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Spacing & Grid <span class="section-number">03</span></h2>
+                </div>
+                <div class="spacing-demo">
+                    <div class="spacing-item">
+                        <div class="spacing-box" style="width: 4px; height: 4px;"></div>
+                        <span class="spacing-label">4px</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box" style="width: 8px; height: 8px;"></div>
+                        <span class="spacing-label">8px</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box" style="width: 16px; height: 16px;"></div>
+                        <span class="spacing-label">16px</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box" style="width: 24px; height: 24px;"></div>
+                        <span class="spacing-label">24px</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box" style="width: 32px; height: 32px;"></div>
+                        <span class="spacing-label">32px</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box" style="width: 48px; height: 48px;"></div>
+                        <span class="spacing-label">48px</span>
+                    </div>
+                </div>
+                <div class="grid-demo">
+                    <div class="grid-cell">1</div>
+                    <div class="grid-cell">2</div>
+                    <div class="grid-cell">3</div>
+                    <div class="grid-cell">4</div>
+                    <div class="grid-cell">5</div>
+                    <div class="grid-cell">6</div>
+                    <div class="grid-cell">7</div>
+                    <div class="grid-cell">8</div>
+                    <div class="grid-cell">9</div>
+                    <div class="grid-cell">10</div>
+                    <div class="grid-cell">11</div>
+                    <div class="grid-cell">12</div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════════════
+                 SECTION 4: METRIC CARDS
+                 ═══════════════════════════════════════════════════════════════════════════ -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Metric Cards <span class="section-number">04</span></h2>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-card temp">
+                        <div class="metric-header">
+                            <span class="metric-label">Temperature</span>
+                            <div class="metric-icon">🌡️</div>
+                        </div>
+                        <div class="metric-value">72<span>°F</span></div>
+                        <div class="metric-change up">↑ 5° from yesterday</div>
+                    </div>
+                    <div class="metric-card humidity">
+                        <div class="metric-header">
+                            <span class="metric-label">Humidity</span>
+                            <div class="metric-icon">💧</div>
+                        </div>
+                        <div class="metric-value">45<span>%</span></div>
+                        <div class="metric-change down">↓ 10% from morning</div>
+                    </div>
+                    <div class="metric-card wind">
+                        <div class="metric-header">
+                            <span class="metric-label">Wind Speed</span>
+                            <div class="metric-icon">💨</div>
+                        </div>
+                        <div class="metric-value">12<span> mph</span></div>
+                        <div class="metric-change" style="color: var(--text-muted);">NW direction</div>
+                    </div>
+                    <div class="metric-card uv">
+                        <div class="metric-header">
+                            <span class="metric-label">UV Index</span>
+                            <div class="metric-icon">☀️</div>
+                        </div>
+                        <div class="metric-value">6<span> / 11</span></div>
+                        <div class="metric-change up" style="color: #F97316;">High</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════════════
+                 SECTION 5: CHARTS & DATA VIZ
+                 ═══════════════════════════════════════════════════════════════════════════ -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Charts & Data Viz <span class="section-number">05</span></h2>
+                </div>
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">Temperature Today</div>
+                        <div class="temp-chart">
+                            <div class="temp-bar">
+                                <div class="temp-bar-fill" style="height: 50px;"></div>
+                                <div class="temp-bar-label">6AM</div>
                             </div>
-                            <div class="sun-time">
-                                <span class="icon">🌇</span>
-                                <span class="label">Sunset</span>
-                                <span class="time">7:28 PM</span>
+                            <div class="temp-bar">
+                                <div class="temp-bar-fill" style="height: 55px;"></div>
+                                <div class="temp-bar-label">9AM</div>
+                            </div>
+                            <div class="temp-bar">
+                                <div class="temp-bar-fill" style="height: 70px;"></div>
+                                <div class="temp-bar-label">12PM</div>
+                            </div>
+                            <div class="temp-bar">
+                                <div class="temp-bar-fill" style="height: 80px;"></div>
+                                <div class="temp-bar-label">3PM</div>
+                            </div>
+                            <div class="temp-bar">
+                                <div class="temp-bar-fill" style="height: 75px;"></div>
+                                <div class="temp-bar-label">6PM</div>
+                            </div>
+                            <div class="temp-bar">
+                                <div class="temp-bar-fill" style="height: 60px;"></div>
+                                <div class="temp-bar-label">9PM</div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="widget-card">
-                    <div class="widget-header">
-                        <span class="widget-title">MOON PHASE</span>
-                    </div>
-                    <div class="widget-content">
-                        <div class="moon-display">
-                            <div class="moon-icon"></div>
-                            <div class="moon-info">
-                                <div class="moon-phase">First Quarter</div>
-                                <div class="moon-illumination">52% Illuminated</div>
+                    <div class="chart-card">
+                        <div class="chart-title">Precipitation Forecast</div>
+                        <div class="precip-chart">
+                            <div class="precip-bar">
+                                <div class="precip-bar-fill" style="height: 10px;"></div>
+                                <div class="precip-bar-value">10%</div>
+                                <div class="precip-bar-label">Mon</div>
+                            </div>
+                            <div class="precip-bar">
+                                <div class="precip-bar-fill" style="height: 20px;"></div>
+                                <div class="precip-bar-value">20%</div>
+                                <div class="precip-bar-label">Tue</div>
+                            </div>
+                            <div class="precip-bar">
+                                <div class="precip-bar-fill" style="height: 60px;"></div>
+                                <div class="precip-bar-value">60%</div>
+                                <div class="precip-bar-label">Wed</div>
+                            </div>
+                            <div class="precip-bar">
+                                <div class="precip-bar-fill" style="height: 80px;"></div>
+                                <div class="precip-bar-value">80%</div>
+                                <div class="precip-bar-label">Thu</div>
+                            </div>
+                            <div class="precip-bar">
+                                <div class="precip-bar-fill" style="height: 40px;"></div>
+                                <div class="precip-bar-value">40%</div>
+                                <div class="precip-bar-label">Fri</div>
+                            </div>
+                            <div class="precip-bar">
+                                <div class="precip-bar-fill" style="height: 15px;"></div>
+                                <div class="precip-bar-value">15%</div>
+                                <div class="precip-bar-label">Sat</div>
+                            </div>
+                            <div class="precip-bar">
+                                <div class="precip-bar-fill" style="height: 5px;"></div>
+                                <div class="precip-bar-value">5%</div>
+                                <div class="precip-bar-label">Sun</div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="widget-card">
-                    <div class="widget-header">
-                        <span class="widget-title">ACTIVE ALERTS</span>
-                    </div>
-                    <div class="widget-content">
-                        <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
-                            <span class="status-badge storm" style="justify-content: flex-start;">⚡ Thunderstorm Watch until 8PM</span>
-                            <span class="status-badge moderate" style="justify-content: flex-start;">🌡️ Heat Advisory Tomorrow</span>
+                    <div class="chart-card">
+                        <div class="chart-title">Barometric Pressure</div>
+                        <div class="pressure-gauge">
+                            <div class="gauge">
+                                <div class="gauge-needle"></div>
+                            </div>
+                            <div class="gauge-value">1018 hPa</div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 12. Alerts & Notifications -->
-        <section class="section">
-            <h2 class="section-title">ALERTS & NOTIFICATIONS</h2>
-            <div class="alerts-showcase">
-                <div class="alert sunny">
-                    <div class="alert-icon">☀️</div>
-                    <div class="alert-content">
-                        <div class="alert-title">UV Index High</div>
-                        <div class="alert-message">The UV index will reach 8 (Very High) between 11 AM and 3 PM. Apply SPF 30+ sunscreen.</div>
-                    </div>
+            <!-- ═══════════════════════════════════════════════════════════════════════════
+                 SECTION 6: DATA TABLES
+                 ═══════════════════════════════════════════════════════════════════════════ -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Data Tables <span class="section-number">06</span></h2>
                 </div>
-                <div class="alert rain">
-                    <div class="alert-icon">🌧️</div>
-                    <div class="alert-content">
-                        <div class="alert-title">Rain Expected</div>
-                        <div class="alert-message">70% chance of rain starting at 4 PM. Bring an umbrella!</div>
-                    </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Temperature</th>
+                                <th>Conditions</th>
+                                <th>Precipitation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="time-cell">6:00 AM</td>
+                                <td class="temp-cell" style="color: var(--rain);">58°F</td>
+                                <td class="condition-cell"><span class="condition-icon">🌫️</span> Foggy</td>
+                                <td class="precip-cell">5%</td>
+                            </tr>
+                            <tr>
+                                <td class="time-cell">9:00 AM</td>
+                                <td class="temp-cell" style="color: var(--humidity);">64°F</td>
+                                <td class="condition-cell"><span class="condition-icon">⛅</span> Partly Cloudy</td>
+                                <td class="precip-cell">10%</td>
+                            </tr>
+                            <tr>
+                                <td class="time-cell">12:00 PM</td>
+                                <td class="temp-cell" style="color: #F97316;">72°F</td>
+                                <td class="condition-cell"><span class="condition-icon">☀️</span> Sunny</td>
+                                <td class="precip-cell">0%</td>
+                            </tr>
+                            <tr>
+                                <td class="time-cell">3:00 PM</td>
+                                <td class="temp-cell" style="color: var(--temp-hot);">76°F</td>
+                                <td class="condition-cell"><span class="condition-icon">☀️</span> Sunny</td>
+                                <td class="precip-cell">0%</td>
+                            </tr>
+                            <tr>
+                                <td class="time-cell">6:00 PM</td>
+                                <td class="temp-cell" style="color: #F97316;">70°F</td>
+                                <td class="condition-cell"><span class="condition-icon">🌤️</span> Mostly Sunny</td>
+                                <td class="precip-cell">5%</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="alert storm">
-                    <div class="alert-icon">⛈️</div>
-                    <div class="alert-content">
-                        <div class="alert-title">Severe Thunderstorm Watch</div>
-                        <div class="alert-message">Strong storms possible this evening with gusty winds and heavy rain.</div>
-                    </div>
-                </div>
-                <div class="alert snow">
-                    <div class="alert-icon">❄️</div>
-                    <div class="alert-content">
-                        <div class="alert-title">Winter Weather Advisory</div>
-                        <div class="alert-message">2-4 inches of snow expected overnight. Roads may be slippery.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 13. Special: Animated Weather Icons -->
-        <section class="section">
-            <h2 class="section-title">SPECIAL: ANIMATED WEATHER ICONS</h2>
-            <div class="weather-showcase">
-                <div class="weather-icons-grid">
-                    <div class="weather-icon-demo">
-                        <div class="icon-container">
-                            <div class="sun"></div>
-                        </div>
-                        <span class="icon-label">Sunny</span>
+            <!-- ═══════════════════════════════════════════════════════════════════════════
+                 SECTION 8: FORMS & FILTERS
+                 ═══════════════════════════════════════════════════════════════════════════ -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Forms & Filters <span class="section-number">08</span></h2>
+                </div>
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label class="filter-label">Location</label>
+                        <input type="text" class="filter-input" placeholder="Enter city name...">
                     </div>
-                    <div class="weather-icon-demo">
-                        <div class="icon-container">
-                            <div class="cloud"></div>
+                    <div class="filter-group">
+                        <label class="filter-label">Temperature Unit</label>
+                        <div class="unit-toggle">
+                            <button class="unit-btn active">°F</button>
+                            <button class="unit-btn">°C</button>
                         </div>
-                        <span class="icon-label">Cloudy</span>
                     </div>
-                    <div class="weather-icon-demo">
-                        <div class="icon-container">
-                            <div class="rain-container">
-                                <div class="rain-cloud"></div>
-                                <div class="rain-drops">
-                                    <div class="drop"></div>
-                                    <div class="drop"></div>
-                                    <div class="drop"></div>
+                    <div class="filter-group">
+                        <label class="filter-label">Date Range</label>
+                        <select class="filter-input filter-select">
+                            <option>Today</option>
+                            <option>Next 3 Days</option>
+                            <option>Next 7 Days</option>
+                            <option>Next 14 Days</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════════════
+                 SECTION 9: BUTTONS
+                 ═══════════════════════════════════════════════════════════════════════════ -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Buttons <span class="section-number">09</span></h2>
+                </div>
+                <div class="buttons-showcase">
+                    <div class="button-group">
+                        <div class="button-group-label">Primary</div>
+                        <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
+                            <button class="btn btn-primary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+                                Refresh
+                            </button>
+                            <button class="btn btn-primary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 5v14M5 12h14"/></svg>
+                                Add Location
+                            </button>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <div class="button-group-label">Secondary</div>
+                        <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
+                            <button class="btn btn-secondary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                                Share
+                            </button>
+                            <button class="btn btn-ghost">View Details</button>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <div class="button-group-label">Icon Buttons</div>
+                        <div style="display: flex; gap: var(--space-md);">
+                            <button class="btn btn-secondary btn-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                            </button>
+                            <button class="btn btn-secondary btn-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════════════
+                 SECTION 10: STATUS INDICATORS
+                 ═══════════════════════════════════════════════════════════════════════════ -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Status Indicators <span class="section-number">10</span></h2>
+                </div>
+                <div class="status-grid">
+                    <div class="status-card">
+                        <div class="status-title">Weather Warnings</div>
+                        <div class="status-item">
+                            <div class="status-dot green"></div>
+                            <span class="status-label">No Active Warnings</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-dot yellow"></div>
+                            <span class="status-label">Heat Advisory</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-dot orange"></div>
+                            <span class="status-label">Wind Advisory</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-dot red"></div>
+                            <span class="status-label">Severe Storm Warning</span>
+                        </div>
+                    </div>
+                    <div class="status-card">
+                        <div class="status-title">Air Quality Index</div>
+                        <div class="aqi-bar">
+                            <div class="aqi-marker" style="left: 25%;"></div>
+                        </div>
+                        <div class="aqi-value">42</div>
+                        <div class="aqi-label">Good</div>
+                    </div>
+                    <div class="status-card">
+                        <div class="status-title">Pollen Levels</div>
+                        <div class="status-item">
+                            <div class="status-dot green"></div>
+                            <span class="status-label">Tree Pollen: Low</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-dot yellow"></div>
+                            <span class="status-label">Grass Pollen: Moderate</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-dot orange"></div>
+                            <span class="status-label">Ragweed: High</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════════════
+                 SECTION 11: WIDGET CARDS
+                 ═══════════════════════════════════════════════════════════════════════════ -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Widget Cards <span class="section-number">11</span></h2>
+                </div>
+                <div class="widgets-grid">
+                    <div class="widget">
+                        <div class="widget-header">
+                            <span class="widget-title">Sun Times</span>
+                        </div>
+                        <div class="widget-body">
+                            <div class="sun-times">
+                                <div class="sun-time-item">
+                                    <span class="sun-icon">🌅</span>
+                                    <span class="sun-time">6:47 AM</span>
+                                    <span class="sun-label">Sunrise</span>
+                                </div>
+                                <div class="sun-time-item">
+                                    <span class="sun-icon">🌇</span>
+                                    <span class="sun-time">5:52 PM</span>
+                                    <span class="sun-label">Sunset</span>
                                 </div>
                             </div>
                         </div>
-                        <span class="icon-label">Rainy</span>
                     </div>
-                    <div class="weather-icon-demo">
-                        <div class="icon-container">
-                            <div class="snow-container">
-                                <div class="snow-cloud"></div>
-                                <div class="snowflakes">
-                                    <div class="flake"></div>
-                                    <div class="flake"></div>
-                                    <div class="flake"></div>
-                                    <div class="flake"></div>
+                    <div class="widget">
+                        <div class="widget-header">
+                            <span class="widget-title">Moon Phase</span>
+                        </div>
+                        <div class="widget-body">
+                            <div class="moon-phase">
+                                <div class="moon-icon"></div>
+                                <div class="moon-info">
+                                    <div class="moon-name">First Quarter</div>
+                                    <div class="moon-illumination">48% Illumination</div>
                                 </div>
                             </div>
                         </div>
-                        <span class="icon-label">Snowy</span>
                     </div>
-                    <div class="weather-icon-demo">
-                        <div class="icon-container">
-                            <div class="storm-container">
-                                <div class="storm-cloud"></div>
-                                <div class="lightning"></div>
+                    <div class="widget">
+                        <div class="widget-header">
+                            <span class="widget-title">Weekly Outlook</span>
+                        </div>
+                        <div class="widget-body">
+                            <div class="weekly-outlook">
+                                <div class="day-row">
+                                    <span class="day-name">Mon</span>
+                                    <span class="day-icon">☀️</span>
+                                    <div class="day-temps">
+                                        <span class="day-high">76°</span>
+                                        <span class="day-low">58°</span>
+                                    </div>
+                                    <span class="day-precip">10%</span>
+                                </div>
+                                <div class="day-row">
+                                    <span class="day-name">Tue</span>
+                                    <span class="day-icon">⛅</span>
+                                    <div class="day-temps">
+                                        <span class="day-high">72°</span>
+                                        <span class="day-low">55°</span>
+                                    </div>
+                                    <span class="day-precip">20%</span>
+                                </div>
+                                <div class="day-row">
+                                    <span class="day-name">Wed</span>
+                                    <span class="day-icon">🌧️</span>
+                                    <div class="day-temps">
+                                        <span class="day-high">65°</span>
+                                        <span class="day-low">52°</span>
+                                    </div>
+                                    <span class="day-precip">60%</span>
+                                </div>
+                                <div class="day-row">
+                                    <span class="day-name">Thu</span>
+                                    <span class="day-icon">⛈️</span>
+                                    <div class="day-temps">
+                                        <span class="day-high">62°</span>
+                                        <span class="day-low">50°</span>
+                                    </div>
+                                    <span class="day-precip">80%</span>
+                                </div>
+                                <div class="day-row">
+                                    <span class="day-name">Fri</span>
+                                    <span class="day-icon">🌤️</span>
+                                    <div class="day-temps">
+                                        <span class="day-high">68°</span>
+                                        <span class="day-low">54°</span>
+                                    </div>
+                                    <span class="day-precip">15%</span>
+                                </div>
                             </div>
                         </div>
-                        <span class="icon-label">Stormy</span>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Footer -->
-        <footer class="dashboard-footer">
-            <div class="footer-logo">ATMOSPHERE v1.0</div>
-            <p class="footer-text">Weather Station Dashboard Style Guide</p>
-        </footer>
+            <!-- ═══════════════════════════════════════════════════════════════════════════
+                 SECTION 12: ALERTS & NOTIFICATIONS
+                 ═══════════════════════════════════════════════════════════════════════════ -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Alerts & Notifications <span class="section-number">12</span></h2>
+                </div>
+                <div class="alerts-showcase">
+                    <div class="alert info">
+                        <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="16" x2="12" y2="12"/>
+                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                        </svg>
+                        <div class="alert-content">
+                            <div class="alert-title">Forecast Updated</div>
+                            <div class="alert-message">Weather data has been refreshed. Last update: 3:42 PM PST</div>
+                        </div>
+                    </div>
+                    <div class="alert success">
+                        <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <div class="alert-content">
+                            <div class="alert-title">Location Added</div>
+                            <div class="alert-message">New York, NY has been added to your saved locations.</div>
+                        </div>
+                    </div>
+                    <div class="alert warning">
+                        <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <div class="alert-content">
+                            <div class="alert-title">Heat Advisory</div>
+                            <div class="alert-message">High temperatures expected Thursday. Stay hydrated and limit outdoor activities.</div>
+                        </div>
+                    </div>
+                    <div class="alert error">
+                        <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="15" y1="9" x2="9" y2="15"/>
+                            <line x1="9" y1="9" x2="15" y2="15"/>
+                        </svg>
+                        <div class="alert-content">
+                            <div class="alert-title">Severe Storm Warning</div>
+                            <div class="alert-message">Thunderstorms with possible hail expected Wednesday evening. Seek shelter.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════════════════════
+                 SECTION 13: ANIMATED WEATHER ICONS
+                 ═══════════════════════════════════════════════════════════════════════════ -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Animated Weather Icons <span class="section-number">13</span></h2>
+                </div>
+                <div class="weather-icons-showcase">
+                    <div class="weather-icon-card">
+                        <div class="animated-sun">
+                            <div class="sun-ray"></div>
+                            <div class="sun-ray"></div>
+                            <div class="sun-ray"></div>
+                            <div class="sun-ray"></div>
+                            <div class="sun-ray"></div>
+                            <div class="sun-ray"></div>
+                            <div class="sun-ray"></div>
+                            <div class="sun-ray"></div>
+                            <div class="sun-core"></div>
+                        </div>
+                        <span>Sunny</span>
+                    </div>
+                    <div class="weather-icon-card">
+                        <div class="animated-clouds">
+                            <div class="cloud cloud-main"></div>
+                            <div class="cloud cloud-small"></div>
+                        </div>
+                        <span>Cloudy</span>
+                    </div>
+                    <div class="weather-icon-card">
+                        <div class="animated-rain">
+                            <div class="rain-cloud"></div>
+                            <div class="raindrop" style="left: 20px;"></div>
+                            <div class="raindrop"></div>
+                            <div class="raindrop"></div>
+                            <div class="raindrop"></div>
+                            <div class="raindrop"></div>
+                        </div>
+                        <span>Rainy</span>
+                    </div>
+                    <div class="weather-icon-card">
+                        <div class="animated-snow">
+                            <div class="snow-cloud"></div>
+                            <div class="snowflake" style="left: 20px;"></div>
+                            <div class="snowflake"></div>
+                            <div class="snowflake"></div>
+                            <div class="snowflake"></div>
+                            <div class="snowflake"></div>
+                            <div class="snowflake"></div>
+                        </div>
+                        <span>Snowy</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
     </div>
 </body>
 </html>

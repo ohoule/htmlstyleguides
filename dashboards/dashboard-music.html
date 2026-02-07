@@ -69,583 +69,204 @@
             min-height: 100vh;
         }
 
-        /* Gradient Mesh Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(ellipse at 10% 20%, var(--vinyl-glow) 0%, transparent 40%),
-                radial-gradient(ellipse at 90% 80%, var(--spotify-glow) 0%, transparent 40%),
-                radial-gradient(ellipse at 50% 50%, var(--beat-glow) 0%, transparent 50%);
-            opacity: 0.4;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .dashboard-container {
-            position: relative;
-            z-index: 1;
-            max-width: 1500px;
-            margin: 0 auto;
-            padding: var(--space-2xl);
+        /* Dashboard Layout */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            grid-template-rows: 70px 1fr;
+            min-height: 100vh;
         }
 
         /* Header */
-        .dashboard-header {
-            text-align: center;
-            margin-bottom: var(--space-3xl);
-            padding: var(--space-2xl);
-            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-dark) 100%);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-xl);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .dashboard-header::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--spotify-green), var(--vinyl-purple), var(--beat-pink), var(--waveform-cyan));
-        }
-
-        .dashboard-header h1 {
-            font-family: var(--font-display);
-            font-size: 4.5rem;
-            letter-spacing: 0.15em;
-            background: linear-gradient(135deg, var(--spotify-green), var(--waveform-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: var(--space-sm);
-        }
-
-        .dashboard-header .version {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--spotify-green);
-            letter-spacing: 0.2em;
-        }
-
-        .dashboard-header .tagline {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-top: var(--space-md);
-            font-weight: 300;
-        }
-
-        /* Section Styling */
-        .section {
-            margin-bottom: var(--space-3xl);
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            letter-spacing: 0.2em;
-            color: var(--text-primary);
-            margin-bottom: var(--space-lg);
-            padding-bottom: var(--space-sm);
+        .header {
+            grid-column: 1 / -1;
+            background: var(--bg-dark);
             border-bottom: 1px solid var(--border-subtle);
             display: flex;
             align-items: center;
-            gap: var(--space-md);
-        }
-
-        .section-title::before {
-            content: '♪';
-            color: var(--spotify-green);
-        }
-
-        /* ==================== 1. COLOR PALETTE ==================== */
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: var(--space-md);
-        }
-
-        .color-swatch {
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            border: 1px solid var(--border-subtle);
-            transition: all 0.3s ease;
-        }
-
-        .color-swatch:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .color-preview {
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-        }
-
-        .color-preview.spotify { background: var(--spotify-green); }
-        .color-preview.vinyl { background: var(--vinyl-purple); }
-        .color-preview.waveform { background: var(--waveform-cyan); }
-        .color-preview.beat { background: var(--beat-pink); }
-        .color-preview.void { background: var(--bg-void); border-bottom: 1px solid var(--border-subtle); }
-        .color-preview.dark { background: var(--bg-dark); }
-
-        .color-info {
-            padding: var(--space-md);
-        }
-
-        .color-name {
-            font-family: var(--font-display);
-            font-size: 0.9rem;
-            letter-spacing: 0.1em;
-            color: var(--text-primary);
-        }
-
-        .color-hex {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        /* ==================== 2. TYPOGRAPHY ==================== */
-        .typography-showcase {
-            display: grid;
-            gap: var(--space-lg);
-        }
-
-        .type-specimen {
-            background: var(--bg-card);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-subtle);
-        }
-
-        .type-label {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: var(--spotify-green);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: var(--space-md);
-        }
-
-        .display-font {
-            font-family: var(--font-display);
-            font-size: 3.5rem;
-            letter-spacing: 0.1em;
-            color: var(--text-primary);
-        }
-
-        .ui-font {
-            font-family: var(--font-ui);
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            font-weight: 300;
-        }
-
-        .mono-font {
-            font-family: var(--font-mono);
-            font-size: 1rem;
-            color: var(--waveform-cyan);
-        }
-
-        /* ==================== 3. SPACING & GRID ==================== */
-        .spacing-demo {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-md);
-            align-items: flex-end;
-        }
-
-        .space-block {
-            background: linear-gradient(135deg, var(--spotify-green), var(--waveform-cyan));
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .space-block span {
-            font-family: var(--font-mono);
-            font-size: 0.55rem;
-            color: var(--bg-void);
-            font-weight: 600;
-        }
-
-        .grid-demo {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: var(--space-sm);
-            margin-top: var(--space-xl);
-        }
-
-        .grid-cell {
-            height: 40px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-active);
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--text-muted);
-        }
-
-        /* ==================== 4. METRIC CARDS ==================== */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .metric-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .metric-card:hover {
-            border-color: var(--border-active);
-            box-shadow: 0 0 30px var(--spotify-glow);
-        }
-
-        .metric-card::after {
-            content: '';
-            position: absolute;
+            justify-content: space-between;
+            padding: 0 var(--space-xl);
+            position: sticky;
             top: 0;
-            right: 0;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            opacity: 0.1;
-            transform: translate(20%, -20%);
+            z-index: 100;
         }
 
-        .metric-card.listeners::after { background: var(--spotify-green); }
-        .metric-card.streams::after { background: var(--vinyl-purple); }
-        .metric-card.playlists::after { background: var(--waveform-cyan); }
-        .metric-card.skips::after { background: var(--beat-pink); }
-
-        .metric-icon {
-            font-size: 1.8rem;
-            margin-bottom: var(--space-md);
-        }
-
-        .metric-label {
-            font-family: var(--font-ui);
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: var(--space-sm);
-        }
-
-        .metric-value {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            letter-spacing: 0.05em;
-            color: var(--text-primary);
-        }
-
-        .metric-trend {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-            margin-top: var(--space-sm);
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--radius-full);
-        }
-
-        .metric-trend.up {
-            background: rgba(29, 185, 84, 0.15);
-            color: var(--spotify-green);
-        }
-
-        .metric-trend.down {
-            background: rgba(236, 72, 153, 0.15);
-            color: var(--beat-pink);
-        }
-
-        /* ==================== 5. CSS-ONLY CHARTS ==================== */
-        .charts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .chart-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-        }
-
-        .chart-title {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            letter-spacing: 0.15em;
-            color: var(--text-secondary);
-            margin-bottom: var(--space-lg);
-        }
-
-        /* Stream Waveform */
-        .waveform-chart {
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            height: 100px;
-            padding: var(--space-md) 0;
-        }
-
-        .wave-bar {
-            flex: 1;
-            background: linear-gradient(to top, var(--bg-elevated), var(--spotify-green));
-            border-radius: 2px;
-            transition: all 0.3s ease;
-            animation: waveMove 1.5s ease-in-out infinite;
-        }
-
-        .wave-bar:nth-child(odd) {
-            animation-delay: 0.1s;
-        }
-
-        .wave-bar:nth-child(3n) {
-            animation-delay: 0.2s;
-        }
-
-        @keyframes waveMove {
-            0%, 100% { transform: scaleY(1); }
-            50% { transform: scaleY(0.7); }
-        }
-
-        .wave-bar:hover {
-            background: linear-gradient(to top, var(--bg-elevated), var(--waveform-cyan));
-            animation-play-state: paused;
-        }
-
-        /* Genre Distribution */
-        .genre-chart {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-        }
-
-        .genre-row {
+        .logo {
             display: flex;
             align-items: center;
             gap: var(--space-md);
-        }
-
-        .genre-label {
-            width: 80px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        .genre-bar {
-            flex: 1;
-            height: 24px;
-            background: var(--bg-elevated);
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-        }
-
-        .genre-fill {
-            height: 100%;
-            border-radius: var(--radius-sm);
-            transition: width 0.5s ease;
-        }
-
-        .genre-fill.pop { background: linear-gradient(90deg, var(--spotify-green), #4ADE80); }
-        .genre-fill.hiphop { background: linear-gradient(90deg, var(--vinyl-purple), #A855F7); }
-        .genre-fill.rock { background: linear-gradient(90deg, var(--beat-pink), #F472B6); }
-        .genre-fill.electronic { background: linear-gradient(90deg, var(--waveform-cyan), #22D3EE); }
-        .genre-fill.rnb { background: linear-gradient(90deg, #F59E0B, #FBBF24); }
-
-        .genre-value {
-            width: 50px;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-align: right;
-        }
-
-        /* Listening Time */
-        .time-chart {
-            display: flex;
-            align-items: flex-end;
-            gap: 4px;
-            height: 100px;
-        }
-
-        .time-bar {
-            flex: 1;
-            background: var(--vinyl-purple);
-            border-radius: 2px 2px 0 0;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .time-bar:hover {
-            background: var(--beat-pink);
-        }
-
-        .time-bar::after {
-            content: attr(data-hour);
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: var(--font-mono);
-            font-size: 0.5rem;
-            color: var(--text-dim);
-        }
-
-        /* ==================== 6. DATA TABLES ==================== */
-        .data-table-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .data-table thead {
-            background: var(--bg-elevated);
-        }
-
-        .data-table th {
-            font-family: var(--font-display);
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
-            color: var(--text-muted);
-            text-align: left;
-            padding: var(--space-md) var(--space-lg);
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .data-table td {
-            padding: var(--space-md) var(--space-lg);
-            border-bottom: 1px solid var(--border-subtle);
-            font-size: 0.9rem;
-        }
-
-        .data-table tbody tr {
-            transition: all 0.2s ease;
-        }
-
-        .data-table tbody tr:hover {
-            background: rgba(29, 185, 84, 0.05);
-        }
-
-        .track-cell {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-        }
-
-        .track-art {
-            width: 44px;
-            height: 44px;
-            border-radius: var(--radius-sm);
-            background: linear-gradient(135deg, var(--vinyl-purple), var(--beat-pink));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .track-info {
-            flex: 1;
-        }
-
-        .track-name {
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .track-artist {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .streams-cell {
-            font-family: var(--font-mono);
-            color: var(--spotify-green);
-        }
-
-        .duration-cell {
-            font-family: var(--font-mono);
-            color: var(--text-muted);
-        }
-
-        /* ==================== 7. SIDEBAR NAVIGATION ==================== */
-        .sidebar-demo {
-            display: flex;
-            gap: var(--space-xl);
-        }
-
-        .sidebar {
-            width: 240px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-        }
-
-        .sidebar-logo {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            padding: var(--space-md);
-            margin-bottom: var(--space-xl);
         }
 
         .logo-icon {
-            width: 44px;
-            height: 44px;
-            background: var(--spotify-green);
-            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--spotify-green), var(--waveform-cyan));
+            border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--bg-void) 0px,
+                var(--bg-void) 2px,
+                transparent 2px,
+                transparent 5px
+            );
+            animation: equalizer 0.8s ease-in-out infinite alternate;
+        }
+
+        @keyframes equalizer {
+            0% { transform: scaleY(0.5); }
+            100% { transform: scaleY(1); }
         }
 
         .logo-text {
             font-family: var(--font-display);
-            font-size: 1.3rem;
-            letter-spacing: 0.1em;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, var(--spotify-green), var(--waveform-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .nav-section-title {
+        .logo-version {
             font-family: var(--font-mono);
-            font-size: 0.6rem;
-            color: var(--text-dim);
-            letter-spacing: 0.15em;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            padding: 2px 6px;
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+        }
+
+        .header-search {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 var(--space-2xl);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--space-sm) var(--space-md);
+            padding-left: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-full);
+            color: var(--text-primary);
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--spotify-green);
+            box-shadow: 0 0 0 3px var(--spotify-glow);
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-wrapper::before {
+            content: '🔍';
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.9rem;
+            opacity: 0.5;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .notification-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .notification-btn:hover {
+            background: var(--bg-elevated);
+            border-color: var(--spotify-green);
+        }
+
+        .notification-btn::after {
+            content: '3';
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 18px;
+            height: 18px;
+            background: var(--beat-pink);
+            border-radius: var(--radius-full);
+            font-size: 0.65rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--vinyl-purple), var(--beat-pink));
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--bg-dark);
+            border-right: 1px solid var(--border-subtle);
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-section {
+            margin-bottom: var(--space-xl);
+        }
+
+        .nav-label {
+            font-size: 0.7rem;
+            font-weight: 600;
             text-transform: uppercase;
-            padding: 0 var(--space-md);
-            margin: var(--space-lg) 0 var(--space-sm);
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: var(--space-md);
+            padding-left: var(--space-md);
         }
 
         .nav-item {
@@ -657,268 +278,711 @@
             color: var(--text-secondary);
             cursor: pointer;
             transition: all 0.2s ease;
+            margin-bottom: var(--space-xs);
         }
 
         .nav-item:hover {
-            background: var(--bg-elevated);
+            background: var(--bg-card);
             color: var(--text-primary);
         }
 
         .nav-item.active {
+            background: linear-gradient(90deg, var(--spotify-glow), transparent);
             color: var(--spotify-green);
-        }
-
-        .nav-item.active::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            width: 3px;
-            height: 20px;
-            background: var(--spotify-green);
-            border-radius: 0 2px 2px 0;
+            border-left: 3px solid var(--spotify-green);
         }
 
         .nav-icon {
             font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
         }
 
-        /* ==================== 8. FORMS & FILTERS ==================== */
-        .forms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .form-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
+        /* Main Content */
+        .main-content {
             padding: var(--space-xl);
+            overflow-y: auto;
+            background: linear-gradient(180deg, var(--bg-void) 0%, #0a0a0a 100%);
         }
 
-        .form-title {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            letter-spacing: 0.1em;
-            color: var(--text-primary);
+        .section {
+            margin-bottom: var(--space-3xl);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
             margin-bottom: var(--space-lg);
         }
 
-        .form-group {
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+        }
+
+        .section-badge {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            padding: 4px 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            color: var(--text-muted);
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .color-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            transition: transform 0.2s ease;
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .color-swatch {
+            height: 100px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: var(--space-md);
+        }
+
+        .color-swatch.spotify-green { background: var(--spotify-green); }
+        .color-swatch.vinyl-purple { background: var(--vinyl-purple); }
+        .color-swatch.waveform-cyan { background: var(--waveform-cyan); }
+        .color-swatch.beat-pink { background: var(--beat-pink); }
+        .color-swatch.bg-void { background: var(--bg-void); border: 1px solid var(--border-subtle); }
+        .color-swatch.bg-dark { background: var(--bg-dark); }
+        .color-swatch.bg-card { background: var(--bg-card); }
+
+        .color-info {
+            padding: var(--space-md);
+        }
+
+        .color-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: var(--space-xs);
+        }
+
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Typography */
+        .type-specimen {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            border: 1px solid var(--border-subtle);
             margin-bottom: var(--space-md);
         }
 
-        .form-label {
-            display: block;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: var(--space-xs);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+        .type-display {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            letter-spacing: 4px;
+            line-height: 1;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(90deg, var(--spotify-green), var(--waveform-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .form-input {
+        .type-ui {
+            font-family: var(--font-ui);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .type-mono {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--spotify-green);
+        }
+
+        .type-meta {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        /* Spacing & Grid */
+        .spacing-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .spacing-box {
+            background: linear-gradient(135deg, var(--vinyl-purple), var(--beat-pink));
+            border-radius: var(--radius-sm);
+        }
+
+        .spacing-box.xs { width: 4px; height: 24px; }
+        .spacing-box.sm { width: 8px; height: 24px; }
+        .spacing-box.md { width: 16px; height: 24px; }
+        .spacing-box.lg { width: 24px; height: 24px; }
+        .spacing-box.xl { width: 32px; height: 24px; }
+        .spacing-box.xxl { width: 48px; height: 24px; }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Metric Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            border: 1px solid var(--border-subtle);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            border-color: var(--spotify-green);
+            transform: translateY(-4px);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--spotify-green), var(--waveform-cyan));
+        }
+
+        .metric-card.purple::before {
+            background: linear-gradient(90deg, var(--vinyl-purple), var(--beat-pink));
+        }
+
+        .metric-card.cyan::before {
+            background: linear-gradient(90deg, var(--waveform-cyan), var(--spotify-green));
+        }
+
+        .metric-card.pink::before {
+            background: linear-gradient(90deg, var(--beat-pink), var(--vinyl-purple));
+        }
+
+        .metric-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .metric-value {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .metric-change {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+        }
+
+        .metric-change.positive { color: var(--spotify-green); }
+        .metric-change.negative { color: var(--beat-pink); }
+
+        /* Charts */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-lg);
+        }
+
+        @media (max-width: 1200px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .chart-title {
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: var(--space-md);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: var(--radius-full);
+            display: inline-block;
+            margin-right: var(--space-xs);
+        }
+
+        /* Bar Chart */
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 200px;
+            padding-top: var(--space-lg);
+            gap: var(--space-sm);
+        }
+
+        .bar-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .bar {
             width: 100%;
-            background: var(--bg-dark);
+            max-width: 40px;
+            background: linear-gradient(180deg, var(--spotify-green), var(--waveform-cyan));
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            position: relative;
+            transition: all 0.3s ease;
+            animation: barGrow 1s ease-out forwards;
+            transform-origin: bottom;
+        }
+
+        @keyframes barGrow {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        .bar:hover {
+            filter: brightness(1.2);
+        }
+
+        .bar-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        /* Donut Chart */
+        .donut-container {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xl);
+        }
+
+        .donut-chart {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--spotify-green) 0deg 126deg,
+                var(--vinyl-purple) 126deg 216deg,
+                var(--waveform-cyan) 216deg 288deg,
+                var(--beat-pink) 288deg 360deg
+            );
+            position: relative;
+            animation: donutSpin 1s ease-out;
+        }
+
+        @keyframes donutSpin {
+            from { transform: rotate(-90deg); opacity: 0; }
+            to { transform: rotate(0deg); opacity: 1; }
+        }
+
+        .donut-chart::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: var(--bg-card);
+            border-radius: 50%;
+        }
+
+        .donut-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .donut-value {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .donut-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .donut-legend {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 0.85rem;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: var(--radius-sm);
+        }
+
+        .legend-percent {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-left: auto;
+        }
+
+        /* Data Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .data-table th {
+            background: var(--bg-elevated);
+            padding: var(--space-md) var(--space-lg);
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .data-table td {
+            padding: var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.9rem;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover td {
+            background: var(--bg-elevated);
+        }
+
+        .track-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .track-art {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--vinyl-purple), var(--beat-pink));
+        }
+
+        .track-title {
+            font-weight: 500;
+        }
+
+        .track-artist {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .streams-count {
+            font-family: var(--font-mono);
+            color: var(--spotify-green);
+        }
+
+        .trend-up {
+            color: var(--spotify-green);
+        }
+
+        .trend-down {
+            color: var(--beat-pink);
+        }
+
+        /* Forms & Filters */
+        .filters-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            background: var(--bg-card);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .filter-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-input,
+        .filter-select {
+            padding: var(--space-sm) var(--space-md);
+            background: var(--bg-elevated);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-md);
-            padding: var(--space-md);
             color: var(--text-primary);
             font-family: var(--font-ui);
             font-size: 0.9rem;
+            min-width: 160px;
             transition: all 0.2s ease;
         }
 
-        .form-input:focus {
+        .filter-input:focus,
+        .filter-select:focus {
             outline: none;
             border-color: var(--spotify-green);
             box-shadow: 0 0 0 3px var(--spotify-glow);
         }
 
-        .form-select {
-            width: 100%;
-            background: var(--bg-dark);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
-            padding: var(--space-md);
-            color: var(--text-primary);
-            font-family: var(--font-ui);
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        /* ==================== 9. BUTTONS ==================== */
-        .buttons-showcase {
+        /* Buttons */
+        .buttons-grid {
             display: flex;
             flex-wrap: wrap;
             gap: var(--space-md);
-            align-items: center;
         }
 
         .btn {
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-md);
+            font-family: var(--font-ui);
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: var(--space-sm);
-            padding: var(--space-md) var(--space-xl);
-            border: none;
-            border-radius: var(--radius-full);
-            font-family: var(--font-display);
-            font-size: 0.9rem;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
 
-        .btn-spotify {
-            background: var(--spotify-green);
+        .btn-primary {
+            background: linear-gradient(135deg, var(--spotify-green), #17a34a);
             color: var(--bg-void);
         }
 
-        .btn-spotify:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px var(--spotify-glow);
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px var(--spotify-glow);
         }
 
-        .btn-vinyl {
-            background: var(--vinyl-purple);
-            color: white;
-        }
-
-        .btn-vinyl:hover {
-            box-shadow: 0 0 30px var(--vinyl-glow);
-        }
-
-        .btn-pink {
-            background: var(--beat-pink);
-            color: white;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--text-muted);
+        .btn-secondary {
+            background: var(--bg-card);
             color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
         }
 
-        .btn-outline:hover {
-            border-color: var(--spotify-green);
-            color: var(--spotify-green);
-        }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--text-secondary);
-        }
-
-        .btn-ghost:hover {
-            color: var(--text-primary);
+        .btn-secondary:hover {
             background: var(--bg-elevated);
+            border-color: var(--spotify-green);
         }
 
-        /* ==================== 10. STATUS INDICATORS ==================== */
+        .btn-accent {
+            background: linear-gradient(135deg, var(--vinyl-purple), var(--beat-pink));
+            color: var(--text-primary);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px var(--vinyl-glow);
+        }
+
+        /* Status Indicators */
         .status-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-lg);
-        }
-
-        .status-group {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-        }
-
-        .status-group-title {
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            color: var(--text-dim);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: var(--space-md);
+            gap: var(--space-md);
         }
 
         .status-badge {
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: var(--space-sm);
-            padding: var(--space-sm) var(--space-md);
-            border-radius: var(--radius-full);
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
+            gap: var(--space-xs);
         }
 
-        .status-badge.live {
+        .status-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: var(--radius-full);
+        }
+
+        .status-live {
             background: rgba(29, 185, 84, 0.15);
             color: var(--spotify-green);
         }
 
-        .status-badge.pending {
-            background: rgba(245, 158, 11, 0.15);
-            color: #F59E0B;
+        .status-live::before {
+            background: var(--spotify-green);
+            animation: pulse 1.5s infinite;
         }
 
-        .status-badge.removed {
-            background: rgba(239, 68, 68, 0.15);
-            color: #EF4444;
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
 
-        .status-badge.hifi {
-            background: rgba(6, 182, 212, 0.15);
-            color: var(--waveform-cyan);
-        }
-
-        .status-badge.trending {
-            background: rgba(236, 72, 153, 0.15);
-            color: var(--beat-pink);
-        }
-
-        .status-badge.viral {
+        .status-pending {
             background: rgba(147, 51, 234, 0.15);
             color: var(--vinyl-purple);
         }
 
-        /* ==================== 11. WIDGET CARDS ==================== */
+        .status-pending::before {
+            background: var(--vinyl-purple);
+        }
+
+        .status-private {
+            background: rgba(114, 114, 114, 0.15);
+            color: var(--text-muted);
+        }
+
+        .status-private::before {
+            background: var(--text-muted);
+        }
+
+        .status-verified {
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--waveform-cyan);
+        }
+
+        .status-verified::before {
+            background: var(--waveform-cyan);
+        }
+
+        /* Widget Cards */
         .widgets-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: var(--space-lg);
         }
 
         .widget-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
             border-radius: var(--radius-lg);
-            overflow: hidden;
+            padding: var(--space-lg);
+            border: 1px solid var(--border-subtle);
         }
 
         .widget-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: var(--space-md) var(--space-lg);
-            border-bottom: 1px solid var(--border-subtle);
+            justify-content: space-between;
+            margin-bottom: var(--space-lg);
         }
 
         .widget-title {
-            font-family: var(--font-display);
-            font-size: 0.9rem;
-            letter-spacing: 0.15em;
-            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.95rem;
         }
 
-        .widget-content {
-            padding: var(--space-lg);
+        .widget-action {
+            font-size: 0.8rem;
+            color: var(--spotify-green);
+            cursor: pointer;
         }
 
-        /* Top Tracks Widget */
-        .track-list {
+        .widget-list {
             display: flex;
             flex-direction: column;
-            gap: var(--space-sm);
+            gap: var(--space-md);
         }
 
-        .track-item {
+        .widget-item {
             display: flex;
             align-items: center;
             gap: var(--space-md);
@@ -927,65 +991,84 @@
             transition: background 0.2s ease;
         }
 
-        .track-item:hover {
+        .widget-item:hover {
             background: var(--bg-elevated);
         }
 
-        .track-rank {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            width: 24px;
+        .widget-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--spotify-green), var(--waveform-cyan));
         }
 
-        .track-thumb {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-sm);
+        .widget-avatar.purple {
             background: linear-gradient(135deg, var(--vinyl-purple), var(--beat-pink));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
         }
 
-        .track-details {
+        .widget-info {
             flex: 1;
-            min-width: 0;
         }
 
-        .track-title {
-            font-size: 0.85rem;
+        .widget-name {
             font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-size: 0.9rem;
         }
 
-        .track-subtitle {
-            font-size: 0.75rem;
+        .widget-meta {
+            font-size: 0.8rem;
             color: var(--text-muted);
         }
 
-        .track-streams {
+        .widget-stat {
             font-family: var(--font-mono);
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             color: var(--spotify-green);
         }
 
-        /* ==================== 12. ALERTS & NOTIFICATIONS ==================== */
-        .alerts-showcase {
-            display: grid;
+        /* Alerts */
+        .alerts-stack {
+            display: flex;
+            flex-direction: column;
             gap: var(--space-md);
         }
 
         .alert {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-md);
-            padding: var(--space-lg);
+            padding: var(--space-md) var(--space-lg);
             border-radius: var(--radius-md);
-            border-left: 3px solid;
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .alert-success {
+            background: rgba(29, 185, 84, 0.1);
+            border: 1px solid rgba(29, 185, 84, 0.3);
+            color: var(--spotify-green);
+        }
+
+        .alert-info {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: var(--waveform-cyan);
+        }
+
+        .alert-warning {
+            background: rgba(147, 51, 234, 0.1);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            color: var(--vinyl-purple);
+        }
+
+        .alert-error {
+            background: rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            color: var(--beat-pink);
         }
 
         .alert-icon {
@@ -997,829 +1080,899 @@
         }
 
         .alert-title {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            letter-spacing: 0.1em;
-            margin-bottom: var(--space-xs);
+            font-weight: 600;
+            font-size: 0.9rem;
         }
 
         .alert-message {
             font-size: 0.85rem;
-            color: var(--text-secondary);
+            opacity: 0.9;
         }
 
-        .alert.success {
-            background: rgba(29, 185, 84, 0.1);
-            border-color: var(--spotify-green);
-        }
-
-        .alert.success .alert-title { color: var(--spotify-green); }
-
-        .alert.viral {
-            background: rgba(147, 51, 234, 0.1);
-            border-color: var(--vinyl-purple);
-        }
-
-        .alert.viral .alert-title { color: var(--vinyl-purple); }
-
-        .alert.trending {
-            background: rgba(236, 72, 153, 0.1);
-            border-color: var(--beat-pink);
-        }
-
-        .alert.trending .alert-title { color: var(--beat-pink); }
-
-        .alert.info {
-            background: rgba(6, 182, 212, 0.1);
-            border-color: var(--waveform-cyan);
-        }
-
-        .alert.info .alert-title { color: var(--waveform-cyan); }
-
-        /* ==================== 13. SPECIAL: AUDIO VISUALIZER ==================== */
-        .visualizer-container {
+        /* Special Component: Audio Waveform Visualizer */
+        .waveform-visualizer {
             background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
             border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: var(--space-2xl);
-            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .visualizer-title {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            letter-spacing: 0.2em;
-            color: var(--text-primary);
-            margin-bottom: var(--space-sm);
-        }
-
-        .visualizer-subtitle {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: var(--space-xl);
-        }
-
-        .audio-visualizer {
+        .waveform-header {
             display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            gap: 6px;
-            height: 150px;
-            padding: var(--space-lg);
-            background: var(--bg-dark);
-            border-radius: var(--radius-lg);
+            align-items: center;
+            justify-content: space-between;
             margin-bottom: var(--space-xl);
-        }
-
-        .freq-bar {
-            width: 12px;
-            background: linear-gradient(to top, var(--spotify-green), var(--waveform-cyan));
-            border-radius: 6px;
-            animation: audioFreq 0.8s ease-in-out infinite;
-        }
-
-        .freq-bar:nth-child(1) { animation-delay: 0s; }
-        .freq-bar:nth-child(2) { animation-delay: 0.1s; }
-        .freq-bar:nth-child(3) { animation-delay: 0.2s; }
-        .freq-bar:nth-child(4) { animation-delay: 0.15s; }
-        .freq-bar:nth-child(5) { animation-delay: 0.25s; }
-        .freq-bar:nth-child(6) { animation-delay: 0.05s; }
-        .freq-bar:nth-child(7) { animation-delay: 0.3s; }
-        .freq-bar:nth-child(8) { animation-delay: 0.12s; }
-        .freq-bar:nth-child(9) { animation-delay: 0.22s; }
-        .freq-bar:nth-child(10) { animation-delay: 0.08s; }
-        .freq-bar:nth-child(11) { animation-delay: 0.18s; }
-        .freq-bar:nth-child(12) { animation-delay: 0.28s; }
-        .freq-bar:nth-child(13) { animation-delay: 0.13s; }
-        .freq-bar:nth-child(14) { animation-delay: 0.23s; }
-        .freq-bar:nth-child(15) { animation-delay: 0.03s; }
-        .freq-bar:nth-child(16) { animation-delay: 0.33s; }
-
-        @keyframes audioFreq {
-            0%, 100% {
-                height: 20%;
-                opacity: 0.5;
-            }
-            50% {
-                height: 100%;
-                opacity: 1;
-            }
         }
 
         .now-playing {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: var(--space-lg);
+            gap: var(--space-md);
         }
 
         .now-playing-art {
-            width: 80px;
-            height: 80px;
-            border-radius: var(--radius-lg);
-            background: linear-gradient(135deg, var(--vinyl-purple), var(--beat-pink));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.3);
-            animation: pulse 2s ease-in-out infinite;
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--spotify-green), var(--vinyl-purple));
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+        .now-playing-art::after {
+            content: '▶';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            color: white;
         }
 
-        .now-playing-info {
-            text-align: left;
+        .now-playing-info h4 {
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
         }
 
-        .now-playing-title {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            letter-spacing: 0.1em;
-            color: var(--text-primary);
-        }
-
-        .now-playing-artist {
-            font-size: 1rem;
-            color: var(--text-secondary);
-        }
-
-        .now-playing-status {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            margin-top: var(--space-sm);
-        }
-
-        .playing-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--spotify-green);
-            border-radius: 50%;
-            animation: blink 1s ease-in-out infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        .playing-text {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--spotify-green);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* Footer */
-        .dashboard-footer {
-            text-align: center;
-            padding: var(--space-2xl) var(--space-lg);
-            margin-top: var(--space-3xl);
-            border-top: 1px solid var(--border-subtle);
-        }
-
-        .footer-logo {
-            font-family: var(--font-display);
-            font-size: 1.3rem;
-            letter-spacing: 0.2em;
+        .now-playing-info span {
+            font-size: 0.85rem;
             color: var(--text-muted);
         }
 
-        .footer-text {
-            font-size: 0.85rem;
-            color: var(--text-dim);
-            margin-top: var(--space-sm);
+        .waveform-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .control-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .control-btn:hover {
+            background: var(--spotify-green);
+            border-color: var(--spotify-green);
+        }
+
+        .waveform-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 120px;
+            gap: 3px;
+            padding: var(--space-lg) 0;
+        }
+
+        .wave-bar {
+            width: 4px;
+            background: linear-gradient(180deg, var(--spotify-green), var(--waveform-cyan));
+            border-radius: 2px;
+            animation: waveform 0.6s ease-in-out infinite alternate;
+        }
+
+        @keyframes waveform {
+            0% { transform: scaleY(0.3); }
+            100% { transform: scaleY(1); }
+        }
+
+        .wave-bar:nth-child(1) { height: 40px; animation-delay: 0s; }
+        .wave-bar:nth-child(2) { height: 60px; animation-delay: 0.1s; }
+        .wave-bar:nth-child(3) { height: 80px; animation-delay: 0.2s; }
+        .wave-bar:nth-child(4) { height: 55px; animation-delay: 0.3s; }
+        .wave-bar:nth-child(5) { height: 90px; animation-delay: 0.4s; }
+        .wave-bar:nth-child(6) { height: 70px; animation-delay: 0.5s; }
+        .wave-bar:nth-child(7) { height: 100px; animation-delay: 0.6s; }
+        .wave-bar:nth-child(8) { height: 65px; animation-delay: 0.7s; }
+        .wave-bar:nth-child(9) { height: 85px; animation-delay: 0.8s; }
+        .wave-bar:nth-child(10) { height: 50px; animation-delay: 0.9s; }
+        .wave-bar:nth-child(11) { height: 75px; animation-delay: 1s; }
+        .wave-bar:nth-child(12) { height: 95px; animation-delay: 1.1s; }
+        .wave-bar:nth-child(13) { height: 60px; animation-delay: 1.2s; }
+        .wave-bar:nth-child(14) { height: 80px; animation-delay: 1.3s; }
+        .wave-bar:nth-child(15) { height: 45px; animation-delay: 1.4s; }
+        .wave-bar:nth-child(16) { height: 70px; animation-delay: 0.1s; }
+        .wave-bar:nth-child(17) { height: 90px; animation-delay: 0.2s; }
+        .wave-bar:nth-child(18) { height: 55px; animation-delay: 0.3s; }
+        .wave-bar:nth-child(19) { height: 85px; animation-delay: 0.4s; }
+        .wave-bar:nth-child(20) { height: 65px; animation-delay: 0.5s; }
+        .wave-bar:nth-child(21) { height: 100px; animation-delay: 0.6s; }
+        .wave-bar:nth-child(22) { height: 50px; animation-delay: 0.7s; }
+        .wave-bar:nth-child(23) { height: 75px; animation-delay: 0.8s; }
+        .wave-bar:nth-child(24) { height: 95px; animation-delay: 0.9s; }
+        .wave-bar:nth-child(25) { height: 60px; animation-delay: 1s; }
+        .wave-bar:nth-child(26) { height: 80px; animation-delay: 1.1s; }
+        .wave-bar:nth-child(27) { height: 45px; animation-delay: 1.2s; }
+        .wave-bar:nth-child(28) { height: 70px; animation-delay: 1.3s; }
+        .wave-bar:nth-child(29) { height: 55px; animation-delay: 1.4s; }
+        .wave-bar:nth-child(30) { height: 85px; animation-delay: 0s; }
+
+        .waveform-timeline {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+
+        .time-current, .time-total {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .timeline-bar {
+            flex: 1;
+            height: 4px;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-full);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 35%;
+            background: linear-gradient(90deg, var(--spotify-green), var(--waveform-cyan));
+            border-radius: var(--radius-full);
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .dashboard-container {
-                padding: var(--space-lg);
-            }
-
-            .dashboard-header h1 {
-                font-size: 2.5rem;
-            }
-
-            .metrics-grid,
-            .charts-grid,
-            .widgets-grid {
+        @media (max-width: 1024px) {
+            .dashboard {
                 grid-template-columns: 1fr;
             }
 
-            .sidebar-demo {
-                flex-direction: column;
-            }
-
             .sidebar {
-                width: 100%;
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 var(--space-md);
             }
 
-            .audio-visualizer {
-                gap: 4px;
+            .header-search {
+                display: none;
             }
 
-            .freq-bar {
-                width: 8px;
+            .main-content {
+                padding: var(--space-md);
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="dashboard-container">
+    <div class="dashboard">
         <!-- Header -->
-        <header class="dashboard-header">
-            <h1>SOUNDWAVE</h1>
-            <div class="version">v1.0 MUSIC STREAMING ADMIN</div>
-            <p class="tagline">Analytics Dashboard for Music Streaming Platforms</p>
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span class="logo-text">SOUNDWAVE</span>
+                <span class="logo-version">v1.0</span>
+            </div>
+
+            <div class="header-search">
+                <div class="search-wrapper">
+                    <input type="text" class="search-input" placeholder="Search tracks, artists, playlists...">
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <div class="notification-btn">🔔</div>
+                <div class="user-avatar">DJ</div>
+            </div>
         </header>
 
-        <!-- 1. Color Palette -->
-        <section class="section">
-            <h2 class="section-title">COLOR PALETTE</h2>
-            <div class="color-grid">
-                <div class="color-swatch">
-                    <div class="color-preview spotify">♪</div>
-                    <div class="color-info">
-                        <div class="color-name">SPOTIFY GREEN</div>
-                        <div class="color-hex">#1DB954</div>
-                    </div>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="nav-section">
+                <div class="nav-label">Main</div>
+                <div class="nav-item active">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
                 </div>
-                <div class="color-swatch">
-                    <div class="color-preview vinyl">🎵</div>
-                    <div class="color-info">
-                        <div class="color-name">VINYL PURPLE</div>
-                        <div class="color-hex">#9333EA</div>
-                    </div>
+                <div class="nav-item">
+                    <span class="nav-icon">🎵</span>
+                    <span>Tracks</span>
                 </div>
-                <div class="color-swatch">
-                    <div class="color-preview waveform">〰️</div>
-                    <div class="color-info">
-                        <div class="color-name">WAVEFORM CYAN</div>
-                        <div class="color-hex">#06B6D4</div>
-                    </div>
+                <div class="nav-item">
+                    <span class="nav-icon">🎤</span>
+                    <span>Artists</span>
                 </div>
-                <div class="color-swatch">
-                    <div class="color-preview beat">💗</div>
-                    <div class="color-info">
-                        <div class="color-name">BEAT PINK</div>
-                        <div class="color-hex">#EC4899</div>
-                    </div>
+                <div class="nav-item">
+                    <span class="nav-icon">📁</span>
+                    <span>Playlists</span>
                 </div>
-                <div class="color-swatch">
-                    <div class="color-preview void"></div>
-                    <div class="color-info">
-                        <div class="color-name">VOID BLACK</div>
-                        <div class="color-hex">#0D0D0D</div>
-                    </div>
-                </div>
-                <div class="color-swatch">
-                    <div class="color-preview dark"></div>
-                    <div class="color-info">
-                        <div class="color-name">DARK BG</div>
-                        <div class="color-hex">#1A1A1A</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </nav>
 
-        <!-- 2. Typography -->
-        <section class="section">
-            <h2 class="section-title">TYPOGRAPHY</h2>
-            <div class="typography-showcase">
+            <nav class="nav-section">
+                <div class="nav-label">Analytics</div>
+                <div class="nav-item">
+                    <span class="nav-icon">📈</span>
+                    <span>Analytics</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">👥</span>
+                    <span>Audience</span>
+                </div>
+            </nav>
+
+            <nav class="nav-section" style="margin-top: auto;">
+                <div class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Settings</span>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Section 1: Color Palette -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">COLOR PALETTE</h2>
+                    <span class="section-badge">01</span>
+                </div>
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-swatch spotify-green"></div>
+                        <div class="color-info">
+                            <div class="color-name">Spotify Green</div>
+                            <div class="color-hex">#1DB954</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch vinyl-purple"></div>
+                        <div class="color-info">
+                            <div class="color-name">Vinyl Purple</div>
+                            <div class="color-hex">#9333EA</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch waveform-cyan"></div>
+                        <div class="color-info">
+                            <div class="color-name">Waveform Cyan</div>
+                            <div class="color-hex">#06B6D4</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch beat-pink"></div>
+                        <div class="color-info">
+                            <div class="color-name">Beat Pink</div>
+                            <div class="color-hex">#EC4899</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch bg-void"></div>
+                        <div class="color-info">
+                            <div class="color-name">Void Black</div>
+                            <div class="color-hex">#0D0D0D</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch bg-dark"></div>
+                        <div class="color-info">
+                            <div class="color-name">Dark Surface</div>
+                            <div class="color-hex">#1A1A1A</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch bg-card"></div>
+                        <div class="color-info">
+                            <div class="color-name">Card Background</div>
+                            <div class="color-hex">#242424</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Typography -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">TYPOGRAPHY</h2>
+                    <span class="section-badge">02</span>
+                </div>
                 <div class="type-specimen">
-                    <div class="type-label">Display / Bebas Neue</div>
-                    <div class="display-font">MUSIC NEVER STOPS</div>
-                </div>
-                <div class="type-specimen">
-                    <div class="type-label">UI Text / Outfit</div>
-                    <div class="ui-font">Discover trending tracks, analyze streaming performance, and manage your music catalog with powerful analytics tools.</div>
-                </div>
-                <div class="type-specimen">
-                    <div class="type-label">Data / Fira Code</div>
-                    <div class="mono-font">2:47 | 847.2M streams | +12.4% this week</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. Spacing & Grid -->
-        <section class="section">
-            <h2 class="section-title">SPACING & GRID</h2>
-            <div class="spacing-demo">
-                <div class="space-block" style="width: 4px; height: 4px;"></div>
-                <div class="space-block" style="width: 8px; height: 8px;"></div>
-                <div class="space-block" style="width: 16px; height: 16px;"></div>
-                <div class="space-block" style="width: 24px; height: 24px;"></div>
-                <div class="space-block" style="width: 32px; height: 32px;"><span>32</span></div>
-                <div class="space-block" style="width: 48px; height: 48px;"><span>48</span></div>
-                <div class="space-block" style="width: 64px; height: 64px;"><span>64</span></div>
-            </div>
-            <div class="grid-demo">
-                <div class="grid-cell">1</div>
-                <div class="grid-cell">2</div>
-                <div class="grid-cell">3</div>
-                <div class="grid-cell">4</div>
-                <div class="grid-cell">5</div>
-                <div class="grid-cell">6</div>
-                <div class="grid-cell">7</div>
-                <div class="grid-cell">8</div>
-                <div class="grid-cell">9</div>
-                <div class="grid-cell">10</div>
-                <div class="grid-cell">11</div>
-                <div class="grid-cell">12</div>
-            </div>
-        </section>
-
-        <!-- 4. Metric Cards -->
-        <section class="section">
-            <h2 class="section-title">METRIC CARDS</h2>
-            <div class="metrics-grid">
-                <div class="metric-card listeners">
-                    <div class="metric-icon">👥</div>
-                    <div class="metric-label">Monthly Listeners</div>
-                    <div class="metric-value">24.7M</div>
-                    <span class="metric-trend up">↑ 8.3% this month</span>
-                </div>
-                <div class="metric-card streams">
-                    <div class="metric-icon">▶️</div>
-                    <div class="metric-label">Total Streams</div>
-                    <div class="metric-value">847.2M</div>
-                    <span class="metric-trend up">↑ 12.4% this week</span>
-                </div>
-                <div class="metric-card playlists">
-                    <div class="metric-icon">📋</div>
-                    <div class="metric-label">Playlist Adds</div>
-                    <div class="metric-value">1.2M</div>
-                    <span class="metric-trend up">↑ 5.7% today</span>
-                </div>
-                <div class="metric-card skips">
-                    <div class="metric-icon">⏭️</div>
-                    <div class="metric-label">Skip Rate</div>
-                    <div class="metric-value">18.4%</div>
-                    <span class="metric-trend down">↓ 2.1% improvement</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. CSS-Only Charts -->
-        <section class="section">
-            <h2 class="section-title">CSS-ONLY CHARTS</h2>
-            <div class="charts-grid">
-                <div class="chart-container">
-                    <div class="chart-title">STREAM WAVEFORM (30 DAYS)</div>
-                    <div class="waveform-chart">
-                        <div class="wave-bar" style="height: 45%"></div>
-                        <div class="wave-bar" style="height: 65%"></div>
-                        <div class="wave-bar" style="height: 55%"></div>
-                        <div class="wave-bar" style="height: 80%"></div>
-                        <div class="wave-bar" style="height: 70%"></div>
-                        <div class="wave-bar" style="height: 90%"></div>
-                        <div class="wave-bar" style="height: 75%"></div>
-                        <div class="wave-bar" style="height: 60%"></div>
-                        <div class="wave-bar" style="height: 85%"></div>
-                        <div class="wave-bar" style="height: 95%"></div>
-                        <div class="wave-bar" style="height: 100%"></div>
-                        <div class="wave-bar" style="height: 88%"></div>
-                        <div class="wave-bar" style="height: 72%"></div>
-                        <div class="wave-bar" style="height: 68%"></div>
-                        <div class="wave-bar" style="height: 82%"></div>
+                    <div class="type-display">BEBAS NEUE</div>
+                    <div class="type-ui">Outfit — Clean modern interface typography</div>
+                    <div class="type-mono">Fira Code → 1,234,567 streams</div>
+                    <div class="type-meta">
+                        Display: Bebas Neue | UI: Outfit 300-700 | Mono: Fira Code 400-600
                     </div>
                 </div>
-                <div class="chart-container">
-                    <div class="chart-title">GENRE DISTRIBUTION</div>
-                    <div class="genre-chart">
-                        <div class="genre-row">
-                            <span class="genre-label">Pop</span>
-                            <div class="genre-bar"><div class="genre-fill pop" style="width: 85%;"></div></div>
-                            <span class="genre-value">34%</span>
-                        </div>
-                        <div class="genre-row">
-                            <span class="genre-label">Hip-Hop</span>
-                            <div class="genre-bar"><div class="genre-fill hiphop" style="width: 65%;"></div></div>
-                            <span class="genre-value">26%</span>
-                        </div>
-                        <div class="genre-row">
-                            <span class="genre-label">Rock</span>
-                            <div class="genre-bar"><div class="genre-fill rock" style="width: 45%;"></div></div>
-                            <span class="genre-value">18%</span>
-                        </div>
-                        <div class="genre-row">
-                            <span class="genre-label">Electronic</span>
-                            <div class="genre-bar"><div class="genre-fill electronic" style="width: 35%;"></div></div>
-                            <span class="genre-value">14%</span>
-                        </div>
-                        <div class="genre-row">
-                            <span class="genre-label">R&B</span>
-                            <div class="genre-bar"><div class="genre-fill rnb" style="width: 20%;"></div></div>
-                            <span class="genre-value">8%</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="chart-container">
-                    <div class="chart-title">LISTENING TIME BY HOUR</div>
-                    <div class="time-chart">
-                        <div class="time-bar" style="height: 15%;" data-hour="6AM"></div>
-                        <div class="time-bar" style="height: 25%;" data-hour=""></div>
-                        <div class="time-bar" style="height: 45%;" data-hour="9AM"></div>
-                        <div class="time-bar" style="height: 35%;" data-hour=""></div>
-                        <div class="time-bar" style="height: 40%;" data-hour="12PM"></div>
-                        <div class="time-bar" style="height: 50%;" data-hour=""></div>
-                        <div class="time-bar" style="height: 55%;" data-hour="3PM"></div>
-                        <div class="time-bar" style="height: 70%;" data-hour=""></div>
-                        <div class="time-bar" style="height: 85%;" data-hour="6PM"></div>
-                        <div class="time-bar" style="height: 100%;" data-hour=""></div>
-                        <div class="time-bar" style="height: 90%;" data-hour="9PM"></div>
-                        <div class="time-bar" style="height: 60%;" data-hour=""></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 6. Data Tables -->
-        <section class="section">
-            <h2 class="section-title">DATA TABLES</h2>
-            <div class="data-table-container">
+            <!-- Section 3: Spacing & Grid -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">SPACING & GRID</h2>
+                    <span class="section-badge">03</span>
+                </div>
+                <div class="spacing-demo">
+                    <div class="spacing-item">
+                        <div class="spacing-box xs"></div>
+                        <span class="spacing-label">4px (xs)</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box sm"></div>
+                        <span class="spacing-label">8px (sm)</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box md"></div>
+                        <span class="spacing-label">16px (md)</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box lg"></div>
+                        <span class="spacing-label">24px (lg)</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box xl"></div>
+                        <span class="spacing-label">32px (xl)</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box xxl"></div>
+                        <span class="spacing-label">48px (2xl)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Metric Cards -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">METRIC CARDS</h2>
+                    <span class="section-badge">04</span>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">👂</div>
+                        <div class="metric-label">Monthly Listeners</div>
+                        <div class="metric-value">2.4M</div>
+                        <div class="metric-change positive">↑ 12.5% vs last month</div>
+                    </div>
+                    <div class="metric-card purple">
+                        <div class="metric-icon">▶️</div>
+                        <div class="metric-label">Streams Today</div>
+                        <div class="metric-value">847K</div>
+                        <div class="metric-change positive">↑ 8.3% vs yesterday</div>
+                    </div>
+                    <div class="metric-card cyan">
+                        <div class="metric-icon">💰</div>
+                        <div class="metric-label">Revenue (MTD)</div>
+                        <div class="metric-value">$127.4K</div>
+                        <div class="metric-change positive">↑ 15.2% vs last month</div>
+                    </div>
+                    <div class="metric-card pink">
+                        <div class="metric-icon">⭐</div>
+                        <div class="metric-label">New Subscribers</div>
+                        <div class="metric-value">18.2K</div>
+                        <div class="metric-change negative">↓ 3.1% vs last week</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Charts -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">CSS-ONLY CHARTS</h2>
+                    <span class="section-badge">05</span>
+                </div>
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">
+                            <span>Streams Over Time</span>
+                            <div class="chart-legend">
+                                <span><span class="legend-dot" style="background: var(--spotify-green);"></span>This Week</span>
+                            </div>
+                        </div>
+                        <div class="bar-chart">
+                            <div class="bar-column">
+                                <div class="bar" style="height: 65%;"></div>
+                                <span class="bar-label">Mon</span>
+                            </div>
+                            <div class="bar-column">
+                                <div class="bar" style="height: 85%;"></div>
+                                <span class="bar-label">Tue</span>
+                            </div>
+                            <div class="bar-column">
+                                <div class="bar" style="height: 70%;"></div>
+                                <span class="bar-label">Wed</span>
+                            </div>
+                            <div class="bar-column">
+                                <div class="bar" style="height: 95%;"></div>
+                                <span class="bar-label">Thu</span>
+                            </div>
+                            <div class="bar-column">
+                                <div class="bar" style="height: 100%;"></div>
+                                <span class="bar-label">Fri</span>
+                            </div>
+                            <div class="bar-column">
+                                <div class="bar" style="height: 90%;"></div>
+                                <span class="bar-label">Sat</span>
+                            </div>
+                            <div class="bar-column">
+                                <div class="bar" style="height: 75%;"></div>
+                                <span class="bar-label">Sun</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Genre Distribution</div>
+                        <div class="donut-container">
+                            <div class="donut-chart">
+                                <div class="donut-center">
+                                    <div class="donut-value">100%</div>
+                                    <div class="donut-label">Total</div>
+                                </div>
+                            </div>
+                            <div class="donut-legend">
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--spotify-green);"></div>
+                                    <span>Pop</span>
+                                    <span class="legend-percent">35%</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--vinyl-purple);"></div>
+                                    <span>Hip-Hop</span>
+                                    <span class="legend-percent">25%</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--waveform-cyan);"></div>
+                                    <span>Electronic</span>
+                                    <span class="legend-percent">20%</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color" style="background: var(--beat-pink);"></div>
+                                    <span>R&B</span>
+                                    <span class="legend-percent">20%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Data Tables -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">DATA TABLES</h2>
+                    <span class="section-badge">06</span>
+                </div>
                 <table class="data-table">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>TRACK</th>
-                            <th>STREAMS</th>
-                            <th>DURATION</th>
-                            <th>STATUS</th>
+                            <th>Track</th>
+                            <th>Streams</th>
+                            <th>Duration</th>
+                            <th>Trend</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="color: var(--text-muted);">1</td>
+                            <td>1</td>
                             <td>
-                                <div class="track-cell">
-                                    <div class="track-art">🎵</div>
-                                    <div class="track-info">
-                                        <div class="track-name">Midnight Dreams</div>
+                                <div class="track-info">
+                                    <div class="track-art"></div>
+                                    <div>
+                                        <div class="track-title">Midnight Drive</div>
                                         <div class="track-artist">Luna Eclipse</div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="streams-cell">124.5M</td>
-                            <td class="duration-cell">3:42</td>
-                            <td><span class="status-badge viral">🔥 Viral</span></td>
+                            <td class="streams-count">2,847,293</td>
+                            <td>3:42</td>
+                            <td class="trend-up">↑ 15%</td>
                         </tr>
                         <tr>
-                            <td style="color: var(--text-muted);">2</td>
+                            <td>2</td>
                             <td>
-                                <div class="track-cell">
-                                    <div class="track-art">🎶</div>
-                                    <div class="track-info">
-                                        <div class="track-name">Electric Pulse</div>
-                                        <div class="track-artist">Neon Wave</div>
+                                <div class="track-info">
+                                    <div class="track-art" style="background: linear-gradient(135deg, var(--waveform-cyan), var(--spotify-green));"></div>
+                                    <div>
+                                        <div class="track-title">Electric Dreams</div>
+                                        <div class="track-artist">Neon Pulse</div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="streams-cell">98.2M</td>
-                            <td class="duration-cell">4:15</td>
-                            <td><span class="status-badge trending">📈 Trending</span></td>
+                            <td class="streams-count">1,923,847</td>
+                            <td>4:18</td>
+                            <td class="trend-up">↑ 23%</td>
                         </tr>
                         <tr>
-                            <td style="color: var(--text-muted);">3</td>
+                            <td>3</td>
                             <td>
-                                <div class="track-cell">
-                                    <div class="track-art">🎧</div>
-                                    <div class="track-info">
-                                        <div class="track-name">Summer Vibes</div>
-                                        <div class="track-artist">The Sunsets</div>
+                                <div class="track-info">
+                                    <div class="track-art" style="background: linear-gradient(135deg, var(--beat-pink), var(--vinyl-purple));"></div>
+                                    <div>
+                                        <div class="track-title">Heartbeat</div>
+                                        <div class="track-artist">Violet Storm</div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="streams-cell">76.8M</td>
-                            <td class="duration-cell">3:28</td>
-                            <td><span class="status-badge live">● Live</span></td>
+                            <td class="streams-count">1,456,721</td>
+                            <td>3:25</td>
+                            <td class="trend-down">↓ 5%</td>
                         </tr>
                         <tr>
-                            <td style="color: var(--text-muted);">4</td>
+                            <td>4</td>
                             <td>
-                                <div class="track-cell">
-                                    <div class="track-art">🎹</div>
-                                    <div class="track-info">
-                                        <div class="track-name">Piano Dreams</div>
-                                        <div class="track-artist">Classical Fusion</div>
+                                <div class="track-info">
+                                    <div class="track-art" style="background: linear-gradient(135deg, var(--spotify-green), var(--beat-pink));"></div>
+                                    <div>
+                                        <div class="track-title">Summer Nights</div>
+                                        <div class="track-artist">Coastal Wave</div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="streams-cell">54.3M</td>
-                            <td class="duration-cell">5:02</td>
-                            <td><span class="status-badge hifi">HI-FI</span></td>
+                            <td class="streams-count">1,284,556</td>
+                            <td>3:58</td>
+                            <td class="trend-up">↑ 8%</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>
+                                <div class="track-info">
+                                    <div class="track-art" style="background: linear-gradient(135deg, var(--vinyl-purple), var(--waveform-cyan));"></div>
+                                    <div>
+                                        <div class="track-title">Gravity</div>
+                                        <div class="track-artist">Astro Beat</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="streams-count">987,234</td>
+                            <td>4:05</td>
+                            <td class="trend-up">↑ 31%</td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </section>
+            </section>
 
-        <!-- 7. Sidebar Navigation -->
-        <section class="section">
-            <h2 class="section-title">SIDEBAR NAVIGATION</h2>
-            <div class="sidebar-demo">
-                <div class="sidebar">
-                    <div class="sidebar-logo">
-                        <div class="logo-icon">🎵</div>
-                        <div class="logo-text">SOUNDWAVE</div>
-                    </div>
+            <!-- Section 7: Sidebar Navigation (demo) -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">SIDEBAR NAVIGATION</h2>
+                    <span class="section-badge">07</span>
+                </div>
+                <div style="background: var(--bg-card); border-radius: var(--radius-lg); padding: var(--space-lg); border: 1px solid var(--border-subtle); max-width: 260px;">
                     <div class="nav-item active">
                         <span class="nav-icon">📊</span>
-                        Dashboard
+                        <span>Dashboard</span>
                     </div>
                     <div class="nav-item">
-                        <span class="nav-icon">💿</span>
-                        Catalog
-                    </div>
-                    <div class="nav-item">
-                        <span class="nav-icon">📋</span>
-                        Playlists
+                        <span class="nav-icon">🎵</span>
+                        <span>Tracks</span>
                     </div>
                     <div class="nav-item">
                         <span class="nav-icon">🎤</span>
-                        Artists
+                        <span>Artists</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">📁</span>
+                        <span>Playlists</span>
                     </div>
                     <div class="nav-item">
                         <span class="nav-icon">📈</span>
-                        Analytics
+                        <span>Analytics</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-icon">⚙️</span>
+                        <span>Settings</span>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 8. Forms & Filters -->
-        <section class="section">
-            <h2 class="section-title">FORMS & FILTERS</h2>
-            <div class="forms-grid">
-                <div class="form-card">
-                    <div class="form-title">SEARCH</div>
-                    <div class="form-group">
-                        <label class="form-label">Track or Artist</label>
-                        <input type="text" class="form-input" placeholder="Search music...">
+            <!-- Section 8: Forms & Filters -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">FORMS & FILTERS</h2>
+                    <span class="section-badge">08</span>
+                </div>
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label class="filter-label">Search Tracks</label>
+                        <input type="text" class="filter-input" placeholder="Track name...">
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Genre</label>
-                        <select class="form-select">
+                    <div class="filter-group">
+                        <label class="filter-label">Genre</label>
+                        <select class="filter-select">
                             <option>All Genres</option>
                             <option>Pop</option>
                             <option>Hip-Hop</option>
-                            <option>Rock</option>
                             <option>Electronic</option>
+                            <option>R&B</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Date Range</label>
+                        <input type="date" class="filter-input">
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Region</label>
+                        <select class="filter-select">
+                            <option>Global</option>
+                            <option>North America</option>
+                            <option>Europe</option>
+                            <option>Asia Pacific</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-card">
-                    <div class="form-title">FILTERS</div>
-                    <div class="form-group">
-                        <label class="form-label">Date Range</label>
-                        <select class="form-select">
-                            <option>Last 7 days</option>
-                            <option>Last 30 days</option>
-                            <option>Last 90 days</option>
-                            <option>This year</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Popularity</label>
-                        <select class="form-select">
-                            <option>All</option>
-                            <option>Viral</option>
-                            <option>Trending</option>
-                            <option>Rising</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 9. Buttons -->
-        <section class="section">
-            <h2 class="section-title">BUTTONS</h2>
-            <div class="buttons-showcase">
-                <button class="btn btn-spotify">▶ PLAY</button>
-                <button class="btn btn-vinyl">ADD TO PLAYLIST</button>
-                <button class="btn btn-pink">SHARE</button>
-                <button class="btn btn-outline">FOLLOW</button>
-                <button class="btn btn-ghost">MORE</button>
-            </div>
-        </section>
+            <!-- Section 9: Buttons -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">BUTTONS</h2>
+                    <span class="section-badge">09</span>
+                </div>
+                <div class="buttons-grid">
+                    <button class="btn btn-primary">⬆️ Upload Track</button>
+                    <button class="btn btn-accent">➕ Create Playlist</button>
+                    <button class="btn btn-secondary">📊 Export Stats</button>
+                    <button class="btn btn-secondary">🔄 Refresh Data</button>
+                </div>
+            </section>
 
-        <!-- 10. Status Indicators -->
-        <section class="section">
-            <h2 class="section-title">STATUS INDICATORS</h2>
-            <div class="status-grid">
-                <div class="status-group">
-                    <div class="status-group-title">Track Status</div>
-                    <span class="status-badge live">● Live</span>
-                    <span class="status-badge pending">⏳ Pending</span>
-                    <span class="status-badge removed">✕ Removed</span>
+            <!-- Section 10: Status Indicators -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">STATUS INDICATORS</h2>
+                    <span class="section-badge">10</span>
                 </div>
-                <div class="status-group">
-                    <div class="status-group-title">Audio Quality</div>
-                    <span class="status-badge hifi">HI-FI</span>
+                <div class="status-grid">
+                    <span class="status-badge status-live">Live</span>
+                    <span class="status-badge status-pending">Processing</span>
+                    <span class="status-badge status-private">Private</span>
+                    <span class="status-badge status-verified">Verified Artist</span>
                 </div>
-                <div class="status-group">
-                    <div class="status-group-title">Performance</div>
-                    <span class="status-badge trending">📈 Trending</span>
-                    <span class="status-badge viral">🔥 Viral</span>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 11. Widget Cards -->
-        <section class="section">
-            <h2 class="section-title">WIDGET CARDS</h2>
-            <div class="widgets-grid">
-                <div class="widget-card">
-                    <div class="widget-header">
-                        <span class="widget-title">TOP 10 TRACKS</span>
-                    </div>
-                    <div class="widget-content">
-                        <div class="track-list">
-                            <div class="track-item">
-                                <span class="track-rank">1</span>
-                                <div class="track-thumb">🎵</div>
-                                <div class="track-details">
-                                    <div class="track-title">Midnight Dreams</div>
-                                    <div class="track-subtitle">Luna Eclipse</div>
+            <!-- Section 11: Widget Cards -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">WIDGET CARDS</h2>
+                    <span class="section-badge">11</span>
+                </div>
+                <div class="widgets-grid">
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">Trending Artists</span>
+                            <span class="widget-action">View All</span>
+                        </div>
+                        <div class="widget-list">
+                            <div class="widget-item">
+                                <div class="widget-avatar"></div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Luna Eclipse</div>
+                                    <div class="widget-meta">Pop · 2.4M listeners</div>
                                 </div>
-                                <span class="track-streams">124.5M</span>
+                                <span class="widget-stat">↑ 45%</span>
                             </div>
-                            <div class="track-item">
-                                <span class="track-rank">2</span>
-                                <div class="track-thumb">🎶</div>
-                                <div class="track-details">
-                                    <div class="track-title">Electric Pulse</div>
-                                    <div class="track-subtitle">Neon Wave</div>
+                            <div class="widget-item">
+                                <div class="widget-avatar purple"></div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Neon Pulse</div>
+                                    <div class="widget-meta">Electronic · 1.8M listeners</div>
                                 </div>
-                                <span class="track-streams">98.2M</span>
+                                <span class="widget-stat">↑ 32%</span>
                             </div>
-                            <div class="track-item">
-                                <span class="track-rank">3</span>
-                                <div class="track-thumb">🎧</div>
-                                <div class="track-details">
-                                    <div class="track-title">Summer Vibes</div>
-                                    <div class="track-subtitle">The Sunsets</div>
+                            <div class="widget-item">
+                                <div class="widget-avatar" style="background: linear-gradient(135deg, var(--waveform-cyan), var(--beat-pink));"></div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Violet Storm</div>
+                                    <div class="widget-meta">R&B · 1.2M listeners</div>
                                 </div>
-                                <span class="track-streams">76.8M</span>
+                                <span class="widget-stat">↑ 28%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">New Releases</span>
+                            <span class="widget-action">View All</span>
+                        </div>
+                        <div class="widget-list">
+                            <div class="widget-item">
+                                <div class="widget-avatar" style="background: linear-gradient(135deg, var(--beat-pink), var(--vinyl-purple)); border-radius: var(--radius-sm);"></div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Eternal Sunset</div>
+                                    <div class="widget-meta">Released 2 hours ago</div>
+                                </div>
+                                <span class="widget-stat">12.4K</span>
+                            </div>
+                            <div class="widget-item">
+                                <div class="widget-avatar" style="background: linear-gradient(135deg, var(--spotify-green), var(--waveform-cyan)); border-radius: var(--radius-sm);"></div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Digital Love</div>
+                                    <div class="widget-meta">Released 5 hours ago</div>
+                                </div>
+                                <span class="widget-stat">8.7K</span>
+                            </div>
+                            <div class="widget-item">
+                                <div class="widget-avatar" style="background: linear-gradient(135deg, var(--vinyl-purple), var(--beat-pink)); border-radius: var(--radius-sm);"></div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Starlight</div>
+                                    <div class="widget-meta">Released 8 hours ago</div>
+                                </div>
+                                <span class="widget-stat">6.2K</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">Playlist Performance</span>
+                            <span class="widget-action">View All</span>
+                        </div>
+                        <div class="widget-list">
+                            <div class="widget-item">
+                                <div class="widget-avatar" style="border-radius: var(--radius-sm);"></div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Chill Vibes</div>
+                                    <div class="widget-meta">245 tracks · 12.4K followers</div>
+                                </div>
+                                <span class="widget-stat">↑ 8%</span>
+                            </div>
+                            <div class="widget-item">
+                                <div class="widget-avatar purple" style="border-radius: var(--radius-sm);"></div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Workout Energy</div>
+                                    <div class="widget-meta">189 tracks · 8.9K followers</div>
+                                </div>
+                                <span class="widget-stat">↑ 15%</span>
+                            </div>
+                            <div class="widget-item">
+                                <div class="widget-avatar" style="background: linear-gradient(135deg, var(--waveform-cyan), var(--spotify-green)); border-radius: var(--radius-sm);"></div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Late Night</div>
+                                    <div class="widget-meta">312 tracks · 6.7K followers</div>
+                                </div>
+                                <span class="widget-stat">↑ 5%</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="widget-card">
-                    <div class="widget-header">
-                        <span class="widget-title">RISING ARTISTS</span>
+            </section>
+
+            <!-- Section 12: Alerts & Notifications -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">ALERTS & NOTIFICATIONS</h2>
+                    <span class="section-badge">12</span>
+                </div>
+                <div class="alerts-stack">
+                    <div class="alert alert-success">
+                        <span class="alert-icon">✓</span>
+                        <div class="alert-content">
+                            <div class="alert-title">Track Uploaded Successfully</div>
+                            <div class="alert-message">"Midnight Drive" is now live and available for streaming.</div>
+                        </div>
                     </div>
-                    <div class="widget-content">
-                        <div class="track-list">
-                            <div class="track-item">
-                                <span class="track-rank">🔥</span>
-                                <div class="track-thumb" style="border-radius: 50%;">👤</div>
-                                <div class="track-details">
-                                    <div class="track-title">Nova Star</div>
-                                    <div class="track-subtitle">+245% this month</div>
-                                </div>
-                            </div>
-                            <div class="track-item">
-                                <span class="track-rank">🔥</span>
-                                <div class="track-thumb" style="border-radius: 50%;">👤</div>
-                                <div class="track-details">
-                                    <div class="track-title">Echo Chamber</div>
-                                    <div class="track-subtitle">+187% this month</div>
-                                </div>
-                            </div>
-                            <div class="track-item">
-                                <span class="track-rank">🔥</span>
-                                <div class="track-thumb" style="border-radius: 50%;">👤</div>
-                                <div class="track-details">
-                                    <div class="track-title">Velvet Voice</div>
-                                    <div class="track-subtitle">+156% this month</div>
-                                </div>
-                            </div>
+                    <div class="alert alert-info">
+                        <span class="alert-icon">ℹ</span>
+                        <div class="alert-content">
+                            <div class="alert-title">New Milestone Reached</div>
+                            <div class="alert-message">Congratulations! You've reached 2 million monthly listeners.</div>
+                        </div>
+                    </div>
+                    <div class="alert alert-warning">
+                        <span class="alert-icon">⚠</span>
+                        <div class="alert-content">
+                            <div class="alert-title">Processing Audio</div>
+                            <div class="alert-message">Your latest upload is being processed. This may take a few minutes.</div>
+                        </div>
+                    </div>
+                    <div class="alert alert-error">
+                        <span class="alert-icon">✕</span>
+                        <div class="alert-content">
+                            <div class="alert-title">Upload Failed</div>
+                            <div class="alert-message">File format not supported. Please use MP3, WAV, or FLAC.</div>
                         </div>
                     </div>
                 </div>
-                <div class="widget-card">
-                    <div class="widget-header">
-                        <span class="widget-title">VIRAL PLAYLISTS</span>
-                    </div>
-                    <div class="widget-content">
-                        <div class="track-list">
-                            <div class="track-item">
-                                <span class="track-rank">📋</span>
-                                <div class="track-thumb" style="background: var(--spotify-green);">♪</div>
-                                <div class="track-details">
-                                    <div class="track-title">Today's Top Hits</div>
-                                    <div class="track-subtitle">34.2M followers</div>
-                                </div>
-                            </div>
-                            <div class="track-item">
-                                <span class="track-rank">📋</span>
-                                <div class="track-thumb" style="background: var(--vinyl-purple);">♪</div>
-                                <div class="track-details">
-                                    <div class="track-title">Viral Hits 2024</div>
-                                    <div class="track-subtitle">18.7M followers</div>
-                                </div>
-                            </div>
-                            <div class="track-item">
-                                <span class="track-rank">📋</span>
-                                <div class="track-thumb" style="background: var(--beat-pink);">♪</div>
-                                <div class="track-details">
-                                    <div class="track-title">Mood Booster</div>
-                                    <div class="track-subtitle">12.4M followers</div>
-                                </div>
+            </section>
+
+            <!-- Section 13: Special Component - Audio Waveform Visualizer -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">AUDIO WAVEFORM VISUALIZER</h2>
+                    <span class="section-badge">13 · SPECIAL</span>
+                </div>
+                <div class="waveform-visualizer">
+                    <div class="waveform-header">
+                        <div class="now-playing">
+                            <div class="now-playing-art"></div>
+                            <div class="now-playing-info">
+                                <h4>Midnight Drive</h4>
+                                <span>Luna Eclipse</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 12. Alerts & Notifications -->
-        <section class="section">
-            <h2 class="section-title">ALERTS & NOTIFICATIONS</h2>
-            <div class="alerts-showcase">
-                <div class="alert success">
-                    <div class="alert-icon">✓</div>
-                    <div class="alert-content">
-                        <div class="alert-title">TRACK APPROVED</div>
-                        <div class="alert-message">"Midnight Dreams" has been approved and is now live on all platforms.</div>
-                    </div>
-                </div>
-                <div class="alert viral">
-                    <div class="alert-icon">🔥</div>
-                    <div class="alert-content">
-                        <div class="alert-title">GOING VIRAL</div>
-                        <div class="alert-message">"Electric Pulse" has gained 2.3M streams in the last 24 hours!</div>
-                    </div>
-                </div>
-                <div class="alert trending">
-                    <div class="alert-icon">📈</div>
-                    <div class="alert-content">
-                        <div class="alert-title">TRENDING ALERT</div>
-                        <div class="alert-message">Your track has entered the Top 50 Global chart at #47.</div>
-                    </div>
-                </div>
-                <div class="alert info">
-                    <div class="alert-icon">ℹ️</div>
-                    <div class="alert-content">
-                        <div class="alert-title">NEW FEATURE</div>
-                        <div class="alert-message">Real-time analytics are now available. Check your dashboard for live stats.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 13. Special: Audio Visualizer -->
-        <section class="section">
-            <h2 class="section-title">SPECIAL: AUDIO VISUALIZER</h2>
-            <div class="visualizer-container">
-                <div class="visualizer-title">LIVE FREQUENCY ANALYZER</div>
-                <div class="visualizer-subtitle">CSS-only animated audio visualization</div>
-                <div class="audio-visualizer">
-                    <div class="freq-bar" style="height: 40%;"></div>
-                    <div class="freq-bar" style="height: 70%;"></div>
-                    <div class="freq-bar" style="height: 55%;"></div>
-                    <div class="freq-bar" style="height: 85%;"></div>
-                    <div class="freq-bar" style="height: 65%;"></div>
-                    <div class="freq-bar" style="height: 95%;"></div>
-                    <div class="freq-bar" style="height: 75%;"></div>
-                    <div class="freq-bar" style="height: 50%;"></div>
-                    <div class="freq-bar" style="height: 80%;"></div>
-                    <div class="freq-bar" style="height: 60%;"></div>
-                    <div class="freq-bar" style="height: 90%;"></div>
-                    <div class="freq-bar" style="height: 45%;"></div>
-                    <div class="freq-bar" style="height: 100%;"></div>
-                    <div class="freq-bar" style="height: 70%;"></div>
-                    <div class="freq-bar" style="height: 55%;"></div>
-                    <div class="freq-bar" style="height: 35%;"></div>
-                </div>
-                <div class="now-playing">
-                    <div class="now-playing-art">🎵</div>
-                    <div class="now-playing-info">
-                        <div class="now-playing-title">MIDNIGHT DREAMS</div>
-                        <div class="now-playing-artist">Luna Eclipse</div>
-                        <div class="now-playing-status">
-                            <span class="playing-dot"></span>
-                            <span class="playing-text">Now Playing</span>
+                        <div class="waveform-controls">
+                            <div class="control-btn">⏮</div>
+                            <div class="control-btn" style="background: var(--spotify-green); border-color: var(--spotify-green);">▶</div>
+                            <div class="control-btn">⏭</div>
                         </div>
                     </div>
+                    <div class="waveform-bars">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                    <div class="waveform-timeline">
+                        <span class="time-current">1:18</span>
+                        <div class="timeline-bar">
+                            <div class="timeline-progress"></div>
+                        </div>
+                        <span class="time-total">3:42</span>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Footer -->
-        <footer class="dashboard-footer">
-            <div class="footer-logo">SOUNDWAVE v1.0</div>
-            <p class="footer-text">Music Streaming Admin Dashboard Style Guide</p>
-        </footer>
+        </main>
     </div>
 </body>
 </html>

@@ -6,7 +6,7 @@
     <title>HTML Style Guides — A Collection of Themed Design Systems</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Poiret+One&family=Bebas+Neue&family=Press+Start+2P&family=VT323&family=Orbitron:wght@500;700&family=Jost:wght@300;400;500&family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@400;500&family=Zen+Antique&family=Dela+Gothic+One&family=Playfair+Display:wght@500;600&family=Archivo+Black&family=Outfit:wght@400;500;600&family=Rajdhani:wght@500;600&family=Lora:wght@400;500&family=Anybody:wght@500;600&family=Work+Sans:wght@500;600&family=Bricolage+Grotesque:wght@500;600&family=Cormorant:wght@500;600&family=Righteous&family=Cinzel+Decorative:wght@400;700&family=Silkscreen&family=Space+Grotesk:wght@500;600&family=Teko:wght@500;600&family=Pacifico&family=Noto+Serif+JP:wght@400;500&family=Exo+2:wght@500;600&family=IBM+Plex+Sans:wght@500;600&family=Fraunces:opsz,wght@9..144,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Poiret+One&family=Bebas+Neue&family=Press+Start+2P&family=VT323&family=Orbitron:wght@500;700&family=Jost:wght@300;400;500&family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@400;500&family=Zen+Antique&family=Dela+Gothic+One&family=Playfair+Display:wght@500;600&family=Archivo+Black&family=Outfit:wght@400;500;600&family=Rajdhani:wght@500;600&family=Lora:wght@400;500&family=Anybody:wght@500;600&family=Work+Sans:wght@500;600&family=Bricolage+Grotesque:wght@500;600&family=Cormorant:wght@500;600&family=Righteous&family=Cinzel+Decorative:wght@400;700&family=Silkscreen&family=Space+Grotesk:wght@500;600&family=Teko:wght@500;600&family=Pacifico&family=Noto+Serif+JP:wght@400;500&family=Exo+2:wght@500;600&family=IBM+Plex+Sans:wght@500;600&family=Fraunces:opsz,wght@9..144,500&family=Syne:wght@500;600;700&family=Instrument+Serif&family=DM+Serif+Display&family=Manrope:wght@500;600;700&family=Big+Shoulders+Display:wght@500;600;700&family=Quicksand:wght@500;600;700&family=Poppins:wght@500;600&family=Chakra+Petch:wght@500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #FAFAFA;
@@ -949,48 +949,48 @@
            DASHBOARD THEME CARDS
            ════════════════════════════════════════════════════════════════════════════ */
 
-        .card-dashboard {
-            background: linear-gradient(135deg, #0A0E1A 0%, #111827 100%);
+        .dash-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        /* 01. DevOps - Nexus Ops */
+        .card-dash-devops {
+            background: linear-gradient(135deg, #05080F 0%, #111827 100%);
             border: 1px solid #2D3B4F;
             color: #F0F4F8;
         }
-        .card-dashboard:hover {
+        .card-dash-devops:hover {
             box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
             border-color: #00F0FF;
         }
-        .card-dashboard .card-title {
+        .card-dash-devops .card-title {
             font-family: 'Orbitron', sans-serif;
             color: #00F0FF;
             font-size: 20px;
             letter-spacing: 2px;
             text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
         }
-        .card-dashboard .card-number {
-            font-family: 'JetBrains Mono', monospace;
-            color: #00FF88;
-        }
-        .card-dashboard .card-subtitle { color: #8899AA; }
-        .card-dashboard .card-tag {
+        .card-dash-devops .card-number { color: #00FF88; }
+        .card-dash-devops .card-subtitle { color: #8899AA; }
+        .card-dash-devops .card-tag {
             background: rgba(0, 240, 255, 0.15);
             color: #00F0FF;
             border: 1px solid rgba(0, 240, 255, 0.3);
         }
-        .card-dashboard .dashboard-badge {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 4px 10px;
-            border-radius: 4px;
+        .card-dash-devops .dash-badge {
             background: rgba(0, 255, 136, 0.15);
             color: #00FF88;
             border: 1px solid rgba(0, 255, 136, 0.3);
         }
-        .card-dashboard::before {
+        .card-dash-devops::before {
             content: '';
             position: absolute;
             top: 0;
@@ -998,6 +998,881 @@
             right: 0;
             height: 2px;
             background: linear-gradient(90deg, #00F0FF, #00FF88);
+        }
+
+        /* 02. Trading - Market Pulse */
+        .card-dash-trading {
+            background: linear-gradient(135deg, #080A0E 0%, #161A21 100%);
+            border: 1px solid #2A2E35;
+            color: #F4F6F8;
+        }
+        .card-dash-trading:hover {
+            box-shadow: 0 0 30px rgba(0, 230, 118, 0.3);
+            border-color: #00E676;
+        }
+        .card-dash-trading .card-title {
+            font-family: 'Bebas Neue', sans-serif;
+            color: #00E676;
+            font-size: 26px;
+            letter-spacing: 3px;
+        }
+        .card-dash-trading .card-number { color: #00B8FF; }
+        .card-dash-trading .card-subtitle { color: #9BA3AE; }
+        .card-dash-trading .card-tag {
+            background: rgba(0, 230, 118, 0.12);
+            color: #00E676;
+            border: 1px solid rgba(0, 230, 118, 0.25);
+        }
+        .card-dash-trading .dash-badge {
+            background: rgba(0, 230, 118, 0.15);
+            color: #00E676;
+            border: 1px solid rgba(0, 230, 118, 0.3);
+        }
+        .card-dash-trading::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00E676, #00B8FF);
+        }
+
+        /* 03. Healthcare - Vitals HQ */
+        .card-dash-healthcare {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            color: #111827;
+        }
+        .card-dash-healthcare:hover {
+            box-shadow: 0 20px 40px rgba(13, 148, 136, 0.15);
+            border-color: #0D9488;
+        }
+        .card-dash-healthcare .card-title {
+            font-family: 'Manrope', sans-serif;
+            color: #0D9488;
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .card-dash-healthcare .card-number { color: #0D9488; }
+        .card-dash-healthcare .card-subtitle { color: #4B5563; }
+        .card-dash-healthcare .card-tag {
+            background: #F0FDFA;
+            color: #0D9488;
+        }
+        .card-dash-healthcare .dash-badge {
+            background: #CCFBF1;
+            color: #115E59;
+        }
+        .card-dash-healthcare::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #0D9488, #3B82F6);
+        }
+
+        /* 04. Smart Home - Habitat */
+        .card-dash-smarthome {
+            background: #FFFBF5;
+            border: 1px solid #FDE8D0;
+            color: #1F2937;
+        }
+        .card-dash-smarthome:hover {
+            box-shadow: 0 20px 40px rgba(249, 115, 22, 0.15);
+            border-color: #F97316;
+        }
+        .card-dash-smarthome .card-title {
+            font-family: 'Quicksand', sans-serif;
+            color: #F97316;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .card-dash-smarthome .card-number { color: #0EA5E9; }
+        .card-dash-smarthome .card-subtitle { color: #4B5563; }
+        .card-dash-smarthome .card-tag {
+            background: #FFF7ED;
+            color: #F97316;
+            border-radius: 20px;
+        }
+        .card-dash-smarthome .dash-badge {
+            background: #FFF7ED;
+            color: #EA580C;
+            border-radius: 20px;
+        }
+
+        /* 05. Security - Sentinel */
+        .card-dash-security {
+            background: linear-gradient(135deg, #030712 0%, #1E293B 100%);
+            border: 1px solid #334155;
+            color: #F1F5F9;
+        }
+        .card-dash-security:hover {
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.3);
+            border-color: #DC2626;
+        }
+        .card-dash-security .card-title {
+            font-family: 'Chakra Petch', sans-serif;
+            color: #DC2626;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .card-dash-security .card-number { color: #06B6D4; }
+        .card-dash-security .card-subtitle { color: #94A3B8; }
+        .card-dash-security .card-tag {
+            background: rgba(220, 38, 38, 0.12);
+            color: #FCA5A5;
+            border: 1px solid rgba(220, 38, 38, 0.25);
+        }
+        .card-dash-security .dash-badge {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10B981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .card-dash-security::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #DC2626, #06B6D4);
+        }
+
+        /* 06. Crypto - Cipher Trade */
+        .card-dash-crypto {
+            background: linear-gradient(135deg, #0A0A0F 0%, #1A1A25 100%);
+            border: 1px solid #333340;
+            color: #FFFFFF;
+        }
+        .card-dash-crypto:hover {
+            box-shadow: 0 0 30px rgba(247, 147, 26, 0.3), 0 0 60px rgba(98, 126, 234, 0.2);
+            border-color: #F7931A;
+        }
+        .card-dash-crypto .card-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #F7931A;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+        .card-dash-crypto .card-number { color: #627EEA; font-family: 'Exo 2', sans-serif; }
+        .card-dash-crypto .card-subtitle { color: #A0A0B0; }
+        .card-dash-crypto .card-tag {
+            background: rgba(247, 147, 26, 0.12);
+            color: #F7931A;
+            border: 1px solid rgba(247, 147, 26, 0.25);
+        }
+        .card-dash-crypto .dash-badge {
+            background: rgba(247, 147, 26, 0.15);
+            color: #F7931A;
+            border: 1px solid rgba(247, 147, 26, 0.3);
+        }
+        .card-dash-crypto::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #F7931A, #627EEA, #9945FF);
+        }
+
+        /* 07. Weather - Atmosphere */
+        .card-dash-weather {
+            background: linear-gradient(180deg, #F0F7FF 0%, #FFFFFF 100%);
+            border: 1px solid #E2E8F0;
+            color: #0F172A;
+        }
+        .card-dash-weather:hover {
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+            border-color: #3B82F6;
+        }
+        .card-dash-weather .card-title {
+            font-family: 'Poppins', sans-serif;
+            color: #3B82F6;
+            font-size: 22px;
+            font-weight: 600;
+        }
+        .card-dash-weather .card-number { color: #FCD34D; }
+        .card-dash-weather .card-subtitle { color: #475569; }
+        .card-dash-weather .card-tag {
+            background: #EFF6FF;
+            color: #3B82F6;
+        }
+        .card-dash-weather .dash-badge {
+            background: #FEFCE8;
+            color: #A16207;
+        }
+        .card-dash-weather::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #FCD34D, #3B82F6, #7C3AED);
+        }
+
+        /* 08. Fitness - Pulse Active */
+        .card-dash-fitness {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            color: #0F172A;
+        }
+        .card-dash-fitness:hover {
+            box-shadow: 0 20px 40px rgba(249, 115, 22, 0.15);
+            border-color: #F97316;
+        }
+        .card-dash-fitness .card-title {
+            font-family: 'Rajdhani', sans-serif;
+            color: #F97316;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .card-dash-fitness .card-number { color: #EF4444; }
+        .card-dash-fitness .card-subtitle { color: #475569; }
+        .card-dash-fitness .card-tag {
+            background: #FFF7ED;
+            color: #F97316;
+        }
+        .card-dash-fitness .dash-badge {
+            background: linear-gradient(135deg, #F97316, #EF4444);
+            color: #FFFFFF;
+        }
+        .card-dash-fitness::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #F97316, #EF4444, #A855F7);
+        }
+
+        /* 09. E-commerce - Storefront HQ */
+        .card-dash-ecommerce {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            color: #0F172A;
+        }
+        .card-dash-ecommerce:hover {
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+            border-color: #6366F1;
+        }
+        .card-dash-ecommerce .card-title {
+            font-family: 'DM Sans', sans-serif;
+            color: #6366F1;
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .card-dash-ecommerce .card-number { color: #10B981; }
+        .card-dash-ecommerce .card-subtitle { color: #475569; }
+        .card-dash-ecommerce .card-tag {
+            background: #EEF2FF;
+            color: #6366F1;
+        }
+        .card-dash-ecommerce .dash-badge {
+            background: #EEF2FF;
+            color: #4F46E5;
+        }
+        .card-dash-ecommerce::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366F1, #10B981);
+        }
+
+        /* 10. Music - Soundwave */
+        .card-dash-music {
+            background: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
+            border: 1px solid #2D2D2D;
+            color: #FFFFFF;
+        }
+        .card-dash-music:hover {
+            box-shadow: 0 0 30px rgba(29, 185, 84, 0.3);
+            border-color: #1DB954;
+        }
+        .card-dash-music .card-title {
+            font-family: 'Bebas Neue', sans-serif;
+            color: #1DB954;
+            font-size: 26px;
+            letter-spacing: 3px;
+        }
+        .card-dash-music .card-number { color: #9333EA; }
+        .card-dash-music .card-subtitle { color: #B3B3B3; }
+        .card-dash-music .card-tag {
+            background: rgba(29, 185, 84, 0.12);
+            color: #1DB954;
+            border: 1px solid rgba(29, 185, 84, 0.25);
+        }
+        .card-dash-music .dash-badge {
+            background: rgba(29, 185, 84, 0.15);
+            color: #1DB954;
+            border: 1px solid rgba(29, 185, 84, 0.3);
+        }
+        .card-dash-music::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #1DB954, #9333EA, #EC4899);
+        }
+
+        /* 11. IoT - Nexus IoT */
+        .card-dash-iot {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            border: 1px solid #334155;
+            color: #F1F5F9;
+        }
+        .card-dash-iot:hover {
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+            border-color: #22C55E;
+        }
+        .card-dash-iot .card-title {
+            font-family: 'Chakra Petch', sans-serif;
+            color: #22C55E;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+        .card-dash-iot .card-number { color: #3B82F6; }
+        .card-dash-iot .card-subtitle { color: #94A3B8; }
+        .card-dash-iot .card-tag {
+            background: rgba(34, 197, 94, 0.12);
+            color: #22C55E;
+            border: 1px solid rgba(34, 197, 94, 0.25);
+        }
+        .card-dash-iot .dash-badge {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22C55E;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        .card-dash-iot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #22C55E, #3B82F6, #F97316);
+        }
+
+        /* ════════════════════════════════════════════════════════════════════════════
+           SAAS LANDING PAGE CARDS
+           ════════════════════════════════════════════════════════════════════════════ */
+
+        .saas-badge-dark {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .saas-badge-light {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.04);
+            color: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        /* Aether Dark */
+        .card-saas-aether {
+            background: linear-gradient(135deg, #0A0A0F 0%, #141420 100%);
+            border: 1px solid #0891B2;
+            color: #F0F0F5;
+        }
+        .card-saas-aether:hover { box-shadow: 0 0 30px rgba(8, 145, 178, 0.4); }
+        .card-saas-aether .card-title {
+            color: #22D3EE;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+        .card-saas-aether .card-number { color: #0891B2; }
+        .card-saas-aether .card-tag {
+            background: rgba(8, 145, 178, 0.15);
+            color: #22D3EE;
+            border: 1px solid rgba(8, 145, 178, 0.3);
+        }
+
+        /* Aether Light */
+        .card-saas-aether-light {
+            background: #FAFAFC;
+            border: 1px solid #E4E4E7;
+            color: #111118;
+        }
+        .card-saas-aether-light:hover { box-shadow: 0 20px 40px rgba(8, 145, 178, 0.15); }
+        .card-saas-aether-light .card-title {
+            color: #0891B2;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+        }
+        .card-saas-aether-light .card-number { color: #FB7185; }
+        .card-saas-aether-light .card-tag {
+            background: #F0FDFA;
+            color: #0891B2;
+            border: 1px solid #99F6E4;
+        }
+
+        /* Cortex Dark */
+        .card-saas-cortex {
+            background: linear-gradient(135deg, #09090B 0%, #18181B 100%);
+            border: 1px solid #7C3AED;
+            color: #FAFAFA;
+        }
+        .card-saas-cortex:hover { box-shadow: 0 0 30px rgba(124, 58, 237, 0.4), 0 0 60px rgba(8, 145, 178, 0.2); }
+        .card-saas-cortex .card-title {
+            color: #A78BFA;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .card-saas-cortex .card-number { color: #7C3AED; }
+        .card-saas-cortex .card-tag {
+            background: rgba(124, 58, 237, 0.15);
+            color: #A78BFA;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+        }
+
+        /* Cortex Light */
+        .card-saas-cortex-light {
+            background: #FAFAFA;
+            border: 1px solid #E4E4E7;
+            color: #09090B;
+        }
+        .card-saas-cortex-light:hover { box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15); }
+        .card-saas-cortex-light .card-title {
+            color: #7C3AED;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+        .card-saas-cortex-light .card-number { color: #0891B2; }
+        .card-saas-cortex-light .card-tag {
+            background: #EDE9FE;
+            color: #7C3AED;
+        }
+
+        /* Forge Dark */
+        .card-saas-forge {
+            background: #000000;
+            border: 2px solid #FACC15;
+            color: #FAFAFA;
+            border-radius: 0;
+        }
+        .card-saas-forge:hover {
+            box-shadow: 6px 6px 0 #FACC15;
+            transform: translate(-3px, -3px);
+        }
+        .card-saas-forge .card-title {
+            color: #FACC15;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .card-saas-forge .card-number { color: #0891B2; }
+        .card-saas-forge .card-tag {
+            background: #FACC15;
+            color: #000000;
+            border-radius: 0;
+            font-weight: 600;
+        }
+
+        /* Forge Light */
+        .card-saas-forge-light {
+            background: #FFFFFF;
+            border: 2px solid #0A0A0A;
+            color: #0A0A0A;
+            border-radius: 0;
+        }
+        .card-saas-forge-light:hover {
+            box-shadow: 6px 6px 0 #FACC15;
+            transform: translate(-3px, -3px);
+        }
+        .card-saas-forge-light .card-title {
+            color: #0A0A0A;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .card-saas-forge-light .card-number { color: #FACC15; }
+        .card-saas-forge-light .card-tag {
+            background: #0A0A0A;
+            color: #FACC15;
+            border-radius: 0;
+            font-weight: 600;
+        }
+
+        /* Lattice Dark */
+        .card-saas-lattice {
+            background: linear-gradient(135deg, #0F0F1A 0%, #16162A 100%);
+            border: 1px solid #4F46E5;
+            color: #EEEEF5;
+            border-radius: 2px;
+        }
+        .card-saas-lattice:hover { box-shadow: 0 0 30px rgba(79, 70, 229, 0.4); }
+        .card-saas-lattice .card-title {
+            color: #818CF8;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .card-saas-lattice .card-number { color: #4F46E5; }
+        .card-saas-lattice .card-tag {
+            background: rgba(79, 70, 229, 0.15);
+            color: #818CF8;
+            border: 1px solid rgba(79, 70, 229, 0.3);
+            border-radius: 2px;
+        }
+
+        /* Lattice Light */
+        .card-saas-lattice-light {
+            background: #FAFAFF;
+            border: 1px solid #E0E0F0;
+            color: #0F0F1A;
+            border-radius: 2px;
+        }
+        .card-saas-lattice-light:hover { box-shadow: 0 20px 40px rgba(79, 70, 229, 0.15); }
+        .card-saas-lattice-light .card-title {
+            color: #4F46E5;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+        }
+        .card-saas-lattice-light .card-number { color: #0891B2; }
+        .card-saas-lattice-light .card-tag {
+            background: #EEF2FF;
+            color: #4F46E5;
+            border-radius: 2px;
+        }
+
+        /* Meridian Dark */
+        .card-saas-meridian {
+            background: linear-gradient(135deg, #0C1220 0%, #152238 100%);
+            border: 1px solid #059669;
+            color: #EFF6FF;
+        }
+        .card-saas-meridian:hover { box-shadow: 0 0 30px rgba(5, 150, 105, 0.4); }
+        .card-saas-meridian .card-title {
+            color: #34D399;
+            font-family: 'Instrument Serif', serif;
+            font-size: 28px;
+            font-style: italic;
+        }
+        .card-saas-meridian .card-number { color: #059669; }
+        .card-saas-meridian .card-tag {
+            background: rgba(5, 150, 105, 0.15);
+            color: #34D399;
+            border: 1px solid rgba(5, 150, 105, 0.3);
+        }
+
+        /* Meridian Light */
+        .card-saas-meridian-light {
+            background: #FEFDFB;
+            border: 1px solid #E5DDD0;
+            color: #1E293B;
+        }
+        .card-saas-meridian-light:hover { box-shadow: 0 20px 40px rgba(5, 150, 105, 0.15); }
+        .card-saas-meridian-light .card-title {
+            color: #059669;
+            font-family: 'Instrument Serif', serif;
+            font-size: 28px;
+            font-style: italic;
+        }
+        .card-saas-meridian-light .card-number { color: #0891B2; }
+        .card-saas-meridian-light .card-tag {
+            background: #ECFDF5;
+            color: #059669;
+        }
+
+        /* Prism Dark */
+        .card-saas-prism {
+            background: linear-gradient(135deg, #030712 0%, #111827 100%);
+            border: 1px solid #374151;
+            color: #9CA3AF;
+        }
+        .card-saas-prism::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #0891B2, #6366F1, #A855F7, #EC4899, #F97316);
+        }
+        .card-saas-prism:hover { box-shadow: 0 0 40px rgba(99, 102, 241, 0.3), 0 0 80px rgba(168, 85, 247, 0.2); }
+        .card-saas-prism .card-title {
+            background: linear-gradient(90deg, #22D3EE, #818CF8, #A855F7, #EC4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+        }
+        .card-saas-prism .card-number { color: #6366F1; }
+        .card-saas-prism .card-tag {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818CF8;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        /* Prism Light */
+        .card-saas-prism-light {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            color: #030712;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-saas-prism-light::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #0891B2, #6366F1, #A855F7, #EC4899, #F97316);
+        }
+        .card-saas-prism-light:hover { box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15); }
+        .card-saas-prism-light .card-title {
+            background: linear-gradient(90deg, #0891B2, #6366F1, #A855F7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+        }
+        .card-saas-prism-light .card-number { color: #EC4899; }
+        .card-saas-prism-light .card-tag {
+            background: #EEF2FF;
+            color: #6366F1;
+        }
+
+        /* Pulse Dark */
+        .card-saas-pulse {
+            background: linear-gradient(135deg, #0C0A09 0%, #1C1917 100%);
+            border: 1px solid #D97706;
+            color: #FAFAF9;
+        }
+        .card-saas-pulse:hover { box-shadow: 0 0 30px rgba(217, 119, 6, 0.4); }
+        .card-saas-pulse .card-title {
+            color: #FBBF24;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+        .card-saas-pulse .card-number { color: #D97706; }
+        .card-saas-pulse .card-tag {
+            background: rgba(217, 119, 6, 0.15);
+            color: #FBBF24;
+            border: 1px solid rgba(217, 119, 6, 0.3);
+        }
+
+        /* Pulse Light */
+        .card-saas-pulse-light {
+            background: #FFFBF5;
+            border: 1px solid #E7E0D5;
+            color: #1C1917;
+        }
+        .card-saas-pulse-light:hover { box-shadow: 0 20px 40px rgba(217, 119, 6, 0.15); }
+        .card-saas-pulse-light .card-title {
+            color: #D97706;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+        }
+        .card-saas-pulse-light .card-number { color: #0891B2; }
+        .card-saas-pulse-light .card-tag {
+            background: #FFFBEB;
+            color: #D97706;
+        }
+
+        /* Radar Dark */
+        .card-saas-radar {
+            background: linear-gradient(135deg, #0B0F1A 0%, #111827 100%);
+            border: 1px solid #0891B2;
+            color: #F1F5F9;
+        }
+        .card-saas-radar:hover { box-shadow: 0 0 30px rgba(8, 145, 178, 0.4); }
+        .card-saas-radar .card-title {
+            color: #22D3EE;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+        .card-saas-radar .card-number { color: #0891B2; }
+        .card-saas-radar .card-tag {
+            background: rgba(8, 145, 178, 0.15);
+            color: #22D3EE;
+            border: 1px solid rgba(8, 145, 178, 0.3);
+        }
+        .card-saas-radar::after {
+            content: '◎';
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 20px;
+            color: #0891B2;
+            opacity: 0.5;
+        }
+
+        /* Radar Light */
+        .card-saas-radar-light {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            color: #0F172A;
+        }
+        .card-saas-radar-light:hover { box-shadow: 0 20px 40px rgba(8, 145, 178, 0.15); }
+        .card-saas-radar-light .card-title {
+            color: #0891B2;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+        .card-saas-radar-light .card-number { color: #0891B2; }
+        .card-saas-radar-light .card-tag {
+            background: #F0FDFA;
+            color: #0891B2;
+        }
+
+        /* Signal */
+        .card-saas-signal {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            color: #0F172A;
+        }
+        .card-saas-signal:hover { box-shadow: 0 20px 40px rgba(249, 115, 22, 0.15); }
+        .card-saas-signal .card-title {
+            color: #0F172A;
+            font-family: 'DM Serif Display', serif;
+            font-size: 28px;
+        }
+        .card-saas-signal .card-number { color: #F97316; }
+        .card-saas-signal .card-subtitle { color: #475569; }
+        .card-saas-signal .card-tag {
+            background: #FFF7ED;
+            color: #F97316;
+        }
+        .card-saas-signal::before {
+            content: '~';
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-family: 'DM Serif Display', serif;
+            font-size: 28px;
+            color: #F97316;
+            opacity: 0.5;
+        }
+
+        /* Tallow */
+        .card-saas-tallow {
+            background: #FAF7F0;
+            border: 1px solid #D4C9B0;
+            color: #1E2118;
+        }
+        .card-saas-tallow:hover { box-shadow: 0 20px 40px rgba(43, 83, 41, 0.15); }
+        .card-saas-tallow .card-title {
+            color: #2B5329;
+            font-family: 'Fraunces', serif;
+            font-size: 26px;
+        }
+        .card-saas-tallow .card-number { color: #C49B2A; }
+        .card-saas-tallow .card-tag {
+            background: #2B5329;
+            color: #FAF7F0;
+        }
+        .card-saas-tallow::before {
+            content: '◆';
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 16px;
+            color: #C49B2A;
+            opacity: 0.6;
+        }
+
+        /* Terrain Dark */
+        .card-saas-terrain {
+            background: linear-gradient(135deg, #0C120A 0%, #161F14 100%);
+            border: 1px solid #65A30D;
+            color: #F2F5F0;
+        }
+        .card-saas-terrain:hover { box-shadow: 0 0 30px rgba(101, 163, 13, 0.3); }
+        .card-saas-terrain .card-title {
+            color: #84CC16;
+            font-family: 'Manrope', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .card-saas-terrain .card-number { color: #65A30D; }
+        .card-saas-terrain .card-tag {
+            background: rgba(101, 163, 13, 0.15);
+            color: #84CC16;
+            border: 1px solid rgba(101, 163, 13, 0.3);
+        }
+
+        /* Terrain Light */
+        .card-saas-terrain-light {
+            background: #FAFBF7;
+            border: 1px solid #DDE5D0;
+            color: #1A2412;
+        }
+        .card-saas-terrain-light:hover { box-shadow: 0 20px 40px rgba(101, 163, 13, 0.15); }
+        .card-saas-terrain-light .card-title {
+            color: #65A30D;
+            font-family: 'Manrope', sans-serif;
+            font-weight: 700;
+        }
+        .card-saas-terrain-light .card-number { color: #0891B2; }
+        .card-saas-terrain-light .card-tag {
+            background: #F7FEE7;
+            color: #65A30D;
+        }
+
+        /* Anvil */
+        .card-saas-anvil {
+            background: #FFFBF7;
+            border: 2px solid #C54B2A;
+            color: #1A1714;
+        }
+        .card-saas-anvil:hover { box-shadow: 0 20px 40px rgba(197, 75, 42, 0.2); }
+        .card-saas-anvil .card-title {
+            color: #C54B2A;
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 28px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .card-saas-anvil .card-number { color: #C9A87C; }
+        .card-saas-anvil .card-tag {
+            background: #C54B2A;
+            color: #FFFBF7;
         }
 
         /* Footer */
@@ -1053,7 +1928,7 @@
         <header>
             <h1>HTML Style Guides</h1>
             <p>A collection of themed, single-file design systems. Each style guide showcases a unique aesthetic with colors, typography, components, and more.</p>
-            <span class="badge-count">56 Themes</span>
+            <span class="badge-count">77 Themes</span>
         </header>
 
         <!-- ═══════════════════════════════════════════════════════════════════════
@@ -1716,8 +2591,8 @@
         </section>
 
         <div class="grid">
-            <a href="dashboards/dashboard-devops-command-center.html" class="card card-dashboard">
-                <span class="dashboard-badge">DevOps</span>
+            <a href="dashboards/dashboard-devops-command-center.html" class="card card-dash-devops">
+                <span class="dash-badge">DevOps</span>
                 <div class="card-content">
                     <p class="card-number">01 — Dashboard</p>
                     <h2 class="card-title">NEXUS OPS</h2>
@@ -1730,8 +2605,8 @@
                 </div>
             </a>
 
-            <a href="dashboards/dashboard-trading-terminal.html" class="card card-dashboard">
-                <span class="dashboard-badge">Finance</span>
+            <a href="dashboards/dashboard-trading-terminal.html" class="card card-dash-trading">
+                <span class="dash-badge">Finance</span>
                 <div class="card-content">
                     <p class="card-number">02 — Dashboard</p>
                     <h2 class="card-title">MARKET PULSE</h2>
@@ -1744,11 +2619,11 @@
                 </div>
             </a>
 
-            <a href="dashboards/dashboard-healthcare.html" class="card card-dashboard">
-                <span class="dashboard-badge">Medical</span>
+            <a href="dashboards/dashboard-healthcare.html" class="card card-dash-healthcare">
+                <span class="dash-badge">Medical</span>
                 <div class="card-content">
                     <p class="card-number">03 — Dashboard</p>
-                    <h2 class="card-title">VITALS HQ</h2>
+                    <h2 class="card-title">Vitals HQ</h2>
                     <p class="card-subtitle">Healthcare monitoring with patient vitals and clinical metrics</p>
                     <div class="card-tags">
                         <span class="card-tag">Healthcare</span>
@@ -1758,22 +2633,22 @@
                 </div>
             </a>
 
-            <a href="dashboards/dashboard-smart-home.html" class="card card-dashboard">
-                <span class="dashboard-badge">IoT</span>
+            <a href="dashboards/dashboard-smart-home.html" class="card card-dash-smarthome">
+                <span class="dash-badge">Smart Home</span>
                 <div class="card-content">
                     <p class="card-number">04 — Dashboard</p>
-                    <h2 class="card-title">HABITAT</h2>
+                    <h2 class="card-title">Habitat</h2>
                     <p class="card-subtitle">Smart home hub with device control and energy monitoring</p>
                     <div class="card-tags">
-                        <span class="card-tag">Smart Home</span>
+                        <span class="card-tag">IoT</span>
                         <span class="card-tag">Automation</span>
                         <span class="card-tag">Warm</span>
                     </div>
                 </div>
             </a>
 
-            <a href="dashboards/dashboard-security-ops.html" class="card card-dashboard">
-                <span class="dashboard-badge">Security</span>
+            <a href="dashboards/dashboard-security-ops.html" class="card card-dash-security">
+                <span class="dash-badge">Security</span>
                 <div class="card-content">
                     <p class="card-number">05 — Dashboard</p>
                     <h2 class="card-title">SENTINEL</h2>
@@ -1786,8 +2661,8 @@
                 </div>
             </a>
 
-            <a href="dashboards/dashboard-crypto-exchange.html" class="card card-dashboard">
-                <span class="dashboard-badge">Crypto</span>
+            <a href="dashboards/dashboard-crypto-exchange.html" class="card card-dash-crypto">
+                <span class="dash-badge">Crypto</span>
                 <div class="card-content">
                     <p class="card-number">06 — Dashboard</p>
                     <h2 class="card-title">CIPHER TRADE</h2>
@@ -1800,11 +2675,11 @@
                 </div>
             </a>
 
-            <a href="dashboards/dashboard-weather.html" class="card card-dashboard">
-                <span class="dashboard-badge">Weather</span>
+            <a href="dashboards/dashboard-weather.html" class="card card-dash-weather">
+                <span class="dash-badge">Weather</span>
                 <div class="card-content">
                     <p class="card-number">07 — Dashboard</p>
-                    <h2 class="card-title">ATMOSPHERE</h2>
+                    <h2 class="card-title">Atmosphere</h2>
                     <p class="card-subtitle">Weather station with forecasts and animated climate visualizations</p>
                     <div class="card-tags">
                         <span class="card-tag">Meteorology</span>
@@ -1814,8 +2689,8 @@
                 </div>
             </a>
 
-            <a href="dashboards/dashboard-fitness.html" class="card card-dashboard">
-                <span class="dashboard-badge">Fitness</span>
+            <a href="dashboards/dashboard-fitness.html" class="card card-dash-fitness">
+                <span class="dash-badge">Fitness</span>
                 <div class="card-content">
                     <p class="card-number">08 — Dashboard</p>
                     <h2 class="card-title">PULSE ACTIVE</h2>
@@ -1828,11 +2703,11 @@
                 </div>
             </a>
 
-            <a href="dashboards/dashboard-ecommerce.html" class="card card-dashboard">
-                <span class="dashboard-badge">E-commerce</span>
+            <a href="dashboards/dashboard-ecommerce.html" class="card card-dash-ecommerce">
+                <span class="dash-badge">E-commerce</span>
                 <div class="card-content">
                     <p class="card-number">09 — Dashboard</p>
-                    <h2 class="card-title">STOREFRONT HQ</h2>
+                    <h2 class="card-title">Storefront HQ</h2>
                     <p class="card-subtitle">E-commerce admin with sales analytics and live order tracking</p>
                     <div class="card-tags">
                         <span class="card-tag">Retail</span>
@@ -1842,8 +2717,8 @@
                 </div>
             </a>
 
-            <a href="dashboards/dashboard-music.html" class="card card-dashboard">
-                <span class="dashboard-badge">Music</span>
+            <a href="dashboards/dashboard-music.html" class="card card-dash-music">
+                <span class="dash-badge">Music</span>
                 <div class="card-content">
                     <p class="card-number">10 — Dashboard</p>
                     <h2 class="card-title">SOUNDWAVE</h2>
@@ -1856,8 +2731,8 @@
                 </div>
             </a>
 
-            <a href="dashboards/dashboard-iot.html" class="card card-dashboard">
-                <span class="dashboard-badge">IoT</span>
+            <a href="dashboards/dashboard-iot.html" class="card card-dash-iot">
+                <span class="dash-badge">IoT</span>
                 <div class="card-content">
                     <p class="card-number">11 — Dashboard</p>
                     <h2 class="card-title">NEXUS IOT</h2>
@@ -1866,6 +2741,327 @@
                         <span class="card-tag">Sensors</span>
                         <span class="card-tag">Industrial</span>
                         <span class="card-tag">Technical</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════════
+             SAAS LANDING PAGES SECTION
+             ═══════════════════════════════════════════════════════════════════════ -->
+        <section class="section">
+            <h2 class="section-title">SaaS Landing Pages</h2>
+            <p class="section-subtitle">Production-ready SaaS landing page templates with dark and light variants</p>
+        </section>
+
+        <div class="grid">
+            <!-- Aether Dark -->
+            <a href="saas-landing/aether.html" class="card card-saas-aether">
+                <span class="saas-badge-dark">Dark</span>
+                <div class="card-content">
+                    <p class="card-number">01 — SaaS Landing</p>
+                    <h2 class="card-title">Aether</h2>
+                    <p class="card-subtitle">Minimal dark interface with glowing teal accents</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Teal</span>
+                        <span class="card-tag">Dark</span>
+                        <span class="card-tag">Minimal</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Aether Light -->
+            <a href="saas-landing/aether-light.html" class="card card-saas-aether-light">
+                <span class="saas-badge-light">Light</span>
+                <div class="card-content">
+                    <p class="card-number">02 — SaaS Landing</p>
+                    <h2 class="card-title">Aether</h2>
+                    <p class="card-subtitle">Clean accessible interface with teal highlights</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Teal</span>
+                        <span class="card-tag">Light</span>
+                        <span class="card-tag">Clean</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Cortex Dark -->
+            <a href="saas-landing/cortex.html" class="card card-saas-cortex">
+                <span class="saas-badge-dark">Dark</span>
+                <div class="card-content">
+                    <p class="card-number">03 — SaaS Landing</p>
+                    <h2 class="card-title">Cortex</h2>
+                    <p class="card-subtitle">Neural network aesthetic with violet energy</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Violet</span>
+                        <span class="card-tag">Neural</span>
+                        <span class="card-tag">Dark</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Cortex Light -->
+            <a href="saas-landing/cortex-light.html" class="card card-saas-cortex-light">
+                <span class="saas-badge-light">Light</span>
+                <div class="card-content">
+                    <p class="card-number">04 — SaaS Landing</p>
+                    <h2 class="card-title">Cortex</h2>
+                    <p class="card-subtitle">Technical clarity with violet accents</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Violet</span>
+                        <span class="card-tag">Light</span>
+                        <span class="card-tag">Tech</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Forge Dark -->
+            <a href="saas-landing/forge.html" class="card card-saas-forge">
+                <span class="saas-badge-dark">Dark</span>
+                <div class="card-content">
+                    <p class="card-number">05 — SaaS Landing</p>
+                    <h2 class="card-title">FORGE</h2>
+                    <p class="card-subtitle">Industrial interface on pure black canvas</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Yellow</span>
+                        <span class="card-tag">Industrial</span>
+                        <span class="card-tag">Bold</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Forge Light -->
+            <a href="saas-landing/forge-light.html" class="card card-saas-forge-light">
+                <span class="saas-badge-light">Light</span>
+                <div class="card-content">
+                    <p class="card-number">06 — SaaS Landing</p>
+                    <h2 class="card-title">FORGE</h2>
+                    <p class="card-subtitle">Utilitarian design with industrial precision</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Yellow</span>
+                        <span class="card-tag">Light</span>
+                        <span class="card-tag">Bold</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Lattice Dark -->
+            <a href="saas-landing/lattice.html" class="card card-saas-lattice">
+                <span class="saas-badge-dark">Dark</span>
+                <div class="card-content">
+                    <p class="card-number">07 — SaaS Landing</p>
+                    <h2 class="card-title">Lattice</h2>
+                    <p class="card-subtitle">Geometric patterns with indigo glow</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Indigo</span>
+                        <span class="card-tag">Geometric</span>
+                        <span class="card-tag">Dark</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Lattice Light -->
+            <a href="saas-landing/lattice-light.html" class="card card-saas-lattice-light">
+                <span class="saas-badge-light">Light</span>
+                <div class="card-content">
+                    <p class="card-number">08 — SaaS Landing</p>
+                    <h2 class="card-title">Lattice</h2>
+                    <p class="card-subtitle">Crystal structure with indigo accents</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Indigo</span>
+                        <span class="card-tag">Light</span>
+                        <span class="card-tag">Geometric</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Meridian Dark -->
+            <a href="saas-landing/meridian.html" class="card card-saas-meridian">
+                <span class="saas-badge-dark">Dark</span>
+                <div class="card-content">
+                    <p class="card-number">09 — SaaS Landing</p>
+                    <h2 class="card-title">Meridian</h2>
+                    <p class="card-subtitle">Cartographic design on navy depths</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Emerald</span>
+                        <span class="card-tag">Navy</span>
+                        <span class="card-tag">Serif</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Meridian Light -->
+            <a href="saas-landing/meridian-light.html" class="card card-saas-meridian-light">
+                <span class="saas-badge-light">Light</span>
+                <div class="card-content">
+                    <p class="card-number">10 — SaaS Landing</p>
+                    <h2 class="card-title">Meridian</h2>
+                    <p class="card-subtitle">Warm parchment with emerald accents</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Emerald</span>
+                        <span class="card-tag">Warm</span>
+                        <span class="card-tag">Serif</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Prism Dark -->
+            <a href="saas-landing/prism.html" class="card card-saas-prism">
+                <span class="saas-badge-dark">Dark</span>
+                <div class="card-content">
+                    <p class="card-number">11 — SaaS Landing</p>
+                    <h2 class="card-title">Prism</h2>
+                    <p class="card-subtitle">Spectrum refraction on deep space canvas</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Spectrum</span>
+                        <span class="card-tag">Gradient</span>
+                        <span class="card-tag">Dark</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Prism Light -->
+            <a href="saas-landing/prism-light.html" class="card card-saas-prism-light">
+                <span class="saas-badge-light">Light</span>
+                <div class="card-content">
+                    <p class="card-number">12 — SaaS Landing</p>
+                    <h2 class="card-title">Prism</h2>
+                    <p class="card-subtitle">Rainbow spectrum on clean white</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Spectrum</span>
+                        <span class="card-tag">Gradient</span>
+                        <span class="card-tag">Light</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Pulse Dark -->
+            <a href="saas-landing/pulse.html" class="card card-saas-pulse">
+                <span class="saas-badge-dark">Dark</span>
+                <div class="card-content">
+                    <p class="card-number">13 — SaaS Landing</p>
+                    <h2 class="card-title">Pulse</h2>
+                    <p class="card-subtitle">Warm amber rhythms on dark stone</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Amber</span>
+                        <span class="card-tag">Warm</span>
+                        <span class="card-tag">Dark</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Pulse Light -->
+            <a href="saas-landing/pulse-light.html" class="card card-saas-pulse-light">
+                <span class="saas-badge-light">Light</span>
+                <div class="card-content">
+                    <p class="card-number">14 — SaaS Landing</p>
+                    <h2 class="card-title">Pulse</h2>
+                    <p class="card-subtitle">Cream canvas with golden amber pulse</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Amber</span>
+                        <span class="card-tag">Cream</span>
+                        <span class="card-tag">Warm</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Radar Dark -->
+            <a href="saas-landing/radar.html" class="card card-saas-radar">
+                <div class="card-content">
+                    <p class="card-number">15 — SaaS Landing</p>
+                    <h2 class="card-title">Radar</h2>
+                    <p class="card-subtitle">HUD-style scanning interface with dot grid</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Teal</span>
+                        <span class="card-tag">HUD</span>
+                        <span class="card-tag">Dark</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Radar Light -->
+            <a href="saas-landing/radar-light.html" class="card card-saas-radar-light">
+                <span class="saas-badge-light">Light</span>
+                <div class="card-content">
+                    <p class="card-number">16 — SaaS Landing</p>
+                    <h2 class="card-title">Radar</h2>
+                    <p class="card-subtitle">Clean scanning interface with dot grid</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Teal</span>
+                        <span class="card-tag">Light</span>
+                        <span class="card-tag">Grid</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Signal -->
+            <a href="saas-landing/signal.html" class="card card-saas-signal">
+                <div class="card-content">
+                    <p class="card-number">17 — SaaS Landing</p>
+                    <h2 class="card-title">Signal</h2>
+                    <p class="card-subtitle">Elegant serif typography with warm orange</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Orange</span>
+                        <span class="card-tag">Serif</span>
+                        <span class="card-tag">Elegant</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Tallow -->
+            <a href="saas-landing/tallow.html" class="card card-saas-tallow">
+                <div class="card-content">
+                    <p class="card-number">18 — SaaS Landing</p>
+                    <h2 class="card-title">Tallow</h2>
+                    <p class="card-subtitle">Organic warmth with forest green and honey</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Forest</span>
+                        <span class="card-tag">Natural</span>
+                        <span class="card-tag">Cream</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Terrain Dark -->
+            <a href="saas-landing/terrain.html" class="card card-saas-terrain">
+                <span class="saas-badge-dark">Dark</span>
+                <div class="card-content">
+                    <p class="card-number">19 — SaaS Landing</p>
+                    <h2 class="card-title">Terrain</h2>
+                    <p class="card-subtitle">Nature-inspired dark with sage green layers</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Sage</span>
+                        <span class="card-tag">Nature</span>
+                        <span class="card-tag">Dark</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Terrain Light -->
+            <a href="saas-landing/terrain-light.html" class="card card-saas-terrain-light">
+                <span class="saas-badge-light">Light</span>
+                <div class="card-content">
+                    <p class="card-number">20 — SaaS Landing</p>
+                    <h2 class="card-title">Terrain</h2>
+                    <p class="card-subtitle">Fresh natural tones with sage accents</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Sage</span>
+                        <span class="card-tag">Nature</span>
+                        <span class="card-tag">Light</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Anvil -->
+            <a href="saas-landing/anvil.html" class="card card-saas-anvil">
+                <div class="card-content">
+                    <p class="card-number">21 — SaaS Landing</p>
+                    <h2 class="card-title">ANVIL</h2>
+                    <p class="card-subtitle">Rustic industrial design with warm rust tones</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Rust</span>
+                        <span class="card-tag">Industrial</span>
+                        <span class="card-tag">Warm</span>
                     </div>
                 </div>
             </a>

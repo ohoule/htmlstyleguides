@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anvil v1.0 — SaaS Landing Page Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            /* Brand */
+            --rust: #C54B2A;
+            --rust-light: #D96B4B;
+            --rust-dark: #9A3820;
+            --rust-bg: #FDF0EB;
+            --sand: #C9A87C;
+            --sand-light: #E8D5B8;
+            --sand-bg: #FBF6EF;
+
+            /* Surfaces */
+            --cream: #FFFBF7;
+            --warm-white: #FEFCF9;
+
+            /* Neutrals — warm stone scale */
+            --charcoal: #1A1714;
+            --stone-900: #292524;
+            --stone-800: #44403C;
+            --stone-700: #57534E;
+            --stone-600: #78716C;
+            --stone-500: #A8A29E;
+            --stone-400: #D6D3D1;
+            --stone-300: #E7E5E4;
+            --stone-200: #F5F5F4;
+            --stone-100: #FAFAF9;
+            --white: #FFFFFF;
+
+            /* Semantic */
+            --success: #16A34A;
+            --success-bg: #F0FDF4;
+            --success-border: #BBF7D0;
+            --warning: #CA8A04;
+            --warning-bg: #FEFCE8;
+            --warning-border: #FDE68A;
+            --error: #DC2626;
+            --error-bg: #FEF2F2;
+            --error-border: #FECACA;
+            --info: #0369A1;
+            --info-bg: #F0F9FF;
+            --info-border: #BAE6FD;
+
+            /* Typography */
+            --font-display: 'Big Shoulders Display', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Spacing — 8px base */
+            --sp-1: 4px;
+            --sp-2: 8px;
+            --sp-3: 12px;
+            --sp-4: 16px;
+            --sp-5: 24px;
+            --sp-6: 32px;
+            --sp-7: 48px;
+            --sp-8: 64px;
+            --sp-9: 96px;
+
+            /* Shadows */
+            --shadow-xs: 0 1px 2px rgba(26,23,20,0.04);
+            --shadow-sm: 0 2px 4px rgba(26,23,20,0.06);
+            --shadow-md: 0 4px 12px rgba(26,23,20,0.08);
+            --shadow-lg: 0 12px 32px rgba(26,23,20,0.10);
+            --shadow-xl: 0 20px 48px rgba(26,23,20,0.14);
+
+            /* Radii */
+            --radius-sm: 4px;
+            --radius-md: 6px;
+            --radius-lg: 8px;
+
+            /* Motion */
+            --ease: 200ms ease;
+            --ease-slow: 300ms ease;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--charcoal);
+            background: var(--cream);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ————— Layout ————— */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--sp-5);
+        }
+
+        section {
+            padding: var(--sp-9) 0;
+        }
+
+        section.alt { background: var(--white); }
+        section.dark { background: var(--charcoal); color: var(--stone-200); }
+
+        /* ————— Section Header ————— */
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: var(--sp-4);
+            margin-bottom: var(--sp-7);
+            padding-bottom: var(--sp-5);
+            border-bottom: 2px solid var(--stone-300);
+        }
+
+        .section-num {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--rust);
+            opacity: 0.2;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            flex-shrink: 0;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--charcoal);
+        }
+
+        section.dark .section-header { border-bottom-color: var(--stone-800); }
+        section.dark .section-header h2 { color: var(--stone-100); }
+
+        .section-desc {
+            color: var(--stone-600);
+            font-size: 1rem;
+            margin-top: calc(-1 * var(--sp-6));
+            margin-bottom: var(--sp-7);
+            max-width: 640px;
+        }
+
+        /* ————— Group Divider ————— */
+        .group-divider {
+            background: var(--sand-bg);
+            padding: var(--sp-7) 0;
+            border-top: 3px solid var(--rust);
+            border-bottom: 1px solid var(--stone-300);
+        }
+
+        .group-divider h2 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--stone-700);
+            margin-bottom: var(--sp-2);
+        }
+
+        .group-divider p {
+            color: var(--stone-500);
+            font-size: 0.9375rem;
+        }
+
+        /* ————— Utility ————— */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5); }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-5); }
+        .flex-row { display: flex; flex-wrap: wrap; gap: var(--sp-4); align-items: center; }
+        .flex-col { display: flex; flex-direction: column; gap: var(--sp-4); }
+        .label {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--stone-500);
+            margin-bottom: var(--sp-3);
+        }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            section { padding: var(--sp-8) 0; }
+            .section-num { font-size: 2.5rem; }
+            .section-header h2 { font-size: 1.5rem; }
+        }
+
+        /* ===========================
+           SITE HEADER
+        =========================== */
+        .site-header {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: var(--sp-9) 0 var(--sp-8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .site-header::before {
+            content: '';
+            position: absolute;
+            top: 0; right: -10%; bottom: 0;
+            width: 50%;
+            background: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 18px,
+                rgba(197, 75, 42, 0.05) 18px,
+                rgba(197, 75, 42, 0.05) 19px
+            );
+            pointer-events: none;
+        }
+
+        .site-header .container { position: relative; z-index: 1; }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--rust-light);
+            border: 1px solid var(--stone-800);
+            padding: var(--sp-1) var(--sp-3);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--sp-5);
+            letter-spacing: 0.04em;
+        }
+
+        .header-badge .dot {
+            width: 6px; height: 6px;
+            background: var(--rust);
+            border-radius: 50%;
+        }
+
+        .header-title {
+            font-family: var(--font-display);
+            font-size: clamp(5rem, 12vw, 10rem);
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            line-height: 0.9;
+            color: var(--cream);
+            margin-bottom: var(--sp-4);
+        }
+
+        .header-title span { color: var(--rust); }
+
+        .header-subtitle {
+            font-size: 1.125rem;
+            color: var(--stone-500);
+            max-width: 520px;
+            line-height: 1.7;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: var(--sp-7);
+            margin-top: var(--sp-7);
+            padding-top: var(--sp-5);
+            border-top: 1px solid var(--stone-800);
+        }
+
+        .header-meta dt {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--stone-600);
+            margin-bottom: var(--sp-1);
+        }
+
+        .header-meta dd {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--sand);
+        }
+
+        /* ===========================
+           COLOR PALETTE
+        =========================== */
+        .color-swatch {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            background: var(--white);
+        }
+
+        .color-swatch-block {
+            height: 100px;
+            display: flex;
+            align-items: flex-end;
+            padding: var(--sp-3);
+        }
+
+        .color-swatch-info {
+            padding: var(--sp-3) var(--sp-4);
+        }
+
+        .color-swatch-name {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .color-swatch-hex {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--stone-500);
+        }
+
+        .color-row {
+            display: flex;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .color-row-chip {
+            flex: 1;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.02em;
+        }
+
+        /* ===========================
+           BUTTONS
+        =========================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp-2);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            border: 2px solid transparent;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--ease);
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1;
+        }
+
+        .btn:focus-visible {
+            outline: 2px solid var(--rust);
+            outline-offset: 2px;
+        }
+
+        .btn-sm { padding: 8px 16px; font-size: 0.8125rem; }
+        .btn-md { padding: 12px 24px; font-size: 0.9375rem; }
+        .btn-lg { padding: 16px 32px; font-size: 1rem; }
+
+        .btn-primary {
+            background: var(--rust);
+            color: var(--white);
+            border-color: var(--rust);
+        }
+        .btn-primary:hover { background: var(--rust-dark); border-color: var(--rust-dark); }
+        .btn-primary:active { transform: translateY(1px); }
+        .btn-primary:disabled, .btn-primary.disabled {
+            background: var(--stone-400);
+            border-color: var(--stone-400);
+            color: var(--stone-600);
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: var(--charcoal);
+            color: var(--cream);
+            border-color: var(--charcoal);
+        }
+        .btn-secondary:hover { background: var(--stone-800); border-color: var(--stone-800); }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--charcoal);
+            border-color: var(--stone-400);
+        }
+        .btn-ghost:hover { border-color: var(--charcoal); background: var(--stone-200); }
+
+        .btn-text {
+            background: none;
+            border: none;
+            color: var(--rust);
+            padding: 0;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            cursor: pointer;
+            font-size: 0.9375rem;
+            font-family: var(--font-body);
+            transition: color var(--ease);
+        }
+        .btn-text:hover { color: var(--rust-dark); }
+        .btn-text:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
+
+        /* ===========================
+           FORMS
+        =========================== */
+        .form-group { display: flex; flex-direction: column; gap: var(--sp-2); }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--stone-800);
+        }
+
+        .form-hint {
+            font-size: 0.8125rem;
+            color: var(--stone-500);
+        }
+
+        .form-input {
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            padding: 12px 16px;
+            border: 2px solid var(--stone-300);
+            border-radius: var(--radius-md);
+            background: var(--white);
+            color: var(--charcoal);
+            transition: border-color var(--ease), box-shadow var(--ease);
+            outline: none;
+            width: 100%;
+        }
+
+        .form-input::placeholder { color: var(--stone-400); }
+        .form-input:hover { border-color: var(--stone-400); }
+        .form-input:focus { border-color: var(--rust); box-shadow: 0 0 0 3px var(--rust-bg); }
+        .form-input.error { border-color: var(--error); }
+        .form-input.error:focus { box-shadow: 0 0 0 3px var(--error-bg); }
+        .form-input:disabled { background: var(--stone-200); color: var(--stone-500); cursor: not-allowed; }
+
+        .form-error {
+            font-size: 0.8125rem;
+            color: var(--error);
+            display: flex;
+            align-items: center;
+            gap: var(--sp-1);
+        }
+
+        select.form-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2378716C' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5-5h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+        }
+
+        .toggle {
+            position: relative;
+            width: 48px;
+            height: 26px;
+            background: var(--stone-400);
+            border-radius: 26px;
+            cursor: pointer;
+            transition: background var(--ease);
+            border: none;
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px; left: 3px;
+            width: 20px; height: 20px;
+            background: var(--white);
+            border-radius: 50%;
+            transition: transform var(--ease);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .toggle.on { background: var(--rust); }
+        .toggle.on::after { transform: translateX(22px); }
+        .toggle:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
+
+        .signup-form-demo {
+            background: var(--white);
+            border: 2px solid var(--stone-300);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+            max-width: 480px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .signup-form-demo h4 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: var(--sp-2);
+        }
+
+        .signup-form-demo p {
+            color: var(--stone-600);
+            font-size: 0.875rem;
+            margin-bottom: var(--sp-5);
+        }
+
+        .inline-form {
+            display: flex;
+            gap: var(--sp-3);
+        }
+
+        .inline-form .form-input { flex: 1; }
+
+        /* ===========================
+           CARDS
+        =========================== */
+        .card {
+            background: var(--white);
+            border: 1px solid var(--stone-300);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: box-shadow var(--ease), transform var(--ease);
+        }
+
+        .card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+
+        .card-body { padding: var(--sp-5); }
+
+        .card-feature { border-top: 4px solid var(--rust); }
+        .card-feature .card-icon {
+            width: 48px; height: 48px;
+            background: var(--rust-bg);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--sp-4);
+            color: var(--rust);
+            font-size: 1.25rem;
+        }
+
+        .card-feature h3 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: var(--sp-2);
+        }
+
+        .card-feature p {
+            font-size: 0.9375rem;
+            color: var(--stone-600);
+            line-height: 1.6;
+        }
+
+        .card-stat {
+            border-left: 4px solid var(--rust);
+            background: var(--white);
+            padding: var(--sp-5);
+        }
+
+        .card-stat .stat-label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--stone-500);
+            margin-bottom: var(--sp-1);
+        }
+
+        .card-stat .stat-value {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--charcoal);
+            line-height: 1.1;
+        }
+
+        .card-stat .stat-change {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            margin-top: var(--sp-2);
+        }
+
+        .card-stat .stat-change.up { color: var(--success); }
+        .card-stat .stat-change.down { color: var(--error); }
+
+        .card-testimonial {
+            border-left: 4px solid var(--sand);
+            padding: var(--sp-6);
+            background: var(--white);
+        }
+
+        .card-testimonial blockquote {
+            font-size: 1.0625rem;
+            line-height: 1.7;
+            color: var(--stone-800);
+            margin-bottom: var(--sp-5);
+            font-style: italic;
+        }
+
+        .card-testimonial blockquote::before {
+            content: '\201C';
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--sand);
+            line-height: 0;
+            display: block;
+            margin-bottom: var(--sp-3);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+        }
+
+        .testimonial-avatar {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: var(--sand-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--rust-dark);
+            flex-shrink: 0;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            font-size: 0.9375rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.8125rem;
+            color: var(--stone-500);
+        }
+
+        .card-pricing {
+            border: 2px solid var(--stone-300);
+            border-radius: var(--radius-lg);
+            padding: var(--sp-6);
+            background: var(--white);
+            text-align: center;
+            transition: all var(--ease);
+        }
+
+        .card-pricing:hover { border-color: var(--stone-400); box-shadow: var(--shadow-lg); }
+
+        .card-pricing.recommended {
+            border-color: var(--rust);
+            position: relative;
+        }
+
+        .card-pricing.recommended::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -1px; left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            background: var(--rust);
+            color: var(--white);
+            padding: 4px 16px;
+            border-radius: 20px;
+        }
+
+        .card-pricing .tier-name {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: var(--sp-2);
+        }
+
+        .card-pricing .tier-price {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: var(--sp-1);
+        }
+
+        .card-pricing .tier-price span {
+            font-size: 1.2rem;
+            color: var(--stone-500);
+            font-weight: 500;
+        }
+
+        .card-pricing .tier-desc {
+            font-size: 0.875rem;
+            color: var(--stone-500);
+            margin-bottom: var(--sp-5);
+        }
+
+        .card-pricing ul {
+            list-style: none;
+            text-align: left;
+            margin-bottom: var(--sp-5);
+        }
+
+        .card-pricing li {
+            padding: var(--sp-2) 0;
+            font-size: 0.9375rem;
+            color: var(--stone-700);
+            border-bottom: 1px solid var(--stone-200);
+            display: flex;
+            align-items: center;
+            gap: var(--sp-2);
+        }
+
+        .card-pricing li::before {
+            content: '✓';
+            color: var(--rust);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* ===========================
+           NAV BAR
+        =========================== */
+        .nav-demo {
+            background: var(--white);
+            border: 1px solid var(--stone-300);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--sp-4) var(--sp-5);
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            color: var(--charcoal);
+            text-decoration: none;
+        }
+
+        .nav-logo span { color: var(--rust); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-6);
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--stone-600);
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+
+        .nav-links a:hover { color: var(--charcoal); }
+
+        .nav-dark {
+            background: var(--charcoal);
+            border-color: var(--stone-800);
+        }
+
+        .nav-dark .nav-logo { color: var(--cream); }
+        .nav-dark .nav-links a { color: var(--stone-400); }
+        .nav-dark .nav-links a:hover { color: var(--cream); }
+
+        .nav-mobile {
+            max-width: 375px;
+            border: 1px solid var(--stone-300);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-mobile .nav-bar { padding: var(--sp-3) var(--sp-4); }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--charcoal);
+            border-radius: 1px;
+        }
+
+        /* ===========================
+           HERO PATTERN
+        =========================== */
+        .hero-demo {
+            background: var(--white);
+            border: 1px solid var(--stone-300);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-inner {
+            padding: var(--sp-9) var(--sp-7);
+            text-align: center;
+            position: relative;
+            background:
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(197, 75, 42, 0.02) 40px,
+                    rgba(197, 75, 42, 0.02) 41px
+                ),
+                linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+        }
+
+        .hero-kicker {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--rust);
+            margin-bottom: var(--sp-4);
+        }
+
+        .hero-headline {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: 0.01em;
+            color: var(--charcoal);
+            max-width: 700px;
+            margin: 0 auto var(--sp-4);
+        }
+
+        .hero-sub {
+            font-size: 1.125rem;
+            color: var(--stone-600);
+            max-width: 520px;
+            margin: 0 auto var(--sp-6);
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: var(--sp-4);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-7);
+        }
+
+        .hero-proof {
+            font-size: 0.8125rem;
+            color: var(--stone-500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp-2);
+        }
+
+        .hero-proof .dots {
+            display: flex;
+            gap: 2px;
+        }
+
+        .hero-proof .dots span {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+
+        /* ===========================
+           BADGES
+        =========================== */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-1);
+            font-family: var(--font-display);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+        }
+
+        .badge-sm { font-size: 0.65rem; padding: 3px 8px; }
+        .badge-md { font-size: 0.75rem; padding: 4px 12px; }
+
+        .badge-rust { background: var(--rust-bg); color: var(--rust); }
+        .badge-sand { background: var(--sand-bg); color: var(--stone-700); }
+        .badge-charcoal { background: var(--charcoal); color: var(--cream); }
+        .badge-success { background: var(--success-bg); color: var(--success); }
+        .badge-warning { background: var(--warning-bg); color: var(--warning); }
+        .badge-error { background: var(--error-bg); color: var(--error); }
+        .badge-info { background: var(--info-bg); color: var(--info); }
+
+        .badge-outline {
+            background: transparent;
+            border: 1.5px solid currentColor;
+        }
+
+        .badge-pill { border-radius: 20px; }
+
+        .status-dot {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-2);
+            font-size: 0.8125rem;
+            font-weight: 500;
+        }
+
+        .status-dot::before {
+            content: '';
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-dot.active::before { background: var(--success); }
+        .status-dot.pending::before { background: var(--warning); }
+        .status-dot.inactive::before { background: var(--stone-400); }
+        .status-dot.critical::before { background: var(--error); }
+
+        /* ===========================
+           SOCIAL PROOF BAR
+        =========================== */
+        .logo-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp-8);
+            flex-wrap: wrap;
+            padding: var(--sp-5) 0;
+        }
+
+        .logo-strip .fake-logo {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--stone-400);
+            transition: color var(--ease);
+        }
+
+        .logo-strip .fake-logo:hover { color: var(--stone-600); }
+
+        /* ===========================
+           SECTION DIVIDERS
+        =========================== */
+        .divider-demos { display: flex; flex-direction: column; gap: var(--sp-7); }
+
+        .divider-line { border: none; height: 1px; background: var(--stone-300); }
+
+        .divider-thick { border: none; height: 3px; background: var(--stone-300); }
+
+        .divider-rust { border: none; height: 3px; background: var(--rust); width: 80px; }
+
+        .divider-dashed { border: none; height: 0; border-top: 2px dashed var(--stone-300); }
+
+        .divider-diagonal {
+            height: 48px;
+            background: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 6px,
+                var(--stone-200) 6px,
+                var(--stone-200) 7px
+            );
+            border-radius: var(--radius-sm);
+        }
+
+        .divider-label-row {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-4);
+        }
+
+        .divider-label-row span {
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--stone-500);
+            white-space: nowrap;
+        }
+
+        .divider-label-row hr { flex: 1; border: none; height: 1px; background: var(--stone-300); }
+
+        .bg-alternation {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .bg-alternation > div {
+            padding: var(--sp-6) var(--sp-4);
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--stone-600);
+        }
+
+        /* ===========================
+           ALERTS
+        =========================== */
+        .alert {
+            display: flex;
+            gap: var(--sp-3);
+            padding: var(--sp-4) var(--sp-5);
+            border-radius: var(--radius-md);
+            font-size: 0.9375rem;
+            border-left: 4px solid transparent;
+            align-items: flex-start;
+        }
+
+        .alert-icon { flex-shrink: 0; font-size: 1.1rem; margin-top: 1px; }
+
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 2px; }
+        .alert-text { font-size: 0.875rem; opacity: 0.85; }
+
+        .alert-dismiss {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            opacity: 0.5;
+            transition: opacity var(--ease);
+            padding: 0;
+            line-height: 1;
+        }
+
+        .alert-dismiss:hover { opacity: 1; }
+
+        .alert-success { background: var(--success-bg); border-left-color: var(--success); color: #14532D; }
+        .alert-info { background: var(--info-bg); border-left-color: var(--info); color: #0C4A6E; }
+        .alert-warning { background: var(--warning-bg); border-left-color: var(--warning); color: #713F12; }
+        .alert-error { background: var(--error-bg); border-left-color: var(--error); color: #7F1D1D; }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-3);
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: var(--sp-4) var(--sp-5);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-xl);
+            font-size: 0.9375rem;
+            max-width: 400px;
+        }
+
+        .toast-icon { flex-shrink: 0; }
+        .toast-text { flex: 1; }
+
+        .toast-dismiss {
+            background: none;
+            border: none;
+            color: var(--stone-500);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: color var(--ease);
+            padding: 0;
+            line-height: 1;
+        }
+
+        .toast-dismiss:hover { color: var(--cream); }
+
+        /* ===========================
+           FOOTER
+        =========================== */
+        .site-footer {
+            background: var(--charcoal);
+            color: var(--stone-500);
+            padding: var(--sp-8) 0 var(--sp-6);
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--sp-7);
+            margin-bottom: var(--sp-7);
+            padding-bottom: var(--sp-6);
+            border-bottom: 1px solid var(--stone-800);
+            flex-wrap: wrap;
+        }
+
+        .footer-brand .nav-logo { font-size: 2rem; }
+
+        .footer-brand p {
+            font-size: 0.875rem;
+            color: var(--stone-600);
+            max-width: 280px;
+            margin-top: var(--sp-3);
+            line-height: 1.6;
+        }
+
+        .footer-cols {
+            display: flex;
+            gap: var(--sp-9);
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--stone-400);
+            margin-bottom: var(--sp-4);
+        }
+
+        .footer-col ul { list-style: none; }
+
+        .footer-col li { margin-bottom: var(--sp-2); }
+
+        .footer-col a {
+            font-size: 0.875rem;
+            color: var(--stone-500);
+            text-decoration: none;
+            transition: color var(--ease);
+        }
+
+        .footer-col a:hover { color: var(--cream); }
+
+        .footer-bottom {
+            font-size: 0.8125rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--sp-4);
+        }
+
+        .footer-bottom a { color: var(--stone-500); text-decoration: none; }
+        .footer-bottom a:hover { color: var(--cream); }
+
+        @media (max-width: 768px) {
+            .footer-top { flex-direction: column; }
+            .footer-cols { flex-direction: column; gap: var(--sp-6); }
+            .inline-form { flex-direction: column; }
+            .hero-inner { padding: var(--sp-7) var(--sp-5); }
+            .nav-links { display: none; }
+            .logo-strip { gap: var(--sp-6); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== SITE HEADER ===== -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-badge"><span class="dot"></span> v1.0 — SaaS Landing Page System</div>
+            <h1 class="header-title">ANVIL<span>.</span></h1>
+            <p class="header-subtitle">A design system for construction management SaaS. Built for landing pages that convert contractors, project managers, and builders — without looking like every other AI-generated purple SaaS template.</p>
+            <dl class="header-meta">
+                <div>
+                    <dt>Niche</dt>
+                    <dd>Construction Management</dd>
+                </div>
+                <div>
+                    <dt>Fonts</dt>
+                    <dd>Big Shoulders + DM Sans</dd>
+                </div>
+                <div>
+                    <dt>Primary</dt>
+                    <dd>#C54B2A — Rust</dd>
+                </div>
+                <div>
+                    <dt>Created</dt>
+                    <dd>2026.02</dd>
+                </div>
+            </dl>
+        </div>
+    </header>
+
+
+    <!-- =============================================
+         LANDING PAGE FLOW
+         Sections ordered as a visitor would scroll
+    ============================================= -->
+
+
+    <!-- ===== 01 — NAVIGATION BAR ===== -->
+    <section id="navigation" class="dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">01</span>
+                <h2>Navigation Bar</h2>
+            </div>
+
+            <div class="label" style="color: var(--stone-500);">Desktop — Light</div>
+            <div class="nav-demo" style="margin-bottom: var(--sp-6);">
+                <nav class="nav-bar">
+                    <a href="#" class="nav-logo">ANVIL<span>.</span></a>
+                    <ul class="nav-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Docs</a></li>
+                        <li><button class="btn btn-primary btn-sm">Start building</button></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="label" style="color: var(--stone-500);">Desktop — Dark</div>
+            <div class="nav-demo nav-dark" style="margin-bottom: var(--sp-6);">
+                <nav class="nav-bar">
+                    <a href="#" class="nav-logo">ANVIL<span>.</span></a>
+                    <ul class="nav-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Docs</a></li>
+                        <li><button class="btn btn-primary btn-sm">Start building</button></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="label" style="color: var(--stone-500);">Mobile</div>
+            <div class="nav-mobile">
+                <nav class="nav-bar">
+                    <a href="#" class="nav-logo" style="font-size: 1.3rem;">ANVIL<span>.</span></a>
+                    <button class="hamburger" aria-label="Menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 02 — HERO PATTERN ===== -->
+    <section id="hero">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">02</span>
+                <h2>Hero Pattern</h2>
+            </div>
+            <p class="section-desc">The most important section on any landing page. Confident headline, clear value, specific CTA.</p>
+
+            <div class="hero-demo">
+                <div class="hero-inner">
+                    <div class="hero-kicker">Construction Project Management</div>
+                    <h2 class="hero-headline">STOP MANAGING PROJECTS FROM YOUR INBOX</h2>
+                    <p class="hero-sub">Anvil gives general contractors one place to track budgets, coordinate subs, and file daily logs — so nothing falls through the cracks between groundbreaking and punch list.</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-lg">Start your free trial</button>
+                        <button class="btn btn-ghost btn-lg">Watch 2-min demo</button>
+                    </div>
+                    <div class="hero-proof">
+                        <div class="dots"><span></span><span></span><span></span></div>
+                        Trusted by 2,400+ contractors across North America
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 03 — SOCIAL PROOF / BADGES BAR ===== -->
+    <section id="social-proof" class="alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">03</span>
+                <h2>Social Proof / Badges Bar</h2>
+            </div>
+            <p class="section-desc">Trust signals right below the hero. Logo strip, plan labels, and marketing badges that build credibility without shouting.</p>
+
+            <div class="label">Logo Strip — "Trusted by"</div>
+            <div style="background: var(--stone-100); border-radius: var(--radius-lg); padding: var(--sp-4) var(--sp-5); margin-bottom: var(--sp-7);">
+                <p style="text-align: center; font-size: 0.8125rem; color: var(--stone-500); margin-bottom: var(--sp-4);">Trusted by 2,400+ general contractors and construction firms</p>
+                <div class="logo-strip">
+                    <span class="fake-logo">Ridgeline</span>
+                    <span class="fake-logo">Summit GC</span>
+                    <span class="fake-logo">Ironworks</span>
+                    <span class="fake-logo">Pacific Coast</span>
+                    <span class="fake-logo">Cornerstone</span>
+                </div>
+            </div>
+
+            <div class="label">Plan Tier Labels</div>
+            <div class="flex-row" style="margin-bottom: var(--sp-6);">
+                <span class="badge badge-md badge-sand">Foundation</span>
+                <span class="badge badge-md badge-rust">Foreman</span>
+                <span class="badge badge-md badge-charcoal">General Contractor</span>
+            </div>
+
+            <div class="label">Marketing Labels</div>
+            <div class="flex-row" style="margin-bottom: var(--sp-6);">
+                <span class="badge badge-sm badge-rust badge-pill">New</span>
+                <span class="badge badge-sm badge-charcoal badge-pill">Most Popular</span>
+                <span class="badge badge-sm badge-success badge-pill">Best Value</span>
+                <span class="badge badge-sm badge-info badge-pill">Beta</span>
+            </div>
+
+            <div class="label">Semantic Badges</div>
+            <div class="flex-row" style="margin-bottom: var(--sp-6);">
+                <span class="badge badge-md badge-success">On Schedule</span>
+                <span class="badge badge-md badge-warning">At Risk</span>
+                <span class="badge badge-md badge-error">Over Budget</span>
+                <span class="badge badge-md badge-info">In Review</span>
+            </div>
+
+            <div class="label">Outline Variants</div>
+            <div class="flex-row" style="margin-bottom: var(--sp-6);">
+                <span class="badge badge-md badge-outline" style="color: var(--rust);">Residential</span>
+                <span class="badge badge-md badge-outline" style="color: var(--stone-700);">Commercial</span>
+                <span class="badge badge-md badge-outline" style="color: var(--sand);">Industrial</span>
+                <span class="badge badge-md badge-outline" style="color: var(--info);">Municipal</span>
+            </div>
+
+            <div class="label">Status Dots</div>
+            <div class="flex-row">
+                <span class="status-dot active">Active</span>
+                <span class="status-dot pending">Pending Approval</span>
+                <span class="status-dot critical">Delayed</span>
+                <span class="status-dot inactive">Archived</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 04 — FEATURE CARDS ===== -->
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">04</span>
+                <h2>Feature Cards</h2>
+            </div>
+            <p class="section-desc">Explain what the product actually does — with specificity, not vague benefit statements.</p>
+
+            <div class="grid-3">
+                <div class="card card-feature">
+                    <div class="card-body">
+                        <div class="card-icon">⬡</div>
+                        <h3>Budget Tracking</h3>
+                        <p>See real-time spend vs. estimate across every job site. Flag overruns before they become problems.</p>
+                    </div>
+                </div>
+                <div class="card card-feature">
+                    <div class="card-body">
+                        <div class="card-icon">◫</div>
+                        <h3>Daily Logs</h3>
+                        <p>Automated daily reports with weather, crew hours, equipment, and progress photos. Filed from the field in 2 minutes.</p>
+                    </div>
+                </div>
+                <div class="card card-feature">
+                    <div class="card-body">
+                        <div class="card-icon">⊞</div>
+                        <h3>Change Orders</h3>
+                        <p>Create, route, and approve change orders without email chains. Full audit trail from request to signed approval.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 05 — STATS / METRIC CALLOUTS ===== -->
+    <section id="stats" class="alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">05</span>
+                <h2>Stats / Metric Callouts</h2>
+            </div>
+            <p class="section-desc">Key numbers that build credibility. Bold typography, compact layout, real results.</p>
+
+            <div class="grid-4">
+                <div class="card card-stat">
+                    <div class="stat-label">Active Projects</div>
+                    <div class="stat-value">47</div>
+                    <div class="stat-change up">↑ 12% vs. last quarter</div>
+                </div>
+                <div class="card card-stat">
+                    <div class="stat-label">Avg. Budget Accuracy</div>
+                    <div class="stat-value">96.2%</div>
+                    <div class="stat-change up">↑ 3.1% since adopting Anvil</div>
+                </div>
+                <div class="card card-stat">
+                    <div class="stat-label">Hours Saved / Week</div>
+                    <div class="stat-value">18.5</div>
+                    <div class="stat-change up">↑ per project manager</div>
+                </div>
+                <div class="card card-stat">
+                    <div class="stat-label">Open Punch Items</div>
+                    <div class="stat-value">23</div>
+                    <div class="stat-change down">↓ 31% month over month</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 06 — TESTIMONIAL COMPONENT ===== -->
+    <section id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">06</span>
+                <h2>Testimonials</h2>
+            </div>
+            <p class="section-desc">Two variants — a side-accent card and a centered pullquote. Real results, real language, real people.</p>
+
+            <div class="label">Variant A — Card with Side Accent</div>
+            <div class="grid-2" style="margin-bottom: var(--sp-7);">
+                <div class="card card-testimonial">
+                    <blockquote>We went from 3 spreadsheets per job to one dashboard. Anvil saved us 12 hours a week on project coordination alone. Our PMs actually leave the office before 7 now.</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MT</div>
+                        <div>
+                            <div class="testimonial-name">Mike Torres</div>
+                            <div class="testimonial-role">Project Manager, Ridgeline Builders</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-testimonial">
+                    <blockquote>Before Anvil, our budget tracking was a mess of Excel files emailed back and forth. We caught a $180K overrun on the Morrison project two weeks before it would have hit.</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">JR</div>
+                        <div>
+                            <div class="testimonial-name">James Ramirez</div>
+                            <div class="testimonial-role">VP of Operations, Summit Construction Group</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="label">Variant B — Centered Pullquote</div>
+            <div style="text-align: center; max-width: 700px; padding: var(--sp-7) 0;">
+                <div style="font-family: var(--font-display); font-size: 4rem; color: var(--sand); line-height: 0.5; margin-bottom: var(--sp-5);">"</div>
+                <p style="font-size: 1.25rem; line-height: 1.7; color: var(--stone-800); font-style: italic; margin-bottom: var(--sp-5);">We switched from Procore to Anvil six months ago. The daily log feature alone saves each PM about 45 minutes a day. Multiply that by 8 project managers and it's real money.</p>
+                <div style="display: flex; align-items: center; justify-content: center; gap: var(--sp-3);">
+                    <div class="testimonial-avatar">DK</div>
+                    <div style="text-align: left;">
+                        <div class="testimonial-name">Dana Kim</div>
+                        <div class="testimonial-role">COO, Pacific Coast Contractors</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 07 — PRICING COMPONENT ===== -->
+    <section id="pricing" class="alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">07</span>
+                <h2>Pricing</h2>
+            </div>
+            <p class="section-desc">Honest, simple pricing. Creative tier names, clear differentiation, no feature-matrix overload.</p>
+
+            <div class="label">Full Pricing Section</div>
+            <div class="grid-3" style="margin-bottom: var(--sp-7);">
+                <div class="card-pricing">
+                    <div class="tier-name">Foundation</div>
+                    <div class="tier-price">$49<span>/mo</span></div>
+                    <div class="tier-desc">For small crews running 1–5 projects</div>
+                    <ul>
+                        <li>Up to 5 active projects</li>
+                        <li>Daily logs &amp; progress photos</li>
+                        <li>Basic budget tracking</li>
+                        <li>Email support</li>
+                    </ul>
+                    <button class="btn btn-ghost btn-md" style="width: 100%;">Start with Foundation</button>
+                </div>
+                <div class="card-pricing recommended">
+                    <div class="tier-name">Foreman</div>
+                    <div class="tier-price">$129<span>/mo</span></div>
+                    <div class="tier-desc">For growing firms, unlimited projects</div>
+                    <ul>
+                        <li>Unlimited projects</li>
+                        <li>Change order workflows</li>
+                        <li>Subcontractor portal</li>
+                        <li>RFI management</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="btn btn-primary btn-md" style="width: 100%;">Start building with Foreman</button>
+                </div>
+                <div class="card-pricing">
+                    <div class="tier-name">General Contractor</div>
+                    <div class="tier-price">$299<span>/mo</span></div>
+                    <div class="tier-desc">For enterprises, multi-office teams</div>
+                    <ul>
+                        <li>Everything in Foreman</li>
+                        <li>API access &amp; integrations</li>
+                        <li>Custom reporting</li>
+                        <li>SSO &amp; advanced permissions</li>
+                        <li>Dedicated account manager</li>
+                    </ul>
+                    <button class="btn btn-secondary btn-md" style="width: 100%;">Talk to our team</button>
+                </div>
+            </div>
+
+            <div class="label">Single Tier Detail — Recommended</div>
+            <div style="max-width: 400px;">
+                <div class="card-pricing recommended" style="text-align: left;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--sp-4);">
+                        <div>
+                            <div class="tier-name" style="text-align: left;">Foreman</div>
+                            <div class="tier-desc" style="text-align: left; margin-bottom: 0;">For growing firms that need full project control</div>
+                        </div>
+                        <span class="badge badge-sm badge-charcoal badge-pill">Most Popular</span>
+                    </div>
+                    <div class="tier-price" style="text-align: left; margin-bottom: var(--sp-5);">$129<span>/mo</span></div>
+                    <ul style="margin-bottom: var(--sp-6);">
+                        <li>Unlimited active projects</li>
+                        <li>Change order workflows with approval chains</li>
+                        <li>Subcontractor portal with document sharing</li>
+                        <li>RFI creation and tracking</li>
+                        <li>Priority email &amp; phone support</li>
+                    </ul>
+                    <button class="btn btn-primary btn-lg" style="width: 100%; margin-bottom: var(--sp-3);">Start 14-day free trial</button>
+                    <p style="text-align: center; font-size: 0.8125rem; color: var(--stone-500);">No credit card required · Cancel anytime</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 08 — FORMS / LEAD CAPTURE ===== -->
+    <section id="forms">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">08</span>
+                <h2>Forms / Lead Capture</h2>
+            </div>
+            <p class="section-desc">Signup fields, selects, and toggles — the pieces you need for a SaaS landing page that captures leads. This section represents the final CTA area.</p>
+
+            <div class="label">Inline Signup Form — Final CTA</div>
+            <div class="signup-form-demo" style="margin-bottom: var(--sp-7);">
+                <h4>Start your free 14-day trial</h4>
+                <p>No credit card. No contracts. Cancel anytime.</p>
+                <div class="inline-form">
+                    <input class="form-input" type="email" placeholder="you@yourcompany.com">
+                    <button class="btn btn-primary btn-md">Start building</button>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-bottom: var(--sp-7);">
+                <div class="flex-col" style="gap: var(--sp-5);">
+                    <div class="form-group">
+                        <label class="form-label">Work email</label>
+                        <input class="form-input" type="email" placeholder="foreman@ridgelinebuilders.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Company name</label>
+                        <input class="form-input" type="text" placeholder="Ridgeline Builders">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Company size</label>
+                        <select class="form-input">
+                            <option>Select crew size...</option>
+                            <option>1–10 employees</option>
+                            <option>11–50 employees</option>
+                            <option>51–200 employees</option>
+                            <option>200+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex-col" style="gap: var(--sp-5);">
+                    <div class="form-group">
+                        <label class="form-label">Email with error</label>
+                        <input class="form-input error" type="email" value="not-an-email">
+                        <span class="form-error">✕ Please enter a valid email address</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Disabled field</label>
+                        <input class="form-input" type="text" value="Locked during trial" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Project notifications</label>
+                        <div class="flex-row" style="gap: var(--sp-5);">
+                            <div style="display: flex; align-items: center; gap: var(--sp-3);">
+                                <button class="toggle on" role="switch" aria-checked="true"></button>
+                                <span style="font-size: 0.875rem;">Daily digest</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: var(--sp-3);">
+                                <button class="toggle" role="switch" aria-checked="false"></button>
+                                <span style="font-size: 0.875rem;">SMS alerts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 09 — FOOTER ===== -->
+    <section id="footer-demo" class="dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">09</span>
+                <h2>Footer</h2>
+            </div>
+            <p class="section-desc" style="color: var(--stone-500);">Product name, link columns, legal links. Grounded and functional — no decorative nonsense.</p>
+
+            <div style="background: var(--stone-900); border-radius: var(--radius-lg); padding: var(--sp-7) var(--sp-6); box-shadow: var(--shadow-lg);">
+                <div class="footer-top">
+                    <div class="footer-brand">
+                        <a href="#" class="nav-logo">ANVIL<span>.</span></a>
+                        <p>Construction project management that doesn't require a training manual. Built by people who've actually been on a job site.</p>
+                    </div>
+                    <div class="footer-cols">
+                        <div class="footer-col">
+                            <h4>Product</h4>
+                            <ul>
+                                <li><a href="#">Features</a></li>
+                                <li><a href="#">Pricing</a></li>
+                                <li><a href="#">Integrations</a></li>
+                                <li><a href="#">Changelog</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Resources</h4>
+                            <ul>
+                                <li><a href="#">Documentation</a></li>
+                                <li><a href="#">Case Studies</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">API Reference</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Company</h4>
+                            <ul>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">Legal</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <span>© 2026 Anvil. Built for builders.</span>
+                    <div style="display: flex; gap: var(--sp-5);">
+                        <a href="#">Privacy</a>
+                        <a href="#">Terms</a>
+                        <a href="#">Security</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =============================================
+         DESIGN SYSTEM REFERENCE
+         Supporting tokens & components
+    ============================================= -->
+
+    <div class="group-divider">
+        <div class="container">
+            <h2>Design System Reference</h2>
+            <p>Supporting tokens, primitives, and utility components used across the landing page above.</p>
+        </div>
+    </div>
+
+
+    <!-- ===== 10 — COLOR PALETTE ===== -->
+    <section id="colors">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">10</span>
+                <h2>Color Palette</h2>
+            </div>
+            <p class="section-desc">Warm rust and sand on a foundation of stone neutrals. No purple, no generic SaaS blue — just honest earth tones that build trust.</p>
+
+            <div class="label">Brand Colors</div>
+            <div class="grid-4" style="margin-bottom: var(--sp-7);">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--rust);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Rust</div>
+                        <div class="color-swatch-hex">#C54B2A</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--rust-dark);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Rust Dark</div>
+                        <div class="color-swatch-hex">#9A3820</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--sand);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Sand</div>
+                        <div class="color-swatch-hex">#C9A87C</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--charcoal);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Charcoal</div>
+                        <div class="color-swatch-hex">#1A1714</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="label">Neutral Scale</div>
+            <div class="color-row" style="margin-bottom: var(--sp-7);">
+                <div class="color-row-chip" style="background: var(--charcoal); color: var(--stone-400);">900</div>
+                <div class="color-row-chip" style="background: var(--stone-800); color: var(--stone-400);">800</div>
+                <div class="color-row-chip" style="background: var(--stone-700); color: var(--stone-300);">700</div>
+                <div class="color-row-chip" style="background: var(--stone-600); color: var(--white);">600</div>
+                <div class="color-row-chip" style="background: var(--stone-500); color: var(--white);">500</div>
+                <div class="color-row-chip" style="background: var(--stone-400); color: var(--stone-700);">400</div>
+                <div class="color-row-chip" style="background: var(--stone-300); color: var(--stone-700);">300</div>
+                <div class="color-row-chip" style="background: var(--stone-200); color: var(--stone-600);">200</div>
+                <div class="color-row-chip" style="background: var(--stone-100); color: var(--stone-600);">100</div>
+            </div>
+
+            <div class="label">Semantic Colors</div>
+            <div class="grid-4" style="margin-bottom: var(--sp-7);">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--success);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Success</div>
+                        <div class="color-swatch-hex">#16A34A</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--warning);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Warning</div>
+                        <div class="color-swatch-hex">#CA8A04</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--error);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Error</div>
+                        <div class="color-swatch-hex">#DC2626</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--info);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Info</div>
+                        <div class="color-swatch-hex">#0369A1</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="label">Surfaces</div>
+            <div class="grid-3">
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--cream); border: 1px solid var(--stone-300);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Cream</div>
+                        <div class="color-swatch-hex">#FFFBF7 — Page background</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--white); border: 1px solid var(--stone-300);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">White</div>
+                        <div class="color-swatch-hex">#FFFFFF — Cards, sections</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch-block" style="background: var(--rust-bg); border: 1px solid var(--stone-300);"></div>
+                    <div class="color-swatch-info">
+                        <div class="color-swatch-name">Rust BG</div>
+                        <div class="color-swatch-hex">#FDF0EB — Accent surfaces</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 11 — TYPOGRAPHY ===== -->
+    <section id="typography" class="alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">11</span>
+                <h2>Typography</h2>
+            </div>
+            <p class="section-desc">Big Shoulders Display for bold, industrial headlines. DM Sans for readable body copy. JetBrains Mono for data and code.</p>
+
+            <div class="label">Display — Big Shoulders Display 800</div>
+            <div style="font-family: var(--font-display); font-weight: 800; font-size: clamp(3rem, 6vw, 5rem); line-height: 1; letter-spacing: 0.01em; margin-bottom: var(--sp-7); color: var(--charcoal);">
+                EVERY BEAM.<br>EVERY POUR.<br>EVERY DOLLAR.
+            </div>
+
+            <div class="grid-2" style="margin-bottom: var(--sp-7);">
+                <div>
+                    <div class="label">H1 — Big Shoulders 700 / 2.5rem</div>
+                    <div style="font-family: var(--font-display); font-weight: 700; font-size: 2.5rem; line-height: 1.1; letter-spacing: 0.02em; text-transform: uppercase;">Construction Project Management</div>
+                </div>
+                <div>
+                    <div class="label">H2 — Big Shoulders 700 / 2rem</div>
+                    <div style="font-family: var(--font-display); font-weight: 700; font-size: 2rem; line-height: 1.15; letter-spacing: 0.04em; text-transform: uppercase;">Built for General Contractors</div>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-bottom: var(--sp-7);">
+                <div>
+                    <div class="label">H3 — Big Shoulders 600 / 1.4rem</div>
+                    <div style="font-family: var(--font-display); font-weight: 600; font-size: 1.4rem; line-height: 1.2; letter-spacing: 0.06em; text-transform: uppercase;">Real-Time Budget Tracking</div>
+                </div>
+                <div>
+                    <div class="label">H4 — DM Sans 700 / 1.125rem</div>
+                    <div style="font-family: var(--font-body); font-weight: 700; font-size: 1.125rem; line-height: 1.4;">Subcontractor Coordination</div>
+                </div>
+            </div>
+
+            <div style="max-width: 640px; margin-bottom: var(--sp-7);">
+                <div class="label">Body — DM Sans 400 / 1rem / 1.6 line-height</div>
+                <p style="font-size: 1rem; line-height: 1.6; color: var(--stone-700);">Anvil keeps your entire project timeline, budget, and crew coordination in one place. No more spreadsheet chaos. No more missed change orders. From foundation to final walkthrough, you see exactly where every job stands.</p>
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <div class="label">Caption — DM Sans 400 / 0.8125rem</div>
+                    <p style="font-size: 0.8125rem; color: var(--stone-500);">Last updated 14 minutes ago · Ridgeline Towers Phase 2</p>
+                </div>
+                <div>
+                    <div class="label">Mono — JetBrains Mono 400 / 0.875rem</div>
+                    <p style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--stone-600);">$2,847,200 total · 47 active tasks · 12 subs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 12 — SPACING SCALE ===== -->
+    <section id="spacing">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">12</span>
+                <h2>Spacing Scale</h2>
+            </div>
+            <p class="section-desc">8px base unit. Consistent rhythm keeps landing page sections feeling intentional and breathable.</p>
+
+            <div style="display: flex; flex-direction: column; gap: var(--sp-5);">
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--stone-500); width: 80px;">4px — sp-1</span>
+                    <div style="height: 24px; width: 4px; background: var(--rust); border-radius: 2px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--stone-500); width: 80px;">8px — sp-2</span>
+                    <div style="height: 24px; width: 8px; background: var(--rust); border-radius: 2px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--stone-500); width: 80px;">12px — sp-3</span>
+                    <div style="height: 24px; width: 12px; background: var(--rust); border-radius: 2px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--stone-500); width: 80px;">16px — sp-4</span>
+                    <div style="height: 24px; width: 16px; background: var(--rust); border-radius: 2px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--stone-500); width: 80px;">24px — sp-5</span>
+                    <div style="height: 24px; width: 24px; background: var(--rust); border-radius: 2px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--stone-500); width: 80px;">32px — sp-6</span>
+                    <div style="height: 24px; width: 32px; background: var(--rust); border-radius: 2px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--stone-500); width: 80px;">48px — sp-7</span>
+                    <div style="height: 24px; width: 48px; background: var(--rust-light); border-radius: 2px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--stone-500); width: 80px;">64px — sp-8</span>
+                    <div style="height: 24px; width: 64px; background: var(--sand); border-radius: 2px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: var(--sp-5);">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--stone-500); width: 80px;">96px — sp-9</span>
+                    <div style="height: 24px; width: 96px; background: var(--sand-light); border-radius: 2px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 13 — BUTTONS ===== -->
+    <section id="buttons" class="alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">13</span>
+                <h2>Buttons</h2>
+            </div>
+
+            <div class="label">Primary</div>
+            <div class="flex-row" style="margin-bottom: var(--sp-6);">
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary btn-md">Start building</button>
+                <button class="btn btn-primary btn-lg">Schedule a walkthrough</button>
+                <button class="btn btn-primary btn-md disabled" disabled>Disabled</button>
+            </div>
+
+            <div class="label">Secondary</div>
+            <div class="flex-row" style="margin-bottom: var(--sp-6);">
+                <button class="btn btn-secondary btn-sm">Small</button>
+                <button class="btn btn-secondary btn-md">View all projects</button>
+                <button class="btn btn-secondary btn-lg">Talk to our team</button>
+            </div>
+
+            <div class="label">Ghost / Outline</div>
+            <div class="flex-row" style="margin-bottom: var(--sp-6);">
+                <button class="btn btn-ghost btn-sm">Small</button>
+                <button class="btn btn-ghost btn-md">See pricing</button>
+                <button class="btn btn-ghost btn-lg">Read case study</button>
+            </div>
+
+            <div class="label">Text Link</div>
+            <div class="flex-row">
+                <button class="btn-text">Learn more about daily logs →</button>
+                <button class="btn-text">Compare plans</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 14 — SECTION DIVIDERS ===== -->
+    <section id="dividers">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">14</span>
+                <h2>Section Dividers & Decorative Elements</h2>
+            </div>
+            <p class="section-desc">How sections flow into each other. Separation without heaviness.</p>
+
+            <div class="divider-demos">
+                <div>
+                    <div class="label">Thin line</div>
+                    <hr class="divider-line">
+                </div>
+                <div>
+                    <div class="label">Thick line</div>
+                    <hr class="divider-thick">
+                </div>
+                <div>
+                    <div class="label">Rust accent (short)</div>
+                    <hr class="divider-rust">
+                </div>
+                <div>
+                    <div class="label">Dashed</div>
+                    <hr class="divider-dashed">
+                </div>
+                <div>
+                    <div class="label">Labeled divider</div>
+                    <div class="divider-label-row">
+                        <hr><span>Features</span><hr>
+                    </div>
+                </div>
+                <div>
+                    <div class="label">Diagonal stripe pattern (signature element)</div>
+                    <div class="divider-diagonal"></div>
+                </div>
+                <div>
+                    <div class="label">Background alternation pattern</div>
+                    <div class="bg-alternation">
+                        <div style="background: var(--cream);">Cream — #FFFBF7</div>
+                        <div style="background: var(--white);">White — #FFFFFF</div>
+                        <div style="background: var(--sand-bg);">Sand BG — #FBF6EF</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 15 — ALERT MESSAGES ===== -->
+    <section id="alerts" class="alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">15</span>
+                <h2>Alert Messages</h2>
+            </div>
+
+            <div class="label">Inline Alerts</div>
+            <div class="flex-col" style="gap: var(--sp-4); max-width: 640px; margin-bottom: var(--sp-7);">
+                <div class="alert alert-success">
+                    <span class="alert-icon">✓</span>
+                    <div class="alert-content">
+                        <div class="alert-title">You're all set</div>
+                        <div class="alert-text">Your 14-day trial is active. Start by creating your first project.</div>
+                    </div>
+                    <button class="alert-dismiss">✕</button>
+                </div>
+                <div class="alert alert-info">
+                    <span class="alert-icon">ℹ</span>
+                    <div class="alert-content">
+                        <div class="alert-title">New: Subcontractor portal</div>
+                        <div class="alert-text">Invite subs to view schedules and upload documents directly. Available on Foreman and above.</div>
+                    </div>
+                    <button class="alert-dismiss">✕</button>
+                </div>
+                <div class="alert alert-warning">
+                    <span class="alert-icon">⚠</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Trial ending soon</div>
+                        <div class="alert-text">Your free trial expires in 3 days. Add a payment method to keep your projects.</div>
+                    </div>
+                    <button class="alert-dismiss">✕</button>
+                </div>
+                <div class="alert alert-error">
+                    <span class="alert-icon">✕</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Payment failed</div>
+                        <div class="alert-text">We couldn't charge the card ending in 4242. Please update your billing info.</div>
+                    </div>
+                    <button class="alert-dismiss">✕</button>
+                </div>
+            </div>
+
+            <div class="label">Toast Notifications</div>
+            <div class="flex-col" style="gap: var(--sp-4); max-width: 400px;">
+                <div class="toast">
+                    <span class="toast-icon">✓</span>
+                    <span class="toast-text">Project "Morrison Tower" created</span>
+                    <button class="toast-dismiss">✕</button>
+                </div>
+                <div class="toast">
+                    <span class="toast-icon">📋</span>
+                    <span class="toast-text">Daily log submitted for Nov 14</span>
+                    <button class="toast-dismiss">✕</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== SITE FOOTER ===== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom" style="padding: var(--sp-4) 0;">
+                <span style="font-family: var(--font-mono); font-size: 0.75rem;">Anvil v1.0 — SaaS Landing Page Design System</span>
+                <span style="font-size: 0.75rem;">Built for builders.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle switches
+        document.querySelectorAll('.toggle').forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                toggle.classList.toggle('on');
+                const isOn = toggle.classList.contains('on');
+                toggle.setAttribute('aria-checked', isOn);
+            });
+        });
+
+        // Dismiss alerts & toasts
+        document.querySelectorAll('.alert-dismiss, .toast-dismiss').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const el = btn.closest('.alert, .toast');
+                el.style.opacity = '0';
+                el.style.transform = 'translateX(20px)';
+                el.style.transition = 'all 200ms ease';
+                setTimeout(() => el.style.display = 'none', 200);
+            });
+        });
+    </script>
+</body>
+</html>
